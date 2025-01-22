@@ -1,0 +1,22 @@
+{% extends "govuk/template.njk" %}
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+{% block head %}
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="{{ '/assets/css/app.css' | assetMap }}" rel="stylesheet" />
+{% endblock %}
+
+{% block beforeContent %}
+  {{
+    govukPhaseBanner({
+      tag: {
+        text: "Beta"
+      },
+      html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+    })
+  }}
+{% endblock %}
+
+{% block bodyEnd %}
+  <script type="module" src="{{ '/assets/js/app.js' | assetMap }}"></script>
+{% endblock %}
