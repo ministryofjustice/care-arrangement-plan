@@ -58,9 +58,21 @@ It is recommended to use your IDE to run ESLint and Prettier on save, to ensure 
 
 TODO
 
+## Project Structure
+
+The main app code lives in the `server` directory, where it is separated into folders based on functionality. Tests should
+be at the same level as the file they test, and names `<<file>>.test.ts`.
+
+Integration tests are in the `integration-tests` directory. Test files should have the name `<<file>>.cy.ts`.
+
+## Architecture
+
+For documentation on the project architecture, see [here](./architecture-docs/README.md)
+
 ## TODO
 
 - Vulnerability scanning (snyk, audit-ci etc.)
 - Dependabot
 - Sonar or something like that
-- Architecture docs
+- Pipeline
+- Languages
