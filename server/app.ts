@@ -1,6 +1,6 @@
 import express from 'express'
 
-import createError from 'http-errors'
+import { NotFound } from 'http-errors'
 
 import nunjucksSetup from './utils/nunjucksSetup'
 
@@ -32,7 +32,7 @@ const createApp = (): express.Application => {
 
   app.use(routes())
 
-  app.use((request, response, next) => next(createError(404, 'Not found')))
+  app.use((_request, _response, next) => next(new NotFound()))
 
   return app
 }

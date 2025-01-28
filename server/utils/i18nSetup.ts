@@ -4,9 +4,9 @@ import path from 'path'
 
 import config from '../config'
 
-const { includeWelshLanguage } = config
-
 const i18nSetup = (app: express.Express): void => {
+  const { includeWelshLanguage } = config
+
   // TODO - add a language toggle within the page
   i18n.configure({
     defaultLocale: 'en',

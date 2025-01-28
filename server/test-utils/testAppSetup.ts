@@ -4,18 +4,18 @@ import { NotFound } from 'http-errors'
 import routes from '../routes'
 import nunjucksSetup from '../utils/nunjucksSetup'
 import setUpWebSession from '../middleware/setUpWebSession'
+import i18nSetup from '../utils/i18nSetup'
+import setUpWebRequestParsing from '../middleware/setupRequestParsing'
 
 const testAppSetup = (): Express => {
   const app = express()
 
-  app.set('view engine', 'njk')
-
+  i18nSetup(app)
   nunjucksSetup(app)
   app.use(setUpWebSession())
-  app.use(express.json())
-  app.use(express.urlencoded({ extended: true }))
+  app.use(setUpWebRequestParsing())
   app.use(routes())
-  app.use((request, response, next) => next(new NotFound()))
+  app.use((_request, _response, next) => next(new NotFound()))
 
   return app
 }
