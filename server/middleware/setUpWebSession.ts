@@ -20,7 +20,7 @@ const setUpWebSession = (): Router => {
     session({
       store,
       name: 'pfl-care-arrangement-plan.session',
-      cookie: { secure: config.https, sameSite: 'lax', maxAge: config.session.expiryMinutes * 60 * 1000 },
+      cookie: { secure: config.useHttps, sameSite: 'lax', maxAge: config.session.expiryMinutes * 60 * 1000 },
       secret: config.session.secret,
       resave: false, // connect-redis implements touch so shouldn't need this
       saveUninitialized: false,
