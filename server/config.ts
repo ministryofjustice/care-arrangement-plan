@@ -41,6 +41,7 @@ const config = {
   buildNumber: getStringConfigValue('BUILD_NUMBER'),
   gitRef: getStringConfigValue('GIT_REF'),
   branchName: getStringConfigValue('GIT_BRANCH'),
+  includeWelshLanguage: getBoolConfigValue('INCLUDE_WELSH_LANGUAGE'),
   production,
   https: getBoolConfigValue('HTTPS'),
   staticResourceCacheDuration: getStringConfigValue('STATIC_RESOURCE_CACHE_DURATION'),

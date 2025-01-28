@@ -12,6 +12,7 @@ import setUpWebSecurity from './middleware/setUpWebSecurity'
 import setUpWebSession from './middleware/setUpWebSession'
 
 import routes from './routes'
+import i18nSetup from './utils/i18nSetup'
 
 const createApp = (): express.Application => {
   const app = express()
@@ -20,12 +21,13 @@ const createApp = (): express.Application => {
   app.set('trust proxy', true)
   app.set('port', process.env.PORT || 3000)
 
+  i18nSetup(app)
+  nunjucksSetup(app)
   app.use(setUpHealthCheck())
   app.use(setUpWebSecurity())
   app.use(setUpWebSession())
   app.use(setUpWebRequestParsing())
   app.use(setUpStaticResources())
-  nunjucksSetup(app)
   app.use(setUpCsrf())
 
   app.use(routes())
