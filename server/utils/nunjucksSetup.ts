@@ -3,6 +3,7 @@ import path from 'path'
 import nunjucks from 'nunjucks'
 import express from 'express'
 import fs from 'fs'
+import i18n from 'i18n'
 import logger from '../../logger'
 
 const nunjucksSetup = (app: express.Express): void => {
@@ -26,6 +27,10 @@ const nunjucksSetup = (app: express.Express): void => {
   })
 
   njkEnv.addFilter('assetMap', (url: string) => assetManifest[url] || url)
+  /* eslint-disable no-underscore-dangle */
+  njkEnv.addGlobal('__', i18n.__)
+  njkEnv.addGlobal('getLocale', () => i18n.getLocale)
+  /* eslint-enable no-underscore-dangle */
 }
 
 export default nunjucksSetup

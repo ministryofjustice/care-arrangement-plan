@@ -40,9 +40,10 @@ const getValkeyConfig = () => {
 const config = {
   buildNumber: getStringConfigValue('BUILD_NUMBER'),
   gitRef: getStringConfigValue('GIT_REF'),
-  branchName: getStringConfigValue('GIT_BRANCH'),
+  gitBranch: getStringConfigValue('GIT_BRANCH'),
+  includeWelshLanguage: getBoolConfigValue('INCLUDE_WELSH_LANGUAGE'),
   production,
-  https: getBoolConfigValue('HTTPS'),
+  useHttps: getBoolConfigValue('USE_HTTPS'),
   staticResourceCacheDuration: getStringConfigValue('STATIC_RESOURCE_CACHE_DURATION'),
   valkey: getValkeyConfig(),
   session: {
@@ -52,7 +53,7 @@ const config = {
 }
 
 if (production) {
-  if (!config.https || !config.valkey.tls_enabled) {
+  if (!config.useHttps || !config.valkey.tls_enabled) {
     throw new Error(`HTTPS must be enabled on production environments`)
   }
 

@@ -1,7 +1,7 @@
 import express, { Router } from 'express'
 import config from '../config'
 
-const { buildNumber, gitRef, branchName } = config
+const { buildNumber, gitRef, gitBranch } = config
 
 const setUpHealthCheck = (): Router => {
   const router = express.Router()
@@ -9,7 +9,7 @@ const setUpHealthCheck = (): Router => {
   router.get('/health', (_, response, next) => {
     response.json({
       gitHash: gitRef,
-      branch: branchName,
+      branch: gitBranch,
       version: buildNumber,
       uptime: Math.floor(process.uptime()),
     })
