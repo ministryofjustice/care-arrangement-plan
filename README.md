@@ -65,6 +65,20 @@ be at the same level as the file they test, and names `<<file>>.test.ts`.
 
 Integration tests are in the `integration-tests` directory. Test files should have the name `<<file>>.cy.ts`.
 
+## Language Support
+
+The app has support for English and Welsh. All text should be added to `server/locales`, instead of being added directly
+to the Nunjucks template. If you have added an item `home.title` to the locales files, you can access it from the template:
+
+```html
+<h1>{{ __('home.title') }}</h1>
+```
+
+If there is no Welsh translation, the English value will be used as a fallback.
+
+The Welsh support can be toggled on/off using the `INCLUDE_WELSH_LANGUAGE` environment variable, allowing us to do
+releases before full Welsh translation is complete.
+
 ## Architecture
 
 For documentation on the project architecture, see [here](./architecture-docs/README.md)
@@ -75,4 +89,3 @@ For documentation on the project architecture, see [here](./architecture-docs/RE
 - Dependabot
 - Sonar or something like that
 - Pipeline
-- Languages
