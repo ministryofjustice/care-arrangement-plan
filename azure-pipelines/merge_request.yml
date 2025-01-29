@@ -1,0 +1,6 @@
+trigger: none
+
+pool: Default
+
+steps:
+  - template: templates/validation.yml

@@ -1,0 +1,27 @@
+trigger:
+  - main
+
+stages:
+  - stage: Validation
+    jobs:
+      - job: ValidationJob
+        pool: Default
+        steps:
+          - template: templates/validation.yml
+  - stage: development
+    displayName: Deploy to Test
+    jobs:
+      - job: DeployJob
+        pool: Default
+        steps:
+          - script: echo 'hello, world'
+            displayName: 'Run script'
+  - stage: production
+    displayName: Deploy to Production
+    trigger: manual
+    jobs:
+      - job: DeployJob
+        pool: Default
+        steps:
+          - script: echo 'hello, world'
+            displayName: 'Run script'
