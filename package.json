@@ -13,9 +13,10 @@
     "prettier": "prettier . --cache --check",
     "prettier-fix": "prettier . --cache --write",
     "typecheck": "tsc && tsc -p integration-tests",
-    "test": "DOTENV_CONFIG_PATH='.env.example' jest",
-    "test:ci": "DOTENV_CONFIG_PATH='.env.example' jest --runInBand",
+    "test": "DOTENV_CONFIG_PATH='.env.test' jest",
+    "test:ci": "DOTENV_CONFIG_PATH='.env.test' jest --runInBand --coverage",
     "int-test": "cypress run --config video=false",
+    "int-test:ci": "npm run build && start-server-and-test start http://localhost:8001/health int-test",
     "int-test-ui": "cypress open --e2e --browser chrome"
   },
   "engines": {
@@ -72,6 +73,7 @@
     "nock": "^13.5.6",
     "prettier": "^3.4.2",
     "prettier-plugin-jinja-template": "^2.0.0",
+    "start-server-and-test": "^2.0.10",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",
     "typescript": "^5.7.3"

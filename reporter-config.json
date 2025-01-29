@@ -1,6 +1,7 @@
 {
   "reporterEnabled": "spec, mocha-junit-reporter",
   "reporterOptions": {
-    "mochaFile": "test-results/cypress/results-[hash].xml"
+    "testsuitesTitle": "Integration Tests",
+    "mochaFile": "test-results/integration-tests.xml"
   }
 }

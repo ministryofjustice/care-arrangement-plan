@@ -56,7 +56,9 @@ It is recommended to use your IDE to run ESLint and Prettier on save, to ensure 
 
 ## Pipeline
 
-TODO
+We have two pipelines. One runs for pull requests, and prevents the merge unless the tests and static analysis are passing.
+The second runs on merges to the `main` branch, and runs these tests, then releases the app to test. There is a manual
+step in this pipeline to release to production.
 
 ## Project Structure
 
@@ -88,4 +90,3 @@ For documentation on the project architecture, see [here](./architecture-docs/RE
 - Vulnerability scanning (snyk, audit-ci etc.)
 - Dependabot
 - Sonar or something like that
-- Pipeline

@@ -8,6 +8,7 @@ const config = {
     ],
   },
   collectCoverageFrom: ['server/**/*.{ts,js,jsx,mjs}'],
+  coverageReporters: ['cobertura', 'text'],
   testMatch: ['<rootDir>/server/**/*.test.{ts,js,jsx,mjs}'],
   testEnvironment: 'node',
   reporters: [
@@ -15,7 +16,9 @@ const config = {
     [
       'jest-junit',
       {
-        outputDirectory: 'test-results/jest/',
+        outputName: 'unit-tests.xml',
+        suiteName: 'Unit Tests',
+        outputDirectory: 'test-results/',
       },
     ],
     [
