@@ -11,16 +11,31 @@ stages:
   - stage: development
     displayName: Deploy to Test
     jobs:
-      - job: DeployJob
+      - job: DeployTest
         pool: Default
         steps:
+          - task: Docker@2
+            displayName: Build an image
+            inputs:
+              command: build
+              dockerfile: 'Dockerfile'
+              buildContext: '.'
+              repository: 'pfl-care-arrangement-plan'
+          - task: ECRPushImage@1
+            displayName: 'Push Docker Image to ECR'
+            inputs:
+              awsCredentials: 'aws-oidc-federation'
+              regionName: 'eu-west-2'
+              sourceImageName: 'pfl-care-arrangement-plan'
+              repositoryName: 'pfl-care-arrangement-plan'
+              pushTag: $(Build.SourceVersion)
           - script: echo 'hello, world'
             displayName: 'Run script'
   - stage: production
     displayName: Deploy to Production
     trigger: manual
     jobs:
-      - job: DeployJob
+      - job: DeployProd
         pool: Default
         steps:
           - script: echo 'hello, world'

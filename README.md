@@ -48,7 +48,13 @@ docker build -t 'pfl-care-arrangement-plan' .
 And then to run it
 
 ```shell
-docker run --env-file .env -p 8001:8001 pfl-care-arrangement-plan
+docker run --env-file .env -p 8001:8001 -d --rm --name pfl-care-arrangement-plan pfl-care-arrangement-plan
+```
+
+To stop the container
+
+```shell
+docker stop pfl-care-arrangement-plan
 ```
 
 ## Tests
