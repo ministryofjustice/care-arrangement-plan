@@ -37,6 +37,20 @@ docker compose up
 
 The app will now connect to Valkey when running.
 
+### Running in Docker
+
+You can run the app in a docker container, so more closely simulate the hosted environment. To build the docker image
+
+```shell
+docker build -t 'pfl-care-arrangement-plan' .
+```
+
+And then to run it
+
+```shell
+docker run --env-file .env -p 8001:8001 pfl-care-arrangement-plan
+```
+
 ## Tests
 
 We use [Jest](https://jestjs.io/) for unit tests. To run then run `npm run test`.
