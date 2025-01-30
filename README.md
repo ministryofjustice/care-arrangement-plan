@@ -99,6 +99,10 @@ releases before full Welsh translation is complete.
 
 For documentation on the project architecture, see [here](./architecture-docs/README.md)
 
+## Terraform
+
+For documentation on our terraform setup, see [here](./terraform/README.md)
+
 ## TODO
 
 - Vulnerability scanning (snyk, audit-ci etc.)
