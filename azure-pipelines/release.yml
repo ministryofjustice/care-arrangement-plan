@@ -1,6 +1,10 @@
 trigger:
   - main
 
+variables:
+  - name: ecrRepositoryName
+    value: pfl-care-arrangement-plan
+
 stages:
   - stage: Validation
     jobs:
@@ -21,13 +25,15 @@ stages:
               dockerfile: 'Dockerfile'
               buildContext: '.'
               repository: 'pfl-care-arrangement-plan'
+              tags: $(Build.SourceVersion)
           - task: ECRPushImage@1
             displayName: 'Push Docker Image to ECR'
             inputs:
               awsCredentials: 'aws-oidc-federation'
               regionName: 'eu-west-2'
               sourceImageName: 'pfl-care-arrangement-plan'
-              repositoryName: 'pfl-care-arrangement-plan'
+              sourceImageTag: $(Build.SourceVersion)
+              repositoryName: $(ecrRepositoryName)
               pushTag: $(Build.SourceVersion)
           - script: echo 'hello, world'
             displayName: 'Run script'
