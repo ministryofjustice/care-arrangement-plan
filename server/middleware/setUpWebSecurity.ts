@@ -28,6 +28,7 @@ const setUpWebSecurity = (): Router => {
           styleSrc: ["'self'", (_req: Request, response: Response) => `'nonce-${response.locals.cspNonce}'`],
           fontSrc: ["'self'"],
           formAction: ["'self'"],
+          upgradeInsecureRequests: config.useHttps ? [] : null,
         },
       },
       crossOriginEmbedderPolicy: true,
