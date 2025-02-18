@@ -1,6 +1,7 @@
 import crypto from 'crypto'
 import express, { Router, Request, Response, NextFunction } from 'express'
 import helmet from 'helmet'
+import config from '../config'
 
 const setUpWebSecurity = (): Router => {
   const router = express.Router()
@@ -30,6 +31,7 @@ const setUpWebSecurity = (): Router => {
         },
       },
       crossOriginEmbedderPolicy: true,
+      strictTransportSecurity: config.useHttps,
     }),
   )
   return router
