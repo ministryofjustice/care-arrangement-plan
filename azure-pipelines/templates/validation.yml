@@ -13,6 +13,9 @@ steps:
   - script: npm run prettier
     displayName: 'Run Prettier'
 
+  - script: terraform fmt -check -recursive
+    displayName: 'Check Terraform Formatting'
+
   - script: npm run test:ci
     displayName: 'Run Unit Tests'
 

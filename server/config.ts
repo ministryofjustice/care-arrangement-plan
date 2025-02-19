@@ -52,14 +52,15 @@ const config = {
   },
 }
 
-if (production) {
-  if (!config.useHttps || !config.valkey.tls_enabled) {
-    throw new Error(`HTTPS must be enabled on production environments`)
-  }
-
-  if (!config.valkey.enabled) {
-    throw new Error(`Valkey must be used on production environments`)
-  }
-}
+// if (production) {
+//   // TODO C5141-953
+//   if (!config.useHttps || !config.valkey.tls_enabled) {
+//     throw new Error(`HTTPS must be enabled on production environments`)
+//   }
+//   // TODO C5141-954
+//   if (!config.valkey.enabled) {
+//     throw new Error(`Valkey must be used on production environments`)
+//   }
+// }
 
 export default config

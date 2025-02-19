@@ -1,7 +1,7 @@
 # Architecture
 
 The app is a simple express app, using the nunjucks templating engine. It is hosted in AWS, with the infrastructure
-defined using terraform.
+defined using Terraform.
 
 For MVS, as we only need to store transient session data, there is a simple architecture of the containerised web
 application connecting to a Valkey cluster.
