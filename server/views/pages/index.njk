@@ -1,8 +1,64 @@
 {% extends "../partials/layout.njk" %}
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
 {% set mainClasses = "app-container govuk-body" %}
 
+{% block beforeContent %}
+  {{
+    govukBreadcrumbs({
+      items: [{text: "Home"}, {text: "Negotiation tools and services"}, {text: "Make or change a child arrangements plan"}]
+    })
+  }}
+{% endblock %}
+
 {% block content %}
-  <h1>{{ applicationName }}</h1>
-  <p>{{ __('home.line1') }}</p>
-  <p>{{ __('home.line2') }}</p>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">{{ __('serviceName') }}</h1>
+      <p>
+        This service helps you and another parent or carer plan what arrangements are best for your children. If you can
+        agree on a plan, you can avoid court.
+      </p>
+      <p>Use this service to propose:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>where your children live</li>
+        <li>when your children spend time with each parent</li>
+        <li>handovers, holidays and whatever else matters to your children</li>
+      </ul>
+
+      <p>You’ll end up with a proposed plan you can share with the other parent to ask their agreement.</p>
+
+      <p>This service is useful if:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          you are separated or divorced from your children’s other parent and have no child arrangement plan in place
+          yet
+        </li>
+        <li>you want to propose changes to your existing arrangements, even if you have a court order in place</li>
+      </ul>
+
+      {{
+        govukButton({
+          text: "Start now",
+          isStartButton: true
+        })
+      }}
+
+      <p>
+        If you think the other parent is a threat to you or your children's safety, you should not use this service.
+        <a href="">Find another way to make arrangements</a>.
+      </p>
+
+      <p><a href="">Find out more about child abuse and neglect</a></p>
+
+      <p><a href="">Find out more about signs of domestic violence</a> if you're unsure whether you're a victim.</p>
+
+      <p>
+        <a href="https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf"
+          >Tips for parents</a
+        >
+        from a child's perspective.
+      </p>
+    </div>
+  </div>
 {% endblock %}
