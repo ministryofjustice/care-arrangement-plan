@@ -8,8 +8,11 @@
         <h2>{{ status }}</h2>
         <pre>{{ stack }}</pre>
       {% endif %}
-      <p>The error has been logged.</p>
-      <p>You can try reloading the page or <a href="/" class="govuk-link--no-visited-state">start again</a>.</p>
+      <p>{{ __('errors.generic.errorLogged') }}</p>
+      <p>
+        {{ __('errors.generic.tryReloading') }}
+        <a href="/" class="govuk-link--no-visited-state">{{ __('errors.generic.startAgain') }}</a>.
+      </p>
     </div>
   </div>
 {% endblock %}

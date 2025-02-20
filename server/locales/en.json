@@ -2,6 +2,11 @@
   "home.line1": "This site is under construction...",
   "home.line2": "Please check back later when there is content to view.",
   "serviceName": "Propose a child arrangement plan",
-  "error.pageNotFoundTitle": "Page not found",
-  "error.genericTitle": "Sorry, there is a problem with the service"
+  "errors.notFound.title": "Page not found",
+  "errors.notFound.check": "Please check the web address is correct.",
+  "errors.notFound.startAgain": "Start again",
+  "errors.generic.title": "Sorry, there is a problem with the service",
+  "errors.generic.errorLogged": "The error has been logged.",
+  "errors.generic.tryReloading": "You can try reloading the page or ",
+  "errors.generic.startAgain": "start again"
 }

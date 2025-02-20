@@ -15,10 +15,10 @@ export default function createErrorHandler(production: boolean) {
     response.status(status)
 
     return status === 404
-      ? response.render('pages/errors/notFound', { title: i18n.__('error.pageNotFoundTitle') })
+      ? response.render('pages/errors/notFound', { title: i18n.__('errors.notFound.title') })
       : response.render('pages/errors/generic', {
           production,
-          title: production ? i18n.__('error.genericTitle') : error.message,
+          title: production ? i18n.__('errors.generic.title') : error.message,
         })
   }
 }

@@ -5,8 +5,8 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1>{{ title }}</h1>
-      <p>Please check the web address is correct.</p>
-      {{ govukButton({text: "Start again"}) }}
+      <p>{{ __('errors.notFound.check') }}</p>
+      {{ govukButton({text: __('errors.notFound.startAgain') }) }}
     </div>
   </div>
 {% endblock %}
