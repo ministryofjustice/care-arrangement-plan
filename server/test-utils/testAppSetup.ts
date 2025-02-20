@@ -15,7 +15,6 @@ const testAppSetup = (): Express => {
   app.use(setUpWebSession())
   app.use(setUpWebRequestParsing())
   app.use(routes())
-  app.use((_request, _response, next) => next(new NotFound()))
 
   return app
 }

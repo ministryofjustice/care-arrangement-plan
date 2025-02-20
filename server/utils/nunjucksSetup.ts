@@ -27,10 +27,8 @@ const nunjucksSetup = (app: express.Express): void => {
   })
 
   njkEnv.addFilter('assetMap', (url: string) => assetManifest[url] || url)
-  /* eslint-disable no-underscore-dangle */
   njkEnv.addGlobal('__', i18n.__)
   njkEnv.addGlobal('getLocale', () => i18n.getLocale)
-  /* eslint-enable no-underscore-dangle */
 }
 
 export default nunjucksSetup

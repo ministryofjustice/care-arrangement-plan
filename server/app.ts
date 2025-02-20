@@ -3,6 +3,7 @@ import express from 'express'
 import { NotFound } from 'http-errors'
 
 import nunjucksSetup from './utils/nunjucksSetup'
+import errorHandler from './errorHandler'
 
 import setUpCsrf from './middleware/setUpCsrf'
 import setUpHealthCheck from './middleware/setUpHealthCheck'
@@ -13,6 +14,7 @@ import setUpWebSession from './middleware/setUpWebSession'
 
 import routes from './routes'
 import i18nSetup from './utils/i18nSetup'
+import config from './config'
 
 const createApp = (): express.Application => {
   const app = express()
@@ -33,6 +35,7 @@ const createApp = (): express.Application => {
   app.use(routes())
 
   app.use((_request, _response, next) => next(new NotFound()))
+  app.use(errorHandler(config.production))
 
   return app
 }
