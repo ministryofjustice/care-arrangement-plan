@@ -7,8 +7,6 @@ schedules:
 
 trigger: none
 
-pool: Default
-
 steps:
   - task: NodeTool@0
     inputs:
