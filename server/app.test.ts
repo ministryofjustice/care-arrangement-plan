@@ -9,8 +9,8 @@ let app: Express
 
 type languages = 'en' | 'cy'
 const homepageLanguageStrings = {
-  en: 'This site is under construction...',
-  cy: 'Mae&#39;r safle hwn yn cael ei adeiladu...',
+  en: 'Propose a child arrangement plan',
+  cy: 'Cynnig cynllun trefniant plentyn',
 }
 
 describe('App', () => {

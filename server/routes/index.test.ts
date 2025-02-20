@@ -9,7 +9,7 @@ describe('GET /', () => {
       .get('/')
       .expect('Content-Type', /html/)
       .expect(response => {
-        expect(response.text).toContain('This site is under construction...')
+        expect(response.text).toContain('Propose a child arrangement plan')
       })
   })
 })
