@@ -107,7 +107,7 @@ For documentation on the project architecture, see [here](./architecture-docs/RE
 
 ## Terraform
 
-For documentation on our terraform setup, see [here](./terraform/README.md)
+For documentation on our Terraform setup, see [here](./terraform/README.md)
 
 ## TODO
 
