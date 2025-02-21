@@ -31,11 +31,14 @@ describe('/court-order-check', () => {
     })
 
     it('should redirect to number of children page if the answer is no', () => {
-      return request(app)
-        .post(paths.COURT_ORDER_CHECK)
-        .send({ [formFields.COURT_ORDER_CHECK]: 'No' })
-        .expect(302)
-        .expect('location', paths.START)
+      return (
+        request(app)
+          .post(paths.COURT_ORDER_CHECK)
+          .send({ [formFields.COURT_ORDER_CHECK]: 'No' })
+          .expect(302)
+          // TODO C5141-759 add correct link
+          .expect('location', paths.START)
+      )
     })
   })
 })

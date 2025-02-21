@@ -8,6 +8,8 @@ const courtOrderCheckRoutes = (router: Router) => {
     response.render('pages/courtOrderCheck', {
       errors: request.flash('errors'),
       title: 'Do you already have a court order in place about your child arrangements?',
+      // TODO C5141-758 add correct back link
+      backLinkHref: paths.START,
     })
   })
 
@@ -22,6 +24,7 @@ const courtOrderCheckRoutes = (router: Router) => {
       [formFields.COURT_ORDER_CHECK]: 'Yes' | 'No'
     }>(request)
 
+    // TODO C5141-759 add correct link
     return existingCourtOrder === 'Yes' ? response.redirect(paths.EXISTING_COURT_ORDER) : response.redirect(paths.START)
   })
 }
