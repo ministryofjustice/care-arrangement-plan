@@ -1,0 +1,29 @@
+{% extends "../partials/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p>
+        If you can reach agreement with the other parent or carer, then you do not need to go back to court to change
+        your arrangements. However, a court can only enforce the child arrangements that are in your court order.
+      </p>
+
+      <h2 class="govuk-heading-m">If you have prohibited steps order or a specific issue order</h2>
+      <p>
+        Check any legal documents sent to you by a judge to see whether you have a prohibited steps order or a specific
+        issue order (section 8).
+      </p>
+
+      <p>
+        You must not try to change any rules given to you in a prohibited steps order or specific issue order. You can
+        only propose changes to other parts of your child arrangements, such as what day of the week your children visit
+        you.
+      </p>
+
+      {{ govukButton({ text: "Continue" }) }}
+    </div>
+  </div>
+{% endblock %}

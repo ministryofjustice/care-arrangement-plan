@@ -1,6 +1,7 @@
 import session, { MemoryStore, Store } from 'express-session'
 import { RedisStore } from 'connect-redis'
 import express, { Router } from 'express'
+import flash from 'connect-flash'
 import createValkeyClient from '../data/valkeyClient'
 import config from '../config'
 import logger from '../../logger'
@@ -34,6 +35,8 @@ const setUpWebSession = (): Router => {
     request.session.nowInMinutes = Math.floor(Date.now() / 60e3)
     next()
   })
+
+  router.use(flash())
 
   return router
 }
