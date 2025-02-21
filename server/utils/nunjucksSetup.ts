@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import path from 'path'
 import nunjucks from 'nunjucks'
 import express from 'express'
@@ -9,7 +8,6 @@ import logger from '../../logger'
 const nunjucksSetup = (app: express.Express): void => {
   app.set('view engine', 'njk')
 
-  app.locals.applicationName = 'PFL Care Arrangement Plan'
   let assetManifest: Record<string, string> = {}
 
   try {
@@ -29,6 +27,15 @@ const nunjucksSetup = (app: express.Express): void => {
   njkEnv.addFilter('assetMap', (url: string) => assetManifest[url] || url)
   njkEnv.addGlobal('__', i18n.__)
   njkEnv.addGlobal('getLocale', () => i18n.getLocale)
+  // convert errors to format for GOV.UK error summary component
+  njkEnv.addFilter('errorSummaryList', (errors = []) => {
+    return Object.keys(errors).map(error => {
+      return {
+        text: errors[error].msg,
+        href: errors[error].path ? `#${errors[error].path}-error` : undefined,
+      }
+    })
+  })
 }
 
 export default nunjucksSetup

@@ -1,5 +1,6 @@
 {
   "serviceName": "Propose a child arrangement plan",
+  "errorSummary.title": "There is a problem",
   "errors.notFound.title": "Page not found",
   "errors.notFound.check": "Please check the web address is correct.",
   "errors.notFound.startAgain": "Start again",
