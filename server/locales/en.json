@@ -1,3 +1,10 @@
 {
-  "serviceName": "Propose a child arrangement plan"
+  "serviceName": "Propose a child arrangement plan",
+  "errors.notFound.title": "Page not found",
+  "errors.notFound.check": "Please check the web address is correct.",
+  "errors.notFound.startAgain": "Start again",
+  "errors.generic.title": "Sorry, there is a problem with the service",
+  "errors.generic.errorLogged": "The error has been logged.",
+  "errors.generic.tryReloading": "You can try reloading the page or ",
+  "errors.generic.startAgain": "start again"
 }
