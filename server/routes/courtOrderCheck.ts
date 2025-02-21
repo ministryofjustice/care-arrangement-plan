@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { body, matchedData, validationResult } from 'express-validator'
+import i18n from 'i18n'
 import paths from '../constants/paths'
 import formFields from '../constants/formFields'
 
@@ -7,7 +8,7 @@ const courtOrderCheckRoutes = (router: Router) => {
   router.get(paths.COURT_ORDER_CHECK, (request, response) => {
     response.render('pages/courtOrderCheck', {
       errors: request.flash('errors'),
-      title: 'Do you already have a court order in place about your child arrangements?',
+      title: i18n.__('courtOrderCheck.title'),
       // TODO C5141-758 add correct back link
       backLinkHref: paths.START,
     })

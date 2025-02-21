@@ -13,28 +13,28 @@
             name: formFields.COURT_ORDER_CHECK,
             fieldset: {
               legend: {
-                text: "Do you already have a court order in place about your child arrangements?",
+                text: __('courtOrderCheck.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }
             },
             hint: {
-              text: "This could include a prohibited steps, specific issue or consent order."
+              text: __('courtOrderCheck.subText')
             },
             items: [
               {
                 value: "Yes",
-                text: "Yes"
+                text: __('yes')
               },
               {
                 value: "No",
-                text: "No"
+                text: __('no')
               }
             ],
             errorMessage: errors | findError(formFields.COURT_ORDER_CHECK)
           })
         }}
-        {{ govukButton({text: "Continue"}) }}
+        {{ govukButton({text: __('continue')}) }}
       </form>
     </div>
   </div>
