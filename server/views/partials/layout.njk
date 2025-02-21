@@ -1,6 +1,9 @@
 {% extends "govuk/template.njk" %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 {% set htmlLang = getLocale() %}
+{% set mainClasses = "app-container govuk-body" %}
+
+{% block pageTitle %}{{ title }} – {{ __('serviceName') }} – GOV.UK{% endblock %}
 
 {% block head %}
   <meta name="robots" content="noindex, nofollow" />
