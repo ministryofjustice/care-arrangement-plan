@@ -7,7 +7,7 @@ const app = testAppSetup()
 
 describe('/court-order-check', () => {
   describe('GET', () => {
-    it('should render court order check order page', () => {
+    it('should render court order check page', () => {
       return request(app)
         .get(paths.COURT_ORDER_CHECK)
         .expect('Content-Type', /html/)
