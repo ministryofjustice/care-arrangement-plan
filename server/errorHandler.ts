@@ -3,8 +3,11 @@ import type { HTTPError } from 'superagent'
 import i18n from 'i18n'
 import logger from '../logger'
 
-export default function createErrorHandler(production: boolean) {
+import config from './config'
+
+export default function createErrorHandler() {
   return (error: HTTPError, request: Request, response: Response, _next: NextFunction): void => {
+    const { production } = config
     logger.error(`Error handling request for '${request.originalUrl}'`, error)
 
     const status = error.status || 500

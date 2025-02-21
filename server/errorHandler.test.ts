@@ -34,7 +34,7 @@ describe('errorHandler', () => {
       expect(loggerMocks.error).toHaveBeenCalledTimes(1)
     })
 
-    it('should render content without stack in dev mode', async () => {
+    it('should render content with stack in dev mode', async () => {
       config.production = false
       await request(testAppSetup())
         .get('/create-error')

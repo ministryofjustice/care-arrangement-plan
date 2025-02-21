@@ -14,7 +14,6 @@ import setUpWebSession from './middleware/setUpWebSession'
 
 import routes from './routes'
 import i18nSetup from './utils/i18nSetup'
-import config from './config'
 
 const createApp = (): express.Application => {
   const app = express()
@@ -35,7 +34,7 @@ const createApp = (): express.Application => {
   app.use(routes())
 
   app.use((_request, _response, next) => next(new NotFound()))
-  app.use(errorHandler(config.production))
+  app.use(errorHandler())
 
   return app
 }

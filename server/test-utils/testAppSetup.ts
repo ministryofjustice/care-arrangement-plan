@@ -7,7 +7,6 @@ import setUpWebSession from '../middleware/setUpWebSession'
 import i18nSetup from '../utils/i18nSetup'
 import setUpWebRequestParsing from '../middleware/setupRequestParsing'
 import errorHandler from '../errorHandler'
-import config from '../config'
 
 const testAppSetup = (): Express => {
   const app = express()
@@ -25,7 +24,7 @@ const testAppSetup = (): Express => {
   app.use(testRouter)
 
   app.use((_request, _response, next) => next(new NotFound()))
-  app.use(errorHandler(config.production))
+  app.use(errorHandler())
 
   return app
 }
