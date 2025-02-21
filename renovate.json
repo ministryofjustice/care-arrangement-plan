@@ -1,0 +1,7 @@
+{
+  "platform": "azure",
+  "azure-pipelines": {
+    "enabled": true
+  },
+  "enabledManagers": ["azure-pipelines", "terraform", "nvm", "npm", "dockerfile", "docker-compose"]
+}
