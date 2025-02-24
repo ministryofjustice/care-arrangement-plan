@@ -9,7 +9,7 @@
         <pre>{{ stack }}</pre>
       {% endif %}
       <p>{{ __('errors.generic.errorLogged') }}</p>
-      <p>{{ __('errors.generic.tryReloading') }}</p>
+      <p>{{ __('errors.generic.tryReloading') | safe }}</p>
     </div>
   </div>
 {% endblock %}

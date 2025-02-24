@@ -3,6 +3,9 @@ export declare module 'express-session' {
   interface SessionData {
     nowInMinutes: number
     numberOfChildren: number
+    namesOfChildren: string[]
+    initialAdultName: string
+    secondaryAdultName: string
   }
 }
 

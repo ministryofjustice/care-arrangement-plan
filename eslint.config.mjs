@@ -5,6 +5,7 @@ export default [
   {
     rules: {
       'no-underscore-dangle': 'off', // This is needed for i18n
+      'no-plusplus': 'off',
     },
   },
 ]

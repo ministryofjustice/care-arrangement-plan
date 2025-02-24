@@ -1,0 +1,42 @@
+{% extends "../partials/layout.njk" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p>{{ __('about.notStoreInfo') }}</p>
+
+      <form class="form" action="{{ paths.ABOUT_THE_ADULTS }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {{
+          govukInput({
+            id: formFields.INITIAL_ADULT_NAME,
+            name: formFields.INITIAL_ADULT_NAME,
+            label: {
+              text: __('aboutTheAdults.firstNameInitial')
+            },
+            value: formValues[formFields.INITIAL_ADULT_NAME],
+            errorMessage: errors | findError(formFields.INITIAL_ADULT_NAME)
+          })
+        }}
+        {{
+          govukInput({
+            id: formFields.SECONDARY_ADULT_NAME,
+            name: formFields.SECONDARY_ADULT_NAME,
+            label: {
+              text: __('aboutTheAdults.firstNameSecondary')
+            },
+            value: formValues[formFields.SECONDARY_ADULT_NAME],
+            errorMessage: errors | findError(formFields.SECONDARY_ADULT_NAME)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

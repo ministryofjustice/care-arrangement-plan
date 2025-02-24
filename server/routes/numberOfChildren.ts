@@ -8,7 +8,7 @@ const numberOfChildrenRoutes = (router: Router) => {
   router.get(paths.NUMBER_OF_CHILDREN, (request, response) => {
     response.render('pages/numberOfChildren', {
       errors: request.flash('errors'),
-      formValues: request.flash('formValues')[0],
+      formValues: request.flash('formValues')?.[0],
       title: i18n.__('numberOfChildren.title'),
       backLinkHref: paths.COURT_ORDER_CHECK,
     })
