@@ -1,0 +1,31 @@
+{
+  "prHourlyLimit": 0,
+  "rebaseWhen": "behind-base-branch",
+  "enabledManagers": ["azure-pipelines", "terraform", "nvm", "npm", "dockerfile", "docker-compose"],
+  "packageRules": [
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "dependencies (non-major)"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "dependencies (major)"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "devDependencies (non-major)"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "devDependencies (major)"
+    }
+  ]
+}

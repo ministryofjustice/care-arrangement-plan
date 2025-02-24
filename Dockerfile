@@ -12,7 +12,8 @@ WORKDIR /app
 RUN apt-get update && \
         apt-get upgrade -y && \
         apt-get autoremove -y && \
-        rm -rf /var/lib/apt/lists/*
+        rm -rf /var/lib/apt/lists/* && \
+        npm install -g npm@latest
 
 # Stage: build assets
 FROM base AS build
