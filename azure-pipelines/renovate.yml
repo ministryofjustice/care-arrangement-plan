@@ -15,9 +15,11 @@ steps:
       versionSource: 'fromFile'
       versionFilePath: '.nvmrc'
 
-  - script: npx renovate --autodiscover
+  - script: npx renovate
     displayName: 'Run Renovate'
     env:
+      RENOVATE_CACHE_DIR: /var/tmp
+      RENOVATE_AUTODISCOVER: true
       RENOVATE_PLATFORM: azure
       RENOVATE_ENDPOINT: $(System.CollectionUri)
       RENOVATE_TOKEN: $(System.AccessToken)
