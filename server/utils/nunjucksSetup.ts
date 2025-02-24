@@ -1,15 +1,16 @@
-/* eslint-disable no-param-reassign */
 import path from 'path'
 import nunjucks from 'nunjucks'
 import express from 'express'
 import fs from 'fs'
 import i18n from 'i18n'
+import { FieldValidationError } from 'express-validator'
 import logger from '../../logger'
+import paths from '../constants/paths'
+import formFields from '../constants/formFields'
 
 const nunjucksSetup = (app: express.Express): void => {
   app.set('view engine', 'njk')
 
-  app.locals.applicationName = 'PFL Care Arrangement Plan'
   let assetManifest: Record<string, string> = {}
 
   try {
@@ -27,8 +28,30 @@ const nunjucksSetup = (app: express.Express): void => {
   })
 
   njkEnv.addFilter('assetMap', (url: string) => assetManifest[url] || url)
+  njkEnv.addGlobal('paths', paths)
+  njkEnv.addGlobal('formFields', formFields)
   njkEnv.addGlobal('__', i18n.__)
   njkEnv.addGlobal('getLocale', () => i18n.getLocale)
+  // find specific error and return errorMessage for field validation
+  njkEnv.addFilter('findError', (errors: FieldValidationError[], formFieldId: string) => {
+    if (!errors) return null
+    const errorForMessage = errors.find(error => error.path === formFieldId)
+
+    if (errorForMessage === undefined) return null
+
+    return {
+      text: errorForMessage?.msg,
+    }
+  })
+  // convert errors to format for GOV.UK error summary component
+  njkEnv.addFilter('errorSummaryList', (errors = []) => {
+    return Object.keys(errors).map(error => {
+      return {
+        text: errors[error].msg,
+        href: errors[error].path ? `#${errors[error].path}-error` : undefined,
+      }
+    })
+  })
 }
 
 export default nunjucksSetup
