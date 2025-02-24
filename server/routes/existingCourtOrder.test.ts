@@ -4,7 +4,7 @@ import paths from '../constants/paths'
 
 const app = testAppSetup()
 
-describe('GET /existing-court-order', () => {
+describe(`GET ${paths.EXISTING_COURT_ORDER}`, () => {
   it('should render existing court order page', () => {
     return request(app)
       .get(paths.EXISTING_COURT_ORDER)

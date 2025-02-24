@@ -1,7 +1,7 @@
 import request from 'supertest'
 import testAppSetup from './test-utils/testAppSetup'
 import config from './config'
-import { loggerMocks } from './test-utils/testSetup'
+import { loggerMocks } from './test-utils/testMocks'
 
 describe('errorHandler', () => {
   describe('notFound', () => {

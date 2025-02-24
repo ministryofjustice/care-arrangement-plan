@@ -3,17 +3,22 @@ import { NotFound } from 'http-errors'
 
 import routes from '../routes'
 import nunjucksSetup from '../utils/nunjucksSetup'
-import setUpWebSession from '../middleware/setUpWebSession'
 import i18nSetup from '../utils/i18nSetup'
 import setUpWebRequestParsing from '../middleware/setupRequestParsing'
 import errorHandler from '../errorHandler'
+import { flashMock, sessionMock } from './testMocks'
 
 const testAppSetup = (): Express => {
   const app = express()
 
   i18nSetup(app)
   nunjucksSetup(app)
-  app.use(setUpWebSession())
+  app.use((request, _response, next) => {
+    request.session = sessionMock
+    request.flash = flashMock
+    next()
+  })
+
   app.use(setUpWebRequestParsing())
   app.use(routes())
 
