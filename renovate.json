@@ -1,5 +1,6 @@
 {
   "prHourlyLimit": 0,
+  "rebaseWhen": "behind-base-branch",
   "enabledManagers": ["azure-pipelines", "terraform", "nvm", "npm", "dockerfile", "docker-compose"],
   "packageRules": [
     {
