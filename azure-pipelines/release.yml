@@ -13,14 +13,12 @@ stages:
   - stage: Validation
     jobs:
       - job: ValidationJob
-        pool: Default
         steps:
           - template: templates/validation.yml
   - stage: development
     displayName: Deploy to Test
     jobs:
       - job: DeployTest
-        pool: Default
         steps:
           - task: Docker@2
             displayName: Build an image
@@ -61,7 +59,6 @@ stages:
     trigger: manual
     jobs:
       - job: DeployProd
-        pool: Default
         steps:
           - task: AWSShellScript@1
             displayName: 'Run Terraform'
