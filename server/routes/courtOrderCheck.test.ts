@@ -1,20 +1,44 @@
 import request from 'supertest'
+import { JSDOM } from 'jsdom'
 import testAppSetup from '../test-utils/testAppSetup'
 import paths from '../constants/paths'
 import formFields from '../constants/formFields'
-import { flashMock } from '../test-utils/testMocks'
+import { flashMock, flashMockErrors } from '../test-utils/testMocks'
 
 const app = testAppSetup()
 
 describe(paths.COURT_ORDER_CHECK, () => {
   describe('GET', () => {
-    it('should render court order check page', () => {
-      return request(app)
-        .get(paths.COURT_ORDER_CHECK)
-        .expect('Content-Type', /html/)
-        .expect(response => {
-          expect(response.text).toContain('Do you already have a court order in place about your child arrangements?')
-        })
+    it('should render court order check page', async () => {
+      const response = await request(app).get(paths.COURT_ORDER_CHECK).expect('Content-Type', /html/)
+
+      const dom = new JSDOM(response.text)
+
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent(
+        'Do you already have a court order in place about your child arrangements?',
+      )
+      expect(dom.window.document.querySelector('h2')).toBeNull()
+      expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).not.toContain(
+        `${formFields.COURT_ORDER_CHECK}-error`,
+      )
+    })
+
+    it('should render error flash responses correctly', async () => {
+      Object.assign(flashMockErrors, [
+        {
+          location: 'body',
+          msg: 'Invalid value',
+          path: formFields.COURT_ORDER_CHECK,
+          type: 'field',
+        },
+      ])
+
+      const dom = new JSDOM((await request(app).get(paths.COURT_ORDER_CHECK)).text)
+
+      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem')
+      expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).toContain(
+        `${formFields.COURT_ORDER_CHECK}-error`,
+      )
     })
   })
 

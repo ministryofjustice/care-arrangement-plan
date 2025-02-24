@@ -9,14 +9,16 @@ const app = testAppSetup()
 
 describe(paths.NUMBER_OF_CHILDREN, () => {
   describe('GET', () => {
-    it('should render number of children page', () => {
-      return request(app)
-        .get(paths.NUMBER_OF_CHILDREN)
-        .expect('Content-Type', /html/)
-        .expect(response => {
-          expect(response.text).toContain('How many children is this for?')
-          expect(response.text).not.toContain('There is a problem')
-        })
+    it('should render number of children page', async () => {
+      const response = await request(app).get(paths.NUMBER_OF_CHILDREN).expect('Content-Type', /html/)
+
+      const dom = new JSDOM(response.text)
+
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent('How many children is this for?')
+      expect(dom.window.document.querySelector('h2')).toBeNull()
+      expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).not.toHaveAttribute(
+        'aria-describedby',
+      )
     })
 
     it('should render error flash responses correctly', async () => {
@@ -33,7 +35,12 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
 
       const dom = new JSDOM((await request(app).get(paths.NUMBER_OF_CHILDREN)).text)
 
-      expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).toHaveAttribute('value', '7')
+      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem')
+      expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).toHaveValue('7')
+      expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).toHaveAttribute(
+        'aria-describedby',
+        `${formFields.NUMBER_OF_CHILDREN}-error`,
+      )
     })
   })
 
