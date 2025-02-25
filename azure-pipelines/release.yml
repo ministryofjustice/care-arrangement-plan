@@ -20,14 +20,18 @@ stages:
     jobs:
       - job: DeployTest
         steps:
+          - script: sudo apt-get install -y qemu qemu-user-static
+            displayName: 'Install arm64 emulator'
           - task: Docker@2
-            displayName: Build an image
+            displayName: Build Docker Image
             inputs:
               command: build
               dockerfile: 'Dockerfile'
               buildContext: '.'
               repository: 'pfl-care-arrangement-plan'
               tags: $(Build.SourceVersion)
+            env:
+              DOCKER_DEFAULT_PLATFORM: 'linux/arm64'
           - task: ECRPushImage@1
             displayName: 'Push Docker Image to ECR'
             inputs:
