@@ -16,6 +16,7 @@ const aboutTheAdultsRoutes = (router: Router) => {
 
   router.post(
     paths.ABOUT_THE_ADULTS,
+    // TODO C5141-1013: Add error messages
     body(formFields.INITIAL_ADULT_NAME).trim().notEmpty(),
     body(formFields.SECONDARY_ADULT_NAME).trim().notEmpty(),
     (request, response) => {

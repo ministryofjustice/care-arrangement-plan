@@ -9,8 +9,7 @@ const courtOrderCheckRoutes = (router: Router) => {
     response.render('pages/courtOrderCheck', {
       errors: request.flash('errors'),
       title: i18n.__('courtOrderCheck.title'),
-      // TODO C5141-758 add correct back link
-      backLinkHref: paths.START,
+      backLinkHref: paths.DO_WHATS_BEST,
     })
   })
 

@@ -1,0 +1,30 @@
+{% extends "../partials/layout.njk" %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      {{ __('doWhatsBest.content') | safe }}
+
+      <form class="form" action="{{ paths.DO_WHATS_BEST }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {{
+          govukCheckboxes({
+            name: formFields.DO_WHATS_BEST,
+            items: [
+              {
+                text: __('doWhatsBest.childrensNeedsFirst')
+              }
+            ],
+            errorMessage: errors | findError(formFields.DO_WHATS_BEST)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

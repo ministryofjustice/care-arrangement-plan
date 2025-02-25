@@ -1,0 +1,46 @@
+{% extends "../partials/layout.njk" %}
+{% from "govuk/components/exit-this-page/macro.njk" import govukExitThisPage %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+
+  {{ govukExitThisPage() }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p>{{ __('safetyCheck.workWithPartner') }}</p>
+
+      <form class="form" action="{{ paths.SAFETY_CHECK }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {{
+          govukRadios({
+            name: formFields.SAFETY_CHECK,
+            fieldset: {
+              legend: {
+                text: __('safetyCheck.safeAndConfident'),
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: __('yes')
+              },
+              {
+                value: "No",
+                text: __('no')
+              }
+            ],
+            errorMessage: errors | findError(formFields.SAFETY_CHECK)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

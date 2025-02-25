@@ -1,0 +1,19 @@
+{% extends "../partials/layout.njk" %}
+{% from "govuk/components/exit-this-page/macro.njk" import govukExitThisPage %}
+
+{% block content %}
+
+  {{ govukExitThisPage() }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      {{ __('notSafe.content') | safe }}
+      <p>
+        {{ __('notSafe.feelConfident') }}
+        <a href="{{ paths.CHILDREN_SAFETY_CHECK }}">{{ __('notSafe.continue') }}</a>.
+      </p>
+    </div>
+  </div>
+{% endblock %}
