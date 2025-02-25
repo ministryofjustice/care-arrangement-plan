@@ -21,7 +21,7 @@ const doWhatsBestRoutes = (router: Router) => {
       return response.redirect(paths.DO_WHATS_BEST)
     }
 
-    response.redirect(paths.COURT_ORDER_CHECK)
+    return response.redirect(paths.COURT_ORDER_CHECK)
   })
 }
 
