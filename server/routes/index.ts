@@ -5,6 +5,9 @@ import existingCourtOrderRoutes from './existingCourtOrder'
 import numberOfChildrenRoutes from './numberOfChildren'
 import aboutTheChildrenRoutes from './aboutTheChildren'
 import aboutTheAdultsRoutes from './aboutTheAdults'
+import safetyCheckRoutes from './safetyCheck'
+import childrenSafetyRoutesCheck from './childrenSafetyCheck'
+import doWhatsBestRoutes from './doWhatsBest'
 
 const routes = (): Router => {
   const router = Router()
@@ -12,6 +15,9 @@ const routes = (): Router => {
     response.render('pages/index')
   })
 
+  safetyCheckRoutes(router)
+  childrenSafetyRoutesCheck(router)
+  doWhatsBestRoutes(router)
   courtOrderCheckRoutes(router)
   existingCourtOrderRoutes(router)
   numberOfChildrenRoutes(router)

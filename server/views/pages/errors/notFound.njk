@@ -6,7 +6,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1>{{ title }}</h1>
       <p>{{ __('errors.notFound.check') }}</p>
-      {{ govukButton({text: __('errors.notFound.startAgain') }) }}
+      {{ govukButton({text: __('errors.notFound.startAgain'), href: paths.SAFETY_CHECK }) }}
     </div>
   </div>
 {% endblock %}
