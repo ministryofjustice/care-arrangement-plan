@@ -1,14 +1,15 @@
-// eslint-disable-next-line import/prefer-default-export
-export const loggerMocks = {
-  debug: jest.fn(),
-  info: jest.fn(),
-  warn: jest.fn(),
-  error: jest.fn(),
-  fatal: jest.fn(),
-}
+// eslint-disable-next-line import/no-extraneous-dependencies
+import '@testing-library/jest-dom'
+import { flashFormValues, flashMockErrors, loggerMocks, sessionMock } from './testMocks'
 
 jest.mock('../../logger', () => loggerMocks)
 
+beforeEach(() => {
+  Object.assign(flashMockErrors, [])
+  Object.assign(flashFormValues, [])
+  Object.assign(sessionMock, {})
+})
+
 afterEach(() => {
-  jest.resetAllMocks()
+  jest.clearAllMocks()
 })

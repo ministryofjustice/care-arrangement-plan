@@ -1,25 +1,59 @@
 import request from 'supertest'
+import { JSDOM } from 'jsdom'
 import testAppSetup from '../test-utils/testAppSetup'
 import paths from '../constants/paths'
 import formFields from '../constants/formFields'
+import { flashMock, flashMockErrors } from '../test-utils/testMocks'
 
 const app = testAppSetup()
 
-describe('/court-order-check', () => {
+describe(paths.COURT_ORDER_CHECK, () => {
   describe('GET', () => {
-    it('should render court order check page', () => {
-      return request(app)
-        .get(paths.COURT_ORDER_CHECK)
-        .expect('Content-Type', /html/)
-        .expect(response => {
-          expect(response.text).toContain('Do you already have a court order in place about your child arrangements?')
-        })
+    it('should render court order check page', async () => {
+      const response = await request(app).get(paths.COURT_ORDER_CHECK).expect('Content-Type', /html/)
+
+      const dom = new JSDOM(response.text)
+
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent(
+        'Do you already have a court order in place about your child arrangements?',
+      )
+      expect(dom.window.document.querySelector('h2')).toBeNull()
+      expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).not.toContain(
+        `${formFields.COURT_ORDER_CHECK}-error`,
+      )
+    })
+
+    it('should render error flash responses correctly', async () => {
+      Object.assign(flashMockErrors, [
+        {
+          location: 'body',
+          msg: 'Invalid value',
+          path: formFields.COURT_ORDER_CHECK,
+          type: 'field',
+        },
+      ])
+
+      const dom = new JSDOM((await request(app).get(paths.COURT_ORDER_CHECK)).text)
+
+      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem')
+      expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).toContain(
+        `${formFields.COURT_ORDER_CHECK}-error`,
+      )
     })
   })
 
   describe('POST', () => {
-    it('should reload page when there is no body', () => {
-      return request(app).post(paths.COURT_ORDER_CHECK).expect(302).expect('location', paths.COURT_ORDER_CHECK)
+    it('should reload page and set flash when there is no body', async () => {
+      await request(app).post(paths.COURT_ORDER_CHECK).expect(302).expect('location', paths.COURT_ORDER_CHECK)
+
+      expect(flashMock).toHaveBeenCalledWith('errors', [
+        {
+          location: 'body',
+          msg: 'Invalid value',
+          path: formFields.COURT_ORDER_CHECK,
+          type: 'field',
+        },
+      ])
     })
 
     it('should redirect to existing court order page if the answer is yes', () => {
@@ -31,14 +65,11 @@ describe('/court-order-check', () => {
     })
 
     it('should redirect to number of children page if the answer is no', () => {
-      return (
-        request(app)
-          .post(paths.COURT_ORDER_CHECK)
-          .send({ [formFields.COURT_ORDER_CHECK]: 'No' })
-          .expect(302)
-          // TODO C5141-759 add correct link
-          .expect('location', paths.START)
-      )
+      return request(app)
+        .post(paths.COURT_ORDER_CHECK)
+        .send({ [formFields.COURT_ORDER_CHECK]: 'No' })
+        .expect(302)
+        .expect('location', paths.NUMBER_OF_CHILDREN)
     })
   })
 })

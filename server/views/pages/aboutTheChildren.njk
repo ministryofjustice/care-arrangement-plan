@@ -1,0 +1,34 @@
+{% extends "../partials/layout.njk" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p>{{ __('about.notStoreInfo') }}</p>
+
+      <form class="form" action="{{ paths.ABOUT_THE_CHILDREN }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {% for i in range(numberOfChildren) %}
+          {% set fieldName = formFields.CHILD_NAME + i %}
+          {{
+            govukInput({
+              id: fieldName,
+              name: fieldName,
+              label: {
+                text: __('aboutTheChildren.singleFirstName') if numberOfChildren === 1 else __('aboutTheChildren.multipleFirstName' + i)
+              },
+              value: formValues[fieldName],
+              errorMessage: errors | findError(fieldName)
+            })
+          }}
+        {% endfor %}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

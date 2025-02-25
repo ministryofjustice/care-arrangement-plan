@@ -14,6 +14,7 @@ const courtOrderCheckRoutes = (router: Router) => {
     })
   })
 
+  // TODO C5141-1013: Add error message
   router.post(paths.COURT_ORDER_CHECK, body(formFields.COURT_ORDER_CHECK).exists(), (request, response) => {
     const errors = validationResult(request)
     if (!errors.isEmpty()) {
@@ -25,8 +26,9 @@ const courtOrderCheckRoutes = (router: Router) => {
       [formFields.COURT_ORDER_CHECK]: 'Yes' | 'No'
     }>(request)
 
-    // TODO C5141-759 add correct link
-    return existingCourtOrder === 'Yes' ? response.redirect(paths.EXISTING_COURT_ORDER) : response.redirect(paths.START)
+    return existingCourtOrder === 'Yes'
+      ? response.redirect(paths.EXISTING_COURT_ORDER)
+      : response.redirect(paths.NUMBER_OF_CHILDREN)
   })
 }
 
