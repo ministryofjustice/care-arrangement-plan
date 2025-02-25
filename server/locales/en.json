@@ -27,6 +27,6 @@
   "aboutTheChildren.multipleFirstName4": "First name of the fifth child",
   "aboutTheChildren.multipleFirstName5": "First name of the sixth child",
   "aboutTheAdults.title": "About the adults who will care for the children",
-  "aboutTheAdults.firstNameInitial": "First name of parent or carer",
-  "aboutTheAdults.firstNameSecondary": "First name of the other parent or carer"
+  "aboutTheAdults.initialParentFirstName": "First name of parent or carer",
+  "aboutTheAdults.secondaryParentFirstName": "First name of the other parent or carer"
 }
