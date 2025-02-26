@@ -45,5 +45,14 @@
   "aboutTheChildren.multipleFirstName5": "First name of the sixth child",
   "aboutTheAdults.title": "About the adults who will care for the children",
   "aboutTheAdults.initialParentFirstName": "First name of parent or carer",
-  "aboutTheAdults.secondaryParentFirstName": "First name of the other parent or carer"
+  "aboutTheAdults.secondaryParentFirstName": "First name of the other parent or carer",
+  "taskList.titlePrefix": "Child arrangements plan for",
+  "taskList.completed": "Completed",
+  "taskList.whoThePlanIsFor": "Who the plan is for",
+  "taskList.theChildren": "The children",
+  "taskList.whoIsUsing": "Who is using this service?",
+  "checkYourAnswers.title": "Check your answers",
+  "checkYourAnswers.change": "Change",
+  "checkYourAnswers.change.children": "the children",
+  "checkYourAnswers.change.users": "the users"
 }

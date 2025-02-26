@@ -11,4 +11,6 @@ export default {
   ABOUT_THE_CHILDREN: '/about-the-children',
   ABOUT_THE_ADULTS: '/about-the-adults',
   TASK_LIST: '/make-a-plan',
+  CHECK_YOUR_ANSWERS: '/check-your-answers',
+  SHARE_PLAN: '/share-plan',
 }
