@@ -8,7 +8,7 @@ const taskListRoutes = (router: Router) => {
     const { namesOfChildren } = request.session
 
     response.render('pages/taskList', {
-      title: `${i18n.__('taskList.titlePrefix')} ${formatNames(namesOfChildren)}`,
+      title: i18n.__('taskList.title', { names: formatNames(namesOfChildren) }),
       // TODO - this should only be true when all tasks are complete
       showContinue: true,
     })
