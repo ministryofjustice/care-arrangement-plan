@@ -4,46 +4,76 @@
   "no": "No",
   "continue": "Continue",
   "back": "Back",
-  "errorSummary.title": "There is a problem",
-  "errors.notFound.title": "Page not found",
-  "errors.notFound.check": "Please check the web address is correct.",
-  "errors.notFound.startAgain": "Start again",
-  "errors.generic.title": "Sorry, there is a problem with the service",
-  "errors.generic.errorLogged": "The error has been logged.",
-  "errors.generic.tryReloading": "You can try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>.",
-  "safetyCheck.title": "Safety check",
-  "safetyCheck.workWithPartner": "This service asks you to work with your parenting partner to agree a plan for your children. You need to be able to state your needs and views without feeling intimidated.",
-  "safetyCheck.safeAndConfident": "Do you feel safe and confident?",
-  "notSafe.title": "Finding the right route for you",
-  "notSafe.content": "<p>This service may not be right for you if you’ve experienced domestic abuse.</p><p>Find out <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">how to recognise domestic abuse</a>.</p><p>Get help and advice on <a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">making child arrangements when there’s been domestic abuse</a>.</p>",
-  "notSafe.feelConfident": "If you feel confident that you can discuss things without feeling intimidated, ",
-  "notSafe.continue": "continue using the service",
-  "childrenSafetyCheck.title": "Children's safety",
-  "childrenSafetyCheck.content": "<p>Children may be at risk if there has been:</p><ul class=\"govuk-list govuk-list--bullet\"><li>any form of domestic abuse or violence, even if the abuse was not directed at the children</li><li>actual or attempted child abduction</li><li>child abuse or neglect</li><li>misuse of drugs, alcohol or other substances</li><li>any other safety or welfare concerns that place anyone at significant risk of harm</li></ul>",
-  "childrenSafetyCheck.questionTitle": "Are the children safe?",
-  "childrenNotSafe.title": "Getting help",
-  "childrenNotSafe.content": "<p>It may not be appropriate to make child arrangements if there’s any risk of harm to the children.</p><p>Get advice on <a href=\"https://www.gov.uk/government/publications/coronavirus-covid-19-keeping-children-safe-from-abuse-and-harm/advice-to-parents-and-carers-on-keeping-children-safe-from-abuse-and-harm\">protecting children from abuse</a>.</p><p>Citizens Advice has advice on <a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">making child arrangements when there’s been domestic abuse</a>.</p>",
-  "childrenNotSafe.feelConfident": "If you feel confident that making child arrangements will not put children at risk, ",
-  "childrenNotSafe.continue": "continue using the service",
-  "doWhatsBest.title": "What’s best for the children?",
-  "doWhatsBest.content": "<p>Your child arrangements plan should reflect what is best for the children. You must consider their wants and needs when making these arrangements.</p><p>Remember, the aim is to make sure your children are as happy as they can be.</p>",
-  "doWhatsBest.childrensNeedsFirst": "I will put my children’s needs first",
-  "courtOrderCheck.title": "Do you already have a court order in place about your child arrangements?",
-  "courtOrderCheck.subText": "This could include a prohibited steps, specific issue or consent order.",
-  "existingCourtOrder.title": "You can still use this service",
-  "existingCourtOrder.text": "<p>If you can reach agreement with the other parent or carer, then you do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order.</p><h2 class=\"govuk-heading-m\">If you have prohibited steps order or a specific issue order</h2><p> Check any legal documents sent to you by a judge to see whether you have a prohibited steps order or a specific issue order (section 8).</p><p> You must not try to change any rules given to you in a prohibited steps order or specific issue order. You can only propose changes to other parts of your child arrangements, such as what day of the week your children visit you.</p>",
-  "numberOfChildren.title": "How many children is this for?",
-  "about.notStoreInfo": "We do not store this information or share it with other government departments.",
-  "aboutTheChildren.singleTitle": "About the child",
-  "aboutTheChildren.multipleTitle": "About the children",
-  "aboutTheChildren.singleFirstName": "First name of the child",
-  "aboutTheChildren.multipleFirstName0": "First name of the first child",
-  "aboutTheChildren.multipleFirstName1": "First name of the second child",
-  "aboutTheChildren.multipleFirstName2": "First name of the third child",
-  "aboutTheChildren.multipleFirstName3": "First name of the fourth child",
-  "aboutTheChildren.multipleFirstName4": "First name of the fifth child",
-  "aboutTheChildren.multipleFirstName5": "First name of the sixth child",
-  "aboutTheAdults.title": "About the adults who will care for the children",
-  "aboutTheAdults.initialParentFirstName": "First name of parent or carer",
-  "aboutTheAdults.secondaryParentFirstName": "First name of the other parent or carer"
+  "errorSummary": {
+    "title": "There is a problem"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page not found",
+      "check": "Please check the web address is correct.",
+      "startAgain": "Start again"
+    },
+    "generic": {
+      "title": "Sorry, there is a problem with the service",
+      "errorLogged": "The error has been logged.",
+      "tryReloading": "You can try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
+    }
+  },
+  "safetyCheck": {
+    "title": "Safety check",
+    "workWithPartner": "This service asks you to work with your parenting partner to agree a plan for your children. You need to be able to state your needs and views without feeling intimidated.",
+    "safeAndConfident": "Do you feel safe and confident?"
+  },
+  "notSafe": {
+    "title": "Finding the right route for you",
+    "content": "<p>This service may not be right for you if you’ve experienced domestic abuse.</p><p>Find out <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">how to recognise domestic abuse</a>.</p><p>Get help and advice on <a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">making child arrangements when there’s been domestic abuse</a>.</p>",
+    "feelConfident": "If you feel confident that you can discuss things without feeling intimidated, ",
+    "continue": "continue using the service"
+  },
+  "childrenSafetyCheck": {
+    "title": "Children’s safety",
+    "content": "<p>Children may be at risk if there has been:</p><ul class=\"govuk-list govuk-list--bullet\"><li>any form of domestic abuse or violence, even if the abuse was not directed at the children</li><li>actual or attempted child abduction</li><li>child abuse or neglect</li><li>misuse of drugs, alcohol or other substances</li><li>any other safety or welfare concerns that place anyone at significant risk of harm</li></ul>",
+    "questionTitle": "Are the children safe?"
+  },
+  "childrenNotSafe": {
+    "title": "Getting help",
+    "content": "<p>It may not be appropriate to make child arrangements if there’s any risk of harm to the children.</p><p>Get advice on <a href=\"https://www.gov.uk/government/publications/coronavirus-covid-19-keeping-children-safe-from-abuse-and-harm/advice-to-parents-and-carers-on-keeping-children-safe-from-abuse-and-harm\">protecting children from abuse</a>.</p><p>Citizens Advice has advice on <a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">making child arrangements when there’s been domestic abuse</a>.</p>",
+    "feelConfident": "If you feel confident that making child arrangements will not put children at risk, ",
+    "continue": "continue using the service"
+  },
+  "doWhatsBest": {
+    "title": "What’s best for the children?",
+    "content": "<p>Your child arrangements plan should reflect what is best for the children. You must consider their wants and needs when making these arrangements.</p><p>Remember, the aim is to make sure your children are as happy as they can be.</p>",
+    "childrensNeedsFirst": "I will put my children’s needs first"
+  },
+  "courtOrderCheck": {
+    "title": "Do you already have a court order in place about your child arrangements?",
+    "subText": "This could include a prohibited steps, specific issue or consent order."
+  },
+  "existingCourtOrder": {
+    "title": "You can still use this service",
+    "text": "<p>If you can reach agreement with the other parent or carer, then you do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order.</p><h2 class=\"govuk-heading-m\">If you have prohibited steps order or a specific issue order</h2><p> Check any legal documents sent to you by a judge to see whether you have a prohibited steps order or a specific issue order (section 8).</p><p> You must not try to change any rules given to you in a prohibited steps order or specific issue order. You can only propose changes to other parts of your child arrangements, such as what day of the week your children visit you.</p>"
+  },
+  "numberOfChildren": {
+    "title": "How many children is this for?"
+  },
+  "about": {
+    "notStoreInfo": "We do not store this information or share it with other government departments."
+  },
+  "aboutTheChildren": {
+    "singleTitle": "About the child",
+    "multipleTitle": "About the children",
+    "singleFirstName": "First name of the child",
+    "multipleFirstName0": "First name of the first child",
+    "multipleFirstName1": "First name of the second child",
+    "multipleFirstName2": "First name of the third child",
+    "multipleFirstName3": "First name of the fourth child",
+    "multipleFirstName4": "First name of the fifth child",
+    "multipleFirstName5": "First name of the sixth child"
+  },
+  "aboutTheAdults": {
+    "title": "About the adults who will care for the children",
+    "initialParentFirstName": "First name of parent or carer",
+    "secondaryParentFirstName": "First name of the other parent or carer"
+  }
 }
