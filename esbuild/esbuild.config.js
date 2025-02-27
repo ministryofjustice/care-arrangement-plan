@@ -1,8 +1,6 @@
-const { spawn } = require('node:child_process')
 const path = require('node:path')
 
 const { glob } = require('glob')
-const chokidar = require('chokidar')
 const buildAssets = require('./assets.config')
 const buildApp = require('./app.config')
 
@@ -41,42 +39,10 @@ const buildConfig = {
 }
 
 const main = () => {
-  /**
-   * @type {chokidar.WatchOptions}
-   */
-  const chokidarOptions = {
-    persistent: true,
-    ignoreInitial: true,
-  }
-
-  const args = process.argv
-  if (args.includes('--build')) {
-    Promise.all([buildApp(buildConfig), buildAssets(buildConfig)]).catch(e => {
-      process.stderr.write(`${e}\n`)
-      process.exit(1)
-    })
-  }
-
-  if (args.includes('--dev-server')) {
-    let serverProcess = null
-    chokidar.watch(['dist']).on('all', () => {
-      if (serverProcess) serverProcess.kill()
-      serverProcess = spawn('node', ['--env-file=.env', 'dist/server.js'], { stdio: 'inherit' })
-    })
-  }
-
-  if (args.includes('--watch')) {
-    process.stderr.write('\u{1b}[1m\u{1F52D} Watching for changes...\u{1b}[0m\n')
-    // Assets
-    chokidar
-      .watch(['assets/**/*'], chokidarOptions)
-      .on('all', () => buildAssets(buildConfig).catch(e => process.stderr.write(`${e}\n`)))
-
-    // App
-    chokidar
-      .watch(['server/**/*'], { ...chokidarOptions, ignored: ['**/*.test.ts'] })
-      .on('all', () => buildApp(buildConfig).catch(e => process.stderr.write(`${e}\n`)))
-  }
+  Promise.all([buildApp(buildConfig), buildAssets(buildConfig)]).catch(e => {
+    process.stderr.write(`${e}\n`)
+    process.exit(1)
+  })
 }
 
 main()
