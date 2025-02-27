@@ -10,7 +10,7 @@ steps:
   - script: npx audit-ci --config audit-ci.json
     displayName: 'Run vulnerability scan'
 
-  - script: npm ci
+  - script: npm ci --no-audit
     displayName: 'Install Dependencies'
 
   - script: npm run lint
