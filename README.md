@@ -111,5 +111,4 @@ For documentation on our Terraform setup, see [here](./terraform/README.md)
 
 ## TODO
 
-- Vulnerability scanning (snyk, audit-ci etc.)
 - Sonar or something like that
