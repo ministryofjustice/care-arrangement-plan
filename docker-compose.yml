@@ -1,0 +1,35 @@
+volumes:
+  node_modules:
+  public:
+
+services:
+  app:
+    build:
+      context: .
+      target: base-app
+    container_name: cap-app
+    env_file:
+      - .env
+    volumes:
+      - public:/usr/share/nginx/html
+    ports:
+      - "80:8080"
+    depends_on:
+      node:
+        condition: service_started
+        restart: true
+
+  node:
+    container_name: cap-node
+    build:
+      context: .
+      target: assets-dev
+    working_dir: /home/node
+    tty: true
+    stop_grace_period: 0s
+    command: make node-assets
+    volumes:
+      - node_modules:/home/node/node_modules
+      - public:/home/node/dist
+      - ./package.json:/home/node/package.json
+      - ./Makefile:/home/node/Makefile
