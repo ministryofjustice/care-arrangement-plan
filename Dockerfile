@@ -6,7 +6,7 @@ FROM node:23-alpine AS base-assets
 ## dev might use make and bash, prod does not need these
 
 
-FROM node:23-alpine AS assets-dev
+FROM base-assets AS assets-dev
 
 RUN apk add --no-cache make bash
 
