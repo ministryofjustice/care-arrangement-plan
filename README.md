@@ -111,4 +111,4 @@ For documentation on our Terraform setup, see [here](./terraform/README.md)
 
 ## TODO
 
-- Sonar or something like that
+- Sonar/Some SAST tool
