@@ -14,7 +14,7 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
 
       const dom = new JSDOM(response.text)
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent("Children's safety")
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Children’s safety')
       expect(dom.window.document.querySelector('h2')).toBeNull()
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby')
     })

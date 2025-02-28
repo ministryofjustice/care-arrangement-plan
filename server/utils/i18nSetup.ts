@@ -15,6 +15,7 @@ const i18nSetup = (app: express.Express): void => {
     directory: path.resolve(__dirname, '../locales'),
     updateFiles: false,
     retryInDefaultLocale: true,
+    objectNotation: true,
   })
 
   app.use(i18n.init)
