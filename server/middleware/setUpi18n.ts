@@ -1,10 +1,11 @@
+import { Router } from 'express'
 import i18n from 'i18n'
-import express from 'express'
 import path from 'path'
-
 import config from '../config'
 
-const i18nSetup = (app: express.Express): void => {
+const setUpi18n = (): Router => {
+  const router = Router()
+
   const { includeWelshLanguage } = config
 
   // TODO - add a language toggle within the page
@@ -18,7 +19,9 @@ const i18nSetup = (app: express.Express): void => {
     objectNotation: true,
   })
 
-  app.use(i18n.init)
+  router.use(i18n.init)
+
+  return router
 }
 
-export default i18nSetup
+export default setUpi18n
