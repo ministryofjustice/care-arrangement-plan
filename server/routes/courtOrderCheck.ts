@@ -25,9 +25,12 @@ const courtOrderCheckRoutes = (router: Router) => {
       [formFields.COURT_ORDER_CHECK]: 'Yes' | 'No'
     }>(request)
 
-    return existingCourtOrder === 'Yes'
-      ? response.redirect(paths.EXISTING_COURT_ORDER)
-      : response.redirect(paths.NUMBER_OF_CHILDREN)
+    if (existingCourtOrder === 'Yes') {
+      request.session.courtOrderInPlace = true
+      return response.redirect(paths.EXISTING_COURT_ORDER)
+    }
+    request.session.courtOrderInPlace = false
+    return response.redirect(paths.NUMBER_OF_CHILDREN)
   })
 }
 

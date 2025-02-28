@@ -1,0 +1,24 @@
+<h2 class="govuk-heading-l">{{ __('sharePlan.yourProposedPlan.aboutThePlan') }}</h2>
+
+<p class="govuk-body">{{ __('sharePlan.yourProposedPlan.senderSaid', {senderName: values.initialAdultName}) }}</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>
+    {{ __('sharePlan.yourProposedPlan.courtOrder' if values.courtOrderInPlace else 'sharePlan.yourProposedPlan.noCourtOrder') }}
+  </li>
+  {% if values.numberOfChildren === 1 %}
+    <li>{{ __('sharePlan.yourProposedPlan.forOneChild', {childName: values.childrenNames}) }}</li>
+  {% else %}
+    <li>
+      {{ __('sharePlan.yourProposedPlan.forMultipleChildren', {childrenNames: values.childrenNames, numberOfChildren: values.numberOfChildren}) }}
+    </li>
+  {% endif %}
+  <li>
+    {{ __('sharePlan.yourProposedPlan.agreementBetween', {senderName: values.initialAdultName, otherAdultName: values.secondaryAdultName, childrenNames: values.childrenNames}) }}
+  </li>
+</ul>
+
+<p>{{ __('sharePlan.yourProposedPlan.doNotStoreNames') }}</p>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
+
+{{ __('sharePlan.yourProposedPlan.whatHappensNow', {senderName: values.initialAdultName}) | safe }}
