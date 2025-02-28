@@ -1,0 +1,43 @@
+{% extends "../partials/layout.njk" %}
+{% from "govuk/components/task-list/macro.njk" import govukTaskList %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <h2 class="govuk-heading-m">{{ __('taskList.whoThePlanIsFor') }}</h2>
+      {{
+        govukTaskList({
+          items: [
+            {
+              title: {
+                text: __('taskList.theChildren')
+              },
+              href: paths.NUMBER_OF_CHILDREN,
+              status: {
+                text: __('taskList.completed')
+              }
+            },
+            {
+              title: {
+                text: __('taskList.whoIsUsing')
+              },
+              href: paths.ABOUT_THE_ADULTS,
+              status: {
+                text: __('taskList.completed')
+              }
+            }
+          ]
+        })
+      }}
+
+      {% if showContinue %}
+        <div class="govuk-!-margin-top-5">
+          {{ govukButton({text: __('continue'), href: paths.CHECK_YOUR_ANSWERS}) }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

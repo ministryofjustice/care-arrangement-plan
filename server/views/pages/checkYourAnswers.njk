@@ -1,0 +1,55 @@
+{% extends "../partials/layout.njk" %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <h2 class="govuk-heading-m">{{ __('taskList.whoThePlanIsFor') }}</h2>
+      {{
+        govukSummaryList({
+        classes: "govuk-!-margin-bottom-9",
+        rows: [
+          {
+            key: {
+              text: __('taskList.theChildren')
+            },
+            value: {
+              text: values.childrenNames
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.NUMBER_OF_CHILDREN,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.change.children')
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text:  __('taskList.whoIsUsing')
+            },
+            value: {
+              text: values.adultNames
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.ABOUT_THE_ADULTS,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.change.users')
+                }
+              ]
+            }
+          }
+        ]
+        })
+      }}
+      {{ govukButton({text: __('continue'), href: paths.SHARE_PLAN }) }}
+    </div>
+  </div>
+{% endblock %}

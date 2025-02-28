@@ -75,5 +75,20 @@
     "title": "About the adults who will care for the children",
     "initialParentFirstName": "First name of parent or carer",
     "secondaryParentFirstName": "First name of the other parent or carer"
+  },
+  "taskList": {
+    "title": "Child arrangements plan for {{names}}",
+    "completed": "Completed",
+    "whoThePlanIsFor": "Who the plan is for",
+    "theChildren": "The children",
+    "whoIsUsing": "Who is using this service?"
+  },
+  "checkYourAnswers": {
+    "title": "Check your answers",
+    "change": {
+      "text": "Change",
+      "children": "the children",
+      "users": "the users"
+    }
   }
 }
