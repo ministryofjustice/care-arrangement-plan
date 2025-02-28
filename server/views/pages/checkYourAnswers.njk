@@ -49,6 +49,32 @@
         ]
         })
       }}
+
+      <h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
+      {{
+        govukSummaryList({
+        classes: "govuk-!-margin-bottom-9",
+        rows: [
+          {
+            key: {
+              text: __('taskList.whatWillHappen')
+            },
+            value: {
+              text: values.whatWillHappen
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.change.whatWillHappen')
+                }
+              ]
+            }
+          }
+        ]
+        })
+      }}
       {{ govukButton({text: __('continue'), href: paths.SHARE_PLAN }) }}
     </div>
   </div>

@@ -6,6 +6,12 @@ export declare module 'express-session' {
     namesOfChildren: string[]
     initialAdultName: string
     secondaryAdultName: string
+    specialDays?: {
+      whatWillHappen?: {
+        skipped: boolean
+        answer?: string
+      }
+    }
   }
 }
 

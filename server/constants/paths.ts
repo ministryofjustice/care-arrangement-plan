@@ -13,4 +13,6 @@ export default {
   TASK_LIST: '/make-a-plan',
   CHECK_YOUR_ANSWERS: '/check-your-answers',
   SHARE_PLAN: '/share-plan',
+  SPECIAL_DAYS_WHAT_WILL_HAPPEN: '/special-days/what-will-happen',
+  SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP: '/special-days/what-will-happen/skip',
 }

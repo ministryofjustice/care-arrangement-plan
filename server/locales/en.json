@@ -4,6 +4,7 @@
   "no": "No",
   "continue": "Continue",
   "back": "Back",
+  "doNotNeedToDecide": "We do not need to decide this",
   "errorSummary": {
     "title": "There is a problem"
   },
@@ -81,14 +82,23 @@
     "completed": "Completed",
     "whoThePlanIsFor": "Who the plan is for",
     "theChildren": "The children",
-    "whoIsUsing": "Who is using this service?"
+    "whoIsUsing": "Who is using this service?",
+    "specialDays": "Special days",
+    "whatWillHappen": "What will happen on special days?"
+  },
+  "specialDays": {
+    "whatWillHappen": {
+      "title": "What will happen on special days?",
+      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays."
+    }
   },
   "checkYourAnswers": {
     "title": "Check your answers",
     "change": {
       "text": "Change",
       "children": "the children",
-      "users": "the users"
+      "users": "the users",
+      "whatWillHappen": "what will happen on special days"
     }
   }
 }

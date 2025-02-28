@@ -10,6 +10,7 @@ import childrenSafetyRoutesCheck from './childrenSafetyCheck'
 import doWhatsBestRoutes from './doWhatsBest'
 import taskListRoutes from './taskList'
 import checkYourAnswersRoutes from './checkYourAnswers'
+import specialDaysRoutes from './specialDays'
 
 const routes = (): Router => {
   const router = Router()
@@ -27,6 +28,7 @@ const routes = (): Router => {
   aboutTheAdultsRoutes(router)
   taskListRoutes(router)
   checkYourAnswersRoutes(router)
+  specialDaysRoutes(router)
 
   return router
 }

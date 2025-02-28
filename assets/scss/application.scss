@@ -1,2 +1,11 @@
 $govuk-global-styles: true;
 @import 'govuk-frontend/dist/govuk/index';
+
+.link-styled-button {
+  @extend %govuk-body-m;
+  color: $govuk-link-colour;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}

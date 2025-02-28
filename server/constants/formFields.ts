@@ -7,6 +7,7 @@ enum formFields {
   CHILD_NAME = 'child-name',
   INITIAL_ADULT_NAME = 'initial-adult-name',
   SECONDARY_ADULT_NAME = 'secondary-adult-name',
+  SPECIAL_DAYS = 'special-days',
 }
 
 export default formFields
