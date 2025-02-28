@@ -14,6 +14,7 @@ import setUpWebSession from './middleware/setUpWebSession'
 
 import routes from './routes'
 import i18nSetup from './utils/i18nSetup'
+import logger from './logger'
 
 const createApp = (): express.Application => {
   const app = express()
@@ -39,4 +40,8 @@ const createApp = (): express.Application => {
   return app
 }
 
-export default createApp
+const app = createApp()
+
+app.listen(app.get('port'), () => {
+  logger.info(`Server listening on port ${app.get('port')}`)
+})

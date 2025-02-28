@@ -4,7 +4,7 @@ import express from 'express'
 import fs from 'fs'
 import i18n from 'i18n'
 import { FieldValidationError } from 'express-validator'
-import logger from '../../logger'
+import logger from '../logger'
 import paths from '../constants/paths'
 import formFields from '../constants/formFields'
 
@@ -14,7 +14,7 @@ const nunjucksSetup = (app: express.Express): void => {
   let assetManifest: Record<string, string> = {}
 
   try {
-    const assetMetadataPath = path.resolve(__dirname, '../../assets/manifest.json')
+    const assetMetadataPath = path.resolve(__dirname, '../assets/manifest.json')
     assetManifest = JSON.parse(fs.readFileSync(assetMetadataPath, 'utf8'))
   } catch (e) {
     if (process.env.NODE_ENV !== 'test') {
