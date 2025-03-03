@@ -22,11 +22,11 @@ const buildConfig = {
     copy: [
       {
         from: path.join(cwd, 'server/views/**/*'),
-        to: path.join(cwd, 'dist/server/views'),
+        to: path.join(cwd, 'dist/views'),
       },
       {
         from: path.join(cwd, 'server/locales/**/*'),
-        to: path.join(cwd, 'dist/server/locales'),
+        to: path.join(cwd, 'dist/locales'),
       },
     ],
   },

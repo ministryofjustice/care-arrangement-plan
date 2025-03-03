@@ -2,7 +2,7 @@
 import '@testing-library/jest-dom'
 import { flashFormValues, flashMockErrors, loggerMocks, sessionMock } from './testMocks'
 
-jest.mock('../../logger', () => loggerMocks)
+jest.mock('../logger', () => loggerMocks)
 
 beforeEach(() => {
   Object.assign(flashMockErrors, [])
