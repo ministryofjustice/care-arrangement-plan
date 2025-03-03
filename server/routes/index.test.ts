@@ -10,7 +10,7 @@ describe(`GET ${paths.START}`, () => {
       .get(paths.START)
       .expect('Content-Type', /html/)
       .expect(response => {
-        expect(response.text).toContain('Propose a child arrangement plan')
+        expect(response.text).toContain('Propose a child arrangements plan')
       })
   })
 })
