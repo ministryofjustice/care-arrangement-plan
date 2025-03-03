@@ -22,6 +22,8 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
     })
 
     it('should render error flash responses correctly', async () => {
+      sessionMock.numberOfChildren = 4
+
       Object.assign(flashMockErrors, [
         {
           location: 'body',
@@ -41,6 +43,16 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
         'aria-describedby',
         `${formFields.NUMBER_OF_CHILDREN}-error`,
       )
+    })
+
+    it('should render the previous value if it exists', async () => {
+      const numberOfChildren = 4
+
+      sessionMock.numberOfChildren = numberOfChildren
+
+      const dom = new JSDOM((await request(app).get(paths.NUMBER_OF_CHILDREN)).text)
+
+      expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).toHaveValue(`${numberOfChildren}`)
     })
   })
 
@@ -83,5 +95,34 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
         expect(sessionMock.numberOfChildren).toEqual(numberOfChildren)
       },
     )
+
+    it("should reset the children's names when a new number of children is set", async () => {
+      sessionMock.namesOfChildren = ['James', 'Rachel', 'Jack']
+      sessionMock.numberOfChildren = 3
+
+      await request(app)
+        .post(paths.NUMBER_OF_CHILDREN)
+        .send({ [formFields.NUMBER_OF_CHILDREN]: 2 })
+        .expect(302)
+        .expect('location', paths.ABOUT_THE_CHILDREN)
+
+      expect(sessionMock.namesOfChildren).toEqual(undefined)
+      expect(sessionMock.numberOfChildren).toEqual(2)
+    })
+
+    it("should not reset the children's names when the same number of children is set", async () => {
+      const namesOfChildren = ['James', 'Rachel', 'Jack']
+      sessionMock.namesOfChildren = namesOfChildren
+      sessionMock.numberOfChildren = 3
+
+      await request(app)
+        .post(paths.NUMBER_OF_CHILDREN)
+        .send({ [formFields.NUMBER_OF_CHILDREN]: 3 })
+        .expect(302)
+        .expect('location', paths.ABOUT_THE_CHILDREN)
+
+      expect(sessionMock.namesOfChildren).toEqual(namesOfChildren)
+      expect(sessionMock.numberOfChildren).toEqual(3)
+    })
   })
 })
