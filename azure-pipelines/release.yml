@@ -56,7 +56,8 @@ stages:
                   -var "build_number=$(Build.BuildNumber)" \
                   -var "git_ref=$(Build.SourceVersion)" \
                   -var "git_branch=$(Build.SourceBranchName)" \
-                  -var "session_secret=$(TestSessionSecret)"
+                  -var "session_secret=$(TestSessionSecret)" \
+                  -var "beta_access_passwords=$(TestBetaAccessPassword)"
   - stage: production
     displayName: Deploy to Production
     condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'main'))
@@ -79,4 +80,5 @@ stages:
                   -var "build_number=$(Build.BuildNumber)" \
                   -var "git_ref=$(Build.SourceVersion)" \
                   -var "git_branch=$(Build.SourceBranchName)" \
-                  -var "session_secret=$(ProdSessionSecret)"
+                  -var "session_secret=$(ProdSessionSecret)" \
+                  -var "beta_access_passwords=${ProdBetaAccessPassword)"

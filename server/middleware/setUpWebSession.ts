@@ -4,7 +4,7 @@ import express, { Router } from 'express'
 import flash from 'connect-flash'
 import createValkeyClient from '../data/valkeyClient'
 import config from '../config'
-import logger from '../../logger'
+import logger from '../logger'
 
 const setUpWebSession = (): Router => {
   let store: Store

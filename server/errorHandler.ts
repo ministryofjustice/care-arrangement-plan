@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { HTTPError } from 'superagent'
 import i18n from 'i18n'
-import logger from '../logger'
+import logger from './logger'
 
 import config from './config'
 

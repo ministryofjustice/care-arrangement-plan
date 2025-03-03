@@ -3,7 +3,7 @@ import { JSDOM } from 'jsdom'
 import testAppSetup from '../test-utils/testAppSetup'
 import paths from '../constants/paths'
 import formFields from '../constants/formFields'
-import { flashMock, flashMockErrors } from '../test-utils/testMocks'
+import { flashMock, flashMockErrors, sessionMock } from '../test-utils/testMocks'
 
 const app = testAppSetup()
 
@@ -56,20 +56,24 @@ describe(paths.COURT_ORDER_CHECK, () => {
       ])
     })
 
-    it('should redirect to existing court order page if the answer is yes', () => {
-      return request(app)
+    it('should redirect to existing court order page if the answer is yes', async () => {
+      await request(app)
         .post(paths.COURT_ORDER_CHECK)
         .send({ [formFields.COURT_ORDER_CHECK]: 'Yes' })
         .expect(302)
         .expect('location', paths.EXISTING_COURT_ORDER)
+
+      expect(sessionMock.courtOrderInPlace).toEqual(true)
     })
 
-    it('should redirect to number of children page if the answer is no', () => {
-      return request(app)
+    it('should redirect to number of children page if the answer is no', async () => {
+      await request(app)
         .post(paths.COURT_ORDER_CHECK)
         .send({ [formFields.COURT_ORDER_CHECK]: 'No' })
         .expect(302)
         .expect('location', paths.NUMBER_OF_CHILDREN)
+
+      expect(sessionMock.courtOrderInPlace).toEqual(false)
     })
   })
 })

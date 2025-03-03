@@ -11,9 +11,12 @@ import setUpStaticResources from './middleware/setUpStaticResources'
 import setUpWebRequestParsing from './middleware/setupRequestParsing'
 import setUpWebSecurity from './middleware/setUpWebSecurity'
 import setUpWebSession from './middleware/setUpWebSession'
+import setUpi18n from './middleware/setUpi18n'
 
 import routes from './routes'
-import i18nSetup from './utils/i18nSetup'
+import logger from './logger'
+import unauthenticatedRoutes from './routes/unauthenticatedRoutes'
+import setupAuthentication from './middleware/setupAuthentication'
 
 const createApp = (): express.Application => {
   const app = express()
@@ -22,7 +25,7 @@ const createApp = (): express.Application => {
   app.set('trust proxy', true)
   app.set('port', process.env.PORT || 3000)
 
-  i18nSetup(app)
+  app.use(setUpi18n())
   nunjucksSetup(app)
   app.use(setUpHealthCheck())
   app.use(setUpWebSecurity())
@@ -30,7 +33,8 @@ const createApp = (): express.Application => {
   app.use(setUpWebRequestParsing())
   app.use(setUpStaticResources())
   app.use(setUpCsrf())
-
+  app.use(unauthenticatedRoutes())
+  app.use(setupAuthentication())
   app.use(routes())
 
   app.use((_request, _response, next) => next(new NotFound()))
@@ -39,4 +43,8 @@ const createApp = (): express.Application => {
   return app
 }
 
-export default createApp
+const app = createApp()
+
+app.listen(app.get('port'), () => {
+  logger.info(`Server listening on port ${app.get('port')}`)
+})

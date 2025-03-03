@@ -1,6 +1,11 @@
 $govuk-global-styles: true;
 @import 'govuk-frontend/dist/govuk/index';
 
+.now-share-header {
+  margin-top: 0;
+  border-top: 10px solid #1d70b8;
+}
+
 .link-styled-button {
   @extend %govuk-body-m;
   color: $govuk-link-colour;
