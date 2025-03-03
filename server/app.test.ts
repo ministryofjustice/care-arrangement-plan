@@ -9,7 +9,7 @@ let app: Express
 
 type languages = 'en' | 'cy'
 const homepageLanguageStrings = {
-  en: 'Propose a child arrangement plan',
+  en: 'Propose a child arrangements plan',
   cy: 'Cynnig cynllun trefniant plentyn',
 }
 

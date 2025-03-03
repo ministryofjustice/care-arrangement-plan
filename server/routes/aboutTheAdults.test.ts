@@ -18,9 +18,9 @@ describe(paths.ABOUT_THE_ADULTS, () => {
         'About the adults who will care for the children',
       )
       expect(dom.window.document.querySelector('h2')).toBeNull()
-      expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`)).not.toHaveAttribute(
-        'aria-describedby',
-      )
+      expect(
+        dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`).getAttribute('aria-describedby'),
+      ).not.toContain(`${formFields.INITIAL_ADULT_NAME}-error`)
       expect(dom.window.document.querySelector(`#${formFields.SECONDARY_ADULT_NAME}`)).not.toHaveAttribute(
         'aria-describedby',
       )
@@ -47,10 +47,9 @@ describe(paths.ABOUT_THE_ADULTS, () => {
       const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_ADULTS)).text)
 
       expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem')
-      expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`)).toHaveAttribute(
-        'aria-describedby',
-        `${formFields.INITIAL_ADULT_NAME}-error`,
-      )
+      expect(
+        dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`).getAttribute('aria-describedby'),
+      ).toContain(`${formFields.INITIAL_ADULT_NAME}-error`)
       expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}-error`)).toHaveTextContent(
         primaryError,
       )
