@@ -78,7 +78,7 @@
     "secondaryParentFirstName": "First name of the other parent or carer"
   },
   "taskList": {
-    "title": "Child arrangements plan for {{names}}",
+    "title": "Child arrangements plan for {{ names }}",
     "completed": "Completed",
     "whoThePlanIsFor": "Who the plan is for",
     "theChildren": "The children",
@@ -90,6 +90,35 @@
       "text": "Change",
       "children": "the children",
       "users": "the users"
+    }
+  },
+  "sharePlan": {
+    "title": "Child arrangements plan for {{ names }}",
+    "panelTitle": "Your proposed plan is ready to share",
+    "nowShare": "Now share your plan",
+    "sendThePlanTo": "Send this proposed child arrangements plan to {{ name }}",
+    "download": "Download the plan",
+    "print": "Print the plan",
+    "content": "<p>You've created a proposed child arrangements plan. You must now share the plan with {{ otherAdult }} to get their agreement.</p><h2 class=\"govuk-heading-s govuk-!-margin-bottom-2\">What to do next</h2><p>Send this proposed child arrangements plan to {{ otherAdult }}. {{ otherAdult }} will have the chance to respond.</p><h2 class=\"govuk-heading-s govuk-!-margin-bottom-2\">If {{ otherAdult }} does not respond</h2><p>If {{ otherAdult }} does not respond, you can try mediation. The next step would be to apply for a court order.</p><p><a href=\"https://www.gov.uk/looking-after-children-divorce/types-of-court-order\" class=\"govuk-link\">Find out more about what to do if you cannot agree.</a></p>",
+    "whatWeAreTelling": {
+      "title": "What we're telling {{ name }} about this plan",
+      "context": "<h2 class=\"govuk-heading-m\">Proposed child arrangements plan for {{ childrenNames }}</h2><p>{{ senderName }} is asking that you work together to come up with a plan for how to look after {{ childrenNames }}. These proposed child arrangements aim to find a way you can both work together to make {{ childrenNames }} as happy and secure as possible.</p><p class=\"govuk-body\">You do not need to accept what {{ senderName }} is proposing. Instead you can:</p><ul class=\"govuk-list govuk-list--bullet\"><li>use this form to suggest changes to what {{ senderName }} is proposing</li><li>start your own proposed child arrangements plan using the propose a child arrangements plan service on GOV.UK, or by finding a similar service</li><li>make a written plan of your own without using any service or template</li></ul><h3 class=\"govuk-heading-s\">Why you should work with {{ senderName }} to make a plan</h3><p>It’s best if you and {{ senderName }} work together to plan what arrangements are best for the children. If you can agree on a plan, you may be able to avoid court.</p>",
+      "courtOrderInPlace": "<h3 class=\"govuk-heading-s\">As you have a court order in place</h3><p>{{ senderName }} has told us that there is a court order in place about your child arrangements. If you can reach agreement with {{ senderName }}, then you do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order.</p><h3 class=\"govuk-heading-s\">If you have prohibited steps order or a specific issue order</h3><p>Check any legal documents sent to you by a judge to see whether you have a prohibited steps order or a specific issue order (section 8).</p>",
+      "topTips": "<p class=\"govuk-body govuk-!-font-weight-bold\">Top tips</p><p class=\"govuk-body\">You do not need to accept what {{ senderName }} is proposing. Instead you can:</p><ul class=\"govuk-list govuk-list--bullet\"><li>One of the main reasons people end up in court is that they are not willing to compromise to reach agreement. It may help you avoid court if you can work with {{ senderName }} to find a compromise that’s best for your children.</li><li>Get your children’s input into the arrangements you are making so that they feel included and their needs are met.</li><li>Remember to always put your children’s needs and feelings first.</li><li>It may not be in the children’s best interests to split time exactly between households.</li></ul>",
+      "moreInfo": "<h3 class=\"govuk-heading-s\">If you need more information about divorce and separation</h3><p class=\"govuk-body\">Check GOV.UK to find what support is available including:</p><ul class=\"govuk-list govuk-list--bullet\"><li>Separating or divorcing: what you need to do</li><li>Making child arrangements if you divorce or separate</li><li>Getting emotional support</li></ul>",
+      "safetyCheck": "<h3 class=\"govuk-heading-s\">Safety check</h3><p>To make child arrangements you need to be able to state your needs and views without feeling intimidated. Do not continue with this process if you think the other parent is a threat to you or your children's safety.</p><p>Do not continue with this process if there has been:</p><ul class=\"govuk-list govuk-list--bullet\"><li>any form of domestic abuse or violence, even if the abuse was not directed at the children</li><li>actual or attempted child abduction</li><li>child abuse or neglect</li><li>misuse of drugs, alcohol or other substances</li><li>any other safety or welfare concerns that place anyone at significant risk of harm</li></ul><p>Instead you should find another way to make arrangements by visiting <a href=\"https://helpwithchildarrangements.service.justice.gov.uk\">https://helpwithchildarrangements.service.justice.gov.uk</a></p><h3 class=\"govuk-heading-s\">Getting help with abuse and domestic violence</h3><p>To find out more about what is child abuse and neglect, visit <a href=\"https://www.nspcc.org.uk/what-is-child-abuse\">https://www.nspcc.org.uk/what-is-child-abuse</a></p><p>If you're unsure whether you're a victim of domestic abuse, visit <a href=\"https://www.nhs.uk/live-well/getting-help-for-domestic-violence\">https://www.nhs.uk/live-well/getting-help-for-domestic-violence</a></p>"
+    },
+    "yourProposedPlan": {
+      "title": "Your proposed plan",
+      "aboutThePlan": "About this child arrangements proposal",
+      "senderSaid": "{{ senderName }} said:",
+      "courtOrder": "there is a court order in place at this time",
+      "noCourtOrder": "there is no court order in place at this time",
+      "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{ childrenNames }}",
+      "agreementBetween": "this agreement is between {{ senderName }} and {{ otherAdultName }}, who are the adults who will care for {{ childrenNames }}",
+      "forOneChild": "this is a proposed child arrangements plan for 1 child, {{ childName }}",
+      "doNotStoreNames": "We do not store these names or share any of this information with other government departments.",
+      "whatHappensNow": "<h2 class=\"govuk-heading-m\">What happens now?</h2><p>Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.</p><p>If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.</p><p><a href=\"https://www.gov.uk/looking-after-children-divorce\">https://www.gov.uk/looking-after-children-divorce</a></p>"
     }
   }
 }

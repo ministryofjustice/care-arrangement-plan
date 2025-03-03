@@ -32,7 +32,7 @@ a distributed cache of sessions. The app is, by default, configured not to use V
 use Valkey locally, set the `VALKEY_ENABLED` environment variable to true, and start Valkey by running
 
 ```shell
-docker compose up
+docker compose up -d
 ```
 
 The app will now connect to Valkey when running.

@@ -1,0 +1,11 @@
+{{ __('sharePlan.whatWeAreTelling.context', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) | safe }}
+
+{% if values.courtOrderInPlace %}
+  {{ __('sharePlan.whatWeAreTelling.courtOrderInPlace', {senderName: values.initialAdultName}) | safe }}
+{% endif %}
+
+{{ __('sharePlan.whatWeAreTelling.topTips', {senderName: values.initialAdultName}) | safe }}
+
+{{ __('sharePlan.whatWeAreTelling.moreInfo') | safe }}
+
+{{ __('sharePlan.whatWeAreTelling.safetyCheck') | safe }}
