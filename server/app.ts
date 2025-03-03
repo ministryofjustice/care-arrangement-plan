@@ -11,9 +11,9 @@ import setUpStaticResources from './middleware/setUpStaticResources'
 import setUpWebRequestParsing from './middleware/setupRequestParsing'
 import setUpWebSecurity from './middleware/setUpWebSecurity'
 import setUpWebSession from './middleware/setUpWebSession'
+import setUpi18n from './middleware/setUpi18n'
 
 import routes from './routes'
-import i18nSetup from './utils/i18nSetup'
 import logger from './logger'
 import unauthenticatedRoutes from './routes/unauthenticatedRoutes'
 import setupAuthentication from './middleware/setupAuthentication'
@@ -25,7 +25,7 @@ const createApp = (): express.Application => {
   app.set('trust proxy', true)
   app.set('port', process.env.PORT || 3000)
 
-  i18nSetup(app)
+  app.use(setUpi18n())
   nunjucksSetup(app)
   app.use(setUpHealthCheck())
   app.use(setUpWebSecurity())
