@@ -5,13 +5,13 @@
   <li>
     {{ __('sharePlan.yourProposedPlan.courtOrder' if values.courtOrderInPlace else 'sharePlan.yourProposedPlan.noCourtOrder') }}
   </li>
-  {% if values.numberOfChildren === 1 %}
-    <li>{{ __('sharePlan.yourProposedPlan.forOneChild', {childName: values.childrenNames}) }}</li>
-  {% else %}
-    <li>
+  <li>
+    {% if values.numberOfChildren === 1 %}
+      { __('sharePlan.yourProposedPlan.forOneChild', {childName: values.childrenNames}) }}
+    {% else %}
       {{ __('sharePlan.yourProposedPlan.forMultipleChildren', {childrenNames: values.childrenNames, numberOfChildren: values.numberOfChildren}) }}
-    </li>
-  {% endif %}
+    {% endif %}
+  </li>
   <li>
     {{ __('sharePlan.yourProposedPlan.agreementBetween', {senderName: values.initialAdultName, otherAdultName: values.secondaryAdultName, childrenNames: values.childrenNames}) }}
   </li>
