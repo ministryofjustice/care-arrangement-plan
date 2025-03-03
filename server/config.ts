@@ -15,6 +15,8 @@ const getIntConfigValue = (name: string): number => {
   return parseInt(getStringConfigValue(name), 10)
 }
 
+const getStringArray = (name: string) => getStringConfigValue(name).split(',')
+
 const getValkeyConfig = () => {
   const enabled = getBoolConfigValue('VALKEY_ENABLED')
 
@@ -50,6 +52,8 @@ const config = {
     secret: getStringConfigValue('SESSION_SECRET'),
     expiryMinutes: getIntConfigValue('WEB_SESSION_TIMEOUT_IN_MINUTES'),
   },
+  passwords: getStringArray('BETA_ACCESS_PASSWORDS'),
+  useAuth: getBoolConfigValue('USE_AUTH'),
 }
 
 // if (production) {

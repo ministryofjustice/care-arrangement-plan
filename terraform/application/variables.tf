@@ -28,3 +28,10 @@ variable "session_secret" {
   sensitive   = true
   nullable    = false
 }
+
+variable "beta_access_passwords" {
+  description = "The passwords use to gain beta access.  They should be comma delimited"
+  type        = string
+  sensitive   = true
+  nullable    = false
+}
