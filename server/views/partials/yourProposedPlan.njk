@@ -7,7 +7,7 @@
   </li>
   <li>
     {% if values.numberOfChildren === 1 %}
-      { __('sharePlan.yourProposedPlan.forOneChild', {childName: values.childrenNames}) }}
+      {{ __('sharePlan.yourProposedPlan.forOneChild', {childName: values.childrenNames}) }}
     {% else %}
       {{ __('sharePlan.yourProposedPlan.forMultipleChildren', {childrenNames: values.childrenNames, numberOfChildren: values.numberOfChildren}) }}
     {% endif %}
