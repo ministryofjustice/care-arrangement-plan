@@ -13,4 +13,5 @@ export default {
   TASK_LIST: '/make-a-plan',
   CHECK_YOUR_ANSWERS: '/check-your-answers',
   SHARE_PLAN: '/share-plan',
+  PASSWORD: '/password',
 }

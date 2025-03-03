@@ -118,6 +118,8 @@ resource "aws_ecs_task_definition" "ecs_task" {
         { name = "USE_HTTPS", value = "false" },
         { name = "STATIC_RESOURCE_CACHE_DURATION", value = "1h" },
         { name = "SESSION_SECRET", value = var.session_secret },
+        { name = "BETA_ACCESS_PASSWORDS", value = var.beta_access_passwords },
+        { name = "USE_AUTH", value = "true" },
         { name = "WEB_SESSION_TIMEOUT_IN_MINUTES", value = "120" },
         { name = "VALKEY_ENABLED", value = "false" },
         { name = "NODE_ENV", value = "production" },
