@@ -6,9 +6,14 @@ import formFields from '../constants/formFields'
 
 const numberOfChildrenRoutes = (router: Router) => {
   router.get(paths.NUMBER_OF_CHILDREN, (request, response) => {
+    const formValues = {
+      [formFields.NUMBER_OF_CHILDREN]: request.session.numberOfChildren,
+      ...request.flash('formValues')?.[0],
+    }
+
     response.render('pages/numberOfChildren', {
       errors: request.flash('errors'),
-      formValues: request.flash('formValues')?.[0],
+      formValues,
       title: i18n.__('numberOfChildren.title'),
       backLinkHref: paths.COURT_ORDER_CHECK,
     })
@@ -30,7 +35,12 @@ const numberOfChildrenRoutes = (router: Router) => {
         return response.redirect(paths.NUMBER_OF_CHILDREN)
       }
 
-      request.session.numberOfChildren = Number(formData[formFields.NUMBER_OF_CHILDREN])
+      const numberOfChildren = Number(formData[formFields.NUMBER_OF_CHILDREN])
+
+      if (numberOfChildren !== request.session.numberOfChildren) {
+        request.session.numberOfChildren = Number(formData[formFields.NUMBER_OF_CHILDREN])
+        request.session.namesOfChildren = undefined
+      }
 
       return response.redirect(paths.ABOUT_THE_CHILDREN)
     },

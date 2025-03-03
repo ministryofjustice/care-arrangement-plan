@@ -6,9 +6,15 @@ import formFields from '../constants/formFields'
 
 const aboutTheAdultsRoutes = (router: Router) => {
   router.get(paths.ABOUT_THE_ADULTS, (request, response) => {
+    const formValues = {
+      [formFields.INITIAL_ADULT_NAME]: request.session.initialAdultName,
+      [formFields.SECONDARY_ADULT_NAME]: request.session.secondaryAdultName,
+      ...request.flash('formValues')?.[0],
+    }
+
     response.render('pages/aboutTheAdults', {
       errors: request.flash('errors'),
-      formValues: request.flash('formValues')?.[0],
+      formValues,
       title: i18n.__('aboutTheAdults.title'),
       backLinkHref: paths.ABOUT_THE_CHILDREN,
     })
