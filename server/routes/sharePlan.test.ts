@@ -1,13 +1,25 @@
 import request from 'supertest'
+import { SessionData } from 'express-session'
 import testAppSetup from '../test-utils/testAppSetup'
 import paths from '../constants/paths'
 import { sessionMock } from '../test-utils/testMocks'
 
 const app = testAppSetup()
 
+const session: Partial<SessionData> = {
+  namesOfChildren: ['James', 'Rachel', 'Jack'],
+  initialAdultName: 'Bob',
+  secondaryAdultName: 'Sam',
+  specialDays: {
+    whatWillHappen: {
+      skipped: true,
+    },
+  },
+}
+
 describe(`GET ${paths.SHARE_PLAN}`, () => {
   beforeEach(() => {
-    sessionMock.namesOfChildren = ['James', 'Rachel', 'Jack']
+    Object.assign(sessionMock, session)
   })
 
   it('should render existing court order page', () => {

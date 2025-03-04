@@ -21,6 +21,9 @@ describe(`GET ${paths.TASK_LIST}`, () => {
     Object.assign(sessionMock, session)
 
     const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)
+
+    expect(response.text).not.toContain('Incomplete')
+
     const dom = new JSDOM(response.text)
 
     expect(dom.window.document.querySelector('h1')).toHaveTextContent(
