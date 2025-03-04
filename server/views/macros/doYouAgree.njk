@@ -1,0 +1,44 @@
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+
+{% macro doYouAgree(text) %}
+  <p class="govuk-body govuk-!-margin-bottom-2">{{ __('sharePlan.yourProposedPlan.doYouAgree') }}</p>
+
+  <div class="govuk-form-group">
+    {% call govukFieldset({}) %}
+      <div class="agreement-input__item">
+        {{
+          govukInput({
+            id: "answer-yes",
+            name: "answer-yes",
+            classes: "govuk-input--width-2",
+            label: {
+              text: __('yes')
+            }
+          })
+        }}
+      </div>
+      <div class="agreement-input__item">
+        {{
+          govukInput({
+            id: "answer-no",
+            name: "answer-no",
+            classes: "govuk-input--width-2",
+            label: {
+              text: __('no')
+            }
+          })
+        }}
+      </div>
+    {% endcall %}
+  </div>
+
+  {{
+    govukTextarea({
+      label: {
+        text: text
+      }
+    })
+  }}
+{% endmacro %}
