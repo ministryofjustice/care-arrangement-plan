@@ -1,4 +1,3 @@
-{% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "macros/endOfSection.njk" import endOfSection %}
 {% from "macros/doYouAgree.njk" import doYouAgree %}
 
@@ -35,7 +34,5 @@
 </p>
 {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.specialDays.whatWillHappen')) }}
 {{ endOfSection(__('sharePlan.yourProposedPlan.compromise.specialDays')) }}
-
-<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
 
 {{ __('sharePlan.yourProposedPlan.whatHappensNow', {senderName: values.initialAdultName}) | safe }}
