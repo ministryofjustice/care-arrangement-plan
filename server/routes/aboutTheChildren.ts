@@ -6,15 +6,22 @@ import formFields from '../constants/formFields'
 
 const aboutTheChildrenRoutes = (router: Router) => {
   router.get(paths.ABOUT_THE_CHILDREN, (request, response) => {
-    const { numberOfChildren } = request.session
+    const { numberOfChildren, namesOfChildren } = request.session
 
     if (numberOfChildren == null) {
       return response.redirect(paths.NUMBER_OF_CHILDREN)
     }
 
+    const formValues = {
+      ...Object.fromEntries(
+        Array.from({ length: numberOfChildren }, (_, i) => [formFields.CHILD_NAME + i, namesOfChildren?.[i]]),
+      ),
+      ...request.flash('formValues')?.[0],
+    }
+
     return response.render('pages/aboutTheChildren', {
       errors: request.flash('errors'),
-      formValues: request.flash('formValues')?.[0],
+      formValues,
       title:
         numberOfChildren === 1 ? i18n.__('aboutTheChildren.singleTitle') : i18n.__('aboutTheChildren.multipleTitle'),
       backLinkHref: paths.NUMBER_OF_CHILDREN,

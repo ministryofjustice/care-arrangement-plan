@@ -70,14 +70,27 @@ describe(paths.ABOUT_THE_CHILDREN, () => {
 
     it('should render field value flash responses correctly', async () => {
       sessionMock.numberOfChildren = 1
+      sessionMock.namesOfChildren = ['James']
 
       const initialName = 'initialName'
       Object.assign(flashFormValues, [{ [`${formFields.CHILD_NAME}0`]: initialName }])
 
       const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_CHILDREN)).text)
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem')
       expect(dom.window.document.querySelector(`#${formFields.CHILD_NAME}0`)).toHaveValue(initialName)
+    })
+
+    it('should render previous values correctly', async () => {
+      const firstName = 'James'
+      const secondName = 'Rachel'
+
+      sessionMock.numberOfChildren = 2
+      sessionMock.namesOfChildren = [firstName, secondName]
+
+      const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_CHILDREN)).text)
+
+      expect(dom.window.document.querySelector(`#${formFields.CHILD_NAME}0`)).toHaveValue(firstName)
+      expect(dom.window.document.querySelector(`#${formFields.CHILD_NAME}1`)).toHaveValue(secondName)
     })
   })
 

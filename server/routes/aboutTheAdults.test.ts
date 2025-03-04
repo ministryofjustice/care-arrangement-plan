@@ -69,9 +69,24 @@ describe(paths.ABOUT_THE_ADULTS, () => {
         { [formFields.INITIAL_ADULT_NAME]: initialName, [formFields.SECONDARY_ADULT_NAME]: secondaryName },
       ])
 
+      sessionMock.initialAdultName = 'wrong initialName'
+      sessionMock.secondaryAdultName = 'wrong secondaryName'
+
       const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_ADULTS)).text)
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem')
+      expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`)).toHaveValue(initialName)
+      expect(dom.window.document.querySelector(`#${formFields.SECONDARY_ADULT_NAME}`)).toHaveValue(secondaryName)
+    })
+
+    it('should render field previous values correctly', async () => {
+      const initialName = 'initialName'
+      const secondaryName = 'secondaryName'
+
+      sessionMock.initialAdultName = initialName
+      sessionMock.secondaryAdultName = secondaryName
+
+      const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_ADULTS)).text)
+
       expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`)).toHaveValue(initialName)
       expect(dom.window.document.querySelector(`#${formFields.SECONDARY_ADULT_NAME}`)).toHaveValue(secondaryName)
     })

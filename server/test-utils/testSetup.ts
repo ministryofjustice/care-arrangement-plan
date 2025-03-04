@@ -5,8 +5,8 @@ import { flashFormValues, flashMockErrors, loggerMocks, sessionMock } from './te
 jest.mock('../logger', () => loggerMocks)
 
 beforeEach(() => {
-  Object.assign(flashMockErrors, [])
-  Object.assign(flashFormValues, [])
+  flashMockErrors.length = 0
+  flashFormValues.length = 0
   Object.assign(sessionMock, {})
 })
 
