@@ -4,6 +4,7 @@
   "no": "No",
   "continue": "Continue",
   "back": "Back",
+  "doNotNeedToDecide": "We do not need to decide this",
   "errorSummary": {
     "title": "There is a problem"
   },
@@ -82,14 +83,23 @@
     "completed": "Completed",
     "whoThePlanIsFor": "Who the plan is for",
     "theChildren": "The children",
-    "whoIsUsing": "Who is using this service?"
+    "whoIsUsing": "Who is using this service?",
+    "specialDays": "Special days",
+    "whatWillHappen": "What will happen on special days?"
+  },
+  "specialDays": {
+    "whatWillHappen": {
+      "title": "What will happen on special days?",
+      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays."
+    }
   },
   "checkYourAnswers": {
     "title": "Check your answers",
     "change": {
       "text": "Change",
       "children": "the children",
-      "users": "the users"
+      "users": "the users",
+      "whatWillHappen": "what will happen on special days"
     }
   },
   "sharePlan": {
@@ -112,13 +122,24 @@
       "title": "Your proposed plan",
       "aboutThePlan": "About this child arrangements proposal",
       "senderSaid": "{{ senderName }} said:",
+      "senderSuggestion": "{{ senderName }}'s suggestion:",
+      "doYouAgree": "Do you agree?",
+      "endOfSection": "End of section",
       "courtOrder": "there is a court order in place at this time",
       "noCourtOrder": "there is no court order in place at this time",
       "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{ childrenNames }}",
       "agreementBetween": "this agreement is between {{ senderName }} and {{ otherAdultName }}, who are the adults who will care for {{ childrenNames }}",
       "forOneChild": "this is a proposed child arrangements plan for 1 child, {{ childName }}",
       "doNotStoreNames": "We do not store these names or share any of this information with other government departments.",
-      "whatHappensNow": "<h2 class=\"govuk-heading-m\">What happens now?</h2><p>Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.</p><p>If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.</p><p><a href=\"https://www.gov.uk/looking-after-children-divorce\">https://www.gov.uk/looking-after-children-divorce</a></p>"
+      "whatHappensNow": "<h2 class=\"govuk-heading-m\">What happens now?</h2><p>Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.</p><p>If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.</p><p><a href=\"https://www.gov.uk/looking-after-children-divorce\">https://www.gov.uk/looking-after-children-divorce</a></p>",
+      "doNotAgree": {
+        "specialDays": {
+          "whatWillHappen": "If you do not agree, suggest what will happen on special days"
+        }
+      },
+      "compromise": {
+        "specialDays": "You can use this space to write your agreed compromise for the special days section"
+      }
     }
   }
 }

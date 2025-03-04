@@ -4,7 +4,7 @@
     <jest-package value="$PROJECT_DIR$/node_modules/jest" />
     <working-dir value="$PROJECT_DIR$" />
     <envs>
-      <env name="DOTENV_CONFIG_PATH" value=".env.example" />
+      <env name="DOTENV_CONFIG_PATH" value=".env.test" />
     </envs>
     <scope-kind value="ALL" />
     <method v="2" />

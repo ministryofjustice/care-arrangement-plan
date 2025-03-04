@@ -1,3 +1,6 @@
+{% from "macros/endOfSection.njk" import endOfSection %}
+{% from "macros/doYouAgree.njk" import doYouAgree %}
+
 <h2 class="govuk-heading-l">{{ __('sharePlan.yourProposedPlan.aboutThePlan') }}</h2>
 
 <p class="govuk-body">{{ __('sharePlan.yourProposedPlan.senderSaid', {senderName: values.initialAdultName}) }}</p>
@@ -20,5 +23,16 @@
 <p>{{ __('sharePlan.yourProposedPlan.doNotStoreNames') }}</p>
 
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
+
+<h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
+<h3 class="govuk-heading-s">{{ __('specialDays.whatWillHappen.title') }}</h3>
+<p>{{ __('specialDays.whatWillHappen.content') }}</p>
+<p>
+  {{ __('sharePlan.yourProposedPlan.senderSuggestion', {senderName: values.initialAdultName}) }}
+  <br />
+  {{ values.whatWillHappen }}
+</p>
+{{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.specialDays.whatWillHappen')) }}
+{{ endOfSection(__('sharePlan.yourProposedPlan.compromise.specialDays')) }}
 
 {{ __('sharePlan.yourProposedPlan.whatHappensNow', {senderName: values.initialAdultName}) | safe }}

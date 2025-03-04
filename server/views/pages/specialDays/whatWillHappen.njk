@@ -1,0 +1,36 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p>{{ __('specialDays.whatWillHappen.content') }}</p>
+
+      <form class="form" action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {{
+          govukTextarea({
+            name: formFields.SPECIAL_DAYS,
+            id: formFields.SPECIAL_DAYS,
+            label: {
+              classes: "govuk-label--m"
+            },
+            value: initialWhatWillHappen,
+            errorMessage: errors | findError(formFields.SPECIAL_DAYS)
+          })
+        }}
+
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+      <form class="form" action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

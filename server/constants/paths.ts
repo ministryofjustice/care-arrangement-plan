@@ -14,4 +14,6 @@ export default {
   CHECK_YOUR_ANSWERS: '/check-your-answers',
   SHARE_PLAN: '/share-plan',
   PASSWORD: '/password',
+  SPECIAL_DAYS_WHAT_WILL_HAPPEN: '/special-days/what-will-happen',
+  SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP: '/special-days/what-will-happen/skip',
 }
