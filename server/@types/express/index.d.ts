@@ -9,7 +9,7 @@ export declare module 'express-session' {
     secondaryAdultName: string
     specialDays?: {
       whatWillHappen?: {
-        skipped: boolean
+        noDecisionRequired: boolean
         answer?: string
       }
     }

@@ -43,7 +43,7 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
 
       sessionMock.specialDays = {
         whatWillHappen: {
-          skipped: false,
+          noDecisionRequired: false,
           answer: response,
         },
       }
@@ -81,7 +81,7 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
         .expect(302)
         .expect('location', paths.TASK_LIST)
 
-      expect(sessionMock.specialDays.whatWillHappen).toEqual({ skipped: false, answer: response })
+      expect(sessionMock.specialDays.whatWillHappen).toEqual({ noDecisionRequired: false, answer: response })
     })
   })
 })
@@ -90,6 +90,6 @@ describe(`POST ${paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP}`, () => {
   it('should redirect to task list when the answer is entered and set whatWillHappen', async () => {
     await request(app).post(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP).expect(302).expect('location', paths.TASK_LIST)
 
-    expect(sessionMock.specialDays.whatWillHappen).toEqual({ skipped: true })
+    expect(sessionMock.specialDays.whatWillHappen).toEqual({ noDecisionRequired: true })
   })
 })

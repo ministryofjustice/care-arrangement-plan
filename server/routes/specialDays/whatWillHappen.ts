@@ -33,7 +33,7 @@ const whatWillHappenRoutes = (router: Router) => {
       request.session.specialDays = {
         ...request.session.specialDays,
         whatWillHappen: {
-          skipped: false,
+          noDecisionRequired: false,
           answer: whatWillHappen,
         },
       }
@@ -46,7 +46,7 @@ const whatWillHappenRoutes = (router: Router) => {
     request.session.specialDays = {
       ...request.session.specialDays,
       whatWillHappen: {
-        skipped: true,
+        noDecisionRequired: true,
       },
     }
 

@@ -8,7 +8,7 @@ const sharePlanRoutes = (router: Router) => {
     const { namesOfChildren, specialDays } = request.session
 
     const childrenNames = formatNames(namesOfChildren)
-    const whatWillHappen = specialDays.whatWillHappen.skipped
+    const whatWillHappen = specialDays.whatWillHappen.noDecisionRequired
       ? i18n.__('doNotNeedToDecide')
       : specialDays.whatWillHappen.answer
 

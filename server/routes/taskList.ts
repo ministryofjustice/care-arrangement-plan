@@ -7,7 +7,8 @@ const taskListRoutes = (router: Router) => {
   router.get(paths.TASK_LIST, (request, response) => {
     const { namesOfChildren, specialDays } = request.session
 
-    const whatWillHappenComplete = specialDays?.whatWillHappen?.skipped || !!specialDays?.whatWillHappen?.answer
+    const whatWillHappenComplete =
+      specialDays?.whatWillHappen?.noDecisionRequired || !!specialDays?.whatWillHappen?.answer
 
     response.render('pages/taskList', {
       title: i18n.__('taskList.title', { names: formatNames(namesOfChildren) }),

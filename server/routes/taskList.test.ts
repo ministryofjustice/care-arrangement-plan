@@ -11,7 +11,7 @@ const session: Partial<SessionData> = {
   namesOfChildren: ['James', 'Rachel', 'Jack'],
   specialDays: {
     whatWillHappen: {
-      skipped: true,
+      noDecisionRequired: true,
     },
   },
 }

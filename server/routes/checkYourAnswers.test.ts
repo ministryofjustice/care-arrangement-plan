@@ -12,7 +12,7 @@ const session: Partial<SessionData> = {
   secondaryAdultName: 'Sam',
   specialDays: {
     whatWillHappen: {
-      skipped: true,
+      noDecisionRequired: true,
     },
   },
 }

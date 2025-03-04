@@ -7,7 +7,7 @@ const checkYourAnswersRoutes = (router: Router) => {
   router.get(paths.CHECK_YOUR_ANSWERS, (request, response) => {
     const { namesOfChildren, initialAdultName, secondaryAdultName, specialDays } = request.session
 
-    const whatWillHappen = specialDays.whatWillHappen.skipped
+    const whatWillHappen = specialDays.whatWillHappen.noDecisionRequired
       ? i18n.__('doNotNeedToDecide')
       : specialDays.whatWillHappen.answer
 
