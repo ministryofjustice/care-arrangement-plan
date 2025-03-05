@@ -26,6 +26,7 @@ const mostlyLiveRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_MOSTLY_LIVE,
+    // TODO C5141-1013: Add error messages
     body(formFields.MOSTLY_LIVE_WHERE).exists(),
     body(formFields.DESCRIBE_ARRANGEMENT).if(body(formFields.MOSTLY_LIVE_WHERE).equals('other')).trim().notEmpty(),
     (request, response) => {
@@ -47,6 +48,8 @@ const mostlyLiveRoutes = (router: Router) => {
         request.session.livingAndVisiting = { mostlyLive: { where, describeArrangement } }
         return response.redirect(paths.TASK_LIST)
       }
+
+      // TODO C5141-1196 - add redirect for split
 
       if (where !== request.session.livingAndVisiting?.mostlyLive?.where) {
         request.session.livingAndVisiting = { mostlyLive: { where } }

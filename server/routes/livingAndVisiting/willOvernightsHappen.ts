@@ -27,6 +27,7 @@ const willOvernightsHappenRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN,
+    // TODO C5141-1013: Add error messages
     body(formFields.WILL_OVERNIGHTS_HAPPEN).exists(),
     (request, response) => {
       const errors = validationResult(request)
@@ -41,6 +42,8 @@ const willOvernightsHappenRoutes = (router: Router) => {
       }>(request)
 
       const willOvernightsHappen = formData[formFields.WILL_OVERNIGHTS_HAPPEN] === 'Yes'
+
+      // TODO C5141-1196 - add redirect for yes
 
       if (request.session.livingAndVisiting?.overnightVisits?.willHappen !== willOvernightsHappen) {
         request.session.livingAndVisiting = {

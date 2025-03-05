@@ -27,6 +27,7 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN,
+    // TODO C5141-1013: Add error messages
     body(formFields.WILL_DAYTIME_VISITS_HAPPEN).exists(),
     (request, response) => {
       const errors = validationResult(request)
@@ -41,6 +42,8 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
       }>(request)
 
       const willDaytimeVisitsHappen = formData[formFields.WILL_DAYTIME_VISITS_HAPPEN] === 'Yes'
+
+      // TODO C5141-1196 - add redirect for yes
 
       if (request.session.livingAndVisiting?.daytimeVisits?.willHappen !== willDaytimeVisitsHappen) {
         request.session.livingAndVisiting = {
