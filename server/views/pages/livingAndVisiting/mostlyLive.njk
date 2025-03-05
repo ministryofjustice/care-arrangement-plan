@@ -1,0 +1,71 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <form class="form" action="{{ paths.LIVING_VISITING_MOSTLY_LIVE }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+        {% set describeArrangementHtml %}
+          {{
+            govukTextarea({
+              name: formFields.DESCRIBE_ARRANGEMENT,
+              id: formFields.DESCRIBE_ARRANGEMENT,
+              label: {
+                text: __('livingAndVisiting.mostlyLive.describeArrangement')
+              },
+              value: formValues[formFields.DESCRIBE_ARRANGEMENT],
+              errorMessage: errors | findError(formFields.DESCRIBE_ARRANGEMENT)
+            })
+          }}
+        {% endset -%}
+
+        {{
+          govukRadios({
+            name: formFields.MOSTLY_LIVE_WHERE,
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            items: [
+              {
+                value: "withInitial",
+                text: __('livingAndVisiting.mostlyLive.with', {adult: values.initialAdultName})
+              },
+              {
+                value: "withSecondary",
+                text: __('livingAndVisiting.mostlyLive.with', {adult: values.secondaryAdultName})
+              },
+              {
+                value: "split",
+                text: __('livingAndVisiting.mostlyLive.singleChildSplit', {childName: values.namesOfChildren[0], initialAdult: values.initialAdultName, secondaryAdult: values.secondaryAdultName})
+                      if values.numberOfChildren === 1 else
+                      __('livingAndVisiting.mostlyLive.multipleChildrenSplit', {initialAdult: values.initialAdultName, secondaryAdult: values.secondaryAdultName})
+              },
+              {
+                divider: __('livingAndVisiting.mostlyLive.or')
+              },
+              {
+                value: "other",
+                text: __('livingAndVisiting.mostlyLive.other'),
+                conditional: {
+                  html: describeArrangementHtml
+                }
+              }
+            ],
+            value: formValues[formFields.MOSTLY_LIVE_WHERE],
+            errorMessage: errors | findError(formFields.MOSTLY_LIVE_WHERE)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

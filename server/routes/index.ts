@@ -11,6 +11,7 @@ import doWhatsBestRoutes from './doWhatsBest'
 import taskListRoutes from './taskList'
 import checkYourAnswersRoutes from './checkYourAnswers'
 import sharePlanRoutes from './sharePlan'
+import livingAndVisitingRoutes from './livingAndVisiting'
 import specialDaysRoutes from './specialDays'
 
 const routes = (): Router => {
@@ -30,6 +31,7 @@ const routes = (): Router => {
   taskListRoutes(router)
   checkYourAnswersRoutes(router)
   sharePlanRoutes(router)
+  livingAndVisitingRoutes(router)
   specialDaysRoutes(router)
 
   return router

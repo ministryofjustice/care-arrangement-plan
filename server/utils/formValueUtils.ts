@@ -1,3 +1,5 @@
+import { yesOrNo } from '../@types/fields'
+
 export const formatNames = (names: string[]) => {
   switch (names.length) {
     case 0:
@@ -11,7 +13,7 @@ export const formatNames = (names: string[]) => {
   }
 }
 
-export const convertBooleanValueToRadioButtonValue = (booleanValue: boolean): 'Yes' | 'No' | undefined => {
+export const convertBooleanValueToRadioButtonValue = (booleanValue: boolean): yesOrNo | undefined => {
   switch (booleanValue) {
     case true:
       return 'Yes'
