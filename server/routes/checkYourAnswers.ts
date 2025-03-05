@@ -1,23 +1,19 @@
 import { Router } from 'express'
 import i18n from 'i18n'
 import paths from '../constants/paths'
-import formatNames from '../utils/formatNames'
+import { formatNames } from '../utils/formValueUtils'
 
 const checkYourAnswersRoutes = (router: Router) => {
   router.get(paths.CHECK_YOUR_ANSWERS, (request, response) => {
-    const { namesOfChildren, initialAdultName, secondaryAdultName, specialDays } = request.session
-
-    const whatWillHappen = specialDays.whatWillHappen.noDecisionRequired
-      ? i18n.__('doNotNeedToDecide')
-      : specialDays.whatWillHappen.answer
+    const { initialAdultName, secondaryAdultName } = request.session
 
     response.render('pages/checkYourAnswers', {
       title: `${i18n.__('checkYourAnswers.title')}`,
       backLinkHref: paths.TASK_LIST,
       values: {
-        childrenNames: formatNames(namesOfChildren),
+        childrenNames: request.sessionHelpers.formattedChildrenNames(),
         adultNames: formatNames([initialAdultName, secondaryAdultName]),
-        whatWillHappen,
+        whatWillHappen: request.sessionHelpers.whatWillHappenAnswer(),
       },
     })
   })
