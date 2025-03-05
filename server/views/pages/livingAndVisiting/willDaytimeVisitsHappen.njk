@@ -10,7 +10,7 @@
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukRadios({
-            name: formFields.WILL_DAYTIME_VISTS_HAPPEN,
+            name: formFields.WILL_DAYTIME_VISITS_HAPPEN,
             fieldset: {
               legend: {
                 text: title,
@@ -28,8 +28,8 @@
                 text: __('no')
               }
             ],
-            value: formValues[formFields.WILL_DAYTIME_VISTS_HAPPEN],
-            errorMessage: errors | findError(formFields.WILL_DAYTIME_VISTS_HAPPEN)
+            value: formValues[formFields.WILL_DAYTIME_VISITS_HAPPEN],
+            errorMessage: errors | findError(formFields.WILL_DAYTIME_VISITS_HAPPEN)
           })
         }}
         {{ govukButton({text: __('continue')}) }}
