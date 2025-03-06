@@ -19,7 +19,7 @@ const session: Partial<SessionData> = {
 
 describe(`GET ${paths.CHECK_YOUR_ANSWERS}`, () => {
   it('should render check your answers page', () => {
-    Object.assign(sessionMock, session)
+    Object.assign(sessionMock, structuredClone(session))
 
     return request(app)
       .get(paths.CHECK_YOUR_ANSWERS)

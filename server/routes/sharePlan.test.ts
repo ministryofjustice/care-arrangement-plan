@@ -19,7 +19,7 @@ const session: Partial<SessionData> = {
 
 describe(`GET ${paths.SHARE_PLAN}`, () => {
   beforeEach(() => {
-    Object.assign(sessionMock, session)
+    Object.assign(sessionMock, structuredClone(session))
   })
 
   it('should render existing court order page', () => {
