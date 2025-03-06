@@ -71,7 +71,7 @@ const whichDaysOvernightRoutes = (router: Router) => {
     },
   )
 
-  router.post(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT_SKIP, (request, response) => {
+  router.post(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT_NOT_REQUIRED, (request, response) => {
     request.session.livingAndVisiting = {
       ...request.session.livingAndVisiting,
       overnightVisits: {

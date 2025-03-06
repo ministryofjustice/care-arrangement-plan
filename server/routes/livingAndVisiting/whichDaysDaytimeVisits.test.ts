@@ -253,10 +253,10 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
   })
 })
 
-describe(`POST ${paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_SKIP}`, () => {
+describe(`POST ${paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_NOT_REQUIRED}`, () => {
   it('should redirect to the task list when the answer is entered and set whatWillHappen', async () => {
     await request(app)
-      .post(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_SKIP)
+      .post(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_NOT_REQUIRED)
       .expect(302)
       .expect('location', paths.TASK_LIST)
 

@@ -251,10 +251,10 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
   })
 })
 
-describe(`POST ${paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT_SKIP}`, () => {
+describe(`POST ${paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT_NOT_REQUIRED}`, () => {
   it('should redirect to will daytime visits happen when the answer is entered and set whatWillHappen', async () => {
     await request(app)
-      .post(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT_SKIP)
+      .post(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT_NOT_REQUIRED)
       .expect(302)
       .expect('location', paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN)
 
