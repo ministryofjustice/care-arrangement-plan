@@ -18,6 +18,8 @@ export default {
   LIVING_VISITING_WHICH_SCHEDULE: '/living-and-visiting/which-schedule-is-best',
   LIVING_VISITING_WHICH_SCHEDULE_SKIP: '/living-and-visiting/which-schedule-is-best/skip',
   LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN: '/living-and-visiting/will-overnights-happen',
+  LIVING_VISITING_WHICH_DAYS_OVERNIGHT: '/living-and-visiting/which-days-overnight',
+  LIVING_VISITING_WHICH_DAYS_OVERNIGHT_SKIP: '/living-and-visiting/which-days-overnight/skip',
   LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN: '/living-and-visiting/will-daytime-visits-happen',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN: '/special-days/what-will-happen',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP: '/special-days/what-will-happen/skip',

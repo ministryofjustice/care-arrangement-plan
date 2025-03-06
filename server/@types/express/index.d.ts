@@ -1,37 +1,9 @@
-import { whereMostlyLive } from '../fields'
+import { CAPSession } from '../session'
 
 export declare module 'express-session' {
-  // Declare that the session will potentially contain these additional fields
-  interface SessionData {
-    nowInMinutes: number
-    courtOrderInPlace: boolean
-    numberOfChildren: number
-    namesOfChildren: string[]
-    initialAdultName: string
-    secondaryAdultName: string
-    livingAndVisiting?: {
-      mostlyLive?: {
-        where: whereMostlyLive
-        describeArrangement?: string
-      }
-      whichSchedule?: {
-        noDecisionRequired: boolean
-        answer?: string
-      }
-      overnightVisits?: {
-        willHappen: boolean
-      }
-      daytimeVisits?: {
-        willHappen: boolean
-      }
-    }
-    specialDays?: {
-      whatWillHappen?: {
-        noDecisionRequired: boolean
-        answer?: string
-      }
-    }
-  }
+  // Declare that the session.d.ts will potentially contain these additional fields
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  interface SessionData extends CAPSession {}
 }
 
 export declare global {

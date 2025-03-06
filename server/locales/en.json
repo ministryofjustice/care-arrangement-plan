@@ -6,6 +6,19 @@
   "back": "Back",
   "doNotNeedToDecide": "We do not need to decide this",
   "theChildren": "the children",
+  "anotherArrangement": "Another arrangement",
+  "or": "or",
+  "describeArrangement": "Describe the arrangement",
+  "selectAllThatApply": "Select all that apply",
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
   "errorSummary": {
     "title": "There is a problem"
   },
@@ -93,10 +106,7 @@
       "title": "Where will {{ childName }} mostly live?",
       "with": "With {{ adult }}",
       "singleChildSplit": "{{ childName }} will split time between {{ initialAdult }} and {{ secondaryAdult }}",
-      "multipleChildrenSplit": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}",
-      "other": "Another arrangement",
-      "or": "or",
-      "describeArrangement": "Describe the arrangement"
+      "multipleChildrenSplit": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}"
     },
     "whichSchedule": {
       "title": "Which schedule best meets the children's needs?",
@@ -106,6 +116,9 @@
     },
     "willOvernightsHappen": {
       "title": "Will {{ childName }} stay overnight with {{ adult }}?"
+    },
+    "whichDaysOvernight": {
+      "title": "On which days will overnights happen?"
     },
     "willDaytimeVisitsHappen": {
       "title": "Will {{ childName }} do daytime visits with {{ adult }}?"

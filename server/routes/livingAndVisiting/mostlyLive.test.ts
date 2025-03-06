@@ -42,7 +42,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       expect(dom.window.document.querySelector(`label[for="${formFields.MOSTLY_LIVE_WHERE}-3"]`)).toHaveTextContent(
         `James will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
       )
-      expect(dom.window.document.querySelector(`#${formFields.DESCRIBE_ARRANGEMENT}`)).not.toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).not.toHaveAttribute(
         'aria-describedby',
       )
     })
@@ -73,7 +73,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
         {
           location: 'body',
           msg: secondaryError,
-          path: formFields.DESCRIBE_ARRANGEMENT,
+          path: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT,
           type: 'field',
         },
       ])
@@ -81,22 +81,26 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE)).text)
 
       expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem')
+      expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
+        'aria-describedby',
+        `${formFields.MOSTLY_LIVE_WHERE}-error`,
+      )
       expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-error`)).toHaveTextContent(
         primaryError,
       )
-      expect(dom.window.document.querySelector(`#${formFields.DESCRIBE_ARRANGEMENT}`)).toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).toHaveAttribute(
         'aria-describedby',
-        `${formFields.DESCRIBE_ARRANGEMENT}-error`,
+        `${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-error`,
       )
-      expect(dom.window.document.querySelector(`#${formFields.DESCRIBE_ARRANGEMENT}-error`)).toHaveTextContent(
-        secondaryError,
-      )
+      expect(
+        dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-error`),
+      ).toHaveTextContent(secondaryError)
     })
 
     it('should render field value flash responses correctly', async () => {
       const arrangement = 'arrangement'
       Object.assign(flashFormValues, [
-        { [formFields.DESCRIBE_ARRANGEMENT]: arrangement, [formFields.MOSTLY_LIVE_WHERE]: 'other' },
+        { [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: arrangement, [formFields.MOSTLY_LIVE_WHERE]: 'other' },
       ])
 
       sessionMock.livingAndVisiting.mostlyLive = {
@@ -107,7 +111,9 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE)).text)
 
       expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-5`)).toHaveAttribute('checked')
-      expect(dom.window.document.querySelector(`#${formFields.DESCRIBE_ARRANGEMENT}`)).toHaveValue(arrangement)
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).toHaveValue(
+        arrangement,
+      )
     })
 
     it('should render field previous values correctly', async () => {
@@ -121,7 +127,9 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE)).text)
 
       expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-5`)).toHaveAttribute('checked')
-      expect(dom.window.document.querySelector(`#${formFields.DESCRIBE_ARRANGEMENT}`)).toHaveValue(arrangement)
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).toHaveValue(
+        arrangement,
+      )
     })
   })
 
@@ -153,7 +161,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
         {
           location: 'body',
           msg: 'Invalid value',
-          path: formFields.DESCRIBE_ARRANGEMENT,
+          path: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT,
           type: 'field',
           value: '',
         },
@@ -165,7 +173,10 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       const describeArrangement = 'arrangement'
       await request(app)
         .post(paths.LIVING_VISITING_MOSTLY_LIVE)
-        .send({ [formFields.MOSTLY_LIVE_WHERE]: where, [formFields.DESCRIBE_ARRANGEMENT]: describeArrangement })
+        .send({
+          [formFields.MOSTLY_LIVE_WHERE]: where,
+          [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: describeArrangement,
+        })
         .expect(302)
         .expect('location', paths.TASK_LIST)
 
@@ -183,7 +194,10 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
 
         await request(app)
           .post(paths.LIVING_VISITING_MOSTLY_LIVE)
-          .send({ [formFields.MOSTLY_LIVE_WHERE]: selection })
+          .send({
+            [formFields.MOSTLY_LIVE_WHERE]: selection,
+            [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: 'arrangement',
+          })
           .expect(302)
           .expect('location', expectedRedirect)
 

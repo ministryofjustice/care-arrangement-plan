@@ -13,12 +13,12 @@
         {% set describeArrangementHtml %}
           {{
             govukTextarea({
-              name: formFields.DESCRIBE_ARRANGEMENT,
+              name: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT,
               label: {
-                text: __('livingAndVisiting.mostlyLive.describeArrangement')
+                text: __('describeArrangement')
               },
-              value: formValues[formFields.DESCRIBE_ARRANGEMENT],
-              errorMessage: errors | findError(formFields.DESCRIBE_ARRANGEMENT)
+              value: formValues[formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT],
+              errorMessage: errors | findError(formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT)
             })
           }}
         {% endset -%}
@@ -49,11 +49,11 @@
                       __('livingAndVisiting.mostlyLive.multipleChildrenSplit', {initialAdult: values.initialAdultName, secondaryAdult: values.secondaryAdultName})
               },
               {
-                divider: __('livingAndVisiting.mostlyLive.or')
+                divider: __('or')
               },
               {
                 value: "other",
-                text: __('livingAndVisiting.mostlyLive.other'),
+                text: __('anotherArrangement'),
                 conditional: {
                   html: describeArrangementHtml
                 }

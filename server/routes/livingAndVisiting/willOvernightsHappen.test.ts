@@ -108,13 +108,38 @@ describe(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, () => {
       ])
     })
 
-    // TODO C5141-1196 - add to these tests
-    it('should redirect to will daytime visits happen', () => {
-      return request(app)
+    it('should redirect to will daytime visits happen if the answer is no', async () => {
+      await request(app)
         .post(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)
         .send({ [formFields.WILL_OVERNIGHTS_HAPPEN]: 'No' })
         .expect(302)
         .expect('location', paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN)
+
+      expect(sessionMock.livingAndVisiting.overnightVisits).toEqual({ willHappen: false })
+    })
+
+    it('should redirect to which days overnight if the answer is yes', async () => {
+      await request(app)
+        .post(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)
+        .send({ [formFields.WILL_OVERNIGHTS_HAPPEN]: 'Yes' })
+        .expect(302)
+        .expect('location', paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)
+
+      expect(sessionMock.livingAndVisiting.overnightVisits).toEqual({ willHappen: true })
+    })
+
+    it('should not override existing session if the answer is the same the existing answer', async () => {
+      const overnightVisits = { willHappen: true, whichDays: { noDecisionRequired: true } }
+
+      sessionMock.livingAndVisiting.overnightVisits = overnightVisits
+
+      await request(app)
+        .post(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)
+        .send({ [formFields.WILL_OVERNIGHTS_HAPPEN]: 'Yes' })
+        .expect(302)
+        .expect('location', paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)
+
+      expect(sessionMock.livingAndVisiting.overnightVisits).toEqual(overnightVisits)
     })
   })
 })
