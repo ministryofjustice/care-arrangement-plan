@@ -3,20 +3,20 @@ import i18n from 'i18n'
 import { body, matchedData, validationResult } from 'express-validator'
 import paths from '../../constants/paths'
 import formFields from '../../constants/formFields'
-import { whichDays, dayValues } from '../../@types/fields'
-import { Days } from '../../@types/session'
-
-const daysOfWeek: dayValues[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+import { whichDaysField } from '../../@types/fields'
+import { convertWhichDaysFieldToSessionValue, convertWhichDaysSessionValueToField } from '../../utils/formValueUtils'
 
 const whichDaysOvernightRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, (request, response) => {
     const { overnightVisits } = request.session.livingAndVisiting
 
+    const [previousDaysOvernight, previousDescribeArrangement] = convertWhichDaysSessionValueToField(
+      overnightVisits.whichDays,
+    )
+
     const formValues = {
-      [formFields.WHICH_DAYS_OVERNIGHT_DESCRIBE_ARRANGEMENT]: overnightVisits.whichDays?.describeArrangement,
-      [formFields.WHICH_DAYS_OVERNIGHT]: overnightVisits.whichDays?.describeArrangement
-        ? 'other'
-        : daysOfWeek.filter(day => overnightVisits.whichDays?.days?.[day]),
+      [formFields.WHICH_DAYS_OVERNIGHT]: previousDaysOvernight,
+      [formFields.WHICH_DAYS_OVERNIGHT_DESCRIBE_ARRANGEMENT]: previousDescribeArrangement,
       ...request.flash('formValues')?.[0],
     }
 
@@ -38,12 +38,12 @@ const whichDaysOvernightRoutes = (router: Router) => {
     body(formFields.WHICH_DAYS_OVERNIGHT).exists().toArray(),
     body(formFields.WHICH_DAYS_OVERNIGHT).custom(
       // This is prevented by JS in the page, but possible for people with JS disabled to submit
-      (whichDaysOvernight: whichDays) => !(whichDaysOvernight.length > 1 && whichDaysOvernight.includes('other')),
+      (whichDaysOvernight: whichDaysField) => !(whichDaysOvernight.length > 1 && whichDaysOvernight.includes('other')),
     ),
     (request, response) => {
       const formData = matchedData<{
         [formFields.WHICH_DAYS_OVERNIGHT_DESCRIBE_ARRANGEMENT]: string
-        [formFields.WHICH_DAYS_OVERNIGHT]: whichDays
+        [formFields.WHICH_DAYS_OVERNIGHT]: whichDaysField
       }>(request, { onlyValidData: false })
 
       const errors = validationResult(request)
@@ -63,15 +63,7 @@ const whichDaysOvernightRoutes = (router: Router) => {
         ...request.session.livingAndVisiting,
         overnightVisits: {
           ...request.session.livingAndVisiting.overnightVisits,
-          whichDays:
-            whichDaysOvernight[0] === 'other'
-              ? { describeArrangement }
-              : {
-                  days: daysOfWeek.reduce((acc, day) => {
-                    acc[day] = whichDaysOvernight.includes(day)
-                    return acc
-                  }, {} as Days),
-                },
+          whichDays: convertWhichDaysFieldToSessionValue(whichDaysOvernight, describeArrangement),
         },
       }
 

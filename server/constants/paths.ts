@@ -21,6 +21,8 @@ export default {
   LIVING_VISITING_WHICH_DAYS_OVERNIGHT: '/living-and-visiting/which-days-overnight',
   LIVING_VISITING_WHICH_DAYS_OVERNIGHT_SKIP: '/living-and-visiting/which-days-overnight/skip',
   LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN: '/living-and-visiting/will-daytime-visits-happen',
+  LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS: '/living-and-visiting/which-days-daytime-visits',
+  LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_SKIP: '/living-and-visiting/which-days-daytime-visits/skip',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN: '/special-days/what-will-happen',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP: '/special-days/what-will-happen/skip',
 }

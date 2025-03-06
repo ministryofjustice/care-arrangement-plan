@@ -43,8 +43,6 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
 
       const willDaytimeVisitsHappen = formData[formFields.WILL_DAYTIME_VISITS_HAPPEN] === 'Yes'
 
-      // TODO C5141-1196 - add redirect for yes
-
       if (request.session.livingAndVisiting?.daytimeVisits?.willHappen !== willDaytimeVisitsHappen) {
         request.session.livingAndVisiting = {
           ...request.session.livingAndVisiting,
@@ -52,6 +50,10 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
             willHappen: willDaytimeVisitsHappen,
           },
         }
+      }
+
+      if (willDaytimeVisitsHappen) {
+        return response.redirect(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS)
       }
 
       return response.redirect(paths.TASK_LIST)

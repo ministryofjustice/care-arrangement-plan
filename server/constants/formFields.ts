@@ -15,6 +15,8 @@ enum formFields {
   WHICH_DAYS_OVERNIGHT = 'which-days-overnight',
   WHICH_DAYS_OVERNIGHT_DESCRIBE_ARRANGEMENT = 'which-days-overnight-describe-arrangement',
   WILL_DAYTIME_VISITS_HAPPEN = 'will-daytime-visits-happen',
+  WHICH_DAYS_DAYTIME_VISITS = 'which-days',
+  WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT = 'which-days-describe-arrangement',
   SPECIAL_DAYS = 'special-days',
 }
 

@@ -10,6 +10,12 @@ export type Days = {
   sunday: boolean
 }
 
+export type WhichDays = {
+  days?: days
+  describeArrangement?: string
+  noDecisionRequired?: boolean
+}
+
 export type CAPSession = {
   nowInMinutes: number
   courtOrderInPlace: boolean
@@ -28,14 +34,11 @@ export type CAPSession = {
     }
     overnightVisits?: {
       willHappen: boolean
-      whichDays?: {
-        days?: days
-        describeArrangement?: string
-        noDecisionRequired?: boolean
-      }
+      whichDays?: WhichDays
     }
     daytimeVisits?: {
       willHappen: boolean
+      whichDays?: WhichDays
     }
   }
   specialDays?: {

@@ -122,6 +122,9 @@
     },
     "willDaytimeVisitsHappen": {
       "title": "Will {{ childName }} do daytime visits with {{ adult }}?"
+    },
+    "whichDaysDaytimeVisits": {
+      "title": "On which days will daytime visits happen?"
     }
   },
   "specialDays": {
