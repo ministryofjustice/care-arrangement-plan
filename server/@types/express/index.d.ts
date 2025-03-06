@@ -14,6 +14,10 @@ export declare module 'express-session' {
         where: whereMostlyLive
         describeArrangement?: string
       }
+      whichSchedule?: {
+        noDecisionRequired: boolean
+        answer?: string
+      }
       overnightVisits?: {
         willHappen: boolean
       }

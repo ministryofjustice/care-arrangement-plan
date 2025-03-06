@@ -44,18 +44,18 @@ const mostlyLiveRoutes = (router: Router) => {
 
       const { [formFields.MOSTLY_LIVE_WHERE]: where, [formFields.DESCRIBE_ARRANGEMENT]: describeArrangement } = formData
 
-      if (where === 'other') {
-        request.session.livingAndVisiting = { mostlyLive: { where, describeArrangement } }
-        return response.redirect(paths.TASK_LIST)
-      }
-
-      // TODO C5141-1196 - add redirect for split
-
       if (where !== request.session.livingAndVisiting?.mostlyLive?.where) {
-        request.session.livingAndVisiting = { mostlyLive: { where } }
+        request.session.livingAndVisiting = { mostlyLive: { where, describeArrangement } }
       }
 
-      return response.redirect(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)
+      switch (where) {
+        case 'other':
+          return response.redirect(paths.TASK_LIST)
+        case 'split':
+          return response.redirect(paths.LIVING_VISITING_WHICH_SCHEDULE)
+        default:
+          return response.redirect(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)
+      }
     },
   )
 }

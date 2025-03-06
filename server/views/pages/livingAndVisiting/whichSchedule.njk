@@ -1,4 +1,5 @@
 {% extends "partials/layout.njk" %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
@@ -9,21 +10,27 @@
 
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p>{{ __('specialDays.whatWillHappen.content') }}</p>
+      {{
+        govukDetails({
+            summaryText: __('livingAndVisiting.whichSchedule.getIdeas'),
+            html: __('livingAndVisiting.whichSchedule.commonSchedules')
+        })
+      }}
 
-      <form class="form" action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN }}" method="post" novalidate>
+      <p>{{ __('livingAndVisiting.whichSchedule.exactSplit') }}</p>
+
+      <form class="form" action="{{ paths.LIVING_VISITING_WHICH_SCHEDULE }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukTextarea({
-            name: formFields.SPECIAL_DAYS,
-            value: initialWhatWillHappen,
-            errorMessage: errors | findError(formFields.SPECIAL_DAYS)
+            name: formFields.WHICH_SCHEDULE,
+            value: initialSchedule,
+            errorMessage: errors | findError(formFields.WHICH_SCHEDULE)
           })
         }}
-
         {{ govukButton({text: __('continue')}) }}
       </form>
-      <form class="form" action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP }}" method="post" novalidate>
+      <form class="form" action="{{ paths.LIVING_VISITING_WHICH_SCHEDULE_SKIP }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
       </form>

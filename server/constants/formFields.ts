@@ -10,6 +10,7 @@ enum formFields {
   SECONDARY_ADULT_NAME = 'secondary-adult-name',
   MOSTLY_LIVE_WHERE = 'mostly-live-where',
   DESCRIBE_ARRANGEMENT = 'describe-arrangement',
+  WHICH_SCHEDULE = 'which-schedule',
   WILL_OVERNIGHTS_HAPPEN = 'will-overnights-happen',
   WILL_DAYTIME_VISITS_HAPPEN = 'will-daytime-visits-happen',
   SPECIAL_DAYS = 'special-days',

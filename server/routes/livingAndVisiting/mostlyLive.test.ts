@@ -172,18 +172,24 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where, describeArrangement } })
     })
 
-    it('should redirect to will overnights happen page if the page is correctly filled and other is not selected', async () => {
-      sessionMock.livingAndVisiting = { mostlyLive: { where: 'withSecondary' }, overnightVisits: { willHappen: true } }
+    it.each([
+      [paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, 'withInitial'],
+      [paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, 'withSecondary'],
+      [paths.LIVING_VISITING_WHICH_SCHEDULE, 'split'],
+    ])(
+      'should redirect to %s if the page is correctly filled and %s is selected',
+      async (expectedRedirect, selection) => {
+        sessionMock.livingAndVisiting = { mostlyLive: { where: 'other' }, overnightVisits: { willHappen: true } }
 
-      const where = 'withInitial'
-      await request(app)
-        .post(paths.LIVING_VISITING_MOSTLY_LIVE)
-        .send({ [formFields.MOSTLY_LIVE_WHERE]: where })
-        .expect(302)
-        .expect('location', paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)
+        await request(app)
+          .post(paths.LIVING_VISITING_MOSTLY_LIVE)
+          .send({ [formFields.MOSTLY_LIVE_WHERE]: selection })
+          .expect(302)
+          .expect('location', expectedRedirect)
 
-      expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where } })
-    })
+        expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where: selection } })
+      },
+    )
 
     it('should not reset the livingAndVisiting data if the same option is set', async () => {
       const where: whereMostlyLive = 'withInitial'
