@@ -18,6 +18,8 @@ export declare global {
         parentNotMostlyLivedWith: () => string
         collectiveChildrenName: () => string
         whatWillHappenAnswer: () => string
+        mostlyLiveComplete: () => boolean
+        whatWillHappenComplete: () => boolean
       }
     }
   }

@@ -33,6 +33,28 @@
         })
       }}
 
+      <h2 class="govuk-heading-m">{{ __('taskList.livingAndVisiting') }}</h2>
+      {{
+        govukTaskList({
+          items: [
+            {
+              title: {
+                text: __('taskList.whereWillTheChildrenLive')
+              },
+              href: paths.LIVING_VISITING_MOSTLY_LIVE,
+              status: {
+                text: __('taskList.completed')
+              } if mostlyLiveComplete else {
+                tag: {
+                  text: "Incomplete",
+                  classes: "govuk-tag--blue"
+                }
+              }
+            }
+          ]
+        })
+      }}
+
       <h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
       {{
         govukTaskList({

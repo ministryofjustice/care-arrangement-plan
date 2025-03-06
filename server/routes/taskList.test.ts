@@ -9,6 +9,12 @@ const app = testAppSetup()
 
 const session: Partial<SessionData> = {
   namesOfChildren: ['James', 'Rachel', 'Jack'],
+  livingAndVisiting: {
+    mostlyLive: {
+      where: 'other',
+      describeArrangement: 'arrangement',
+    },
+  },
   specialDays: {
     whatWillHappen: {
       noDecisionRequired: true,
@@ -32,6 +38,16 @@ describe(`GET ${paths.TASK_LIST}`, () => {
       'Child arrangements plan for James, Rachel and Jack',
     )
     expect(dom.window.document.querySelector('[role="button"]')).not.toBeNull()
+  })
+
+  it('should not render the continue button if the where will the children mostly live section is not filled out', async () => {
+    sessionMock.livingAndVisiting = null
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)
+
+    const dom = new JSDOM(response.text)
+
+    expect(dom.window.document.querySelector('[role="button"]')).toBeNull()
   })
 
   it('should not render the continue button if the what will happen section is not filled out', async () => {
