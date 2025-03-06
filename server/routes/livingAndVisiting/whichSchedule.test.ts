@@ -104,9 +104,12 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
   })
 })
 
-describe(`POST ${paths.LIVING_VISITING_WHICH_SCHEDULE_SKIP}`, () => {
+describe(`POST ${paths.LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED}`, () => {
   it('should redirect to task list when the answer is entered and set whatWillHappen', async () => {
-    await request(app).post(paths.LIVING_VISITING_WHICH_SCHEDULE_SKIP).expect(302).expect('location', paths.TASK_LIST)
+    await request(app)
+      .post(paths.LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED)
+      .expect(302)
+      .expect('location', paths.TASK_LIST)
 
     expect(sessionMock.livingAndVisiting).toEqual({
       mostlyLive: {

@@ -69,7 +69,7 @@ const whichDaysDaytimeVisitsRoutes = (router: Router) => {
     },
   )
 
-  router.post(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_SKIP, (request, response) => {
+  router.post(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_NOT_REQUIRED, (request, response) => {
     request.session.livingAndVisiting = {
       ...request.session.livingAndVisiting,
       daytimeVisits: {

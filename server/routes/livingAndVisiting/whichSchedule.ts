@@ -42,7 +42,7 @@ const whichScheduleRoutes = (router: Router) => {
     },
   )
 
-  router.post(paths.LIVING_VISITING_WHICH_SCHEDULE_SKIP, (request, response) => {
+  router.post(paths.LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED, (request, response) => {
     request.session.livingAndVisiting = {
       ...request.session.livingAndVisiting,
       whichSchedule: {

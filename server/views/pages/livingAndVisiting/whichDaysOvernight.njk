@@ -82,7 +82,12 @@
         }}
         {{ govukButton({text: __('continue')}) }}
       </form>
-      <form class="form" action="{{ paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT_SKIP }}" method="post" novalidate>
+      <form
+        class="form"
+        action="{{ paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT_NOT_REQUIRED }}"
+        method="post"
+        novalidate
+      >
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
       </form>

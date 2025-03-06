@@ -42,7 +42,7 @@ const whatWillHappenRoutes = (router: Router) => {
     },
   )
 
-  router.post(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP, (request, response) => {
+  router.post(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED, (request, response) => {
     request.session.specialDays = {
       ...request.session.specialDays,
       whatWillHappen: {

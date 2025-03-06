@@ -86,9 +86,12 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
   })
 })
 
-describe(`POST ${paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP}`, () => {
+describe(`POST ${paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED}`, () => {
   it('should redirect to task list when the answer is entered and set whatWillHappen', async () => {
-    await request(app).post(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP).expect(302).expect('location', paths.TASK_LIST)
+    await request(app)
+      .post(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED)
+      .expect(302)
+      .expect('location', paths.TASK_LIST)
 
     expect(sessionMock.specialDays.whatWillHappen).toEqual({ noDecisionRequired: true })
   })
