@@ -110,13 +110,38 @@ describe(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, () => {
       ])
     })
 
-    // TODO C5141-1196 - add to these tests
-    it('should redirect to will task list', () => {
-      return request(app)
+    it('should redirect to task list if the answer is no', async () => {
+      await request(app)
         .post(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN)
         .send({ [formFields.WILL_DAYTIME_VISITS_HAPPEN]: 'No' })
         .expect(302)
         .expect('location', paths.TASK_LIST)
+
+      expect(sessionMock.livingAndVisiting.daytimeVisits).toEqual({ willHappen: false })
+    })
+
+    it('should redirect to which days daytime visits if the answer is yes', async () => {
+      await request(app)
+        .post(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN)
+        .send({ [formFields.WILL_DAYTIME_VISITS_HAPPEN]: 'Yes' })
+        .expect(302)
+        .expect('location', paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS)
+
+      expect(sessionMock.livingAndVisiting.daytimeVisits).toEqual({ willHappen: true })
+    })
+
+    it('should not override existing session if the answer is the same the existing answer', async () => {
+      const daytimeVisits = { willHappen: true, whichDays: { noDecisionRequired: true } }
+
+      sessionMock.livingAndVisiting.daytimeVisits = daytimeVisits
+
+      await request(app)
+        .post(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN)
+        .send({ [formFields.WILL_DAYTIME_VISITS_HAPPEN]: 'Yes' })
+        .expect(302)
+        .expect('location', paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS)
+
+      expect(sessionMock.livingAndVisiting.daytimeVisits).toEqual(daytimeVisits)
     })
   })
 })

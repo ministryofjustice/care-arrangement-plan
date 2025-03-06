@@ -1,4 +1,7 @@
-import { yesOrNo } from '../@types/fields'
+import { dayValues, whichDaysField, yesOrNo } from '../@types/fields'
+import { Days, WhichDays } from '../@types/session'
+
+const daysOfWeek: dayValues[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
 export const formatNames = (names: string[]) => {
   switch (names.length) {
@@ -22,4 +25,28 @@ export const convertBooleanValueToRadioButtonValue = (booleanValue: boolean): ye
     default:
       return undefined
   }
+}
+
+export const convertWhichDaysFieldToSessionValue = (
+  whichDays: whichDaysField,
+  describeArrangement: string,
+): WhichDays => {
+  if (whichDays[0] === 'other') {
+    return { describeArrangement }
+  }
+
+  return {
+    days: daysOfWeek.reduce((acc, day) => {
+      acc[day] = whichDays.includes(day)
+      return acc
+    }, {} as Days),
+  }
+}
+
+export const convertWhichDaysSessionValueToField = (whichDays: WhichDays | undefined): [whichDaysField, string?] => {
+  if (whichDays?.describeArrangement) {
+    return [['other'], whichDays.describeArrangement]
+  }
+
+  return [daysOfWeek.filter(day => whichDays?.days?.[day])]
 }

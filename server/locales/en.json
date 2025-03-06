@@ -6,6 +6,19 @@
   "back": "Back",
   "doNotNeedToDecide": "We do not need to decide this",
   "theChildren": "the children",
+  "anotherArrangement": "Another arrangement",
+  "or": "or",
+  "describeArrangement": "Describe the arrangement",
+  "selectAllThatApply": "Select all that apply",
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
   "errorSummary": {
     "title": "There is a problem"
   },
@@ -93,16 +106,25 @@
       "title": "Where will {{ childName }} mostly live?",
       "with": "With {{ adult }}",
       "singleChildSplit": "{{ childName }} will split time between {{ initialAdult }} and {{ secondaryAdult }}",
-      "multipleChildrenSplit": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}",
-      "other": "Another arrangement",
-      "or": "or",
-      "describeArrangement": "Describe the arrangement"
+      "multipleChildrenSplit": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}"
+    },
+    "whichSchedule": {
+      "title": "Which schedule best meets the children's needs?",
+      "getIdeas": "Get scheduling ideas",
+      "commonSchedules": "<p>Here are some common schedules that can benefit children.</p><p><b>Alternating weeks</b><br/>The children will spend one week in one household and the next week in the other.</p><p><b>2-2-3 schedule</b><br/>Children spend two days in one household, two days in the other, then back to the first house for 3 days including the weekend.</p><p><b>4-4-3 schedule</b><br/>Children spend three days in one household then four days in the other. The next week they switch.</p><p><b>2-2-5-5 schedule</b><br/>Children spend two days in one household, then two days in the other. After that they spend five days in one household, then five days in the other.</p>",
+      "exactSplitWarning": "An exact split of time between two households does not always suit children’s best interests."
     },
     "willOvernightsHappen": {
       "title": "Will {{ childName }} stay overnight with {{ adult }}?"
     },
+    "whichDaysOvernight": {
+      "title": "On which days will overnights happen?"
+    },
     "willDaytimeVisitsHappen": {
       "title": "Will {{ childName }} do daytime visits with {{ adult }}?"
+    },
+    "whichDaysDaytimeVisits": {
+      "title": "On which days will daytime visits happen?"
     }
   },
   "specialDays": {

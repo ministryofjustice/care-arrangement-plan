@@ -9,7 +9,7 @@ const app = testAppSetup()
 
 describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
   describe('GET', () => {
-    it('should render what will happen on special days check page', async () => {
+    it('should render what will happen on special days page', async () => {
       const response = await request(app).get(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN).expect('Content-Type', /html/)
 
       const dom = new JSDOM(response.text)

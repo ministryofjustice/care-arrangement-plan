@@ -1,0 +1,91 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <form class="form" action="{{ paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {% set anotherHtml %}
+          {{
+            govukTextarea({
+              name: formFields.WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT,
+              label: {
+                text: __('describeArrangement')
+              },
+              value: formValues[formFields.WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT],
+              errorMessage: errors | findError(formFields.WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT)
+            })
+          }}
+        {% endset -%}
+
+        {{
+          govukCheckboxes({
+            name: formFields.WHICH_DAYS_DAYTIME_VISITS,
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            hint: {
+              text: __('selectAllThatApply')
+            },
+            items: [
+              {
+                value: "monday",
+                text: __('days.monday')
+              },
+              {
+                value: "tuesday",
+                text: __('days.tuesday')
+              },
+              {
+                value: "wednesday",
+                text: __('days.wednesday')
+              },
+              {
+                value: "thursday",
+                text: __('days.thursday')
+              },
+              {
+                value: "friday",
+                text: __('days.friday')
+              },
+              {
+                value: "saturday",
+                text: __('days.saturday')
+              },
+              {
+                value: "sunday",
+                text: __('days.sunday')
+              },
+              {
+                divider: __('or')
+              },
+              {
+                value: "other",
+                text: __('anotherArrangement'),
+                behaviour: "exclusive",
+                conditional: {
+                  html: anotherHtml
+                }
+              }
+            ],
+            values: formValues[formFields.WHICH_DAYS_DAYTIME_VISITS],
+            errorMessage: errors | findError(formFields.WHICH_DAYS_DAYTIME_VISITS)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+      <form class="form" action="{{ paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_SKIP }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

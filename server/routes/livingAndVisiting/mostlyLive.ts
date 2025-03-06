@@ -8,7 +8,7 @@ import { whereMostlyLive } from '../../@types/fields'
 const mostlyLiveRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_MOSTLY_LIVE, (request, response) => {
     const formValues = {
-      [formFields.DESCRIBE_ARRANGEMENT]: request.session.livingAndVisiting?.mostlyLive?.describeArrangement,
+      [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: request.session.livingAndVisiting?.mostlyLive?.describeArrangement,
       [formFields.MOSTLY_LIVE_WHERE]: request.session.livingAndVisiting?.mostlyLive?.where,
       ...request.flash('formValues')?.[0],
     }
@@ -28,10 +28,13 @@ const mostlyLiveRoutes = (router: Router) => {
     paths.LIVING_VISITING_MOSTLY_LIVE,
     // TODO C5141-1013: Add error messages
     body(formFields.MOSTLY_LIVE_WHERE).exists(),
-    body(formFields.DESCRIBE_ARRANGEMENT).if(body(formFields.MOSTLY_LIVE_WHERE).equals('other')).trim().notEmpty(),
+    body(formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT)
+      .if(body(formFields.MOSTLY_LIVE_WHERE).equals('other'))
+      .trim()
+      .notEmpty(),
     (request, response) => {
       const formData = matchedData<{
-        [formFields.DESCRIBE_ARRANGEMENT]: string
+        [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: string
         [formFields.MOSTLY_LIVE_WHERE]: whereMostlyLive
       }>(request, { onlyValidData: false })
       const errors = validationResult(request)
@@ -42,20 +45,25 @@ const mostlyLiveRoutes = (router: Router) => {
         return response.redirect(paths.LIVING_VISITING_MOSTLY_LIVE)
       }
 
-      const { [formFields.MOSTLY_LIVE_WHERE]: where, [formFields.DESCRIBE_ARRANGEMENT]: describeArrangement } = formData
-
-      if (where === 'other') {
-        request.session.livingAndVisiting = { mostlyLive: { where, describeArrangement } }
-        return response.redirect(paths.TASK_LIST)
-      }
-
-      // TODO C5141-1196 - add redirect for split
+      const {
+        [formFields.MOSTLY_LIVE_WHERE]: where,
+        [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: describeArrangement,
+      } = formData
 
       if (where !== request.session.livingAndVisiting?.mostlyLive?.where) {
-        request.session.livingAndVisiting = { mostlyLive: { where } }
+        request.session.livingAndVisiting = {
+          mostlyLive: { where, describeArrangement: where === 'other' ? describeArrangement : undefined },
+        }
       }
 
-      return response.redirect(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)
+      switch (where) {
+        case 'other':
+          return response.redirect(paths.TASK_LIST)
+        case 'split':
+          return response.redirect(paths.LIVING_VISITING_WHICH_SCHEDULE)
+        default:
+          return response.redirect(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)
+      }
     },
   )
 }

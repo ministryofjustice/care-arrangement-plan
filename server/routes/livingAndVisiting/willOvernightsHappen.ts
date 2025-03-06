@@ -16,7 +16,7 @@ const willOvernightsHappenRoutes = (router: Router) => {
         adult: request.sessionHelpers.parentNotMostlyLivedWith(),
         childName: request.sessionHelpers.collectiveChildrenName(),
       }),
-      backLinkHref: paths.LIVING_VISITING_MOSTLY_LIVE,
+      backLinkHref: paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN,
       formValues: {
         [formFields.WILL_OVERNIGHTS_HAPPEN]: convertBooleanValueToRadioButtonValue(
           livingAndVisiting.overnightVisits?.willHappen,
@@ -43,8 +43,6 @@ const willOvernightsHappenRoutes = (router: Router) => {
 
       const willOvernightsHappen = formData[formFields.WILL_OVERNIGHTS_HAPPEN] === 'Yes'
 
-      // TODO C5141-1196 - add redirect for yes
-
       if (request.session.livingAndVisiting?.overnightVisits?.willHappen !== willOvernightsHappen) {
         request.session.livingAndVisiting = {
           ...request.session.livingAndVisiting,
@@ -52,6 +50,10 @@ const willOvernightsHappenRoutes = (router: Router) => {
             willHappen: willOvernightsHappen,
           },
         }
+      }
+
+      if (willOvernightsHappen) {
+        return response.redirect(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)
       }
 
       return response.redirect(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN)
