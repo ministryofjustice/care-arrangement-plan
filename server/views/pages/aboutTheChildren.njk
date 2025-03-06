@@ -17,7 +17,6 @@
           {% set fieldName = formFields.CHILD_NAME + i %}
           {{
             govukInput({
-              id: fieldName,
               name: fieldName,
               label: {
                 text: __('aboutTheChildren.singleFirstName') if numberOfChildren === 1 else __('aboutTheChildren.multipleFirstName' + i)
