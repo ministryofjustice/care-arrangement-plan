@@ -172,7 +172,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where, describeArrangement } })
     })
 
-    it('should redirect to task list page if the page is correctly filled and other is not selected', async () => {
+    it('should redirect to will overnights happen page if the page is correctly filled and other is not selected', async () => {
       sessionMock.livingAndVisiting = { mostlyLive: { where: 'withSecondary' }, overnightVisits: { willHappen: true } }
 
       const where = 'withInitial'
