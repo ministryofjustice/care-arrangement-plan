@@ -23,6 +23,11 @@ export declare global {
       flash(type: 'errors', message: ValidationError[]): number
       flash(type: 'formValues'): Record<string, string | string[] | number[]>[]
       flash(type: 'formValues', message: Record<string, string | string[] | number[]>): number
+      sessionHelpers: {
+        formattedChildrenNames: () => string
+        collectiveChildrenName: () => string
+        whatWillHappenAnswer: () => string
+      }
     }
   }
 }
