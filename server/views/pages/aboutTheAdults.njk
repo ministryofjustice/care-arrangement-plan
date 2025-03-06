@@ -15,7 +15,6 @@
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukInput({
-            id: formFields.INITIAL_ADULT_NAME,
             name: formFields.INITIAL_ADULT_NAME,
             label: {
               text: __('aboutTheAdults.initialParentFirstName')
@@ -29,7 +28,6 @@
         }}
         {{
           govukInput({
-            id: formFields.SECONDARY_ADULT_NAME,
             name: formFields.SECONDARY_ADULT_NAME,
             label: {
               text: __('aboutTheAdults.secondaryParentFirstName')
