@@ -19,9 +19,11 @@ const session: Partial<SessionData> = {
 
 describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
   describe('GET', () => {
-    it('should render the mostly live page for a single child', async () => {
-      Object.assign(sessionMock, session)
+    beforeEach(() => {
+      Object.assign(sessionMock, structuredClone(session))
+    })
 
+    it('should render the mostly live page for a single child', async () => {
       sessionMock.numberOfChildren = 1
       sessionMock.namesOfChildren = ['James']
 
@@ -48,8 +50,6 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
     })
 
     it('should render the mostly live page for multiple children', async () => {
-      Object.assign(sessionMock, session)
-
       const response = await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE).expect('Content-Type', /html/)
 
       const dom = new JSDOM(response.text)

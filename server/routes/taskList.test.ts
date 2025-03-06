@@ -17,9 +17,11 @@ const session: Partial<SessionData> = {
 }
 
 describe(`GET ${paths.TASK_LIST}`, () => {
-  it('should render task list page', async () => {
-    Object.assign(sessionMock, session)
+  beforeEach(() => {
+    Object.assign(sessionMock, structuredClone(session))
+  })
 
+  it('should render task list page', async () => {
     const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)
 
     expect(response.text).not.toContain('Incomplete')
@@ -33,7 +35,6 @@ describe(`GET ${paths.TASK_LIST}`, () => {
   })
 
   it('should not render the continue button if the what will happen section is not filled out', async () => {
-    Object.assign(sessionMock, session)
     sessionMock.specialDays = null
 
     const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)

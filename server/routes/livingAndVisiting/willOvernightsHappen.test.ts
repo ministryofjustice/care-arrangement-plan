@@ -23,7 +23,7 @@ const session: Partial<SessionData> = {
 describe(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, () => {
   describe('GET', () => {
     beforeEach(() => {
-      Object.assign(sessionMock, session)
+      Object.assign(sessionMock, structuredClone(session))
     })
 
     it('should render the will overnights happen page for a single child', async () => {
@@ -131,7 +131,7 @@ describe(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, () => {
     it('should not override existing session if the answer is the same the existing answer', async () => {
       const overnightVisits = { willHappen: true, whichDays: { noDecisionRequired: true } }
 
-      sessionMock.livingAndVisiting.overnightVisits = overnightVisits
+      sessionMock.livingAndVisiting = { overnightVisits }
 
       await request(app)
         .post(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)
