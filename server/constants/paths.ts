@@ -14,6 +14,9 @@ export default {
   CHECK_YOUR_ANSWERS: '/check-your-answers',
   SHARE_PLAN: '/share-plan',
   PASSWORD: '/password',
+  LIVING_VISITING_MOSTLY_LIVE: '/living-and-visiting/where-will-the-children-mostly-live',
+  LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN: '/living-and-visiting/will-overnights-happen',
+  LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN: '/living-and-visiting/will-daytime-visits-happen',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN: '/special-days/what-will-happen',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN_SKIP: '/special-days/what-will-happen/skip',
 }

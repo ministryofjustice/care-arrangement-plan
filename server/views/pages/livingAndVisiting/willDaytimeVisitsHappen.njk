@@ -1,0 +1,39 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <form class="form" action="{{ paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {{
+          govukRadios({
+            name: formFields.WILL_DAYTIME_VISITS_HAPPEN,
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: __('yes')
+              },
+              {
+                value: "No",
+                text: __('no')
+              }
+            ],
+            value: formValues[formFields.WILL_DAYTIME_VISITS_HAPPEN],
+            errorMessage: errors | findError(formFields.WILL_DAYTIME_VISITS_HAPPEN)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

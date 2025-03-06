@@ -3,6 +3,7 @@ import { body, matchedData, validationResult } from 'express-validator'
 import i18n from 'i18n'
 import paths from '../constants/paths'
 import formFields from '../constants/formFields'
+import { yesOrNo } from '../@types/fields'
 
 const courtOrderCheckRoutes = (router: Router) => {
   router.get(paths.COURT_ORDER_CHECK, (request, response) => {
@@ -22,7 +23,7 @@ const courtOrderCheckRoutes = (router: Router) => {
     }
 
     const { [formFields.COURT_ORDER_CHECK]: existingCourtOrder } = matchedData<{
-      [formFields.COURT_ORDER_CHECK]: 'Yes' | 'No'
+      [formFields.COURT_ORDER_CHECK]: yesOrNo
     }>(request)
 
     if (existingCourtOrder === 'Yes') {

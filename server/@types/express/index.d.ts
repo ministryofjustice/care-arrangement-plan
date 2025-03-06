@@ -1,3 +1,5 @@
+import { whereMostlyLive } from '../fields'
+
 export declare module 'express-session' {
   // Declare that the session will potentially contain these additional fields
   interface SessionData {
@@ -7,6 +9,18 @@ export declare module 'express-session' {
     namesOfChildren: string[]
     initialAdultName: string
     secondaryAdultName: string
+    livingAndVisiting?: {
+      mostlyLive?: {
+        where: whereMostlyLive
+        describeArrangement?: string
+      }
+      overnightVisits?: {
+        willHappen: boolean
+      }
+      daytimeVisits?: {
+        willHappen: boolean
+      }
+    }
     specialDays?: {
       whatWillHappen?: {
         noDecisionRequired: boolean
@@ -25,6 +39,7 @@ export declare global {
       flash(type: 'formValues', message: Record<string, string | string[] | number[]>): number
       sessionHelpers: {
         formattedChildrenNames: () => string
+        parentNotMostlyLivedWith: () => string
         collectiveChildrenName: () => string
         whatWillHappenAnswer: () => string
       }

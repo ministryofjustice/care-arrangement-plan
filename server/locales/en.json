@@ -88,6 +88,23 @@
     "specialDays": "Special days",
     "whatWillHappen": "What will happen on special days?"
   },
+  "livingAndVisiting": {
+    "mostlyLive": {
+      "title": "Where will {{ childName }} mostly live?",
+      "with": "With {{ adult }}",
+      "singleChildSplit": "{{ childName }} will split time between {{ initialAdult }} and {{ secondaryAdult }}",
+      "multipleChildrenSplit": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}",
+      "other": "Another arrangement",
+      "or": "or",
+      "describeArrangement": "Describe the arrangement"
+    },
+    "willOvernightsHappen": {
+      "title": "Will {{ childName }} stay overnight with {{ adult }}?"
+    },
+    "willDaytimeVisitsHappen": {
+      "title": "Will {{ childName }} do daytime visits with {{ adult }}?"
+    }
+  },
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",
