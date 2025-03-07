@@ -5,7 +5,6 @@ import sessionHelpers from './sessionHelpers'
 import { sessionMock } from '../test-utils/testMocks'
 import formattedAnswers from './formattedAnswers'
 import setUpi18n from './setUpi18n'
-import paths from '../constants/paths'
 
 const testPath = '/test'
 
