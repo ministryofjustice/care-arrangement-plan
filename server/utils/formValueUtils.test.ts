@@ -1,6 +1,6 @@
-import { convertBooleanValueToRadioButtonValue, formatNames } from './formValueUtils'
+import { convertBooleanValueToRadioButtonValue, formatListOfStrings } from './formValueUtils'
 
-describe('formatNames', () => {
+describe('formatListOfWords', () => {
   test.each([
     [[], ''],
     [['James'], 'James'],
@@ -8,7 +8,7 @@ describe('formatNames', () => {
     [['James', 'Rachel', 'Jack'], 'James, Rachel and Jack'],
     [['James', 'Rachel', 'Jack', 'Molly'], 'James, Rachel, Jack and Molly'],
   ])('returns the correct name for %s', (names, expectedFormattedNames) => {
-    expect(formatNames(names)).toEqual(expectedFormattedNames)
+    expect(formatListOfStrings(names)).toEqual(expectedFormattedNames)
   })
 })
 

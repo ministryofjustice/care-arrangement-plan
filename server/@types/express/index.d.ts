@@ -17,9 +17,17 @@ export declare global {
         formattedChildrenNames: () => string
         parentNotMostlyLivedWith: () => string
         collectiveChildrenName: () => string
-        whatWillHappenAnswer: () => string
         mostlyLiveComplete: () => boolean
         whatWillHappenComplete: () => boolean
+      }
+      formattedAnswers: {
+        mostlyLive: () => string
+        whichSchedule: () => string
+        willOvernightsHappen: () => string
+        whichDaysOvernight: () => string
+        willDaytimeVisitsHappen: () => string
+        whichDaysDaytimeVisits: () => string
+        whatWillHappen: () => string
       }
     }
   }

@@ -10,6 +10,12 @@ const session: Partial<SessionData> = {
   namesOfChildren: ['James', 'Rachel', 'Jack'],
   initialAdultName: 'Bob',
   secondaryAdultName: 'Sam',
+  livingAndVisiting: {
+    mostlyLive: {
+      where: 'other',
+      describeArrangement: 'describeArrangement',
+    },
+  },
   specialDays: {
     whatWillHappen: {
       noDecisionRequired: true,

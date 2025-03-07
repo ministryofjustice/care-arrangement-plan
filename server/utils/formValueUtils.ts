@@ -3,16 +3,16 @@ import { Days, WhichDays } from '../@types/session'
 
 const daysOfWeek: dayValues[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
-export const formatNames = (names: string[]) => {
-  switch (names.length) {
+export const formatListOfStrings = (words: string[]) => {
+  switch (words.length) {
     case 0:
       return ''
     case 1:
-      return names[0]
+      return words[0]
     case 2:
-      return names.join(' and ')
+      return words.join(' and ')
     default:
-      return `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`
+      return `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}`
   }
 }
 

@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import i18n from 'i18n'
 import paths from '../constants/paths'
-import { formatNames } from '../utils/formValueUtils'
+import { formatListOfStrings } from '../utils/formValueUtils'
 
 const checkYourAnswersRoutes = (router: Router) => {
   router.get(paths.CHECK_YOUR_ANSWERS, (request, response) => {
@@ -11,9 +11,17 @@ const checkYourAnswersRoutes = (router: Router) => {
       title: `${i18n.__('checkYourAnswers.title')}`,
       backLinkHref: paths.TASK_LIST,
       values: {
+        collectiveChildrenName: request.sessionHelpers.collectiveChildrenName(),
         childrenNames: request.sessionHelpers.formattedChildrenNames(),
-        adultNames: formatNames([initialAdultName, secondaryAdultName]),
-        whatWillHappen: request.sessionHelpers.whatWillHappenAnswer(),
+        adultNames: formatListOfStrings([initialAdultName, secondaryAdultName]),
+        parentNotMostlyLivedWith: request.sessionHelpers.parentNotMostlyLivedWith(),
+        mostlyLive: request.formattedAnswers.mostlyLive(),
+        whichSchedule: request.formattedAnswers.whichSchedule(),
+        willOvernightsHappen: request.formattedAnswers.willOvernightsHappen(),
+        whichDaysOvernight: request.formattedAnswers.whichDaysOvernight(),
+        willDaytimeVisitsHappen: request.formattedAnswers.willDaytimeVisitsHappen(),
+        whichDaysDaytimeVisits: request.formattedAnswers.whichDaysDaytimeVisits(),
+        whatWillHappen: request.formattedAnswers.whatWillHappen(),
       },
     })
   })

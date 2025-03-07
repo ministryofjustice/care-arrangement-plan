@@ -11,7 +11,7 @@ const sharePlanRoutes = (router: Router) => {
       values: {
         ...request.session,
         childrenNames,
-        whatWillHappen: request.sessionHelpers.whatWillHappenAnswer(),
+        whatWillHappen: request.formattedAnswers.whatWillHappen(),
       },
     })
   })
