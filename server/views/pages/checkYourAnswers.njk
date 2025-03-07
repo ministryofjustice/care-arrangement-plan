@@ -50,6 +50,117 @@
         })
       }}
 
+      <h2 class="govuk-heading-m">{{ __('taskList.livingAndVisiting') }}</h2>
+      {{
+        govukSummaryList({
+          classes: "govuk-!-margin-bottom-9",
+          rows: [
+            {
+              key: {
+                text: __('taskList.whereWillTheChildrenLive')
+              },
+              value: {
+                text: values.mostlyLive
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.LIVING_VISITING_MOSTLY_LIVE,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.whereWillTheChildrenLive')
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: __('livingAndVisiting.whichSchedule.title')
+              },
+              value: {
+                text: values.whichSchedule
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.LIVING_VISITING_WHICH_SCHEDULE,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.whichSchedule')
+                  }
+                ]
+              }
+            } if values.whichSchedule else null,
+            {
+              key: {
+                text: __('livingAndVisiting.willOvernightsHappen.title', {childName: values.collectiveChildrenName, adult: values.parentNotMostlyLivedWith})
+              },
+              value: {
+                text: values.willOvernightsHappen
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.willOvernightsHappen', {childName: values.collectiveChildrenName, adult: values.parentNotMostlyLivedWith})
+                  }
+                ]
+              }
+            } if values.willOvernightsHappen else null,
+            {
+              key: {
+                text: __('livingAndVisiting.whichDaysOvernight.title')
+              },
+              value: {
+                text: values.whichDaysOvernight
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.whichDaysOvernight')
+                  }
+                ]
+              }
+            } if values.whichDaysOvernight else null,
+            {
+              key: {
+                text: __('livingAndVisiting.willDaytimeVisitsHappen.title', {childName: values.collectiveChildrenName, adult: values.parentNotMostlyLivedWith})
+              },
+              value: {
+                text: values.willDaytimeVisitsHappen
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.willDaytimeVisitsHappen', {childName: values.collectiveChildrenName, adult: values.parentNotMostlyLivedWith})
+                  }
+                ]
+              }
+            } if values.willDaytimeVisitsHappen else null,
+            {
+              key: {
+                text: __('livingAndVisiting.whichDaysDaytimeVisits.title')
+              },
+              value: {
+                text: values.whichDaysDaytimeVisits
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.whichDaysDaytimeVisits')
+                  }
+                ]
+              }
+            } if values.whichDaysDaytimeVisits else null
+          ]
+        })
+      }}
+
       <h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
       {{
         govukSummaryList({
@@ -57,7 +168,7 @@
         rows: [
           {
             key: {
-              text: __('taskList.whatWillHappen')
+              text: __('specialDays.whatWillHappen.title')
             },
             value: {
               text: values.whatWillHappen
