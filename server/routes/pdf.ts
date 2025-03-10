@@ -7,7 +7,7 @@ const pdfRoutes = (router: Router) => {
     const pdf = createPdf(false)
 
     response.setHeader('Content-Type', 'application/pdf')
-    response.setHeader('Content-Disposition', 'attachment; filename=sample.pdf')
+    response.setHeader('Content-Disposition', 'attachment; filename=Proposed child arrangements plan.pdf')
     response.send(Buffer.from(pdf))
   })
 
@@ -15,7 +15,7 @@ const pdfRoutes = (router: Router) => {
     const pdf = createPdf(true)
 
     response.setHeader('Content-Type', 'application/pdf')
-    response.setHeader('Content-Disposition', 'inline; filename=sample.pdf')
+    response.setHeader('Content-Disposition', 'inline; filename=Proposed child arrangements plan.pdf')
     response.send(Buffer.from(pdf))
   })
 }
