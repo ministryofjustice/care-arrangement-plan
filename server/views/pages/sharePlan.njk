@@ -45,8 +45,8 @@
       <p class="govuk-body govuk-!-margin-bottom-2">
         {{ __('sharePlan.sendThePlanTo', {name: values.secondaryAdultName}) }}
       </p>
-      <p>{{ __('sharePlan.download') }}</p>
-      <p>{{ __('sharePlan.print') }}</p>
+      <p><a href="{{ paths.DOWNLOAD_PDF }}">{{ __('sharePlan.download') }}</a></p>
+      <p><a href="{{ paths.PRINT_PDF }}" target="_blank">{{ __('sharePlan.print') }}</a></p>
     </div>
   </div>
 {% endblock %}

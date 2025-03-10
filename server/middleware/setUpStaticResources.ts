@@ -13,11 +13,7 @@ const setUpStaticResources = (): Router => {
   //  Static Resources Configuration
   const staticResourcesConfig = { maxAge: config.staticResourceCacheDuration, redirect: false }
 
-  Array.of(
-    '/dist/assets',
-    '/node_modules/govuk-frontend/dist/govuk/assets',
-    '/node_modules/govuk-frontend/dist',
-  ).forEach(dir => {
+  Array.of('/dist/assets', '/node_modules/govuk-frontend/dist/govuk/assets').forEach(dir => {
     router.use('/assets', express.static(path.join(process.cwd(), dir), staticResourcesConfig))
   })
 

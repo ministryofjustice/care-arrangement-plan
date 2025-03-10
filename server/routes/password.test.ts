@@ -16,10 +16,6 @@ const testPassword2 = 'testPassword2'
 const encryptedTestPassword = 'fd5cb51bafd60f6fdbedde6e62c473da6f247db271633e15919bab78a02ee9eb'
 
 describe('Password Handler', () => {
-  afterEach(() => {
-    jest.restoreAllMocks()
-  })
-
   describe('GET', () => {
     beforeEach(() => {
       config.useAuth = true

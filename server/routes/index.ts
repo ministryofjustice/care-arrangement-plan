@@ -13,6 +13,7 @@ import checkYourAnswersRoutes from './checkYourAnswers'
 import sharePlanRoutes from './sharePlan'
 import livingAndVisitingRoutes from './livingAndVisiting'
 import specialDaysRoutes from './specialDays'
+import pdfRoutes from './pdf'
 
 const routes = (): Router => {
   const router = Router()
@@ -33,6 +34,7 @@ const routes = (): Router => {
   sharePlanRoutes(router)
   livingAndVisitingRoutes(router)
   specialDaysRoutes(router)
+  pdfRoutes(router)
 
   return router
 }
