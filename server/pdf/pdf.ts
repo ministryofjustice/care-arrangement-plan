@@ -1,9 +1,11 @@
 import JsPdf from 'jspdf'
 import fs from 'fs'
+import i18n from 'i18n'
 import {
   FONT,
   FOOTER_HEIGHT,
   HEADER_HEIGHT,
+  HEADER_LOGO_HEIGHT,
   LINE_HEIGHT_RATIO,
   MAIN_TEXT_SIZE,
   MARGIN_WIDTH,
@@ -24,22 +26,25 @@ class Pdf implements PdfBuilder {
 
   public readonly maxPageWidth: number
 
+  private readonly logoData = `data:image/png;base64,${fs.readFileSync('./assets/images/crest.png', { encoding: 'base64' })}`
+
   constructor(autoPrint: boolean) {
     // @ts-expect-error There is an error into the jsPDF type declaration.
     this.document = new JsPdf({ lineHeight: LINE_HEIGHT_RATIO })
     this.maxPageWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH
     this.setupFonts()
     if (autoPrint) this.document.autoPrint()
+    this.addHeaderToPage()
   }
 
   public toArrayBuffer() {
     return this.document.output('arraybuffer')
   }
 
-  public addHeaderToEveryPage() {
+  public addFooterToEveryPage() {
     for (let pageNumber = 1; pageNumber <= this.document.getNumberOfPages(); pageNumber++) {
       this.document.setPage(pageNumber)
-      this.addHeaderToPage(pageNumber)
+      this.addFooterToPage(pageNumber)
     }
   }
 
@@ -56,14 +61,45 @@ class Pdf implements PdfBuilder {
     this.document.addFont('light-94a07e06a1-v2.ttf', FONT, 'normal')
   }
 
-  private addHeaderToPage(pageNumber: number) {
+  private addHeaderToPage() {
+    this.document.setFillColor(0, 0, 0).rect(0, 0, this.document.internal.pageSize.getWidth(), HEADER_HEIGHT, 'F')
+    const headerLogoWidth = HEADER_LOGO_HEIGHT * 5
+    this.document.addImage(
+      this.logoData,
+      'PNG',
+      MARGIN_WIDTH,
+      0.5 * (HEADER_HEIGHT - HEADER_LOGO_HEIGHT),
+      headerLogoWidth,
+      HEADER_LOGO_HEIGHT,
+    )
     this.document
-      .setFillColor(0, 0, 0)
-      .rect(0, 0, this.document.internal.pageSize.getWidth(), HEADER_HEIGHT, 'F')
-      .setTextColor(255, 255, 255)
       .setFont(FONT, 'bold')
-      .text(`Header Text - Page ${pageNumber} / ${this.document.getNumberOfPages()}`, 10, 10)
+      .setFontSize(SECTION_HEADING_SIZE)
+      .setTextColor(255, 255, 255)
+      .text(
+        i18n.__('pdf.name'),
+        headerLogoWidth +
+          MARGIN_WIDTH +
+          0.5 * (this.document.internal.pageSize.getWidth() - headerLogoWidth - MARGIN_WIDTH),
+        HEADER_HEIGHT * 0.5 + 0.25 * LINE_HEIGHT_RATIO * SECTION_HEADING_SIZE * MM_PER_POINT,
+        { align: 'center' },
+      )
       .setTextColor(0, 0, 0)
+  }
+
+  private addFooterToPage(pageNumber: number) {
+    this.document
+      .setFont(FONT, 'normal')
+      .setFontSize(MAIN_TEXT_SIZE)
+      .text(
+        i18n.__('pdf.pageCount', {
+          currentPage: pageNumber.toString(),
+          totalPages: this.document.getNumberOfPages().toString(),
+        }),
+        this.document.internal.pageSize.getWidth() - MARGIN_WIDTH,
+        this.document.internal.pageSize.getHeight() - MARGIN_WIDTH,
+        { align: 'right' },
+      )
   }
 
   createDoYouAgreeComponent(
@@ -105,6 +141,7 @@ class Pdf implements PdfBuilder {
   createNewPage() {
     this.document.addPage()
     this.currentY = HEADER_HEIGHT
+    this.addHeaderToPage()
   }
 
   drawBorder(x: number, y: number, xSize: number, ySize: number) {

@@ -190,5 +190,9 @@
         "specialDays": "You can use this space to write your agreed compromise for the special days section"
       }
     }
+  },
+  "pdf": {
+    "name": "Proposed child arrangements plan",
+    "pageCount": "Page {{ currentPage }} of {{ totalPages }}"
   }
 }

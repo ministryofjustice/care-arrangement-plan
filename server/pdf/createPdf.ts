@@ -31,7 +31,7 @@ const createPdf = (autoPrint: boolean) => {
     'If you do not agree, suggest what should happen about overnight visits',
     true,
   )
-  pdf.addHeaderToEveryPage()
+  pdf.addFooterToEveryPage()
 
   return pdf.toArrayBuffer()
 }
