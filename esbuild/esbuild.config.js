@@ -29,12 +29,22 @@ const buildConfig = {
         to: path.join(cwd, 'dist/locales'),
       },
     ],
+    clear: path.join(cwd, 'dist/**/*'),
   },
 
   assets: {
     outDir: path.join(cwd, 'dist/assets'),
     entryPoints: glob.sync([path.join(cwd, 'assets/js/index.js'), path.join(cwd, 'assets/scss/application.scss')]),
-    clear: glob.sync([path.join(cwd, 'dist/assets/{css,js}')]),
+    copy: [
+      {
+        from: path.join(cwd, 'assets/fonts/**/*'),
+        to: path.join(cwd, 'dist/assets/fonts'),
+      },
+      {
+        from: path.join(cwd, 'assets/images/**/*'),
+        to: path.join(cwd, 'dist/assets/images'),
+      },
+    ],
   },
 }
 
