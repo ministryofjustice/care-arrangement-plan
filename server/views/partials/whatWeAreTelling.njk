@@ -1,11 +1,56 @@
-{{ __('sharePlan.whatWeAreTelling.context', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) | safe }}
-
+<h2 class="govuk-heading-m">
+  {{ __('sharePlan.whatWeAreTelling.proposedPlan', {childrenNames: values.childrenNames}) }}
+</h2>
+<p>
+  {{ __('sharePlan.whatWeAreTelling.initialIsAsking', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}
+</p>
+<p>{{ __('sharePlan.whatWeAreTelling.doNotNeedToAccept', {senderName: values.initialAdultName}) }}</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>{{ __('sharePlan.whatWeAreTelling.suggestChanges', {senderName: values.initialAdultName}) }}</li>
+  <li>{{ __('sharePlan.whatWeAreTelling.startYourOwn') }}</li>
+  <li>{{ __('sharePlan.whatWeAreTelling.makeCustom') }}</li>
+</ul>
+<h3 class="govuk-heading-s">{{ __('sharePlan.whatWeAreTelling.benefitsHeading') }}</h3>
+<p>{{ __('sharePlan.whatWeAreTelling.benefits', {senderName: values.initialAdultName}) }}</p>
+<h3 class="govuk-heading-s">{{ __('sharePlan.whatWeAreTelling.topTips') }}</h3>
+<ul class="govuk-list govuk-list--bullet">
+  <li>{{ __('sharePlan.whatWeAreTelling.compromise', {senderName: values.initialAdultName}) }}</li>
+  <li>{{ __('sharePlan.whatWeAreTelling.childrensInput') }}</li>
+  <li>{{ __('sharePlan.whatWeAreTelling.childrenFirst') }}</li>
+  <li>{{ __('sharePlan.whatWeAreTelling.splitMayNotBeBest') }}</li>
+</ul>
+<h3 class="govuk-heading-s">{{ __('sharePlan.whatWeAreTelling.moreInfoHeading') }}</h3>
+<p>{{ __('sharePlan.whatWeAreTelling.moreInfo') }}</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>{{ __('sharePlan.whatWeAreTelling.separatingOrDivorcing') }}</li>
+  <li>{{ __('sharePlan.whatWeAreTelling.makingChildArrangements') }}</li>
+</ul>
+<h3 class="govuk-heading-s">{{ __('sharePlan.whatWeAreTelling.safetyCheckHeading') }}</h3>
+<p>{{ __('sharePlan.whatWeAreTelling.safetyCheck') }}</p>
+<p>{{ __('sharePlan.whatWeAreTelling.doNotContinueIf') }}</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>{{ __('sharePlan.whatWeAreTelling.domesticAbuse') }}</li>
+  <li>{{ __('sharePlan.whatWeAreTelling.childAbduction') }}</li>
+  <li>{{ __('sharePlan.whatWeAreTelling.childAbuse') }}</li>
+  <li>{{ __('sharePlan.whatWeAreTelling.drugsOrAlcohol') }}</li>
+  <li>{{ __('sharePlan.whatWeAreTelling.otherConcerns') }}</li>
+</ul>
+<p class="govuk-!-font-weight-bold">{{ __('sharePlan.whatWeAreTelling.stopIfAnyConcern') | urlize | safe }}</p>
+<h3 class="govuk-heading-s">{{ __('sharePlan.whatWeAreTelling.gettingHelpHeading') }}</h3>
+<p>{{ __('sharePlan.whatWeAreTelling.gettingHelp') | urlize | safe }}</p>
 {% if values.courtOrderInPlace %}
-  {{ __('sharePlan.whatWeAreTelling.courtOrderInPlace', {senderName: values.initialAdultName}) | safe }}
+  <h3 class="govuk-heading-s">{{ __('sharePlan.whatWeAreTelling.courtOrderHeading') }}</h3>
+  <p>{{ __('sharePlan.whatWeAreTelling.courtOrderInPlace', {senderName: values.initialAdultName}) }}</p>
+  <p>{{ __('sharePlan.whatWeAreTelling.ordersInclude') }}</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ __('sharePlan.whatWeAreTelling.prohibitedSteps') }}</li>
+    <li>{{ __('sharePlan.whatWeAreTelling.specificIssue') }}</li>
+    <li>{{ __('sharePlan.whatWeAreTelling.nonMolestation') }}</li>
+    <li>{{ __('sharePlan.whatWeAreTelling.noContact') }}</li>
+  </ul>
+  <p>{{ __('sharePlan.whatWeAreTelling.checkDocuments') }}</p>
+  <p class="govuk-!-font-weight-bold">{{ __('sharePlan.whatWeAreTelling.stopIfOrders') }}</p>
+  <h3 class="govuk-heading-s">{{ __('sharePlan.whatWeAreTelling.noRestrictionsOnContactHeading') }}</h3>
+  <p>{{ __('sharePlan.whatWeAreTelling.noRestrictionsOnContact') }}</p>
+  <p>{{ __('sharePlan.whatWeAreTelling.changeCourtArrangements') }}</p>
 {% endif %}
-
-{{ __('sharePlan.whatWeAreTelling.topTips', {senderName: values.initialAdultName}) | safe }}
-
-{{ __('sharePlan.whatWeAreTelling.moreInfo') | safe }}
-
-{{ __('sharePlan.whatWeAreTelling.safetyCheck') | safe }}
