@@ -10,7 +10,6 @@ const sessionHelpers = (request: Request, _response: Response, next: NextFunctio
     formattedChildrenNames: () => formatListOfStrings(namesOfChildren),
     parentNotMostlyLivedWith: () =>
       livingAndVisiting.mostlyLive.where === 'withInitial' ? secondaryAdultName : initialAdultName,
-    collectiveChildrenName: () => (numberOfChildren === 1 ? namesOfChildren[0] : i18n.__('theChildren')),
     mostlyLiveComplete: () => {
       if (!livingAndVisiting?.mostlyLive) return false
 

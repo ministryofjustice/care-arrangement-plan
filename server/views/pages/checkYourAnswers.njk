@@ -91,7 +91,7 @@
             } if values.whichSchedule else null,
             {
               key: {
-                text: __('livingAndVisiting.willOvernightsHappen.title', {childName: values.collectiveChildrenName, adult: values.parentNotMostlyLivedWith})
+                text: __('livingAndVisiting.willOvernightsHappen.title', {adult: values.parentNotMostlyLivedWith})
               },
               value: {
                 text: values.willOvernightsHappen
@@ -101,7 +101,7 @@
                   {
                     href: paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN,
                     text: __('checkYourAnswers.change.text'),
-                    visuallyHiddenText: __('checkYourAnswers.change.willOvernightsHappen', {childName: values.collectiveChildrenName, adult: values.parentNotMostlyLivedWith})
+                    visuallyHiddenText: __('checkYourAnswers.change.willOvernightsHappen', {adult: values.parentNotMostlyLivedWith})
                   }
                 ]
               }
@@ -125,7 +125,7 @@
             } if values.whichDaysOvernight else null,
             {
               key: {
-                text: __('livingAndVisiting.willDaytimeVisitsHappen.title', {childName: values.collectiveChildrenName, adult: values.parentNotMostlyLivedWith})
+                text: __('livingAndVisiting.willDaytimeVisitsHappen.title', {adult: values.parentNotMostlyLivedWith})
               },
               value: {
                 text: values.willDaytimeVisitsHappen
@@ -135,7 +135,7 @@
                   {
                     href: paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN,
                     text: __('checkYourAnswers.change.text'),
-                    visuallyHiddenText: __('checkYourAnswers.change.willDaytimeVisitsHappen', {childName: values.collectiveChildrenName, adult: values.parentNotMostlyLivedWith})
+                    visuallyHiddenText: __('checkYourAnswers.change.willDaytimeVisitsHappen', {adult: values.parentNotMostlyLivedWith})
                   }
                 ]
               }

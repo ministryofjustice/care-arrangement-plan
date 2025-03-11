@@ -15,9 +15,7 @@ const mostlyLiveRoutes = (router: Router) => {
 
     response.render('pages/livingAndVisiting/mostlyLive', {
       errors: request.flash('errors'),
-      title: i18n.__('livingAndVisiting.mostlyLive.title', {
-        childName: request.sessionHelpers.collectiveChildrenName(),
-      }),
+      title: i18n.__('livingAndVisiting.mostlyLive.title'),
       values: request.session,
       formValues,
       backLinkHref: paths.TASK_LIST,

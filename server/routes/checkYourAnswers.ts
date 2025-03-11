@@ -11,7 +11,6 @@ const checkYourAnswersRoutes = (router: Router) => {
       title: `${i18n.__('checkYourAnswers.title')}`,
       backLinkHref: paths.TASK_LIST,
       values: {
-        collectiveChildrenName: request.sessionHelpers.collectiveChildrenName(),
         childrenNames: request.sessionHelpers.formattedChildrenNames(),
         adultNames: formatListOfStrings([initialAdultName, secondaryAdultName]),
         parentNotMostlyLivedWith: request.sessionHelpers.parentNotMostlyLivedWith(),
