@@ -2,8 +2,8 @@
 {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 
-{% macro doYouAgree(text) %}
-  <p class="govuk-body govuk-!-margin-bottom-2">{{ __('sharePlan.yourProposedPlan.doYouAgree') }}</p>
+{% macro doYouAgree(text, questionText=__('sharePlan.yourProposedPlan.doYouAgree')) %}
+  <p class="govuk-body govuk-!-margin-bottom-2">{{ questionText }}</p>
 
   <div class="govuk-form-group">
     {% call govukFieldset({}) %}
@@ -32,11 +32,13 @@
     {% endcall %}
   </div>
 
-  {{
-    govukTextarea({
-      label: {
-        text: text
-      }
-    })
-  }}
+  {% if text %}
+    {{
+      govukTextarea({
+        label: {
+          text: text
+        }
+      })
+    }}
+  {% endif %}
 {% endmacro %}

@@ -19,8 +19,9 @@
     {{ __('sharePlan.yourProposedPlan.agreementBetween', {senderName: values.initialAdultName, otherAdultName: values.secondaryAdultName, childrenNames: values.childrenNames}) }}
   </li>
 </ul>
-
+{{ doYouAgree(questionText=__('sharePlan.yourProposedPlan.doYouAgreeOnBasics')) }}
 <p>{{ __('sharePlan.yourProposedPlan.doNotStoreNames') }}</p>
+<p>{{ __('sharePlan.yourProposedPlan.doNotAgreeOnBasics') | urlize | safe }}</p>
 
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
 
