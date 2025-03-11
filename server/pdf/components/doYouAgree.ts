@@ -21,15 +21,16 @@ class DoYouAgree extends BaseComponent {
 
   private readonly CHECKBOX_TEXT_GAP = 3
 
-  private readonly doYouAgreeParagraph: Paragraph = {
-    text: i18n.__('sharePlan.yourProposedPlan.doYouAgree'),
-    size: MAIN_TEXT_SIZE,
-    style: 'normal',
-    bottomPadding: this.CHECKBOX_TEXT_GAP,
-  }
+  private readonly doYouAgreeParagraph: Paragraph
 
-  constructor(pdf: PdfBuilder) {
+  constructor(pdf: PdfBuilder, text: string) {
     super(pdf)
+    this.doYouAgreeParagraph = {
+      text,
+      size: MAIN_TEXT_SIZE,
+      style: 'normal',
+      bottomPadding: this.CHECKBOX_TEXT_GAP,
+    }
     this.radioGroup = new AcroFormRadioButton()
     this.radioGroup.radio = true
     this.radioGroup.caption = '8'

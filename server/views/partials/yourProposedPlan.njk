@@ -19,20 +19,28 @@
     {{ __('sharePlan.yourProposedPlan.agreementBetween', {senderName: values.initialAdultName, otherAdultName: values.secondaryAdultName, childrenNames: values.childrenNames}) }}
   </li>
 </ul>
-
+{{ doYouAgree(questionText=__('sharePlan.yourProposedPlan.doYouAgreeOnBasics')) }}
 <p>{{ __('sharePlan.yourProposedPlan.doNotStoreNames') }}</p>
+<p>{{ __('sharePlan.yourProposedPlan.doNotAgreeOnBasics') | urlize | safe }}</p>
 
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
 
 <h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
 <h3 class="govuk-heading-s">{{ __('specialDays.whatWillHappen.title') }}</h3>
 <p>{{ __('specialDays.whatWillHappen.content') }}</p>
-<p>
-  {{ __('sharePlan.yourProposedPlan.senderSuggestion', {senderName: values.initialAdultName}) }}
-  <br />
-  {{ values.whatWillHappen }}
-</p>
+{% if values.specialDays.whatWillHappen.noDecisionRequired %}
+  {{ __('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', {senderName: values.initialAdultName}) }}
+{% else %}
+  <p>
+    {{ __('sharePlan.yourProposedPlan.senderSuggested', {senderName: values.initialAdultName}) }}
+    <br />
+    "{{ values.specialDays.whatWillHappen.answer }}"
+  </p>
+{% endif %}
 {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.specialDays.whatWillHappen')) }}
 {{ endOfSection(__('sharePlan.yourProposedPlan.compromise.specialDays')) }}
 
-{{ __('sharePlan.yourProposedPlan.whatHappensNow', {senderName: values.initialAdultName}) | safe }}
+<h2 class="govuk-heading-m">{{ __('sharePlan.yourProposedPlan.whatHappensNowHeading') }}</h2>
+<p>{{ __('sharePlan.yourProposedPlan.nowSendPlan', {senderName: values.initialAdultName}) | safe }}</p>
+<p>{{ __('sharePlan.yourProposedPlan.unableToAgree') }}</p>
+<p>{{ __('sharePlan.yourProposedPlan.moreInfoAndSupport') | urlize | safe }}</p>

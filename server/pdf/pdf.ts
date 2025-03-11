@@ -11,13 +11,8 @@ import {
   MAIN_TEXT_SIZE,
   MARGIN_WIDTH,
   MM_PER_POINT,
-  PARAGRAPH_SPACE,
-  QUESTION_TITLE_SIZE,
   SECTION_HEADING_SIZE,
 } from '../constants/pdfConstants'
-import DoYouAgreeComponent from './components/doYouAgree'
-import TextComponent from './components/text'
-import TextBoxComponent from './components/textbox'
 import { Paragraph, PdfBuilder } from '../@types/pdf'
 
 class Pdf implements PdfBuilder {
@@ -101,38 +96,6 @@ class Pdf implements PdfBuilder {
         this.document.internal.pageSize.getHeight() - MARGIN_WIDTH,
         { align: 'right' },
       )
-  }
-
-  createDoYouAgreeComponent(
-    sectionHeading: string | undefined,
-    title: string | undefined,
-    mainText: string,
-    endText: string,
-    includeTextbox: boolean,
-  ) {
-    const initialParagraphs: Paragraph[] = []
-    if (sectionHeading) {
-      initialParagraphs.push({
-        text: sectionHeading,
-        size: SECTION_HEADING_SIZE,
-        style: 'bold',
-        bottomPadding: PARAGRAPH_SPACE,
-      })
-    }
-    if (title) {
-      initialParagraphs.push({ text: title, size: QUESTION_TITLE_SIZE, style: 'bold', bottomPadding: PARAGRAPH_SPACE })
-    }
-    initialParagraphs.push({ text: mainText, size: MAIN_TEXT_SIZE, style: 'normal', bottomPadding: PARAGRAPH_SPACE })
-    new TextComponent(this, initialParagraphs).addComponentToDocument()
-    new DoYouAgreeComponent(this).addComponentToDocument()
-
-    if (includeTextbox) {
-      new TextBoxComponent(this, endText).addComponentToDocument()
-    } else {
-      new TextComponent(this, [
-        { text: endText, size: MAIN_TEXT_SIZE, style: 'normal', bottomPadding: PARAGRAPH_SPACE },
-      ]).addComponentToDocument()
-    }
   }
 
   heightWillOverflowDocument(height: number) {

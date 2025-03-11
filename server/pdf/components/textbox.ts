@@ -1,29 +1,21 @@
 import { AcroFormTextField } from 'jspdf'
-import BaseComponent from './base'
+import TextComponent from './text'
 import { Paragraph, PdfBuilder } from '../../@types/pdf'
-import { MAIN_TEXT_SIZE, MARGIN_WIDTH, PARAGRAPH_SPACE } from '../../constants/pdfConstants'
+import { MARGIN_WIDTH, PARAGRAPH_SPACE } from '../../constants/pdfConstants'
 
-class Textbox extends BaseComponent {
-  private readonly textParagraph: Paragraph
-
+class Textbox extends TextComponent {
   private readonly TEXTBOX_HEIGHT = 20
 
-  constructor(pdf: PdfBuilder, text: string) {
-    super(pdf)
-    this.textParagraph = {
-      text,
-      size: MAIN_TEXT_SIZE,
-      style: 'normal',
-      bottomPadding: PARAGRAPH_SPACE,
-    }
+  constructor(pdf: PdfBuilder, paragraphs: Paragraph[]) {
+    super(pdf, paragraphs)
   }
 
   protected getComponentHeight() {
-    return this.pdf.getParagraphHeight(this.textParagraph) + this.TEXTBOX_HEIGHT + PARAGRAPH_SPACE
+    return super.getComponentHeight() + this.TEXTBOX_HEIGHT + PARAGRAPH_SPACE
   }
 
   protected createComponent() {
-    this.pdf.addParagraph(this.textParagraph)
+    super.createComponent()
 
     const textField = new AcroFormTextField()
     textField.multiline = true
