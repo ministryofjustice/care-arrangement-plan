@@ -215,7 +215,10 @@
       "agreementBetween": "this agreement is between {{ senderName }} and {{ otherAdultName }}, who are the adults who will care for {{ childrenNames }}",
       "forOneChild": "this is a proposed child arrangements plan for 1 child, {{ childName }}",
       "doNotStoreNames": "We do not store these names or share any of this information with other government departments.",
-      "whatHappensNow": "<h2 class=\"govuk-heading-m\">What happens now?</h2><p>Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.</p><p>If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.</p><p><a href=\"https://www.gov.uk/looking-after-children-divorce\">https://www.gov.uk/looking-after-children-divorce</a></p>",
+      "whatHappensNowHeading": "What happens now?",
+      "nowSendPlan": "Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.",
+      "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.",
+      "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce ",
       "doNotAgree": {
         "specialDays": {
           "whatWillHappen": "If you do not agree, suggest what will happen on special days"

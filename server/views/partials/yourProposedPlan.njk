@@ -35,4 +35,7 @@
 {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.specialDays.whatWillHappen')) }}
 {{ endOfSection(__('sharePlan.yourProposedPlan.compromise.specialDays')) }}
 
-{{ __('sharePlan.yourProposedPlan.whatHappensNow', {senderName: values.initialAdultName}) | safe }}
+<h2 class="govuk-heading-m">{{ __('sharePlan.yourProposedPlan.whatHappensNowHeading') }}</h2>
+<p>{{ __('sharePlan.yourProposedPlan.nowSendPlan', {senderName: values.initialAdultName}) | safe }}</p>
+<p>{{ __('sharePlan.yourProposedPlan.unableToAgree') }}</p>
+<p>{{ __('sharePlan.yourProposedPlan.moreInfoAndSupport') | urlize | safe }}</p>
