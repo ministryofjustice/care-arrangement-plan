@@ -1,10 +1,16 @@
 import express, { Express } from 'express'
 import request from 'supertest'
 import { SessionData } from 'express-session'
-import sessionHelpers from './sessionHelpers'
 import { sessionMock } from '../test-utils/testMocks'
-import formattedAnswers from './formattedAnswers'
-import setUpi18n from './setUpi18n'
+import setUpi18n from '../middleware/setUpi18n'
+import {
+  mostlyLive,
+  whichDaysDaytimeVisits,
+  whichDaysOvernight,
+  whichSchedule,
+  willDaytimeVisitsHappen,
+  willOvernightsHappen,
+} from './formattedAnswersForCheckAnswers'
 
 const testPath = '/test'
 
@@ -12,20 +18,14 @@ const testAppSetup = (): Express => {
   const app = express()
 
   app.use(setUpi18n())
-  app.use((req, _response, next) => {
-    req.session = sessionMock
-    next()
-  })
-  app.use(sessionHelpers)
-  app.use(formattedAnswers)
   app.get(testPath, (req, response) => {
     response.json({
-      mostlyLive: req.formattedAnswers.mostlyLive(),
-      whichSchedule: req.formattedAnswers.whichSchedule(),
-      willOvernightsHappen: req.formattedAnswers.willOvernightsHappen(),
-      whichDaysOvernight: req.formattedAnswers.whichDaysOvernight(),
-      willDaytimeVisitsHappen: req.formattedAnswers.willDaytimeVisitsHappen(),
-      whichDaysDaytimeVisits: req.formattedAnswers.whichDaysDaytimeVisits(),
+      mostlyLive: mostlyLive(sessionMock),
+      whichSchedule: whichSchedule(sessionMock),
+      willOvernightsHappen: willOvernightsHappen(sessionMock),
+      whichDaysOvernight: whichDaysOvernight(sessionMock),
+      willDaytimeVisitsHappen: willDaytimeVisitsHappen(sessionMock),
+      whichDaysDaytimeVisits: whichDaysDaytimeVisits(sessionMock),
     })
   })
 
@@ -174,7 +174,7 @@ describe('formattedAnswers', () => {
           expect(response.body).toEqual({
             mostlyLive: `With ${session.initialAdultName}`,
             willOvernightsHappen: 'Yes',
-            whichDaysOvernight: `The children will stay overnight with ${session.secondaryAdultName} on the following days: Monday, Wednesday and Friday`,
+            whichDaysOvernight: `The children will stay overnight with ${session.secondaryAdultName} on Monday, Wednesday and Friday`,
             willDaytimeVisitsHappen: 'No',
           })
         })
@@ -216,7 +216,7 @@ describe('formattedAnswers', () => {
             willOvernightsHappen: 'Yes',
             whichDaysOvernight: arrangement,
             willDaytimeVisitsHappen: 'Yes',
-            whichDaysDaytimeVisits: `The children will have daytime visits with ${session.initialAdultName} on the following days: Saturday`,
+            whichDaysDaytimeVisits: `The children will have daytime visits with ${session.initialAdultName} on a Saturday`,
           })
         })
     })

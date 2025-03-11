@@ -8,8 +8,6 @@ import { flashMock, sessionMock } from './testMocks'
 import setUpi18n from '../middleware/setUpi18n'
 import setupAuthentication from '../middleware/setupAuthentication'
 import unauthenticatedRoutes from '../routes/unauthenticatedRoutes'
-import sessionHelpers from '../middleware/sessionHelpers'
-import formattedAnswers from '../middleware/formattedAnswers'
 
 const testAppSetup = (): Express => {
   const app = express()
@@ -21,8 +19,6 @@ const testAppSetup = (): Express => {
     request.flash = flashMock
     next()
   })
-  app.use(sessionHelpers)
-  app.use(formattedAnswers)
   app.use(setUpWebRequestParsing())
   app.use(unauthenticatedRoutes())
   app.use(setupAuthentication())

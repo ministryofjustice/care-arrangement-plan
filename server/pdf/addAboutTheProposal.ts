@@ -5,10 +5,11 @@ import DoYouAgreeComponent from './components/doYouAgree'
 import BulletListComponent from './components/bulletList'
 import TextComponent from './components/text'
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
+import { formattedChildrenNames } from '../utils/sessionHelpers'
 
 const addAboutTheProposal = (pdf: PdfBuilder, request: Request) => {
   const { initialAdultName, courtOrderInPlace, secondaryAdultName, numberOfChildren } = request.session
-  const childrenNames = request.sessionHelpers.formattedChildrenNames()
+  const childrenNames = formattedChildrenNames(request.session)
 
   new BulletListComponent(pdf, {
     initialText: [

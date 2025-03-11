@@ -5,6 +5,7 @@ import paths from '../../constants/paths'
 import formFields from '../../constants/formFields'
 import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils'
 import { yesOrNo } from '../../@types/fields'
+import { parentNotMostlyLivedWith } from '../../utils/sessionHelpers'
 
 const willDaytimeVisitsHappenRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, (request, response) => {
@@ -13,7 +14,7 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
     response.render('pages/livingAndVisiting/willDaytimeVisitsHappen', {
       errors: request.flash('errors'),
       title: i18n.__('livingAndVisiting.willDaytimeVisitsHappen.title', {
-        adult: request.sessionHelpers.parentNotMostlyLivedWith(),
+        adult: parentNotMostlyLivedWith(request.session),
       }),
       backLinkHref: paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN,
       formValues: {
