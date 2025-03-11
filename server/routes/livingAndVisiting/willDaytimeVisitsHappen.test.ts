@@ -26,7 +26,7 @@ describe(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, () => {
       Object.assign(sessionMock, structuredClone(session))
     })
 
-    it('should render the will daytime visits happen page for a single child', async () => {
+    it('should render the will daytime visits happen page for the primary adult', async () => {
       sessionMock.numberOfChildren = 1
       sessionMock.namesOfChildren = ['James']
 
@@ -37,14 +37,14 @@ describe(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, () => {
       const dom = new JSDOM(response.text)
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
-        `Will James do daytime visits with ${session.secondaryAdultName}?`,
+        `Will the children do daytime visits with ${session.secondaryAdultName}?`,
       )
       expect(dom.window.document.querySelector('h2')).toBeNull()
       expect(dom.window.document.querySelector(':checked')).toBeNull()
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby')
     })
 
-    it('should render the will daytime visits happen page for multiple children', () => {
+    it('should render the will daytime visits happen page for the initial adult', () => {
       sessionMock.livingAndVisiting.mostlyLive.where = 'withSecondary'
 
       return request(app)

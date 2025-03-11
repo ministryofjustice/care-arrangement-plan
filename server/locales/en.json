@@ -5,7 +5,6 @@
   "continue": "Continue",
   "back": "Back",
   "doNotNeedToDecide": "We do not need to decide this",
-  "theChildren": "the children",
   "anotherArrangement": "Another arrangement",
   "or": "or",
   "describeArrangement": "Describe the arrangement",
@@ -104,10 +103,9 @@
   },
   "livingAndVisiting": {
     "mostlyLive": {
-      "title": "Where will {{ childName }} mostly live?",
+      "title": "Where will the children mostly live?",
       "with": "With {{ adult }}",
-      "singleChildSplit": "{{ childName }} will split time between {{ initialAdult }} and {{ secondaryAdult }}",
-      "multipleChildrenSplit": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}"
+      "split": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}"
     },
     "whichSchedule": {
       "title": "Which schedule best meets the children's needs?",
@@ -116,14 +114,14 @@
       "exactSplitWarning": "An exact split of time between two households does not always suit children’s best interests."
     },
     "willOvernightsHappen": {
-      "title": "Will {{ childName }} stay overnight with {{ adult }}?"
+      "title": "Will the children stay overnight with {{ adult }}?"
     },
     "whichDaysOvernight": {
       "title": "On which days will overnights happen?",
       "answer": "The children will stay overnight with {{ adult }} on the following days: {{ days }}"
     },
     "willDaytimeVisitsHappen": {
-      "title": "Will {{ childName }} do daytime visits with {{ adult }}?"
+      "title": "Will the children do daytime visits with {{ adult }}?"
     },
     "whichDaysDaytimeVisits": {
       "title": "On which days will daytime visits happen?",
@@ -140,13 +138,12 @@
     "title": "Check your answers",
     "change": {
       "text": "Change",
-      "children": "the children",
       "users": "the users",
       "whereWillTheChildrenLive": "where the children will mostly live",
       "whichSchedule": "which schedule best meets the children's needs",
-      "willOvernightsHappen": "if {{ childName }} will stay overnight with {{ adult }}",
+      "willOvernightsHappen": "if the children will stay overnight with {{ adult }}",
       "whichDaysOvernight": "which days overnights will happen",
-      "willDaytimeVisitsHappen": "if {{ childName }} will do daytime visits with {{ adult }}?",
+      "willDaytimeVisitsHappen": "if the children will do daytime visits with {{ adult }}?",
       "whichDaysDaytimeVisits": "which days daytime visits will happen",
       "whatWillHappen": "what will happen on special days"
     }

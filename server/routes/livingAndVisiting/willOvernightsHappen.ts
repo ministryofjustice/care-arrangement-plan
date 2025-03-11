@@ -14,7 +14,6 @@ const willOvernightsHappenRoutes = (router: Router) => {
       errors: request.flash('errors'),
       title: i18n.__('livingAndVisiting.willOvernightsHappen.title', {
         adult: request.sessionHelpers.parentNotMostlyLivedWith(),
-        childName: request.sessionHelpers.collectiveChildrenName(),
       }),
       backLinkHref: paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN,
       formValues: {

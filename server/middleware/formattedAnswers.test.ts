@@ -68,7 +68,7 @@ describe('formattedAnswers', () => {
       return request(app)
         .get(testPath)
         .expect(response => {
-          expect(response.body).toEqual({ mostlyLive: `Another arrangement: ${arrangement}` })
+          expect(response.body).toEqual({ mostlyLive: arrangement })
         })
     })
 
@@ -110,7 +110,7 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect(response => {
           expect(response.body).toEqual({
-            mostlyLive: `James will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
+            mostlyLive: `They will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
             whichSchedule: 'We do not need to decide this',
           })
         })

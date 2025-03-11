@@ -16,7 +16,6 @@ export declare global {
       sessionHelpers: {
         formattedChildrenNames: () => string
         parentNotMostlyLivedWith: () => string
-        collectiveChildrenName: () => string
         mostlyLiveComplete: () => boolean
         whatWillHappenComplete: () => boolean
       }

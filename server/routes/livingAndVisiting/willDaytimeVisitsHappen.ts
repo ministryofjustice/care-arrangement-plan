@@ -14,7 +14,6 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
       errors: request.flash('errors'),
       title: i18n.__('livingAndVisiting.willDaytimeVisitsHappen.title', {
         adult: request.sessionHelpers.parentNotMostlyLivedWith(),
-        childName: request.sessionHelpers.collectiveChildrenName(),
       }),
       backLinkHref: paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN,
       formValues: {

@@ -1,16 +1,13 @@
 import { NextFunction, Request, Response } from 'express'
-import i18n from 'i18n'
 import { formatListOfStrings } from '../utils/formValueUtils'
 
 const sessionHelpers = (request: Request, _response: Response, next: NextFunction) => {
-  const { namesOfChildren, livingAndVisiting, initialAdultName, secondaryAdultName, specialDays, numberOfChildren } =
-    request.session
+  const { namesOfChildren, livingAndVisiting, initialAdultName, secondaryAdultName, specialDays } = request.session
 
   request.sessionHelpers = {
     formattedChildrenNames: () => formatListOfStrings(namesOfChildren),
     parentNotMostlyLivedWith: () =>
       livingAndVisiting.mostlyLive.where === 'withInitial' ? secondaryAdultName : initialAdultName,
-    collectiveChildrenName: () => (numberOfChildren === 1 ? namesOfChildren[0] : i18n.__('theChildren')),
     mostlyLiveComplete: () => {
       if (!livingAndVisiting?.mostlyLive) return false
 

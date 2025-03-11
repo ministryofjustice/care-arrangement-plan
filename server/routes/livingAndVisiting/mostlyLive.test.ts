@@ -23,15 +23,12 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       Object.assign(sessionMock, structuredClone(session))
     })
 
-    it('should render the mostly live page for a single child', async () => {
-      sessionMock.numberOfChildren = 1
-      sessionMock.namesOfChildren = ['James']
-
+    it('should render the mostly live page', async () => {
       const response = await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE).expect('Content-Type', /html/)
 
       const dom = new JSDOM(response.text)
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Where will James mostly live?')
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Where will the children mostly live?')
       expect(dom.window.document.querySelector('h2')).toBeNull()
       expect(dom.window.document.querySelector(':checked')).toBeNull()
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby')
@@ -42,21 +39,10 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
         `With ${session.secondaryAdultName}`,
       )
       expect(dom.window.document.querySelector(`label[for="${formFields.MOSTLY_LIVE_WHERE}-3"]`)).toHaveTextContent(
-        `James will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
+        `They will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
       )
       expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).not.toHaveAttribute(
         'aria-describedby',
-      )
-    })
-
-    it('should render the mostly live page for multiple children', async () => {
-      const response = await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE).expect('Content-Type', /html/)
-
-      const dom = new JSDOM(response.text)
-
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Where will the children mostly live?')
-      expect(dom.window.document.querySelector(`label[for="${formFields.MOSTLY_LIVE_WHERE}-3"]`)).toHaveTextContent(
-        `They will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
       )
     })
 
