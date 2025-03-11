@@ -18,7 +18,7 @@ describe(`GET ${paths.DOWNLOAD_PDF}`, () => {
   test('calls create pdf with autoPrint false', async () => {
     await request(app).get(paths.DOWNLOAD_PDF)
 
-    expect(createPdf).toHaveBeenCalledWith(false)
+    expect(createPdf).toHaveBeenCalledWith(false, expect.any(Object))
   })
 })
 
@@ -33,6 +33,6 @@ describe(`GET ${paths.PRINT_PDF}`, () => {
   test('calls create pdf with autoPrint false', async () => {
     await request(app).get(paths.PRINT_PDF)
 
-    expect(createPdf).toHaveBeenCalledWith(true)
+    expect(createPdf).toHaveBeenCalledWith(true, expect.any(Object))
   })
 })
