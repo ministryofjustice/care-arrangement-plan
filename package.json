@@ -6,9 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "node esbuild/esbuild.config.js --build",
-    "clean": "rm -rf dist",
     "start": "node $ENV_FILE_OPTION $NODE_OPTIONS dist/app.js | bunyan -o short",
-    "start:dev": "ENV_FILE_OPTION='--env-file=.env' nodemon --exec 'run-s clean build start'",
+    "start:dev": "ENV_FILE_OPTION='--env-file=.env' nodemon --exec 'run-s build start'",
     "lint": "eslint . --cache --max-warnings 0",
     "lint-fix": "eslint . --cache --max-warnings 0 --fix",
     "prettier": "prettier . --cache --check",

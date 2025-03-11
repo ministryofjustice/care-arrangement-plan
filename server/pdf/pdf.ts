@@ -1,6 +1,7 @@
 import JsPdf from 'jspdf'
 import fs from 'fs'
 import i18n from 'i18n'
+import path from 'path'
 import {
   FONT,
   FOOTER_HEIGHT,
@@ -26,7 +27,7 @@ class Pdf implements PdfBuilder {
 
   public readonly maxPageWidth: number
 
-  private readonly logoData = `data:image/png;base64,${fs.readFileSync('./assets/images/crest.png', { encoding: 'base64' })}`
+  private readonly logoData = `data:image/png;base64,${fs.readFileSync(path.resolve(__dirname, '../assets/images/crest.png'), { encoding: 'base64' })}`
 
   constructor(autoPrint: boolean) {
     // @ts-expect-error There is an error into the jsPDF type declaration.
@@ -51,12 +52,12 @@ class Pdf implements PdfBuilder {
   private setupFonts() {
     this.document.addFileToVFS(
       'bold-b542beb274-v2.ttf',
-      fs.readFileSync('./assets/fonts/bold-b542beb274-v2.ttf').toString('base64'),
+      fs.readFileSync(path.resolve(__dirname, '../assets/fonts/bold-b542beb274-v2.ttf')).toString('base64'),
     )
     this.document.addFont('bold-b542beb274-v2.ttf', FONT, 'bold')
     this.document.addFileToVFS(
       'light-94a07e06a1-v2.ttf',
-      fs.readFileSync('./assets/fonts/light-94a07e06a1-v2.ttf').toString('base64'),
+      fs.readFileSync(path.resolve(__dirname, '../assets/fonts/light-94a07e06a1-v2.ttf')).toString('base64'),
     )
     this.document.addFont('light-94a07e06a1-v2.ttf', FONT, 'normal')
   }
