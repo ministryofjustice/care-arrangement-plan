@@ -68,9 +68,9 @@ either `npm run int-test` for headless mode, or `npm run int-test-ui` to use the
 
 To run the TypeScript compiler use `npm run typecheck`.
 
-We use ESLint for linting. To run the check use `npm run lint`. `npm run lint-fix` can be used to automatically fix issues.
+We use ESLint for linting. To run the check use `npm run lint`. `npm run lint:fix` can be used to automatically fix issues.
 
-We use Prettier to ensure consistent styling. Run `npm run prettier` to check for issues, and `npm run prettier-fix` to fix them.
+We use Prettier to ensure consistent styling. Run `npm run prettier` to check for issues, and `npm run prettier:fix` to fix them.
 
 It is recommended to use your IDE to run ESLint and Prettier on save, to ensure files are formatted correctly.
 
@@ -108,6 +108,22 @@ For documentation on the project architecture, see [here](./architecture-docs/RE
 ## Terraform
 
 For documentation on our Terraform setup, see [here](./terraform/README.md)
+
+## Common Tasks
+
+### Adding a new question
+
+There are a few steps to adding a new question
+
+- Decide the data structure for the answers, and add it to the [`CAPSession` type](./server/@types/session.d.ts)
+- Create the pages and routes for the question
+- Add the question to the task list
+- Add the completion check to the question to the conditional that displays the "Continue" button on the task list
+- Add the question's answers to the "Check your answers page" - this should be as close as possible to exactly what the
+  user has entered
+- Add the question's answers to the "Share plan" page - this should exactly match what will be displayed in the
+  outputted PDF
+- Add the question's answers to the PDF
 
 ## TODO
 
