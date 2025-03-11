@@ -105,8 +105,7 @@
     "mostlyLive": {
       "title": "Where will the children mostly live?",
       "with": "With {{ adult }}",
-      "singleChildSplit": "{{ childName }} will split time between {{ initialAdult }} and {{ secondaryAdult }}",
-      "multipleChildrenSplit": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}"
+      "split": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}"
     },
     "whichSchedule": {
       "title": "Which schedule best meets the children's needs?",

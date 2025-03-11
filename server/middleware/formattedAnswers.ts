@@ -3,8 +3,7 @@ import i18n from 'i18n'
 import { convertWhichDaysSessionValueToField, formatListOfStrings } from '../utils/formValueUtils'
 
 const formattedAnswers = (request: Request, _response: Response, next: NextFunction) => {
-  const { namesOfChildren, livingAndVisiting, initialAdultName, secondaryAdultName, specialDays, numberOfChildren } =
-    request.session
+  const { livingAndVisiting, initialAdultName, secondaryAdultName, specialDays } = request.session
 
   request.formattedAnswers = {
     mostlyLive: () => {
@@ -15,16 +14,10 @@ const formattedAnswers = (request: Request, _response: Response, next: NextFunct
         case 'withSecondary':
           return i18n.__('livingAndVisiting.mostlyLive.with', { adult: secondaryAdultName })
         case 'split':
-          return numberOfChildren === 1
-            ? i18n.__('livingAndVisiting.mostlyLive.singleChildSplit', {
-                childName: namesOfChildren[0],
-                initialAdult: initialAdultName,
-                secondaryAdult: secondaryAdultName,
-              })
-            : i18n.__('livingAndVisiting.mostlyLive.multipleChildrenSplit', {
-                initialAdult: initialAdultName,
-                secondaryAdult: secondaryAdultName,
-              })
+          return i18n.__('livingAndVisiting.mostlyLive.split', {
+            initialAdult: initialAdultName,
+            secondaryAdult: secondaryAdultName,
+          })
         case 'other':
           return livingAndVisiting.mostlyLive.describeArrangement
         default:
