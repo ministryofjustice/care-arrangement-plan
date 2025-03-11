@@ -26,7 +26,7 @@ const formattedAnswers = (request: Request, _response: Response, next: NextFunct
                 secondaryAdult: secondaryAdultName,
               })
         case 'other':
-          return `${i18n.__('anotherArrangement')}: ${livingAndVisiting.mostlyLive.describeArrangement}`
+          return livingAndVisiting.mostlyLive.describeArrangement
         default:
           return undefined
       }

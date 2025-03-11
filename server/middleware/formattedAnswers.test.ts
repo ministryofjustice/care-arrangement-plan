@@ -68,7 +68,7 @@ describe('formattedAnswers', () => {
       return request(app)
         .get(testPath)
         .expect(response => {
-          expect(response.body).toEqual({ mostlyLive: `Another arrangement: ${arrangement}` })
+          expect(response.body).toEqual({ mostlyLive: arrangement })
         })
     })
 
