@@ -1,6 +1,6 @@
 import i18n from 'i18n'
 import { formatWhichDatsSessionValue } from './formValueUtils'
-import { parentNotMostlyLivedWith } from './sessionHelpers'
+import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers'
 import { CAPSession } from '../@types/session'
 
 export const mostlyLive = (session: Partial<CAPSession>) => {
@@ -8,9 +8,8 @@ export const mostlyLive = (session: Partial<CAPSession>) => {
   if (!livingAndVisiting.mostlyLive) return undefined
   switch (livingAndVisiting.mostlyLive.where) {
     case 'withInitial':
-      return i18n.__('livingAndVisiting.mostlyLive.with', { adult: initialAdultName })
     case 'withSecondary':
-      return i18n.__('livingAndVisiting.mostlyLive.with', { adult: secondaryAdultName })
+      return i18n.__('livingAndVisiting.mostlyLive.with', { adult: parentMostlyLivedWith(session) })
     case 'split':
       return i18n.__('livingAndVisiting.mostlyLive.split', {
         initialAdult: initialAdultName,
@@ -23,16 +22,14 @@ export const mostlyLive = (session: Partial<CAPSession>) => {
   }
 }
 
-export const whichSchedule = (session: Partial<CAPSession>) => {
-  const { livingAndVisiting } = session
+export const whichSchedule = ({ livingAndVisiting }: Partial<CAPSession>) => {
   if (!livingAndVisiting.whichSchedule) return undefined
   return livingAndVisiting.whichSchedule.noDecisionRequired
     ? i18n.__('doNotNeedToDecide')
     : livingAndVisiting.whichSchedule.answer
 }
 
-export const willOvernightsHappen = (session: Partial<CAPSession>) => {
-  const { livingAndVisiting } = session
+export const willOvernightsHappen = ({ livingAndVisiting }: Partial<CAPSession>) => {
   if (!livingAndVisiting.overnightVisits) return undefined
   return livingAndVisiting.overnightVisits.willHappen ? i18n.__('yes') : i18n.__('no')
 }
@@ -53,8 +50,7 @@ export const whichDaysOvernight = (session: Partial<CAPSession>) => {
   })
 }
 
-export const willDaytimeVisitsHappen = (session: Partial<CAPSession>) => {
-  const { livingAndVisiting } = session
+export const willDaytimeVisitsHappen = ({ livingAndVisiting }: Partial<CAPSession>) => {
   if (!livingAndVisiting.daytimeVisits) return undefined
   return livingAndVisiting.daytimeVisits.willHappen ? i18n.__('yes') : i18n.__('no')
 }
@@ -75,7 +71,5 @@ export const whichDaysDaytimeVisits = (session: Partial<CAPSession>) => {
   })
 }
 
-export const whatWillHappen = (session: Partial<CAPSession>) =>
-  session.specialDays.whatWillHappen.noDecisionRequired
-    ? i18n.__('doNotNeedToDecide')
-    : session.specialDays.whatWillHappen.answer
+export const whatWillHappen = ({ specialDays }: Partial<CAPSession>) =>
+  specialDays.whatWillHappen.noDecisionRequired ? i18n.__('doNotNeedToDecide') : specialDays.whatWillHappen.answer

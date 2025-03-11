@@ -1,8 +1,16 @@
 import { Router } from 'express'
 import i18n from 'i18n'
 import paths from '../constants/paths'
-import { formattedChildrenNames } from '../utils/sessionHelpers'
-import { whatWillHappen } from '../utils/formattedAnswersForPdf'
+import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers'
+import {
+  whatWillHappen,
+  mostlyLive,
+  whichDaysDaytimeVisits,
+  whichDaysOvernight,
+  whichSchedule,
+  willDaytimeVisitsHappen,
+  willOvernightsHappen,
+} from '../utils/formattedAnswersForPdf'
 
 const sharePlanRoutes = (router: Router) => {
   router.get(paths.SHARE_PLAN, (request, response) => {
@@ -13,6 +21,13 @@ const sharePlanRoutes = (router: Router) => {
       values: {
         ...request.session,
         childrenNames,
+        parentNotMostlyLivedWith: parentNotMostlyLivedWith(request.session),
+        mostlyLiveAnswer: mostlyLive(request.session),
+        whichScheduleAnswer: whichSchedule(request.session),
+        willOvernightsHappenAnswer: willOvernightsHappen(request.session),
+        whichDaysOvernightAnswer: whichDaysOvernight(request.session),
+        willDaytimeVisitsHappenAnswer: willDaytimeVisitsHappen(request.session),
+        whichDaysDaytimeVisitsAnswer: whichDaysDaytimeVisits(request.session),
         whatWillHappenAnswer: whatWillHappen(request.session),
       },
     })

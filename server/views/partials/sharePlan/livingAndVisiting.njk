@@ -1,0 +1,42 @@
+<h2 class="govuk-heading-m">{{ __('taskList.livingAndVisiting') }}</h2>
+
+<h3 class="govuk-heading-s">{{ __('livingAndVisiting.mostlyLive.title') }}</h3>
+<p class="newline-separated-paragraph">{{ values.mostlyLiveAnswer }}</p>
+{{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.mostlyLive')) }}
+
+{% if values.whichScheduleAnswer %}
+  <h3 class="govuk-heading-s">{{ __('livingAndVisiting.whichSchedule.title') }}</h3>
+  <p>{{ __('livingAndVisiting.whichSchedule.exactSplitWarning') }}</p>
+  <p class="newline-separated-paragraph">{{ values.whichScheduleAnswer }}</p>
+  {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichSchedule')) }}
+{% endif %}
+
+{% if values.willOvernightsHappenAnswer %}
+  <h3 class="govuk-heading-s">
+    {{ __('livingAndVisiting.willOvernightsHappen.title', {adult: values.parentNotMostlyLivedWith}) }}
+  </h3>
+  <p class="newline-separated-paragraph">{{ values.willOvernightsHappenAnswer }}</p>
+  {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.willOvernightsHappen', {adult: values.parentNotMostlyLivedWith})) }}
+{% endif %}
+
+{% if values.whichDaysOvernightAnswer %}
+  <h3 class="govuk-heading-s">{{ __('livingAndVisiting.whichDaysOvernight.title') }}</h3>
+  <p class="newline-separated-paragraph">{{ values.whichDaysOvernightAnswer }}</p>
+  {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichDaysOvernight', {adult: values.parentNotMostlyLivedWith})) }}
+{% endif %}
+
+{% if values.willDaytimeVisitsHappenAnswer %}
+  <h3 class="govuk-heading-s">
+    {{ __('livingAndVisiting.willDaytimeVisitsHappen.title', {adult: values.parentNotMostlyLivedWith}) }}
+  </h3>
+  <p class="newline-separated-paragraph">{{ values.willDaytimeVisitsHappenAnswer }}</p>
+  {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.willDaytimeVisitsHappen')) }}
+{% endif %}
+
+{% if values.whichDaysDaytimeVisitsAnswer %}
+  <h3 class="govuk-heading-s">{{ __('livingAndVisiting.whichDaysDaytimeVisits.title') }}</h3>
+  <p class="newline-separated-paragraph">{{ values.whichDaysDaytimeVisitsAnswer }}</p>
+  {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichDaysDaytimeVisits')) }}
+{% endif %}
+
+{{ endOfSection(__('sharePlan.yourProposedPlan.compromise.livingAndVisiting')) }}
