@@ -81,8 +81,6 @@ const formattedAnswers = (request: Request, _response: Response, next: NextFunct
         days: formatListOfStrings(days),
       })
     },
-    whatWillHappen: () =>
-      specialDays.whatWillHappen.noDecisionRequired ? i18n.__('doNotNeedToDecide') : specialDays.whatWillHappen.answer,
   }
 
   next()

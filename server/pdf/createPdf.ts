@@ -2,6 +2,7 @@ import { Request } from 'express'
 import Pdf from './pdf'
 import addPreamble from './addPreamble'
 import addWhatHappensNow from './addWhatHappensNow'
+import addSpecialDays from './addSpecialDays'
 
 const createPdf = (autoPrint: boolean, request: Request) => {
   const pdf = new Pdf(autoPrint)
@@ -9,7 +10,8 @@ const createPdf = (autoPrint: boolean, request: Request) => {
   addPreamble(pdf, request)
   pdf.createNewPage()
 
-  addWhatWillHappen(pdf, request)
+  addSpecialDays(pdf, request)
+
   addWhatHappensNow(pdf, request)
 
   pdf.addFooterToEveryPage()
