@@ -26,7 +26,6 @@ export declare global {
         whichDaysOvernight: () => string
         willDaytimeVisitsHappen: () => string
         whichDaysDaytimeVisits: () => string
-        whatWillHappen: () => string
       }
     }
   }

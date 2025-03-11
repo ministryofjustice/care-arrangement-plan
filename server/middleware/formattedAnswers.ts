@@ -3,7 +3,7 @@ import i18n from 'i18n'
 import { convertWhichDaysSessionValueToField, formatListOfStrings } from '../utils/formValueUtils'
 
 const formattedAnswers = (request: Request, _response: Response, next: NextFunction) => {
-  const { livingAndVisiting, initialAdultName, secondaryAdultName, specialDays } = request.session
+  const { livingAndVisiting, initialAdultName, secondaryAdultName } = request.session
 
   request.formattedAnswers = {
     mostlyLive: () => {
@@ -74,8 +74,6 @@ const formattedAnswers = (request: Request, _response: Response, next: NextFunct
         days: formatListOfStrings(days),
       })
     },
-    whatWillHappen: () =>
-      specialDays.whatWillHappen.noDecisionRequired ? i18n.__('doNotNeedToDecide') : specialDays.whatWillHappen.answer,
   }
 
   next()

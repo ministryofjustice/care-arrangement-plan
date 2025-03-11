@@ -5,7 +5,7 @@ import { formatListOfStrings } from '../utils/formValueUtils'
 
 const checkYourAnswersRoutes = (router: Router) => {
   router.get(paths.CHECK_YOUR_ANSWERS, (request, response) => {
-    const { initialAdultName, secondaryAdultName } = request.session
+    const { initialAdultName, secondaryAdultName, specialDays } = request.session
 
     response.render('pages/checkYourAnswers', {
       title: `${i18n.__('checkYourAnswers.title')}`,
@@ -20,7 +20,9 @@ const checkYourAnswersRoutes = (router: Router) => {
         whichDaysOvernight: request.formattedAnswers.whichDaysOvernight(),
         willDaytimeVisitsHappen: request.formattedAnswers.willDaytimeVisitsHappen(),
         whichDaysDaytimeVisits: request.formattedAnswers.whichDaysDaytimeVisits(),
-        whatWillHappen: request.formattedAnswers.whatWillHappen(),
+        whatWillHappen: specialDays.whatWillHappen.noDecisionRequired
+          ? i18n.__('doNotNeedToDecide')
+          : specialDays.whatWillHappen.answer,
       },
     })
   })
