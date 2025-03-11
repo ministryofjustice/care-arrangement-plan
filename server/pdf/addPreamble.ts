@@ -4,12 +4,13 @@ import { PdfBuilder } from '../@types/pdf'
 import TextComponent from './components/text'
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
 import BulletListComponent from './components/bulletList'
+import { formattedChildrenNames } from '../utils/sessionHelpers'
 
 const addPreamble = (pdf: PdfBuilder, request: Request) => {
   new TextComponent(pdf, [
     {
       text: i18n.__('sharePlan.whatWeAreTelling.proposedPlan', {
-        childrenNames: request.sessionHelpers.formattedChildrenNames(),
+        childrenNames: formattedChildrenNames(request.session),
       }),
       size: SECTION_HEADING_SIZE,
       style: 'bold',
@@ -18,7 +19,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
     {
       text: i18n.__('sharePlan.whatWeAreTelling.initialIsAsking', {
         senderName: request.session.initialAdultName,
-        childrenNames: request.sessionHelpers.formattedChildrenNames(),
+        childrenNames: formattedChildrenNames(request.session),
       }),
       size: MAIN_TEXT_SIZE,
       style: 'normal',

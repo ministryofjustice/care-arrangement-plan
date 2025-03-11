@@ -50,3 +50,18 @@ export const convertWhichDaysSessionValueToField = (whichDays: WhichDays | undef
 
   return [daysOfWeek.filter(day => whichDays?.days?.[day])]
 }
+
+export const formatWhichDatsSessionValue = (whichDays: WhichDays | undefined): string => {
+  if (!whichDays?.days) {
+    return ''
+  }
+
+  const lowercaseDays = convertWhichDaysSessionValueToField(whichDays)[0]
+  const uppercaseDays = lowercaseDays.map(day => day.charAt(0).toUpperCase() + day.slice(1))
+
+  if (uppercaseDays.length === 1) {
+    return `a ${uppercaseDays[0]}`
+  }
+
+  return formatListOfStrings(uppercaseDays)
+}

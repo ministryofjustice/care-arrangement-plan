@@ -5,8 +5,6 @@ import flash from 'connect-flash'
 import createValkeyClient from '../data/valkeyClient'
 import config from '../config'
 import logger from '../logger'
-import sessionHelpers from './sessionHelpers'
-import formattedAnswers from './formattedAnswers'
 
 const setUpWebSession = (): Router => {
   let store: Store
@@ -39,9 +37,6 @@ const setUpWebSession = (): Router => {
   })
 
   router.use(flash())
-
-  router.use(sessionHelpers)
-  router.use(formattedAnswers)
 
   return router
 }

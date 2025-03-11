@@ -13,20 +13,6 @@ export declare global {
       flash(type: 'errors', message: ValidationError[]): number
       flash(type: 'formValues'): Record<string, string | string[] | number[]>[]
       flash(type: 'formValues', message: Record<string, string | string[] | number[]>): number
-      sessionHelpers: {
-        formattedChildrenNames: () => string
-        parentNotMostlyLivedWith: () => string
-        mostlyLiveComplete: () => boolean
-        whatWillHappenComplete: () => boolean
-      }
-      formattedAnswers: {
-        mostlyLive: () => string
-        whichSchedule: () => string
-        willOvernightsHappen: () => string
-        whichDaysOvernight: () => string
-        willDaytimeVisitsHappen: () => string
-        whichDaysDaytimeVisits: () => string
-      }
     }
   }
 }

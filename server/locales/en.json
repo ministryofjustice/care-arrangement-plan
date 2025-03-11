@@ -118,14 +118,14 @@
     },
     "whichDaysOvernight": {
       "title": "On which days will overnights happen?",
-      "answer": "The children will stay overnight with {{ adult }} on the following days: {{ days }}"
+      "answer": "The children will stay overnight with {{ adult }} on {{ days }}"
     },
     "willDaytimeVisitsHappen": {
       "title": "Will the children do daytime visits with {{ adult }}?"
     },
     "whichDaysDaytimeVisits": {
       "title": "On which days will daytime visits happen?",
-      "answer": "The children will have daytime visits with {{ adult }} on the following days: {{ days }}"
+      "answer": "The children will have daytime visits with {{ adult }} on {{ days }}"
     }
   },
   "specialDays": {
