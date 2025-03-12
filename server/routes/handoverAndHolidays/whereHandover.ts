@@ -60,7 +60,7 @@ const whereHandoverRoutes = (router: Router) => {
         },
       }
 
-      return response.redirect(paths.HANDOVER_HOLIDAYS_HOLIDAYS)
+      return response.redirect(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
     },
   )
 
@@ -72,7 +72,7 @@ const whereHandoverRoutes = (router: Router) => {
       },
     }
 
-    return response.redirect(paths.HANDOVER_HOLIDAYS_HOLIDAYS)
+    return response.redirect(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
   })
 }
 

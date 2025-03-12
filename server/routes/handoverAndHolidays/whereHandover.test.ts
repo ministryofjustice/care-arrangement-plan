@@ -158,7 +158,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       ])
     })
 
-    it('should redirect to holidays page when the answer is complete', async () => {
+    it('should redirect to will change during school holidays page when the answer is complete', async () => {
       const where = 'someoneElse'
       const someoneElse = 'someone else'
       const initialHandoverAndHolidays = { getBetweenHouseholds: { noDecisionRequired: true } }
@@ -172,7 +172,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
           [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: someoneElse,
         })
         .expect(302)
-        .expect('location', paths.HANDOVER_HOLIDAYS_HOLIDAYS)
+        .expect('location', paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
 
       expect(sessionMock.handoverAndHolidays).toEqual({
         ...initialHandoverAndHolidays,
@@ -183,7 +183,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
 })
 
 describe(`POST ${paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED}`, () => {
-  it('should redirect to holidays page when the answer is entered and set whereHandover', async () => {
+  it('should redirect to will change during school holidays page when the answer is entered and set whereHandover', async () => {
     const initialHandoverAndHolidays = { getBetweenHouseholds: { noDecisionRequired: true } }
 
     sessionMock.handoverAndHolidays = initialHandoverAndHolidays
@@ -191,7 +191,7 @@ describe(`POST ${paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED}`, () => {
     await request(app)
       .post(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED)
       .expect(302)
-      .expect('location', paths.HANDOVER_HOLIDAYS_HOLIDAYS)
+      .expect('location', paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
 
     expect(sessionMock.handoverAndHolidays).toEqual({
       ...initialHandoverAndHolidays,

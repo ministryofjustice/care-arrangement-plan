@@ -138,6 +138,9 @@
       "atSchool": "At school",
       "someoneElse": "Someone else will manage handover, such as a grandparent",
       "someoneElseName": "Name of the person who will manage handover"
+    },
+    "willChangeDuringSchoolHolidays": {
+      "title": "Will these arrangements change during school holidays?"
     }
   },
   "specialDays": {

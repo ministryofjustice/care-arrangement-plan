@@ -1,10 +1,12 @@
 import { Router } from 'express'
-import getBetweenHouseholds from './getBetweenHouseholds'
-import whereHandover from './whereHandover'
+import getBetweenHouseholdsRoutes from './getBetweenHouseholds'
+import whereHandoverRoutes from './whereHandover'
+import willChangeDuringSchoolHolidaysRoutes from './willChangeDuringSchoolHolidays'
 
 const handoverAndHolidaysRoutes = (router: Router) => {
-  getBetweenHouseholds(router)
-  whereHandover(router)
+  getBetweenHouseholdsRoutes(router)
+  whereHandoverRoutes(router)
+  willChangeDuringSchoolHolidaysRoutes(router)
 }
 
 export default handoverAndHolidaysRoutes

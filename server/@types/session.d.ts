@@ -52,6 +52,10 @@ export type CAPSession = {
       where?: whereHandoverField[]
       someoneElse?: string
     }
+    willChangeDuringSchoolHolidays?: {
+      noDecisionRequired: boolean
+      willChange?: boolean
+    }
   }
   specialDays?: {
     whatWillHappen?: {

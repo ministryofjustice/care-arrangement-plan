@@ -21,6 +21,7 @@ enum formFields {
   GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT = 'get-between-households-describe-arrangement',
   WHERE_HANDOVER = 'where-handover',
   WHERE_HANDOVER_SOMEONE_ELSE = 'where-handover-someone-else',
+  WILL_CHANGE_DURING_SCHOOL_HOLIDAYS = 'will-change-during-school-holidays',
   SPECIAL_DAYS = 'special-days',
 }
 
