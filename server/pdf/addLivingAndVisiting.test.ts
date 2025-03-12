@@ -1,12 +1,10 @@
 import express, { Express } from 'express'
 import request from 'supertest'
-import { createHash } from 'crypto'
-import fs from 'fs'
 import path from 'path'
 import setUpi18n from '../middleware/setUpi18n'
 import { sessionMock } from '../test-utils/testMocks'
 import Pdf from './pdf'
-import stripPdfMetadata from '../test-utils/stripPdfMetadata'
+import { validateResponseAgainstSnapshot } from '../test-utils/pdfUtils'
 import addLivingAndVisiting from './addLivingAndVisiting'
 
 jest.mock('../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../assets/${fileName}`))
@@ -50,12 +48,7 @@ describe('addLivingAndVisiting', () => {
     })
 
     const response = await request(app).get(testPath)
-    const responseHash = createHash('sha256').update(stripPdfMetadata(response.body)).digest('hex')
-
-    const referenceFile = fs.readFileSync(path.resolve(__dirname, '../../test-assets/addLivingAndVisiting-other.pdf'))
-    const referenceHash = createHash('sha256').update(stripPdfMetadata(referenceFile)).digest('hex')
-
-    expect(responseHash).toEqual(referenceHash)
+    validateResponseAgainstSnapshot(response.body, '../../test-assets/addLivingAndVisiting-other.pdf')
   })
 
   test('pdf matches for split', async () => {
@@ -76,12 +69,7 @@ describe('addLivingAndVisiting', () => {
     })
 
     const response = await request(app).get(testPath)
-    const responseHash = createHash('sha256').update(stripPdfMetadata(response.body)).digest('hex')
-
-    const referenceFile = fs.readFileSync(path.resolve(__dirname, '../../test-assets/addLivingAndVisiting-split.pdf'))
-    const referenceHash = createHash('sha256').update(stripPdfMetadata(referenceFile)).digest('hex')
-
-    expect(responseHash).toEqual(referenceHash)
+    validateResponseAgainstSnapshot(response.body, '../../test-assets/addLivingAndVisiting-split.pdf')
   })
 
   test('pdf matches for with adult with no visits', async () => {
@@ -104,14 +92,7 @@ describe('addLivingAndVisiting', () => {
     })
 
     const response = await request(app).get(testPath)
-    const responseHash = createHash('sha256').update(stripPdfMetadata(response.body)).digest('hex')
-
-    const referenceFile = fs.readFileSync(
-      path.resolve(__dirname, '../../test-assets/addLivingAndVisiting-adultWithNoVisits.pdf'),
-    )
-    const referenceHash = createHash('sha256').update(stripPdfMetadata(referenceFile)).digest('hex')
-
-    expect(responseHash).toEqual(referenceHash)
+    validateResponseAgainstSnapshot(response.body, '../../test-assets/addLivingAndVisiting-adultWithNoVisits.pdf')
   })
 
   test('pdf matches for with adult with visits', async () => {
@@ -148,13 +129,6 @@ describe('addLivingAndVisiting', () => {
     })
 
     const response = await request(app).get(testPath)
-    const responseHash = createHash('sha256').update(stripPdfMetadata(response.body)).digest('hex')
-
-    const referenceFile = fs.readFileSync(
-      path.resolve(__dirname, '../../test-assets/addLivingAndVisiting-adultWithVisits.pdf'),
-    )
-    const referenceHash = createHash('sha256').update(stripPdfMetadata(referenceFile)).digest('hex')
-
-    expect(responseHash).toEqual(referenceHash)
+    validateResponseAgainstSnapshot(response.body, '../../test-assets/addLivingAndVisiting-adultWithVisits.pdf')
   })
 })
