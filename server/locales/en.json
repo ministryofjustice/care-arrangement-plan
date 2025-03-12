@@ -98,7 +98,6 @@
     "theChildren": "The children",
     "whoIsUsing": "Who is using this service?",
     "livingAndVisiting": "Living and visiting",
-    "whereWillTheChildrenLive": "Where will the children mostly live?",
     "specialDays": "Special days"
   },
   "livingAndVisiting": {
@@ -117,15 +116,13 @@
       "title": "Will the children stay overnight with {{ adult }}?"
     },
     "whichDaysOvernight": {
-      "title": "On which days will overnights happen?",
-      "answer": "The children will stay overnight with {{ adult }} on {{ days }}"
+      "title": "On which days will overnights happen?"
     },
     "willDaytimeVisitsHappen": {
       "title": "Will the children do daytime visits with {{ adult }}?"
     },
     "whichDaysDaytimeVisits": {
-      "title": "On which days will daytime visits happen?",
-      "answer": "The children will have daytime visits with {{ adult }} on {{ days }}"
+      "title": "On which days will daytime visits happen?"
     }
   },
   "specialDays": {
@@ -136,6 +133,10 @@
   },
   "checkYourAnswers": {
     "title": "Check your answers",
+    "livingAndVisiting": {
+      "whichDaysOvernight": "The children will stay overnight with {{ adult }} on {{ days }}",
+      "whichDaysDaytimeVisits": "The children will have daytime visits with {{ adult }} on {{ days }}"
+    },
     "change": {
       "text": "Change",
       "users": "the users",

@@ -44,7 +44,7 @@ export const whichDaysOvernight = (session: Partial<CAPSession>) => {
     return i18n.__('doNotNeedToDecide')
   }
 
-  return i18n.__('livingAndVisiting.whichDaysOvernight.answer', {
+  return i18n.__('checkYourAnswers.livingAndVisiting.whichDaysOvernight', {
     adult: parentNotMostlyLivedWith(session),
     days: formatWhichDatsSessionValue(livingAndVisiting.overnightVisits.whichDays),
   })
@@ -65,7 +65,7 @@ export const whichDaysDaytimeVisits = (session: Partial<CAPSession>) => {
     return i18n.__('doNotNeedToDecide')
   }
 
-  return i18n.__('livingAndVisiting.whichDaysDaytimeVisits.answer', {
+  return i18n.__('checkYourAnswers.livingAndVisiting.whichDaysDaytimeVisits', {
     adult: parentNotMostlyLivedWith(session),
     days: formatWhichDatsSessionValue(livingAndVisiting.daytimeVisits.whichDays),
   })
