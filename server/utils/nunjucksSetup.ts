@@ -7,6 +7,7 @@ import { FieldValidationError } from 'express-validator'
 import logger from '../logger'
 import paths from '../constants/paths'
 import formFields from '../constants/formFields'
+import getAssetPath from './getAssetPath'
 
 const nunjucksSetup = (app: express.Express): void => {
   app.set('view engine', 'njk')
@@ -14,7 +15,7 @@ const nunjucksSetup = (app: express.Express): void => {
   let assetManifest: Record<string, string> = {}
 
   try {
-    const assetMetadataPath = path.resolve(__dirname, '../assets/manifest.json')
+    const assetMetadataPath = getAssetPath('manifest.json')
     assetManifest = JSON.parse(fs.readFileSync(assetMetadataPath, 'utf8'))
   } catch (e) {
     if (process.env.NODE_ENV !== 'test') {
