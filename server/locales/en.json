@@ -209,22 +209,41 @@
       "endOfSection": "End of section",
       "courtOrder": "there is a court order in place at this time",
       "noCourtOrder": "there is no court order in place at this time",
-      "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{ childrenNames }}",
       "forOneChild": "this is a proposed child arrangements plan for 1 child, {{ childName }}",
+      "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{ childrenNames }}",
       "agreementBetween": "this agreement is between {{ senderName }} and {{ otherAdultName }}, who are the adults who will care for {{ childrenNames }}",
       "doYouAgreeOnBasics": "Do you and {{ senderName }} agree about the children’s names, your names, and whether there is a court order in place?",
       "doNotStoreNames": "We do not store these names or share any of this information with other government departments.",
       "doNotAgreeOnBasics": "If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to https://www.gov.uk/looking-after-children-divorce.",
+      "livingAndVisiting": {
+        "suggestedLiveWith": "{{ senderName }} suggested that the children mostly live with {{ adult }}.",
+        "suggestedSplit": "{{ senderName }} said the children will split their time between {{ otherAdult }}'s home and {{ senderName }}'s home.",
+        "suggestedStayOvernight": "{{ senderName }} suggested that the children stay overnight at {{ adult }}'s home.",
+        "suggestedNoOvernights": "{{ senderName }} suggested that overnights do not happen at this time.",
+        "suggestedOvernightDays": "{{ senderName }} suggested that overnight visits happen on {{ days }}.",
+        "suggestedDaytimeVisits": "{{ senderName }} suggested that the children do daytime visits to {{ adult }}'s home.",
+        "suggestedNoDaytimeVisits": "{{ senderName }} suggested that daytime visits do not happen at this time.",
+        "suggestedDaytimeVisitDays": "{{ senderName }} suggested that daytime visits happen on {{ days }}."
+      },
       "whatHappensNowHeading": "What happens now?",
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.",
       "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.",
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce ",
       "doNotAgree": {
+        "livingAndVisiting": {
+          "mostlyLive": "If you do not agree, suggest where the children will mostly live",
+          "whichSchedule": "If you do not agree, suggest a schedule",
+          "willOvernightsHappen": "If you do not agree, suggest whether the children will stay overnight with {{ adult }}",
+          "whichDaysOvernight": "If you do not agree, suggest when the children will stay overnight with {{ adult }}",
+          "willDaytimeVisitsHappen": "If you do not agree, suggest whether the children will do daytime visits",
+          "whichDaysDaytimeVisits": "If you do not agree, suggest when the children will do daytime visits"
+        },
         "specialDays": {
           "whatWillHappen": "If you do not agree, suggest what will happen on special days"
         }
       },
       "compromise": {
+        "livingAndVisiting": "You can use this space to write your agreed compromise for the living and visiting section",
         "specialDays": "You can use this space to write your agreed compromise for the special days section"
       }
     }

@@ -6,6 +6,7 @@ import BulletListComponent from './components/bulletList'
 import TextComponent from './components/text'
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
 import { formattedChildrenNames } from '../utils/sessionHelpers'
+import FontStyles from './fontStyles'
 
 const addAboutTheProposal = (pdf: PdfBuilder, request: Request) => {
   const { initialAdultName, courtOrderInPlace, secondaryAdultName, numberOfChildren } = request.session
@@ -16,13 +17,13 @@ const addAboutTheProposal = (pdf: PdfBuilder, request: Request) => {
       {
         text: i18n.__('sharePlan.yourProposedPlan.aboutThePlan'),
         size: SECTION_HEADING_SIZE,
-        style: 'bold',
+        style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
         text: i18n.__('sharePlan.yourProposedPlan.senderSaid', { senderName: initialAdultName }),
         size: MAIN_TEXT_SIZE,
-        style: 'normal',
+        style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
@@ -53,13 +54,13 @@ const addAboutTheProposal = (pdf: PdfBuilder, request: Request) => {
     {
       text: i18n.__('sharePlan.yourProposedPlan.doNotStoreNames'),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: i18n.__('sharePlan.yourProposedPlan.doNotAgreeOnBasics'),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument()

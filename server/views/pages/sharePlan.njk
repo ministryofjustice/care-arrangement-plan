@@ -11,8 +11,8 @@
 
       {{ __('sharePlan.content', {otherAdult: values.secondaryAdultName}) | safe }}
 
-      {% set whatWeAreTelling %}{% include 'partials/whatWeAreTelling.njk' %}{% endset %}
-      {% set yourProposedPlan %}{% include 'partials/yourProposedPlan.njk' %}{% endset %}
+      {% set whatWeAreTelling %}{% include 'partials/sharePlan/whatWeAreTelling.njk' %}{% endset %}
+      {% set yourProposedPlan %}{% include 'partials/sharePlan/yourProposedPlan.njk' %}{% endset %}
 
       {{
         govukAccordion({

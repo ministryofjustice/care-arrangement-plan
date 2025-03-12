@@ -3,7 +3,7 @@ import JsPdf from 'jspdf'
 export type Paragraph = {
   text: string
   size: number
-  style: 'normal' | 'bold'
+  style: FontStyles
   bottomPadding: number
 }
 

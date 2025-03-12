@@ -3,6 +3,9 @@ import { CAPSession } from '../@types/session'
 
 export const formattedChildrenNames = (session: Partial<CAPSession>) => formatListOfStrings(session.namesOfChildren)
 
+export const parentMostlyLivedWith = (session: Partial<CAPSession>) =>
+  session.livingAndVisiting.mostlyLive.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName
+
 export const parentNotMostlyLivedWith = (session: Partial<CAPSession>) =>
   session.livingAndVisiting.mostlyLive.where === 'withInitial' ? session.secondaryAdultName : session.initialAdultName
 

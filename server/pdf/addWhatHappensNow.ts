@@ -3,31 +3,32 @@ import { Request } from 'express'
 import { PdfBuilder } from '../@types/pdf'
 import TextComponent from './components/text'
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
+import FontStyles from './fontStyles'
 
 const addWhatHappensNow = (pdf: PdfBuilder, request: Request) => {
   new TextComponent(pdf, [
     {
       text: i18n.__('sharePlan.yourProposedPlan.whatHappensNowHeading'),
       size: SECTION_HEADING_SIZE,
-      style: 'bold',
+      style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: i18n.__('sharePlan.yourProposedPlan.nowSendPlan', { senderName: request.session.initialAdultName }),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: i18n.__('sharePlan.yourProposedPlan.unableToAgree'),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: i18n.__('sharePlan.yourProposedPlan.moreInfoAndSupport'),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument()

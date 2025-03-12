@@ -19,3 +19,7 @@ $govuk-global-styles: true;
   display: inline-block;
   margin-right: govuk-spacing(4);
 }
+
+.newline-separated-paragraph {
+  white-space: pre-line;
+}

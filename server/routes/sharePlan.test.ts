@@ -12,7 +12,14 @@ const session: Partial<SessionData> = {
   secondaryAdultName: 'Sam',
   specialDays: {
     whatWillHappen: {
-      noDecisionRequired: true,
+      noDecisionRequired: false,
+      answer: 'whatWillHappenAnswer',
+    },
+  },
+  livingAndVisiting: {
+    mostlyLive: {
+      where: 'other',
+      describeArrangement: 'livingAndVisitingArrangement',
     },
   },
 }
@@ -52,6 +59,19 @@ describe(`GET ${paths.SHARE_PLAN}`, () => {
       .expect(response => {
         expect(response.text).toContain('As there is a court order in place')
         expect(response.text).toContain('there is a court order in place at this time')
+      })
+  })
+
+  it('should include special days answer', () => {
+    return request(app)
+      .get(paths.SHARE_PLAN)
+      .expect('Content-Type', /html/)
+      .expect(response => {
+        expect(response.text).toMatch(
+          new RegExp(
+            `${session.initialAdultName} suggested:\\s+&quot;${session.specialDays.whatWillHappen.answer}&quot;`,
+          ),
+        )
       })
   })
 })

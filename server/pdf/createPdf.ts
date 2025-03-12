@@ -4,6 +4,7 @@ import addPreamble from './addPreamble'
 import addWhatHappensNow from './addWhatHappensNow'
 import addSpecialDays from './addSpecialDays'
 import addAboutTheProposal from './addAboutTheProposal'
+import addLivingAndVisiting from './addLivingAndVisiting'
 
 const createPdf = (autoPrint: boolean, request: Request) => {
   const pdf = new Pdf(autoPrint)
@@ -12,9 +13,8 @@ const createPdf = (autoPrint: boolean, request: Request) => {
   pdf.createNewPage()
 
   addAboutTheProposal(pdf, request)
-
+  addLivingAndVisiting(pdf, request)
   addSpecialDays(pdf, request)
-
   addWhatHappensNow(pdf, request)
 
   pdf.addFooterToEveryPage()

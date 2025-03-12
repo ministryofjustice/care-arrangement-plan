@@ -1,6 +1,7 @@
 import TextComponent from './text'
 import { Paragraph, PdfBuilder } from '../../@types/pdf'
 import { BULLET_POINT_SPACING, MAIN_TEXT_SIZE, PARAGRAPH_SPACE } from '../../constants/pdfConstants'
+import FontStyles from '../fontStyles'
 
 class BulletList extends TextComponent {
   constructor(
@@ -16,7 +17,7 @@ class BulletList extends TextComponent {
       paragraphs.push({
         text: `•   ${bulletText[i]}`,
         size: MAIN_TEXT_SIZE,
-        style: 'normal',
+        style: FontStyles.NORMAL,
         bottomPadding: i === bulletText.length - 1 ? PARAGRAPH_SPACE : BULLET_POINT_SPACING,
       })
     }
