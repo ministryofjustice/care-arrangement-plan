@@ -1,12 +1,10 @@
 import express, { Express } from 'express'
 import request from 'supertest'
-import { createHash } from 'crypto'
-import fs from 'fs'
 import path from 'path'
 import setUpi18n from '../middleware/setUpi18n'
 import { sessionMock } from '../test-utils/testMocks'
 import Pdf from './pdf'
-import stripPdfMetadata from '../test-utils/stripPdfMetadata'
+import { validateResponseAgainstSnapshot } from '../test-utils/pdfUtils'
 import addAboutTheProposal from './addAboutTheProposal'
 
 jest.mock('../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../assets/${fileName}`))
@@ -45,14 +43,7 @@ describe('addAboutTheProposal', () => {
     })
 
     const response = await request(app).get(testPath)
-    const responseHash = createHash('sha256').update(stripPdfMetadata(response.body)).digest('hex')
-
-    const referenceFile = fs.readFileSync(
-      path.resolve(__dirname, '../../test-assets/addAboutTheProposal-noCourtOrderOneChild.pdf'),
-    )
-    const referenceHash = createHash('sha256').update(stripPdfMetadata(referenceFile)).digest('hex')
-
-    expect(responseHash).toEqual(referenceHash)
+    validateResponseAgainstSnapshot(response.body, '../../test-assets/addAboutTheProposal-noCourtOrderOneChild.pdf')
   })
 
   test('pdf matches for court order and multiple children', async () => {
@@ -65,13 +56,9 @@ describe('addAboutTheProposal', () => {
     })
 
     const response = await request(app).get(testPath)
-    const responseHash = createHash('sha256').update(stripPdfMetadata(response.body)).digest('hex')
-
-    const referenceFile = fs.readFileSync(
-      path.resolve(__dirname, '../../test-assets/addAboutTheProposal-withCourtOrderMultipleChildren.pdf'),
+    validateResponseAgainstSnapshot(
+      response.body,
+      '../../test-assets/addAboutTheProposal-withCourtOrderMultipleChildren.pdf',
     )
-    const referenceHash = createHash('sha256').update(stripPdfMetadata(referenceFile)).digest('hex')
-
-    expect(responseHash).toEqual(referenceHash)
   })
 })

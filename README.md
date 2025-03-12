@@ -61,6 +61,9 @@ docker stop pfl-care-arrangement-plan
 
 We use [Jest](https://jestjs.io/) for unit tests. To run then run `npm run test`.
 
+These include PDF snapshot tests. To update the tests, run them with the environment variable `UPDATE_PDF_SNAPSHOTS=true`,
+or run `npm run test:update-pdf-snapshots`
+
 We also have integration tests using [Cypress](https://www.cypress.io/). To run these, start the app server then run
 either `npm run int-test` for headless mode, or `npm run int-test-ui` to use the Cypress UI.
 
