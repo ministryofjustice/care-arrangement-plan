@@ -1,5 +1,5 @@
 import i18n from 'i18n'
-import { formatWhichDatsSessionValue } from './formValueUtils'
+import { formatWhichDaysSessionValue } from './formValueUtils'
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers'
 import { CAPSession } from '../@types/session'
 
@@ -46,7 +46,7 @@ export const whichDaysOvernight = (session: Partial<CAPSession>) => {
 
   return i18n.__('checkYourAnswers.livingAndVisiting.whichDaysOvernight', {
     adult: parentNotMostlyLivedWith(session),
-    days: formatWhichDatsSessionValue(livingAndVisiting.overnightVisits.whichDays),
+    days: formatWhichDaysSessionValue(livingAndVisiting.overnightVisits.whichDays),
   })
 }
 
@@ -67,7 +67,7 @@ export const whichDaysDaytimeVisits = (session: Partial<CAPSession>) => {
 
   return i18n.__('checkYourAnswers.livingAndVisiting.whichDaysDaytimeVisits', {
     adult: parentNotMostlyLivedWith(session),
-    days: formatWhichDatsSessionValue(livingAndVisiting.daytimeVisits.whichDays),
+    days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays),
   })
 }
 
