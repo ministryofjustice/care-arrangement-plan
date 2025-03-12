@@ -5,13 +5,13 @@ import { sessionMock } from '../test-utils/testMocks'
 import setUpi18n from '../middleware/setUpi18n'
 import {
   mostlyLive,
-  whatWillHappen,
   whichDaysDaytimeVisits,
   whichDaysOvernight,
   whichSchedule,
   willDaytimeVisitsHappen,
   willOvernightsHappen,
-} from './formattedAnswersForCheckAnswers'
+  whatWillHappen,
+} from './formattedAnswersForPdf'
 
 const testPath = '/test'
 
@@ -19,7 +19,7 @@ const testAppSetup = (): Express => {
   const app = express()
 
   app.use(setUpi18n())
-  app.get(testPath, (_req, response) => {
+  app.get(testPath, (req, response) => {
     response.json({
       livingAndVisiting: {
         mostlyLive: mostlyLive(sessionMock),
@@ -45,12 +45,12 @@ const session: Partial<SessionData> = {
   numberOfChildren: 3,
   initialAdultName: 'Sarah',
   secondaryAdultName: 'Steph',
+  livingAndVisiting: {},
   specialDays: {
     whatWillHappen: {
       noDecisionRequired: true,
     },
   },
-  livingAndVisiting: {},
 }
 
 describe('formattedAnswers', () => {
@@ -79,7 +79,9 @@ describe('formattedAnswers', () => {
       return request(app)
         .get(testPath)
         .expect(response => {
-          expect(response.body.livingAndVisiting).toEqual({ mostlyLive: arrangement })
+          expect(response.body.livingAndVisiting).toEqual({
+            mostlyLive: `${session.initialAdultName} suggested:\n"${arrangement}"`,
+          })
         })
     })
 
@@ -99,8 +101,8 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect(response => {
           expect(response.body.livingAndVisiting).toEqual({
-            mostlyLive: `They will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
-            whichSchedule: arrangement,
+            mostlyLive: `${session.initialAdultName} said the children will split their time between ${session.secondaryAdultName}'s home and ${session.initialAdultName}'s home.`,
+            whichSchedule: `${session.initialAdultName} suggested:\n"${arrangement}"`,
           })
         })
     })
@@ -121,8 +123,8 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect(response => {
           expect(response.body.livingAndVisiting).toEqual({
-            mostlyLive: `They will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
-            whichSchedule: 'We do not need to decide this',
+            mostlyLive: `${session.initialAdultName} said the children will split their time between ${session.secondaryAdultName}'s home and ${session.initialAdultName}'s home.`,
+            whichSchedule: `${session.initialAdultName} suggested that this does not need to be decided.`,
           })
         })
     })
@@ -147,10 +149,10 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect(response => {
           expect(response.body.livingAndVisiting).toEqual({
-            mostlyLive: `With ${session.initialAdultName}`,
-            willOvernightsHappen: 'No',
-            willDaytimeVisitsHappen: 'Yes',
-            whichDaysDaytimeVisits: 'We do not need to decide this',
+            mostlyLive: `${session.initialAdultName} suggested that the children mostly live with ${session.initialAdultName}.`,
+            willOvernightsHappen: `${session.initialAdultName} suggested that overnights do not happen at this time.`,
+            willDaytimeVisitsHappen: `${session.initialAdultName} suggested that the children do daytime visits to ${session.secondaryAdultName}'s home.`,
+            whichDaysDaytimeVisits: `${session.initialAdultName} suggested that this does not need to be decided.`,
           })
         })
     })
@@ -183,10 +185,10 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect(response => {
           expect(response.body.livingAndVisiting).toEqual({
-            mostlyLive: `With ${session.initialAdultName}`,
-            willOvernightsHappen: 'Yes',
-            whichDaysOvernight: `The children will stay overnight with ${session.secondaryAdultName} on Monday, Wednesday and Friday`,
-            willDaytimeVisitsHappen: 'No',
+            mostlyLive: `${session.initialAdultName} suggested that the children mostly live with ${session.initialAdultName}.`,
+            willOvernightsHappen: `${session.initialAdultName} suggested that the children stay overnight at ${session.secondaryAdultName}'s home.`,
+            whichDaysOvernight: `${session.initialAdultName} suggested that overnight visits happen on Monday, Wednesday and Friday.`,
+            willDaytimeVisitsHappen: `${session.initialAdultName} suggested that daytime visits do not happen at this time.`,
           })
         })
     })
@@ -223,11 +225,11 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect(response => {
           expect(response.body.livingAndVisiting).toEqual({
-            mostlyLive: `With ${session.secondaryAdultName}`,
-            willOvernightsHappen: 'Yes',
-            whichDaysOvernight: arrangement,
-            willDaytimeVisitsHappen: 'Yes',
-            whichDaysDaytimeVisits: `The children will have daytime visits with ${session.initialAdultName} on a Saturday`,
+            mostlyLive: `${session.initialAdultName} suggested that the children mostly live with ${session.secondaryAdultName}.`,
+            willOvernightsHappen: `${session.initialAdultName} suggested that the children stay overnight at ${session.initialAdultName}'s home.`,
+            whichDaysOvernight: `${session.initialAdultName} suggested:\n"arrangement"`,
+            willDaytimeVisitsHappen: `${session.initialAdultName} suggested that the children do daytime visits to ${session.initialAdultName}'s home.`,
+            whichDaysDaytimeVisits: `${session.initialAdultName} suggested that daytime visits happen on a Saturday.`,
           })
         })
     })
@@ -244,7 +246,9 @@ describe('formattedAnswers', () => {
       return request(app)
         .get(testPath)
         .expect(response => {
-          expect(response.body.specialDays).toEqual({ whatWillHappen: 'We do not need to decide this' })
+          expect(response.body.specialDays).toEqual({
+            whatWillHappen: `${session.initialAdultName} suggested that this does not need to be decided.`,
+          })
         })
     })
     it('should return correctly for answer to what will happen', () => {
@@ -259,7 +263,9 @@ describe('formattedAnswers', () => {
       return request(app)
         .get(testPath)
         .expect(response => {
-          expect(response.body.specialDays).toEqual({ whatWillHappen: answer })
+          expect(response.body.specialDays).toEqual({
+            whatWillHappen: `${session.initialAdultName} suggested:\n"${answer}"`,
+          })
         })
     })
   })
