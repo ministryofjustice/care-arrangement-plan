@@ -25,6 +25,8 @@ export default {
   LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_NOT_REQUIRED: '/living-and-visiting/which-days-daytime-visits/not-required',
   HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS: '/handover-and-holidays/get-between-households',
   HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS_NOT_REQUIRED: '/handover-and-holidays/get-between-households/not-required',
+  HANDOVER_HOLIDAYS_WHERE_HANDOVER: '/handover-and-holidays/where-handover',
+  HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED: '/handover-and-holidays/where-handover/not-required',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN: '/special-days/what-will-happen',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED: '/special-days/what-will-happen/not-required',
   DOWNLOAD_PDF: '/download-pdf',

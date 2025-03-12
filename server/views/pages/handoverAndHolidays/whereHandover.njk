@@ -1,0 +1,81 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {% set hintHtml %}
+          <p>{{ __('handoverAndHolidays.whereHandover.explainer') }}</p>
+          <p>{{ __('selectAllThatApply') }}</p>
+        {% endset -%}
+
+        {% set anotherHtml %}
+          {{
+            govukTextarea({
+              name: formFields.WHERE_HANDOVER_SOMEONE_ELSE,
+              label: {
+                text: __('handoverAndHolidays.whereHandover.someoneElseName')
+              },
+              value: formValues[formFields.WHERE_HANDOVER_SOMEONE_ELSE],
+              errorMessage: errors | findError(formFields.WHERE_HANDOVER_SOMEONE_ELSE)
+            })
+          }}
+        {% endset -%}
+
+        {{
+          govukCheckboxes({
+            name: formFields.WHERE_HANDOVER,
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            hint: {
+              html: hintHtml
+            },
+            items: [
+              {
+                value: "neutral",
+                text: __('handoverAndHolidays.whereHandover.neutralLocation')
+              },
+              {
+                value: "initialHome",
+                text: __('handoverAndHolidays.whereHandover.atHome', {adult: values.initialAdultName})
+              },
+              {
+                value: "secondaryHome",
+                text: __('handoverAndHolidays.whereHandover.atHome', {adult: values.secondaryAdultName})
+              },
+              {
+                value: "school",
+                text: __('handoverAndHolidays.whereHandover.atSchool')
+              },
+              {
+                value: "someoneElse",
+                text: __('handoverAndHolidays.whereHandover.someoneElse'),
+                behaviour: "exclusive",
+                conditional: {
+                  html: anotherHtml
+                }
+              }
+            ],
+            values: formValues[formFields.WHERE_HANDOVER],
+            errorMessage: errors | findError(formFields.WHERE_HANDOVER)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

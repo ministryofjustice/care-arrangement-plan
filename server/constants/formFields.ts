@@ -19,6 +19,8 @@ enum formFields {
   WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT = 'which-days-describe-arrangement',
   GET_BETWEEN_HOUSEHOLDS = 'get-between-households',
   GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT = 'get-between-households-describe-arrangement',
+  WHERE_HANDOVER = 'where-handover',
+  WHERE_HANDOVER_SOMEONE_ELSE = 'where-handover-someone-else',
   SPECIAL_DAYS = 'special-days',
 }
 

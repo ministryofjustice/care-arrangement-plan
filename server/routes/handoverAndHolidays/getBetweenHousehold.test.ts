@@ -9,8 +9,6 @@ import formFields from '../../constants/formFields'
 const app = testAppSetup()
 
 const session: Partial<SessionData> = {
-  namesOfChildren: ['James', 'Rachel', 'Jack'],
-  numberOfChildren: 3,
   initialAdultName: 'Sarah',
   secondaryAdultName: 'Steph',
 }
@@ -162,6 +160,10 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
     it('should redirect to where handover page if the page is correctly filled', async () => {
       const how = 'other'
       const describeArrangement = 'arrangement'
+      const initialHandoverAndHolidays = { whereHandover: { noDecisionRequired: true } }
+
+      sessionMock.handoverAndHolidays = initialHandoverAndHolidays
+
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)
         .send({
@@ -172,25 +174,8 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
         .expect('location', paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)
 
       expect(sessionMock.handoverAndHolidays).toEqual({
-        getBetweenHouseholds: { noDecisionRequired: false, how, describeArrangement },
-      })
-    })
-
-    it('should not reset the handoverAndHolidays data', async () => {
-      const how = 'initialCollects'
-      const initialHandoverAndHolidays = { whereHandover: { noDecisionRequired: true } }
-
-      sessionMock.handoverAndHolidays = initialHandoverAndHolidays
-
-      await request(app)
-        .post(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)
-        .send({ [formFields.GET_BETWEEN_HOUSEHOLDS]: how })
-        .expect(302)
-        .expect('location', paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)
-
-      expect(sessionMock.handoverAndHolidays).toEqual({
         ...initialHandoverAndHolidays,
-        getBetweenHouseholds: { how, noDecisionRequired: false },
+        getBetweenHouseholds: { noDecisionRequired: false, how, describeArrangement },
       })
     })
   })

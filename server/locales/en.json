@@ -129,6 +129,15 @@
     "getBetweenHouseholds": {
       "title": "How will the children get between households?",
       "collectsTheChildren": "{{ adult }} collects the children"
+    },
+    "whereHandover": {
+      "title": "Where does handover take place?",
+      "explainer": "It may be easier for children if the handover takes place at a neutral location such as a park or railway station.",
+      "neutralLocation": "Neutral location",
+      "atHome": "At {{ adult }}'s home",
+      "atSchool": "At school",
+      "someoneElse": "Someone else will manage handover, such as a grandparent",
+      "someoneElseName": "Name of the person who will manage handover"
     }
   },
   "specialDays": {

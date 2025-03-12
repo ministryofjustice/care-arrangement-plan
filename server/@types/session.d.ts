@@ -1,4 +1,4 @@
-import { getBetweenHouseholds, whereMostlyLive } from './fields'
+import { getBetweenHouseholds, whereHandoverField, whereMostlyLive } from './fields'
 
 export type Days = {
   monday: boolean
@@ -46,6 +46,11 @@ export type CAPSession = {
       noDecisionRequired: boolean
       how?: getBetweenHouseholds
       describeArrangement?: string
+    }
+    whereHandover?: {
+      noDecisionRequired: boolean
+      where?: whereHandoverField[]
+      someoneElse?: string
     }
   }
   specialDays?: {
