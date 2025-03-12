@@ -51,7 +51,7 @@ export const convertWhichDaysSessionValueToField = (whichDays: WhichDays | undef
   return [daysOfWeek.filter(day => whichDays?.days?.[day])]
 }
 
-export const formatWhichDatsSessionValue = (whichDays: WhichDays | undefined): string => {
+export const formatWhichDaysSessionValue = (whichDays: WhichDays | undefined): string => {
   if (!whichDays?.days) {
     return ''
   }

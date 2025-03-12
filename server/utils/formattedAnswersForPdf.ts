@@ -1,7 +1,7 @@
 import i18n from 'i18n'
 import { CAPSession } from '../@types/session'
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers'
-import { formatWhichDatsSessionValue } from './formValueUtils'
+import { formatWhichDaysSessionValue } from './formValueUtils'
 
 const senderSuggested = (senderName: string, suggestion: string) =>
   `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName })}\n"${suggestion}"`
@@ -57,7 +57,7 @@ export const whichDaysOvernight = ({ livingAndVisiting, initialAdultName }: Part
 
   return i18n.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedOvernightDays', {
     senderName: initialAdultName,
-    days: formatWhichDatsSessionValue(livingAndVisiting.overnightVisits.whichDays),
+    days: formatWhichDaysSessionValue(livingAndVisiting.overnightVisits.whichDays),
   })
 }
 
@@ -83,7 +83,7 @@ export const whichDaysDaytimeVisits = ({ livingAndVisiting, initialAdultName }: 
 
   return i18n.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedDaytimeVisitDays', {
     senderName: initialAdultName,
-    days: formatWhichDatsSessionValue(livingAndVisiting.daytimeVisits.whichDays),
+    days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays),
   })
 }
 

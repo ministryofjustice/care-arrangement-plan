@@ -45,7 +45,6 @@ describe('addPreamble', () => {
     })
 
     const response = await request(app).get(testPath)
-
     const responseHash = createHash('sha256').update(stripPdfMetadata(response.body)).digest('hex')
 
     const referenceFile = fs.readFileSync(path.resolve(__dirname, '../../test-assets/addPreamble-noCourtOrder.pdf'))
@@ -64,7 +63,6 @@ describe('addPreamble', () => {
     })
 
     const response = await request(app).get(testPath)
-
     const responseHash = createHash('sha256').update(stripPdfMetadata(response.body)).digest('hex')
 
     const referenceFile = fs.readFileSync(path.resolve(__dirname, '../../test-assets/addPreamble-withCourtOrder.pdf'))
