@@ -9,6 +9,7 @@ import {
   PARAGRAPH_SPACE,
 } from '../../constants/pdfConstants'
 import { Paragraph, PdfBuilder } from '../../@types/pdf'
+import FontStyles from '../fontStyles'
 
 class DoYouAgree extends BaseComponent {
   private readonly radioGroup: AcroFormRadioButton
@@ -28,7 +29,7 @@ class DoYouAgree extends BaseComponent {
     this.doYouAgreeParagraph = {
       text,
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: this.CHECKBOX_TEXT_GAP,
     }
     this.radioGroup = new AcroFormRadioButton()

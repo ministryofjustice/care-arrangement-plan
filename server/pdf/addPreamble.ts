@@ -5,6 +5,7 @@ import TextComponent from './components/text'
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
 import BulletListComponent from './components/bulletList'
 import { formattedChildrenNames } from '../utils/sessionHelpers'
+import FontStyles from './fontStyles'
 
 const addPreamble = (pdf: PdfBuilder, request: Request) => {
   new TextComponent(pdf, [
@@ -13,7 +14,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
         childrenNames: formattedChildrenNames(request.session),
       }),
       size: SECTION_HEADING_SIZE,
-      style: 'bold',
+      style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
@@ -22,7 +23,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
         childrenNames: formattedChildrenNames(request.session),
       }),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument()
@@ -34,7 +35,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
           senderName: request.session.initialAdultName,
         }),
         size: MAIN_TEXT_SIZE,
-        style: 'normal',
+        style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
@@ -51,13 +52,13 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
     {
       text: i18n.__('sharePlan.whatWeAreTelling.benefitsHeading'),
       size: QUESTION_TITLE_SIZE,
-      style: 'bold',
+      style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: i18n.__('sharePlan.whatWeAreTelling.benefits', { senderName: request.session.initialAdultName }),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument()
@@ -67,7 +68,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       {
         text: i18n.__('sharePlan.whatWeAreTelling.topTips'),
         size: QUESTION_TITLE_SIZE,
-        style: 'bold',
+        style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
@@ -86,13 +87,13 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       {
         text: i18n.__('sharePlan.whatWeAreTelling.moreInfoHeading'),
         size: QUESTION_TITLE_SIZE,
-        style: 'bold',
+        style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
         text: i18n.__('sharePlan.whatWeAreTelling.moreInfo'),
         size: MAIN_TEXT_SIZE,
-        style: 'normal',
+        style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
@@ -107,19 +108,19 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       {
         text: i18n.__('sharePlan.whatWeAreTelling.safetyCheckHeading'),
         size: QUESTION_TITLE_SIZE,
-        style: 'bold',
+        style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
         text: i18n.__('sharePlan.whatWeAreTelling.safetyCheck'),
         size: MAIN_TEXT_SIZE,
-        style: 'normal',
+        style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
         text: i18n.__('sharePlan.whatWeAreTelling.doNotContinueIf'),
         size: MAIN_TEXT_SIZE,
-        style: 'normal',
+        style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
@@ -134,7 +135,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       {
         text: i18n.__('sharePlan.whatWeAreTelling.stopIfAnyConcern'),
         size: MAIN_TEXT_SIZE,
-        style: 'bold',
+        style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
@@ -144,13 +145,13 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
     {
       text: i18n.__('sharePlan.whatWeAreTelling.gettingHelpHeading'),
       size: QUESTION_TITLE_SIZE,
-      style: 'bold',
+      style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: i18n.__('sharePlan.whatWeAreTelling.gettingHelp'),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument()
@@ -161,7 +162,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
         {
           text: i18n.__('sharePlan.whatWeAreTelling.courtOrderHeading'),
           size: QUESTION_TITLE_SIZE,
-          style: 'bold',
+          style: FontStyles.BOLD,
           bottomPadding: PARAGRAPH_SPACE,
         },
         {
@@ -169,13 +170,13 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
             senderName: request.session.initialAdultName,
           }),
           size: MAIN_TEXT_SIZE,
-          style: 'normal',
+          style: FontStyles.NORMAL,
           bottomPadding: PARAGRAPH_SPACE,
         },
         {
           text: i18n.__('sharePlan.whatWeAreTelling.ordersInclude'),
           size: MAIN_TEXT_SIZE,
-          style: 'normal',
+          style: FontStyles.NORMAL,
           bottomPadding: PARAGRAPH_SPACE,
         },
       ],
@@ -189,13 +190,13 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
         {
           text: i18n.__('sharePlan.whatWeAreTelling.checkDocuments'),
           size: MAIN_TEXT_SIZE,
-          style: 'normal',
+          style: FontStyles.NORMAL,
           bottomPadding: PARAGRAPH_SPACE,
         },
         {
           text: i18n.__('sharePlan.whatWeAreTelling.stopIfOrders'),
           size: MAIN_TEXT_SIZE,
-          style: 'bold',
+          style: FontStyles.BOLD,
           bottomPadding: PARAGRAPH_SPACE,
         },
       ],
@@ -204,19 +205,19 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       {
         text: i18n.__('sharePlan.whatWeAreTelling.noRestrictionsOnContactHeading'),
         size: QUESTION_TITLE_SIZE,
-        style: 'bold',
+        style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
         text: i18n.__('sharePlan.whatWeAreTelling.noRestrictionsOnContact'),
         size: MAIN_TEXT_SIZE,
-        style: 'normal',
+        style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
         text: i18n.__('sharePlan.whatWeAreTelling.changeCourtArrangements'),
         size: MAIN_TEXT_SIZE,
-        style: 'normal',
+        style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ]).addComponentToDocument()

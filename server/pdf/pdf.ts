@@ -14,6 +14,7 @@ import {
   SECTION_HEADING_SIZE,
 } from '../constants/pdfConstants'
 import { Paragraph, PdfBuilder } from '../@types/pdf'
+import FontStyles from './fontStyles'
 
 class Pdf implements PdfBuilder {
   public readonly document: JsPdf
@@ -49,12 +50,12 @@ class Pdf implements PdfBuilder {
       'bold-b542beb274-v2.ttf',
       fs.readFileSync(path.resolve(__dirname, '../assets/fonts/bold-b542beb274-v2.ttf')).toString('base64'),
     )
-    this.document.addFont('bold-b542beb274-v2.ttf', FONT, 'bold')
+    this.document.addFont('bold-b542beb274-v2.ttf', FONT, FontStyles.BOLD)
     this.document.addFileToVFS(
       'light-94a07e06a1-v2.ttf',
       fs.readFileSync(path.resolve(__dirname, '../assets/fonts/light-94a07e06a1-v2.ttf')).toString('base64'),
     )
-    this.document.addFont('light-94a07e06a1-v2.ttf', FONT, 'normal')
+    this.document.addFont('light-94a07e06a1-v2.ttf', FONT, FontStyles.NORMAL)
   }
 
   private addHeaderToPage() {
@@ -69,7 +70,7 @@ class Pdf implements PdfBuilder {
       HEADER_LOGO_HEIGHT,
     )
     this.document
-      .setFont(FONT, 'bold')
+      .setFont(FONT, FontStyles.BOLD)
       .setFontSize(SECTION_HEADING_SIZE)
       .setTextColor(255, 255, 255)
       .text(
@@ -85,7 +86,7 @@ class Pdf implements PdfBuilder {
 
   private addFooterToPage(pageNumber: number) {
     this.document
-      .setFont(FONT, 'normal')
+      .setFont(FONT, FontStyles.NORMAL)
       .setFontSize(MAIN_TEXT_SIZE)
       .text(
         i18n.__('pdf.pageCount', {

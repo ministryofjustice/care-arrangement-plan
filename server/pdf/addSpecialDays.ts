@@ -6,31 +6,32 @@ import TextboxComponent from './components/textbox'
 import DoYouAgreeComponent from './components/doYouAgree'
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
 import { whatWillHappen } from '../utils/formattedAnswersForPdf'
+import FontStyles from './fontStyles'
 
 const addSpecialDays = (pdf: PdfBuilder, request: Request) => {
   new TextComponent(pdf, [
     {
       text: i18n.__('taskList.specialDays'),
       size: SECTION_HEADING_SIZE,
-      style: 'bold',
+      style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: i18n.__('specialDays.whatWillHappen.title'),
       size: QUESTION_TITLE_SIZE,
-      style: 'bold',
+      style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: i18n.__('specialDays.whatWillHappen.content'),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: whatWillHappen(request.session),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument()
@@ -41,7 +42,7 @@ const addSpecialDays = (pdf: PdfBuilder, request: Request) => {
     {
       text: i18n.__('sharePlan.yourProposedPlan.doNotAgree.specialDays.whatWillHappen'),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument()
@@ -50,13 +51,13 @@ const addSpecialDays = (pdf: PdfBuilder, request: Request) => {
     {
       text: i18n.__('sharePlan.yourProposedPlan.endOfSection'),
       size: QUESTION_TITLE_SIZE,
-      style: 'bold',
+      style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: i18n.__('sharePlan.yourProposedPlan.compromise.specialDays'),
       size: MAIN_TEXT_SIZE,
-      style: 'normal',
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument()
