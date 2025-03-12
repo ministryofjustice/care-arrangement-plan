@@ -125,6 +125,12 @@
       "title": "On which days will daytime visits happen?"
     }
   },
+  "handoverAndHolidays": {
+    "getBetweenHouseholds": {
+      "title": "How will the children get between households?",
+      "collectsTheChildren": "{{ adult }} collects the children"
+    }
+  },
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",

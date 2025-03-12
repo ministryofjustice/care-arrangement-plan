@@ -17,6 +17,8 @@ enum formFields {
   WILL_DAYTIME_VISITS_HAPPEN = 'will-daytime-visits-happen',
   WHICH_DAYS_DAYTIME_VISITS = 'which-days',
   WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT = 'which-days-describe-arrangement',
+  GET_BETWEEN_HOUSEHOLDS = 'get-between-households',
+  GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT = 'get-between-households-describe-arrangement',
   SPECIAL_DAYS = 'special-days',
 }
 
