@@ -6,6 +6,7 @@ import {
   formatWhichDaysSessionValue,
 } from './formValueUtils'
 import { WhichDays } from '../@types/session'
+import { dayValues } from '../@types/fields'
 
 describe('formValueUtils', () => {
   describe('formatListOfStrings', () => {
@@ -38,15 +39,7 @@ describe('formValueUtils', () => {
 
     test('returns correctly for days', () => {
       expect(convertWhichDaysFieldToSessionValue(['monday', 'friday', 'saturday'], undefined)).toEqual({
-        days: {
-          monday: true,
-          tuesday: false,
-          wednesday: false,
-          thursday: false,
-          friday: true,
-          saturday: true,
-          sunday: false,
-        },
+        days: ['monday', 'friday', 'saturday'],
       })
     })
   })
@@ -63,15 +56,7 @@ describe('formValueUtils', () => {
     test('returns correctly for days', () => {
       expect(
         convertWhichDaysSessionValueToField({
-          days: {
-            monday: true,
-            tuesday: false,
-            wednesday: false,
-            thursday: false,
-            friday: true,
-            saturday: true,
-            sunday: false,
-          },
+          days: ['monday', 'friday', 'saturday'],
         }),
       ).toEqual([['monday', 'friday', 'saturday']])
     })
@@ -81,9 +66,9 @@ describe('formValueUtils', () => {
     test.each([
       [undefined, ''],
       [{ noDecisionRequired: true }, ''],
-      [{ days: { monday: true } }, 'a Monday'],
-      [{ days: { monday: true, tuesday: true } }, 'Monday and Tuesday'],
-      [{ days: { monday: true, tuesday: true, wednesday: true } }, 'Monday, Tuesday and Wednesday'],
+      [{ days: ['monday'] as dayValues[] }, 'a Monday'],
+      [{ days: ['monday', 'tuesday'] as dayValues[] }, 'Monday and Tuesday'],
+      [{ days: ['monday', 'tuesday', 'wednesday'] as dayValues[] }, 'Monday, Tuesday and Wednesday'],
     ])('returns the correct name for %s', (whichDays: WhichDays, expectedFormattedDays) => {
       expect(formatWhichDaysSessionValue(whichDays)).toEqual(expectedFormattedDays)
     })

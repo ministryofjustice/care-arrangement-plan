@@ -108,15 +108,7 @@ describe('addLivingAndVisiting', () => {
         overnightVisits: {
           willHappen: true,
           whichDays: {
-            days: {
-              monday: true,
-              tuesday: false,
-              wednesday: true,
-              thursday: false,
-              friday: true,
-              saturday: false,
-              sunday: false,
-            },
+            days: ['monday', 'wednesday', 'friday'],
           },
         },
         daytimeVisits: {

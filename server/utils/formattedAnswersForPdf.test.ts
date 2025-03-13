@@ -165,15 +165,7 @@ describe('formattedAnswers', () => {
         overnightVisits: {
           willHappen: true,
           whichDays: {
-            days: {
-              monday: true,
-              tuesday: false,
-              wednesday: true,
-              thursday: false,
-              friday: true,
-              saturday: false,
-              sunday: false,
-            },
+            days: ['monday', 'wednesday', 'friday'],
           },
         },
         daytimeVisits: {
@@ -208,15 +200,7 @@ describe('formattedAnswers', () => {
         daytimeVisits: {
           willHappen: true,
           whichDays: {
-            days: {
-              monday: false,
-              tuesday: false,
-              wednesday: false,
-              thursday: false,
-              friday: false,
-              saturday: true,
-              sunday: false,
-            },
+            days: ['saturday'],
           },
         },
       }
