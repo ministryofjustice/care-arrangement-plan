@@ -1,0 +1,43 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <form
+        class="form"
+        action="{{ paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS }}"
+        method="post"
+        novalidate
+      >
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {{
+          govukTextarea({
+            label: {
+              text: title,
+              classes: "govuk-label--l",
+              isPageHeading: true
+            },
+            hint: {
+              text: __('handoverAndHolidays.howChangeDuringSchoolHolidays.content')
+            },
+            name: formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, value: initialHowChangeDuringSchoolHolidays,
+            errorMessage: errors | findError(formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+      <form
+        class="form"
+        action="{{ paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED }}"
+        method="post"
+        novalidate
+      >
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

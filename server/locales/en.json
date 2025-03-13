@@ -141,6 +141,10 @@
     },
     "willChangeDuringSchoolHolidays": {
       "title": "Will these arrangements change during school holidays?"
+    },
+    "howChangeDuringSchoolHolidays": {
+      "title": "How will the arrangements be different in school holidays?",
+      "content": "School holidays include half terms, bank holidays and inset days."
     }
   },
   "specialDays": {

@@ -56,7 +56,10 @@ export type CAPSession = {
       noDecisionRequired: boolean
       willChange?: boolean
     }
-  }
+    howChangeDuringSchoolHolidays?: {
+      noDecisionRequired: boolean
+      answer?: string
+    }
   specialDays?: {
     whatWillHappen?: {
       noDecisionRequired: boolean

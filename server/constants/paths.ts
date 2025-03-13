@@ -30,6 +30,9 @@ export default {
   HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS: '/handover-and-holidays/will-change-during-school-holidays',
   HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED:
     '/handover-and-holidays/will-change-during-school-holidays/not-required',
+  HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS: '/handover-and-holidays/how-change-during-school-holidays',
+  HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED:
+    '/handover-and-holidays/how-change-during-school-holidays/not-required',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN: '/special-days/what-will-happen',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED: '/special-days/what-will-happen/not-required',
   DOWNLOAD_PDF: '/download-pdf',
