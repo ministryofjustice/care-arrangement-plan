@@ -161,6 +161,100 @@
         })
       }}
 
+      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays') }}</h2>
+      {{
+        govukSummaryList({
+          classes: "govuk-!-margin-bottom-9",
+          rows: [
+            {
+              key: {
+                text: __('handoverAndHolidays.getBetweenHouseholds.title')
+              },
+              value: {
+                text: values.getBetweenHouseholds
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.getBetweenHouseholds')
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: __('handoverAndHolidays.whereHandover.title')
+              },
+              value: {
+                text: values.whereHandover
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.whereHandover')
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: __('handoverAndHolidays.willChangeDuringSchoolHolidays.title')
+              },
+              value: {
+                text: values.willChangeDuringSchoolHolidays
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.willChangeDuringSchoolHolidays')
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: __('handoverAndHolidays.howChangeDuringSchoolHolidays.title')
+              },
+              value: {
+                text: values.howChangeDuringSchoolHolidays
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.howChangeDuringSchoolHolidays')
+                  }
+                ]
+              }
+            } if values.howChangeDuringSchoolHolidays else null,
+            {
+              key: {
+                text: __('handoverAndHolidays.itemsForChangeover.title')
+              },
+              value: {
+                text: values.itemsForChangeover
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.change.itemsForChangeover')
+                  }
+                ]
+              }
+            }
+          ]
+        })
+      }}
+
       <h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
       {{
         govukSummaryList({

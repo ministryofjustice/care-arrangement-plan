@@ -16,6 +16,20 @@ const session: Partial<SessionData> = {
       answer: 'whatWillHappenAnswer',
     },
   },
+  handoverAndHolidays: {
+    getBetweenHouseholds: {
+      noDecisionRequired: true,
+    },
+    whereHandover: {
+      noDecisionRequired: true,
+    },
+    willChangeDuringSchoolHolidays: {
+      noDecisionRequired: true,
+    },
+    itemsForChangeover: {
+      noDecisionRequired: true,
+    },
+  },
   livingAndVisiting: {
     mostlyLive: {
       where: 'other',

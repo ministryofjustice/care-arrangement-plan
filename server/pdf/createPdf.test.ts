@@ -23,6 +23,20 @@ describe('createPdf', () => {
           describeArrangement: 'livingAndVisitingArrangement',
         },
       },
+      handoverAndHolidays: {
+        getBetweenHouseholds: {
+          noDecisionRequired: true,
+        },
+        whereHandover: {
+          noDecisionRequired: true,
+        },
+        willChangeDuringSchoolHolidays: {
+          noDecisionRequired: true,
+        },
+        itemsForChangeover: {
+          noDecisionRequired: true,
+        },
+      },
       specialDays: {
         whatWillHappen: {
           noDecisionRequired: false,

@@ -3,7 +3,7 @@ import i18n from 'i18n'
 import { body, matchedData, validationResult } from 'express-validator'
 import paths from '../../constants/paths'
 import formFields from '../../constants/formFields'
-import { getBetweenHouseholds } from '../../@types/fields'
+import { getBetweenHouseholdsField } from '../../@types/fields'
 
 const getBetweenHouseholdsRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, (request, response) => {
@@ -34,7 +34,7 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
     (request, response) => {
       const formData = matchedData<{
         [formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT]: string
-        [formFields.GET_BETWEEN_HOUSEHOLDS]: getBetweenHouseholds
+        [formFields.GET_BETWEEN_HOUSEHOLDS]: getBetweenHouseholdsField
       }>(request, { onlyValidData: false })
       const errors = validationResult(request)
 
