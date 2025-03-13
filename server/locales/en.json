@@ -145,6 +145,10 @@
     "howChangeDuringSchoolHolidays": {
       "title": "How will the arrangements be different in school holidays?",
       "content": "School holidays include half terms, bank holidays and inset days."
+    },
+    "itemsForChangeover": {
+      "title": "What items need to go between households?",
+      "content": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes."
     }
   },
   "specialDays": {

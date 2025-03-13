@@ -83,7 +83,7 @@ describe(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
       ])
     })
 
-    it('should redirect to items transferred when the answer is entered and set howChangeDuringSchoolHolidays', async () => {
+    it('should redirect to items for changeover when the answer is entered and set howChangeDuringSchoolHolidays', async () => {
       const initialHandoverAndHolidays = { whereHandover: { noDecisionRequired: true } }
       sessionMock.handoverAndHolidays = initialHandoverAndHolidays
       const answer = 'response'
@@ -92,7 +92,7 @@ describe(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
         .post(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS)
         .send({ [formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS]: answer })
         .expect(302)
-        .expect('location', paths.HANDOVER_HOLIDAYS_ITEMS_TRANSFERRED)
+        .expect('location', paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
 
       expect(sessionMock.handoverAndHolidays).toEqual({
         ...initialHandoverAndHolidays,
@@ -103,14 +103,14 @@ describe(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
 })
 
 describe(`POST ${paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED}`, () => {
-  it('should redirect to items transferred when the answer is entered and set howChangeDuringSchoolHolidays', async () => {
+  it('should redirect to items for changeover when the answer is entered and set howChangeDuringSchoolHolidays', async () => {
     const initialHandoverAndHolidays = { whereHandover: { noDecisionRequired: true } }
     sessionMock.handoverAndHolidays = initialHandoverAndHolidays
 
     await request(app)
       .post(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED)
       .expect(302)
-      .expect('location', paths.HANDOVER_HOLIDAYS_ITEMS_TRANSFERRED)
+      .expect('location', paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
 
     expect(sessionMock.handoverAndHolidays).toEqual({
       ...initialHandoverAndHolidays,

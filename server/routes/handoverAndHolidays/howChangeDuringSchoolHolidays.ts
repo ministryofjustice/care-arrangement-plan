@@ -38,7 +38,7 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
         },
       }
 
-      return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_TRANSFERRED)
+      return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
     },
   )
 
@@ -50,7 +50,7 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
       },
     }
 
-    return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_TRANSFERRED)
+    return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
   })
 }
 

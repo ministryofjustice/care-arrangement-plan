@@ -85,14 +85,14 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
       ])
     })
 
-    it('should redirect to items transferred if the answer is no', async () => {
+    it('should redirect to items for changeover if the answer is no', async () => {
       sessionMock.handoverAndHolidays = { howChangeDuringSchoolHolidays: { noDecisionRequired: true } }
 
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
         .send({ [formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS]: 'No' })
         .expect(302)
-        .expect('location', paths.HANDOVER_HOLIDAYS_ITEMS_TRANSFERRED)
+        .expect('location', paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
 
       expect(sessionMock.handoverAndHolidays).toEqual({
         willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: false },
@@ -118,13 +118,13 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
 })
 
 describe(`POST ${paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED}`, () => {
-  it('should redirect to items transferred when the answer is entered and set willChangeDuringSchoolHolidays', async () => {
+  it('should redirect to items for changeover when the answer is entered and set willChangeDuringSchoolHolidays', async () => {
     sessionMock.handoverAndHolidays = { howChangeDuringSchoolHolidays: { noDecisionRequired: true } }
 
     await request(app)
       .post(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED)
       .expect(302)
-      .expect('location', paths.HANDOVER_HOLIDAYS_ITEMS_TRANSFERRED)
+      .expect('location', paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
 
     expect(sessionMock.handoverAndHolidays).toEqual({ willChangeDuringSchoolHolidays: { noDecisionRequired: true } })
   })

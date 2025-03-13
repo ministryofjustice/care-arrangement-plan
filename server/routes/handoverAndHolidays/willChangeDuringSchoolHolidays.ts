@@ -52,7 +52,7 @@ const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
 
       delete request.session.handoverAndHolidays?.howChangeDuringSchoolHolidays
 
-      return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_TRANSFERRED)
+      return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
     },
   )
 
@@ -65,7 +65,7 @@ const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
     }
     delete request.session.handoverAndHolidays?.howChangeDuringSchoolHolidays
 
-    return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_TRANSFERRED)
+    return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
   })
 }
 

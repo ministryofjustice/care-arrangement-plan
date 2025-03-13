@@ -23,6 +23,7 @@ enum formFields {
   WHERE_HANDOVER_SOMEONE_ELSE = 'where-handover-someone-else',
   WILL_CHANGE_DURING_SCHOOL_HOLIDAYS = 'will-change-during-school-holidays',
   HOW_CHANGE_DURING_SCHOOL_HOLIDAYS = 'how-change-during-school-holidays',
+  ITEMS_FOR_CHANGEOVER = 'items-for-changeover',
   SPECIAL_DAYS = 'special-days',
 }
 

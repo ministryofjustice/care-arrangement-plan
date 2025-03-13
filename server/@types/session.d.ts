@@ -60,6 +60,11 @@ export type CAPSession = {
       noDecisionRequired: boolean
       answer?: string
     }
+    itemsForChangeover?: {
+      noDecisionRequired: boolean
+      answer?: string
+    }
+  }
   specialDays?: {
     whatWillHappen?: {
       noDecisionRequired: boolean
