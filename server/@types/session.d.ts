@@ -1,17 +1,7 @@
-import { getBetweenHouseholds, whereHandoverField, whereMostlyLive } from './fields'
-
-export type Days = {
-  monday: boolean
-  tuesday: boolean
-  wednesday: boolean
-  thursday: boolean
-  friday: boolean
-  saturday: boolean
-  sunday: boolean
-}
+import { dayValues, getBetweenHouseholds, whereHandoverField, whereMostlyLive } from './fields'
 
 export type WhichDays = {
-  days?: days
+  days?: dayValues[]
   describeArrangement?: string
   noDecisionRequired?: boolean
 }

@@ -81,7 +81,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
       ])
 
       sessionMock.livingAndVisiting.overnightVisits.whichDays = {
-        days: { monday: true },
+        days: ['monday'],
       }
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)).text)
@@ -129,7 +129,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
 
     it('should render existing values correctly for day arrangement', async () => {
       sessionMock.livingAndVisiting.overnightVisits.whichDays = {
-        days: { monday: true, thursday: true },
+        days: ['monday', 'thursday'],
       }
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)).text)
@@ -235,15 +235,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
         overnightVisits: {
           willHappen: true,
           whichDays: {
-            days: {
-              monday: true,
-              tuesday: false,
-              wednesday: false,
-              thursday: true,
-              friday: false,
-              saturday: false,
-              sunday: false,
-            },
+            days: ['monday', 'thursday'],
           },
         },
       })

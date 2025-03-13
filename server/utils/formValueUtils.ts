@@ -1,7 +1,5 @@
 import { dayValues, whichDaysField, yesOrNo } from '../@types/fields'
-import { Days, WhichDays } from '../@types/session'
-
-const daysOfWeek: dayValues[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+import { WhichDays } from '../@types/session'
 
 export const formatListOfStrings = (words: string[]) => {
   switch (words.length) {
@@ -35,12 +33,7 @@ export const convertWhichDaysFieldToSessionValue = (
     return { describeArrangement }
   }
 
-  return {
-    days: daysOfWeek.reduce((acc, day) => {
-      acc[day] = whichDays.includes(day)
-      return acc
-    }, {} as Days),
-  }
+  return { days: whichDays as dayValues[] }
 }
 
 export const convertWhichDaysSessionValueToField = (whichDays: WhichDays | undefined): [whichDaysField, string?] => {
@@ -48,7 +41,7 @@ export const convertWhichDaysSessionValueToField = (whichDays: WhichDays | undef
     return [['other'], whichDays.describeArrangement]
   }
 
-  return [daysOfWeek.filter(day => whichDays?.days?.[day])]
+  return [whichDays?.days, undefined]
 }
 
 export const formatWhichDaysSessionValue = (whichDays: WhichDays | undefined): string => {
