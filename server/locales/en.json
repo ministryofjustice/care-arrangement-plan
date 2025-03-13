@@ -238,7 +238,7 @@
       "title": "Your proposed plan",
       "aboutThePlan": "About this child arrangements proposal",
       "senderSaid": "{{ senderName }} said:",
-      "senderSuggested": "{{ senderName }} suggested:",
+      "senderSuggested": "{{ senderName }} suggested:\n\"{{ suggestion }}\"",
       "senderSuggestedDoNotDecide": "{{ senderName }} suggested that this does not need to be decided.",
       "doYouAgree": "Do you agree?",
       "endOfSection": "End of section",
@@ -262,6 +262,11 @@
       },
       "handoverAndHolidays": {
         "suggestedCollects": "{{ senderName }} suggested that {{ adult }} collects the children.",
+        "suggestedHandover": "{{ senderName }} suggested that handover takes place at {{{ location }}}",
+        "neutralLocation": "a neutral location",
+        "home": "{{ adult }}'s home",
+        "school": "school",
+        "suggestedSomeoneElse": "{{ senderName }} suggested that someone else will manage handover. {{ senderName }} suggested:\n\"{{ someoneElse }}\"",
         "suggestedChangeDuringSchoolHolidays": "{{ senderName }} suggested that these arrangements should change during school holidays.",
         "suggestedNoChangeDuringSchoolHolidays": "{{ senderName }} suggested that these arrangements do not change during school holidays."
       },

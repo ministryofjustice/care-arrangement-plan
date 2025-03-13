@@ -56,7 +56,7 @@ const whereHandoverRoutes = (router: Router) => {
         whereHandover: {
           noDecisionRequired: false,
           where: whereHandover,
-          someoneElse,
+          someoneElse: whereHandover.includes('someoneElse') ? someoneElse : undefined,
         },
       }
 

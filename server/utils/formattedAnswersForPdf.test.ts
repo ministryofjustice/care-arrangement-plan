@@ -274,7 +274,7 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.initialAdultName} suggested that ${session.initialAdultName} collects the children.`,
-          whereHandover: `Neutral location, At ${session.initialAdultName}'s home, At school`,
+          whereHandover: `${session.initialAdultName} suggested that handover takes place at a neutral location, ${session.initialAdultName}'s home and school`,
           willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that these arrangements do not change during school holidays.`,
           itemsForChangeover: `${session.initialAdultName} suggested:\n"itemsForChangeover arrangement"`,
         },
@@ -297,7 +297,7 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.initialAdultName} suggested:\n"getBetweenHouseholds arrangement"`,
-          whereHandover: 'Grandma',
+          whereHandover: `${session.initialAdultName} suggested that someone else will manage handover. ${session.initialAdultName} suggested:\n"Grandma"`,
           willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that these arrangements should change during school holidays.`,
           howChangeDuringSchoolHolidays: `${session.initialAdultName} suggested:\n"howChangeDuringSchoolHolidays answer"`,
           itemsForChangeover: `${session.initialAdultName} suggested:\n"itemsForChangeover arrangement"`,
@@ -313,7 +313,7 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.initialAdultName} suggested that ${session.secondaryAdultName} collects the children.`,
-          whereHandover: `At ${session.secondaryAdultName}'s home`,
+          whereHandover: `${session.initialAdultName} suggested that handover takes place at ${session.secondaryAdultName}'s home`,
           willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that these arrangements should change during school holidays.`,
           howChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that this does not need to be decided.`,
           itemsForChangeover: `${session.initialAdultName} suggested:\n"itemsForChangeover arrangement"`,
