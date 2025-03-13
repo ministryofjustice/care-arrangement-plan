@@ -260,6 +260,11 @@
         "suggestedNoDaytimeVisits": "{{ senderName }} suggested that daytime visits do not happen at this time.",
         "suggestedDaytimeVisitDays": "{{ senderName }} suggested that daytime visits happen on {{ days }}."
       },
+      "handoverAndHolidays": {
+        "suggestedCollects": "{{ senderName }} suggested that {{ adult }} collects the children.",
+        "suggestedChangeDuringSchoolHolidays": "{{ senderName }} suggested that these arrangements should change during school holidays.",
+        "suggestedNoChangeDuringSchoolHolidays": "{{ senderName }} suggested that these arrangements do not change during school holidays."
+      },
       "whatHappensNowHeading": "What happens now?",
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.",
       "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.",
@@ -273,12 +278,20 @@
           "willDaytimeVisitsHappen": "If you do not agree, suggest whether the children will do daytime visits",
           "whichDaysDaytimeVisits": "If you do not agree, suggest when the children will do daytime visits"
         },
+        "handoverAndHolidays": {
+          "getBetweenHouseholds": "If you do not agree, suggest how the children get between households",
+          "whereHandover": "If you do not agree, suggest where handover takes place",
+          "willChangeDuringSchoolHolidays": "If you do not agree, suggest whether the arrangements should change during the holidays",
+          "howChangeDuringSchoolHolidays": "If you do not agree, suggest how the arrangements should change during the holidays",
+          "itemsForChangeover": "If you do not agree, suggest which items need to go between households"
+        },
         "specialDays": {
           "whatWillHappen": "If you do not agree, suggest what will happen on special days"
         }
       },
       "compromise": {
         "livingAndVisiting": "You can use this space to write your agreed compromise for the living and visiting section",
+        "handoverAndHolidays": "You can use this space to write your agreed compromise for the handovers and holidays section",
         "specialDays": "You can use this space to write your agreed compromise for the special days section"
       }
     }

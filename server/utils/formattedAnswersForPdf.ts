@@ -2,6 +2,7 @@ import i18n from 'i18n'
 import { CAPSession } from '../@types/session'
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers'
 import { formatWhichDaysSessionValue } from './formValueUtils'
+import { whereHandoverField } from '../@types/fields'
 
 const senderSuggested = (senderName: string, suggestion: string) =>
   `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName })}\n"${suggestion}"`
@@ -86,6 +87,84 @@ export const whichDaysDaytimeVisits = ({ livingAndVisiting, initialAdultName }: 
     days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays),
   })
 }
+
+export const getBetweenHouseholds = ({
+  handoverAndHolidays,
+  initialAdultName,
+  secondaryAdultName,
+}: Partial<CAPSession>) => {
+  if (handoverAndHolidays.getBetweenHouseholds.noDecisionRequired) {
+    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+  }
+  switch (handoverAndHolidays.getBetweenHouseholds.how) {
+    case 'initialCollects':
+      return i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
+        senderName: initialAdultName,
+        adult: initialAdultName,
+      })
+    case 'secondaryCollects':
+      return i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
+        senderName: initialAdultName,
+        adult: secondaryAdultName,
+      })
+    case 'other':
+      return senderSuggested(initialAdultName, handoverAndHolidays.getBetweenHouseholds.describeArrangement)
+    default:
+      return undefined
+  }
+}
+
+export const whereHandover = ({ handoverAndHolidays, initialAdultName, secondaryAdultName }: Partial<CAPSession>) => {
+  if (handoverAndHolidays.whereHandover.noDecisionRequired) {
+    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+  }
+
+  // TODO
+  const getAnswerForWhereHandoverWhere = (where: whereHandoverField) => {
+    switch (where) {
+      case 'neutral':
+        return i18n.__('handoverAndHolidays.whereHandover.neutralLocation')
+      case 'initialHome':
+        return i18n.__('handoverAndHolidays.whereHandover.atHome', { adult: initialAdultName })
+      case 'secondaryHome':
+        return i18n.__('handoverAndHolidays.whereHandover.atHome', { adult: secondaryAdultName })
+      case 'school':
+        return i18n.__('handoverAndHolidays.whereHandover.atSchool')
+      case 'someoneElse':
+        return handoverAndHolidays.whereHandover.someoneElse
+      default:
+        return undefined
+    }
+  }
+
+  return handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere).join(', ')
+}
+
+export const willChangeDuringSchoolHolidays = ({ handoverAndHolidays, initialAdultName }: Partial<CAPSession>) => {
+  if (handoverAndHolidays.willChangeDuringSchoolHolidays.noDecisionRequired) {
+    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+  }
+  return handoverAndHolidays.willChangeDuringSchoolHolidays.willChange
+    ? i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedChangeDuringSchoolHolidays', {
+        senderName: initialAdultName,
+      })
+    : i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedNoChangeDuringSchoolHolidays', {
+        senderName: initialAdultName,
+      })
+}
+
+export const howChangeDuringSchoolHolidays = ({ handoverAndHolidays, initialAdultName }: Partial<CAPSession>) => {
+  if (!handoverAndHolidays.howChangeDuringSchoolHolidays) return undefined
+
+  return handoverAndHolidays.howChangeDuringSchoolHolidays.noDecisionRequired
+    ? i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+    : senderSuggested(initialAdultName, handoverAndHolidays.howChangeDuringSchoolHolidays.answer)
+}
+
+export const itemsForChangeover = ({ handoverAndHolidays, initialAdultName }: Partial<CAPSession>) =>
+  handoverAndHolidays.itemsForChangeover.noDecisionRequired
+    ? i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+    : senderSuggested(initialAdultName, handoverAndHolidays.itemsForChangeover.answer)
 
 export const whatWillHappen = ({ specialDays, initialAdultName }: Partial<CAPSession>) =>
   specialDays.whatWillHappen.noDecisionRequired

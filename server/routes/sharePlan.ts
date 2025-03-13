@@ -10,6 +10,11 @@ import {
   whichSchedule,
   willDaytimeVisitsHappen,
   willOvernightsHappen,
+  getBetweenHouseholds,
+  whereHandover,
+  willChangeDuringSchoolHolidays,
+  howChangeDuringSchoolHolidays,
+  itemsForChangeover,
 } from '../utils/formattedAnswersForPdf'
 
 const sharePlanRoutes = (router: Router) => {
@@ -28,6 +33,11 @@ const sharePlanRoutes = (router: Router) => {
         whichDaysOvernightAnswer: whichDaysOvernight(request.session),
         willDaytimeVisitsHappenAnswer: willDaytimeVisitsHappen(request.session),
         whichDaysDaytimeVisitsAnswer: whichDaysDaytimeVisits(request.session),
+        getBetweenHouseholdsAnswer: getBetweenHouseholds(request.session),
+        whereHandoverAnswer: whereHandover(request.session),
+        willChangeDuringSchoolHolidaysAnswer: willChangeDuringSchoolHolidays(request.session),
+        howChangeDuringSchoolHolidaysAnswer: howChangeDuringSchoolHolidays(request.session),
+        itemsForChangeoverAnswer: itemsForChangeover(request.session),
         whatWillHappenAnswer: whatWillHappen(request.session),
       },
     })
