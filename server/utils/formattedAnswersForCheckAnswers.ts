@@ -2,6 +2,7 @@ import i18n from 'i18n'
 import { formatWhichDaysSessionValue } from './formValueUtils'
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers'
 import { CAPSession } from '../@types/session'
+import { whereHandoverField } from '../@types/fields'
 
 export const mostlyLive = (session: Partial<CAPSession>) => {
   const { livingAndVisiting, initialAdultName, secondaryAdultName } = session
@@ -70,6 +71,71 @@ export const whichDaysDaytimeVisits = (session: Partial<CAPSession>) => {
     days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays),
   })
 }
+
+export const getBetweenHouseholds = ({
+  handoverAndHolidays,
+  initialAdultName,
+  secondaryAdultName,
+}: Partial<CAPSession>) => {
+  if (handoverAndHolidays.getBetweenHouseholds.noDecisionRequired) {
+    return i18n.__('doNotNeedToDecide')
+  }
+  switch (handoverAndHolidays.getBetweenHouseholds.how) {
+    case 'initialCollects':
+      return i18n.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: initialAdultName })
+    case 'secondaryCollects':
+      return i18n.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: secondaryAdultName })
+    case 'other':
+      return handoverAndHolidays.getBetweenHouseholds.describeArrangement
+    default:
+      return undefined
+  }
+}
+
+export const whereHandover = ({ handoverAndHolidays, initialAdultName, secondaryAdultName }: Partial<CAPSession>) => {
+  if (handoverAndHolidays.whereHandover.noDecisionRequired) {
+    return i18n.__('doNotNeedToDecide')
+  }
+
+  const getAnswerForWhereHandoverWhere = (where: whereHandoverField) => {
+    switch (where) {
+      case 'neutral':
+        return i18n.__('handoverAndHolidays.whereHandover.neutralLocation')
+      case 'initialHome':
+        return i18n.__('handoverAndHolidays.whereHandover.atHome', { adult: initialAdultName })
+      case 'secondaryHome':
+        return i18n.__('handoverAndHolidays.whereHandover.atHome', { adult: secondaryAdultName })
+      case 'school':
+        return i18n.__('handoverAndHolidays.whereHandover.atSchool')
+      case 'someoneElse':
+        return handoverAndHolidays.whereHandover.someoneElse
+      default:
+        return undefined
+    }
+  }
+
+  return handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere).join(', ')
+}
+
+export const willChangeDuringSchoolHolidays = ({ handoverAndHolidays }: Partial<CAPSession>) => {
+  if (handoverAndHolidays.willChangeDuringSchoolHolidays.noDecisionRequired) {
+    return i18n.__('doNotNeedToDecide')
+  }
+  return handoverAndHolidays.willChangeDuringSchoolHolidays.willChange ? i18n.__('yes') : i18n.__('no')
+}
+
+export const howChangeDuringSchoolHolidays = ({ handoverAndHolidays }: Partial<CAPSession>) => {
+  if (!handoverAndHolidays.howChangeDuringSchoolHolidays) return undefined
+
+  return handoverAndHolidays.howChangeDuringSchoolHolidays.noDecisionRequired
+    ? i18n.__('doNotNeedToDecide')
+    : handoverAndHolidays.howChangeDuringSchoolHolidays.answer
+}
+
+export const itemsForChangeover = ({ handoverAndHolidays }: Partial<CAPSession>) =>
+  handoverAndHolidays.itemsForChangeover.noDecisionRequired
+    ? i18n.__('doNotNeedToDecide')
+    : handoverAndHolidays.itemsForChangeover.answer
 
 export const whatWillHappen = ({ specialDays }: Partial<CAPSession>) =>
   specialDays.whatWillHappen.noDecisionRequired ? i18n.__('doNotNeedToDecide') : specialDays.whatWillHappen.answer

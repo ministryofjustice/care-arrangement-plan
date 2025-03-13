@@ -11,6 +11,11 @@ import {
   whichSchedule,
   willDaytimeVisitsHappen,
   willOvernightsHappen,
+  getBetweenHouseholds,
+  whereHandover,
+  willChangeDuringSchoolHolidays,
+  howChangeDuringSchoolHolidays,
+  itemsForChangeover,
 } from '../utils/formattedAnswersForCheckAnswers'
 
 const checkYourAnswersRoutes = (router: Router) => {
@@ -30,6 +35,11 @@ const checkYourAnswersRoutes = (router: Router) => {
         whichDaysOvernight: whichDaysOvernight(request.session),
         willDaytimeVisitsHappen: willDaytimeVisitsHappen(request.session),
         whichDaysDaytimeVisits: whichDaysDaytimeVisits(request.session),
+        getBetweenHouseholds: getBetweenHouseholds(request.session),
+        whereHandover: whereHandover(request.session),
+        willChangeDuringSchoolHolidays: willChangeDuringSchoolHolidays(request.session),
+        howChangeDuringSchoolHolidays: howChangeDuringSchoolHolidays(request.session),
+        itemsForChangeover: itemsForChangeover(request.session),
         whatWillHappen: whatWillHappen(request.session),
       },
     })

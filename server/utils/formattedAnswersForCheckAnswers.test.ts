@@ -3,12 +3,18 @@ import request from 'supertest'
 import { SessionData } from 'express-session'
 import { sessionMock } from '../test-utils/testMocks'
 import setUpi18n from '../middleware/setUpi18n'
+import { getBetweenHouseholdsField, whereHandoverField } from '../@types/fields'
 import {
+  getBetweenHouseholds,
+  howChangeDuringSchoolHolidays,
+  itemsForChangeover,
   mostlyLive,
   whatWillHappen,
+  whereHandover,
   whichDaysDaytimeVisits,
   whichDaysOvernight,
   whichSchedule,
+  willChangeDuringSchoolHolidays,
   willDaytimeVisitsHappen,
   willOvernightsHappen,
 } from './formattedAnswersForCheckAnswers'
@@ -29,6 +35,13 @@ const testAppSetup = (): Express => {
         willDaytimeVisitsHappen: willDaytimeVisitsHappen(sessionMock),
         whichDaysDaytimeVisits: whichDaysDaytimeVisits(sessionMock),
       },
+      handoverAndHolidays: {
+        getBetweenHouseholds: getBetweenHouseholds(sessionMock),
+        whereHandover: whereHandover(sessionMock),
+        willChangeDuringSchoolHolidays: willChangeDuringSchoolHolidays(sessionMock),
+        howChangeDuringSchoolHolidays: howChangeDuringSchoolHolidays(sessionMock),
+        itemsForChangeover: itemsForChangeover(sessionMock),
+      },
       specialDays: {
         whatWillHappen: whatWillHappen(sessionMock),
       },
@@ -45,12 +58,26 @@ const session: Partial<SessionData> = {
   numberOfChildren: 3,
   initialAdultName: 'Sarah',
   secondaryAdultName: 'Steph',
+  livingAndVisiting: {},
+  handoverAndHolidays: {
+    getBetweenHouseholds: {
+      noDecisionRequired: true,
+    },
+    whereHandover: {
+      noDecisionRequired: true,
+    },
+    willChangeDuringSchoolHolidays: {
+      noDecisionRequired: true,
+    },
+    itemsForChangeover: {
+      noDecisionRequired: true,
+    },
+  },
   specialDays: {
     whatWillHappen: {
       noDecisionRequired: true,
     },
   },
-  livingAndVisiting: {},
 }
 
 describe('formattedAnswers', () => {
@@ -213,6 +240,90 @@ describe('formattedAnswers', () => {
             willDaytimeVisitsHappen: 'Yes',
             whichDaysDaytimeVisits: `The children will have daytime visits with ${session.initialAdultName} on a Saturday`,
           })
+        })
+    })
+  })
+
+  describe('handoverAndHolidays', () => {
+    it.each([
+      [
+        {
+          getBetweenHouseholds: { noDecisionRequired: true },
+          whereHandover: { noDecisionRequired: true },
+          willChangeDuringSchoolHolidays: { noDecisionRequired: true },
+          itemsForChangeover: { noDecisionRequired: true },
+        },
+        {
+          getBetweenHouseholds: 'We do not need to decide this',
+          whereHandover: 'We do not need to decide this',
+          willChangeDuringSchoolHolidays: 'We do not need to decide this',
+          itemsForChangeover: 'We do not need to decide this',
+        },
+      ],
+      [
+        {
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
+          whereHandover: {
+            noDecisionRequired: false,
+            where: ['neutral', 'initialHome', 'school'] as whereHandoverField[],
+          },
+          willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: false },
+          itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
+        },
+        {
+          getBetweenHouseholds: `${session.initialAdultName} collects the children`,
+          whereHandover: `Neutral location, At ${session.initialAdultName}'s home, At school`,
+          willChangeDuringSchoolHolidays: 'No',
+          itemsForChangeover: 'itemsForChangeover arrangement',
+        },
+      ],
+      [
+        {
+          getBetweenHouseholds: {
+            noDecisionRequired: false,
+            how: 'other' as getBetweenHouseholdsField,
+            describeArrangement: 'getBetweenHouseholds arrangement',
+          },
+          whereHandover: {
+            noDecisionRequired: false,
+            where: ['someoneElse'] as whereHandoverField[],
+            someoneElse: 'Grandma',
+          },
+          willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
+          howChangeDuringSchoolHolidays: { noDecisionRequired: false, answer: 'howChangeDuringSchoolHolidays answer' },
+          itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
+        },
+        {
+          getBetweenHouseholds: 'getBetweenHouseholds arrangement',
+          whereHandover: 'Grandma',
+          willChangeDuringSchoolHolidays: 'Yes',
+          howChangeDuringSchoolHolidays: 'howChangeDuringSchoolHolidays answer',
+          itemsForChangeover: 'itemsForChangeover arrangement',
+        },
+      ],
+      [
+        {
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'secondaryCollects' as getBetweenHouseholdsField },
+          whereHandover: { noDecisionRequired: false, where: ['secondaryHome'] as whereHandoverField[] },
+          willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
+          howChangeDuringSchoolHolidays: { noDecisionRequired: true },
+          itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
+        },
+        {
+          getBetweenHouseholds: `${session.secondaryAdultName} collects the children`,
+          whereHandover: `At ${session.secondaryAdultName}'s home`,
+          willChangeDuringSchoolHolidays: 'Yes',
+          howChangeDuringSchoolHolidays: 'We do not need to decide this',
+          itemsForChangeover: 'itemsForChangeover arrangement',
+        },
+      ],
+    ])('should return the correct value for handover and holidays', (handoverAndHolidays, expectedValues) => {
+      sessionMock.handoverAndHolidays = handoverAndHolidays
+
+      return request(app)
+        .get(testPath)
+        .expect(response => {
+          expect(response.body.handoverAndHolidays).toEqual(expectedValues)
         })
     })
   })
