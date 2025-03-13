@@ -5,6 +5,7 @@ import addWhatHappensNow from './addWhatHappensNow'
 import addSpecialDays from './addSpecialDays'
 import addAboutTheProposal from './addAboutTheProposal'
 import addLivingAndVisiting from './addLivingAndVisiting'
+import addHandoverAndHolidays from './addHandoverAndHolidays'
 
 const createPdf = (autoPrint: boolean, request: Request) => {
   const pdf = new Pdf(autoPrint)
@@ -14,6 +15,7 @@ const createPdf = (autoPrint: boolean, request: Request) => {
 
   addAboutTheProposal(pdf, request)
   addLivingAndVisiting(pdf, request)
+  addHandoverAndHolidays(pdf, request)
   addSpecialDays(pdf, request)
   addWhatHappensNow(pdf, request)
 
