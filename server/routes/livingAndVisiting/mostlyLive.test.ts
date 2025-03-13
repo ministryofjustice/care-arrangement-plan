@@ -14,7 +14,6 @@ const session: Partial<SessionData> = {
   numberOfChildren: 3,
   initialAdultName: 'Sarah',
   secondaryAdultName: 'Steph',
-  livingAndVisiting: {},
 }
 
 describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
@@ -89,9 +88,11 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
         { [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: arrangement, [formFields.MOSTLY_LIVE_WHERE]: 'other' },
       ])
 
-      sessionMock.livingAndVisiting.mostlyLive = {
-        where: 'withInitial',
-        describeArrangement: 'wrong arrangement',
+      sessionMock.livingAndVisiting = {
+        mostlyLive: {
+          where: 'withInitial',
+          describeArrangement: 'wrong arrangement',
+        },
       }
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE)).text)
@@ -105,9 +106,11 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
     it('should render field previous values correctly', async () => {
       const arrangement = 'arrangement'
 
-      sessionMock.livingAndVisiting.mostlyLive = {
-        where: 'other',
-        describeArrangement: arrangement,
+      sessionMock.livingAndVisiting = {
+        mostlyLive: {
+          where: 'other',
+          describeArrangement: arrangement,
+        },
       }
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE)).text)

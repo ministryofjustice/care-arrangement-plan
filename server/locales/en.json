@@ -125,6 +125,32 @@
       "title": "On which days will daytime visits happen?"
     }
   },
+  "handoverAndHolidays": {
+    "getBetweenHouseholds": {
+      "title": "How will the children get between households?",
+      "collectsTheChildren": "{{ adult }} collects the children"
+    },
+    "whereHandover": {
+      "title": "Where does handover take place?",
+      "explainer": "It may be easier for children if the handover takes place at a neutral location such as a park or railway station.",
+      "neutralLocation": "Neutral location",
+      "atHome": "At {{ adult }}'s home",
+      "atSchool": "At school",
+      "someoneElse": "Someone else will manage handover, such as a grandparent",
+      "someoneElseName": "Name of the person who will manage handover"
+    },
+    "willChangeDuringSchoolHolidays": {
+      "title": "Will these arrangements change during school holidays?"
+    },
+    "howChangeDuringSchoolHolidays": {
+      "title": "How will the arrangements be different in school holidays?",
+      "content": "School holidays include half terms, bank holidays and inset days."
+    },
+    "itemsForChangeover": {
+      "title": "What items need to go between households?",
+      "content": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes."
+    }
+  },
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",

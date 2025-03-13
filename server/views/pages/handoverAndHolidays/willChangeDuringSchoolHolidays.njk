@@ -1,0 +1,53 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <form
+        class="form"
+        action="{{ paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS }}"
+        method="post"
+        novalidate
+      >
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {{
+          govukRadios({
+            name: formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: __('yes')
+              },
+              {
+                value: "No",
+                text: __('no')
+              }
+            ],
+            value: formValues[formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS],
+            errorMessage: errors | findError(formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+      <form
+        class="form"
+        action="{{ paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED }}"
+        method="post"
+        novalidate
+      >
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

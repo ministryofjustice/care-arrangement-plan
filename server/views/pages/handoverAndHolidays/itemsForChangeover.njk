@@ -1,0 +1,39 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {{
+          govukTextarea({
+            label: {
+              text: title,
+              classes: "govuk-label--l",
+              isPageHeading: true
+            },
+            hint: {
+              text: __('handoverAndHolidays.itemsForChangeover.content')
+            },
+            name: formFields.ITEMS_FOR_CHANGEOVER,
+            value: initialItemsForChangeover,
+            errorMessage: errors | findError(formFields.ITEMS_FOR_CHANGEOVER)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+      <form
+        class="form"
+        action="{{ paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED }}"
+        method="post"
+        novalidate
+      >
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

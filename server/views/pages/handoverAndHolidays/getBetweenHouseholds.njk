@@ -1,0 +1,70 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+        {% set describeArrangementHtml %}
+          {{
+            govukTextarea({
+              name: formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT,
+              label: {
+                text: __('describeArrangement')
+              },
+              value: formValues[formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT],
+              errorMessage: errors | findError(formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT)
+            })
+          }}
+        {% endset -%}
+
+        {{
+          govukRadios({
+            name: formFields.GET_BETWEEN_HOUSEHOLDS,
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            items: [
+              {
+                value: "initialCollects",
+                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.initialAdultName})
+              },
+              {
+                value: "secondaryCollects",
+                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.secondaryAdultName})
+              },
+              {
+                value: "other",
+                text: __('anotherArrangement'),
+                conditional: {
+                  html: describeArrangementHtml
+                }
+              }
+            ],
+            value: formValues[formFields.GET_BETWEEN_HOUSEHOLDS],
+            errorMessage: errors | findError(formFields.GET_BETWEEN_HOUSEHOLDS)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+      <form
+        class="form"
+        action="{{ paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS_NOT_REQUIRED }}"
+        method="post"
+        novalidate
+      >
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
