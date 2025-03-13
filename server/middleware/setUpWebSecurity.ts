@@ -24,7 +24,13 @@ const setUpWebSecurity = (): Router => {
           // <link href="http://example.com/" rel="stylesheet" nonce="{{ cspNonce }}">
           // This ensures only scripts we trust are loaded, and not anything injected into the
           // page by an attacker.
-          scriptSrc: ["'self'", (_req: Request, response: Response) => `'nonce-${response.locals.cspNonce}'`],
+          scriptSrc: [
+            "'self'",
+            (_request: Request, reponse: Response) => `'nonce-${reponse.locals.cspNonce}'`,
+            'https://*.googletagmanager.com',
+          ],
+          imgSrc: ["'self'", 'data:', 'https://*.googletagmanager.com'],
+          connectSrc: ['https://*.googletagmanager.com'],
           styleSrc: ["'self'", (_req: Request, response: Response) => `'nonce-${response.locals.cspNonce}'`],
           fontSrc: ["'self'"],
           formAction: ["'self'"],

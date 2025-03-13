@@ -9,6 +9,16 @@
 {% block head %}
   <meta name="robots" content="noindex, nofollow" />
   <link href="{{ '/assets/css/app.css' | assetMap }}" rel="stylesheet" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-97NRQW5JEZ"></script>
+  <script nonce="{{ cspNonce }}">
+    window.dataLayer = window.dataLayer || []
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+    gtag('js', new Date())
+
+    gtag('config', 'G-97NRQW5JEZ')
+  </script>
 {% endblock %}
 
 {% block beforeContent %}
