@@ -94,10 +94,13 @@
   "taskList": {
     "title": "Child arrangements plan for {{ names }}",
     "completed": "Completed",
+    "incomplete": "Incomplete",
+    "cannotStart": "Cannot start yet",
     "whoThePlanIsFor": "Who the plan is for",
     "theChildren": "The children",
     "whoIsUsing": "Who is using this service?",
     "livingAndVisiting": "Living and visiting",
+    "handoverAndHolidays": "Handovers and holidays",
     "specialDays": "Special days"
   },
   "livingAndVisiting": {

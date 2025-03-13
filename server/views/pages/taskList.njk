@@ -1,6 +1,25 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/task-list/macro.njk" import govukTaskList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{%
+  set completeStatus = {
+    text: __('taskList.completed')
+  }
+%}
+{%
+  set incompleteStatus = {
+  tag: {
+    text: __('taskList.incomplete'),
+    classes: "govuk-tag--blue"
+    }
+  }
+%}
+{%
+  set cannotStartStatus = {
+    text: __('taskList.cannotStart'),
+    classes: "govuk-task-list__status--cannot-start-yet"
+  }
+%}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -16,18 +35,14 @@
                 text: __('taskList.theChildren')
               },
               href: paths.NUMBER_OF_CHILDREN,
-              status: {
-                text: __('taskList.completed')
-              }
+              status: completeStatus
             },
             {
               title: {
                 text: __('taskList.whoIsUsing')
               },
               href: paths.ABOUT_THE_ADULTS,
-              status: {
-                text: __('taskList.completed')
-              }
+              status: completeStatus
             }
           ]
         })
@@ -42,14 +57,43 @@
                 text: __('livingAndVisiting.mostlyLive.title')
               },
               href: paths.LIVING_VISITING_MOSTLY_LIVE,
-              status: {
-                text: __('taskList.completed')
-              } if mostlyLiveComplete else {
-                tag: {
-                  text: "Incomplete",
-                  classes: "govuk-tag--blue"
-                }
-              }
+              status: completeStatus if mostlyLiveComplete else incompleteStatus
+            }
+          ]
+        })
+      }}
+
+      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays') }}</h2>
+      {{
+        govukTaskList({
+          items: [
+            {
+              title: {
+                text: __('handoverAndHolidays.getBetweenHouseholds.title')
+              },
+              href: paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS,
+              status: completeStatus if getBetweenHouseholdsComplete else incompleteStatus
+            },
+            {
+              title: {
+                text: __('handoverAndHolidays.whereHandover.title')
+              },
+              href: paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER if getBetweenHouseholdsComplete else null,
+              status: completeStatus if whereHandoverComplete else (incompleteStatus if getBetweenHouseholdsComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('handoverAndHolidays.willChangeDuringSchoolHolidays.title')
+              },
+              href: paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS if whereHandoverComplete else null,
+              status: completeStatus if willChangeDuringSchoolHolidaysComplete else (incompleteStatus if whereHandoverComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('handoverAndHolidays.itemsForChangeover.title')
+              },
+              href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
+              status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
             }
           ]
         })
@@ -64,14 +108,7 @@
                 text: __('specialDays.whatWillHappen.title')
               },
               href: paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN,
-              status: {
-                text: __('taskList.completed')
-              } if whatWillHappenComplete else {
-                tag: {
-                  text: "Incomplete",
-                  classes: "govuk-tag--blue"
-                }
-              }
+              status: completeStatus if whatWillHappenComplete else incompleteStatus
             }
           ]
         })

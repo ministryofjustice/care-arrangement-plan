@@ -28,4 +28,20 @@ export const mostlyLiveComplete = (session: Partial<CAPSession>) => {
   return overnightComplete && daytimeVisitsComplete
 }
 
+export const getBetweenHouseholdsComplete = (session: Partial<CAPSession>) =>
+  !!session.handoverAndHolidays?.getBetweenHouseholds
+
+export const whereHandoverComplete = (session: Partial<CAPSession>) => !!session.handoverAndHolidays?.whereHandover
+
+export const willChangeDuringSchoolHolidaysComplete = ({ handoverAndHolidays }: Partial<CAPSession>) => {
+  if (!handoverAndHolidays?.willChangeDuringSchoolHolidays) return false
+
+  return !(
+    handoverAndHolidays.willChangeDuringSchoolHolidays.willChange && !handoverAndHolidays.howChangeDuringSchoolHolidays
+  )
+}
+
+export const itemsForChangeoverComplete = (session: Partial<CAPSession>) =>
+  !!session.handoverAndHolidays?.itemsForChangeover
+
 export const whatWillHappenComplete = (session: Partial<CAPSession>) => !!session.specialDays?.whatWillHappen

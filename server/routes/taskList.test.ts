@@ -15,6 +15,20 @@ const session: Partial<SessionData> = {
       describeArrangement: 'arrangement',
     },
   },
+  handoverAndHolidays: {
+    getBetweenHouseholds: {
+      noDecisionRequired: true,
+    },
+    whereHandover: {
+      noDecisionRequired: true,
+    },
+    willChangeDuringSchoolHolidays: {
+      noDecisionRequired: true,
+    },
+    itemsForChangeover: {
+      noDecisionRequired: true,
+    },
+  },
   specialDays: {
     whatWillHappen: {
       noDecisionRequired: true,
@@ -42,6 +56,46 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
   it('should not render the continue button if the where will the children mostly live section is not filled out', async () => {
     sessionMock.livingAndVisiting = null
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)
+
+    const dom = new JSDOM(response.text)
+
+    expect(dom.window.document.querySelector('[role="button"]')).toBeNull()
+  })
+
+  it('should not render the continue button if the get between households section is not filled out', async () => {
+    sessionMock.handoverAndHolidays.getBetweenHouseholds = null
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)
+
+    const dom = new JSDOM(response.text)
+
+    expect(dom.window.document.querySelector('[role="button"]')).toBeNull()
+  })
+
+  it('should not render the continue button if the where handover section is not filled out', async () => {
+    sessionMock.handoverAndHolidays.whereHandover = null
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)
+
+    const dom = new JSDOM(response.text)
+
+    expect(dom.window.document.querySelector('[role="button"]')).toBeNull()
+  })
+
+  it('should not render the continue button if the will change during school holidays section is not filled out', async () => {
+    sessionMock.handoverAndHolidays.willChangeDuringSchoolHolidays = null
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)
+
+    const dom = new JSDOM(response.text)
+
+    expect(dom.window.document.querySelector('[role="button"]')).toBeNull()
+  })
+
+  it('should not render the continue button if the items for changeover section is not filled out', async () => {
+    sessionMock.handoverAndHolidays.itemsForChangeover = null
 
     const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)
 

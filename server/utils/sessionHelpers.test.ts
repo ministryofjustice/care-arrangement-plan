@@ -1,4 +1,4 @@
-import { mostlyLiveComplete } from './sessionHelpers'
+import { mostlyLiveComplete, willChangeDuringSchoolHolidaysComplete } from './sessionHelpers'
 import { CAPSession } from '../@types/session'
 
 describe('sessionHelpers', () => {
@@ -168,6 +168,68 @@ describe('sessionHelpers', () => {
       }
 
       expect(mostlyLiveComplete(session)).toEqual(false)
+    })
+  })
+
+  describe('willChangeDuringSchoolHolidaysComplete', () => {
+    test('returns false if the will change during holidays is not filled out', () => {
+      const session: Partial<CAPSession> = {}
+
+      expect(willChangeDuringSchoolHolidaysComplete(session)).toEqual(false)
+    })
+
+    test('returns false if the will change during holidays is true but the how change is not filled out', () => {
+      const session: Partial<CAPSession> = {
+        handoverAndHolidays: {
+          willChangeDuringSchoolHolidays: {
+            willChange: true,
+            noDecisionRequired: false,
+          },
+        },
+      }
+
+      expect(willChangeDuringSchoolHolidaysComplete(session)).toEqual(false)
+    })
+
+    test('returns true if the will change during holidays is true and the how change is filled out', () => {
+      const session: Partial<CAPSession> = {
+        handoverAndHolidays: {
+          willChangeDuringSchoolHolidays: {
+            willChange: true,
+            noDecisionRequired: false,
+          },
+          howChangeDuringSchoolHolidays: {
+            noDecisionRequired: true,
+          },
+        },
+      }
+
+      expect(willChangeDuringSchoolHolidaysComplete(session)).toEqual(true)
+    })
+
+    test('returns true if the will change during holidays is false', () => {
+      const session: Partial<CAPSession> = {
+        handoverAndHolidays: {
+          willChangeDuringSchoolHolidays: {
+            willChange: false,
+            noDecisionRequired: false,
+          },
+        },
+      }
+
+      expect(willChangeDuringSchoolHolidaysComplete(session)).toEqual(true)
+    })
+
+    test('returns true if the will change during holidays is no decision required', () => {
+      const session: Partial<CAPSession> = {
+        handoverAndHolidays: {
+          willChangeDuringSchoolHolidays: {
+            noDecisionRequired: true,
+          },
+        },
+      }
+
+      expect(willChangeDuringSchoolHolidaysComplete(session)).toEqual(true)
     })
   })
 })
