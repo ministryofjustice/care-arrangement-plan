@@ -124,6 +124,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
         { name = "VALKEY_ENABLED", value = "false" },
         { name = "NODE_ENV", value = "production" },
         { name = "INCLUDE_WELSH_LANGUAGE", value = "false" },
+        { name = "GA4_ID", value = var.ga4_id },
       ]
     }
   ])

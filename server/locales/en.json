@@ -33,6 +33,17 @@
       "tryReloading": "You can try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
     }
   },
+  "cookieBanner": {
+    "title": "Cookies on Propose a child arrangements plan",
+    "acceptCookies": "Accept analytics cookies",
+    "rejectCookies": "Reject analytics cookies",
+    "viewCookies": "View cookies",
+    "hideCookieMessage": "Hide cookie message",
+    "useEssentialCookies": "We use some essential cookies to make this service work.",
+    "useAnalyticsCookies": "We’d also like to use analytics cookies so we can understand how you use the service and make improvements.",
+    "acceptedAnalyticsCookies": "You’ve accepted analytics cookies. You can <a class=\"govuk-link\" href={{ cookiesUrl }} >change your cookie settings</a> at any time.",
+    "rejectedAnalyticsCookies": "You’ve rejected analytics cookies. You can <a class=\"govuk-link\" href={{ cookiesUrl }} >change your cookie settings</a> at any time."
+  },
   "safetyCheck": {
     "title": "Safety check",
     "workWithPartner": "This service asks you to work with your parenting partner to agree a plan for your children. You need to be able to state your needs and views without feeling intimidated.",

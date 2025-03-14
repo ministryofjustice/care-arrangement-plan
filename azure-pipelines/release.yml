@@ -58,6 +58,7 @@ stages:
                   -var "git_branch=$(Build.SourceBranchName)" \
                   -var "session_secret=$(TestSessionSecret)" \
                   -var "beta_access_passwords=$(TestBetaAccessPassword)"
+                  -var "ga4_id=G-97NRQW5JEZ"
   - stage: production
     displayName: Deploy to Production
     condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'main'))

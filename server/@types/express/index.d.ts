@@ -14,5 +14,10 @@ export declare global {
       flash(type: 'formValues'): Record<string, string | string[] | number[]>[]
       flash(type: 'formValues', message: Record<string, string | string[] | number[]>): number
     }
+
+    interface Locals {
+      analyticsEnabled?: boolean
+      ga4Id?: string
+    }
   }
 }

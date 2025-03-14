@@ -1,0 +1,75 @@
+{% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
+
+{% set html %}
+  <p class="govuk-body">{{ __('cookieBanner.useEssentialCookies') }}</p>
+  <p class="govuk-body">{{ __('cookieBanner.useAnalyticsCookies') }}</p>
+{% endset %}
+
+{% set acceptHtml %}
+  <p class="govuk-body">{{ __('cookieBanner.acceptedAnalyticsCookies', {cookiesUrl: paths.COOKIES}) | safe }}</p>
+{% endset %}
+
+{% set rejectHtml %}
+  <p class="govuk-body">{{ __('cookieBanner.rejectedAnalyticsCookies', {cookiesUrl: paths.COOKIES}) | safe }}</p>
+{% endset %}
+
+{{
+  govukCookieBanner({
+    ariaLabel: __('cookieBanner.title'),
+    attributes: {
+      id: "cookie-banner"
+    },
+    hidden: true,
+    messages: [
+      {
+        headingText: __('cookieBanner.title'),
+        attributes: {
+          id: "cookie-banner-main"
+        },
+        html: html,
+        actions: [
+          {
+            text: __('cookieBanner.acceptCookies'),
+            type: "button",
+            value: "yes"
+          },
+          {
+            text: __('cookieBanner.rejectCookies'),
+            type: "button",
+            value: "no"
+          },
+          {
+            text: __('cookieBanner.viewCookies'),
+            href: paths.COOKIES
+          }
+        ]
+      },
+      {
+        html: acceptHtml,
+        attributes: {
+          id: "cookie-banner-accepted"
+        },
+        hidden: true,
+        actions: [
+          {
+            text: __('cookieBanner.hideCookieMessage'),
+            type: "button"
+          }
+        ]
+      },
+      {
+        html: rejectHtml,
+        attributes: {
+          id: "cookie-banner-rejected"
+        },
+        hidden: true,
+        actions: [
+          {
+            text: __('cookieBanner.hideCookieMessage'),
+            type: "button"
+          }
+        ]
+      }
+    ]
+  })
+}}

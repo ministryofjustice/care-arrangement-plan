@@ -30,8 +30,14 @@ variable "session_secret" {
 }
 
 variable "beta_access_passwords" {
-  description = "The passwords use to gain beta access.  They should be comma delimited"
+  description = "The passwords use to gain beta access. They should be comma delimited"
   type        = string
   sensitive   = true
   nullable    = false
+}
+
+variable "ga4_id" {
+  description = "The GA4 ID"
+  type        = string
+  nullable    = true
 }
