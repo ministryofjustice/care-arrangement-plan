@@ -190,6 +190,12 @@
       "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays."
     }
   },
+  "otherThings": {
+    "whatOtherThingsMatter": {
+      "title": "What other things matter to your children?",
+      "content": "<p class=\"govuk-body\">You may want to agree things such as:</p><ul class=\"govuk-list govuk-list--bullet\"><li>religious practices, diet, and standard rules across both households</li><li>extra-curricular activities, such as swimming lessons</li><li>access to other friends and family</li><li>other types of contact, such as video calls</li></ul>"
+    }
+  },
   "checkYourAnswers": {
     "title": "Check your answers",
     "livingAndVisiting": {

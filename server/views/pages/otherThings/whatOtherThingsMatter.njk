@@ -1,0 +1,37 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      {{ __('otherThings.whatOtherThingsMatter.content') | safe }}
+
+      <form class="form" action="{{ paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {{
+          govukTextarea({
+            name: formFields.WHAT_OTHER_THINGS_MATTER,
+            value: initialWhatOtherThingsMatter,
+            errorMessage: errors | findError(formFields.WHAT_OTHER_THINGS_MATTER)
+          })
+        }}
+
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+      <form
+        class="form"
+        action="{{ paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED }}"
+        method="post"
+        novalidate
+      >
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

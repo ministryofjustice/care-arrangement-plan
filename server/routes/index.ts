@@ -15,6 +15,7 @@ import livingAndVisitingRoutes from './livingAndVisiting'
 import specialDaysRoutes from './specialDays'
 import pdfRoutes from './pdf'
 import handoverAndHolidaysRoutes from './handoverAndHolidays'
+import otherThingsRoutes from './otherThings'
 
 const routes = (): Router => {
   const router = Router()
@@ -36,6 +37,7 @@ const routes = (): Router => {
   livingAndVisitingRoutes(router)
   handoverAndHolidaysRoutes(router)
   specialDaysRoutes(router)
+  otherThingsRoutes(router)
   pdfRoutes(router)
 
   return router

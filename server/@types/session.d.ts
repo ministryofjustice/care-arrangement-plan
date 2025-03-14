@@ -61,4 +61,10 @@ export type CAPSession = {
       answer?: string
     }
   }
+  otherThings?: {
+    whatOtherThingsMatter?: {
+      noDecisionRequired: boolean
+      answer?: string
+    }
+  }
 }
