@@ -35,6 +35,11 @@ const session: Partial<SessionData> = {
       noDecisionRequired: true,
     },
   },
+  otherThings: {
+    whatOtherThingsMatter: {
+      noDecisionRequired: true,
+    },
+  },
 }
 
 describe(`GET ${paths.CHECK_YOUR_ANSWERS}`, () => {

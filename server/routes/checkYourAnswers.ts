@@ -5,7 +5,6 @@ import { formatListOfStrings } from '../utils/formValueUtils'
 import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers'
 import {
   mostlyLive,
-  whatWillHappen,
   whichDaysDaytimeVisits,
   whichDaysOvernight,
   whichSchedule,
@@ -16,6 +15,8 @@ import {
   willChangeDuringSchoolHolidays,
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
+  whatWillHappen,
+  whatOtherThingsMatter,
 } from '../utils/formattedAnswersForCheckAnswers'
 
 const checkYourAnswersRoutes = (router: Router) => {
@@ -41,6 +42,7 @@ const checkYourAnswersRoutes = (router: Router) => {
         howChangeDuringSchoolHolidays: howChangeDuringSchoolHolidays(request.session),
         itemsForChangeover: itemsForChangeover(request.session),
         whatWillHappen: whatWillHappen(request.session),
+        whatOtherThingsMatter: whatOtherThingsMatter(request.session),
       },
     })
   })

@@ -217,7 +217,8 @@
       "willChangeDuringSchoolHolidays": "if the arrangements will change during school holidays",
       "howChangeDuringSchoolHolidays": "how the arrangements will change during school holidays",
       "itemsForChangeover": "what items need to go between households",
-      "whatWillHappen": "what will happen on special days"
+      "whatWillHappen": "what will happen on special days",
+      "whatOtherThingsMatter": "what other things matter to your children"
     }
   },
   "sharePlan": {

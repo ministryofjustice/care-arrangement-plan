@@ -280,6 +280,33 @@
         ]
         })
       }}
+
+      <h2 class="govuk-heading-m">{{ __('taskList.otherThings') }}</h2>
+      {{
+        govukSummaryList({
+        classes: "govuk-!-margin-bottom-9",
+        rows: [
+          {
+            key: {
+              text: __('otherThings.whatOtherThingsMatter.title')
+            },
+            value: {
+              text: values.whatOtherThingsMatter
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.change.whatOtherThingsMatter')
+                }
+              ]
+            }
+          }
+        ]
+        })
+      }}
+
       {{ govukButton({text: __('continue'), href: paths.SHARE_PLAN }) }}
     </div>
   </div>
