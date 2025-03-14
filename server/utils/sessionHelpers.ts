@@ -45,3 +45,6 @@ export const itemsForChangeoverComplete = (session: Partial<CAPSession>) =>
   !!session.handoverAndHolidays?.itemsForChangeover
 
 export const whatWillHappenComplete = (session: Partial<CAPSession>) => !!session.specialDays?.whatWillHappen
+
+export const whatOtherThingsMatterComplete = (session: Partial<CAPSession>) =>
+  !!session.otherThings?.whatOtherThingsMatter

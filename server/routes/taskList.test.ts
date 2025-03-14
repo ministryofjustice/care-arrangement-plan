@@ -34,6 +34,11 @@ const session: Partial<SessionData> = {
       noDecisionRequired: true,
     },
   },
+  otherThings: {
+    whatOtherThingsMatter: {
+      noDecisionRequired: true,
+    },
+  },
 }
 
 describe(`GET ${paths.TASK_LIST}`, () => {
@@ -106,6 +111,16 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
   it('should not render the continue button if the what will happen section is not filled out', async () => {
     sessionMock.specialDays = null
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)
+
+    const dom = new JSDOM(response.text)
+
+    expect(dom.window.document.querySelector('[role="button"]')).toBeNull()
+  })
+
+  it('should not render the continue button if the what other things matter section is not filled out', async () => {
+    sessionMock.otherThings = null
 
     const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/)
 

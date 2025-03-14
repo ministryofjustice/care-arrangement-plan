@@ -131,7 +131,8 @@
     "whoIsUsing": "Who is using this service?",
     "livingAndVisiting": "Living and visiting",
     "handoverAndHolidays": "Handovers and holidays",
-    "specialDays": "Special days"
+    "specialDays": "Special days",
+    "otherThings": "Other things"
   },
   "livingAndVisiting": {
     "mostlyLive": {

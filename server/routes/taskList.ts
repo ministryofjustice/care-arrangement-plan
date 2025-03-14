@@ -9,6 +9,7 @@ import {
   willChangeDuringSchoolHolidaysComplete,
   itemsForChangeoverComplete,
   whatWillHappenComplete,
+  whatOtherThingsMatterComplete,
 } from '../utils/sessionHelpers'
 
 const taskListRoutes = (router: Router) => {
@@ -19,6 +20,7 @@ const taskListRoutes = (router: Router) => {
     const isWillChangeDuringSchoolHolidaysComplete = willChangeDuringSchoolHolidaysComplete(request.session)
     const isItemsForChangeoverComplete = itemsForChangeoverComplete(request.session)
     const isWhatWillHappenComplete = whatWillHappenComplete(request.session)
+    const isWhatOtherThingsMatterComplete = whatOtherThingsMatterComplete(request.session)
 
     response.render('pages/taskList', {
       title: i18n.__('taskList.title', { names: formattedChildrenNames(request.session) }),
@@ -29,13 +31,15 @@ const taskListRoutes = (router: Router) => {
         isGetBetweenHouseholdsComplete &&
         isWhereHandoverComplete &&
         isWillChangeDuringSchoolHolidaysComplete &&
-        isItemsForChangeoverComplete,
+        isItemsForChangeoverComplete &&
+        isWhatOtherThingsMatterComplete,
       mostlyLiveComplete: isMostlyLiveComplete,
       getBetweenHouseholdsComplete: isGetBetweenHouseholdsComplete,
       whereHandoverComplete: isWhereHandoverComplete,
       willChangeDuringSchoolHolidaysComplete: isWillChangeDuringSchoolHolidaysComplete,
       itemsForChangeoverComplete: isItemsForChangeoverComplete,
       whatWillHappenComplete: isWhatWillHappenComplete,
+      whatOtherThingsMatterComplete: isWhatOtherThingsMatterComplete,
     })
   })
 }
