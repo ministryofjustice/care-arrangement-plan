@@ -1,10 +1,8 @@
 import i18n from 'i18n'
 import { Request } from 'express'
 import { PdfBuilder } from '../@types/pdf'
-import TextComponent from './components/text'
 import TextboxComponent from './components/textbox'
-import DoYouAgreeComponent from './components/doYouAgree'
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants'
 import {
   whichDaysDaytimeVisits,
   whichDaysOvernight,
@@ -15,57 +13,23 @@ import {
 } from '../utils/formattedAnswersForPdf'
 import FontStyles from './fontStyles'
 import { parentNotMostlyLivedWith } from '../utils/sessionHelpers'
+import addAnswer from './addAnswer'
 
-const addAnswer = (
-  pdf: PdfBuilder,
-  question: string,
-  subtext: string | undefined,
-  answer: string | undefined,
-  disagreeText: string,
-) => {
-  if (!answer) return
-
-  new TextComponent(
+const addMostlyLive = (pdf: PdfBuilder, request: Request) => {
+  addAnswer(
     pdf,
-    [
-      {
-        text: question,
-        size: QUESTION_TITLE_SIZE,
-        style: FontStyles.BOLD,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
-      subtext
-        ? {
-            text: subtext,
-            size: MAIN_TEXT_SIZE,
-            style: FontStyles.NORMAL,
-            bottomPadding: PARAGRAPH_SPACE,
-          }
-        : undefined,
-      {
-        text: answer,
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
-    ].filter(paragraph => !!paragraph),
-  ).addComponentToDocument()
-
-  new DoYouAgreeComponent(pdf, i18n.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument()
-
-  new TextboxComponent(pdf, [
-    {
-      text: disagreeText,
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-  ]).addComponentToDocument()
+    i18n.__('taskList.livingAndVisiting'),
+    i18n.__('livingAndVisiting.mostlyLive.title'),
+    undefined,
+    mostlyLive(request.session),
+    i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.mostlyLive'),
+  )
 }
 
 const addWhichSchedule = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
     pdf,
+    undefined,
     i18n.__('livingAndVisiting.whichSchedule.title'),
     i18n.__('livingAndVisiting.whichSchedule.exactSplitWarning'),
     whichSchedule(request.session),
@@ -78,6 +42,7 @@ const addWillOvernightsHappen = (pdf: PdfBuilder, request: Request) => {
 
   addAnswer(
     pdf,
+    undefined,
     i18n.__('livingAndVisiting.willOvernightsHappen.title', { adult }),
     undefined,
     willOvernightsHappen(request.session),
@@ -88,6 +53,7 @@ const addWillOvernightsHappen = (pdf: PdfBuilder, request: Request) => {
 const addWhichDaysOvernight = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
     pdf,
+    undefined,
     i18n.__('livingAndVisiting.whichDaysOvernight.title'),
     undefined,
     whichDaysOvernight(request.session),
@@ -100,6 +66,7 @@ const addWhichDaysOvernight = (pdf: PdfBuilder, request: Request) => {
 const addWillDaytimeVisitsHappen = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
     pdf,
+    undefined,
     i18n.__('livingAndVisiting.willDaytimeVisitsHappen.title', { adult: parentNotMostlyLivedWith(request.session) }),
     undefined,
     willDaytimeVisitsHappen(request.session),
@@ -110,6 +77,7 @@ const addWillDaytimeVisitsHappen = (pdf: PdfBuilder, request: Request) => {
 const addWWhichDaysDaytimeVisits = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
     pdf,
+    undefined,
     i18n.__('livingAndVisiting.whichDaysDaytimeVisits.title'),
     undefined,
     whichDaysDaytimeVisits(request.session),
@@ -118,38 +86,7 @@ const addWWhichDaysDaytimeVisits = (pdf: PdfBuilder, request: Request) => {
 }
 
 const addLivingAndVisiting = (pdf: PdfBuilder, request: Request) => {
-  new TextComponent(pdf, [
-    {
-      text: i18n.__('taskList.livingAndVisiting'),
-      size: SECTION_HEADING_SIZE,
-      style: FontStyles.BOLD,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-    {
-      text: i18n.__('livingAndVisiting.mostlyLive.title'),
-      size: QUESTION_TITLE_SIZE,
-      style: FontStyles.BOLD,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-    {
-      text: mostlyLive(request.session),
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-  ]).addComponentToDocument()
-
-  new DoYouAgreeComponent(pdf, i18n.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument()
-
-  new TextboxComponent(pdf, [
-    {
-      text: i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.mostlyLive'),
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-  ]).addComponentToDocument()
-
+  addMostlyLive(pdf, request)
   addWhichSchedule(pdf, request)
   addWillOvernightsHappen(pdf, request)
   addWhichDaysOvernight(pdf, request)
