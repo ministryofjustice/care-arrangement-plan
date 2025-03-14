@@ -7,7 +7,7 @@
       "GHSA-v2mw-5mch-w8c5": {
         "active": true,
         "expiry": "2025-03-20",
-        "notes": "Canvg has been patched, but we need to wait for jsPDF to use the patch. This isn't actually a vuln for us"
+        "notes": "We've updated to a fixed version of canvg (3.0.11), but the issue hasn't marked this as a patched version yet"
       }
     }
   ]
