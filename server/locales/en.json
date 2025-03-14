@@ -330,12 +330,16 @@
         },
         "specialDays": {
           "whatWillHappen": "If you do not agree, suggest what will happen on special days"
+        },
+        "otherThings": {
+          "whatOtherThingsMatter": "If you do not agree, suggest what other things matter to your children"
         }
       },
       "compromise": {
         "livingAndVisiting": "You can use this space to write your agreed compromise for the living and visiting section",
         "handoverAndHolidays": "You can use this space to write your agreed compromise for the handovers and holidays section",
-        "specialDays": "You can use this space to write your agreed compromise for the special days section"
+        "specialDays": "You can use this space to write your agreed compromise for the special days section",
+        "otherThings": "You can use this space to write your agreed compromise for the other things section"
       }
     }
   },

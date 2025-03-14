@@ -10,10 +10,10 @@ const session: Partial<SessionData> = {
   namesOfChildren: ['James', 'Rachel', 'Jack'],
   initialAdultName: 'Bob',
   secondaryAdultName: 'Sam',
-  specialDays: {
-    whatWillHappen: {
-      noDecisionRequired: false,
-      answer: 'whatWillHappenAnswer',
+  livingAndVisiting: {
+    mostlyLive: {
+      where: 'other',
+      describeArrangement: 'livingAndVisitingArrangement',
     },
   },
   handoverAndHolidays: {
@@ -30,10 +30,16 @@ const session: Partial<SessionData> = {
       noDecisionRequired: true,
     },
   },
-  livingAndVisiting: {
-    mostlyLive: {
-      where: 'other',
-      describeArrangement: 'livingAndVisitingArrangement',
+  specialDays: {
+    whatWillHappen: {
+      noDecisionRequired: false,
+      answer: 'whatWillHappenAnswer',
+    },
+  },
+  otherThings: {
+    whatOtherThingsMatter: {
+      noDecisionRequired: false,
+      answer: 'whatOtherThingsMatterAnswer',
     },
   },
 }
@@ -84,6 +90,19 @@ describe(`GET ${paths.SHARE_PLAN}`, () => {
         expect(response.text).toMatch(
           new RegExp(
             `${session.initialAdultName} suggested:\\s+&quot;${session.specialDays.whatWillHappen.answer}&quot;`,
+          ),
+        )
+      })
+  })
+
+  it('should include other things answer', () => {
+    return request(app)
+      .get(paths.SHARE_PLAN)
+      .expect('Content-Type', /html/)
+      .expect(response => {
+        expect(response.text).toMatch(
+          new RegExp(
+            `${session.initialAdultName} suggested:\\s+&quot;${session.otherThings.whatOtherThingsMatter.answer}&quot;`,
           ),
         )
       })

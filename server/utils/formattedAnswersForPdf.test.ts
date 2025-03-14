@@ -16,6 +16,7 @@ import {
   whereHandover,
   willChangeDuringSchoolHolidays,
   howChangeDuringSchoolHolidays,
+  whatOtherThingsMatter,
 } from './formattedAnswersForPdf'
 import { getBetweenHouseholdsField, whereHandoverField } from '../@types/fields'
 
@@ -44,6 +45,9 @@ const testAppSetup = (): Express => {
       },
       specialDays: {
         whatWillHappen: whatWillHappen(sessionMock),
+      },
+      otherThings: {
+        whatOtherThingsMatter: whatOtherThingsMatter(sessionMock),
       },
     })
   })
@@ -75,6 +79,11 @@ const session: Partial<SessionData> = {
   },
   specialDays: {
     whatWillHappen: {
+      noDecisionRequired: true,
+    },
+  },
+  otherThings: {
+    whatOtherThingsMatter: {
       noDecisionRequired: true,
     },
   },
@@ -360,6 +369,42 @@ describe('formattedAnswers', () => {
         .expect(response => {
           expect(response.body.specialDays).toEqual({
             whatWillHappen: `${session.initialAdultName} suggested:\n"${answer}"`,
+          })
+        })
+    })
+  })
+
+  describe('otherThings', () => {
+    it('should return correctly for no need to decide what will happen', () => {
+      sessionMock.otherThings = {
+        whatOtherThingsMatter: {
+          noDecisionRequired: true,
+        },
+      }
+
+      return request(app)
+        .get(testPath)
+        .expect(response => {
+          expect(response.body.otherThings).toEqual({
+            whatOtherThingsMatter: `${session.initialAdultName} suggested that this does not need to be decided.`,
+          })
+        })
+    })
+
+    it('should return correctly for answer to what will happen', () => {
+      const answer = 'answer'
+      sessionMock.otherThings = {
+        whatOtherThingsMatter: {
+          noDecisionRequired: false,
+          answer,
+        },
+      }
+
+      return request(app)
+        .get(testPath)
+        .expect(response => {
+          expect(response.body.otherThings).toEqual({
+            whatOtherThingsMatter: `${session.initialAdultName} suggested:\n"${answer}"`,
           })
         })
     })

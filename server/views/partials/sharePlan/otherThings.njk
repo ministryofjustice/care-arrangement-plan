@@ -1,0 +1,8 @@
+<h2 class="govuk-heading-m">{{ __('taskList.otherThings') }}</h2>
+
+<h3 class="govuk-heading-s">{{ __('otherThings.whatOtherThingsMatter.title') }}</h3>
+{{ __('otherThings.whatOtherThingsMatter.content') | safe }}
+<p class="newline-separated-paragraph">{{ values.whatOtherThingsMatterAnswer }}</p>
+{{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.otherThings.whatOtherThingsMatter')) }}
+
+{{ endOfSection(__('sharePlan.yourProposedPlan.compromise.otherThings')) }}

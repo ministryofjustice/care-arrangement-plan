@@ -15,6 +15,7 @@ import {
   willChangeDuringSchoolHolidays,
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
+  whatOtherThingsMatter,
 } from '../utils/formattedAnswersForPdf'
 
 const sharePlanRoutes = (router: Router) => {
@@ -39,6 +40,7 @@ const sharePlanRoutes = (router: Router) => {
         howChangeDuringSchoolHolidaysAnswer: howChangeDuringSchoolHolidays(request.session),
         itemsForChangeoverAnswer: itemsForChangeover(request.session),
         whatWillHappenAnswer: whatWillHappen(request.session),
+        whatOtherThingsMatterAnswer: whatOtherThingsMatter(request.session),
       },
     })
   })
