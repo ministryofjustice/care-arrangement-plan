@@ -57,7 +57,7 @@ stages:
                   -var "git_ref=$(Build.SourceVersion)" \
                   -var "git_branch=$(Build.SourceBranchName)" \
                   -var "session_secret=$(TestSessionSecret)" \
-                  -var "beta_access_passwords=$(TestBetaAccessPassword)"
+                  -var "beta_access_passwords=$(TestBetaAccessPassword)" \
                   -var "ga4_id=G-97NRQW5JEZ"
   - stage: production
     displayName: Deploy to Production
