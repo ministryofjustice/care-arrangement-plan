@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express'
 import setupAnalytics from './setupAnalytics'
 import config from '../config'
+import cookieNames from '../constants/cookieNames'
 
 describe('setupAnalytics', () => {
   let request: Request
@@ -13,7 +14,9 @@ describe('setupAnalytics', () => {
   })
 
   it('should set locals.analyticsEnabled to true if consent cookie set to yes', () => {
-    request.cookies = { cookie_policy: encodeURIComponent(JSON.stringify({ acceptAnalytics: 'yes' })) }
+    request.cookies = {
+      [cookieNames.ANALYTICS_CONSENT]: encodeURIComponent(JSON.stringify({ acceptAnalytics: 'Yes' })),
+    }
 
     setupAnalytics()(request, response, next)
 
@@ -22,7 +25,7 @@ describe('setupAnalytics', () => {
   })
 
   it('should set locals.analyticsEnabled to false if consent cookie set to no', () => {
-    request.cookies = { cookie_policy: encodeURIComponent(JSON.stringify({ acceptAnalytics: 'no' })) }
+    request.cookies = { [cookieNames.ANALYTICS_CONSENT]: encodeURIComponent(JSON.stringify({ acceptAnalytics: 'No' })) }
 
     setupAnalytics()(request, response, next)
 
@@ -31,7 +34,7 @@ describe('setupAnalytics', () => {
   })
 
   it('should set locals.analyticsEnabled to undefined if consent cookie set to invalid value', () => {
-    request.cookies = { cookie_policy: 'NOT-A-JSON-STRING' }
+    request.cookies = { [cookieNames.ANALYTICS_CONSENT]: 'NOT-A-JSON-STRING' }
 
     setupAnalytics()(request, response, next)
 

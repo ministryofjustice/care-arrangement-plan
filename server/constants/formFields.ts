@@ -1,4 +1,5 @@
 enum formFields {
+  ACCEPT_OPTIONAL_COOKIES = 'accept-optional-cookies',
   SAFETY_CHECK = 'safety-check',
   CHILDREN_SAFETY_CHECK = 'children-safety-check',
   DO_WHATS_BEST = 'do-whats-best',

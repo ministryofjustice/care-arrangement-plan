@@ -4,7 +4,7 @@ const setupCookieBanner = () => {
     document.getElementById('cookie-banner-main').hidden = true
 
     const confirmationMessage =
-      acceptAnalytics === 'yes'
+      acceptAnalytics === 'Yes'
         ? document.getElementById('cookie-banner-accepted')
         : document.getElementById('cookie-banner-rejected')
 
@@ -42,7 +42,7 @@ const setupCookieBanner = () => {
     expires.setFullYear(expires.getFullYear() + 1)
     document.cookie = `cookie_policy=${encodeURIComponent(JSON.stringify({ acceptAnalytics }))}; expires=${expires.toUTCString()}; path=/; Secure`
 
-    if (acceptAnalytics === 'no') {
+    if (acceptAnalytics === 'No') {
       removeAnalyticsCookies()
     }
   }

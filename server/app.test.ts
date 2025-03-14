@@ -6,6 +6,7 @@ import config from './config'
 
 import testAppSetup from './test-utils/testAppSetup'
 import paths from './constants/paths'
+import cookieNames from './constants/cookieNames'
 
 let app: Express
 
@@ -77,12 +78,12 @@ describe('App', () => {
         app = testAppSetup()
       })
 
-      it.each([undefined, JSON.stringify({ acceptAnalytics: 'no' }), JSON.stringify({ acceptAnalytics: 'yes' })])(
+      it.each([undefined, JSON.stringify({ acceptAnalytics: 'No' }), JSON.stringify({ acceptAnalytics: 'Yes' })])(
         'should not show the cookie banner or load GA4 if the consent cookie is %s',
         consentCookie => {
           return request(app)
             .get(paths.START)
-            .set('Cookie', `cookie_policy=${consentCookie}`)
+            .set('Cookie', `${cookieNames.ANALYTICS_CONSENT}=${consentCookie}`)
             .expect('Content-Type', /html/)
             .expect(response => {
               expect(response.text).not.toContain('www.googletagmanager.com')
@@ -115,7 +116,7 @@ describe('App', () => {
       it('should not show the banner and not load ga4 if the consent cookie is no', async () => {
         const response = await request(app)
           .get(paths.START)
-          .set('Cookie', `cookie_policy=${JSON.stringify({ acceptAnalytics: 'no' })}`)
+          .set('Cookie', `${cookieNames.ANALYTICS_CONSENT}=${JSON.stringify({ acceptAnalytics: 'No' })}`)
           .expect('Content-Type', /html/)
 
         expect(response.text).not.toContain('www.googletagmanager.com')
@@ -129,7 +130,7 @@ describe('App', () => {
       it('should not show the banner and load ga4 if the consent cookie is yes', async () => {
         const response = await request(app)
           .get(paths.START)
-          .set('Cookie', `cookie_policy=${JSON.stringify({ acceptAnalytics: 'yes' })}`)
+          .set('Cookie', `${cookieNames.ANALYTICS_CONSENT}=${JSON.stringify({ acceptAnalytics: 'Yes' })}`)
           .expect('Content-Type', /html/)
 
         expect(response.text).toContain(`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`)

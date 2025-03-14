@@ -3,8 +3,8 @@ import { Router } from 'express'
 import url from 'url'
 import config from '../config'
 import encryptPassword from '../utils/encryptPassword'
-import { AUTH_COOKIE_NAME } from '../routes/password'
 import paths from '../constants/paths'
+import cookieNames from '../constants/cookieNames'
 
 const setupAuthentication = () => {
   const router = Router()
@@ -28,6 +28,6 @@ const sendUserToPasswordPage = (req: Request, res: Response) => {
 }
 
 const isAuthenticated = (req: Request) =>
-  config.passwords.map(encryptPassword).some(p => p === req.cookies[AUTH_COOKIE_NAME])
+  config.passwords.map(encryptPassword).some(p => p === req.cookies[cookieNames.AUTHENTICATION])
 
 export default setupAuthentication

@@ -7,6 +7,7 @@ import config from '../config'
 import testAppSetup from '../test-utils/testAppSetup'
 import paths from '../constants/paths'
 import formFields from '../constants/formFields'
+import cookieNames from '../constants/cookieNames'
 
 let app: Express
 
@@ -77,7 +78,7 @@ describe('Password Handler', () => {
         it('should set authentication cookie', () => {
           const returnURL = '/myPage'
           const authenticatedCookieProperties = [
-            `authentication=${encryptedTestPassword};`,
+            `${cookieNames.AUTHENTICATION}=${encryptedTestPassword};`,
             `Max-Age=${60 * 60 * 24 * 30}`,
             `Secure`,
           ]

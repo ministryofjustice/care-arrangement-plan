@@ -1,0 +1,101 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p>{{ __('cookies.cookiesAre') }}</p>
+      <p>{{ __('cookies.usedFor') }}</p>
+
+      <h2 class="govuk-heading-m">{{ __('cookies.essentialCookies') }}</h2>
+      <p>{{ __('cookies.essentialCookiesUse') }}</p>
+
+      {{
+        govukTable({
+          head: [
+            { text: __('cookies.name') },
+            { text: __('cookies.purpose') },
+            { text: __('cookies.expiry') }
+          ],
+          rows: [
+            [
+              { text: cookieNames.SESSION },
+              { text: "TODO" },
+              { text: __('cookies.twoHours') }
+            ],
+            [
+              { text: cookieNames.AUTHENTICATION },
+              { text: "TODO" },
+              { text: __('cookies.thirtyDays') }
+            ],
+            [
+              { text: cookieNames.ANALYTICS_CONSENT },
+              { text: "TODO" },
+              { text: __('cookies.oneYear') }
+            ]
+          ]
+        })
+      }}
+
+      {% if ga4Id %}
+        <h2 class="govuk-heading-m">{{ __('cookies.optionalCookies') }}</h2>
+
+        {{
+          govukTable({
+            head: [
+              { text: __('cookies.name') },
+              { text: __('cookies.purpose') },
+              { text: __('cookies.expiry') }
+            ],
+            rows: [
+              [
+                { text: "_ga" },
+                { text: __('cookies._gaCookie') },
+                { text: __('cookies.twoYears') }
+              ],
+              [
+                { text: "_ga_" + (ga4Id | replace("G-", "")) },
+                { text: __('cookies._ga_IdCookie') },
+                { text: __('cookies.twoYears') }
+              ]
+            ]
+          })
+        }}
+
+        <form class="form" action="{{ paths.COOKIES }}" method="post" novalidate>
+          <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+          {{
+            govukRadios({
+              classes: "govuk-radios--inline",
+              name: formFields.ACCEPT_OPTIONAL_COOKIES,
+              fieldset: {
+                legend: {
+                  text: __('cookies.acceptOptionalCookies'),
+                  classes: "govuk-fieldset__legend--s"
+                }
+              },
+              items: [
+                {
+                  value: "Yes",
+                  text: __('yes'),
+                  checked: analyticsEnabled
+                },
+                {
+                  value: "No",
+                  text: __('no'),
+                  checked: false if analyticsEnabled else true
+                }
+              ]
+            })
+          }}
+
+          {{ govukButton({text: __('cookies.saveCookieSettings')}) }}
+        </form>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
