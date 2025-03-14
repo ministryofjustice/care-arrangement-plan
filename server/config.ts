@@ -47,6 +47,9 @@ const config = {
   production,
   useHttps: getBoolConfigValue('USE_HTTPS'),
   staticResourceCacheDuration: getStringConfigValue('STATIC_RESOURCE_CACHE_DURATION'),
+  analytics: {
+    ga4Id: process.env.GA4_ID,
+  },
   valkey: getValkeyConfig(),
   session: {
     secret: getStringConfigValue('SESSION_SECRET'),

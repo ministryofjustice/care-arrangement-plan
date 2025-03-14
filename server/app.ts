@@ -17,6 +17,7 @@ import routes from './routes'
 import logger from './logger'
 import unauthenticatedRoutes from './routes/unauthenticatedRoutes'
 import setupAuthentication from './middleware/setupAuthentication'
+import setupAnalytics from './middleware/setupAnalytics'
 
 const createApp = (): express.Application => {
   const app = express()
@@ -33,6 +34,7 @@ const createApp = (): express.Application => {
   app.use(setUpWebRequestParsing())
   app.use(setUpStaticResources())
   app.use(setUpCsrf())
+  app.use(setupAnalytics())
   app.use(unauthenticatedRoutes())
   app.use(setupAuthentication())
   app.use(routes())

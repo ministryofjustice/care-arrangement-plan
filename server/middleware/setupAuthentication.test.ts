@@ -2,8 +2,8 @@ import request from 'supertest'
 import { Express } from 'express'
 import config from '../config'
 import testAppSetup from '../test-utils/testAppSetup'
-import { AUTH_COOKIE_NAME } from '../routes/password'
 import paths from '../constants/paths'
+import cookieNames from '../constants/cookieNames'
 
 let app: Express
 
@@ -11,7 +11,7 @@ let app: Express
 
 const testPassword = 'testPassword'
 const encryptedTestPassword = 'fd5cb51bafd60f6fdbedde6e62c473da6f247db271633e15919bab78a02ee9eb'
-const validAuthenticationCookie = `${AUTH_COOKIE_NAME}=${encryptedTestPassword}`
+const validAuthenticationCookie = `${cookieNames.AUTHENTICATION}=${encryptedTestPassword}`
 
 describe('When a route is called', () => {
   beforeEach(() => {

@@ -4,8 +4,7 @@ import config from '../config'
 import encryptPassword from '../utils/encryptPassword'
 import paths from '../constants/paths'
 import formFields from '../constants/formFields'
-
-export const AUTH_COOKIE_NAME = 'authentication'
+import cookieNames from '../constants/cookieNames'
 
 const passwordRoutes = (router: Router) => {
   router.get(paths.PASSWORD, handleGetPassword)
@@ -26,7 +25,7 @@ const handlePostPassword = (request: Request, response: Response) => {
   const errors = validationResult(request)
 
   if (errors.isEmpty()) {
-    response.cookie(AUTH_COOKIE_NAME, encryptPassword(request.body.password), {
+    response.cookie(cookieNames.AUTHENTICATION, encryptPassword(request.body.password), {
       maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
       secure: config.useHttps,
     })

@@ -5,6 +5,7 @@ import flash from 'connect-flash'
 import createValkeyClient from '../data/valkeyClient'
 import config from '../config'
 import logger from '../logger'
+import cookieNames from '../constants/cookieNames'
 
 const setUpWebSession = (): Router => {
   let store: Store
@@ -20,7 +21,7 @@ const setUpWebSession = (): Router => {
   router.use(
     session({
       store,
-      name: 'pfl-care-arrangement-plan.session',
+      name: cookieNames.SESSION,
       cookie: { secure: config.useHttps, sameSite: 'lax', maxAge: config.session.expiryMinutes * 60 * 1000 },
       secret: config.session.secret,
       resave: false, // connect-redis implements touch so shouldn't need this

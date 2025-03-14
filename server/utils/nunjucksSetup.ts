@@ -8,6 +8,7 @@ import logger from '../logger'
 import paths from '../constants/paths'
 import formFields from '../constants/formFields'
 import getAssetPath from './getAssetPath'
+import cookieNames from '../constants/cookieNames'
 
 const nunjucksSetup = (app: express.Express): void => {
   app.set('view engine', 'njk')
@@ -31,6 +32,7 @@ const nunjucksSetup = (app: express.Express): void => {
   njkEnv.addFilter('assetMap', (url: string) => assetManifest[url] || url)
   njkEnv.addGlobal('paths', paths)
   njkEnv.addGlobal('formFields', formFields)
+  njkEnv.addGlobal('cookieNames', cookieNames)
   njkEnv.addGlobal('__', i18n.__)
   njkEnv.addGlobal('getLocale', () => i18n.getLocale)
   // find specific error and return errorMessage for field validation
