@@ -9,7 +9,13 @@
 
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      {{ __('otherThings.whatOtherThingsMatter.content') | safe }}
+      <p class="govuk-body">{{ __('otherThings.whatOtherThingsMatter.thingsToAgree') }}}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('otherThings.whatOtherThingsMatter.religionDietAndRules') }}</li>
+        <li>{{ __('otherThings.whatOtherThingsMatter.extraCurriculars') }}</li>
+        <li>{{ __('otherThings.whatOtherThingsMatter.friendsAndFamily') }}</li>
+        <li>{{ __('otherThings.whatOtherThingsMatter.otherContact') }}</li>
+      </ul>
 
       <form class="form" action="{{ paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />

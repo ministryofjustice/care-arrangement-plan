@@ -43,6 +43,12 @@ describe('createPdf', () => {
           answer: 'whatWillHappenAnswer',
         },
       },
+      otherThings: {
+        whatOtherThingsMatter: {
+          noDecisionRequired: false,
+          answer: 'whatOtherThingsMatterAnswer',
+        },
+      },
     })
 
     const response = await request(app).get(paths.DOWNLOAD_PDF)
