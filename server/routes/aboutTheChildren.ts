@@ -1,15 +1,16 @@
-import { Router } from 'express'
-import i18n from 'i18n'
-import { ValidationError } from 'express-validator'
-import paths from '../constants/paths'
-import formFields from '../constants/formFields'
+import { Router } from 'express';
+import { ValidationError } from 'express-validator';
+import i18n from 'i18n';
+
+import formFields from '../constants/formFields';
+import paths from '../constants/paths';
 
 const aboutTheChildrenRoutes = (router: Router) => {
   router.get(paths.ABOUT_THE_CHILDREN, (request, response) => {
-    const { numberOfChildren, namesOfChildren } = request.session
+    const { numberOfChildren, namesOfChildren } = request.session;
 
     if (numberOfChildren == null) {
-      return response.redirect(paths.NUMBER_OF_CHILDREN)
+      return response.redirect(paths.NUMBER_OF_CHILDREN);
     }
 
     const formValues = {
@@ -17,7 +18,7 @@ const aboutTheChildrenRoutes = (router: Router) => {
         Array.from({ length: numberOfChildren }, (_, i) => [formFields.CHILD_NAME + i, namesOfChildren?.[i]]),
       ),
       ...request.flash('formValues')?.[0],
-    }
+    };
 
     return response.render('pages/aboutTheChildren', {
       errors: request.flash('errors'),
@@ -26,18 +27,18 @@ const aboutTheChildrenRoutes = (router: Router) => {
         numberOfChildren === 1 ? i18n.__('aboutTheChildren.singleTitle') : i18n.__('aboutTheChildren.multipleTitle'),
       backLinkHref: paths.NUMBER_OF_CHILDREN,
       numberOfChildren,
-    })
-  })
+    });
+  });
 
   router.post(paths.ABOUT_THE_CHILDREN, (request, response) => {
-    const { numberOfChildren } = request.session
+    const { numberOfChildren } = request.session;
 
-    const errors: ValidationError[] = []
-    const values: Record<string, string> = {}
+    const errors: ValidationError[] = [];
+    const values: Record<string, string> = {};
 
     for (let i = 0; i < numberOfChildren; i++) {
-      const fieldName = formFields.CHILD_NAME + i
-      const value: string = request.body[fieldName]?.trim()
+      const fieldName = formFields.CHILD_NAME + i;
+      const value: string = request.body[fieldName]?.trim();
       if (!value) {
         // TODO C5141-1013: Add error message
         errors.push({
@@ -45,22 +46,22 @@ const aboutTheChildrenRoutes = (router: Router) => {
           msg: 'Invalid value',
           path: fieldName,
           type: 'field',
-        })
+        });
       } else {
-        values[fieldName] = value
+        values[fieldName] = value;
       }
     }
 
     if (errors.length > 0) {
-      request.flash('errors', errors)
-      request.flash('formValues', values)
-      return response.redirect(paths.ABOUT_THE_CHILDREN)
+      request.flash('errors', errors);
+      request.flash('formValues', values);
+      return response.redirect(paths.ABOUT_THE_CHILDREN);
     }
 
-    request.session.namesOfChildren = Object.values(values)
+    request.session.namesOfChildren = Object.values(values);
 
-    return response.redirect(paths.ABOUT_THE_ADULTS)
-  })
-}
+    return response.redirect(paths.ABOUT_THE_ADULTS);
+  });
+};
 
-export default aboutTheChildrenRoutes
+export default aboutTheChildrenRoutes;

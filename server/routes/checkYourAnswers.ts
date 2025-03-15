@@ -1,8 +1,7 @@
-import { Router } from 'express'
-import i18n from 'i18n'
-import paths from '../constants/paths'
-import { formatListOfStrings } from '../utils/formValueUtils'
-import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers'
+import { Router } from 'express';
+import i18n from 'i18n';
+
+import paths from '../constants/paths';
 import {
   mostlyLive,
   whatWillHappen,
@@ -16,11 +15,13 @@ import {
   willChangeDuringSchoolHolidays,
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
-} from '../utils/formattedAnswersForCheckAnswers'
+} from '../utils/formattedAnswersForCheckAnswers';
+import { formatListOfStrings } from '../utils/formValueUtils';
+import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
 
 const checkYourAnswersRoutes = (router: Router) => {
   router.get(paths.CHECK_YOUR_ANSWERS, (request, response) => {
-    const { initialAdultName, secondaryAdultName } = request.session
+    const { initialAdultName, secondaryAdultName } = request.session;
 
     response.render('pages/checkYourAnswers', {
       title: `${i18n.__('checkYourAnswers.title')}`,
@@ -42,8 +43,8 @@ const checkYourAnswersRoutes = (router: Router) => {
         itemsForChangeover: itemsForChangeover(request.session),
         whatWillHappen: whatWillHappen(request.session),
       },
-    })
-  })
-}
+    });
+  });
+};
 
-export default checkYourAnswersRoutes
+export default checkYourAnswersRoutes;

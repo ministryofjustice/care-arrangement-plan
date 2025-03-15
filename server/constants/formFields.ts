@@ -28,4 +28,4 @@ enum formFields {
   SPECIAL_DAYS = 'special-days',
 }
 
-export default formFields
+export default formFields;

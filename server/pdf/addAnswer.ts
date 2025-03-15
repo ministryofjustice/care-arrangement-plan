@@ -1,10 +1,12 @@
-import i18n from 'i18n'
-import { PdfBuilder } from '../@types/pdf'
-import TextComponent from './components/text'
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
-import FontStyles from './fontStyles'
-import DoYouAgreeComponent from './components/doYouAgree'
-import TextboxComponent from './components/textbox'
+import i18n from 'i18n';
+
+import { PdfBuilder } from '../@types/pdf';
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+
+import DoYouAgreeComponent from './components/doYouAgree';
+import TextComponent from './components/text';
+import TextboxComponent from './components/textbox';
+import FontStyles from './fontStyles';
 
 const addAnswer = (
   pdf: PdfBuilder,
@@ -14,7 +16,7 @@ const addAnswer = (
   answer: string | undefined,
   disagreeText: string,
 ) => {
-  if (!answer) return
+  if (!answer) return;
 
   new TextComponent(
     pdf,
@@ -47,10 +49,10 @@ const addAnswer = (
         style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
-    ].filter(paragraph => !!paragraph),
-  ).addComponentToDocument()
+    ].filter((paragraph) => !!paragraph),
+  ).addComponentToDocument();
 
-  new DoYouAgreeComponent(pdf, i18n.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument()
+  new DoYouAgreeComponent(pdf, i18n.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument();
 
   new TextboxComponent(pdf, [
     {
@@ -59,7 +61,7 @@ const addAnswer = (
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
-}
+  ]).addComponentToDocument();
+};
 
-export default addAnswer
+export default addAnswer;

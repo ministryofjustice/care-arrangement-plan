@@ -40,4 +40,4 @@ export default {
   SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED: '/special-days/what-will-happen/not-required',
   DOWNLOAD_PDF: '/download-pdf',
   PRINT_PDF: '/print-pdf',
-}
+};

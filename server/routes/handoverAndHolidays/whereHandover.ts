@@ -1,9 +1,10 @@
-import { Router } from 'express'
-import i18n from 'i18n'
-import { body, matchedData, validationResult } from 'express-validator'
-import paths from '../../constants/paths'
-import formFields from '../../constants/formFields'
-import { whereHandoverField } from '../../@types/fields'
+import { Router } from 'express';
+import { body, matchedData, validationResult } from 'express-validator';
+import i18n from 'i18n';
+
+import { whereHandoverField } from '../../@types/fields';
+import formFields from '../../constants/formFields';
+import paths from '../../constants/paths';
 
 const whereHandoverRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, (request, response) => {
@@ -11,7 +12,7 @@ const whereHandoverRoutes = (router: Router) => {
       [formFields.WHERE_HANDOVER]: request.session.handoverAndHolidays?.whereHandover?.where,
       [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: request.session.handoverAndHolidays?.whereHandover?.someoneElse,
       ...request.flash('formValues')?.[0],
-    }
+    };
 
     response.render('pages/handoverAndHolidays/whereHandover', {
       errors: request.flash('errors'),
@@ -19,8 +20,8 @@ const whereHandoverRoutes = (router: Router) => {
       values: request.session,
       title: i18n.__('handoverAndHolidays.whereHandover.title'),
       backLinkHref: paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS,
-    })
-  })
+    });
+  });
 
   router.post(
     paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER,
@@ -36,20 +37,20 @@ const whereHandoverRoutes = (router: Router) => {
     ),
     (request, response) => {
       const formData = matchedData<{
-        [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: string
-        [formFields.WHERE_HANDOVER]: whereHandoverField[]
-      }>(request, { onlyValidData: false })
+        [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: string;
+        [formFields.WHERE_HANDOVER]: whereHandoverField[];
+      }>(request, { onlyValidData: false });
 
-      const errors = validationResult(request)
+      const errors = validationResult(request);
 
       if (!errors.isEmpty()) {
-        request.flash('errors', errors.array())
-        request.flash('formValues', formData)
-        return response.redirect(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)
+        request.flash('errors', errors.array());
+        request.flash('formValues', formData);
+        return response.redirect(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
       }
 
       const { [formFields.WHERE_HANDOVER]: whereHandover, [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: someoneElse } =
-        formData
+        formData;
 
       request.session.handoverAndHolidays = {
         ...request.session.handoverAndHolidays,
@@ -58,11 +59,11 @@ const whereHandoverRoutes = (router: Router) => {
           where: whereHandover,
           someoneElse: whereHandover.includes('someoneElse') ? someoneElse : undefined,
         },
-      }
+      };
 
-      return response.redirect(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
+      return response.redirect(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS);
     },
-  )
+  );
 
   router.post(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED, (request, response) => {
     request.session.handoverAndHolidays = {
@@ -70,10 +71,10 @@ const whereHandoverRoutes = (router: Router) => {
       whereHandover: {
         noDecisionRequired: true,
       },
-    }
+    };
 
-    return response.redirect(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
-  })
-}
+    return response.redirect(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS);
+  });
+};
 
-export default whereHandoverRoutes
+export default whereHandoverRoutes;

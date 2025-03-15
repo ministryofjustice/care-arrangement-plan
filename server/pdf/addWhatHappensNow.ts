@@ -1,9 +1,11 @@
-import i18n from 'i18n'
-import { Request } from 'express'
-import { PdfBuilder } from '../@types/pdf'
-import TextComponent from './components/text'
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
-import FontStyles from './fontStyles'
+import { Request } from 'express';
+import i18n from 'i18n';
+
+import { PdfBuilder } from '../@types/pdf';
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+
+import TextComponent from './components/text';
+import FontStyles from './fontStyles';
 
 const addWhatHappensNow = (pdf: PdfBuilder, request: Request) => {
   new TextComponent(pdf, [
@@ -31,7 +33,7 @@ const addWhatHappensNow = (pdf: PdfBuilder, request: Request) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
-}
+  ]).addComponentToDocument();
+};
 
-export default addWhatHappensNow
+export default addWhatHappensNow;

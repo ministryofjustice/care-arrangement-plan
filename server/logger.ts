@@ -1,9 +1,10 @@
-import bunyan from 'bunyan'
-import bunyanFormat from 'bunyan-format'
-import config from './config'
+import { createLogger } from 'bunyan';
+import bunyanFormat from 'bunyan-format';
 
-const formatOut = bunyanFormat({ outputMode: 'short', color: !config.production })
+import config from './config';
 
-const logger = bunyan.createLogger({ name: 'PFL Care Arrangement Plan', stream: formatOut, level: 'debug' })
+const formatOut = bunyanFormat({ outputMode: 'short', color: !config.production });
 
-export default logger
+const logger = createLogger({ name: 'PFL Care Arrangement Plan', stream: formatOut, level: 'debug' });
+
+export default logger;

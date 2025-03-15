@@ -31,6 +31,6 @@ const config = {
   moduleFileExtensions: ['web.js', 'js', 'json', 'node', 'ts'],
   setupFiles: ['dotenv/config'],
   setupFilesAfterEnv: ['./server/test-utils/testSetup.ts'],
-}
+};
 
-export default config
+export default config;

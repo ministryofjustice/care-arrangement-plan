@@ -1,11 +1,13 @@
-import i18n from 'i18n'
-import { Request } from 'express'
-import { PdfBuilder } from '../@types/pdf'
-import TextComponent from './components/text'
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
-import BulletListComponent from './components/bulletList'
-import { formattedChildrenNames } from '../utils/sessionHelpers'
-import FontStyles from './fontStyles'
+import { Request } from 'express';
+import i18n from 'i18n';
+
+import { PdfBuilder } from '../@types/pdf';
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+import { formattedChildrenNames } from '../utils/sessionHelpers';
+
+import BulletListComponent from './components/bulletList';
+import TextComponent from './components/text';
+import FontStyles from './fontStyles';
 
 const addPreamble = (pdf: PdfBuilder, request: Request) => {
   new TextComponent(pdf, [
@@ -26,7 +28,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
+  ]).addComponentToDocument();
 
   new BulletListComponent(pdf, {
     initialText: [
@@ -46,7 +48,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       i18n.__('sharePlan.whatWeAreTelling.startYourOwn'),
       i18n.__('sharePlan.whatWeAreTelling.suggestChanges'),
     ],
-  }).addComponentToDocument()
+  }).addComponentToDocument();
 
   new TextComponent(pdf, [
     {
@@ -61,7 +63,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
+  ]).addComponentToDocument();
 
   new BulletListComponent(pdf, {
     initialText: [
@@ -80,7 +82,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       i18n.__('sharePlan.whatWeAreTelling.childrenFirst'),
       i18n.__('sharePlan.whatWeAreTelling.splitMayNotBeBest'),
     ],
-  }).addComponentToDocument()
+  }).addComponentToDocument();
 
   new BulletListComponent(pdf, {
     initialText: [
@@ -101,7 +103,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       i18n.__('sharePlan.whatWeAreTelling.separatingOrDivorcing'),
       i18n.__('sharePlan.whatWeAreTelling.makingChildArrangements'),
     ],
-  }).addComponentToDocument()
+  }).addComponentToDocument();
 
   new BulletListComponent(pdf, {
     initialText: [
@@ -139,7 +141,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
-  }).addComponentToDocument()
+  }).addComponentToDocument();
 
   new TextComponent(pdf, [
     {
@@ -154,7 +156,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
+  ]).addComponentToDocument();
 
   if (request.session.courtOrderInPlace) {
     new BulletListComponent(pdf, {
@@ -200,7 +202,7 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
           bottomPadding: PARAGRAPH_SPACE,
         },
       ],
-    }).addComponentToDocument()
+    }).addComponentToDocument();
     new TextComponent(pdf, [
       {
         text: i18n.__('sharePlan.whatWeAreTelling.noRestrictionsOnContactHeading'),
@@ -220,8 +222,8 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
         style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
-    ]).addComponentToDocument()
+    ]).addComponentToDocument();
   }
-}
+};
 
-export default addPreamble
+export default addPreamble;
