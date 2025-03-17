@@ -6,60 +6,81 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">{{ title }}</h1>
-      <p>{{ __('cookies.cookiesAre') }}</p>
-      <p>{{ __('cookies.usedFor') }}</p>
+      <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-      <h2 class="govuk-heading-m">{{ __('cookies.essentialCookies') }}</h2>
+      {{ __('cookies.aboutCookies') | safe }}
+
+      <h2 class="govuk-heading-l">{{ __('cookies.howCookiesAreUsed') }}</h2>
+
+      <h3 class="govuk-heading-m">{{ __('cookies.essentialCookies') }}</h3>
+
       <p>{{ __('cookies.essentialCookiesUse') }}</p>
+
+      {{ __('cookies.rememberingProgress') | safe }}
 
       {{
         govukTable({
           head: [
             { text: __('cookies.name') },
             { text: __('cookies.purpose') },
-            { text: __('cookies.expiry') }
+            { text: __('cookies.expires') }
           ],
           rows: [
             [
               { text: cookieNames.SESSION },
-              { text: "TODO" },
-              { text: __('cookies.twoHours') }
+              { text: __('cookies.sessionPurpose') },
+              { text: __('cookies.sessionExpiry') }
             ],
             [
               { text: cookieNames.AUTHENTICATION },
-              { text: "TODO" },
-              { text: __('cookies.thirtyDays') }
-            ],
-            [
-              { text: cookieNames.ANALYTICS_CONSENT },
-              { text: "TODO" },
-              { text: __('cookies.oneYear') }
+              { text: __('cookies.authenticationPurpose') },
+              { text: __('cookies.authenticationExpiry') }
             ]
           ]
         })
       }}
 
       {% if ga4Id %}
-        <h2 class="govuk-heading-m">{{ __('cookies.optionalCookies') }}</h2>
+        {{ __('cookies.cookiesMessage') | safe }}
 
         {{
           govukTable({
             head: [
               { text: __('cookies.name') },
               { text: __('cookies.purpose') },
-              { text: __('cookies.expiry') }
+              { text: __('cookies.expires') }
+            ],
+            rows: [
+              [
+                { text: cookieNames.ANALYTICS_CONSENT },
+                { text: __('cookies.consentPurpose') },
+                { text: __('cookies.consentExpiry') }
+              ]
+            ]
+          })
+        }}
+
+        <h3 class="govuk-heading-m">{{ __('cookies.optionalCookies') }}</h3>
+
+        {{ __('cookies.aboutOptionalCookies') | safe }}
+
+        {{
+          govukTable({
+            head: [
+              { text: __('cookies.name') },
+              { text: __('cookies.purpose') },
+              { text: __('cookies.expires') }
             ],
             rows: [
               [
                 { text: "_ga" },
-                { text: __('cookies._gaCookie') },
-                { text: __('cookies.twoYears') }
+                { text: __('cookies._gaCookiePurpose') },
+                { text: __('cookies.gaCookiesExpiry') }
               ],
               [
                 { text: "_ga_" + (ga4Id | replace("G-", "")) },
-                { text: __('cookies._ga_IdCookie') },
-                { text: __('cookies.twoYears') }
+                { text: __('cookies._ga_IdCookiePurpose') },
+                { text: __('cookies.gaCookiesExpiry') }
               ]
             ]
           })
