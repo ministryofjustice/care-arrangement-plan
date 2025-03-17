@@ -26,6 +26,7 @@ enum formFields {
   HOW_CHANGE_DURING_SCHOOL_HOLIDAYS = 'how-change-during-school-holidays',
   ITEMS_FOR_CHANGEOVER = 'items-for-changeover',
   SPECIAL_DAYS = 'special-days',
+  WHAT_OTHER_THINGS_MATTER = 'what-other-things-matter',
 }
 
 export default formFields;

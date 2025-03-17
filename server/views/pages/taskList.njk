@@ -114,6 +114,21 @@
         })
       }}
 
+      <h2 class="govuk-heading-m">{{ __('taskList.otherThings') }}</h2>
+      {{
+        govukTaskList({
+          items: [
+            {
+              title: {
+                text: __('otherThings.whatOtherThingsMatter.title')
+              },
+              href: paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER,
+              status: completeStatus if whatOtherThingsMatterComplete else incompleteStatus
+            }
+          ]
+        })
+      }}
+
       {% if showContinue %}
         <div class="govuk-!-margin-top-5">
           {{ govukButton({text: __('continue'), href: paths.CHECK_YOUR_ANSWERS}) }}

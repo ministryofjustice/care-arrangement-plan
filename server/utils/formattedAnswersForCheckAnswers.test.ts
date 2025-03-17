@@ -19,6 +19,7 @@ import {
   willChangeDuringSchoolHolidays,
   willDaytimeVisitsHappen,
   willOvernightsHappen,
+  whatOtherThingsMatter,
 } from './formattedAnswersForCheckAnswers';
 
 const testPath = '/test';
@@ -46,6 +47,9 @@ const testAppSetup = (): Express => {
       },
       specialDays: {
         whatWillHappen: whatWillHappen(sessionMock),
+      },
+      otherThings: {
+        whatOtherThingsMatter: whatOtherThingsMatter(sessionMock),
       },
     });
   });
@@ -77,6 +81,11 @@ const session: Partial<SessionData> = {
   },
   specialDays: {
     whatWillHappen: {
+      noDecisionRequired: true,
+    },
+  },
+  otherThings: {
+    whatOtherThingsMatter: {
       noDecisionRequired: true,
     },
   },
@@ -357,6 +366,37 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.specialDays).toEqual({ whatWillHappen: answer });
+        });
+    });
+  });
+
+  describe('otherThings', () => {
+    it('should return correctly for no need to decide what will happen', () => {
+      sessionMock.otherThings = {
+        whatOtherThingsMatter: {
+          noDecisionRequired: true,
+        },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.otherThings).toEqual({ whatOtherThingsMatter: 'We do not need to decide this' });
+        });
+    });
+    it('should return correctly for answer to what will happen', () => {
+      const answer = 'answer';
+      sessionMock.otherThings = {
+        whatOtherThingsMatter: {
+          noDecisionRequired: false,
+          answer,
+        },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.otherThings).toEqual({ whatOtherThingsMatter: answer });
         });
     });
   });

@@ -178,3 +178,8 @@ export const whatWillHappen = ({ specialDays, initialAdultName }: Partial<CAPSes
   specialDays.whatWillHappen.noDecisionRequired
     ? i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
     : `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName: initialAdultName, suggestion: specialDays.whatWillHappen.answer })}`;
+
+export const whatOtherThingsMatter = ({ otherThings, initialAdultName }: Partial<CAPSession>) =>
+  otherThings.whatOtherThingsMatter.noDecisionRequired
+    ? i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+    : `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName: initialAdultName, suggestion: otherThings.whatOtherThingsMatter.answer })}`;

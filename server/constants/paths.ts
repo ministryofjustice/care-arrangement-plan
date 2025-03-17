@@ -38,6 +38,8 @@ export default {
   HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED: '/handover-and-holidays/items-for-changeover/not-required',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN: '/special-days/what-will-happen',
   SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED: '/special-days/what-will-happen/not-required',
+  OTHER_THINGS_WHAT_OTHER_THINGS_MATTER: '/other-things/what-other-things-matter',
+  OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED: '/other-things/what-other-things-matter/not-required',
   DOWNLOAD_PDF: '/download-pdf',
   PRINT_PDF: '/print-pdf',
 };

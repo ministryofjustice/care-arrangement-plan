@@ -131,7 +131,8 @@
     "whoIsUsing": "Who is using this service?",
     "livingAndVisiting": "Living and visiting",
     "handoverAndHolidays": "Handovers and holidays",
-    "specialDays": "Special days"
+    "specialDays": "Special days",
+    "otherThings": "Other things"
   },
   "livingAndVisiting": {
     "mostlyLive": {
@@ -190,6 +191,16 @@
       "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays."
     }
   },
+  "otherThings": {
+    "whatOtherThingsMatter": {
+      "title": "What other things matter to your children?",
+      "thingsToAgree": "You may want to agree things such as:",
+      "religionDietAndRules": "religious practices, diet, and standard rules across both households",
+      "extraCurriculars": "extra-curricular activities, such as swimming lessons",
+      "friendsAndFamily": "access to other friends and family",
+      "otherContact": "other types of contact, such as video calls"
+    }
+  },
   "checkYourAnswers": {
     "title": "Check your answers",
     "livingAndVisiting": {
@@ -210,7 +221,8 @@
       "willChangeDuringSchoolHolidays": "if the arrangements will change during school holidays",
       "howChangeDuringSchoolHolidays": "how the arrangements will change during school holidays",
       "itemsForChangeover": "what items need to go between households",
-      "whatWillHappen": "what will happen on special days"
+      "whatWillHappen": "what will happen on special days",
+      "whatOtherThingsMatter": "what other things matter to your children"
     }
   },
   "sharePlan": {
@@ -322,12 +334,16 @@
         },
         "specialDays": {
           "whatWillHappen": "If you do not agree, suggest what will happen on special days"
+        },
+        "otherThings": {
+          "whatOtherThingsMatter": "If you do not agree, suggest what other things matter to your children"
         }
       },
       "compromise": {
         "livingAndVisiting": "You can use this space to write your agreed compromise for the living and visiting section",
         "handoverAndHolidays": "You can use this space to write your agreed compromise for the handovers and holidays section",
-        "specialDays": "You can use this space to write your agreed compromise for the special days section"
+        "specialDays": "You can use this space to write your agreed compromise for the special days section",
+        "otherThings": "You can use this space to write your agreed compromise for the other things section"
       }
     }
   },

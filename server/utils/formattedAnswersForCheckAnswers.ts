@@ -141,3 +141,8 @@ export const itemsForChangeover = ({ handoverAndHolidays }: Partial<CAPSession>)
 
 export const whatWillHappen = ({ specialDays }: Partial<CAPSession>) =>
   specialDays.whatWillHappen.noDecisionRequired ? i18n.__('doNotNeedToDecide') : specialDays.whatWillHappen.answer;
+
+export const whatOtherThingsMatter = ({ otherThings }: Partial<CAPSession>) =>
+  otherThings.whatOtherThingsMatter.noDecisionRequired
+    ? i18n.__('doNotNeedToDecide')
+    : otherThings.whatOtherThingsMatter.answer;

@@ -1,0 +1,14 @@
+<h2 class="govuk-heading-m">{{ __('taskList.otherThings') }}</h2>
+
+<h3 class="govuk-heading-s">{{ __('otherThings.whatOtherThingsMatter.title') }}</h3>
+<p class="govuk-body">{{ __('otherThings.whatOtherThingsMatter.thingsToAgree') }}}</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>{{ __('otherThings.whatOtherThingsMatter.religionDietAndRules') }}</li>
+  <li>{{ __('otherThings.whatOtherThingsMatter.extraCurriculars') }}</li>
+  <li>{{ __('otherThings.whatOtherThingsMatter.friendsAndFamily') }}</li>
+  <li>{{ __('otherThings.whatOtherThingsMatter.otherContact') }}</li>
+</ul>
+<p class="newline-separated-paragraph">{{ values.whatOtherThingsMatterAnswer }}</p>
+{{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.otherThings.whatOtherThingsMatter')) }}
+
+{{ endOfSection(__('sharePlan.yourProposedPlan.compromise.otherThings')) }}
