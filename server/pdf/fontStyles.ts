@@ -3,4 +3,4 @@ enum FontStyles {
   BOLD = 'bold',
 }
 
-export default FontStyles
+export default FontStyles;

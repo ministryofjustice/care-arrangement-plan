@@ -1,34 +1,35 @@
-import request from 'supertest'
-import { JSDOM } from 'jsdom'
-import testAppSetup from '../test-utils/testAppSetup'
-import paths from '../constants/paths'
-import formFields from '../constants/formFields'
-import { flashFormValues, flashMock, flashMockErrors, sessionMock } from '../test-utils/testMocks'
+import { JSDOM } from 'jsdom';
+import request from 'supertest';
 
-const app = testAppSetup()
+import formFields from '../constants/formFields';
+import paths from '../constants/paths';
+import testAppSetup from '../test-utils/testAppSetup';
+import { flashFormValues, flashMock, flashMockErrors, sessionMock } from '../test-utils/testMocks';
+
+const app = testAppSetup();
 
 describe(paths.ABOUT_THE_ADULTS, () => {
   describe('GET', () => {
     it('should render about the adults page', async () => {
-      const response = await request(app).get(paths.ABOUT_THE_ADULTS).expect('Content-Type', /html/)
+      const response = await request(app).get(paths.ABOUT_THE_ADULTS).expect('Content-Type', /html/);
 
-      const dom = new JSDOM(response.text)
+      const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
         'About the adults who will care for the children',
-      )
-      expect(dom.window.document.querySelector('h2')).toBeNull()
+      );
+      expect(dom.window.document.querySelector('h2')).toBeNull();
       expect(
         dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`).getAttribute('aria-describedby'),
-      ).not.toContain(`${formFields.INITIAL_ADULT_NAME}-error`)
+      ).not.toContain(`${formFields.INITIAL_ADULT_NAME}-error`);
       expect(dom.window.document.querySelector(`#${formFields.SECONDARY_ADULT_NAME}`)).not.toHaveAttribute(
         'aria-describedby',
-      )
-    })
+      );
+    });
 
     it('should render error flash responses correctly', async () => {
-      const primaryError = 'errorOne'
-      const secondaryError = 'errorTwo'
+      const primaryError = 'errorOne';
+      const secondaryError = 'errorTwo';
       Object.assign(flashMockErrors, [
         {
           location: 'body',
@@ -42,64 +43,65 @@ describe(paths.ABOUT_THE_ADULTS, () => {
           path: formFields.SECONDARY_ADULT_NAME,
           type: 'field',
         },
-      ])
+      ]);
 
-      const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_ADULTS)).text)
+      const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_ADULTS)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem')
-      expect(
-        dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`).getAttribute('aria-describedby'),
-      ).toContain(`${formFields.INITIAL_ADULT_NAME}-error`)
+      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`)).toHaveAttribute(
+        'aria-describedby',
+        expect.stringContaining(`${formFields.INITIAL_ADULT_NAME}-error`),
+      );
       expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}-error`)).toHaveTextContent(
         primaryError,
-      )
+      );
       expect(dom.window.document.querySelector(`#${formFields.SECONDARY_ADULT_NAME}`)).toHaveAttribute(
         'aria-describedby',
         `${formFields.SECONDARY_ADULT_NAME}-error`,
-      )
+      );
       expect(dom.window.document.querySelector(`#${formFields.SECONDARY_ADULT_NAME}-error`)).toHaveTextContent(
         secondaryError,
-      )
-    })
+      );
+    });
 
     it('should render field value flash responses correctly', async () => {
-      const initialName = 'initialName'
-      const secondaryName = 'secondaryName'
+      const initialName = 'initialName';
+      const secondaryName = 'secondaryName';
       Object.assign(flashFormValues, [
         { [formFields.INITIAL_ADULT_NAME]: initialName, [formFields.SECONDARY_ADULT_NAME]: secondaryName },
-      ])
+      ]);
 
-      sessionMock.initialAdultName = 'wrong initialName'
-      sessionMock.secondaryAdultName = 'wrong secondaryName'
+      sessionMock.initialAdultName = 'wrong initialName';
+      sessionMock.secondaryAdultName = 'wrong secondaryName';
 
-      const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_ADULTS)).text)
+      const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_ADULTS)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`)).toHaveValue(initialName)
-      expect(dom.window.document.querySelector(`#${formFields.SECONDARY_ADULT_NAME}`)).toHaveValue(secondaryName)
-    })
+      expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`)).toHaveValue(initialName);
+      expect(dom.window.document.querySelector(`#${formFields.SECONDARY_ADULT_NAME}`)).toHaveValue(secondaryName);
+    });
 
     it('should render field previous values correctly', async () => {
-      const initialName = 'initialName'
-      const secondaryName = 'secondaryName'
+      const initialName = 'initialName';
+      const secondaryName = 'secondaryName';
 
-      sessionMock.initialAdultName = initialName
-      sessionMock.secondaryAdultName = secondaryName
+      sessionMock.initialAdultName = initialName;
+      sessionMock.secondaryAdultName = secondaryName;
 
-      const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_ADULTS)).text)
+      const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_ADULTS)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`)).toHaveValue(initialName)
-      expect(dom.window.document.querySelector(`#${formFields.SECONDARY_ADULT_NAME}`)).toHaveValue(secondaryName)
-    })
-  })
+      expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`)).toHaveValue(initialName);
+      expect(dom.window.document.querySelector(`#${formFields.SECONDARY_ADULT_NAME}`)).toHaveValue(secondaryName);
+    });
+  });
 
   describe('POST', () => {
     it('should reload page and set flash when the page is not correctly filled', async () => {
-      const initialName = 'initialName'
+      const initialName = 'initialName';
       await request(app)
         .post(paths.ABOUT_THE_ADULTS)
         .send({ [formFields.INITIAL_ADULT_NAME]: initialName })
         .expect(302)
-        .expect('location', paths.ABOUT_THE_ADULTS)
+        .expect('location', paths.ABOUT_THE_ADULTS);
 
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
@@ -109,24 +111,24 @@ describe(paths.ABOUT_THE_ADULTS, () => {
           type: 'field',
           value: '',
         },
-      ])
+      ]);
       expect(flashMock).toHaveBeenCalledWith('formValues', {
         [formFields.INITIAL_ADULT_NAME]: initialName,
         [formFields.SECONDARY_ADULT_NAME]: '',
-      })
-    })
+      });
+    });
 
     it('should redirect to task list page if the page is correctly filled', async () => {
-      const initialName = 'initialName'
-      const secondaryName = 'secondaryName'
+      const initialName = 'initialName';
+      const secondaryName = 'secondaryName';
       await request(app)
         .post(paths.ABOUT_THE_ADULTS)
         .send({ [formFields.INITIAL_ADULT_NAME]: initialName, [formFields.SECONDARY_ADULT_NAME]: secondaryName })
         .expect(302)
-        .expect('location', paths.TASK_LIST)
+        .expect('location', paths.TASK_LIST);
 
-      expect(sessionMock.initialAdultName).toEqual(initialName)
-      expect(sessionMock.secondaryAdultName).toEqual(secondaryName)
-    })
-  })
-})
+      expect(sessionMock.initialAdultName).toEqual(initialName);
+      expect(sessionMock.secondaryAdultName).toEqual(secondaryName);
+    });
+  });
+});

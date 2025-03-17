@@ -1,16 +1,18 @@
-import i18n from 'i18n'
-import { Request } from 'express'
-import { PdfBuilder } from '../@types/pdf'
-import DoYouAgreeComponent from './components/doYouAgree'
-import BulletListComponent from './components/bulletList'
-import TextComponent from './components/text'
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
-import { formattedChildrenNames } from '../utils/sessionHelpers'
-import FontStyles from './fontStyles'
+import { Request } from 'express';
+import i18n from 'i18n';
+
+import { PdfBuilder } from '../@types/pdf';
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+import { formattedChildrenNames } from '../utils/sessionHelpers';
+
+import BulletListComponent from './components/bulletList';
+import DoYouAgreeComponent from './components/doYouAgree';
+import TextComponent from './components/text';
+import FontStyles from './fontStyles';
 
 const addAboutTheProposal = (pdf: PdfBuilder, request: Request) => {
-  const { initialAdultName, courtOrderInPlace, secondaryAdultName, numberOfChildren } = request.session
-  const childrenNames = formattedChildrenNames(request.session)
+  const { initialAdultName, courtOrderInPlace, secondaryAdultName, numberOfChildren } = request.session;
+  const childrenNames = formattedChildrenNames(request.session);
 
   new BulletListComponent(pdf, {
     initialText: [
@@ -43,12 +45,12 @@ const addAboutTheProposal = (pdf: PdfBuilder, request: Request) => {
         childrenNames,
       }),
     ],
-  }).addComponentToDocument()
+  }).addComponentToDocument();
 
   new DoYouAgreeComponent(
     pdf,
     i18n.__('sharePlan.yourProposedPlan.doYouAgreeOnBasics', { senderName: initialAdultName }),
-  ).addComponentToDocument()
+  ).addComponentToDocument();
 
   new TextComponent(pdf, [
     {
@@ -63,7 +65,7 @@ const addAboutTheProposal = (pdf: PdfBuilder, request: Request) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
-}
+  ]).addComponentToDocument();
+};
 
-export default addAboutTheProposal
+export default addAboutTheProposal;

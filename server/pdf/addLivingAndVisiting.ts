@@ -1,8 +1,8 @@
-import i18n from 'i18n'
-import { Request } from 'express'
-import { PdfBuilder } from '../@types/pdf'
-import TextboxComponent from './components/textbox'
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants'
+import { Request } from 'express';
+import i18n from 'i18n';
+
+import { PdfBuilder } from '../@types/pdf';
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants';
 import {
   whichDaysDaytimeVisits,
   whichDaysOvernight,
@@ -10,10 +10,12 @@ import {
   mostlyLive,
   whichSchedule,
   willOvernightsHappen,
-} from '../utils/formattedAnswersForPdf'
-import FontStyles from './fontStyles'
-import { parentNotMostlyLivedWith } from '../utils/sessionHelpers'
-import addAnswer from './addAnswer'
+} from '../utils/formattedAnswersForPdf';
+import { parentNotMostlyLivedWith } from '../utils/sessionHelpers';
+
+import addAnswer from './addAnswer';
+import TextboxComponent from './components/textbox';
+import FontStyles from './fontStyles';
 
 const addMostlyLive = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
@@ -23,8 +25,8 @@ const addMostlyLive = (pdf: PdfBuilder, request: Request) => {
     undefined,
     mostlyLive(request.session),
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.mostlyLive'),
-  )
-}
+  );
+};
 
 const addWhichSchedule = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
@@ -34,11 +36,11 @@ const addWhichSchedule = (pdf: PdfBuilder, request: Request) => {
     i18n.__('livingAndVisiting.whichSchedule.exactSplitWarning'),
     whichSchedule(request.session),
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichSchedule'),
-  )
-}
+  );
+};
 
 const addWillOvernightsHappen = (pdf: PdfBuilder, request: Request) => {
-  const adult = parentNotMostlyLivedWith(request.session)
+  const adult = parentNotMostlyLivedWith(request.session);
 
   addAnswer(
     pdf,
@@ -47,8 +49,8 @@ const addWillOvernightsHappen = (pdf: PdfBuilder, request: Request) => {
     undefined,
     willOvernightsHappen(request.session),
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.willOvernightsHappen', { adult }),
-  )
-}
+  );
+};
 
 const addWhichDaysOvernight = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
@@ -60,8 +62,8 @@ const addWhichDaysOvernight = (pdf: PdfBuilder, request: Request) => {
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichDaysOvernight', {
       adult: parentNotMostlyLivedWith(request.session),
     }),
-  )
-}
+  );
+};
 
 const addWillDaytimeVisitsHappen = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
@@ -71,8 +73,8 @@ const addWillDaytimeVisitsHappen = (pdf: PdfBuilder, request: Request) => {
     undefined,
     willDaytimeVisitsHappen(request.session),
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.willDaytimeVisitsHappen'),
-  )
-}
+  );
+};
 
 const addWWhichDaysDaytimeVisits = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
@@ -82,16 +84,16 @@ const addWWhichDaysDaytimeVisits = (pdf: PdfBuilder, request: Request) => {
     undefined,
     whichDaysDaytimeVisits(request.session),
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichDaysDaytimeVisits'),
-  )
-}
+  );
+};
 
 const addLivingAndVisiting = (pdf: PdfBuilder, request: Request) => {
-  addMostlyLive(pdf, request)
-  addWhichSchedule(pdf, request)
-  addWillOvernightsHappen(pdf, request)
-  addWhichDaysOvernight(pdf, request)
-  addWillDaytimeVisitsHappen(pdf, request)
-  addWWhichDaysDaytimeVisits(pdf, request)
+  addMostlyLive(pdf, request);
+  addWhichSchedule(pdf, request);
+  addWillOvernightsHappen(pdf, request);
+  addWhichDaysOvernight(pdf, request);
+  addWillDaytimeVisitsHappen(pdf, request);
+  addWWhichDaysDaytimeVisits(pdf, request);
 
   new TextboxComponent(pdf, [
     {
@@ -106,7 +108,7 @@ const addLivingAndVisiting = (pdf: PdfBuilder, request: Request) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
-}
+  ]).addComponentToDocument();
+};
 
-export default addLivingAndVisiting
+export default addLivingAndVisiting;

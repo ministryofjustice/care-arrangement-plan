@@ -1,9 +1,11 @@
-import express, { Express } from 'express'
-import request from 'supertest'
-import { SessionData } from 'express-session'
-import { sessionMock } from '../test-utils/testMocks'
-import setUpi18n from '../middleware/setUpi18n'
-import { getBetweenHouseholdsField, whereHandoverField } from '../@types/fields'
+import express, { Express } from 'express';
+import { SessionData } from 'express-session';
+import request from 'supertest';
+
+import { getBetweenHouseholdsField, whereHandoverField } from '../@types/fields';
+import setUpi18n from '../middleware/setUpi18n';
+import { sessionMock } from '../test-utils/testMocks';
+
 import {
   getBetweenHouseholds,
   howChangeDuringSchoolHolidays,
@@ -18,14 +20,14 @@ import {
   willDaytimeVisitsHappen,
   willOvernightsHappen,
   whatOtherThingsMatter,
-} from './formattedAnswersForCheckAnswers'
+} from './formattedAnswersForCheckAnswers';
 
-const testPath = '/test'
+const testPath = '/test';
 
 const testAppSetup = (): Express => {
-  const app = express()
+  const app = express();
 
-  app.use(setUpi18n())
+  app.use(setUpi18n());
   app.get(testPath, (_req, response) => {
     response.json({
       livingAndVisiting: {
@@ -49,13 +51,13 @@ const testAppSetup = (): Express => {
       otherThings: {
         whatOtherThingsMatter: whatOtherThingsMatter(sessionMock),
       },
-    })
-  })
+    });
+  });
 
-  return app
-}
+  return app;
+};
 
-const app = testAppSetup()
+const app = testAppSetup();
 
 const session: Partial<SessionData> = {
   namesOfChildren: ['James', 'Rachel', 'Jack'],
@@ -87,40 +89,40 @@ const session: Partial<SessionData> = {
       noDecisionRequired: true,
     },
   },
-}
+};
 
 describe('formattedAnswers', () => {
   beforeEach(() => {
-    Object.assign(sessionMock, structuredClone(session))
-  })
+    Object.assign(sessionMock, structuredClone(session));
+  });
 
   describe('livingAndVisiting', () => {
     it('should all return undefined if section is not answered', () => {
       return request(app)
         .get(testPath)
-        .expect(response => {
-          expect(response.body.livingAndVisiting).toEqual({})
-        })
-    })
+        .expect((response) => {
+          expect(response.body.livingAndVisiting).toEqual({});
+        });
+    });
 
     it('should return correctly for other', () => {
-      const arrangement = 'arrangement'
+      const arrangement = 'arrangement';
       sessionMock.livingAndVisiting = {
         mostlyLive: {
           where: 'other',
           describeArrangement: arrangement,
         },
-      }
+      };
 
       return request(app)
         .get(testPath)
-        .expect(response => {
-          expect(response.body.livingAndVisiting).toEqual({ mostlyLive: arrangement })
-        })
-    })
+        .expect((response) => {
+          expect(response.body.livingAndVisiting).toEqual({ mostlyLive: arrangement });
+        });
+    });
 
     it('should return correctly for split with answer', () => {
-      const arrangement = 'arrangement'
+      const arrangement = 'arrangement';
       sessionMock.livingAndVisiting = {
         mostlyLive: {
           where: 'split',
@@ -129,21 +131,21 @@ describe('formattedAnswers', () => {
           noDecisionRequired: false,
           answer: arrangement,
         },
-      }
+      };
 
       return request(app)
         .get(testPath)
-        .expect(response => {
+        .expect((response) => {
           expect(response.body.livingAndVisiting).toEqual({
             mostlyLive: `They will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
             whichSchedule: arrangement,
-          })
-        })
-    })
+          });
+        });
+    });
 
     it('should return correctly for split with no decision required', () => {
-      sessionMock.namesOfChildren = ['James']
-      sessionMock.numberOfChildren = 1
+      sessionMock.namesOfChildren = ['James'];
+      sessionMock.numberOfChildren = 1;
       sessionMock.livingAndVisiting = {
         mostlyLive: {
           where: 'split',
@@ -151,17 +153,17 @@ describe('formattedAnswers', () => {
         whichSchedule: {
           noDecisionRequired: true,
         },
-      }
+      };
 
       return request(app)
         .get(testPath)
-        .expect(response => {
+        .expect((response) => {
           expect(response.body.livingAndVisiting).toEqual({
             mostlyLive: `They will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
             whichSchedule: 'We do not need to decide this',
-          })
-        })
-    })
+          });
+        });
+    });
 
     it('should return correctly for with adult with no overnights', () => {
       sessionMock.livingAndVisiting = {
@@ -177,19 +179,19 @@ describe('formattedAnswers', () => {
             noDecisionRequired: true,
           },
         },
-      }
+      };
 
       return request(app)
         .get(testPath)
-        .expect(response => {
+        .expect((response) => {
           expect(response.body.livingAndVisiting).toEqual({
             mostlyLive: `With ${session.initialAdultName}`,
             willOvernightsHappen: 'No',
             willDaytimeVisitsHappen: 'Yes',
             whichDaysDaytimeVisits: 'We do not need to decide this',
-          })
-        })
-    })
+          });
+        });
+    });
 
     it('should return correctly for with adult with no daytime visits', () => {
       sessionMock.livingAndVisiting = {
@@ -205,22 +207,22 @@ describe('formattedAnswers', () => {
         daytimeVisits: {
           willHappen: false,
         },
-      }
+      };
 
       return request(app)
         .get(testPath)
-        .expect(response => {
+        .expect((response) => {
           expect(response.body.livingAndVisiting).toEqual({
             mostlyLive: `With ${session.initialAdultName}`,
             willOvernightsHappen: 'Yes',
             whichDaysOvernight: `The children will stay overnight with ${session.secondaryAdultName} on Monday, Wednesday and Friday`,
             willDaytimeVisitsHappen: 'No',
-          })
-        })
-    })
+          });
+        });
+    });
 
     it('should return correctly for with adult selected days', () => {
-      const arrangement = 'arrangement'
+      const arrangement = 'arrangement';
       sessionMock.livingAndVisiting = {
         mostlyLive: {
           where: 'withSecondary',
@@ -237,21 +239,21 @@ describe('formattedAnswers', () => {
             days: ['saturday'],
           },
         },
-      }
+      };
 
       return request(app)
         .get(testPath)
-        .expect(response => {
+        .expect((response) => {
           expect(response.body.livingAndVisiting).toEqual({
             mostlyLive: `With ${session.secondaryAdultName}`,
             willOvernightsHappen: 'Yes',
             whichDaysOvernight: arrangement,
             willDaytimeVisitsHappen: 'Yes',
             whichDaysDaytimeVisits: `The children will have daytime visits with ${session.initialAdultName} on a Saturday`,
-          })
-        })
-    })
-  })
+          });
+        });
+    });
+  });
 
   describe('handoverAndHolidays', () => {
     it.each([
@@ -327,15 +329,15 @@ describe('formattedAnswers', () => {
         },
       ],
     ])('should return the correct value for handover and holidays', (handoverAndHolidays, expectedValues) => {
-      sessionMock.handoverAndHolidays = handoverAndHolidays
+      sessionMock.handoverAndHolidays = handoverAndHolidays;
 
       return request(app)
         .get(testPath)
-        .expect(response => {
-          expect(response.body.handoverAndHolidays).toEqual(expectedValues)
-        })
-    })
-  })
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays).toEqual(expectedValues);
+        });
+    });
+  });
 
   describe('specialDays', () => {
     it('should return correctly for no need to decide what will happen', () => {
@@ -343,30 +345,30 @@ describe('formattedAnswers', () => {
         whatWillHappen: {
           noDecisionRequired: true,
         },
-      }
+      };
 
       return request(app)
         .get(testPath)
-        .expect(response => {
-          expect(response.body.specialDays).toEqual({ whatWillHappen: 'We do not need to decide this' })
-        })
-    })
+        .expect((response) => {
+          expect(response.body.specialDays).toEqual({ whatWillHappen: 'We do not need to decide this' });
+        });
+    });
     it('should return correctly for answer to what will happen', () => {
-      const answer = 'answer'
+      const answer = 'answer';
       sessionMock.specialDays = {
         whatWillHappen: {
           noDecisionRequired: false,
           answer,
         },
-      }
+      };
 
       return request(app)
         .get(testPath)
-        .expect(response => {
-          expect(response.body.specialDays).toEqual({ whatWillHappen: answer })
-        })
-    })
-  })
+        .expect((response) => {
+          expect(response.body.specialDays).toEqual({ whatWillHappen: answer });
+        });
+    });
+  });
 
   describe('otherThings', () => {
     it('should return correctly for no need to decide what will happen', () => {
@@ -374,28 +376,28 @@ describe('formattedAnswers', () => {
         whatOtherThingsMatter: {
           noDecisionRequired: true,
         },
-      }
+      };
 
       return request(app)
         .get(testPath)
-        .expect(response => {
-          expect(response.body.otherThings).toEqual({ whatOtherThingsMatter: 'We do not need to decide this' })
-        })
-    })
+        .expect((response) => {
+          expect(response.body.otherThings).toEqual({ whatOtherThingsMatter: 'We do not need to decide this' });
+        });
+    });
     it('should return correctly for answer to what will happen', () => {
-      const answer = 'answer'
+      const answer = 'answer';
       sessionMock.otherThings = {
         whatOtherThingsMatter: {
           noDecisionRequired: false,
           answer,
         },
-      }
+      };
 
       return request(app)
         .get(testPath)
-        .expect(response => {
-          expect(response.body.otherThings).toEqual({ whatOtherThingsMatter: answer })
-        })
-    })
-  })
-})
+        .expect((response) => {
+          expect(response.body.otherThings).toEqual({ whatOtherThingsMatter: answer });
+        });
+    });
+  });
+});

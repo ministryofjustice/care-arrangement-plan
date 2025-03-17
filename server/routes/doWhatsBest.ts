@@ -1,8 +1,9 @@
-import { Router } from 'express'
-import i18n from 'i18n'
-import { body, validationResult } from 'express-validator'
-import paths from '../constants/paths'
-import formFields from '../constants/formFields'
+import { Router } from 'express';
+import { body, validationResult } from 'express-validator';
+import i18n from 'i18n';
+
+import formFields from '../constants/formFields';
+import paths from '../constants/paths';
 
 const doWhatsBestRoutes = (router: Router) => {
   router.get(paths.DO_WHATS_BEST, (request, response) => {
@@ -10,19 +11,19 @@ const doWhatsBestRoutes = (router: Router) => {
       errors: request.flash('errors'),
       title: i18n.__('doWhatsBest.title'),
       backLinkHref: paths.CHILDREN_SAFETY_CHECK,
-    })
-  })
+    });
+  });
 
   // TODO C5141-1013: Add error message
   router.post(paths.DO_WHATS_BEST, body(formFields.DO_WHATS_BEST).exists(), (request, response) => {
-    const errors = validationResult(request)
+    const errors = validationResult(request);
     if (!errors.isEmpty()) {
-      request.flash('errors', errors.array())
-      return response.redirect(paths.DO_WHATS_BEST)
+      request.flash('errors', errors.array());
+      return response.redirect(paths.DO_WHATS_BEST);
     }
 
-    return response.redirect(paths.COURT_ORDER_CHECK)
-  })
-}
+    return response.redirect(paths.COURT_ORDER_CHECK);
+  });
+};
 
-export default doWhatsBestRoutes
+export default doWhatsBestRoutes;

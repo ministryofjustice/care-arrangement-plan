@@ -1,12 +1,14 @@
-import i18n from 'i18n'
-import { Request } from 'express'
-import { PdfBuilder } from '../@types/pdf'
-import TextboxComponent from './components/textbox'
-import DoYouAgreeComponent from './components/doYouAgree'
-import BulletListComponent from './components/bulletList'
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants'
-import { whatOtherThingsMatter } from '../utils/formattedAnswersForPdf'
-import FontStyles from './fontStyles'
+import { Request } from 'express';
+import i18n from 'i18n';
+
+import { PdfBuilder } from '../@types/pdf';
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+import { whatOtherThingsMatter } from '../utils/formattedAnswersForPdf';
+
+import BulletListComponent from './components/bulletList';
+import DoYouAgreeComponent from './components/doYouAgree';
+import TextboxComponent from './components/textbox';
+import FontStyles from './fontStyles';
 
 const addOtherThings = (pdf: PdfBuilder, request: Request) => {
   new BulletListComponent(pdf, {
@@ -44,12 +46,12 @@ const addOtherThings = (pdf: PdfBuilder, request: Request) => {
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
-  }).addComponentToDocument()
+  }).addComponentToDocument();
 
   new DoYouAgreeComponent(
     pdf,
     i18n.__('sharePlan.yourProposedPlan.doYouAgreeOnBasics', { senderName: request.session.initialAdultName }),
-  ).addComponentToDocument()
+  ).addComponentToDocument();
 
   new TextboxComponent(pdf, [
     {
@@ -58,7 +60,7 @@ const addOtherThings = (pdf: PdfBuilder, request: Request) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
+  ]).addComponentToDocument();
 
   new TextboxComponent(pdf, [
     {
@@ -73,7 +75,7 @@ const addOtherThings = (pdf: PdfBuilder, request: Request) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
-}
+  ]).addComponentToDocument();
+};
 
-export default addOtherThings
+export default addOtherThings;

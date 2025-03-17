@@ -9,12 +9,13 @@ import {
   Radios,
   SkipLink,
   PasswordInput,
-} from 'govuk-frontend'
-import setupCookieBanner from './cookieBanner'
+} from 'govuk-frontend';
 
-const components = [Accordion, Button, Checkboxes, ErrorSummary, ExitThisPage, Header, Radios, SkipLink, PasswordInput]
-components.forEach(Component => {
-  createAll(Component)
-})
+import setupCookieBanner from './cookieBanner';
 
-setupCookieBanner()
+const components = [Accordion, Button, Checkboxes, ErrorSummary, ExitThisPage, Header, Radios, SkipLink, PasswordInput];
+components.forEach((Component) => {
+  createAll(Component);
+});
+
+setupCookieBanner();

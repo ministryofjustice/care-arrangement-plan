@@ -1,13 +1,14 @@
-import { Router } from 'express'
-import passwordRoutes from './password'
-import cookiesRoutes from './cookies'
+import { Router } from 'express';
+
+import cookiesRoutes from './cookies';
+import passwordRoutes from './password';
 
 const routes = (): Router => {
-  const router = Router()
-  passwordRoutes(router)
-  cookiesRoutes(router)
+  const router = Router();
+  passwordRoutes(router);
+  cookiesRoutes(router);
 
-  return router
-}
+  return router;
+};
 
-export default routes
+export default routes;

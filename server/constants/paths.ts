@@ -42,4 +42,4 @@ export default {
   OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED: '/other-things/what-other-things-matter/not-required',
   DOWNLOAD_PDF: '/download-pdf',
   PRINT_PDF: '/print-pdf',
-}
+};

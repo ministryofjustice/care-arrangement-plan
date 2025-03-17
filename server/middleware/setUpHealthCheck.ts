@@ -1,20 +1,21 @@
-import express, { Router } from 'express'
-import config from '../config'
+import { Router } from 'express';
 
-const { buildNumber, gitRef, gitBranch } = config
+import config from '../config';
+
+const { buildNumber, gitRef, gitBranch } = config;
 
 const setUpHealthCheck = (): Router => {
-  const router = express.Router()
+  const router = Router();
 
-  router.get('/health', (_, response, next) => {
+  router.get('/health', (_, response, _next) => {
     response.json({
       gitHash: gitRef,
       branch: gitBranch,
       version: buildNumber,
       uptime: Math.floor(process.uptime()),
-    })
-  })
-  return router
-}
+    });
+  });
+  return router;
+};
 
-export default setUpHealthCheck
+export default setUpHealthCheck;

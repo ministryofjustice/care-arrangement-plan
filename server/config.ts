@@ -1,24 +1,24 @@
-const production = process.env.NODE_ENV === 'production'
+const production = process.env.NODE_ENV === 'production';
 
 const getStringConfigValue = (name: string): string => {
   if (process.env[name]) {
-    return process.env[name]
+    return process.env[name];
   }
-  throw new Error(`Missing env var ${name}`)
-}
+  throw new Error(`Missing env var ${name}`);
+};
 
 const getBoolConfigValue = (name: string): boolean => {
-  return getStringConfigValue(name) === 'true'
-}
+  return getStringConfigValue(name) === 'true';
+};
 
 const getIntConfigValue = (name: string): number => {
-  return parseInt(getStringConfigValue(name), 10)
-}
+  return parseInt(getStringConfigValue(name), 10);
+};
 
-const getStringArray = (name: string) => getStringConfigValue(name).split(',')
+const getStringArray = (name: string) => getStringConfigValue(name).split(',');
 
 const getValkeyConfig = () => {
-  const enabled = getBoolConfigValue('VALKEY_ENABLED')
+  const enabled = getBoolConfigValue('VALKEY_ENABLED');
 
   if (enabled) {
     return {
@@ -27,7 +27,7 @@ const getValkeyConfig = () => {
       port: getIntConfigValue('VALKEY_PORT'),
       password: getStringConfigValue('VALKEY_PASSWORD'),
       tls_enabled: getBoolConfigValue('VALKEY_TLS_ENABLED'),
-    }
+    };
   }
 
   return {
@@ -36,8 +36,8 @@ const getValkeyConfig = () => {
     port: undefined,
     password: undefined,
     tls_enabled: undefined,
-  }
-}
+  };
+};
 
 const config = {
   buildNumber: getStringConfigValue('BUILD_NUMBER'),
@@ -57,7 +57,7 @@ const config = {
   },
   passwords: getStringArray('BETA_ACCESS_PASSWORDS'),
   useAuth: getBoolConfigValue('USE_AUTH'),
-}
+};
 
 // if (production) {
 //   // TODO C5141-953
@@ -70,4 +70,4 @@ const config = {
 //   }
 // }
 
-export default config
+export default config;

@@ -1,36 +1,35 @@
-import request from 'supertest'
-import { Express } from 'express'
-import { flashMock, flashMockErrors } from '../test-utils/testMocks'
+import { Express } from 'express';
+import request from 'supertest';
 
-import config from '../config'
+import config from '../config';
+import cookieNames from '../constants/cookieNames';
+import formFields from '../constants/formFields';
+import paths from '../constants/paths';
+import testAppSetup from '../test-utils/testAppSetup';
+import { flashMock, flashMockErrors } from '../test-utils/testMocks';
 
-import testAppSetup from '../test-utils/testAppSetup'
-import paths from '../constants/paths'
-import formFields from '../constants/formFields'
-import cookieNames from '../constants/cookieNames'
+let app: Express;
 
-let app: Express
+const testPassword1 = 'testPassword';
+const testPassword2 = 'testPassword2';
 
-const testPassword1 = 'testPassword'
-const testPassword2 = 'testPassword2'
-
-const encryptedTestPassword = 'fd5cb51bafd60f6fdbedde6e62c473da6f247db271633e15919bab78a02ee9eb'
+const encryptedTestPassword = 'fd5cb51bafd60f6fdbedde6e62c473da6f247db271633e15919bab78a02ee9eb';
 
 describe('Password Handler', () => {
   describe('GET', () => {
     beforeEach(() => {
-      config.useAuth = true
-      app = testAppSetup()
-    })
+      config.useAuth = true;
+      app = testAppSetup();
+    });
 
     it('should return password page without error', () =>
       request(app)
         .get(paths.PASSWORD)
         .expect(200)
-        .expect(response => {
-          expect(response.text).toContain('Sign in - GOV.UK')
-          expect(response.text).not.toContain('The password is not correct')
-        }))
+        .expect((response) => {
+          expect(response.text).toContain('Sign in - GOV.UK');
+          expect(response.text).not.toContain('The password is not correct');
+        }));
 
     it('should return password page with error if there is an error', () => {
       Object.assign(flashMockErrors, [
@@ -41,69 +40,69 @@ describe('Password Handler', () => {
           type: 'field',
           value: 'incorrect password',
         },
-      ])
+      ]);
 
       return request(app)
         .get(paths.PASSWORD)
         .expect(200)
-        .expect(response => {
-          expect(response.text).toContain('The password is not correct')
-        })
-    })
+        .expect((response) => {
+          expect(response.text).toContain('The password is not correct');
+        });
+    });
 
     describe('POST with no authentication cookie', () => {
       beforeEach(() => {
-        config.useAuth = true
-        config.passwords = [testPassword1, testPassword2]
-        config.useHttps = true
+        config.useAuth = true;
+        config.passwords = [testPassword1, testPassword2];
+        config.useHttps = true;
 
-        app = testAppSetup()
-      })
+        app = testAppSetup();
+      });
 
       describe('and the password is correct', () => {
         it.each([testPassword1, testPassword2])('should not error with any correct password', (password: string) =>
           request(app).post(paths.PASSWORD).send(`password=${password}`).expect(302).expect('location', '/'),
-        )
+        );
 
         it('should redirect to the return url', () => {
-          const returnURL = '/myPage'
+          const returnURL = '/myPage';
 
           return request(app)
             .post(paths.PASSWORD)
             .send({ password: testPassword1, returnURL })
             .expect(302)
-            .expect('location', returnURL)
-        })
+            .expect('location', returnURL);
+        });
 
         it('should set authentication cookie', () => {
-          const returnURL = '/myPage'
+          const returnURL = '/myPage';
           const authenticatedCookieProperties = [
             `${cookieNames.AUTHENTICATION}=${encryptedTestPassword};`,
             `Max-Age=${60 * 60 * 24 * 30}`,
             `Secure`,
-          ]
+          ];
 
           return request(app)
             .post(paths.PASSWORD)
             .send({ password: testPassword1, returnURL })
             .expect(302)
-            .expect(response => {
-              authenticatedCookieProperties.forEach(p => expect(response.header['set-cookie'][0]).toContain(p))
-            })
-        })
-      })
+            .expect((response) => {
+              authenticatedCookieProperties.forEach((p) => expect(response.header['set-cookie'][0]).toContain(p));
+            });
+        });
+      });
 
       describe('POST and the password is incorrect', () => {
         it('should redirect to the password page with return Url', async () => {
-          const returnURL = 'myPage'
-          const incorrrectPasswordRedirectUrl = `${paths.PASSWORD}?returnURL=${returnURL}`
-          const incorrectPassword = 'invalid'
+          const returnURL = 'myPage';
+          const incorrrectPasswordRedirectUrl = `${paths.PASSWORD}?returnURL=${returnURL}`;
+          const incorrectPassword = 'invalid';
 
           await request(app)
             .post(`/password`)
             .send({ password: incorrectPassword, returnURL })
             .expect(302)
-            .expect('location', incorrrectPasswordRedirectUrl)
+            .expect('location', incorrrectPasswordRedirectUrl);
 
           expect(flashMock).toHaveBeenCalledWith('errors', [
             {
@@ -113,12 +112,12 @@ describe('Password Handler', () => {
               type: 'field',
               value: incorrectPassword,
             },
-          ])
-        })
+          ]);
+        });
 
         it('should set flash error', async () => {
-          const incorrectPassword = 'invalid'
-          await request(app).post(`/password`).send({ password: incorrectPassword }).expect(302)
+          const incorrectPassword = 'invalid';
+          await request(app).post(`/password`).send({ password: incorrectPassword }).expect(302);
 
           expect(flashMock).toHaveBeenCalledWith('errors', [
             {
@@ -128,9 +127,9 @@ describe('Password Handler', () => {
               type: 'field',
               value: incorrectPassword,
             },
-          ])
-        })
-      })
-    })
-  })
-})
+          ]);
+        });
+      });
+    });
+  });
+});

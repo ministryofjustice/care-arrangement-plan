@@ -1,18 +1,20 @@
-import crypto from 'crypto'
-import express, { Router, Request, Response, NextFunction } from 'express'
-import helmet from 'helmet'
-import config from '../config'
+import crypto from 'crypto';
+
+import { Router, Request, Response, NextFunction } from 'express';
+import helmet from 'helmet';
+
+import config from '../config';
 
 const setUpWebSecurity = (): Router => {
-  const router = express.Router()
+  const router = Router();
 
   // Secure code best practice - see:
   // 1. https://expressjs.com/en/advanced/best-practice-security.html,
   // 2. https://www.npmjs.com/package/helmet
   router.use((_req: Request, response: Response, next: NextFunction) => {
-    response.locals.cspNonce = crypto.randomBytes(16).toString('hex')
-    next()
-  })
+    response.locals.cspNonce = crypto.randomBytes(16).toString('hex');
+    next();
+  });
   router.use(
     helmet({
       contentSecurityPolicy: {
@@ -44,8 +46,8 @@ const setUpWebSecurity = (): Router => {
       crossOriginEmbedderPolicy: true,
       strictTransportSecurity: config.useHttps,
     }),
-  )
-  return router
-}
+  );
+  return router;
+};
 
-export default setUpWebSecurity
+export default setUpWebSecurity;

@@ -29,4 +29,4 @@ enum formFields {
   WHAT_OTHER_THINGS_MATTER = 'what-other-things-matter',
 }
 
-export default formFields
+export default formFields;

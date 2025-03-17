@@ -1,27 +1,28 @@
-import request from 'supertest'
-import { JSDOM } from 'jsdom'
-import testAppSetup from '../../test-utils/testAppSetup'
-import paths from '../../constants/paths'
-import { flashMock, flashMockErrors, sessionMock } from '../../test-utils/testMocks'
-import formFields from '../../constants/formFields'
+import { JSDOM } from 'jsdom';
+import request from 'supertest';
 
-const app = testAppSetup()
+import formFields from '../../constants/formFields';
+import paths from '../../constants/paths';
+import testAppSetup from '../../test-utils/testAppSetup';
+import { flashMock, flashMockErrors, sessionMock } from '../../test-utils/testMocks';
+
+const app = testAppSetup();
 
 describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
   describe('GET', () => {
     it('should render what what other things matter page', async () => {
       const response = await request(app)
         .get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)
-        .expect('Content-Type', /html/)
+        .expect('Content-Type', /html/);
 
-      const dom = new JSDOM(response.text)
+      const dom = new JSDOM(response.text);
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('What other things matter to your children?')
-      expect(dom.window.document.querySelector('h2')).toBeNull()
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent('What other things matter to your children?');
+      expect(dom.window.document.querySelector('h2')).toBeNull();
       expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`)).not.toHaveAttribute(
         'aria-describedby',
-      )
-    })
+      );
+    });
 
     it('should render error flash responses correctly', async () => {
       Object.assign(flashMockErrors, [
@@ -31,39 +32,39 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
           path: formFields.WHAT_OTHER_THINGS_MATTER,
           type: 'field',
         },
-      ])
+      ]);
 
-      const dom = new JSDOM((await request(app).get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)).text)
+      const dom = new JSDOM((await request(app).get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem')
+      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
       expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`)).toHaveAttribute(
         'aria-describedby',
         `${formFields.WHAT_OTHER_THINGS_MATTER}-error`,
-      )
-    })
+      );
+    });
 
     it('should render existing values correctly', async () => {
-      const response = 'other things matter'
+      const response = 'other things matter';
 
       sessionMock.otherThings = {
         whatOtherThingsMatter: {
           noDecisionRequired: false,
           answer: response,
         },
-      }
+      };
 
-      const dom = new JSDOM((await request(app).get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)).text)
+      const dom = new JSDOM((await request(app).get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`)).toHaveValue(response)
-    })
-  })
+      expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`)).toHaveValue(response);
+    });
+  });
 
   describe('POST', () => {
     it('should reload page and set flash when there is no body', async () => {
       await request(app)
         .post(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)
         .expect(302)
-        .expect('location', paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)
+        .expect('location', paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER);
 
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
@@ -73,30 +74,30 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
           type: 'field',
           value: '',
         },
-      ])
-    })
+      ]);
+    });
 
     it('should redirect to task list when the answer is entered and set whatOtherThingsMatter', async () => {
-      const response = 'other things matter'
+      const response = 'other things matter';
 
       await request(app)
         .post(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)
         .send({ [formFields.WHAT_OTHER_THINGS_MATTER]: response })
         .expect(302)
-        .expect('location', paths.TASK_LIST)
+        .expect('location', paths.TASK_LIST);
 
-      expect(sessionMock.otherThings.whatOtherThingsMatter).toEqual({ noDecisionRequired: false, answer: response })
-    })
-  })
-})
+      expect(sessionMock.otherThings.whatOtherThingsMatter).toEqual({ noDecisionRequired: false, answer: response });
+    });
+  });
+});
 
 describe(`POST ${paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED}`, () => {
   it('should redirect to task list when the answer is entered and set whatWillHappen', async () => {
     await request(app)
       .post(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED)
       .expect(302)
-      .expect('location', paths.TASK_LIST)
+      .expect('location', paths.TASK_LIST);
 
-    expect(sessionMock.otherThings.whatOtherThingsMatter).toEqual({ noDecisionRequired: true })
-  })
-})
+    expect(sessionMock.otherThings.whatOtherThingsMatter).toEqual({ noDecisionRequired: true });
+  });
+});

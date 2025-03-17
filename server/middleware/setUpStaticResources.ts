@@ -1,26 +1,27 @@
-import path from 'path'
-import compression from 'compression'
-import express, { Router } from 'express'
-import noCache from 'nocache'
+import path from 'path';
 
-import config from '../config'
+import compression from 'compression';
+import { Router, static as expressStatic } from 'express';
+import noCache from 'nocache';
+
+import config from '../config';
 
 const setUpStaticResources = (): Router => {
-  const router = express.Router()
+  const router = Router();
 
-  router.use(compression())
+  router.use(compression());
 
   //  Static Resources Configuration
-  const staticResourcesConfig = { maxAge: config.staticResourceCacheDuration, redirect: false }
+  const staticResourcesConfig = { maxAge: config.staticResourceCacheDuration, redirect: false };
 
-  Array.of('/dist/assets', '/node_modules/govuk-frontend/dist/govuk/assets').forEach(dir => {
-    router.use('/assets', express.static(path.join(process.cwd(), dir), staticResourcesConfig))
-  })
+  Array.of('/dist/assets', '/node_modules/govuk-frontend/dist/govuk/assets').forEach((dir) => {
+    router.use('/assets', expressStatic(path.join(process.cwd(), dir), staticResourcesConfig));
+  });
 
   // Don't cache dynamic resources
-  router.use(noCache())
+  router.use(noCache());
 
-  return router
-}
+  return router;
+};
 
-export default setUpStaticResources
+export default setUpStaticResources;

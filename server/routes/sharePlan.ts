@@ -1,7 +1,7 @@
-import { Router } from 'express'
-import i18n from 'i18n'
-import paths from '../constants/paths'
-import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers'
+import { Router } from 'express';
+import i18n from 'i18n';
+
+import paths from '../constants/paths';
 import {
   whatWillHappen,
   mostlyLive,
@@ -16,11 +16,12 @@ import {
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
   whatOtherThingsMatter,
-} from '../utils/formattedAnswersForPdf'
+} from '../utils/formattedAnswersForPdf';
+import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
 
 const sharePlanRoutes = (router: Router) => {
   router.get(paths.SHARE_PLAN, (request, response) => {
-    const childrenNames = formattedChildrenNames(request.session)
+    const childrenNames = formattedChildrenNames(request.session);
 
     response.render('pages/sharePlan', {
       title: `${i18n.__('sharePlan.title', { names: childrenNames })}`,
@@ -42,8 +43,8 @@ const sharePlanRoutes = (router: Router) => {
         whatWillHappenAnswer: whatWillHappen(request.session),
         whatOtherThingsMatterAnswer: whatOtherThingsMatter(request.session),
       },
-    })
-  })
-}
+    });
+  });
+};
 
-export default sharePlanRoutes
+export default sharePlanRoutes;

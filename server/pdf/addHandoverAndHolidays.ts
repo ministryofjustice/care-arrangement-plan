@@ -1,17 +1,19 @@
-import i18n from 'i18n'
-import { Request } from 'express'
-import { PdfBuilder } from '../@types/pdf'
-import TextboxComponent from './components/textbox'
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants'
+import { Request } from 'express';
+import i18n from 'i18n';
+
+import { PdfBuilder } from '../@types/pdf';
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants';
 import {
   getBetweenHouseholds,
   whereHandover,
   willChangeDuringSchoolHolidays,
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
-} from '../utils/formattedAnswersForPdf'
-import FontStyles from './fontStyles'
-import addAnswer from './addAnswer'
+} from '../utils/formattedAnswersForPdf';
+
+import addAnswer from './addAnswer';
+import TextboxComponent from './components/textbox';
+import FontStyles from './fontStyles';
 
 const addGetBetweenHouseholds = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
@@ -21,8 +23,8 @@ const addGetBetweenHouseholds = (pdf: PdfBuilder, request: Request) => {
     undefined,
     getBetweenHouseholds(request.session),
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.getBetweenHouseholds'),
-  )
-}
+  );
+};
 
 const addWhereHandover = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
@@ -32,8 +34,8 @@ const addWhereHandover = (pdf: PdfBuilder, request: Request) => {
     i18n.__('handoverAndHolidays.whereHandover.explainer'),
     whereHandover(request.session),
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.whereHandover'),
-  )
-}
+  );
+};
 
 const addWillChangeDuringSchoolHolidays = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
@@ -43,11 +45,11 @@ const addWillChangeDuringSchoolHolidays = (pdf: PdfBuilder, request: Request) =>
     undefined,
     willChangeDuringSchoolHolidays(request.session),
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.willChangeDuringSchoolHolidays'),
-  )
-}
+  );
+};
 
 const addHowChangeDuringSchoolHolidays = (pdf: PdfBuilder, request: Request) => {
-  const answer = howChangeDuringSchoolHolidays(request.session)
+  const answer = howChangeDuringSchoolHolidays(request.session);
 
   if (answer) {
     addAnswer(
@@ -57,9 +59,9 @@ const addHowChangeDuringSchoolHolidays = (pdf: PdfBuilder, request: Request) => 
       i18n.__('handoverAndHolidays.howChangeDuringSchoolHolidays.content'),
       answer,
       i18n.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.howChangeDuringSchoolHolidays'),
-    )
+    );
   }
-}
+};
 
 const addItemsForChangeover = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
@@ -69,15 +71,15 @@ const addItemsForChangeover = (pdf: PdfBuilder, request: Request) => {
     undefined,
     itemsForChangeover(request.session),
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.itemsForChangeover'),
-  )
-}
+  );
+};
 
 const addHandoverAndHolidays = (pdf: PdfBuilder, request: Request) => {
-  addGetBetweenHouseholds(pdf, request)
-  addWhereHandover(pdf, request)
-  addWillChangeDuringSchoolHolidays(pdf, request)
-  addHowChangeDuringSchoolHolidays(pdf, request)
-  addItemsForChangeover(pdf, request)
+  addGetBetweenHouseholds(pdf, request);
+  addWhereHandover(pdf, request);
+  addWillChangeDuringSchoolHolidays(pdf, request);
+  addHowChangeDuringSchoolHolidays(pdf, request);
+  addItemsForChangeover(pdf, request);
 
   new TextboxComponent(pdf, [
     {
@@ -92,7 +94,7 @@ const addHandoverAndHolidays = (pdf: PdfBuilder, request: Request) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
-}
+  ]).addComponentToDocument();
+};
 
-export default addHandoverAndHolidays
+export default addHandoverAndHolidays;
