@@ -9,7 +9,7 @@ const app = testAppSetup();
 describe(paths.PRIVACY_NOTICE, () => {
   describe('GET', () => {
     it('should render privacy notice page', async () => {
-      const response = await request(app).get(paths.CONTACT_US).expect('Content-Type', /html/);
+      const response = await request(app).get(paths.PRIVACY_NOTICE).expect('Content-Type', /html/);
 
       const dom = new JSDOM(response.text);
 

@@ -18,7 +18,7 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('What other things matter to your children?');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`)).not.toHaveAttribute(
         'aria-describedby',
       );
@@ -36,7 +36,9 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
 
       const dom = new JSDOM((await request(app).get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`)).toHaveAttribute(
         'aria-describedby',
         `${formFields.WHAT_OTHER_THINGS_MATTER}-error`,

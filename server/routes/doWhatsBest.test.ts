@@ -16,7 +16,7 @@ describe(paths.DO_WHATS_BEST, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('What’s best for the children?');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(`#${formFields.DO_WHATS_BEST}`)).not.toHaveAttribute('aria-describedby');
     });
 
@@ -32,7 +32,9 @@ describe(paths.DO_WHATS_BEST, () => {
 
       const dom = new JSDOM((await request(app).get(paths.DO_WHATS_BEST)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector(`#${formFields.DO_WHATS_BEST}`)).toHaveAttribute(
         'aria-describedby',
         `${formFields.DO_WHATS_BEST}-error`,

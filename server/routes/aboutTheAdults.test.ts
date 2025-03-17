@@ -18,7 +18,7 @@ describe(paths.ABOUT_THE_ADULTS, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
         'About the adults who will care for the children',
       );
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(
         dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`).getAttribute('aria-describedby'),
       ).not.toContain(`${formFields.INITIAL_ADULT_NAME}-error`);
@@ -47,7 +47,9 @@ describe(paths.ABOUT_THE_ADULTS, () => {
 
       const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_ADULTS)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector(`#${formFields.INITIAL_ADULT_NAME}`)).toHaveAttribute(
         'aria-describedby',
         expect.stringContaining(`${formFields.INITIAL_ADULT_NAME}-error`),
