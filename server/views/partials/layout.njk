@@ -41,7 +41,7 @@
       tag: {
         text: "Beta"
       },
-      html: __('phaseBannerText', {feedbackUrl: feedbackUrl}) | safe
+      html: __('phaseBannerText', {feedbackUrl: feedbackUrl})
     })
   }}
   {% if backLinkHref %}
@@ -73,6 +73,10 @@
           {
             href: paths.PRIVACY_NOTICE,
             text: __('footer.privacy')
+          },
+          {
+            href: paths.TERMS_AND_CONDITIONS,
+            text: __('footer.termsAndConditions')
           }
         ]
       }

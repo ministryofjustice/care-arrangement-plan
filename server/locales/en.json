@@ -24,7 +24,8 @@
     "contact": "Contact",
     "cookies": "Cookies",
     "feedback": "Feedback",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "termsAndConditions": "Terms and conditions"
   },
   "errorSummary": {
     "title": "There is a problem"
@@ -96,6 +97,25 @@
     "howWeStorePersonalData": "<h2 class=\"govuk-heading-m\">How we store your personal data</h2><p>Personal data is stored only while you create your plan and for up to 30 days afterwards.</p>",
     "howToComplain": "<h2 class=\"govuk-heading-m\">How to complain</h2><p>If you have any concerns about our use of your personal data, you can contact the MoJ data protection officer:</p><div class=\"govuk-inset-text\">Data Protection Officer<br />Ministry of Justice<br />10th Floor, Post Point 10.31<br />102 Petty France<br />London<br />SW1H 9AJ <br /><br /><a href=\"mailto:dpo@justice.gov.uk\">dpo@justice.gov.uk</a></div><p>You can also complain to the ICO if you are unhappy with how we have used your data.</p><div class=\"govuk-inset-text\">Information Commissioner’s Office<br />Wycliffe House<br />Water Lane<br />Wilmslow<br />Cheshire<br />SK9 5AF<br /><br />Helpline number: 0303 123 1113<br />ICO website:<a href=\"https://www.ico.org.uk\">https://www.ico.org.uk</a></div>",
     "preparedDate": "This statement was prepared on 11 March 2025."
+  },
+  "termsAndConditions": {
+    "title": "Terms and conditions",
+    "agree": "By using this service you agree to these terms and conditions.",
+    "responsibilityForTheServiceHeading": "Responsibility for the service",
+    "accurateAndComplete": "The Ministry of Justice (MOJ) runs this service. We try to make sure the information we provide is accurate and complete and the service is always available and virus free.",
+    "noLiabilityFor": "The MoJ accepts no liability for:",
+    "unableToAccess": "you being unable to access the service (for example due to high demand or because we've taken it down for maintenance)",
+    "indirectDamages": "indirect damages arising from you using the service or relying on its content",
+    "externalSites": "the content and availability of external websites that link to the service or which link from it",
+    "informationAboutYouHeading": "Information about you and your visits",
+    "informationAboutYou": "We collect information about you in accordance with our <a href={{ privacyUrl }}>privacy policy</a> and our <a href={{ cookieUrl }}>cookie policy</a>. By using this service you agree to us collecting this information and confirm that any data you provide is accurate.",
+    "limitationsHeading": "Limitations of the service",
+    "limitations": "Using this service does not guarantee that you will be able to resolve your child arrangements without going to court. While this tool is designed to help you create a child arrangement plan, some cases may still require legal intervention.",
+    "misuseHeading": "Misuse",
+    "misuse": "You must only use this service to create a parenting plan for child(ren) that you have responsibility for and access to. You must not impersonate another person, provide false or misleading information, or use this service on behalf of someone else without their consent.",
+    "mustNotUseToHarass": "You must not use this service to harass, threaten, or abuse others.",
+    "restrictionsOnUseHeading": "Restrictions on use",
+    "restrictionsOnUse": "If you have a court order in place that restricts contact with the other parent or child, such as a no contact order, non-molestation order, or any other legal restriction, you must not use this service to contact them. Doing so could be a breach of the order and may have legal consequences. If you are unsure whether a legal order affects your ability to use this service, seek legal advice before proceeding."
   },
   "safetyCheck": {
     "title": "Safety check",
