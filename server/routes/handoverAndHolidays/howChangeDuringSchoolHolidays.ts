@@ -1,8 +1,9 @@
-import { Router } from 'express'
-import i18n from 'i18n'
-import { body, matchedData, validationResult } from 'express-validator'
-import paths from '../../constants/paths'
-import formFields from '../../constants/formFields'
+import { Router } from 'express';
+import { body, matchedData, validationResult } from 'express-validator';
+import i18n from 'i18n';
+
+import formFields from '../../constants/formFields';
+import paths from '../../constants/paths';
 
 const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, (request, response) => {
@@ -11,24 +12,24 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
       title: i18n.__('handoverAndHolidays.howChangeDuringSchoolHolidays.title'),
       initialHowChangeDuringSchoolHolidays: request.session.handoverAndHolidays?.howChangeDuringSchoolHolidays?.answer,
       backLinkHref: paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
-    })
-  })
+    });
+  });
 
   router.post(
     paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS,
     // TODO C5141-1013: Add error messages
     body(formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS).trim().notEmpty(),
     (request, response) => {
-      const errors = validationResult(request)
+      const errors = validationResult(request);
 
       if (!errors.isEmpty()) {
-        request.flash('errors', errors.array())
-        return response.redirect(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS)
+        request.flash('errors', errors.array());
+        return response.redirect(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS);
       }
 
       const { [formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS]: whatWillHappen } = matchedData<{
-        [formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS]: string
-      }>(request, { onlyValidData: false })
+        [formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS]: string;
+      }>(request, { onlyValidData: false });
 
       request.session.handoverAndHolidays = {
         ...request.session.handoverAndHolidays,
@@ -36,11 +37,11 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
           noDecisionRequired: false,
           answer: whatWillHappen,
         },
-      }
+      };
 
-      return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
+      return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
     },
-  )
+  );
 
   router.post(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED, (request, response) => {
     request.session.handoverAndHolidays = {
@@ -48,10 +49,10 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
       howChangeDuringSchoolHolidays: {
         noDecisionRequired: true,
       },
-    }
+    };
 
-    return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
-  })
-}
+    return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
+  });
+};
 
-export default howChangeDuringSchoolHolidaysRoutes
+export default howChangeDuringSchoolHolidaysRoutes;

@@ -1,12 +1,14 @@
-import { Router } from 'express'
-import i18n from 'i18n'
-import path from 'path'
-import config from '../config'
+import path from 'path';
+
+import { Router } from 'express';
+import i18n from 'i18n';
+
+import config from '../config';
 
 const setUpi18n = (): Router => {
-  const router = Router()
+  const router = Router();
 
-  const { includeWelshLanguage } = config
+  const { includeWelshLanguage } = config;
 
   // TODO - add a language toggle within the page
   i18n.configure({
@@ -17,11 +19,11 @@ const setUpi18n = (): Router => {
     updateFiles: false,
     retryInDefaultLocale: true,
     objectNotation: true,
-  })
+  });
 
-  router.use(i18n.init)
+  router.use(i18n.init);
 
-  return router
-}
+  return router;
+};
 
-export default setUpi18n
+export default setUpi18n;

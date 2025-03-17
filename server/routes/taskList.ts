@@ -1,6 +1,7 @@
-import { Router } from 'express'
-import i18n from 'i18n'
-import paths from '../constants/paths'
+import { Router } from 'express';
+import i18n from 'i18n';
+
+import paths from '../constants/paths';
 import {
   formattedChildrenNames,
   mostlyLiveComplete,
@@ -9,16 +10,16 @@ import {
   willChangeDuringSchoolHolidaysComplete,
   itemsForChangeoverComplete,
   whatWillHappenComplete,
-} from '../utils/sessionHelpers'
+} from '../utils/sessionHelpers';
 
 const taskListRoutes = (router: Router) => {
   router.get(paths.TASK_LIST, (request, response) => {
-    const isMostlyLiveComplete = mostlyLiveComplete(request.session)
-    const isGetBetweenHouseholdsComplete = getBetweenHouseholdsComplete(request.session)
-    const isWhereHandoverComplete = whereHandoverComplete(request.session)
-    const isWillChangeDuringSchoolHolidaysComplete = willChangeDuringSchoolHolidaysComplete(request.session)
-    const isItemsForChangeoverComplete = itemsForChangeoverComplete(request.session)
-    const isWhatWillHappenComplete = whatWillHappenComplete(request.session)
+    const isMostlyLiveComplete = mostlyLiveComplete(request.session);
+    const isGetBetweenHouseholdsComplete = getBetweenHouseholdsComplete(request.session);
+    const isWhereHandoverComplete = whereHandoverComplete(request.session);
+    const isWillChangeDuringSchoolHolidaysComplete = willChangeDuringSchoolHolidaysComplete(request.session);
+    const isItemsForChangeoverComplete = itemsForChangeoverComplete(request.session);
+    const isWhatWillHappenComplete = whatWillHappenComplete(request.session);
 
     response.render('pages/taskList', {
       title: i18n.__('taskList.title', { names: formattedChildrenNames(request.session) }),
@@ -36,8 +37,8 @@ const taskListRoutes = (router: Router) => {
       willChangeDuringSchoolHolidaysComplete: isWillChangeDuringSchoolHolidaysComplete,
       itemsForChangeoverComplete: isItemsForChangeoverComplete,
       whatWillHappenComplete: isWhatWillHappenComplete,
-    })
-  })
-}
+    });
+  });
+};
 
-export default taskListRoutes
+export default taskListRoutes;

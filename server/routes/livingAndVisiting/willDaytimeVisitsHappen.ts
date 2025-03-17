@@ -1,15 +1,16 @@
-import { Router } from 'express'
-import i18n from 'i18n'
-import { body, matchedData, validationResult } from 'express-validator'
-import paths from '../../constants/paths'
-import formFields from '../../constants/formFields'
-import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils'
-import { yesOrNo } from '../../@types/fields'
-import { parentNotMostlyLivedWith } from '../../utils/sessionHelpers'
+import { Router } from 'express';
+import { body, matchedData, validationResult } from 'express-validator';
+import i18n from 'i18n';
+
+import { yesOrNo } from '../../@types/fields';
+import formFields from '../../constants/formFields';
+import paths from '../../constants/paths';
+import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils';
+import { parentNotMostlyLivedWith } from '../../utils/sessionHelpers';
 
 const willDaytimeVisitsHappenRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, (request, response) => {
-    const { livingAndVisiting } = request.session
+    const { livingAndVisiting } = request.session;
 
     response.render('pages/livingAndVisiting/willDaytimeVisitsHappen', {
       errors: request.flash('errors'),
@@ -22,26 +23,26 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
           livingAndVisiting.daytimeVisits?.willHappen,
         ),
       },
-    })
-  })
+    });
+  });
 
   router.post(
     paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN,
     // TODO C5141-1013: Add error messages
     body(formFields.WILL_DAYTIME_VISITS_HAPPEN).exists(),
     (request, response) => {
-      const errors = validationResult(request)
+      const errors = validationResult(request);
 
       if (!errors.isEmpty()) {
-        request.flash('errors', errors.array())
-        return response.redirect(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN)
+        request.flash('errors', errors.array());
+        return response.redirect(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN);
       }
 
       const formData = matchedData<{
-        [formFields.WILL_DAYTIME_VISITS_HAPPEN]: yesOrNo
-      }>(request)
+        [formFields.WILL_DAYTIME_VISITS_HAPPEN]: yesOrNo;
+      }>(request);
 
-      const willDaytimeVisitsHappen = formData[formFields.WILL_DAYTIME_VISITS_HAPPEN] === 'Yes'
+      const willDaytimeVisitsHappen = formData[formFields.WILL_DAYTIME_VISITS_HAPPEN] === 'Yes';
 
       if (request.session.livingAndVisiting?.daytimeVisits?.willHappen !== willDaytimeVisitsHappen) {
         request.session.livingAndVisiting = {
@@ -49,16 +50,16 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
           daytimeVisits: {
             willHappen: willDaytimeVisitsHappen,
           },
-        }
+        };
       }
 
       if (willDaytimeVisitsHappen) {
-        return response.redirect(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS)
+        return response.redirect(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS);
       }
 
-      return response.redirect(paths.TASK_LIST)
+      return response.redirect(paths.TASK_LIST);
     },
-  )
-}
+  );
+};
 
-export default willDaytimeVisitsHappenRoutes
+export default willDaytimeVisitsHappenRoutes;

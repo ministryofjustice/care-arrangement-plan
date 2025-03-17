@@ -5,7 +5,7 @@
   "repository": "git@ssh.dev.azure.com:v3/ACE-C514/pfl-care-arrangement-plan/pfl-care-arrangement-plan",
   "license": "MIT",
   "scripts": {
-    "build": "node esbuild/esbuild.config.js --build",
+    "build": "node esbuild/esbuild.config.mjs --build",
     "start": "node $ENV_FILE_OPTION $NODE_OPTIONS dist/app.js | bunyan -o short",
     "start:dev": "ENV_FILE_OPTION='--env-file=.env' nodemon --exec 'run-s build start'",
     "lint": "eslint . --cache --max-warnings 0",
@@ -45,8 +45,8 @@
     "redis": "4.7.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.22.0",
     "@jgoz/esbuild-plugin-typecheck": "4.0.3",
-    "@ministryofjustice/eslint-config-hmpps": "0.0.1-beta.2",
     "@testing-library/jest-dom": "6.6.3",
     "@tsconfig/node22": "22.0.0",
     "@types/bunyan": "1.8.11",
@@ -72,7 +72,17 @@
     "esbuild-plugin-copy": "2.1.1",
     "esbuild-plugin-manifest": "1.0.5",
     "esbuild-sass-plugin": "3.3.1",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-import-resolver-typescript": "^3.9.0",
+    "eslint-plugin-cypress": "^4.2.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^28.11.0",
+    "eslint-plugin-jest-dom": "^5.5.0",
+    "eslint-plugin-no-only-tests": "^3.3.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "glob": "11.0.1",
+    "globals": "^16.0.0",
     "jest": "29.7.0",
     "jest-html-reporter": "4.0.1",
     "jest-junit": "16.0.0",
@@ -86,6 +96,7 @@
     "start-server-and-test": "2.0.10",
     "supertest": "7.0.0",
     "ts-jest": "29.2.6",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "typescript-eslint": "^8.26.1"
   }
 }

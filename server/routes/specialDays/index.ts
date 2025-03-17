@@ -1,8 +1,9 @@
-import { Router } from 'express'
-import whatWillHappenRoutes from './whatWillHappen'
+import { Router } from 'express';
+
+import whatWillHappenRoutes from './whatWillHappen';
 
 const specialDaysRoutes = (router: Router) => {
-  whatWillHappenRoutes(router)
-}
+  whatWillHappenRoutes(router);
+};
 
-export default specialDaysRoutes
+export default specialDaysRoutes;

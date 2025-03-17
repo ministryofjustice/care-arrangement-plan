@@ -1,11 +1,12 @@
-import { mostlyLiveComplete, willChangeDuringSchoolHolidaysComplete } from './sessionHelpers'
-import { CAPSession } from '../@types/session'
+import { CAPSession } from '../@types/session';
+
+import { mostlyLiveComplete, willChangeDuringSchoolHolidaysComplete } from './sessionHelpers';
 
 describe('sessionHelpers', () => {
   describe('mostlyLiveComplete', () => {
     it('returns false if mostly live is not filled out', () => {
-      expect(mostlyLiveComplete({})).toEqual(false)
-    })
+      expect(mostlyLiveComplete({})).toBe(false);
+    });
 
     it('returns true if mostly live is other', () => {
       const session: Partial<CAPSession> = {
@@ -15,10 +16,10 @@ describe('sessionHelpers', () => {
             describeArrangement: 'arrangement',
           },
         },
-      }
+      };
 
-      expect(mostlyLiveComplete(session)).toEqual(true)
-    })
+      expect(mostlyLiveComplete(session)).toBe(true);
+    });
 
     it('returns false for split living if the schedule is not complete', () => {
       const session: Partial<CAPSession> = {
@@ -27,25 +28,10 @@ describe('sessionHelpers', () => {
             where: 'split',
           },
         },
-      }
+      };
 
-      expect(mostlyLiveComplete(session)).toEqual(false)
-    })
-
-    it('returns true for split living if the schedule is complete', () => {
-      const session: Partial<CAPSession> = {
-        livingAndVisiting: {
-          mostlyLive: {
-            where: 'split',
-          },
-          whichSchedule: {
-            noDecisionRequired: true,
-          },
-        },
-      }
-
-      expect(mostlyLiveComplete(session)).toEqual(true)
-    })
+      expect(mostlyLiveComplete(session)).toBe(false);
+    });
 
     it('returns true for split living if the schedule is complete', () => {
       const session: Partial<CAPSession> = {
@@ -57,10 +43,10 @@ describe('sessionHelpers', () => {
             noDecisionRequired: true,
           },
         },
-      }
+      };
 
-      expect(mostlyLiveComplete(session)).toEqual(true)
-    })
+      expect(mostlyLiveComplete(session)).toBe(true);
+    });
 
     it("returns true if visits won't happen", () => {
       const session: Partial<CAPSession> = {
@@ -75,10 +61,10 @@ describe('sessionHelpers', () => {
             willHappen: false,
           },
         },
-      }
+      };
 
-      expect(mostlyLiveComplete(session)).toEqual(true)
-    })
+      expect(mostlyLiveComplete(session)).toBe(true);
+    });
 
     it('returns true if visits will happen', () => {
       const session: Partial<CAPSession> = {
@@ -99,10 +85,10 @@ describe('sessionHelpers', () => {
             },
           },
         },
-      }
+      };
 
-      expect(mostlyLiveComplete(session)).toEqual(true)
-    })
+      expect(mostlyLiveComplete(session)).toBe(true);
+    });
 
     it("returns false if overnight visits aren't decided", () => {
       const session: Partial<CAPSession> = {
@@ -114,10 +100,10 @@ describe('sessionHelpers', () => {
             willHappen: false,
           },
         },
-      }
+      };
 
-      expect(mostlyLiveComplete(session)).toEqual(false)
-    })
+      expect(mostlyLiveComplete(session)).toBe(false);
+    });
 
     it("returns false if overnight visits will happen but aren't decided", () => {
       const session: Partial<CAPSession> = {
@@ -132,10 +118,10 @@ describe('sessionHelpers', () => {
             willHappen: false,
           },
         },
-      }
+      };
 
-      expect(mostlyLiveComplete(session)).toEqual(false)
-    })
+      expect(mostlyLiveComplete(session)).toBe(false);
+    });
 
     it("returns false if daytime visits aren't decided", () => {
       const session: Partial<CAPSession> = {
@@ -147,10 +133,10 @@ describe('sessionHelpers', () => {
             willHappen: false,
           },
         },
-      }
+      };
 
-      expect(mostlyLiveComplete(session)).toEqual(false)
-    })
+      expect(mostlyLiveComplete(session)).toBe(false);
+    });
 
     it("returns false if daytime visits will happen but aren't decided", () => {
       const session: Partial<CAPSession> = {
@@ -165,18 +151,18 @@ describe('sessionHelpers', () => {
             willHappen: true,
           },
         },
-      }
+      };
 
-      expect(mostlyLiveComplete(session)).toEqual(false)
-    })
-  })
+      expect(mostlyLiveComplete(session)).toBe(false);
+    });
+  });
 
   describe('willChangeDuringSchoolHolidaysComplete', () => {
     test('returns false if the will change during holidays is not filled out', () => {
-      const session: Partial<CAPSession> = {}
+      const session: Partial<CAPSession> = {};
 
-      expect(willChangeDuringSchoolHolidaysComplete(session)).toEqual(false)
-    })
+      expect(willChangeDuringSchoolHolidaysComplete(session)).toBe(false);
+    });
 
     test('returns false if the will change during holidays is true but the how change is not filled out', () => {
       const session: Partial<CAPSession> = {
@@ -186,10 +172,10 @@ describe('sessionHelpers', () => {
             noDecisionRequired: false,
           },
         },
-      }
+      };
 
-      expect(willChangeDuringSchoolHolidaysComplete(session)).toEqual(false)
-    })
+      expect(willChangeDuringSchoolHolidaysComplete(session)).toBe(false);
+    });
 
     test('returns true if the will change during holidays is true and the how change is filled out', () => {
       const session: Partial<CAPSession> = {
@@ -202,10 +188,10 @@ describe('sessionHelpers', () => {
             noDecisionRequired: true,
           },
         },
-      }
+      };
 
-      expect(willChangeDuringSchoolHolidaysComplete(session)).toEqual(true)
-    })
+      expect(willChangeDuringSchoolHolidaysComplete(session)).toBe(true);
+    });
 
     test('returns true if the will change during holidays is false', () => {
       const session: Partial<CAPSession> = {
@@ -215,10 +201,10 @@ describe('sessionHelpers', () => {
             noDecisionRequired: false,
           },
         },
-      }
+      };
 
-      expect(willChangeDuringSchoolHolidaysComplete(session)).toEqual(true)
-    })
+      expect(willChangeDuringSchoolHolidaysComplete(session)).toBe(true);
+    });
 
     test('returns true if the will change during holidays is no decision required', () => {
       const session: Partial<CAPSession> = {
@@ -227,9 +213,9 @@ describe('sessionHelpers', () => {
             noDecisionRequired: true,
           },
         },
-      }
+      };
 
-      expect(willChangeDuringSchoolHolidaysComplete(session)).toEqual(true)
-    })
-  })
-})
+      expect(willChangeDuringSchoolHolidaysComplete(session)).toBe(true);
+    });
+  });
+});

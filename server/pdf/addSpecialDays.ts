@@ -1,11 +1,13 @@
-import i18n from 'i18n'
-import { Request } from 'express'
-import { PdfBuilder } from '../@types/pdf'
-import TextboxComponent from './components/textbox'
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants'
-import { whatWillHappen } from '../utils/formattedAnswersForPdf'
-import FontStyles from './fontStyles'
-import addAnswer from './addAnswer'
+import { Request } from 'express';
+import i18n from 'i18n';
+
+import { PdfBuilder } from '../@types/pdf';
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants';
+import { whatWillHappen } from '../utils/formattedAnswersForPdf';
+
+import addAnswer from './addAnswer';
+import TextboxComponent from './components/textbox';
+import FontStyles from './fontStyles';
 
 const addSpecialDays = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
@@ -15,7 +17,7 @@ const addSpecialDays = (pdf: PdfBuilder, request: Request) => {
     i18n.__('specialDays.whatWillHappen.content'),
     whatWillHappen(request.session),
     i18n.__('sharePlan.yourProposedPlan.doNotAgree.specialDays.whatWillHappen'),
-  )
+  );
 
   new TextboxComponent(pdf, [
     {
@@ -30,7 +32,7 @@ const addSpecialDays = (pdf: PdfBuilder, request: Request) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ]).addComponentToDocument()
-}
+  ]).addComponentToDocument();
+};
 
-export default addSpecialDays
+export default addSpecialDays;

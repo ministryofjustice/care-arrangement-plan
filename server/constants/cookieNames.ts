@@ -4,4 +4,4 @@ enum cookieNames {
   ANALYTICS_CONSENT = 'cookie_policy',
 }
 
-export default cookieNames
+export default cookieNames;
