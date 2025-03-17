@@ -29,6 +29,8 @@ const handlePostPassword = (request: Request, response: Response) => {
     response.cookie(cookieNames.AUTHENTICATION, encryptPassword(request.body.password), {
       maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
       secure: config.useHttps,
+      httpOnly: true,
+      sameSite: 'lax',
     });
     return response.redirect(processedRedirectUrl);
   }

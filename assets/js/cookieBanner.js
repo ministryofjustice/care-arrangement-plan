@@ -39,7 +39,8 @@ const setupCookieBanner = () => {
   function setAnalyticsPreferenceCookie(acceptAnalytics) {
     const expires = new Date();
     expires.setFullYear(expires.getFullYear() + 1);
-    document.cookie = `cookie_policy=${encodeURIComponent(JSON.stringify({ acceptAnalytics }))}; expires=${expires.toUTCString()}; path=/; Secure`;
+    const secure = location.protocol === 'https:';
+    document.cookie = `cookie_policy=${encodeURIComponent(JSON.stringify({ acceptAnalytics }))}; expires=${expires.toUTCString()}; path=/;${secure ? 'Secure; ' : ''} SameSite=Lax`;
 
     if (acceptAnalytics === 'No') {
       removeAnalyticsCookies();
