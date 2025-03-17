@@ -47,3 +47,15 @@ variable "feedback_url" {
   type        = string
   nullable    = false
 }
+
+variable "contact_email" {
+  description = "The contact email for the service"
+  type        = string
+  nullable    = false
+}
+
+variable "preview_end" {
+  description = "The date string for the end of the beta preview. Expected in YYYY-MM-DDTHH:mm:ss format"
+  type        = string
+  nullable    = false
+}

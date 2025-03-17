@@ -1,0 +1,11 @@
+{% extends "partials/layout.njk" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <h2 class="govuk-heading-m">{{ __('accessibilityStatement.meetingNeeds') | safe }}</h2>
+      {{ __('accessibilityStatement.content', { contactEmail: contactEmail, previewEnd: previewEnd }) | safe }}
+    </div>
+  </div>
+{% endblock %}
