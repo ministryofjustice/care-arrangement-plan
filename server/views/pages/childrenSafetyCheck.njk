@@ -12,7 +12,14 @@
       {% include "partials/errorSummary.njk" %}
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      {{ __('childrenSafetyCheck.content') | safe }}
+      <p>{{ __('childrenSafetyCheck.childrenMayBeAtRisk') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('childrenSafetyCheck.domesticAbuse') }}</li>
+        <li>{{ __('childrenSafetyCheck.childAbduction') }}</li>
+        <li>{{ __('childrenSafetyCheck.childAbuse') }}</li>
+        <li>{{ __('childrenSafetyCheck.drugsOrAlcohol') }}</li>
+        <li>{{ __('childrenSafetyCheck.otherConcerns') }}</li>
+      </ul>
 
       <form class="form" action="{{ paths.CHILDREN_SAFETY_CHECK }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />

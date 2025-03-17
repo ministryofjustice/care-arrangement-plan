@@ -6,7 +6,19 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      {{ __('existingCourtOrder.text') | safe }}
+      <p>{{ __('existingCourtOrder.ifYouHaveACourtOrder') }}</p>
+
+      <p>{{ __('existingCourtOrder.ordersInclude') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('existingCourtOrder.prohibitedSteps') }}</li>
+        <li>{{ __('existingCourtOrder.specificIssue') }}</li>
+        <li>{{ __('existingCourtOrder.nonMolestation') }}</li>
+        <li>{{ __('existingCourtOrder.noContact') }}</li>
+      </ul>
+      <p>{{ __('existingCourtOrder.checkDocuments') }}</p>
+      <h2 class="govuk-heading-m">{{ __('existingCourtOrder.noRestrictionsOnContactHeading') }}</h2>
+      <p>{{ __('existingCourtOrder.noRestrictionsOnContact') }}</p>
+      <p>{{ __('existingCourtOrder.changeCourtArrangements') }}</p>
 
       {{ govukButton({text: __('continue'), href: paths.NUMBER_OF_CHILDREN}) }}
     </div>

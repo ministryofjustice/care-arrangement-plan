@@ -11,7 +11,7 @@ describe(`GET ${paths.EXISTING_COURT_ORDER}`, () => {
       .get(paths.EXISTING_COURT_ORDER)
       .expect('Content-Type', /html/)
       .expect((response) => {
-        expect(response.text).toContain('You can still use this service');
+        expect(response.text).toContain('If you have a court order');
       });
   });
 });
