@@ -24,7 +24,6 @@
         dataLayer.push(arguments);
       }
       gtag('js', new Date());
-
       gtag('config', '{{ ga4Id }}');
     </script>
   {% endif %}
@@ -42,12 +41,43 @@
       tag: {
         text: "Beta"
       },
-      html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+      html: __('phaseBannerText', {feedbackUrl: feedbackUrl}) | safe
     })
   }}
   {% if backLinkHref %}
     <div role="navigation">{{ govukBackLink({text: __('back'), href: backLinkHref}) }}</div>
   {% endif %}
+{% endblock %}
+
+{% block footer %}
+  {{
+    govukFooter({
+      meta: {
+        items: [
+          {
+            href: paths.ACCESSIBILITY_STATEMENT,
+            text: __('footer.accessibility')
+          },
+          {
+            href: paths.CONTACT_US,
+            text: __('footer.contact')
+          },
+          {
+            href: paths.COOKIES,
+            text: __('footer.cookies')
+          },
+          {
+            href: feedbackUrl,
+            text: __('footer.feedback')
+          },
+          {
+            href: paths.PRIVACY_NOTICE,
+            text: __('footer.privacy')
+          }
+        ]
+      }
+    })
+  }}
 {% endblock %}
 
 {% block bodyEnd %}

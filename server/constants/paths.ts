@@ -1,6 +1,9 @@
 export default {
   START: '/',
+  ACCESSIBILITY_STATEMENT: '/accessibility-statement',
+  CONTACT_US: '/contact-us',
   COOKIES: '/cookies',
+  PRIVACY_NOTICE: '/privacy-notice',
   SAFETY_CHECK: '/safety-check',
   NOT_SAFE: '/not-safe',
   CHILDREN_SAFETY_CHECK: '/children-safety-check',

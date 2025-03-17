@@ -41,3 +41,9 @@ variable "ga4_id" {
   type        = string
   nullable    = true
 }
+
+variable "feedback_url" {
+  description = "The feedback url for the service"
+  type        = string
+  nullable    = false
+}

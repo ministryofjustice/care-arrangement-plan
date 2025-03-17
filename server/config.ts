@@ -57,6 +57,7 @@ const config = {
   },
   passwords: getStringArray('BETA_ACCESS_PASSWORDS'),
   useAuth: getBoolConfigValue('USE_AUTH'),
+  feedbackUrl: getStringConfigValue('FEEDBACK_URL'),
 };
 
 // if (production) {

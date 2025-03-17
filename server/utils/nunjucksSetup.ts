@@ -6,6 +6,7 @@ import { FieldValidationError } from 'express-validator';
 import i18n from 'i18n';
 import { configure as configureNunjucks } from 'nunjucks';
 
+import config from '../config';
 import cookieNames from '../constants/cookieNames';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
@@ -33,6 +34,8 @@ const nunjucksSetup = (app: express.Express): void => {
   });
 
   njkEnv.addFilter('assetMap', (url: string) => assetManifest[url] || url);
+  // TODO - add correct URL
+  njkEnv.addGlobal('feedbackUrl', config.feedbackUrl);
   njkEnv.addGlobal('paths', paths);
   njkEnv.addGlobal('formFields', formFields);
   njkEnv.addGlobal('cookieNames', cookieNames);
