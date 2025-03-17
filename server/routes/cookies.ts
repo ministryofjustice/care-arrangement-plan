@@ -3,6 +3,7 @@ import i18n from 'i18n';
 
 import { yesOrNo } from '../@types/fields';
 import config from '../config';
+import cookieNames from '../constants/cookieNames';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 
@@ -16,13 +17,11 @@ const cookiesRoutes = (router: Router) => {
   router.post(paths.COOKIES, (request, response) => {
     const acceptAnalytics = request.body[formFields.ACCEPT_OPTIONAL_COOKIES] as yesOrNo;
 
-    const expires = new Date();
-    expires.setFullYear(expires.getFullYear() + 1);
-
-    response.cookie('cookie_policy', JSON.stringify({ acceptAnalytics }), {
-      expires,
+    response.cookie(cookieNames.ANALYTICS_CONSENT, JSON.stringify({ acceptAnalytics }), {
+      maxAge: 1000 * 60 * 60 * 24 * 365, // One Year
       secure: config.useHttps,
       httpOnly: false,
+      sameSite: 'lax',
     });
 
     if (acceptAnalytics === 'No') {

@@ -49,7 +49,7 @@ describe(paths.COOKIES, () => {
         .expect('location', paths.COOKIES)
         .expect((response) => {
           expect(response.header['set-cookie']).toEqual([
-            `cookie_policy=${encodeURIComponent(JSON.stringify({ acceptAnalytics: 'Yes' }))}; Path=/; Expires=Thu, 01 Jan 2026 00:00:00 GMT`,
+            `cookie_policy=${encodeURIComponent(JSON.stringify({ acceptAnalytics: 'Yes' }))}; Max-Age=31536000; Path=/; Expires=Thu, 01 Jan 2026 00:00:00 GMT; SameSite=Lax`,
           ]);
         });
     });
@@ -63,7 +63,7 @@ describe(paths.COOKIES, () => {
         .expect('location', paths.COOKIES)
         .expect((response) => {
           expect(response.header['set-cookie']).toEqual([
-            `cookie_policy=${encodeURIComponent(JSON.stringify({ acceptAnalytics: 'No' }))}; Path=/; Expires=Thu, 01 Jan 2026 00:00:00 GMT`,
+            `cookie_policy=${encodeURIComponent(JSON.stringify({ acceptAnalytics: 'No' }))}; Max-Age=31536000; Path=/; Expires=Thu, 01 Jan 2026 00:00:00 GMT; SameSite=Lax`,
             '_ga=; Domain=127.0.0.1; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT',
             `_ga_${config.analytics.ga4Id}=; Domain=127.0.0.1; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT`,
           ]);
