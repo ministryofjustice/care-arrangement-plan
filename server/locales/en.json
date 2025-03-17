@@ -76,7 +76,12 @@
   },
   "childrenSafetyCheck": {
     "title": "Children’s safety",
-    "content": "<p>Children may be at risk if there has been:</p><ul class=\"govuk-list govuk-list--bullet\"><li>any form of domestic abuse or violence, even if the abuse was not directed at the children</li><li>actual or attempted child abduction</li><li>child abuse or neglect</li><li>misuse of drugs, alcohol or other substances</li><li>any other safety or welfare concerns that place anyone at significant risk of harm</li></ul>",
+    "childrenMayBeAtRisk": "Children may be at risk if there has been:",
+    "domesticAbuse": "any form of domestic abuse or violence, even if the abuse was not directed at the children",
+    "childAbduction": "actual or attempted child abduction",
+    "childAbuse": "child abuse or neglect",
+    "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
+    "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm",
     "questionTitle": "Are the children safe?"
   },
   "childrenNotSafe": {
@@ -95,8 +100,17 @@
     "subText": "This could include a prohibited steps, specific issue or consent order."
   },
   "existingCourtOrder": {
-    "title": "You can still use this service",
-    "text": "<p>If you can reach agreement with the other parent or carer, then you do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order.</p><h2 class=\"govuk-heading-m\">If you have prohibited steps order or a specific issue order</h2><p> Check any legal documents sent to you by a judge to see whether you have a prohibited steps order or a specific issue order (section 8).</p><p> You must not try to change any rules given to you in a prohibited steps order or specific issue order. You can only propose changes to other parts of your child arrangements, such as what day of the week your children visit you.</p>"
+    "title": "If you have a court order",
+    "ifYouHaveACourtOrder": "If you have an order in place that sets out restrictions on contact with your children or ex-partner, do not use this service.",
+    "ordersInclude": "This type of order may include:",
+    "prohibitedSteps": "a prohibited steps order",
+    "specificIssue": "a specific issue order",
+    "nonMolestation": "a non-molestation order",
+    "noContact": "a no contact order",
+    "checkDocuments": "Check any legal documents sent to you by a court to see whether you have any of these types of restrictions.",
+    "noRestrictionsOnContactHeading": "If you do not have any restrictions on contact",
+    "noRestrictionsOnContact": "If you do not have any restrictions on contact with your children or ex-partner, you can use this service.",
+    "changeCourtArrangements": "You can use this service to change child arrangements given to you by a court, so long as the other parent or carer agrees with the changes. You do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order."
   },
   "numberOfChildren": {
     "title": "How many children is this for?"
@@ -255,26 +269,12 @@
       "safetyCheckHeading": "Safety check",
       "safetyCheck": "To make child arrangements you need to be able to state your needs and views without feeling intimidated. The other parent or carer must not be a threat to you or to your children's safety.",
       "doNotContinueIf": "Do not continue with this process if there has been:",
-      "domesticAbuse": "any form of domestic abuse or violence, even if the abuse was not directed at the children",
-      "childAbduction": "actual or attempted child abduction",
-      "childAbuse": "child abuse or neglect",
-      "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
-      "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm",
       "stopIfAnyConcern": "If you have any concerns about safety, stop now. Find another way to make arrangements by visiting https://helpwithchildarrangements.service.justice.gov.uk",
       "gettingHelpHeading": "Getting help with abuse and domestic violence",
       "gettingHelp": "To find out more about what is child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse. If you’re unsure whether you’re a victim of domestic abuse, visit https://www.nhs.uk/live-well/getting-help-for-domestic-violence.",
       "courtOrderHeading": "As there is a court order in place",
       "courtOrderInPlace": "{{ senderName }} has told us there is a court order in place. If you have an order in place that sets out restrictions on contact with your children or ex-partner, you should find a different way to make your child arrangements.",
-      "ordersInclude": "This type of order may include:",
-      "prohibitedSteps": "a prohibited steps order",
-      "specificIssue": "a specific issue order",
-      "nonMolestation": "a non-molestation order",
-      "noContact": "a no contact order",
-      "checkDocuments": "Check any legal documents sent to you by a court to see whether you have any of these types of restrictions.",
-      "stopIfOrders": "If you have one of these types of order, stop now and find another way to agree your child arrangements.",
-      "noRestrictionsOnContactHeading": "If you do not have any restrictions on contact",
-      "noRestrictionsOnContact": "If you do not have any restrictions on contact with your children or ex-partner, you can use this service.",
-      "changeCourtArrangements": "You can use this service to change child arrangements given to you by a court, so long as the other parent or carer agrees with the changes. You do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order."
+      "stopIfOrders": "If you have one of these types of order, stop now and find another way to agree your child arrangements."
     },
     "yourProposedPlan": {
       "title": "Your proposed plan",

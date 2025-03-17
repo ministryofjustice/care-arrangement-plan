@@ -127,11 +127,11 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
       },
     ],
     bulletText: [
-      i18n.__('sharePlan.whatWeAreTelling.domesticAbuse'),
-      i18n.__('sharePlan.whatWeAreTelling.childAbduction'),
-      i18n.__('sharePlan.whatWeAreTelling.childAbuse'),
-      i18n.__('sharePlan.whatWeAreTelling.drugsOrAlcohol'),
-      i18n.__('sharePlan.whatWeAreTelling.otherConcerns'),
+      i18n.__('childrenSafetyCheck.domesticAbuse'),
+      i18n.__('childrenSafetyCheck.childAbduction'),
+      i18n.__('childrenSafetyCheck.childAbuse'),
+      i18n.__('childrenSafetyCheck.drugsOrAlcohol'),
+      i18n.__('childrenSafetyCheck.otherConcerns'),
     ],
     finalText: [
       {
@@ -176,21 +176,21 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
           bottomPadding: PARAGRAPH_SPACE,
         },
         {
-          text: i18n.__('sharePlan.whatWeAreTelling.ordersInclude'),
+          text: i18n.__('existingCourtOrder.ordersInclude'),
           size: MAIN_TEXT_SIZE,
           style: FontStyles.NORMAL,
           bottomPadding: PARAGRAPH_SPACE,
         },
       ],
       bulletText: [
-        i18n.__('sharePlan.whatWeAreTelling.prohibitedSteps'),
-        i18n.__('sharePlan.whatWeAreTelling.specificIssue'),
-        i18n.__('sharePlan.whatWeAreTelling.nonMolestation'),
-        i18n.__('sharePlan.whatWeAreTelling.noContact'),
+        i18n.__('existingCourtOrder.prohibitedSteps'),
+        i18n.__('existingCourtOrder.specificIssue'),
+        i18n.__('existingCourtOrder.nonMolestation'),
+        i18n.__('existingCourtOrder.noContact'),
       ],
       finalText: [
         {
-          text: i18n.__('sharePlan.whatWeAreTelling.checkDocuments'),
+          text: i18n.__('existingCourtOrder.checkDocuments'),
           size: MAIN_TEXT_SIZE,
           style: FontStyles.NORMAL,
           bottomPadding: PARAGRAPH_SPACE,
@@ -205,19 +205,19 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
     }).addComponentToDocument();
     new TextComponent(pdf, [
       {
-        text: i18n.__('sharePlan.whatWeAreTelling.noRestrictionsOnContactHeading'),
+        text: i18n.__('existingCourtOrder.noRestrictionsOnContactHeading'),
         size: QUESTION_TITLE_SIZE,
         style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
-        text: i18n.__('sharePlan.whatWeAreTelling.noRestrictionsOnContact'),
+        text: i18n.__('existingCourtOrder.noRestrictionsOnContact'),
         size: MAIN_TEXT_SIZE,
         style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
-        text: i18n.__('sharePlan.whatWeAreTelling.changeCourtArrangements'),
+        text: i18n.__('existingCourtOrder.changeCourtArrangements'),
         size: MAIN_TEXT_SIZE,
         style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
