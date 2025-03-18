@@ -3,6 +3,7 @@ import i18n from 'i18n';
 
 import paths from '../constants/paths';
 import createPdf from '../pdf/createPdf';
+import getAssetPath from '../utils/getAssetPath';
 
 const pdfRoutes = (router: Router) => {
   router.get(paths.DOWNLOAD_PDF, (request, response) => {
@@ -19,6 +20,11 @@ const pdfRoutes = (router: Router) => {
     response.setHeader('Content-Type', 'application/pdf');
     response.setHeader('Content-Disposition', `inline; filename=${i18n.__('pdf.name')}.pdf`);
     response.send(Buffer.from(pdf));
+  });
+
+  router.get(paths.DOWNLOAD_PAPER_FORM, (_request, response) => {
+    // TODO - fix name and asset
+    response.download(getAssetPath('other/paperForm.pdf'), `${i18n.__('pdf.name')}.pdf`);
   });
 };
 
