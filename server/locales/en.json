@@ -162,25 +162,34 @@
     "mostlyLive": {
       "title": "Where will the children mostly live?",
       "with": "With {{ adult }}",
-      "split": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}"
+      "split": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}",
+      "emptyError": "Choose where the children will mostly live",
+      "arrangementMissingError": "Describe the living arrangement you are proposing"
     },
     "whichSchedule": {
       "title": "Which schedule best meets the children's needs?",
       "getIdeas": "Get scheduling ideas",
       "commonSchedules": "<p>Here are some common schedules that can benefit children.</p><p><b>Alternating weeks</b><br/>The children will spend one week in one household and the next week in the other.</p><p><b>2-2-3 schedule</b><br/>Children spend two days in one household, two days in the other, then back to the first house for 3 days including the weekend.</p><p><b>4-4-3 schedule</b><br/>Children spend three days in one household then four days in the other. The next week they switch.</p><p><b>2-2-5-5 schedule</b><br/>Children spend two days in one household, then two days in the other. After that they spend five days in one household, then five days in the other.</p>",
-      "exactSplitWarning": "An exact split of time between two households does not always suit children’s best interests."
+      "exactSplitWarning": "An exact split of time between two households does not always suit children’s best interests.",
+      "error": "Describe which schedule will best meet the children's needs"
     },
     "willOvernightsHappen": {
-      "title": "Will the children stay overnight with {{ adult }}?"
+      "title": "Will the children stay overnight with {{ adult }}?",
+      "error": "Choose whether the children will do overnight stays"
     },
     "whichDaysOvernight": {
-      "title": "On which days will overnights happen?"
+      "title": "On which days will overnights happen?",
+      "emptyError": "Select which days overnights will happen on",
+      "arrangementMissingError": "Describe when the children will stay overnight"
     },
     "willDaytimeVisitsHappen": {
-      "title": "Will the children do daytime visits with {{ adult }}?"
+      "title": "Will the children do daytime visits with {{ adult }}?",
+      "error": "Choose whether the children will do daytime visits"
     },
     "whichDaysDaytimeVisits": {
-      "title": "On which days will daytime visits happen?"
+      "title": "On which days will daytime visits happen?",
+      "emptyError": "Select when daytime visits will happen",
+      "arrangementMissingError": "Describe when daytime visits will happen"
     }
   },
   "handoverAndHolidays": {

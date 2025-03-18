@@ -77,7 +77,7 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: "Describe which schedule will best meet the children's needs",
           path: formFields.WHICH_SCHEDULE,
           type: 'field',
           value: '',

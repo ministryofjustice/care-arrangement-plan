@@ -31,12 +31,16 @@ const whichDaysOvernightRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT,
-    // TODO C5141-1013: Add error messages
     body(formFields.WHICH_DAYS_OVERNIGHT_DESCRIBE_ARRANGEMENT)
       .if(body(formFields.WHICH_DAYS_OVERNIGHT).equals('other'))
       .trim()
-      .notEmpty(),
-    body(formFields.WHICH_DAYS_OVERNIGHT).exists().toArray(),
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('livingAndVisiting.whichDaysOvernight.arrangementMissingError')),
+    body(formFields.WHICH_DAYS_OVERNIGHT)
+      .exists()
+      .toArray()
+      .withMessage((_value, { req }) => req.__('livingAndVisiting.whichDaysOvernight.emptyError')),
+    // TODO C5141-1013: Add error message
     body(formFields.WHICH_DAYS_OVERNIGHT).custom(
       // This is prevented by JS in the page, but possible for people with JS disabled to submit
       (whichDaysOvernight: whichDaysField) => !(whichDaysOvernight.length > 1 && whichDaysOvernight.includes('other')),

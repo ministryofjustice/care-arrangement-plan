@@ -28,8 +28,9 @@ const willOvernightsHappenRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN,
-    // TODO C5141-1013: Add error messages
-    body(formFields.WILL_OVERNIGHTS_HAPPEN).exists(),
+    body(formFields.WILL_OVERNIGHTS_HAPPEN)
+      .exists()
+      .withMessage((_value, { req }) => req.__('livingAndVisiting.willOvernightsHappen.error')),
     (request, response) => {
       const errors = validationResult(request);
 

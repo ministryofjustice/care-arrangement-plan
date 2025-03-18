@@ -104,7 +104,7 @@ describe(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Choose whether the children will do daytime visits',
           path: formFields.WILL_DAYTIME_VISITS_HAPPEN,
           type: 'field',
         },

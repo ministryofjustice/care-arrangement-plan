@@ -133,7 +133,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Choose where the children will mostly live',
           path: formFields.MOSTLY_LIVE_WHERE,
           type: 'field',
         },
@@ -150,7 +150,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe the living arrangement you are proposing',
           path: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT,
           type: 'field',
           value: '',
