@@ -228,7 +228,8 @@
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",
-      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays."
+      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.",
+      "error": "Describe what you propose will happen on special days"
     }
   },
   "otherThings": {
@@ -238,7 +239,8 @@
       "religionDietAndRules": "religious practices, diet, and standard rules across both households",
       "extraCurriculars": "extra-curricular activities, such as swimming lessons",
       "friendsAndFamily": "access to other friends and family",
-      "otherContact": "other types of contact, such as video calls"
+      "otherContact": "other types of contact, such as video calls",
+      "error": "Describe what other things matter to your children"
     }
   },
   "checkYourAnswers": {
