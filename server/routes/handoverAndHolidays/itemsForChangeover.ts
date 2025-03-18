@@ -17,8 +17,10 @@ const itemsForChangeoverRoutes = (router: Router) => {
 
   router.post(
     paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER,
-    // TODO C5141-1013: Add error messages
-    body(formFields.ITEMS_FOR_CHANGEOVER).trim().notEmpty(),
+    body(formFields.ITEMS_FOR_CHANGEOVER)
+      .trim()
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('handoverAndHolidays.itemsForChangeover.error')),
     (request, response) => {
       const errors = validationResult(request);
 

@@ -75,7 +75,7 @@ describe(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe the arrangement you are proposing',
           path: formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS,
           type: 'field',
           value: '',

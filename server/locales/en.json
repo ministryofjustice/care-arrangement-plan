@@ -195,7 +195,9 @@
   "handoverAndHolidays": {
     "getBetweenHouseholds": {
       "title": "How will the children get between households?",
-      "collectsTheChildren": "{{ adult }} collects the children"
+      "collectsTheChildren": "{{ adult }} collects the children",
+      "emptyError": "Select who will be responsible for getting the children",
+      "arrangementMissingError": "Describe how the children will get between households"
     },
     "whereHandover": {
       "title": "Where does handover take place?",
@@ -204,18 +206,23 @@
       "atHome": "At {{ adult }}'s home",
       "atSchool": "At school",
       "someoneElse": "Someone else will manage handover, such as a grandparent",
-      "someoneElseName": "Name of the person who will manage handover"
+      "someoneElseName": "Name of the person who will manage handover",
+      "emptyError": "Select where handover takes place",
+      "arrangementMissingError": "Describe who will manage handover"
     },
     "willChangeDuringSchoolHolidays": {
-      "title": "Will these arrangements change during school holidays?"
+      "title": "Will these arrangements change during school holidays?",
+      "error": "Choose whether the arrangements will change"
     },
     "howChangeDuringSchoolHolidays": {
       "title": "How will the arrangements be different in school holidays?",
-      "content": "School holidays include half terms, bank holidays and inset days."
+      "content": "School holidays include half terms, bank holidays and inset days.",
+      "error": "Describe the arrangement you are proposing"
     },
     "itemsForChangeover": {
       "title": "What items need to go between households?",
-      "content": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes."
+      "content": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes.",
+      "error": "List which items need to go between households"
     }
   },
   "specialDays": {
