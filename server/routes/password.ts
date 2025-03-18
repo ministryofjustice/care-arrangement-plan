@@ -5,6 +5,7 @@ import config from '../config';
 import cookieNames from '../constants/cookieNames';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
+import logger from '../logger';
 import encryptPassword from '../utils/encryptPassword';
 
 const passwordRoutes = (router: Router) => {
@@ -32,6 +33,7 @@ const handlePostPassword = (request: Request, response: Response) => {
       httpOnly: true,
       sameSite: 'lax',
     });
+    logger.info(`Received successful login request`);
     return response.redirect(processedRedirectUrl);
   }
 

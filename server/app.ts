@@ -8,6 +8,7 @@ import setupAuthentication from './middleware/setupAuthentication';
 import setUpCsrf from './middleware/setUpCsrf';
 import setUpHealthCheck from './middleware/setUpHealthCheck';
 import setUpi18n from './middleware/setUpi18n';
+import setupRequestLogging from './middleware/setupRequestLogging';
 import setUpWebRequestParsing from './middleware/setupRequestParsing';
 import setUpStaticResources from './middleware/setUpStaticResources';
 import setUpWebSecurity from './middleware/setUpWebSecurity';
@@ -32,6 +33,7 @@ const createApp = (): express.Application => {
   app.use(setUpStaticResources());
   app.use(setUpCsrf());
   app.use(setupAnalytics());
+  app.use(setupRequestLogging());
   app.use(unauthenticatedRoutes());
   app.use(setupAuthentication());
   app.use(routes());
