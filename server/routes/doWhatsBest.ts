@@ -14,16 +14,21 @@ const doWhatsBestRoutes = (router: Router) => {
     });
   });
 
-  // TODO C5141-1013: Add error message
-  router.post(paths.DO_WHATS_BEST, body(formFields.DO_WHATS_BEST).exists(), (request, response) => {
-    const errors = validationResult(request);
-    if (!errors.isEmpty()) {
-      request.flash('errors', errors.array());
-      return response.redirect(paths.DO_WHATS_BEST);
-    }
+  router.post(
+    paths.DO_WHATS_BEST,
+    body(formFields.DO_WHATS_BEST)
+      .exists()
+      .withMessage((_value, { req }) => req.__('doWhatsBest.error')),
+    (request, response) => {
+      const errors = validationResult(request);
+      if (!errors.isEmpty()) {
+        request.flash('errors', errors.array());
+        return response.redirect(paths.DO_WHATS_BEST);
+      }
 
-    return response.redirect(paths.COURT_ORDER_CHECK);
-  });
+      return response.redirect(paths.COURT_ORDER_CHECK);
+    },
+  );
 };
 
 export default doWhatsBestRoutes;

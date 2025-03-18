@@ -23,9 +23,14 @@ const aboutTheAdultsRoutes = (router: Router) => {
 
   router.post(
     paths.ABOUT_THE_ADULTS,
-    // TODO C5141-1013: Add error messages
-    body(formFields.INITIAL_ADULT_NAME).trim().notEmpty(),
-    body(formFields.SECONDARY_ADULT_NAME).trim().notEmpty(),
+    body(formFields.INITIAL_ADULT_NAME)
+      .trim()
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('aboutTheAdults.initialError')),
+    body(formFields.SECONDARY_ADULT_NAME)
+      .trim()
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('aboutTheAdults.secondaryError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.INITIAL_ADULT_NAME]: string;

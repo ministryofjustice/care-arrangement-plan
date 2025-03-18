@@ -21,20 +21,25 @@ const safetyCheckRoutes = (router: Router) => {
     });
   });
 
-  // TODO C5141-1013: Add error message
-  router.post(paths.CHILDREN_SAFETY_CHECK, body(formFields.CHILDREN_SAFETY_CHECK).exists(), (request, response) => {
-    const errors = validationResult(request);
-    if (!errors.isEmpty()) {
-      request.flash('errors', errors.array());
-      return response.redirect(paths.CHILDREN_SAFETY_CHECK);
-    }
+  router.post(
+    paths.CHILDREN_SAFETY_CHECK,
+    body(formFields.CHILDREN_SAFETY_CHECK)
+      .exists()
+      .withMessage((_value, { req }) => req.__('childrenSafetyCheck.error')),
+    (request, response) => {
+      const errors = validationResult(request);
+      if (!errors.isEmpty()) {
+        request.flash('errors', errors.array());
+        return response.redirect(paths.CHILDREN_SAFETY_CHECK);
+      }
 
-    const { [formFields.CHILDREN_SAFETY_CHECK]: isSafe } = matchedData<{
-      [formFields.CHILDREN_SAFETY_CHECK]: yesOrNo;
-    }>(request);
+      const { [formFields.CHILDREN_SAFETY_CHECK]: isSafe } = matchedData<{
+        [formFields.CHILDREN_SAFETY_CHECK]: yesOrNo;
+      }>(request);
 
-    return isSafe === 'Yes' ? response.redirect(paths.DO_WHATS_BEST) : response.redirect(paths.CHILDREN_NOT_SAFE);
-  });
+      return isSafe === 'Yes' ? response.redirect(paths.DO_WHATS_BEST) : response.redirect(paths.CHILDREN_NOT_SAFE);
+    },
+  );
 };
 
 export default safetyCheckRoutes;

@@ -66,7 +66,8 @@
   "safetyCheck": {
     "title": "Safety check",
     "workWithPartner": "This service asks you to work with your parenting partner to agree a plan for your children. You need to be able to state your needs and views without feeling intimidated.",
-    "safeAndConfident": "Do you feel safe and confident?"
+    "safeAndConfident": "Do you feel safe and confident?",
+    "error": "Select whether you feel safe and confident or not"
   },
   "notSafe": {
     "title": "Finding the right route for you",
@@ -82,7 +83,8 @@
     "childAbuse": "child abuse or neglect",
     "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
     "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm",
-    "questionTitle": "Are the children safe?"
+    "questionTitle": "Are the children safe?",
+    "error": "Select whether the children are safe or not"
   },
   "childrenNotSafe": {
     "title": "Getting help",
@@ -93,11 +95,13 @@
   "doWhatsBest": {
     "title": "What’s best for the children?",
     "content": "<p>Your child arrangements plan should reflect what is best for the children. You must consider their wants and needs when making these arrangements.</p><p>Remember, the aim is to make sure your children are as happy as they can be.</p>",
-    "childrensNeedsFirst": "I will put my children’s needs first"
+    "childrensNeedsFirst": "I will put my children’s needs first",
+    "error": "You must select the box to continue"
   },
   "courtOrderCheck": {
     "title": "Do you already have a court order in place about your child arrangements?",
-    "subText": "This could include a prohibited steps, specific issue or consent order."
+    "subText": "This could include a prohibited steps, specific issue or consent order.",
+    "error": "Select whether you have a court order in place currently"
   },
   "existingCourtOrder": {
     "title": "If you have a court order",
@@ -113,7 +117,10 @@
     "changeCourtArrangements": "You can use this service to change child arrangements given to you by a court, so long as the other parent or carer agrees with the changes. You do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order."
   },
   "numberOfChildren": {
-    "title": "How many children is this for?"
+    "title": "How many children is this for?",
+    "emptyError": "Enter how many children this agreement is for",
+    "tooFewError": "Your agreement must be for at least 1 child",
+    "tooManyError": "Your agreement cannot be for more than 6 children"
   },
   "about": {
     "notStoreInfo": "We do not store this information or share it with other government departments."
@@ -127,13 +134,16 @@
     "multipleFirstName2": "First name of the third child",
     "multipleFirstName3": "First name of the fourth child",
     "multipleFirstName4": "First name of the fifth child",
-    "multipleFirstName5": "First name of the sixth child"
+    "multipleFirstName5": "First name of the sixth child",
+    "error": "Enter a first name"
   },
   "aboutTheAdults": {
     "title": "About the adults who will care for the children",
     "initialParentFirstName": "Your first name",
     "initialParentFirstNameHint": "If you are answering these questions for someone else, enter their first name",
-    "secondaryParentFirstName": "First name of the other parent or carer"
+    "secondaryParentFirstName": "First name of the other parent or carer",
+    "initialError": "Enter your first name or the name of the person you represent",
+    "secondaryError": "Enter the name of the other parent or carer"
   },
   "taskList": {
     "title": "Child arrangements plan for {{ names }}",

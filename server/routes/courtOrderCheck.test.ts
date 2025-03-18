@@ -51,7 +51,7 @@ describe(paths.COURT_ORDER_CHECK, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Select whether you have a court order in place currently',
           path: formFields.COURT_ORDER_CHECK,
           type: 'field',
         },

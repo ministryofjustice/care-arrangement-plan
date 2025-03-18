@@ -47,7 +47,7 @@ describe(paths.SAFETY_CHECK, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Select whether you feel safe and confident or not',
           path: formFields.SAFETY_CHECK,
           type: 'field',
         },

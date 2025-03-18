@@ -106,7 +106,7 @@ describe(paths.ABOUT_THE_ADULTS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Enter the name of the other parent or carer',
           path: formFields.SECONDARY_ADULT_NAME,
           type: 'field',
           value: '',
