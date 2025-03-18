@@ -10,7 +10,7 @@ const safetyCheckRoutes = (router: Router) => {
   router.get(paths.SAFETY_CHECK, (request, response) => {
     response.render('pages/safetyCheck', {
       errors: request.flash('errors'),
-      title: request.__('safetyCheck.title'),
+      title: i18n.__('safetyCheck.title'),
     });
   });
 
