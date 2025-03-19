@@ -1,0 +1,17 @@
+{% extends "partials/layout.njk" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p>This service was available for a short time only as part of a private view (test phase).</p>
+      <p>If you used the service and have any feedback, please contact us on {{ contactEmail | urlize | safe }}.</p>
+      <p>
+        To make a child arrangements plan you could use the
+        <a href="https://www.planningtogether.cafcass.gov.uk/plan">CAFCASS parenting plan</a> or the
+        <a href="https://www.gov.scot/publications/parenting-plan/pages/8">parenting plan from Scottish Government</a>.
+      </p>
+    </div>
+  </div>
+{% endblock %}
