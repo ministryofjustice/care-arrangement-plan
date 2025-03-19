@@ -57,7 +57,7 @@
     "title": "Accessibility statement",
     "meetingNeeds": "Meeting access needs during the private view of this online service",
     "availableToSmallGroup": "This online service is being made available to a small group of early users for a short period of time only. The service has been created by the Ministry of Justice and is still being developed. The purpose of this private view is to help the Child Arrangements team to improve the service by getting feedback as it is being developed.",
-    "usableToAsManyAsPossible": "We want as many people as possible to be able to use the service, now and when it is developed further. If you have any difficulties using the service during the private view, please email <a href=\"mailto:{{ contactEmail }}\">{{ contactEmail }}</a> and tell us what happened.",
+    "usableToAsManyAsPossible": "We want as many people as possible to be able to use the service, now and when it is developed further. If you have any difficulties using the service during the private view, please email {{ contactEmail }} and tell us what happened.",
     "statementPrepared": "This statement was prepared on 06 March 2025.",
     "previewEnds": "The private view will be available until {{ previewEnd }}."
   },
@@ -65,8 +65,7 @@
     "title": "Contact us",
     "reportProblem": "To report a problem or suggest improvements to this service, you can email:",
     "onlyUseForFeedback": "This email address should only be used for feedback on the digital service.",
-    "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created.",
-    "content": "<p>To report a problem or suggest improvements to this service, you can email:<p><p><a href=\"mailto:{{ contactEmail }}\">{{ contactEmail }}</a></p><p>This email address should only be used for feedback on the digital service.</p><p>We cannot answer any questions about child arrangement plans that have already been created.</p>"
+    "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created."
   },
   "cookies": {
     "title": "Cookies",
