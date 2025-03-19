@@ -1,4 +1,6 @@
-import { dayValues, whichDaysField, yesOrNo } from '../@types/fields';
+import i18n from 'i18n';
+
+import { dayValues, planLastMinuteChangesField, whichDaysField, yesOrNo } from '../@types/fields';
 import { WhichDays } from '../@types/session';
 
 export const formatListOfStrings = (words: string[]) => {
@@ -44,6 +46,7 @@ export const convertWhichDaysSessionValueToField = (whichDays: WhichDays | undef
   return [whichDays?.days, undefined];
 };
 
+//TODO does this translate days in welsh?
 export const formatWhichDaysSessionValue = (whichDays: WhichDays | undefined): string => {
   if (!whichDays?.days) {
     return '';
@@ -57,4 +60,25 @@ export const formatWhichDaysSessionValue = (whichDays: WhichDays | undefined): s
   }
 
   return formatListOfStrings(uppercaseDays);
+};
+
+export const formatPlanChangesOptionsIntoList = (field: planLastMinuteChangesField[] | undefined): string => {
+  const translatedStrings = field.map(getTranslatedPlanChangesField).map((s) => s.toLowerCase());
+  return formatListOfStrings(translatedStrings);
+};
+
+const getTranslatedPlanChangesField = (field: planLastMinuteChangesField) => {
+  const ns = 'decisionMaking.planLastMinuteChanges';
+  switch (field) {
+    case 'text':
+      return i18n.__(`${ns}.textMessage`);
+    case 'phone':
+      return i18n.__(`${ns}.phoneCall`);
+    case 'email':
+      return i18n.__(`${ns}.email`);
+    case 'app':
+      return i18n.__(`${ns}.app`);
+    case 'anotherArrangement':
+      return i18n.__(`${ns}.anotherArrangement`);
+  }
 };

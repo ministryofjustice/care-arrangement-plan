@@ -43,6 +43,11 @@ const session: Partial<SessionData> = {
       answer: 'whatOtherThingsMatterAnswer',
     },
   },
+  decisionMaking: {
+    planLastMinuteChanges: {
+      noDecisionRequired: true,
+    },
+  },
 };
 
 describe(`GET ${paths.SHARE_PLAN}`, () => {

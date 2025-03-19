@@ -1,4 +1,10 @@
-import { dayValues, getBetweenHouseholdsField, whereHandoverField, whereMostlyLive } from './fields';
+import {
+  dayValues,
+  getBetweenHouseholdsField,
+  planLastMinuteChangesField as planLastMinuteChangesField,
+  whereHandoverField,
+  whereMostlyLive,
+} from './fields';
 
 export type WhichDays = {
   days?: dayValues[];
@@ -65,6 +71,13 @@ export type CAPSession = {
     whatOtherThingsMatter?: {
       noDecisionRequired: boolean;
       answer?: string;
+    };
+  };
+  decisionMaking?: {
+    planLastMinuteChanges?: {
+      options?: planLastMinuteChangesField[];
+      anotherArrangmentDescription?: string;
+      noDecisionRequired: boolean;
     };
   };
 };

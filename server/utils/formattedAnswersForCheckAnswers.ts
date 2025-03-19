@@ -3,7 +3,7 @@ import i18n from 'i18n';
 import { whereHandoverField } from '../@types/fields';
 import { CAPSession } from '../@types/session';
 
-import { formatWhichDaysSessionValue } from './formValueUtils';
+import { formatPlanChangesOptionsIntoList, formatWhichDaysSessionValue } from './formValueUtils';
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
 
 export const mostlyLive = (session: Partial<CAPSession>) => {
@@ -146,3 +146,15 @@ export const whatOtherThingsMatter = ({ otherThings }: Partial<CAPSession>) =>
   otherThings.whatOtherThingsMatter.noDecisionRequired
     ? i18n.__('doNotNeedToDecide')
     : otherThings.whatOtherThingsMatter.answer;
+
+const capitilizeFirstLetter = (s: string) => {
+  return String(s).charAt(0).toUpperCase() + String(s).slice(1);
+};
+
+export const planLastMinuteChanges = ({ decisionMaking }: Partial<CAPSession>) => {
+  if (decisionMaking.planLastMinuteChanges.noDecisionRequired) {
+    return i18n.__('doNotNeedToDecide');
+  }
+  const planLastMinuteChangeList = formatPlanChangesOptionsIntoList(decisionMaking.planLastMinuteChanges.options);
+  return capitilizeFirstLetter(planLastMinuteChangeList);
+};
