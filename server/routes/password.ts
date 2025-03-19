@@ -44,7 +44,7 @@ const handlePostPassword = (request: Request, response: Response) => {
 const handleGetPassword = async (request: Request, response: Response) => {
   const returnURL = request.query.returnURL || '/';
 
-  response.render('pages/password', { returnURL, errors: request.flash('errors') });
+  response.render('pages/password', { returnURL, errors: request.flash('errors'), title: 'Sign in' });
 };
 
 export default passwordRoutes;
