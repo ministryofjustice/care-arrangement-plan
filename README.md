@@ -6,6 +6,17 @@ This is a Node.js app (v22) running on [Express](https://expressjs.com/) with
 
 This app is heavily inspired from MoJ's [hmpps-template-typescript](https://github.com/ministryofjustice/hmpps-template-typescript).
 
+## Preview testing
+
+The service is undergoing private preview testing. This is currently set to end on 30th April 2025. To change this date,
+the environment variable `PREVIEW_END` must be changed. After this date, all requests to the service will return a page
+explaining that the preview has ended.
+
+To move the service into an open beta, the following changes should be made
+
+- Remove the password page and authentication middleware
+- Remove the service no longer available middleware
+
 ## Installation
 
 Install Node 22. It is recommended to use a versioning manager such as [NVM](https://github.com/nvm-sh/nvm).
