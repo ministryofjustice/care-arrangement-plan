@@ -2,13 +2,5 @@
   "low": true,
   "package-manager": "npm",
   "registry": "https://registry.npmjs.org",
-  "allowlist": [
-    {
-      "GHSA-v2mw-5mch-w8c5": {
-        "active": true,
-        "expiry": "2025-03-20",
-        "notes": "We've updated to a fixed version of canvg (3.0.11), but the issue hasn't marked this as a patched version yet"
-      }
-    }
-  ]
+  "allowlist": []
 }

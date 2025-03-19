@@ -42,6 +42,8 @@ enum paths {
   SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED = '/special-days/what-will-happen/not-required',
   OTHER_THINGS_WHAT_OTHER_THINGS_MATTER = '/other-things/what-other-things-matter',
   OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED = '/other-things/what-other-things-matter/not-required',
+  DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES = '/decision-making/plan-last-minute-changes',
+  DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES_NOT_REQUIRED = '/decision-making/plan-last-minute-changes/not-required',
   DOWNLOAD_PDF = '/download-pdf',
   PRINT_PDF = '/print-pdf',
 }

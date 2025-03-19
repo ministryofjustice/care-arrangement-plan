@@ -1,0 +1,81 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" action="plan-last-minute-changes" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+        {% set anotherHtml %}
+          {{
+            govukTextarea({
+              name: formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT,
+              value: formValues[formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT],
+              label: {
+                text:__('decisionMaking.planLastMinuteChanges.anotherDescriptionLabel')
+              },
+              errorMessage: errors | findError(formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT)
+            })
+          }}
+        {% endset -%}
+
+        {{
+          govukCheckboxes({
+            name: formFields.PLAN_LAST_MINUTE_CHANGES,
+            fieldset: {
+              legend: {
+                text: __('decisionMaking.planLastMinuteChanges.howChangesCommunicated'),
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            hint: {
+              text: __('decisionMaking.planLastMinuteChanges.howChangesCommunicatedAdditionalDescription')
+            },
+            items: [
+              {
+                value: "text",
+                text: __('decisionMaking.planLastMinuteChanges.textMessage')
+              },
+              {
+                value: "phone",
+                text: __('decisionMaking.planLastMinuteChanges.phoneCall')
+              },
+              {
+                value: "email",
+                text: __('decisionMaking.planLastMinuteChanges.email')
+              },
+              {
+                value: "app",
+                text: __('decisionMaking.planLastMinuteChanges.app')
+              },
+              {
+                value: "anotherArrangement",
+                text: __('decisionMaking.planLastMinuteChanges.anotherArrangement'),
+                behaviour: "exclusive",
+                conditional: { html: anotherHtml }
+              }
+            ],
+              values: formValues[formFields.PLAN_LAST_MINUTE_CHANGES],
+              errorMessage: errors | findError(formFields.PLAN_LAST_MINUTE_CHANGES)
+          })
+        }}
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+
+      <form
+        class="form"
+        action="{{ paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES_NOT_REQUIRED }}"
+        method="post"
+        novalidate
+      >
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

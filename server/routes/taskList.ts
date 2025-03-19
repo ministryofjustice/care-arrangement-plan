@@ -11,6 +11,7 @@ import {
   itemsForChangeoverComplete,
   whatWillHappenComplete,
   whatOtherThingsMatterComplete,
+  planLastMinuteChangesComplete,
 } from '../utils/sessionHelpers';
 
 const taskListRoutes = (router: Router) => {
@@ -22,6 +23,7 @@ const taskListRoutes = (router: Router) => {
     const isItemsForChangeoverComplete = itemsForChangeoverComplete(request.session);
     const isWhatWillHappenComplete = whatWillHappenComplete(request.session);
     const isWhatOtherThingsMatterComplete = whatOtherThingsMatterComplete(request.session);
+    const isPlanLastMinuteChangesComplete = planLastMinuteChangesComplete(request.session);
 
     response.render('pages/taskList', {
       title: i18n.__('taskList.title', { names: formattedChildrenNames(request.session) }),
@@ -33,7 +35,8 @@ const taskListRoutes = (router: Router) => {
         isWhereHandoverComplete &&
         isWillChangeDuringSchoolHolidaysComplete &&
         isItemsForChangeoverComplete &&
-        isWhatOtherThingsMatterComplete,
+        isWhatOtherThingsMatterComplete &&
+        isPlanLastMinuteChangesComplete,
       mostlyLiveComplete: isMostlyLiveComplete,
       getBetweenHouseholdsComplete: isGetBetweenHouseholdsComplete,
       whereHandoverComplete: isWhereHandoverComplete,
@@ -41,6 +44,7 @@ const taskListRoutes = (router: Router) => {
       itemsForChangeoverComplete: isItemsForChangeoverComplete,
       whatWillHappenComplete: isWhatWillHappenComplete,
       whatOtherThingsMatterComplete: isWhatOtherThingsMatterComplete,
+      planLastMinuteChangesComplete: isPlanLastMinuteChangesComplete,
     });
   });
 };

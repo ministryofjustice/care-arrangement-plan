@@ -205,7 +205,8 @@
     "livingAndVisiting": "Living and visiting",
     "handoverAndHolidays": "Handovers and holidays",
     "specialDays": "Special days",
-    "otherThings": "Other things"
+    "otherThings": "Other things",
+    "decisionMaking": "Decision making"
   },
   "livingAndVisiting": {
     "mostlyLive": {
@@ -272,6 +273,19 @@
       "extraCurriculars": "extra-curricular activities, such as swimming lessons",
       "friendsAndFamily": "access to other friends and family",
       "otherContact": "other types of contact, such as video calls"
+    }
+  },
+  "decisionMaking": {
+    "planLastMinuteChanges": {
+      "title": "How will you agree changes?",
+      "anotherDescriptionLabel": "Describe the arrangement",
+      "howChangesCommunicated": "How should last-minute changes be communicated?",
+      "howChangesCommunicatedAdditionalDescription": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school. Select all that apply.",
+      "textMessage": "By text message",
+      "phoneCall": "With a phone call",
+      "email": "By email",
+      "app": "Using a parenting app",
+      "anotherArrangement": "Another arrangement"
     }
   },
   "checkYourAnswers": {
@@ -371,6 +385,11 @@
         "suggestedChangeDuringSchoolHolidays": "{{ senderName }} suggested that these arrangements should change during school holidays.",
         "suggestedNoChangeDuringSchoolHolidays": "{{ senderName }} suggested that these arrangements do not change during school holidays."
       },
+      "decisionMaking": {
+        "planLastMinuteChanges": {
+          "howChangesCommunicated": "{{ senderName }} suggested that last minute changes should be communicated by"
+        }
+      },
       "whatHappensNowHeading": "What happens now?",
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.",
       "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.",
@@ -396,13 +415,17 @@
         },
         "otherThings": {
           "whatOtherThingsMatter": "If you do not agree, suggest what other things matter to your children"
+        },
+        "decisionMaking": {
+          "planLastMinuteChanges": "If you do not agree, suggest how last minute changes should be communicated"
         }
       },
       "compromise": {
         "livingAndVisiting": "You can use this space to write your agreed compromise for the living and visiting section",
         "handoverAndHolidays": "You can use this space to write your agreed compromise for the handovers and holidays section",
         "specialDays": "You can use this space to write your agreed compromise for the special days section",
-        "otherThings": "You can use this space to write your agreed compromise for the other things section"
+        "otherThings": "You can use this space to write your agreed compromise for the other things section",
+        "decisionMaking": "You can use this space to write your agreed compromise for the decision making section"
       }
     }
   },

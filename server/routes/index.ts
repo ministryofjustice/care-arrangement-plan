@@ -7,6 +7,7 @@ import aboutTheChildrenRoutes from './aboutTheChildren';
 import checkYourAnswersRoutes from './checkYourAnswers';
 import childrenSafetyRoutesCheck from './childrenSafetyCheck';
 import courtOrderCheckRoutes from './courtOrderCheck';
+import decisionMakingRoutes from './decisionMaking';
 import doWhatsBestRoutes from './doWhatsBest';
 import existingCourtOrderRoutes from './existingCourtOrder';
 import handoverAndHolidaysRoutes from './handoverAndHolidays';
@@ -40,6 +41,7 @@ const routes = (): Router => {
   handoverAndHolidaysRoutes(router);
   specialDaysRoutes(router);
   otherThingsRoutes(router);
+  decisionMakingRoutes(router);
   pdfRoutes(router);
 
   return router;

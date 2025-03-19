@@ -40,6 +40,11 @@ const session: Partial<SessionData> = {
       noDecisionRequired: true,
     },
   },
+  decisionMaking: {
+    planLastMinuteChanges: {
+      noDecisionRequired: true,
+    },
+  },
 };
 
 describe(`GET ${paths.TASK_LIST}`, () => {

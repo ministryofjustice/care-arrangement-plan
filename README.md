@@ -107,6 +107,22 @@ If there is no Welsh translation, the English value will be used as a fallback.
 The Welsh support can be toggled on/off using the `INCLUDE_WELSH_LANGUAGE` environment variable, allowing us to do
 releases before full Welsh translation is complete.
 
+## Analytics
+
+We used GA4 for tracking. GA4 will only be enabled if the environment variable `GA4_ID` exists.
+
+If the user does not have a `cookie_policy` cookie, GA4 will not activate, and the cookie consent banner will load. Once
+that cookie exists, tracking will be enabled depending on the consent setting within in.
+
+### Preview testing analytics
+
+For preview testing, we wish to get numbers using the service, and GA4 is not reliable for this due to ad-blockers or
+users denying consent. There are server logs which can be used for this purpose (although they may need de-duplicating
+based off IP address).
+
+- To see users starting the service, count the numbers of successful logins: `Received successful login request`
+- To see users completing the service, count the number of hits to the share page: `Responded to GET /share-plan with 200`
+
 ## Architecture
 
 For documentation on the project architecture, see [here](./architecture-docs/README.md)

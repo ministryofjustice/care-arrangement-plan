@@ -1,6 +1,7 @@
 import { Request } from 'express';
 
 import addAboutTheProposal from './addAboutTheProposal';
+import addDecisionMaking from './addDecisionMaking';
 import addHandoverAndHolidays from './addHandoverAndHolidays';
 import addLivingAndVisiting from './addLivingAndVisiting';
 import addOtherThings from './addOtherThings';
@@ -20,6 +21,7 @@ const createPdf = (autoPrint: boolean, request: Request) => {
   addHandoverAndHolidays(pdf, request);
   addSpecialDays(pdf, request);
   addOtherThings(pdf, request);
+  addDecisionMaking(pdf, request);
   addWhatHappensNow(pdf, request);
 
   pdf.addFooterToEveryPage();
