@@ -48,10 +48,7 @@ const addOtherThings = (pdf: PdfBuilder, request: Request) => {
     ],
   }).addComponentToDocument();
 
-  new DoYouAgreeComponent(
-    pdf,
-    i18n.__('sharePlan.yourProposedPlan.doYouAgreeOnBasics', { senderName: request.session.initialAdultName }),
-  ).addComponentToDocument();
+  new DoYouAgreeComponent(pdf, i18n.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument();
 
   new TextboxComponent(pdf, [
     {
