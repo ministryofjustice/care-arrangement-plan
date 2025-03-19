@@ -27,6 +27,8 @@ enum formFields {
   ITEMS_FOR_CHANGEOVER = 'items-for-changeover',
   SPECIAL_DAYS = 'special-days',
   WHAT_OTHER_THINGS_MATTER = 'what-other-things-matter',
+  PLAN_LAST_MINUTE_CHANGES = 'plan-last-minute-changes-method',
+  PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT = 'plan-last-minute-changes-describe-arrangement',
 }
 
 export default formFields;

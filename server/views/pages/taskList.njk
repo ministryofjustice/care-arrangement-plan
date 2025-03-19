@@ -129,6 +129,21 @@
         })
       }}
 
+      <h2 class="govuk-heading-m">{{ __('taskList.decisionMaking') }}</h2>
+      {{
+        govukTaskList({
+          items: [
+            {
+              title: {
+                text: __('decisionMaking.planLastMinuteChanges.title')
+              },
+              href: paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES,
+              status: completeStatus if planLastMinuteChangesComplete else incompleteStatus
+            }
+          ]
+        })
+      }}
+
       {% if showContinue %}
         <div class="govuk-!-margin-top-5">
           {{ govukButton({text: __('continue'), href: paths.CHECK_YOUR_ANSWERS}) }}

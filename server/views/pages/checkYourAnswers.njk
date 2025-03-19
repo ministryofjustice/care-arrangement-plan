@@ -306,6 +306,31 @@
         ]
         })
       }}
+      <h2 class="govuk-heading-m">{{ __('taskList.decisionMaking') }}</h2>
+      {{
+        govukSummaryList({
+        classes: "govuk-!-margin-bottom-9",
+        rows: [
+          {
+            key: {
+              text: __('decisionMaking.planLastMinuteChanges.title')
+            },
+            value: {
+              text: values.planLastMinuteChanges
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.change.planLastMinuteChanges')
+                }
+              ]
+            }
+          }
+        ]
+        })
+      }}
 
       {{ govukButton({text: __('continue'), href: paths.SHARE_PLAN }) }}
     </div>
