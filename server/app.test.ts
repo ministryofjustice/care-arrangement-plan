@@ -141,4 +141,33 @@ describe('App', () => {
       });
     });
   });
+
+  describe('Authentication', () => {
+    const pathsWithNoAuthentication = [
+      paths.PASSWORD,
+      paths.CONTACT_US,
+      paths.COOKIES,
+      paths.ACCESSIBILITY_STATEMENT,
+      paths.PRIVACY_NOTICE,
+      paths.TERMS_AND_CONDITIONS,
+    ];
+
+    beforeEach(() => {
+      config.useAuth = true;
+    });
+
+    it.each(Object.values(paths).filter((path) => !pathsWithNoAuthentication.includes(path)))(
+      'should redirect to password page for %s when not authenticated',
+      (path) => {
+        return request(app)
+          .get(path)
+          .expect(302)
+          .expect('location', `${paths.PASSWORD}?returnURL=${encodeURIComponent(path)}`);
+      },
+    );
+
+    it.each(pathsWithNoAuthentication)('should not redirect to password page for %s when not authenticated', (path) => {
+      return request(app).get(path).expect(200);
+    });
+  });
 });

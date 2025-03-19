@@ -20,7 +20,7 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
         `Will these arrangements change during school holidays?`,
       );
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
     });
@@ -37,7 +37,9 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
         `${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}-error`,

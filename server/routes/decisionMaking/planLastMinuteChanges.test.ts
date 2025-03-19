@@ -31,7 +31,7 @@ describe(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
         'How should last-minute changes be communicated?',
       );
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).not.toContain(
         `${formFields.PLAN_LAST_MINUTE_CHANGES}-error`,

@@ -22,7 +22,7 @@ describe(paths.ABOUT_THE_CHILDREN, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('About the child');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(`label[for="${formFields.CHILD_NAME}0"]`)).toHaveTextContent(
         'First name of the child',
       );
@@ -61,7 +61,9 @@ describe(paths.ABOUT_THE_CHILDREN, () => {
 
       const dom = new JSDOM((await request(app).get(paths.ABOUT_THE_CHILDREN)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector(`#${formFields.CHILD_NAME}0`)).toHaveAttribute(
         'aria-describedby',
         `${formFields.CHILD_NAME}0-error`,
