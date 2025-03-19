@@ -18,7 +18,7 @@ describe(paths.COURT_ORDER_CHECK, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
         'Do you already have a court order in place about your child arrangements?',
       );
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).not.toContain(
         `${formFields.COURT_ORDER_CHECK}-error`,
       );
@@ -36,7 +36,9 @@ describe(paths.COURT_ORDER_CHECK, () => {
 
       const dom = new JSDOM((await request(app).get(paths.COURT_ORDER_CHECK)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
         expect.stringContaining(`${formFields.COURT_ORDER_CHECK}-error`),

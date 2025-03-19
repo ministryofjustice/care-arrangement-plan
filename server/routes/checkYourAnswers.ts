@@ -16,6 +16,7 @@ import {
   itemsForChangeover,
   whatWillHappen,
   whatOtherThingsMatter,
+  planLastMinuteChanges,
 } from '../utils/formattedAnswersForCheckAnswers';
 import { formatListOfStrings } from '../utils/formValueUtils';
 import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
@@ -44,6 +45,7 @@ const checkYourAnswersRoutes = (router: Router) => {
         itemsForChangeover: itemsForChangeover(request.session),
         whatWillHappen: whatWillHappen(request.session),
         whatOtherThingsMatter: whatOtherThingsMatter(request.session),
+        planLastMinuteChanges: planLastMinuteChanges(request.session),
       },
     });
   });

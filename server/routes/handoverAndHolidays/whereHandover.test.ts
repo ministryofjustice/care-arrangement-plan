@@ -26,7 +26,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('Where does handover take place?');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).not.toContain(
         `${formFields.WHERE_HANDOVER}-error`,
@@ -56,7 +56,9 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
         expect.stringContaining(`${formFields.WHERE_HANDOVER}-error`),

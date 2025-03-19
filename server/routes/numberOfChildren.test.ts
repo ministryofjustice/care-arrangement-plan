@@ -16,7 +16,7 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('How many children is this for?');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).not.toHaveAttribute(
         'aria-describedby',
       );
@@ -38,7 +38,9 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
 
       const dom = new JSDOM((await request(app).get(paths.NUMBER_OF_CHILDREN)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).toHaveValue('7');
       expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).toHaveAttribute(
         'aria-describedby',

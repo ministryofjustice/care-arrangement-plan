@@ -1,0 +1,34 @@
+{% extends "partials/layout.njk" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p>{{ __('termsAndConditions.agree') }}</p>
+
+      <h2 class="govuk-heading-m">{{ __('termsAndConditions.responsibilityForTheServiceHeading') }}</h2>
+      <p>{{ __('termsAndConditions.accurateAndComplete') }}</p>
+      <p>{{ __('termsAndConditions.noLiabilityFor') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('termsAndConditions.unableToAccess') }}</li>
+        <li>{{ __('termsAndConditions.indirectDamages') }}</li>
+        <li>{{ __('termsAndConditions.externalSites') }}</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">{{ __('termsAndConditions.informationAboutYouHeading') }}</h2>
+      <p>
+        {{ __('termsAndConditions.informationAboutYou', { privacyUrl: paths.PRIVACY_NOTICE, cookieUrl: paths.COOKIES }) | safe }}
+      </p>
+
+      <h2 class="govuk-heading-m">{{ __('termsAndConditions.limitationsHeading') }}</h2>
+      <p>{{ __('termsAndConditions.limitations') }}</p>
+
+      <h2 class="govuk-heading-m">{{ __('termsAndConditions.misuseHeading') }}</h2>
+      <p>{{ __('termsAndConditions.misuse') }}</p>
+      <p>{{ __('termsAndConditions.mustNotUseToHarass') }}</p>
+
+      <h2 class="govuk-heading-m">{{ __('termsAndConditions.restrictionsOnUseHeading') }}</h2>
+      <p>{{ __('termsAndConditions.restrictionsOnUse') }}</p>
+    </div>
+  </div>
+{% endblock %}

@@ -29,7 +29,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('Where will the children mostly live?');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
       expect(dom.window.document.querySelector(`label[for="${formFields.MOSTLY_LIVE_WHERE}"]`)).toHaveTextContent(
@@ -66,7 +66,9 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
         `${formFields.MOSTLY_LIVE_WHERE}-error`,

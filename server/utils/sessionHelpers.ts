@@ -49,3 +49,6 @@ export const whatWillHappenComplete = (session: Partial<CAPSession>) => !!sessio
 
 export const whatOtherThingsMatterComplete = (session: Partial<CAPSession>) =>
   !!session.otherThings?.whatOtherThingsMatter;
+
+export const planLastMinuteChangesComplete = (session: Partial<CAPSession>) =>
+  !!session.decisionMaking?.planLastMinuteChanges;

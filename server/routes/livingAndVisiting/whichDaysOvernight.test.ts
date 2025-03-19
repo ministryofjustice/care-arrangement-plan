@@ -29,7 +29,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('On which days will overnights happen?');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).not.toContain(
         `${formFields.WHICH_DAYS_OVERNIGHT}-error`,
@@ -59,7 +59,9 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
         expect.stringContaining(`${formFields.WHICH_DAYS_OVERNIGHT}-error`),
