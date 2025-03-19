@@ -51,7 +51,7 @@ const mostlyLiveRoutes = (router: Router) => {
         [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: describeArrangement,
       } = formData;
 
-      if (where !== request.session.livingAndVisiting?.mostlyLive?.where) {
+      if (where !== request.session.livingAndVisiting?.mostlyLive?.where || where === 'other') {
         request.session.livingAndVisiting = {
           mostlyLive: { where, describeArrangement: where === 'other' ? describeArrangement : undefined },
         };
