@@ -26,7 +26,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
   router.post(
     paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES,
     // TODO C5141-1013: Add error messages
-    body(formFields.PLAN_LAST_MINUTE_CHANGES).trim().notEmpty(),
+    body(formFields.PLAN_LAST_MINUTE_CHANGES).notEmpty().toArray(),
     body(formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT)
       .if(body(formFields.PLAN_LAST_MINUTE_CHANGES).equals('anotherArrangement'))
       .trim()
@@ -34,16 +34,12 @@ const planLastMinuteChangesRoutes = (router: Router) => {
     body(formFields.PLAN_LAST_MINUTE_CHANGES).custom(
       // This is prevented by JS in the page, but possible for people with JS disabled to submit
       (planLastMinuteChanges: string | string[]) =>
-        !(
-          Array.isArray(planLastMinuteChanges) &&
-          planLastMinuteChanges.length > 1 &&
-          planLastMinuteChanges.includes('anotherArrangement')
-        ),
+        !(planLastMinuteChanges.length > 1 && planLastMinuteChanges.includes('anotherArrangement')),
     ),
     (request, response) => {
       const formData = matchedData<{
         [formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT]: string;
-        [formFields.PLAN_LAST_MINUTE_CHANGES]: planLastMinuteChangesField[] | planLastMinuteChangesField;
+        [formFields.PLAN_LAST_MINUTE_CHANGES]: planLastMinuteChangesField[];
       }>(request, { onlyValidData: false });
 
       const errors = validationResult(request);
@@ -63,7 +59,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
         ...request.session.decisionMaking,
         planLastMinuteChanges: {
           noDecisionRequired: false,
-          options: Array.isArray(options) ? options : [options],
+          options,
           anotherArrangmentDescription: options.includes('anotherArrangement') ? describeArrangement : undefined,
         },
       };
