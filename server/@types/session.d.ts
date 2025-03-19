@@ -1,7 +1,7 @@
 import {
   dayValues,
   getBetweenHouseholdsField,
-  planLastMinuteChangesField as planLastMinuteChangesField,
+  planLastMinuteChangesField,
   whereHandoverField,
   whereMostlyLive,
 } from './fields';

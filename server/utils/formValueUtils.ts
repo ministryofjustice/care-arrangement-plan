@@ -46,7 +46,7 @@ export const convertWhichDaysSessionValueToField = (whichDays: WhichDays | undef
   return [whichDays?.days, undefined];
 };
 
-//TODO does this translate days in welsh?
+//TODO C5141-1299 this does not translate
 export const formatWhichDaysSessionValue = (whichDays: WhichDays | undefined): string => {
   if (!whichDays?.days) {
     return '';
