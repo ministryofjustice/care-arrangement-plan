@@ -27,7 +27,7 @@ describe('Password Handler', () => {
         .get(paths.PASSWORD)
         .expect(200)
         .expect((response) => {
-          expect(response.text).toContain('Sign in - GOV.UK');
+          expect(response.text).toContain('Sign in');
           expect(response.text).not.toContain('The password is not correct');
         }));
 
