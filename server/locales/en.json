@@ -382,9 +382,9 @@
       "safetyCheckHeading": "Safety check",
       "safetyCheck": "To make child arrangements you need to be able to state your needs and views without feeling intimidated. The other parent or carer must not be a threat to you or to your children's safety.",
       "doNotContinueIf": "Do not continue with this process if there has been:",
-      "stopIfAnyConcern": "If you have any concerns about safety, stop now. Find another way to make arrangements by visiting https://helpwithchildarrangements.service.justice.gov.uk",
+      "stopIfAnyConcern": "If you have any concerns about safety, stop now. Find another way to make arrangements by visiting https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements.",
       "gettingHelpHeading": "Getting help with abuse and domestic violence",
-      "gettingHelp": "To find out more about what is child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse. If you’re unsure whether you’re a victim of domestic abuse, visit https://www.nhs.uk/live-well/getting-help-for-domestic-violence.",
+      "gettingHelp": "To find out more about what is child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse. If you’re unsure whether you’re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
       "courtOrderHeading": "As there is a court order in place",
       "courtOrderInPlace": "{{ senderName }} has told us there is a court order in place. If you have an order in place that sets out restrictions on contact with your children or ex-partner, you should find a different way to make your child arrangements.",
       "stopIfOrders": "If you have one of these types of order, stop now and find another way to agree your child arrangements."

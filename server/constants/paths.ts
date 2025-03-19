@@ -46,6 +46,7 @@ enum paths {
   DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES_NOT_REQUIRED = '/decision-making/plan-last-minute-changes/not-required',
   DOWNLOAD_PDF = '/download-pdf',
   PRINT_PDF = '/print-pdf',
+  DOWNLOAD_PAPER_FORM = '/download-paper-form',
 }
 
 export default paths;
