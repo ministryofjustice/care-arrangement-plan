@@ -41,8 +41,8 @@
     "hideCookieMessage": "Hide cookie message",
     "useEssentialCookies": "We use some essential cookies to make this service work.",
     "useAnalyticsCookies": "We’d also like to use analytics cookies so we can understand how you use the service and make improvements.",
-    "acceptedAnalyticsCookies": "You’ve accepted analytics cookies. You can <a class=\"govuk-link\" href={{ cookiesUrl }} >change your cookie settings</a> at any time.",
-    "rejectedAnalyticsCookies": "You’ve rejected analytics cookies. You can <a class=\"govuk-link\" href={{ cookiesUrl }} >change your cookie settings</a> at any time."
+    "acceptedAnalyticsCookies": "You’ve accepted analytics cookies. You can <a href={{ cookiesUrl }} >change your cookie settings</a> at any time.",
+    "rejectedAnalyticsCookies": "You’ve rejected analytics cookies. You can <a href={{ cookiesUrl }} >change your cookie settings</a> at any time."
   },
   "cookies": {
     "title": "Cookies",
@@ -246,7 +246,15 @@
     "sendThePlanTo": "Send this proposed child arrangements plan to {{ name }}",
     "download": "Download the plan",
     "print": "Print the plan",
-    "content": "<p>You've created a proposed child arrangements plan. You must now share the plan with {{ otherAdult }} to get their agreement.</p><h2 class=\"govuk-heading-s govuk-!-margin-bottom-2\">What to do next</h2><p>Send this proposed child arrangements plan to {{ otherAdult }}. {{ otherAdult }} will have the chance to respond.</p><h2 class=\"govuk-heading-s govuk-!-margin-bottom-2\">If {{ otherAdult }} does not respond</h2><p>If {{ otherAdult }} does not respond, you can try mediation. The next step would be to apply for a court order.</p><p><a href=\"https://www.gov.uk/looking-after-children-divorce/types-of-court-order\" class=\"govuk-link\">Find out more about what to do if you cannot agree.</a></p>",
+    "mustNowShare": "You've created a proposed child arrangements plan. You must now share the plan with {{ otherAdult }} to get their agreement.",
+    "whatToDoNext": "What to do next",
+    "sendToSecondary": "Send this proposed child arrangements plan to {{ otherAdult }}. {{ otherAdult }} will have the chance to respond.",
+    "giveFeedback": "Give your feedback about this service",
+    "completeTheSurvey": "Complete the survey",
+    "emailUs": "You can also email {{ contactEmail }}",
+    "ifTheyDoNotRespond": "If {{ otherAdult }} does not respond",
+    "tryMediation": "If {{ otherAdult }} does not respond, you can try mediation. The next step would be to apply for a court order.",
+    "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
     "whatWeAreTelling": {
       "title": "What we're telling {{ name }} about this plan",
       "proposedPlan": "Proposed child arrangements plan for {{ childrenNames }}",
