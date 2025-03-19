@@ -127,7 +127,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
         { name = "GA4_ID", value = var.ga4_id },
         { name = "FEEDBACK_URL", value = var.feedback_url },
         { name = "CONTACT_EMAIL", value = var.contact_email },
-        { name = "PREVIEW_END", value = var.contact_email },
+        { name = "PREVIEW_END", value = var.preview_end },
       ]
     }
   ])
