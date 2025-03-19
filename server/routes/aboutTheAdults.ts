@@ -31,6 +31,9 @@ const aboutTheAdultsRoutes = (router: Router) => {
       .trim()
       .notEmpty()
       .withMessage((_value, { req }) => req.__('aboutTheAdults.secondaryError')),
+    body(formFields.SECONDARY_ADULT_NAME)
+      .custom((value: string, { req }) => value !== req.body[formFields.INITIAL_ADULT_NAME])
+      .withMessage((_value, { req }) => req.__('aboutTheAdults.sameNameError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.INITIAL_ADULT_NAME]: string;

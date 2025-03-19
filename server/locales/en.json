@@ -202,7 +202,8 @@
     "initialParentFirstNameHint": "If you are answering these questions for someone else, enter their first name",
     "secondaryParentFirstName": "First name of the other parent or carer",
     "initialError": "Enter your first name or the name of the person you represent",
-    "secondaryError": "Enter the name of the other parent or carer"
+    "secondaryError": "Enter the name of the other parent or carer",
+    "sameNameError": "Enter a way to tell the adults apart"
   },
   "taskList": {
     "title": "Child arrangements plan for {{ names }}",
@@ -240,7 +241,8 @@
     "whichDaysOvernight": {
       "title": "On which days will overnights happen?",
       "emptyError": "Select which days overnights will happen on",
-      "arrangementMissingError": "Describe when the children will stay overnight"
+      "arrangementMissingError": "Describe when the children will stay overnight",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
     },
     "willDaytimeVisitsHappen": {
       "title": "Will the children do daytime visits with {{ adult }}?",
@@ -249,7 +251,8 @@
     "whichDaysDaytimeVisits": {
       "title": "On which days will daytime visits happen?",
       "emptyError": "Select when daytime visits will happen",
-      "arrangementMissingError": "Describe when daytime visits will happen"
+      "arrangementMissingError": "Describe when daytime visits will happen",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
     }
   },
   "handoverAndHolidays": {
@@ -268,7 +271,8 @@
       "someoneElse": "Someone else will manage handover, such as a grandparent",
       "someoneElseName": "Name of the person who will manage handover",
       "emptyError": "Select where handover takes place",
-      "arrangementMissingError": "Describe who will manage handover"
+      "arrangementMissingError": "Describe who will manage handover",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
     },
     "willChangeDuringSchoolHolidays": {
       "title": "Will these arrangements change during school holidays?",

@@ -120,6 +120,29 @@ describe(paths.ABOUT_THE_ADULTS, () => {
       });
     });
 
+    it('should reload page and set flash when the adults have the same name', async () => {
+      const initialName = 'initialName';
+      await request(app)
+        .post(paths.ABOUT_THE_ADULTS)
+        .send({ [formFields.INITIAL_ADULT_NAME]: initialName, [formFields.SECONDARY_ADULT_NAME]: initialName })
+        .expect(302)
+        .expect('location', paths.ABOUT_THE_ADULTS);
+
+      expect(flashMock).toHaveBeenCalledWith('errors', [
+        {
+          location: 'body',
+          msg: 'Enter a way to tell the adults apart',
+          path: formFields.SECONDARY_ADULT_NAME,
+          type: 'field',
+          value: initialName,
+        },
+      ]);
+      expect(flashMock).toHaveBeenCalledWith('formValues', {
+        [formFields.INITIAL_ADULT_NAME]: initialName,
+        [formFields.SECONDARY_ADULT_NAME]: initialName,
+      });
+    });
+
     it('should redirect to task list page if the page is correctly filled', async () => {
       const initialName = 'initialName';
       const secondaryName = 'secondaryName';

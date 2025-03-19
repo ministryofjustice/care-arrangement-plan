@@ -40,11 +40,13 @@ const whichDaysOvernightRoutes = (router: Router) => {
       .exists()
       .toArray()
       .withMessage((_value, { req }) => req.__('livingAndVisiting.whichDaysOvernight.emptyError')),
-    // TODO C5141-1013: Add error message
-    body(formFields.WHICH_DAYS_OVERNIGHT).custom(
-      // This is prevented by JS in the page, but possible for people with JS disabled to submit
-      (whichDaysOvernight: whichDaysField) => !(whichDaysOvernight.length > 1 && whichDaysOvernight.includes('other')),
-    ),
+    body(formFields.WHICH_DAYS_OVERNIGHT)
+      .custom(
+        // This is prevented by JS in the page, but possible for people with JS disabled to submit
+        (whichDaysOvernight: whichDaysField) =>
+          !(whichDaysOvernight.length > 1 && whichDaysOvernight.includes('other')),
+      )
+      .withMessage((_value, { req }) => req.__('livingAndVisiting.whichDaysOvernight.multiSelectedError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.WHICH_DAYS_OVERNIGHT_DESCRIBE_ARRANGEMENT]: string;

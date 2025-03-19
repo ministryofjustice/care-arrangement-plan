@@ -34,11 +34,12 @@ const whereHandoverRoutes = (router: Router) => {
       .exists()
       .toArray()
       .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.emptyError')),
-    // TODO C5141-1013: Add error messages
-    body(formFields.WHERE_HANDOVER).custom(
-      // This is prevented by JS in the page, but possible for people with JS disabled to submit
-      (whereHandover: whereHandoverField[]) => !(whereHandover.length > 1 && whereHandover.includes('someoneElse')),
-    ),
+    body(formFields.WHERE_HANDOVER)
+      .custom(
+        // This is prevented by JS in the page, but possible for people with JS disabled to submit
+        (whereHandover: whereHandoverField[]) => !(whereHandover.length > 1 && whereHandover.includes('someoneElse')),
+      )
+      .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.multiSelectedError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: string;

@@ -38,11 +38,12 @@ const whichDaysDaytimeVisitsRoutes = (router: Router) => {
       .exists()
       .toArray()
       .withMessage((_value, { req }) => req.__('livingAndVisiting.whichDaysDaytimeVisits.emptyError')),
-    // TODO C5141-1013: Add error messages
-    body(formFields.WHICH_DAYS_DAYTIME_VISITS).custom(
-      // This is prevented by JS in the page, but possible for people with JS disabled to submit
-      (whichDays: whichDaysField) => !(whichDays.length > 1 && whichDays.includes('other')),
-    ),
+    body(formFields.WHICH_DAYS_DAYTIME_VISITS)
+      .custom(
+        // This is prevented by JS in the page, but possible for people with JS disabled to submit
+        (whichDays: whichDaysField) => !(whichDays.length > 1 && whichDays.includes('other')),
+      )
+      .withMessage((_value, { req }) => req.__('livingAndVisiting.whichDaysDaytimeVisits.multiSelectedError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT]: string;

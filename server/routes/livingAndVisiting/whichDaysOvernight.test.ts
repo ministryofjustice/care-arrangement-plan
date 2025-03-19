@@ -191,7 +191,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe what other arrangement you are proposing',
           path: formFields.WHICH_DAYS_OVERNIGHT,
           type: 'field',
           value: ['other', 'monday'],
