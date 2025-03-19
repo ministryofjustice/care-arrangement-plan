@@ -164,7 +164,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Select when daytime visits will happen',
           path: formFields.WHICH_DAYS_DAYTIME_VISITS,
           type: 'field',
         },
@@ -181,7 +181,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe when daytime visits will happen',
           path: formFields.WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT,
           type: 'field',
           value: '',
@@ -199,7 +199,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe what other arrangement you are proposing',
           path: formFields.WHICH_DAYS_DAYTIME_VISITS,
           type: 'field',
           value: ['other', 'monday'],

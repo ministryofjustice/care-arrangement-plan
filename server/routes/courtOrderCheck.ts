@@ -15,25 +15,30 @@ const courtOrderCheckRoutes = (router: Router) => {
     });
   });
 
-  // TODO C5141-1013: Add error message
-  router.post(paths.COURT_ORDER_CHECK, body(formFields.COURT_ORDER_CHECK).exists(), (request, response) => {
-    const errors = validationResult(request);
-    if (!errors.isEmpty()) {
-      request.flash('errors', errors.array());
-      return response.redirect(paths.COURT_ORDER_CHECK);
-    }
+  router.post(
+    paths.COURT_ORDER_CHECK,
+    body(formFields.COURT_ORDER_CHECK)
+      .exists()
+      .withMessage((_value, { req }) => req.__('courtOrderCheck.error')),
+    (request, response) => {
+      const errors = validationResult(request);
+      if (!errors.isEmpty()) {
+        request.flash('errors', errors.array());
+        return response.redirect(paths.COURT_ORDER_CHECK);
+      }
 
-    const { [formFields.COURT_ORDER_CHECK]: existingCourtOrder } = matchedData<{
-      [formFields.COURT_ORDER_CHECK]: yesOrNo;
-    }>(request);
+      const { [formFields.COURT_ORDER_CHECK]: existingCourtOrder } = matchedData<{
+        [formFields.COURT_ORDER_CHECK]: yesOrNo;
+      }>(request);
 
-    if (existingCourtOrder === 'Yes') {
-      request.session.courtOrderInPlace = true;
-      return response.redirect(paths.EXISTING_COURT_ORDER);
-    }
-    request.session.courtOrderInPlace = false;
-    return response.redirect(paths.NUMBER_OF_CHILDREN);
-  });
+      if (existingCourtOrder === 'Yes') {
+        request.session.courtOrderInPlace = true;
+        return response.redirect(paths.EXISTING_COURT_ORDER);
+      }
+      request.session.courtOrderInPlace = false;
+      return response.redirect(paths.NUMBER_OF_CHILDREN);
+    },
+  );
 };
 
 export default courtOrderCheckRoutes;

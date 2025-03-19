@@ -67,7 +67,7 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe what you propose will happen on special days',
           path: formFields.SPECIAL_DAYS,
           type: 'field',
           value: '',

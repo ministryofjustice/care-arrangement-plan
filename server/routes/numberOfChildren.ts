@@ -22,8 +22,16 @@ const numberOfChildrenRoutes = (router: Router) => {
 
   router.post(
     paths.NUMBER_OF_CHILDREN,
-    // TODO C5141-1013: Add error message
-    body(formFields.NUMBER_OF_CHILDREN).trim().isInt({ min: 1, max: 6 }),
+    body(formFields.NUMBER_OF_CHILDREN)
+      .trim()
+      .isInt()
+      .withMessage((_value, { req }) => req.__('numberOfChildren.emptyError'))
+      .bail()
+      .isInt({ min: 1 })
+      .withMessage((_value, { req }) => req.__('numberOfChildren.tooFewError'))
+      .bail()
+      .isInt({ max: 6 })
+      .withMessage((_value, { req }) => req.__('numberOfChildren.tooManyError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.NUMBER_OF_CHILDREN]: string;

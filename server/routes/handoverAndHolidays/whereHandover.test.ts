@@ -119,7 +119,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Select where handover takes place',
           path: formFields.WHERE_HANDOVER,
           type: 'field',
         },
@@ -136,7 +136,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe who will manage handover',
           path: formFields.WHERE_HANDOVER_SOMEONE_ELSE,
           type: 'field',
           value: '',
@@ -154,7 +154,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe what other arrangement you are proposing',
           path: formFields.WHERE_HANDOVER,
           type: 'field',
           value: ['someoneElse', 'neutral'],

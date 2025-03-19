@@ -71,7 +71,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'List which items need to go between households',
           path: formFields.ITEMS_FOR_CHANGEOVER,
           type: 'field',
           value: '',

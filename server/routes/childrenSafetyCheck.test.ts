@@ -49,7 +49,7 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Select whether the children are safe or not',
           path: formFields.CHILDREN_SAFETY_CHECK,
           type: 'field',
         },

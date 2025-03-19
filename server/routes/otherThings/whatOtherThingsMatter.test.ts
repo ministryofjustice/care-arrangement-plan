@@ -71,7 +71,7 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe what other things matter to your children',
           path: formFields.WHAT_OTHER_THINGS_MATTER,
           type: 'field',
           value: '',

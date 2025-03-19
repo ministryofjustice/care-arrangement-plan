@@ -125,7 +125,8 @@
   "safetyCheck": {
     "title": "Safety check",
     "workWithPartner": "This service asks you to work with your parenting partner to agree a plan for your children. You need to be able to state your needs and views without feeling intimidated.",
-    "safeAndConfident": "Do you feel safe and confident?"
+    "safeAndConfident": "Do you feel safe and confident?",
+    "error": "Select whether you feel safe and confident or not"
   },
   "notSafe": {
     "title": "Finding the right route for you",
@@ -141,7 +142,8 @@
     "childAbuse": "child abuse or neglect",
     "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
     "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm",
-    "questionTitle": "Are the children safe?"
+    "questionTitle": "Are the children safe?",
+    "error": "Select whether the children are safe or not"
   },
   "childrenNotSafe": {
     "title": "Getting help",
@@ -152,11 +154,13 @@
   "doWhatsBest": {
     "title": "What’s best for the children?",
     "content": "<p>Your child arrangements plan should reflect what is best for the children. You must consider their wants and needs when making these arrangements.</p><p>Remember, the aim is to make sure your children are as happy as they can be.</p>",
-    "childrensNeedsFirst": "I will put my children’s needs first"
+    "childrensNeedsFirst": "I will put my children’s needs first",
+    "error": "You must select the box to continue"
   },
   "courtOrderCheck": {
     "title": "Do you already have a court order in place about your child arrangements?",
-    "subText": "This could include a prohibited steps, specific issue or consent order."
+    "subText": "This could include a prohibited steps, specific issue or consent order.",
+    "error": "Select whether you have a court order in place currently"
   },
   "existingCourtOrder": {
     "title": "If you have a court order",
@@ -172,7 +176,10 @@
     "changeCourtArrangements": "You can use this service to change child arrangements given to you by a court, so long as the other parent or carer agrees with the changes. You do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order."
   },
   "numberOfChildren": {
-    "title": "How many children is this for?"
+    "title": "How many children is this for?",
+    "emptyError": "Enter how many children this agreement is for",
+    "tooFewError": "Your agreement must be for at least 1 child",
+    "tooManyError": "Your agreement cannot be for more than 6 children"
   },
   "about": {
     "notStoreInfo": "We do not store this information or share it with other government departments."
@@ -186,13 +193,17 @@
     "multipleFirstName2": "First name of the third child",
     "multipleFirstName3": "First name of the fourth child",
     "multipleFirstName4": "First name of the fifth child",
-    "multipleFirstName5": "First name of the sixth child"
+    "multipleFirstName5": "First name of the sixth child",
+    "error": "Enter a first name"
   },
   "aboutTheAdults": {
     "title": "About the adults who will care for the children",
     "initialParentFirstName": "Your first name",
     "initialParentFirstNameHint": "If you are answering these questions for someone else, enter their first name",
-    "secondaryParentFirstName": "First name of the other parent or carer"
+    "secondaryParentFirstName": "First name of the other parent or carer",
+    "initialError": "Enter your first name or the name of the person you represent",
+    "secondaryError": "Enter the name of the other parent or carer",
+    "sameNameError": "Enter a way to tell the adults apart"
   },
   "taskList": {
     "title": "Child arrangements plan for {{ names }}",
@@ -212,31 +223,44 @@
     "mostlyLive": {
       "title": "Where will the children mostly live?",
       "with": "With {{ adult }}",
-      "split": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}"
+      "split": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}",
+      "emptyError": "Choose where the children will mostly live",
+      "arrangementMissingError": "Describe the living arrangement you are proposing"
     },
     "whichSchedule": {
       "title": "Which schedule best meets the children's needs?",
       "getIdeas": "Get scheduling ideas",
       "commonSchedules": "<p>Here are some common schedules that can benefit children.</p><p><b>Alternating weeks</b><br/>The children will spend one week in one household and the next week in the other.</p><p><b>2-2-3 schedule</b><br/>Children spend two days in one household, two days in the other, then back to the first house for 3 days including the weekend.</p><p><b>4-4-3 schedule</b><br/>Children spend three days in one household then four days in the other. The next week they switch.</p><p><b>2-2-5-5 schedule</b><br/>Children spend two days in one household, then two days in the other. After that they spend five days in one household, then five days in the other.</p>",
-      "exactSplitWarning": "An exact split of time between two households does not always suit children’s best interests."
+      "exactSplitWarning": "An exact split of time between two households does not always suit children’s best interests.",
+      "error": "Describe which schedule will best meet the children's needs"
     },
     "willOvernightsHappen": {
-      "title": "Will the children stay overnight with {{ adult }}?"
+      "title": "Will the children stay overnight with {{ adult }}?",
+      "error": "Choose whether the children will do overnight stays"
     },
     "whichDaysOvernight": {
-      "title": "On which days will overnights happen?"
+      "title": "On which days will overnights happen?",
+      "emptyError": "Select which days overnights will happen on",
+      "arrangementMissingError": "Describe when the children will stay overnight",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
     },
     "willDaytimeVisitsHappen": {
-      "title": "Will the children do daytime visits with {{ adult }}?"
+      "title": "Will the children do daytime visits with {{ adult }}?",
+      "error": "Choose whether the children will do daytime visits"
     },
     "whichDaysDaytimeVisits": {
-      "title": "On which days will daytime visits happen?"
+      "title": "On which days will daytime visits happen?",
+      "emptyError": "Select when daytime visits will happen",
+      "arrangementMissingError": "Describe when daytime visits will happen",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
     }
   },
   "handoverAndHolidays": {
     "getBetweenHouseholds": {
       "title": "How will the children get between households?",
-      "collectsTheChildren": "{{ adult }} collects the children"
+      "collectsTheChildren": "{{ adult }} collects the children",
+      "emptyError": "Select who will be responsible for getting the children",
+      "arrangementMissingError": "Describe how the children will get between households"
     },
     "whereHandover": {
       "title": "Where does handover take place?",
@@ -245,24 +269,31 @@
       "atHome": "At {{ adult }}'s home",
       "atSchool": "At school",
       "someoneElse": "Someone else will manage handover, such as a grandparent",
-      "someoneElseName": "Name of the person who will manage handover"
+      "someoneElseName": "Name of the person who will manage handover",
+      "emptyError": "Select where handover takes place",
+      "arrangementMissingError": "Describe who will manage handover",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
     },
     "willChangeDuringSchoolHolidays": {
-      "title": "Will these arrangements change during school holidays?"
+      "title": "Will these arrangements change during school holidays?",
+      "error": "Choose whether the arrangements will change"
     },
     "howChangeDuringSchoolHolidays": {
       "title": "How will the arrangements be different in school holidays?",
-      "content": "School holidays include half terms, bank holidays and inset days."
+      "content": "School holidays include half terms, bank holidays and inset days.",
+      "error": "Describe the arrangement you are proposing"
     },
     "itemsForChangeover": {
       "title": "What items need to go between households?",
-      "content": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes."
+      "content": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes.",
+      "error": "List which items need to go between households"
     }
   },
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",
-      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays."
+      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.",
+      "error": "Describe what you propose will happen on special days"
     }
   },
   "otherThings": {
@@ -272,7 +303,8 @@
       "religionDietAndRules": "religious practices, diet, and standard rules across both households",
       "extraCurriculars": "extra-curricular activities, such as swimming lessons",
       "friendsAndFamily": "access to other friends and family",
-      "otherContact": "other types of contact, such as video calls"
+      "otherContact": "other types of contact, such as video calls",
+      "error": "Describe what other things matter to your children"
     }
   },
   "decisionMaking": {

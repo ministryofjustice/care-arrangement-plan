@@ -104,7 +104,7 @@ describe(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Choose whether the children will do overnight stays',
           path: formFields.WILL_OVERNIGHTS_HAPPEN,
           type: 'field',
         },

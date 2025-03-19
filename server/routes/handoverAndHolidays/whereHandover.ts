@@ -25,16 +25,21 @@ const whereHandoverRoutes = (router: Router) => {
 
   router.post(
     paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER,
-    // TODO C5141-1013: Add error messages
     body(formFields.WHERE_HANDOVER_SOMEONE_ELSE)
       .if(body(formFields.WHERE_HANDOVER).equals('someoneElse'))
       .trim()
-      .notEmpty(),
-    body(formFields.WHERE_HANDOVER).exists().toArray(),
-    body(formFields.WHERE_HANDOVER).custom(
-      // This is prevented by JS in the page, but possible for people with JS disabled to submit
-      (whereHandover: whereHandoverField[]) => !(whereHandover.length > 1 && whereHandover.includes('someoneElse')),
-    ),
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.arrangementMissingError')),
+    body(formFields.WHERE_HANDOVER)
+      .exists()
+      .toArray()
+      .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.emptyError')),
+    body(formFields.WHERE_HANDOVER)
+      .custom(
+        // This is prevented by JS in the page, but possible for people with JS disabled to submit
+        (whereHandover: whereHandoverField[]) => !(whereHandover.length > 1 && whereHandover.includes('someoneElse')),
+      )
+      .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.multiSelectedError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: string;

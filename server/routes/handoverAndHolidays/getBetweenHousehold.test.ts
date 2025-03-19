@@ -137,7 +137,7 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Select who will be responsible for getting the children',
           path: formFields.GET_BETWEEN_HOUSEHOLDS,
           type: 'field',
         },
@@ -154,7 +154,7 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe how the children will get between households',
           path: formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT,
           type: 'field',
           value: '',

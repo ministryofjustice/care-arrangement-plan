@@ -60,27 +60,31 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
   });
 
   describe('POST', () => {
-    it.each(['', 'abc', '7', '6!', '0'])(
-      "should reload page and set flash when the number of children is '%s'",
-      async (numberOfChildren) => {
-        await request(app)
-          .post(paths.NUMBER_OF_CHILDREN)
-          .send({ [formFields.NUMBER_OF_CHILDREN]: numberOfChildren })
-          .expect(302)
-          .expect('location', paths.NUMBER_OF_CHILDREN);
+    it.each([
+      ['', 'Enter how many children this agreement is for'],
+      ['abc', 'Enter how many children this agreement is for'],
+      ['7', 'Your agreement cannot be for more than 6 children'],
+      ['6!', 'Enter how many children this agreement is for'],
+      ['0', 'Your agreement must be for at least 1 child'],
+      ['four', 'Enter how many children this agreement is for'],
+    ])("should reload page and set flash when the number of children is '%s'", async (numberOfChildren, error) => {
+      await request(app)
+        .post(paths.NUMBER_OF_CHILDREN)
+        .send({ [formFields.NUMBER_OF_CHILDREN]: numberOfChildren })
+        .expect(302)
+        .expect('location', paths.NUMBER_OF_CHILDREN);
 
-        expect(flashMock).toHaveBeenCalledWith('errors', [
-          {
-            location: 'body',
-            msg: 'Invalid value',
-            path: formFields.NUMBER_OF_CHILDREN,
-            type: 'field',
-            value: numberOfChildren,
-          },
-        ]);
-        expect(flashMock).toHaveBeenCalledWith('formValues', { [formFields.NUMBER_OF_CHILDREN]: numberOfChildren });
-      },
-    );
+      expect(flashMock).toHaveBeenCalledWith('errors', [
+        {
+          location: 'body',
+          msg: error,
+          path: formFields.NUMBER_OF_CHILDREN,
+          type: 'field',
+          value: numberOfChildren,
+        },
+      ]);
+      expect(flashMock).toHaveBeenCalledWith('formValues', { [formFields.NUMBER_OF_CHILDREN]: numberOfChildren });
+    });
 
     it.each([
       ['6', 6],
