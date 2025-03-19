@@ -4,7 +4,14 @@
 {% set htmlLang = getLocale() %}
 {% set mainClasses = "app-container govuk-body" %}
 
-{% block pageTitle %}{{ title }} – {{ __('serviceName') }} – GOV.UK{% endblock %}
+{% block pageTitle %}
+  {% if errors | length %}
+    Error:
+  {% endif %}
+  {{ title }}
+  – {{ __('serviceName') }} – GOV.UK
+{% endblock %}
+
 {% if ga4Id != undefined %}
   {%
     set bodyAttributes = {
