@@ -211,5 +211,18 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
 
       expect(sessionMock.livingAndVisiting).toEqual(initialLivingAndVisiting);
     });
+
+    it('should not reset the livingAndVisiting data if the option is other', async () => {
+      const where: whereMostlyLive = 'other';
+      const arrangement = 'new arrangement';
+
+      sessionMock.livingAndVisiting = { mostlyLive: { where, describeArrangement: 'old arrangement' } };
+
+      await request(app)
+        .post(paths.LIVING_VISITING_MOSTLY_LIVE)
+        .send({ [formFields.MOSTLY_LIVE_WHERE]: where, [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: arrangement });
+
+      expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where, describeArrangement: arrangement } });
+    });
   });
 });
