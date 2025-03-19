@@ -29,7 +29,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('On which days will daytime visits happen?');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).not.toContain(
         `${formFields.WHICH_DAYS_DAYTIME_VISITS}-error`,
@@ -59,7 +59,9 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
         expect.stringContaining(`${formFields.WHICH_DAYS_DAYTIME_VISITS}-error`),
@@ -162,7 +164,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Select when daytime visits will happen',
           path: formFields.WHICH_DAYS_DAYTIME_VISITS,
           type: 'field',
         },
@@ -179,7 +181,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe when daytime visits will happen',
           path: formFields.WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT,
           type: 'field',
           value: '',
@@ -197,7 +199,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe what other arrangement you are proposing',
           path: formFields.WHICH_DAYS_DAYTIME_VISITS,
           type: 'field',
           value: ['other', 'monday'],

@@ -26,7 +26,7 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
         "Which schedule best meets the children's needs?",
       );
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}`)).not.toHaveAttribute(
         'aria-describedby',
       );
@@ -44,7 +44,9 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_SCHEDULE)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}`)).toHaveAttribute(
         'aria-describedby',
         `${formFields.WHICH_SCHEDULE}-error`,
@@ -77,7 +79,7 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: "Describe which schedule will best meet the children's needs",
           path: formFields.WHICH_SCHEDULE,
           type: 'field',
           value: '',

@@ -41,3 +41,21 @@ variable "ga4_id" {
   type        = string
   nullable    = true
 }
+
+variable "feedback_url" {
+  description = "The feedback url for the service"
+  type        = string
+  nullable    = false
+}
+
+variable "contact_email" {
+  description = "The contact email for the service"
+  type        = string
+  nullable    = false
+}
+
+variable "preview_end" {
+  description = "The date string for the end of the beta preview. Expected in YYYY-MM-DDTHH:mm:ss format"
+  type        = string
+  nullable    = false
+}

@@ -17,8 +17,10 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
 
   router.post(
     paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS,
-    // TODO C5141-1013: Add error messages
-    body(formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS).trim().notEmpty(),
+    body(formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS)
+      .trim()
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('handoverAndHolidays.howChangeDuringSchoolHolidays.error')),
     (request, response) => {
       const errors = validationResult(request);
 

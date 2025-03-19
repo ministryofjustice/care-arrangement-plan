@@ -1,4 +1,4 @@
 {
-  "watch": ["server", "esbuild", "assets"],
+  "watch": ["server", "esbuild", "assets", ".env"],
   "ext": "*"
 }

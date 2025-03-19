@@ -17,8 +17,10 @@ const whatWillHappenRoutes = (router: Router) => {
 
   router.post(
     paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN,
-    // TODO C5141-1013: Add error messages
-    body(formFields.SPECIAL_DAYS).trim().notEmpty(),
+    body(formFields.SPECIAL_DAYS)
+      .trim()
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('specialDays.whatWillHappen.error')),
     (request, response) => {
       const errors = validationResult(request);
 

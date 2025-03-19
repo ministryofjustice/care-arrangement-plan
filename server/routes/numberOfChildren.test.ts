@@ -16,7 +16,7 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('How many children is this for?');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).not.toHaveAttribute(
         'aria-describedby',
       );
@@ -38,7 +38,9 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
 
       const dom = new JSDOM((await request(app).get(paths.NUMBER_OF_CHILDREN)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).toHaveValue('7');
       expect(dom.window.document.querySelector(`#${formFields.NUMBER_OF_CHILDREN}`)).toHaveAttribute(
         'aria-describedby',
@@ -58,27 +60,31 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
   });
 
   describe('POST', () => {
-    it.each(['', 'abc', '7', '6!', '0'])(
-      "should reload page and set flash when the number of children is '%s'",
-      async (numberOfChildren) => {
-        await request(app)
-          .post(paths.NUMBER_OF_CHILDREN)
-          .send({ [formFields.NUMBER_OF_CHILDREN]: numberOfChildren })
-          .expect(302)
-          .expect('location', paths.NUMBER_OF_CHILDREN);
+    it.each([
+      ['', 'Enter how many children this agreement is for'],
+      ['abc', 'Enter how many children this agreement is for'],
+      ['7', 'Your agreement cannot be for more than 6 children'],
+      ['6!', 'Enter how many children this agreement is for'],
+      ['0', 'Your agreement must be for at least 1 child'],
+      ['four', 'Enter how many children this agreement is for'],
+    ])("should reload page and set flash when the number of children is '%s'", async (numberOfChildren, error) => {
+      await request(app)
+        .post(paths.NUMBER_OF_CHILDREN)
+        .send({ [formFields.NUMBER_OF_CHILDREN]: numberOfChildren })
+        .expect(302)
+        .expect('location', paths.NUMBER_OF_CHILDREN);
 
-        expect(flashMock).toHaveBeenCalledWith('errors', [
-          {
-            location: 'body',
-            msg: 'Invalid value',
-            path: formFields.NUMBER_OF_CHILDREN,
-            type: 'field',
-            value: numberOfChildren,
-          },
-        ]);
-        expect(flashMock).toHaveBeenCalledWith('formValues', { [formFields.NUMBER_OF_CHILDREN]: numberOfChildren });
-      },
-    );
+      expect(flashMock).toHaveBeenCalledWith('errors', [
+        {
+          location: 'body',
+          msg: error,
+          path: formFields.NUMBER_OF_CHILDREN,
+          type: 'field',
+          value: numberOfChildren,
+        },
+      ]);
+      expect(flashMock).toHaveBeenCalledWith('formValues', { [formFields.NUMBER_OF_CHILDREN]: numberOfChildren });
+    });
 
     it.each([
       ['6', 6],

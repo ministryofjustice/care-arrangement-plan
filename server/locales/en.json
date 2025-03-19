@@ -18,6 +18,15 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
+  "phaseBannerText": "This is a new service – your <a class=\"govuk-link\" href={{ feedbackUrl }}>feedback</a> will help us to improve it.",
+  "footer": {
+    "accessibility": "Accessibility",
+    "contact": "Contact",
+    "cookies": "Cookies",
+    "feedback": "Feedback",
+    "privacy": "Privacy",
+    "termsAndConditions": "Terms and conditions"
+  },
   "errorSummary": {
     "title": "There is a problem"
   },
@@ -44,29 +53,80 @@
     "acceptedAnalyticsCookies": "You’ve accepted analytics cookies. You can <a class=\"govuk-link\" href={{ cookiesUrl }} >change your cookie settings</a> at any time.",
     "rejectedAnalyticsCookies": "You’ve rejected analytics cookies. You can <a class=\"govuk-link\" href={{ cookiesUrl }} >change your cookie settings</a> at any time."
   },
+  "accessibilityStatement": {
+    "title": "Accessibility statement",
+    "meetingNeeds": "Meeting access needs during the private view of this online service",
+    "availableToSmallGroup": "This online service is being made available to a small group of early users for a short period of time only. The service has been created by the Ministry of Justice and is still being developed. The purpose of this private view is to help the Child Arrangements team to improve the service by getting feedback as it is being developed.",
+    "usableToAsManyAsPossible": "We want as many people as possible to be able to use the service, now and when it is developed further. If you have any difficulties using the service during the private view, please email {{ contactEmail }} and tell us what happened.",
+    "statementPrepared": "This statement was prepared on 06 March 2025.",
+    "previewEnds": "The private view will be available until {{ previewEnd }}."
+  },
+  "contactUs": {
+    "title": "Contact us",
+    "reportProblem": "To report a problem or suggest improvements to this service, you can email:",
+    "onlyUseForFeedback": "This email address should only be used for feedback on the digital service.",
+    "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created."
+  },
   "cookies": {
     "title": "Cookies",
     "name": "Name",
     "purpose": "Purpose",
-    "expiry": "Expiry",
-    "twoHours": "2 hours",
-    "thirtyDays": "30 days",
-    "oneYear": "1 year",
-    "twoYears": "2 year",
-    "cookiesAre": "Cookies are small files saved on your phone, tablet or computer when you visit a website.",
-    "usedFor": "We use cookies to make this site work and collect information about how you use our service.",
+    "expires": "Expires",
+    "aboutCookies": "<p>Propose a child arrangements plan puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the service.</p><p>Cookies are used to:</p><ul class=\"govuk-list govuk-list--bullet\"><li>remember your progress</li><li>measure how you use the service so it can be updated and improved based on your needs</li></ul><p>Propose a child arrangements plan cookies aren't used to identify you personally.</p><p>You'll normally see a message before we store a cookie on your computer.</p><p>Find out more about <a href=\"https://www.aboutcookies.org/\">how to manage cookies</a>.</p>",
+    "howCookiesAreUsed": "How cookies are used in this service",
     "essentialCookies": "Essential cookies",
-    "essentialCookiesUse": "Essential cookies keep your information secure while you use the service. We do not need to ask permission to use them.",
+    "essentialCookiesUse": "Essential cookies are needed for the service to work. We do not need to ask for permission to use them.",
+    "rememberingProgress": "<h4 class=\"govuk-heading-s\">Remembering your progress</h4><p>We will store cookies to remember your application progress in this computer and to expire your session after 120 minutes of inactivity, and to remember the password you have entered to access the service.</p>",
+    "sessionPurpose": "Saves your current progress in this computer and tracks inactivity periods",
+    "sessionExpiry": "After 120 minutes of inactivity",
+    "authenticationPurpose": "Saves the password you entered to access the service",
+    "authenticationExpiry": "After 30 days",
+    "cookiesMessage": "<h4 class=\"govuk-heading-s\">Cookies message</h4><p>You may see a banner when you visit Propose a child arrangements plan inviting you to accept or reject optional cookies. We’ll set a cookies so that your computer knows you’ve seen it and not to show it again, and also to store your settings.</p>",
+    "consentPurpose": "Saves your cookie consent settings",
+    "consentExpiry": "After 1 year",
     "optionalCookies": "Analytics cookies (optional)",
+    "aboutOptionalCookies": "<h4 class=\"govuk-heading-s\">Measuring service usage (Google Analytics)</h4><p>We use Google Analytics software to collect information about how you use Propose a child arrangements plan. We do this to help make sure the service is meeting the needs of its users and to help us make improvements</p><p>Google Analytics stores information about:</p><ul class=\"govuk-list govuk-list--bullet\"><li>the pages you visit</li><li>how long you spend on each page</li><li>how you got to the service</li><li>what you click on while you’re visiting the service</li></ul><p>We don't collect or store your personal information (for example your name or address) so this information can't be used to identify who you are.</p><p>We don't collect or store your personal information (for example your name or address) so this information can't be used to identify who you are.</p><p>Google Analytics sets the following cookies:</p>",
     "acceptOptionalCookies": "Do you want to accept analytics cookies?",
-    "_gaCookie": "Checks if you’ve visited the service before. This helps us count how many people visit our site.",
-    "_ga_IdCookie": "Used by Google Analytics to find and track an individual session with your device.",
+    "_gaCookiePurpose": "Checks if you’ve visited the service before. This helps us count how many people visit our site.",
+    "gaCookiesExpiry": "After 2 years",
+    "_ga_IdCookiePurpose": "Used by Google Analytics to find and track an individual session with your device.",
     "saveCookieSettings": "Save cookie settings"
+  },
+  "privacyNotice": {
+    "title": "Privacy notice",
+    "committedToSecurity": "The Ministry of Justice (MoJ) is committed to the protection and security of your personal information.",
+    "describeHowAndWhy": "This notice describes how and why we are using such information. This privacy notice describes how we collect and use personal information during and after your relationship with us, in accordance with data protection law. This notice will be updated regularly.",
+    "typesOfPersonalData": "<h2 class=\"govuk-heading-m\">The type of personal data we process</h2><p>We currently collect and use the following information:</p><ul class=\"govuk-list govuk-list--bullet\"><li>the first name of both parents or carers</li><li>the first names of all the children</li></ul><p>We collect and process information related to child arrangement planning to help you create a customised child arrangement planning. However, we do not collect personally identifiable information (PII), such as names, addresses, or contact details.</p><p>Because we are not gathering information that can be used to identify you, many data protection rights do not apply. We encourage you not to include this type of detail in your plan. So long as you do not enter information we do not ask for in the service, we do not gather enough information to identify who you are.</p><p>The types of information that we collect which are not personally identifiable may include:</p><ul class=\"govuk-list govuk-list--bullet\"><li>general details about child arrangements, such as preferred schedules and pick up locations</li><li>your contact preferences</li><li>user interactions with our platform, including navigation behaviour and feature usage, to improve our service</li></ul>",
+    "howWeGetPersonalData": "<h2 class=\"govuk-heading-m\">How we get your personal data and why we have it</h2><p>Most of the personal information we process is provided to us directly by you. The information you provide is used to generate a customised child arrangements plan that you can download and share with your co-parent. The information you provide allows us to structure the plan based on your specific needs, ensuring it accurately reflects the arrangements you propose for your children.</p><p>This data collection is essential for:</p><ul class=\"govuk-list govuk-list--bullet\"><li>personalising the plan to fit your parenting situation</li><li>making sure that the download plan document you produce includes all the details you need to support your co-parenting arrangements</li><li>providing you with a version of the plan that can be downloaded for easy reference and sharing</li></ul><p>We only collect the information necessary to generate your child arrangement plan and do not use it for any other purposes without your consent.</p><p>We do not share the information you provide with any other organisation or government department. The details you enter to create your child arrangement plan are used solely for generating your personalised plan document. Under the UK General Data Protection Regulation (UK GDPR), the lawful bases we rely on for processing this information are:</p><p>(a) Your consent. You are able to withdraw your consent at any time. The easiest way to do this is to delete your browser cookies. Guidance on how to do that is <a href=\"https://www.aboutcookies.org/how-to-manage-and-delete-cookies\">here</a>. If you want to ask us to delete your cookie data please contact us.</p>",
+    "internationalTransfers": "<h2 class=\"govuk-heading-m\">International data transfers</h2><p>There are no international transfers.</p>",
+    "howWeStorePersonalData": "<h2 class=\"govuk-heading-m\">How we store your personal data</h2><p>Personal data is stored only while you create your plan and for up to 30 days afterwards.</p>",
+    "howToComplain": "<h2 class=\"govuk-heading-m\">How to complain</h2><p>If you have any concerns about our use of your personal data, you can contact the MoJ data protection officer:</p><div class=\"govuk-inset-text\">Data Protection Officer<br />Ministry of Justice<br />10th Floor, Post Point 10.31<br />102 Petty France<br />London<br />SW1H 9AJ <br /><br /><a href=\"mailto:dpo@justice.gov.uk\">dpo@justice.gov.uk</a></div><p>You can also complain to the ICO if you are unhappy with how we have used your data.</p><div class=\"govuk-inset-text\">Information Commissioner’s Office<br />Wycliffe House<br />Water Lane<br />Wilmslow<br />Cheshire<br />SK9 5AF<br /><br />Helpline number: 0303 123 1113<br />ICO website:<a href=\"https://www.ico.org.uk\">https://www.ico.org.uk</a></div>",
+    "preparedDate": "This statement was prepared on 11 March 2025."
+  },
+  "termsAndConditions": {
+    "title": "Terms and conditions",
+    "agree": "By using this service you agree to these terms and conditions.",
+    "responsibilityForTheServiceHeading": "Responsibility for the service",
+    "accurateAndComplete": "The Ministry of Justice (MOJ) runs this service. We try to make sure the information we provide is accurate and complete and the service is always available and virus free.",
+    "noLiabilityFor": "The MoJ accepts no liability for:",
+    "unableToAccess": "you being unable to access the service (for example due to high demand or because we've taken it down for maintenance)",
+    "indirectDamages": "indirect damages arising from you using the service or relying on its content",
+    "externalSites": "the content and availability of external websites that link to the service or which link from it",
+    "informationAboutYouHeading": "Information about you and your visits",
+    "informationAboutYou": "We collect information about you in accordance with our <a href={{ privacyUrl }}>privacy policy</a> and our <a href={{ cookieUrl }}>cookie policy</a>. By using this service you agree to us collecting this information and confirm that any data you provide is accurate.",
+    "limitationsHeading": "Limitations of the service",
+    "limitations": "Using this service does not guarantee that you will be able to resolve your child arrangements without going to court. While this tool is designed to help you create a child arrangement plan, some cases may still require legal intervention.",
+    "misuseHeading": "Misuse",
+    "misuse": "You must only use this service to create a parenting plan for child(ren) that you have responsibility for and access to. You must not impersonate another person, provide false or misleading information, or use this service on behalf of someone else without their consent.",
+    "mustNotUseToHarass": "You must not use this service to harass, threaten, or abuse others.",
+    "restrictionsOnUseHeading": "Restrictions on use",
+    "restrictionsOnUse": "If you have a court order in place that restricts contact with the other parent or child, such as a no contact order, non-molestation order, or any other legal restriction, you must not use this service to contact them. Doing so could be a breach of the order and may have legal consequences. If you are unsure whether a legal order affects your ability to use this service, seek legal advice before proceeding."
   },
   "safetyCheck": {
     "title": "Safety check",
     "workWithPartner": "This service asks you to work with your parenting partner to agree a plan for your children. You need to be able to state your needs and views without feeling intimidated.",
-    "safeAndConfident": "Do you feel safe and confident?"
+    "safeAndConfident": "Do you feel safe and confident?",
+    "error": "Select whether you feel safe and confident or not"
   },
   "notSafe": {
     "title": "Finding the right route for you",
@@ -82,7 +142,8 @@
     "childAbuse": "child abuse or neglect",
     "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
     "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm",
-    "questionTitle": "Are the children safe?"
+    "questionTitle": "Are the children safe?",
+    "error": "Select whether the children are safe or not"
   },
   "childrenNotSafe": {
     "title": "Getting help",
@@ -93,11 +154,13 @@
   "doWhatsBest": {
     "title": "What’s best for the children?",
     "content": "<p>Your child arrangements plan should reflect what is best for the children. You must consider their wants and needs when making these arrangements.</p><p>Remember, the aim is to make sure your children are as happy as they can be.</p>",
-    "childrensNeedsFirst": "I will put my children’s needs first"
+    "childrensNeedsFirst": "I will put my children’s needs first",
+    "error": "You must select the box to continue"
   },
   "courtOrderCheck": {
     "title": "Do you already have a court order in place about your child arrangements?",
-    "subText": "This could include a prohibited steps, specific issue or consent order."
+    "subText": "This could include a prohibited steps, specific issue or consent order.",
+    "error": "Select whether you have a court order in place currently"
   },
   "existingCourtOrder": {
     "title": "If you have a court order",
@@ -113,7 +176,10 @@
     "changeCourtArrangements": "You can use this service to change child arrangements given to you by a court, so long as the other parent or carer agrees with the changes. You do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order."
   },
   "numberOfChildren": {
-    "title": "How many children is this for?"
+    "title": "How many children is this for?",
+    "emptyError": "Enter how many children this agreement is for",
+    "tooFewError": "Your agreement must be for at least 1 child",
+    "tooManyError": "Your agreement cannot be for more than 6 children"
   },
   "about": {
     "notStoreInfo": "We do not store this information or share it with other government departments."
@@ -127,13 +193,17 @@
     "multipleFirstName2": "First name of the third child",
     "multipleFirstName3": "First name of the fourth child",
     "multipleFirstName4": "First name of the fifth child",
-    "multipleFirstName5": "First name of the sixth child"
+    "multipleFirstName5": "First name of the sixth child",
+    "error": "Enter a first name"
   },
   "aboutTheAdults": {
     "title": "About the adults who will care for the children",
     "initialParentFirstName": "Your first name",
     "initialParentFirstNameHint": "If you are answering these questions for someone else, enter their first name",
-    "secondaryParentFirstName": "First name of the other parent or carer"
+    "secondaryParentFirstName": "First name of the other parent or carer",
+    "initialError": "Enter your first name or the name of the person you represent",
+    "secondaryError": "Enter the name of the other parent or carer",
+    "sameNameError": "Enter a way to tell the adults apart"
   },
   "taskList": {
     "title": "Child arrangements plan for {{ names }}",
@@ -146,37 +216,51 @@
     "livingAndVisiting": "Living and visiting",
     "handoverAndHolidays": "Handovers and holidays",
     "specialDays": "Special days",
-    "otherThings": "Other things"
+    "otherThings": "Other things",
+    "decisionMaking": "Decision making"
   },
   "livingAndVisiting": {
     "mostlyLive": {
       "title": "Where will the children mostly live?",
       "with": "With {{ adult }}",
-      "split": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}"
+      "split": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}",
+      "emptyError": "Choose where the children will mostly live",
+      "arrangementMissingError": "Describe the living arrangement you are proposing"
     },
     "whichSchedule": {
       "title": "Which schedule best meets the children's needs?",
       "getIdeas": "Get scheduling ideas",
       "commonSchedules": "<p>Here are some common schedules that can benefit children.</p><p><b>Alternating weeks</b><br/>The children will spend one week in one household and the next week in the other.</p><p><b>2-2-3 schedule</b><br/>Children spend two days in one household, two days in the other, then back to the first house for 3 days including the weekend.</p><p><b>4-4-3 schedule</b><br/>Children spend three days in one household then four days in the other. The next week they switch.</p><p><b>2-2-5-5 schedule</b><br/>Children spend two days in one household, then two days in the other. After that they spend five days in one household, then five days in the other.</p>",
-      "exactSplitWarning": "An exact split of time between two households does not always suit children’s best interests."
+      "exactSplitWarning": "An exact split of time between two households does not always suit children’s best interests.",
+      "error": "Describe which schedule will best meet the children's needs"
     },
     "willOvernightsHappen": {
-      "title": "Will the children stay overnight with {{ adult }}?"
+      "title": "Will the children stay overnight with {{ adult }}?",
+      "error": "Choose whether the children will do overnight stays"
     },
     "whichDaysOvernight": {
-      "title": "On which days will overnights happen?"
+      "title": "On which days will overnights happen?",
+      "emptyError": "Select which days overnights will happen on",
+      "arrangementMissingError": "Describe when the children will stay overnight",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
     },
     "willDaytimeVisitsHappen": {
-      "title": "Will the children do daytime visits with {{ adult }}?"
+      "title": "Will the children do daytime visits with {{ adult }}?",
+      "error": "Choose whether the children will do daytime visits"
     },
     "whichDaysDaytimeVisits": {
-      "title": "On which days will daytime visits happen?"
+      "title": "On which days will daytime visits happen?",
+      "emptyError": "Select when daytime visits will happen",
+      "arrangementMissingError": "Describe when daytime visits will happen",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
     }
   },
   "handoverAndHolidays": {
     "getBetweenHouseholds": {
       "title": "How will the children get between households?",
-      "collectsTheChildren": "{{ adult }} collects the children"
+      "collectsTheChildren": "{{ adult }} collects the children",
+      "emptyError": "Select who will be responsible for getting the children",
+      "arrangementMissingError": "Describe how the children will get between households"
     },
     "whereHandover": {
       "title": "Where does handover take place?",
@@ -185,24 +269,31 @@
       "atHome": "At {{ adult }}'s home",
       "atSchool": "At school",
       "someoneElse": "Someone else will manage handover, such as a grandparent",
-      "someoneElseName": "Name of the person who will manage handover"
+      "someoneElseName": "Name of the person who will manage handover",
+      "emptyError": "Select where handover takes place",
+      "arrangementMissingError": "Describe who will manage handover",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
     },
     "willChangeDuringSchoolHolidays": {
-      "title": "Will these arrangements change during school holidays?"
+      "title": "Will these arrangements change during school holidays?",
+      "error": "Choose whether the arrangements will change"
     },
     "howChangeDuringSchoolHolidays": {
       "title": "How will the arrangements be different in school holidays?",
-      "content": "School holidays include half terms, bank holidays and inset days."
+      "content": "School holidays include half terms, bank holidays and inset days.",
+      "error": "Describe the arrangement you are proposing"
     },
     "itemsForChangeover": {
       "title": "What items need to go between households?",
-      "content": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes."
+      "content": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes.",
+      "error": "List which items need to go between households"
     }
   },
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",
-      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays."
+      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.",
+      "error": "Describe what you propose will happen on special days"
     }
   },
   "otherThings": {
@@ -212,7 +303,21 @@
       "religionDietAndRules": "religious practices, diet, and standard rules across both households",
       "extraCurriculars": "extra-curricular activities, such as swimming lessons",
       "friendsAndFamily": "access to other friends and family",
-      "otherContact": "other types of contact, such as video calls"
+      "otherContact": "other types of contact, such as video calls",
+      "error": "Describe what other things matter to your children"
+    }
+  },
+  "decisionMaking": {
+    "planLastMinuteChanges": {
+      "title": "How will you agree changes?",
+      "anotherDescriptionLabel": "Describe the arrangement",
+      "howChangesCommunicated": "How should last-minute changes be communicated?",
+      "howChangesCommunicatedAdditionalDescription": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school. Select all that apply.",
+      "textMessage": "By text message",
+      "phoneCall": "With a phone call",
+      "email": "By email",
+      "app": "Using a parenting app",
+      "anotherArrangement": "Another arrangement"
     }
   },
   "checkYourAnswers": {
@@ -312,6 +417,11 @@
         "suggestedChangeDuringSchoolHolidays": "{{ senderName }} suggested that these arrangements should change during school holidays.",
         "suggestedNoChangeDuringSchoolHolidays": "{{ senderName }} suggested that these arrangements do not change during school holidays."
       },
+      "decisionMaking": {
+        "planLastMinuteChanges": {
+          "howChangesCommunicated": "{{ senderName }} suggested that last minute changes should be communicated by"
+        }
+      },
       "whatHappensNowHeading": "What happens now?",
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.",
       "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.",
@@ -337,13 +447,17 @@
         },
         "otherThings": {
           "whatOtherThingsMatter": "If you do not agree, suggest what other things matter to your children"
+        },
+        "decisionMaking": {
+          "planLastMinuteChanges": "If you do not agree, suggest how last minute changes should be communicated"
         }
       },
       "compromise": {
         "livingAndVisiting": "You can use this space to write your agreed compromise for the living and visiting section",
         "handoverAndHolidays": "You can use this space to write your agreed compromise for the handovers and holidays section",
         "specialDays": "You can use this space to write your agreed compromise for the special days section",
-        "otherThings": "You can use this space to write your agreed compromise for the other things section"
+        "otherThings": "You can use this space to write your agreed compromise for the other things section",
+        "decisionMaking": "You can use this space to write your agreed compromise for the decision making section"
       }
     }
   },

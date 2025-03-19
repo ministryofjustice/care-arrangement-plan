@@ -16,7 +16,7 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('What will happen on special days?');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}`)).not.toHaveAttribute('aria-describedby');
     });
 
@@ -32,7 +32,9 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
 
       const dom = new JSDOM((await request(app).get(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}`)).toHaveAttribute(
         'aria-describedby',
         `${formFields.SPECIAL_DAYS}-error`,
@@ -65,7 +67,7 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe what you propose will happen on special days',
           path: formFields.SPECIAL_DAYS,
           type: 'field',
           value: '',

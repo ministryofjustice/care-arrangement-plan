@@ -40,7 +40,7 @@ describe(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
         `Will the children do daytime visits with ${session.secondaryAdultName}?`,
       );
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
     });
@@ -68,7 +68,9 @@ describe(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, () => {
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
         `${formFields.WILL_DAYTIME_VISITS_HAPPEN}-error`,
@@ -104,7 +106,7 @@ describe(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Choose whether the children will do daytime visits',
           path: formFields.WILL_DAYTIME_VISITS_HAPPEN,
           type: 'field',
         },

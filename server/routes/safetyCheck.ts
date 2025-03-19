@@ -20,20 +20,25 @@ const safetyCheckRoutes = (router: Router) => {
     });
   });
 
-  // TODO C5141-1013: Add error message
-  router.post(paths.SAFETY_CHECK, body(formFields.SAFETY_CHECK).exists(), (request, response) => {
-    const errors = validationResult(request);
-    if (!errors.isEmpty()) {
-      request.flash('errors', errors.array());
-      return response.redirect(paths.SAFETY_CHECK);
-    }
+  router.post(
+    paths.SAFETY_CHECK,
+    body(formFields.SAFETY_CHECK)
+      .exists()
+      .withMessage((_value, { req }) => req.__('safetyCheck.error')),
+    (request, response) => {
+      const errors = validationResult(request);
+      if (!errors.isEmpty()) {
+        request.flash('errors', errors.array());
+        return response.redirect(paths.SAFETY_CHECK);
+      }
 
-    const { [formFields.SAFETY_CHECK]: isSafe } = matchedData<{
-      [formFields.SAFETY_CHECK]: yesOrNo;
-    }>(request);
+      const { [formFields.SAFETY_CHECK]: isSafe } = matchedData<{
+        [formFields.SAFETY_CHECK]: yesOrNo;
+      }>(request);
 
-    return isSafe === 'Yes' ? response.redirect(paths.CHILDREN_SAFETY_CHECK) : response.redirect(paths.NOT_SAFE);
-  });
+      return isSafe === 'Yes' ? response.redirect(paths.CHILDREN_SAFETY_CHECK) : response.redirect(paths.NOT_SAFE);
+    },
+  );
 };
 
 export default safetyCheckRoutes;

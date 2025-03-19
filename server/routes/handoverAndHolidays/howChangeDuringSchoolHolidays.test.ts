@@ -20,7 +20,7 @@ describe(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
         'How will the arrangements be different in school holidays?',
       );
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(
         dom.window.document
           .querySelector(`#${formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS}`)
@@ -40,7 +40,9 @@ describe(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector(`#${formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS}`)).toHaveAttribute(
         'aria-describedby',
         expect.stringContaining(`${formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS}-error`),
@@ -75,7 +77,7 @@ describe(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Describe the arrangement you are proposing',
           path: formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS,
           type: 'field',
           value: '',

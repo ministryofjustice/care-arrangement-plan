@@ -28,8 +28,9 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN,
-    // TODO C5141-1013: Add error messages
-    body(formFields.WILL_DAYTIME_VISITS_HAPPEN).exists(),
+    body(formFields.WILL_DAYTIME_VISITS_HAPPEN)
+      .exists()
+      .withMessage((_value, { req }) => req.__('livingAndVisiting.willDaytimeVisitsHappen.error')),
     (request, response) => {
       const errors = validationResult(request);
 

@@ -17,8 +17,10 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
 
   router.post(
     paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER,
-    // TODO C5141-1013: Add error messages
-    body(formFields.WHAT_OTHER_THINGS_MATTER).trim().notEmpty(),
+    body(formFields.WHAT_OTHER_THINGS_MATTER)
+      .trim()
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('otherThings.whatOtherThingsMatter.error')),
     (request, response) => {
       const errors = validationResult(request);
 

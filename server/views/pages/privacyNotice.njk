@@ -1,0 +1,17 @@
+{% extends "partials/layout.njk" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p>{{ __('privacyNotice.committedToSecurity') }}</p>
+      <p>{{ __('privacyNotice.describeHowAndWhy') }}</p>
+      {{ __('privacyNotice.typesOfPersonalData') | safe }}
+      {{ __('privacyNotice.howWeGetPersonalData') | safe }}
+      {{ __('privacyNotice.internationalTransfers') | safe }}
+      {{ __('privacyNotice.howWeStorePersonalData') | safe }}
+      {{ __('privacyNotice.howToComplain') | safe }}
+      <p>{{ __('privacyNotice.preparedDate') }}</p>
+    </div>
+  </div>
+{% endblock %}

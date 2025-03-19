@@ -58,7 +58,10 @@ stages:
                   -var "git_branch=$(Build.SourceBranchName)" \
                   -var "session_secret=$(TestSessionSecret)" \
                   -var "beta_access_passwords=$(TestBetaAccessPassword)" \
-                  -var "ga4_id=G-97NRQW5JEZ"
+                  -var "ga4_id=G-97NRQW5JEZ" \
+                  -var "feedback_url=https://feedback.example.com" \
+                  -var "contact_email=childarrangements@justice.gov.uk" \
+                  -var "preview_end=2025-04-30T23:59:59"
   - stage: production
     displayName: Deploy to Production
     condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'main'))

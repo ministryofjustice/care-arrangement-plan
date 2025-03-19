@@ -16,7 +16,7 @@ describe(paths.SAFETY_CHECK, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('Safety check');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
     });
 
@@ -32,7 +32,9 @@ describe(paths.SAFETY_CHECK, () => {
 
       const dom = new JSDOM((await request(app).get(paths.SAFETY_CHECK)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
         `${formFields.SAFETY_CHECK}-error`,
@@ -47,7 +49,7 @@ describe(paths.SAFETY_CHECK, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Select whether you feel safe and confident or not',
           path: formFields.SAFETY_CHECK,
           type: 'field',
         },

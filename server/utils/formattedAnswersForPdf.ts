@@ -3,7 +3,7 @@ import i18n from 'i18n';
 import { whereHandoverField } from '../@types/fields';
 import { CAPSession } from '../@types/session';
 
-import { formatListOfStrings, formatWhichDaysSessionValue } from './formValueUtils';
+import { formatListOfStrings, formatPlanChangesOptionsIntoList, formatWhichDaysSessionValue } from './formValueUtils';
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
 
 export const mostlyLive = (session: Partial<CAPSession>) => {
@@ -183,3 +183,13 @@ export const whatOtherThingsMatter = ({ otherThings, initialAdultName }: Partial
   otherThings.whatOtherThingsMatter.noDecisionRequired
     ? i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
     : `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName: initialAdultName, suggestion: otherThings.whatOtherThingsMatter.answer })}`;
+
+export const planLastMinuteChanges = ({ decisionMaking, initialAdultName }: Partial<CAPSession>) => {
+  if (decisionMaking.planLastMinuteChanges.noDecisionRequired) {
+    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+  if (decisionMaking.planLastMinuteChanges.options.includes('anotherArrangement')) {
+    return `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName: initialAdultName, suggestion: decisionMaking.planLastMinuteChanges.anotherArrangmentDescription })}`;
+  }
+  return `${i18n.__('sharePlan.yourProposedPlan.decisionMaking.planLastMinuteChanges.howChangesCommunicated', { senderName: initialAdultName })} ${formatPlanChangesOptionsIntoList(decisionMaking.planLastMinuteChanges.options)}`;
+};

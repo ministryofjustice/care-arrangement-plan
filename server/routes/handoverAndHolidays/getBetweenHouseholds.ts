@@ -26,12 +26,14 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
 
   router.post(
     paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS,
-    // TODO C5141-1013: Add error messages
-    body(formFields.GET_BETWEEN_HOUSEHOLDS).exists(),
+    body(formFields.GET_BETWEEN_HOUSEHOLDS)
+      .exists()
+      .withMessage((_value, { req }) => req.__('handoverAndHolidays.getBetweenHouseholds.emptyError')),
     body(formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT)
       .if(body(formFields.GET_BETWEEN_HOUSEHOLDS).equals('other'))
       .trim()
-      .notEmpty(),
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('handoverAndHolidays.getBetweenHouseholds.arrangementMissingError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT]: string;

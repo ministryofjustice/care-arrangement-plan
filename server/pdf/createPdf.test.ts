@@ -51,6 +51,11 @@ describe('createPdf', () => {
           answer: 'whatOtherThingsMatterAnswer',
         },
       },
+      decisionMaking: {
+        planLastMinuteChanges: {
+          noDecisionRequired: true,
+        },
+      },
     });
 
     const response = await request(app).get(paths.DOWNLOAD_PDF);

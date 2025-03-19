@@ -25,12 +25,14 @@ const mostlyLiveRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_MOSTLY_LIVE,
-    // TODO C5141-1013: Add error messages
-    body(formFields.MOSTLY_LIVE_WHERE).exists(),
+    body(formFields.MOSTLY_LIVE_WHERE)
+      .exists()
+      .withMessage((_value, { req }) => req.__('livingAndVisiting.mostlyLive.emptyError')),
     body(formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT)
       .if(body(formFields.MOSTLY_LIVE_WHERE).equals('other'))
       .trim()
-      .notEmpty(),
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('livingAndVisiting.mostlyLive.arrangementMissingError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: string;

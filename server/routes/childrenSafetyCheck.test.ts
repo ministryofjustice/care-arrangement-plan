@@ -16,7 +16,7 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('Children’s safety');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
     });
 
@@ -32,7 +32,9 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
 
       const dom = new JSDOM((await request(app).get(paths.CHILDREN_SAFETY_CHECK)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
         `${formFields.CHILDREN_SAFETY_CHECK}-error`,
@@ -47,7 +49,7 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'Select whether the children are safe or not',
           path: formFields.CHILDREN_SAFETY_CHECK,
           type: 'field',
         },

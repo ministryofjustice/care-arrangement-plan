@@ -40,10 +40,9 @@ const aboutTheChildrenRoutes = (router: Router) => {
       const fieldName = formFields.CHILD_NAME + i;
       const value: string = request.body[fieldName]?.trim();
       if (!value) {
-        // TODO C5141-1013: Add error message
         errors.push({
           location: 'body',
-          msg: 'Invalid value',
+          msg: request.__('aboutTheChildren.error'),
           path: fieldName,
           type: 'field',
         });

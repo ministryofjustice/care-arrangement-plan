@@ -18,7 +18,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('What items need to go between households?');
-      expect(dom.window.document.querySelector('h2')).toBeNull();
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(
         dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}`).getAttribute('aria-describedby'),
       ).not.toContain(`${formFields.ITEMS_FOR_CHANGEOVER}-error`);
@@ -36,7 +36,9 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)).text);
 
-      expect(dom.window.document.querySelector('h2')).toHaveTextContent('There is a problem');
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
       expect(dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}`)).toHaveAttribute(
         'aria-describedby',
         expect.stringContaining(`${formFields.ITEMS_FOR_CHANGEOVER}-error`),
@@ -69,7 +71,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Invalid value',
+          msg: 'List which items need to go between households',
           path: formFields.ITEMS_FOR_CHANGEOVER,
           type: 'field',
           value: '',

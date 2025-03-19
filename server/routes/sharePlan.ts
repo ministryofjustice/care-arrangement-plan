@@ -16,6 +16,7 @@ import {
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
   whatOtherThingsMatter,
+  planLastMinuteChanges,
 } from '../utils/formattedAnswersForPdf';
 import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
 
@@ -42,6 +43,7 @@ const sharePlanRoutes = (router: Router) => {
         itemsForChangeoverAnswer: itemsForChangeover(request.session),
         whatWillHappenAnswer: whatWillHappen(request.session),
         whatOtherThingsMatterAnswer: whatOtherThingsMatter(request.session),
+        planLastMinuteChanges: planLastMinuteChanges(request.session),
       },
     });
   });
