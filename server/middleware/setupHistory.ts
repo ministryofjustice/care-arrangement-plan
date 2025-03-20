@@ -22,6 +22,13 @@ const setupHistory = (): Router => {
 
   router.get('*', (request, response, next) => {
     const requestUrl = request.originalUrl;
+
+    if (requestUrl === paths.TASK_LIST) {
+      // Don't go back into the start flow once we've made it to the task list
+      request.session.pageHistory = [requestUrl];
+      next();
+    }
+
     // @ts-expect-error this is not necessarily of type paths
     if (pathsForHistory.includes(requestUrl)) {
       request.session.pageHistory = request.session.pageHistory || [];
