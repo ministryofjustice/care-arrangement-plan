@@ -4,6 +4,7 @@ import i18n from 'i18n';
 
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
+import { getBackUrl } from '../utils/sessionHelpers';
 
 const numberOfChildrenRoutes = (router: Router) => {
   router.get(paths.NUMBER_OF_CHILDREN, (request, response) => {
@@ -16,7 +17,7 @@ const numberOfChildrenRoutes = (router: Router) => {
       errors: request.flash('errors'),
       formValues,
       title: i18n.__('numberOfChildren.title'),
-      backLinkHref: paths.COURT_ORDER_CHECK,
+      backLinkHref: getBackUrl(request.session, paths.COURT_ORDER_CHECK),
     });
   });
 

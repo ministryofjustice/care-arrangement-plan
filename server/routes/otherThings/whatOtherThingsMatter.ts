@@ -4,6 +4,7 @@ import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const whatOtherThingsMatterRoutes = (router: Router) => {
   router.get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, (request, response) => {
@@ -11,7 +12,7 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
       errors: request.flash('errors'),
       title: i18n.__('otherThings.whatOtherThingsMatter.title'),
       initialWhatOtherThingsMatter: request.session.otherThings?.whatOtherThingsMatter?.answer,
-      backLinkHref: paths.TASK_LIST,
+      backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });
   });
 

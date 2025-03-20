@@ -5,6 +5,7 @@ import i18n from 'i18n';
 import { planLastMinuteChangesField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const planLastMinuteChangesRoutes = (router: Router) => {
   router.get(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES, (request, response) => {
@@ -19,7 +20,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
       errors: request.flash('errors'),
       formValues,
       title: i18n.__('decisionMaking.planLastMinuteChanges.title'),
-      backLinkHref: paths.TASK_LIST,
+      backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });
   });
 
