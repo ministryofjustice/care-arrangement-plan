@@ -1,4 +1,5 @@
 enum paths {
+  PASSWORD = '/password',
   START = '/',
   ACCESSIBILITY_STATEMENT = '/accessibility-statement',
   CONTACT_US = '/contact-us',
@@ -18,7 +19,6 @@ enum paths {
   TASK_LIST = '/make-a-plan',
   CHECK_YOUR_ANSWERS = '/check-your-answers',
   SHARE_PLAN = '/share-plan',
-  PASSWORD = '/password',
   LIVING_VISITING_MOSTLY_LIVE = '/living-and-visiting/where-will-the-children-mostly-live',
   LIVING_VISITING_WHICH_SCHEDULE = '/living-and-visiting/which-schedule-is-best',
   LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED = '/living-and-visiting/which-schedule-is-best/not-required',

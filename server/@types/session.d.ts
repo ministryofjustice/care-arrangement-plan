@@ -13,7 +13,6 @@ export type WhichDays = {
 };
 
 export type CAPSession = {
-  nowInMinutes: number;
   courtOrderInPlace: boolean;
   numberOfChildren: number;
   namesOfChildren: string[];

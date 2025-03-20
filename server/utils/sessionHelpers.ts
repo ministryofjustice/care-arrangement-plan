@@ -1,3 +1,5 @@
+import { SessionData } from 'express-session';
+
 import { CAPSession } from '../@types/session';
 
 import { formatListOfStrings } from './formValueUtils';
@@ -52,3 +54,11 @@ export const whatOtherThingsMatterComplete = (session: Partial<CAPSession>) =>
 
 export const planLastMinuteChangesComplete = (session: Partial<CAPSession>) =>
   !!session.decisionMaking?.planLastMinuteChanges;
+
+export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => {
+  // most recent value is the page for the current request
+  if (session.pageHistory && session.pageHistory.length > 1) {
+    return session.pageHistory[session.pageHistory.length - 2];
+  }
+  return defaultUrl;
+};
