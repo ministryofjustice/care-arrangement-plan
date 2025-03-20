@@ -5,6 +5,7 @@ import config from './config';
 import cookieNames from './constants/cookieNames';
 import paths from './constants/paths';
 import testAppSetup from './test-utils/testAppSetup';
+import { mockNow } from './test-utils/testMocks';
 
 const app = testAppSetup();
 
@@ -167,15 +168,12 @@ describe('App', () => {
   });
 
   describe('Preview end', () => {
-    const fakeNow = new Date('2025-01-01T00:00:00Z');
-
     beforeEach(() => {
-      jest.useFakeTimers({ advanceTimers: true }).setSystemTime(fakeNow);
       config.useAuth = false;
     });
 
     it('should return the service not available page after the preview end date', () => {
-      config.previewEnd = new Date(fakeNow.getTime() - 24 * 60 * 60 * 1000); // one day ago
+      config.previewEnd = new Date(mockNow.getTime() - 24 * 60 * 60 * 1000); // one day ago
 
       return request(app)
         .get(paths.START)
@@ -185,7 +183,7 @@ describe('App', () => {
     });
 
     it('should return the normal page before the preview end date', () => {
-      config.previewEnd = new Date(fakeNow.getTime() + 24 * 60 * 60 * 1000); // one day ago
+      config.previewEnd = new Date(mockNow.getTime() + 24 * 60 * 60 * 1000); // one day ago
 
       return request(app)
         .get(paths.START)
