@@ -52,3 +52,8 @@ export const whatOtherThingsMatterComplete = (session: Partial<CAPSession>) =>
 
 export const planLastMinuteChangesComplete = (session: Partial<CAPSession>) =>
   !!session.decisionMaking?.planLastMinuteChanges;
+
+export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
+  !!session.decisionMaking?.planLongTermNotice;
+
+export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;

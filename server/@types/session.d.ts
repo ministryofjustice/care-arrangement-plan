@@ -79,5 +79,14 @@ export type CAPSession = {
       anotherArrangmentDescription?: string;
       noDecisionRequired: boolean;
     };
+    planLongTermNotice?: {
+      weeks?: number;
+      otherAnwser?: string;
+      noDecisionRequired: boolean;
+    };
+    planReview?: {
+      months?: number;
+      years?: number;
+    };
   };
 };

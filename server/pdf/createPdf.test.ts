@@ -55,6 +55,12 @@ describe('createPdf', () => {
         planLastMinuteChanges: {
           noDecisionRequired: true,
         },
+        planLongTermNotice: {
+          noDecisionRequired: true,
+        },
+        planReview: {
+          months: 1,
+        },
       },
     });
 

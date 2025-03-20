@@ -17,6 +17,8 @@ import {
   whatWillHappen,
   whatOtherThingsMatter,
   planLastMinuteChanges,
+  planLongTermNotice,
+  planReview,
 } from '../utils/formattedAnswersForCheckAnswers';
 import { formatListOfStrings } from '../utils/formValueUtils';
 import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
@@ -46,6 +48,8 @@ const checkYourAnswersRoutes = (router: Router) => {
         whatWillHappen: whatWillHappen(request.session),
         whatOtherThingsMatter: whatOtherThingsMatter(request.session),
         planLastMinuteChanges: planLastMinuteChanges(request.session),
+        planLongTermNotice: planLongTermNotice(request.session),
+        planReview: planReview(request.session),
       },
     });
   });
