@@ -27,6 +27,7 @@ const setupHistory = (): Router => {
       // Don't go back into the start flow once we've made it to the task list
       request.session.pageHistory = [requestUrl];
       next();
+      return;
     }
 
     // @ts-expect-error this is not necessarily of type paths
