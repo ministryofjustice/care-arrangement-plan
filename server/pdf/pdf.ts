@@ -118,9 +118,14 @@ class Pdf implements PdfBuilder {
     this.document.rect(x - 0.3, y - 0.3, xSize + 0.6, ySize + 0.6);
   }
 
+  splitParagraph({ text, size, style }: Paragraph): string[] {
+    this.document.setFontSize(size).setFont(FONT, style);
+    return this.document.splitTextToSize(text, this.maxPageWidth);
+  }
+
   getParagraphHeight({ text, size, style, bottomPadding }: Paragraph) {
     this.document.setFontSize(size).setFont(FONT, style);
-    const textLines = this.document.splitTextToSize(text, this.maxPageWidth);
+    const textLines = this.splitParagraph({ text, size, style, bottomPadding });
     return size * LINE_HEIGHT_RATIO * textLines.length * MM_PER_POINT + bottomPadding;
   }
 
@@ -128,8 +133,7 @@ class Pdf implements PdfBuilder {
     // The first line of text goes above the current y value, so add a single line of spacing to make the paragraph
     // behave the same as all other components we add
     this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
-    this.document.setFontSize(size).setFont(FONT, style);
-    const textLines = this.document.splitTextToSize(text, this.maxPageWidth);
+    const textLines = this.splitParagraph({ text, size, style, bottomPadding });
     this.document.text(textLines, MARGIN_WIDTH, this.currentY);
     this.currentY += size * LINE_HEIGHT_RATIO * (textLines.length - 1) * MM_PER_POINT + bottomPadding;
   }
