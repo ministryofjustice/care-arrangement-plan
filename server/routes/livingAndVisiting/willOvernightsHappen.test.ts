@@ -82,7 +82,7 @@ describe(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, () => {
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.WILL_OVERNIGHTS_HAPPEN}`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WILL_OVERNIGHTS_HAPPEN}`)).toBeChecked();
     });
 
     it('should render field value of no correctly', async () => {
@@ -90,7 +90,7 @@ describe(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, () => {
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.WILL_OVERNIGHTS_HAPPEN}-2`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WILL_OVERNIGHTS_HAPPEN}-2`)).toBeChecked();
     });
   });
 
