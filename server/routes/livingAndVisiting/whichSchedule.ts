@@ -4,6 +4,7 @@ import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const whichScheduleRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WHICH_SCHEDULE, (request, response) => {
@@ -11,7 +12,7 @@ const whichScheduleRoutes = (router: Router) => {
       errors: request.flash('errors'),
       title: i18n.__('livingAndVisiting.whichSchedule.title'),
       initialSchedule: request.session.livingAndVisiting.whichSchedule?.answer,
-      backLinkHref: paths.LIVING_VISITING_MOSTLY_LIVE,
+      backLinkHref: getBackUrl(request.session, paths.LIVING_VISITING_MOSTLY_LIVE),
     });
   });
 

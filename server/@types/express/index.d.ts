@@ -2,8 +2,10 @@ import { CAPSession } from '../session';
 
 export declare module 'express-session' {
   // Declare that the session.d.ts will potentially contain these additional fields
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  interface SessionData extends CAPSession {}
+  interface SessionData extends CAPSession {
+    nowInMinutes: number;
+    pageHistory: string[];
+  }
 }
 
 export declare global {

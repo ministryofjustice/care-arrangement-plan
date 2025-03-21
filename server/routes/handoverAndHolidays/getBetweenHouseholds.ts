@@ -5,6 +5,7 @@ import i18n from 'i18n';
 import { getBetweenHouseholdsField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const getBetweenHouseholdsRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, (request, response) => {
@@ -20,7 +21,7 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
       title: i18n.__('handoverAndHolidays.getBetweenHouseholds.title'),
       values: request.session,
       formValues,
-      backLinkHref: paths.TASK_LIST,
+      backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });
   });
 

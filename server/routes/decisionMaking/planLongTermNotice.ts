@@ -4,6 +4,7 @@ import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const planLongTermNoticeRoutes = (router: Router) => {
   router.get(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, (request, response) => {
@@ -19,7 +20,7 @@ const planLongTermNoticeRoutes = (router: Router) => {
       errors: request.flash('errors'),
       formValues,
       title: i18n.__('decisionMaking.planLongTermNotice.title'),
-      backLinkHref: paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES,
+      backLinkHref: getBackUrl(request.session, paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES),
     });
   });
 

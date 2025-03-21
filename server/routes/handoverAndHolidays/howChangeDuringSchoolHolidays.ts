@@ -4,6 +4,7 @@ import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, (request, response) => {
@@ -11,7 +12,7 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
       errors: request.flash('errors'),
       title: i18n.__('handoverAndHolidays.howChangeDuringSchoolHolidays.title'),
       initialHowChangeDuringSchoolHolidays: request.session.handoverAndHolidays?.howChangeDuringSchoolHolidays?.answer,
-      backLinkHref: paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
+      backLinkHref: getBackUrl(request.session, paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS),
     });
   });
 

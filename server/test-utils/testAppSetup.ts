@@ -4,6 +4,7 @@ import createError from 'http-errors';
 import errorHandler from '../errorHandler';
 import setupAnalytics from '../middleware/setupAnalytics';
 import setupAuthentication from '../middleware/setupAuthentication';
+import setupHistory from '../middleware/setupHistory';
 import setUpi18n from '../middleware/setUpi18n';
 import setUpWebRequestParsing from '../middleware/setupRequestParsing';
 import setupServiceNoLongerAvailable from '../middleware/setupServiceNoLongerAvailable';
@@ -25,6 +26,7 @@ const testAppSetup = (): Express => {
   });
   app.use(setUpWebRequestParsing());
   app.use(setupAnalytics());
+  app.use(setupHistory());
   app.use(setupServiceNoLongerAvailable());
   app.use(unauthenticatedRoutes());
   app.use(setupAuthentication());

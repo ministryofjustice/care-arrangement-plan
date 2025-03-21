@@ -4,13 +4,14 @@ import i18n from 'i18n';
 
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
+import { getBackUrl } from '../utils/sessionHelpers';
 
 const doWhatsBestRoutes = (router: Router) => {
   router.get(paths.DO_WHATS_BEST, (request, response) => {
     response.render('pages/doWhatsBest', {
       errors: request.flash('errors'),
       title: i18n.__('doWhatsBest.title'),
-      backLinkHref: paths.CHILDREN_SAFETY_CHECK,
+      backLinkHref: getBackUrl(request.session, paths.CHILDREN_SAFETY_CHECK),
     });
   });
 

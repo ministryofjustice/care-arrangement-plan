@@ -4,6 +4,7 @@ import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const whatWillHappenRoutes = (router: Router) => {
   router.get(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, (request, response) => {
@@ -11,7 +12,7 @@ const whatWillHappenRoutes = (router: Router) => {
       errors: request.flash('errors'),
       title: i18n.__('specialDays.whatWillHappen.title'),
       initialWhatWillHappen: request.session.specialDays?.whatWillHappen?.answer,
-      backLinkHref: paths.TASK_LIST,
+      backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });
   });
 

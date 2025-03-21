@@ -4,6 +4,7 @@ import i18n from 'i18n';
 
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
+import { getBackUrl } from '../utils/sessionHelpers';
 
 const aboutTheChildrenRoutes = (router: Router) => {
   router.get(paths.ABOUT_THE_CHILDREN, (request, response) => {
@@ -25,7 +26,7 @@ const aboutTheChildrenRoutes = (router: Router) => {
       formValues,
       title:
         numberOfChildren === 1 ? i18n.__('aboutTheChildren.singleTitle') : i18n.__('aboutTheChildren.multipleTitle'),
-      backLinkHref: paths.NUMBER_OF_CHILDREN,
+      backLinkHref: getBackUrl(request.session, paths.NUMBER_OF_CHILDREN),
       numberOfChildren,
     });
   });

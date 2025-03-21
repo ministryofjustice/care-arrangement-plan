@@ -5,6 +5,7 @@ import i18n from 'i18n';
 import { whereHandoverField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const whereHandoverRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, (request, response) => {
@@ -19,7 +20,7 @@ const whereHandoverRoutes = (router: Router) => {
       formValues,
       values: request.session,
       title: i18n.__('handoverAndHolidays.whereHandover.title'),
-      backLinkHref: paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS,
+      backLinkHref: getBackUrl(request.session, paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS),
     });
   });
 

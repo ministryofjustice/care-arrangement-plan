@@ -6,13 +6,14 @@ import { yesOrNo } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, (request, response) => {
     response.render('pages/handoverAndHolidays/willChangeDuringSchoolHolidays', {
       errors: request.flash('errors'),
       title: i18n.__('handoverAndHolidays.willChangeDuringSchoolHolidays.title'),
-      backLinkHref: paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER,
+      backLinkHref: getBackUrl(request.session, paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER),
       formValues: {
         [formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS]: convertBooleanValueToRadioButtonValue(
           request.session.handoverAndHolidays?.willChangeDuringSchoolHolidays?.willChange,

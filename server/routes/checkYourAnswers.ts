@@ -21,7 +21,7 @@ import {
   planReview,
 } from '../utils/formattedAnswersForCheckAnswers';
 import { formatListOfStrings } from '../utils/formValueUtils';
-import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
+import { formattedChildrenNames, parentNotMostlyLivedWith, getBackUrl } from '../utils/sessionHelpers';
 
 const checkYourAnswersRoutes = (router: Router) => {
   router.get(paths.CHECK_YOUR_ANSWERS, (request, response) => {
@@ -29,7 +29,7 @@ const checkYourAnswersRoutes = (router: Router) => {
 
     response.render('pages/checkYourAnswers', {
       title: `${i18n.__('checkYourAnswers.title')}`,
-      backLinkHref: paths.TASK_LIST,
+      backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
       values: {
         childrenNames: formattedChildrenNames(request.session),
         adultNames: formatListOfStrings([initialAdultName, secondaryAdultName]),
