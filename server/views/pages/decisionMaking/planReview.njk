@@ -7,7 +7,9 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">{{ __('decisionMaking.planReview.title') }}</h1>
+      {% include "partials/errorSummary.njk" %}
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
       <div class="govuk-inset-text">{{ __('decisionMaking.planReview.youCanAlsoReview') }}</div>
 
@@ -18,16 +20,16 @@
             <div class="govuk-form-group">
               {{
                 govukInput({
-                      name: formFields.PLAN_REVIEW_MONTHS,
-                                                      label: {
-                  text: __('decisionMaking.planReview.months'),
-                  classes: "govuk-label"
-                },
-                      inputmode: 'numeric',
-                      classes: "govuk-input--width-2",
-                      value: formValues[formFields.PLAN_REVIEW_MONTHS],
-                      errorMessage: errors | findError(formFields.PLAN_REVIEW_MONTHS)
-                    })
+                  name: formFields.PLAN_REVIEW_MONTHS,
+                  label: {
+                    text: __('decisionMaking.planReview.months'),
+                    classes: "govuk-label"
+                  },
+                  inputmode: 'numeric',
+                  classes: "govuk-input--width-2",
+                  value: formValues[formFields.PLAN_REVIEW_MONTHS],
+                  errorMessage: errors | findError(formFields.PLAN_REVIEW_MONTHS)
+                })
               }}
             </div>
           </div>
@@ -39,16 +41,16 @@
               <div class="govuk-form-group">
                 {{
                   govukInput({
-                          name: formFields.PLAN_REVIEW_YEARS,
-                                      label: {
-                    text: __('decisionMaking.planReview.years'),
-                    classes: "govuk-label"
-                  },
-                          inputmode: 'numeric',
-                          classes: "govuk-input--width-2",
-                          value: formValues[formFields.PLAN_REVIEW_YEARS],
-                          errorMessage: errors | findError(formFields.PLAN_REVIEW_YEARS)
-                        })
+                    name: formFields.PLAN_REVIEW_YEARS,
+                    label: {
+                      text: __('decisionMaking.planReview.years'),
+                      classes: "govuk-label"
+                    },
+                    inputmode: 'numeric',
+                    classes: "govuk-input--width-2",
+                    value: formValues[formFields.PLAN_REVIEW_YEARS],
+                    errorMessage: errors | findError(formFields.PLAN_REVIEW_YEARS)
+                  })
                 }}
               </div>
             </div>

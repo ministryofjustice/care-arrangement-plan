@@ -8,17 +8,6 @@ import { flashFormValues, flashMock, flashMockErrors, sessionMock } from '../../
 
 const app = testAppSetup();
 
-beforeEach(() => {
-  sessionMock.livingAndVisiting = {
-    mostlyLive: {
-      where: 'split',
-    },
-    daytimeVisits: {
-      willHappen: true,
-    },
-  };
-});
-
 describe(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES, () => {
   describe('GET', () => {
     it('should render which plan last minute changes page', async () => {

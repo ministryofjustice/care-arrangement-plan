@@ -4,20 +4,9 @@ import request from 'supertest';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import testAppSetup from '../../test-utils/testAppSetup';
-import { flashMock, flashMockErrors, sessionMock } from '../../test-utils/testMocks';
+import { flashFormValues, flashMock, flashMockErrors, sessionMock } from '../../test-utils/testMocks';
 
 const app = testAppSetup();
-
-beforeEach(() => {
-  sessionMock.livingAndVisiting = {
-    mostlyLive: {
-      where: 'split',
-    },
-    daytimeVisits: {
-      willHappen: true,
-    },
-  };
-});
 
 describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
   describe('GET', () => {
@@ -28,6 +17,12 @@ describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('When will the children’s needs change?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_MONTHS}`)).not.toHaveAttribute(
+        'aria-describedby',
+      );
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_YEARS}`)).not.toHaveAttribute(
+        'aria-describedby',
+      );
     });
 
     it('should render error flash responses correctly', async () => {
@@ -50,12 +45,64 @@ describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
       ]);
       const dom = new JSDOM((await request(app).get(paths.DECISION_MAKING_PLAN_REVIEW)).text);
 
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_MONTHS}`)).toHaveAttribute(
+        'aria-describedby',
+        expect.stringContaining(`${formFields.PLAN_REVIEW_MONTHS}-error`),
+      );
       expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_MONTHS}-error`)).toHaveTextContent(
         monthError,
+      );
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_YEARS}`)).toHaveAttribute(
+        'aria-describedby',
+        expect.stringContaining(`${formFields.PLAN_REVIEW_YEARS}-error`),
       );
       expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_YEARS}-error`)).toHaveTextContent(yearError);
     });
 
+    it('should render flash month correctly', async () => {
+      const testValue = 4;
+
+      Object.assign(flashFormValues, [
+        {
+          [formFields.PLAN_REVIEW_MONTHS]: testValue,
+        },
+      ]);
+
+      sessionMock.decisionMaking = {
+        planReview: {
+          months: 6,
+        },
+      };
+
+      const dom = new JSDOM((await request(app).get(paths.DECISION_MAKING_PLAN_REVIEW)).text);
+
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_YEARS}`)).toHaveValue('');
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_MONTHS}`)).toHaveValue(testValue.toString());
+    });
+
+    it('should render flash year correctly', async () => {
+      const testValue = 4;
+
+      Object.assign(flashFormValues, [
+        {
+          [formFields.PLAN_REVIEW_YEARS]: testValue,
+        },
+      ]);
+
+      sessionMock.decisionMaking = {
+        planReview: {
+          years: 6,
+        },
+      };
+
+      const dom = new JSDOM((await request(app).get(paths.DECISION_MAKING_PLAN_REVIEW)).text);
+
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_MONTHS}`)).toHaveValue('');
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_YEARS}`)).toHaveValue(testValue.toString());
+    });
     it('should render previous month correctly', async () => {
       const testValue = 4;
       sessionMock.decisionMaking = {
@@ -179,6 +226,8 @@ describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
     });
 
     it(`should redirect to ${paths.TASK_LIST} when the month is entered and set values in the session`, async () => {
+      const initialDecisionMaking = { planLongTermNotice: { noDecisionRequired: true } };
+      sessionMock.decisionMaking = initialDecisionMaking;
       const months = 4;
 
       await request(app)
@@ -189,12 +238,17 @@ describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
         .expect(302)
         .expect('location', paths.TASK_LIST);
 
-      expect(sessionMock.decisionMaking.planReview).toEqual({
-        months: 4,
+      expect(sessionMock.decisionMaking).toEqual({
+        ...initialDecisionMaking,
+        planReview: {
+          months,
+        },
       });
     });
 
     it(`should redirect to ${paths.TASK_LIST} when the year is entered and set values in the session`, async () => {
+      const initialDecisionMaking = { planLongTermNotice: { noDecisionRequired: true } };
+      sessionMock.decisionMaking = initialDecisionMaking;
       const years = 4;
 
       await request(app)
@@ -205,8 +259,11 @@ describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
         .expect(302)
         .expect('location', paths.TASK_LIST);
 
-      expect(sessionMock.decisionMaking.planReview).toEqual({
-        years: 4,
+      expect(sessionMock.decisionMaking).toEqual({
+        ...initialDecisionMaking,
+        planReview: {
+          years,
+        },
       });
     });
   });

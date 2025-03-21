@@ -29,7 +29,6 @@ const planReviewRoutes = (router: Router) => {
       .custom((value: string, { req }) => value || req.body[otherFromField])
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.bothEmptyError'))
       .bail()
-      .trim()
       .custom((value: string, { req }) => !(value && req.body[otherFromField]))
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.bothFilledError'))
       .bail()
