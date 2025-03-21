@@ -5,13 +5,14 @@ import i18n from 'i18n';
 import { yesOrNo } from '../@types/fields';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
+import { getBackUrl } from '../utils/sessionHelpers';
 
 const safetyCheckRoutes = (router: Router) => {
   router.get(paths.CHILDREN_SAFETY_CHECK, (request, response) => {
     response.render('pages/childrenSafetyCheck', {
       errors: request.flash('errors'),
       title: i18n.__('childrenSafetyCheck.title'),
-      backLinkHref: paths.SAFETY_CHECK,
+      backLinkHref: getBackUrl(request.session, paths.SAFETY_CHECK),
     });
   });
 

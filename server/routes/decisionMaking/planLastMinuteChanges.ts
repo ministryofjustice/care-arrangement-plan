@@ -5,6 +5,7 @@ import i18n from 'i18n';
 import { planLastMinuteChangesField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const planLastMinuteChangesRoutes = (router: Router) => {
   router.get(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES, (request, response) => {
@@ -12,30 +13,35 @@ const planLastMinuteChangesRoutes = (router: Router) => {
 
     const formValues = {
       [formFields.PLAN_LAST_MINUTE_CHANGES]: planLastMinuteChanges?.options,
-      [formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT]: planLastMinuteChanges?.anotherArrangmentDescription,
+      [formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT]: planLastMinuteChanges?.anotherArrangementDescription,
       ...request.flash('formValues')?.[0],
     };
     response.render('pages/decisionMaking/planLastMinuteChanges', {
       errors: request.flash('errors'),
       formValues,
       title: i18n.__('decisionMaking.planLastMinuteChanges.title'),
-      backLinkHref: paths.TASK_LIST,
+      backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });
   });
 
   router.post(
     paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES,
-    // TODO C5141-1013: Add error messages
-    body(formFields.PLAN_LAST_MINUTE_CHANGES).notEmpty().toArray(),
     body(formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT)
       .if(body(formFields.PLAN_LAST_MINUTE_CHANGES).equals('anotherArrangement'))
       .trim()
-      .notEmpty(),
-    body(formFields.PLAN_LAST_MINUTE_CHANGES).custom(
-      // This is prevented by JS in the page, but possible for people with JS disabled to submit
-      (planLastMinuteChanges: string | string[]) =>
-        !(planLastMinuteChanges.length > 1 && planLastMinuteChanges.includes('anotherArrangement')),
-    ),
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('decisionMaking.planLastMinuteChanges.descriptionEmptyError')),
+    body(formFields.PLAN_LAST_MINUTE_CHANGES)
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('decisionMaking.planLastMinuteChanges.emptyError'))
+      .toArray(),
+    body(formFields.PLAN_LAST_MINUTE_CHANGES)
+      .custom(
+        // This is prevented by JS in the page, but possible for people with JS disabled to submit
+        (planLastMinuteChanges: string | string[]) =>
+          !(planLastMinuteChanges.length > 1 && planLastMinuteChanges.includes('anotherArrangement')),
+      )
+      .withMessage((_value, { req }) => req.__('decisionMaking.planLastMinuteChanges.selectOneOptionError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT]: string;
@@ -60,11 +66,11 @@ const planLastMinuteChangesRoutes = (router: Router) => {
         planLastMinuteChanges: {
           noDecisionRequired: false,
           options,
-          anotherArrangmentDescription: options.includes('anotherArrangement') ? describeArrangement : undefined,
+          anotherArrangementDescription: options.includes('anotherArrangement') ? describeArrangement : undefined,
         },
       };
 
-      return response.redirect(paths.TASK_LIST);
+      return response.redirect(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
     },
   );
 
@@ -76,7 +82,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
       },
     };
 
-    return response.redirect(paths.TASK_LIST);
+    return response.redirect(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
   });
 };
 

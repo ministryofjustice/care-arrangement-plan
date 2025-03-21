@@ -1,0 +1,85 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+
+      <form class="form" action="{{ paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+        {% set anotherHtml %}
+          {{
+            govukTextarea({
+              name: formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT,
+              value: formValues[formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT],
+              label: {
+                text: __('describeArrangement')
+              },
+              errorMessage: errors | findError(formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT)
+            })
+          }}
+        {% endset -%}
+
+        {{
+          govukRadios({
+            name: formFields.PLAN_LONG_TERM_NOTICE,
+            value: formValues[formFields.PLAN_LONG_TERM_NOTICE],
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+             hint: {
+              text: __('decisionMaking.planLongTermNotice.sometimesYouNeedToPlanAhead')
+            },
+            items: [
+              {
+                value: 2,
+                text: __('decisionMaking.planLongTermNotice.weeks', { number: 2 })
+              },
+                          {
+                value: 4,
+                text: __('decisionMaking.planLongTermNotice.weeks', { number: 4 })
+              },
+                        {
+                value: 6,
+                text: __('decisionMaking.planLongTermNotice.weeks', { number: 6 })
+              },
+                          {
+                value: 8,
+                text: __('decisionMaking.planLongTermNotice.weeks', { number: 8 })
+              },
+              {
+                value: "anotherArrangement",
+                text: __('anotherArrangement'),
+                conditional: {
+                  html: anotherHtml
+                }
+              }
+            ],
+            errorMessage: errors | findError(formFields.PLAN_LONG_TERM_NOTICE)
+          })
+        }}
+
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+      <form
+        class="form"
+        action="{{ paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE_CHANGES_NOT_REQUIRED }}"
+        method="post"
+        novalidate
+      >
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecide') }}</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

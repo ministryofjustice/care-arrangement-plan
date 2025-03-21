@@ -1,3 +1,5 @@
+import { SessionData } from 'express-session';
+
 import { CAPSession } from '../@types/session';
 
 import { formatListOfStrings } from './formValueUtils';
@@ -52,3 +54,10 @@ export const whatOtherThingsMatterComplete = (session: Partial<CAPSession>) =>
 
 export const planLastMinuteChangesComplete = (session: Partial<CAPSession>) =>
   !!session.decisionMaking?.planLastMinuteChanges;
+
+export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
+  !!session.decisionMaking?.planLongTermNotice;
+
+export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;
+
+export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => session.previousPage || defaultUrl;

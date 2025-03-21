@@ -17,17 +17,19 @@ import {
   whatWillHappen,
   whatOtherThingsMatter,
   planLastMinuteChanges,
+  planLongTermNotice,
+  planReview,
 } from '../utils/formattedAnswersForCheckAnswers';
 import { formatListOfStrings } from '../utils/formValueUtils';
-import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
+import { formattedChildrenNames, parentNotMostlyLivedWith, getBackUrl } from '../utils/sessionHelpers';
 
 const checkYourAnswersRoutes = (router: Router) => {
   router.get(paths.CHECK_YOUR_ANSWERS, (request, response) => {
     const { initialAdultName, secondaryAdultName } = request.session;
 
     response.render('pages/checkYourAnswers', {
-      title: `${i18n.__('checkYourAnswers.title')}`,
-      backLinkHref: paths.TASK_LIST,
+      title: i18n.__('checkYourAnswers.title'),
+      backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
       values: {
         childrenNames: formattedChildrenNames(request.session),
         adultNames: formatListOfStrings([initialAdultName, secondaryAdultName]),
@@ -46,6 +48,8 @@ const checkYourAnswersRoutes = (router: Router) => {
         whatWillHappen: whatWillHappen(request.session),
         whatOtherThingsMatter: whatOtherThingsMatter(request.session),
         planLastMinuteChanges: planLastMinuteChanges(request.session),
+        planLongTermNotice: planLongTermNotice(request.session),
+        planReview: planReview(request.session),
       },
     });
   });

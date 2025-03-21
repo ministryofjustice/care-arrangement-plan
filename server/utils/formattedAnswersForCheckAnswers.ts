@@ -147,14 +147,42 @@ export const whatOtherThingsMatter = ({ otherThings }: Partial<CAPSession>) =>
     ? i18n.__('doNotNeedToDecide')
     : otherThings.whatOtherThingsMatter.answer;
 
-const capitilizeFirstLetter = (s: string) => {
-  return String(s).charAt(0).toUpperCase() + String(s).slice(1);
-};
-
 export const planLastMinuteChanges = ({ decisionMaking }: Partial<CAPSession>) => {
   if (decisionMaking.planLastMinuteChanges.noDecisionRequired) {
     return i18n.__('doNotNeedToDecide');
   }
+  if (decisionMaking.planLastMinuteChanges.anotherArrangementDescription) {
+    return decisionMaking.planLastMinuteChanges.anotherArrangementDescription;
+  }
   const planLastMinuteChangeList = formatPlanChangesOptionsIntoList(decisionMaking.planLastMinuteChanges.options);
-  return capitilizeFirstLetter(planLastMinuteChangeList);
+  return planLastMinuteChangeList.charAt(0).toUpperCase() + String(planLastMinuteChangeList).slice(1);
+};
+
+export const planLongTermNotice = ({ decisionMaking }: Partial<CAPSession>) => {
+  if (decisionMaking.planLongTermNotice.noDecisionRequired) {
+    return i18n.__('doNotNeedToDecide');
+  }
+  if (decisionMaking.planLongTermNotice.otherAnswer) {
+    return decisionMaking.planLongTermNotice.otherAnswer;
+  }
+  return i18n.__('decisionMaking.planLongTermNotice.weeks', {
+    number: decisionMaking.planLongTermNotice.weeks.toString(),
+  });
+};
+
+export const planReview = ({ decisionMaking }: Partial<CAPSession>) => {
+  let number: number;
+  let translationName: string;
+
+  if (decisionMaking.planReview.months) {
+    number = decisionMaking.planReview.months;
+    translationName = 'checkYourAnswers.decisionMaking.months';
+  } else {
+    number = decisionMaking.planReview.years;
+    translationName = 'checkYourAnswers.decisionMaking.years';
+  }
+
+  const translationSuffix = number === 1 ? 'Singular' : 'Plural';
+
+  return i18n.__(translationName + translationSuffix, { number: number.toString() });
 };

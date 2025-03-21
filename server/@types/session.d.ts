@@ -13,7 +13,6 @@ export type WhichDays = {
 };
 
 export type CAPSession = {
-  nowInMinutes: number;
   courtOrderInPlace: boolean;
   numberOfChildren: number;
   namesOfChildren: string[];
@@ -76,8 +75,17 @@ export type CAPSession = {
   decisionMaking?: {
     planLastMinuteChanges?: {
       options?: planLastMinuteChangesField[];
-      anotherArrangmentDescription?: string;
+      anotherArrangementDescription?: string;
       noDecisionRequired: boolean;
+    };
+    planLongTermNotice?: {
+      weeks?: number;
+      otherAnswer?: string;
+      noDecisionRequired: boolean;
+    };
+    planReview?: {
+      months?: number;
+      years?: number;
     };
   };
 };

@@ -44,6 +44,12 @@ const session: Partial<SessionData> = {
     planLastMinuteChanges: {
       noDecisionRequired: true,
     },
+    planLongTermNotice: {
+      noDecisionRequired: true,
+    },
+    planReview: {
+      months: 1,
+    },
   },
 };
 
@@ -127,6 +133,46 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
   it('should not render the continue button if the what other things matter section is not filled out', async () => {
     sessionMock.otherThings = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+  });
+
+  it('should not render the continue button if the decision making section is not filled out', async () => {
+    sessionMock.decisionMaking = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+  });
+
+  it('should not render the continue button if the plan last minute changes section is not filled out', async () => {
+    sessionMock.decisionMaking.planLastMinuteChanges = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+  });
+
+  it('should not render the continue button if the plan long term notice section is not filled out', async () => {
+    sessionMock.decisionMaking.planLongTermNotice = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+  });
+
+  it('should not render the continue button if the plan review section is not filled out', async () => {
+    sessionMock.decisionMaking.planReview = null;
 
     const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
 

@@ -115,7 +115,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS)).text);
 
       expect(dom.window.document.querySelectorAll(':checked')).toHaveLength(2);
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_DAYTIME_VISITS}`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_DAYTIME_VISITS}`)).toBeChecked();
       expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_DAYTIME_VISITS}-4`)).toHaveAttribute(
         'checked',
       );
@@ -147,7 +147,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS)).text);
 
       expect(dom.window.document.querySelectorAll(':checked')).toHaveLength(2);
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_DAYTIME_VISITS}`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_DAYTIME_VISITS}`)).toBeChecked();
       expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_DAYTIME_VISITS}-4`)).toHaveAttribute(
         'checked',
       );

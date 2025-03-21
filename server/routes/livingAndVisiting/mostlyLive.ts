@@ -5,6 +5,7 @@ import i18n from 'i18n';
 import { whereMostlyLive } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const mostlyLiveRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_MOSTLY_LIVE, (request, response) => {
@@ -19,7 +20,7 @@ const mostlyLiveRoutes = (router: Router) => {
       title: i18n.__('livingAndVisiting.mostlyLive.title'),
       values: request.session,
       formValues,
-      backLinkHref: paths.TASK_LIST,
+      backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });
   });
 

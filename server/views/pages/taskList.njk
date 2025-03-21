@@ -139,6 +139,20 @@
               },
               href: paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES,
               status: completeStatus if planLastMinuteChangesComplete else incompleteStatus
+            },
+            {
+              title: {
+                text: __('decisionMaking.planLongTermNotice.title')
+              },
+              href: paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE if planLastMinuteChangesComplete else null,
+              status: completeStatus if planLongTermNoticeComplete else (incompleteStatus if planLastMinuteChangesComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('decisionMaking.planReview.title')
+              },
+              href: paths.DECISION_MAKING_PLAN_REVIEW if planLongTermNoticeComplete else null,
+              status: completeStatus if planReviewComplete else (incompleteStatus if planLongTermNoticeComplete else cannotStartStatus)
             }
           ]
         })

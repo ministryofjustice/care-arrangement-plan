@@ -8,8 +8,6 @@ import testAppSetup from '../test-utils/testAppSetup';
 
 const app = testAppSetup();
 
-const mockDate = new Date('2025-01-01T00:00:00Z');
-
 describe(paths.COOKIES, () => {
   describe('GET', () => {
     it('should render cookies page when there is no ga4 id', async () => {
@@ -36,10 +34,6 @@ describe(paths.COOKIES, () => {
   });
 
   describe('POST', () => {
-    beforeEach(() => {
-      jest.useFakeTimers({ doNotFake: ['setImmediate'] }).setSystemTime(mockDate);
-    });
-
     it('should reload page and set cookies when the response is Yes', async () => {
       config.analytics.ga4Id = 'test-ga4-id';
       await request(app)

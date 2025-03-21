@@ -1,4 +1,5 @@
 enum paths {
+  PASSWORD = '/password',
   START = '/',
   ACCESSIBILITY_STATEMENT = '/accessibility-statement',
   CONTACT_US = '/contact-us',
@@ -18,7 +19,6 @@ enum paths {
   TASK_LIST = '/make-a-plan',
   CHECK_YOUR_ANSWERS = '/check-your-answers',
   SHARE_PLAN = '/share-plan',
-  PASSWORD = '/password',
   LIVING_VISITING_MOSTLY_LIVE = '/living-and-visiting/where-will-the-children-mostly-live',
   LIVING_VISITING_WHICH_SCHEDULE = '/living-and-visiting/which-schedule-is-best',
   LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED = '/living-and-visiting/which-schedule-is-best/not-required',
@@ -44,6 +44,9 @@ enum paths {
   OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED = '/other-things/what-other-things-matter/not-required',
   DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES = '/decision-making/plan-last-minute-changes',
   DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES_NOT_REQUIRED = '/decision-making/plan-last-minute-changes/not-required',
+  DECISION_MAKING_PLAN_LONG_TERM_NOTICE = '/decision-making/plan-long-term-notice',
+  DECISION_MAKING_PLAN_LONG_TERM_NOTICE_CHANGES_NOT_REQUIRED = '/decision-making/plan-long-term-notice/not-required',
+  DECISION_MAKING_PLAN_REVIEW = '/decision-making/plan-review',
   DOWNLOAD_PDF = '/download-pdf',
   PRINT_PDF = '/print-pdf',
   DOWNLOAD_PAPER_FORM = '/download-paper-form',

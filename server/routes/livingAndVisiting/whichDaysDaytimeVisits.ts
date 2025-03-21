@@ -6,6 +6,7 @@ import { whichDaysField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { convertWhichDaysFieldToSessionValue, convertWhichDaysSessionValueToField } from '../../utils/formValueUtils';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const whichDaysDaytimeVisitsRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, (request, response) => {
@@ -23,7 +24,7 @@ const whichDaysDaytimeVisitsRoutes = (router: Router) => {
       errors: request.flash('errors'),
       formValues,
       title: i18n.__('livingAndVisiting.whichDaysDaytimeVisits.title'),
-      backLinkHref: paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN,
+      backLinkHref: getBackUrl(request.session, paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN),
     });
   });
 

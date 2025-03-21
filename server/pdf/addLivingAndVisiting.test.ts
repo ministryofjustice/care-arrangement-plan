@@ -1,39 +1,16 @@
 import path from 'path';
 
-import express, { Express } from 'express';
 import request from 'supertest';
 
-import setUpi18n from '../middleware/setUpi18n';
 import { validateResponseAgainstSnapshot } from '../test-utils/pdfUtils';
 import { sessionMock } from '../test-utils/testMocks';
+import testAppSetup, { TEST_PATH } from '../test-utils/testPdfAppSetup';
 
 import addLivingAndVisiting from './addLivingAndVisiting';
-import Pdf from './pdf';
 
 jest.mock('../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../assets/${fileName}`));
 
-const testPath = '/test';
-
-const testAppSetup = (): Express => {
-  const app = express();
-
-  app.use(setUpi18n());
-  app.use((req, _response, next) => {
-    req.session = sessionMock;
-    next();
-  });
-  app.get(testPath, (req, response) => {
-    const pdf = new Pdf(false);
-    addLivingAndVisiting(pdf, req);
-    response.setHeader('Content-Type', 'application/pdf');
-    response.setHeader('Content-Disposition', `attachment; filename=test.pdf`);
-    response.send(Buffer.from(pdf.toArrayBuffer()));
-  });
-
-  return app;
-};
-
-const app = testAppSetup();
+const app = testAppSetup(addLivingAndVisiting);
 
 describe('addLivingAndVisiting', () => {
   test('pdf matches for other', async () => {
@@ -50,7 +27,7 @@ describe('addLivingAndVisiting', () => {
       },
     });
 
-    const response = await request(app).get(testPath);
+    const response = await request(app).get(TEST_PATH);
     validateResponseAgainstSnapshot(response.body, '../../test-assets/addLivingAndVisiting-other.pdf');
   });
 
@@ -71,7 +48,7 @@ describe('addLivingAndVisiting', () => {
       },
     });
 
-    const response = await request(app).get(testPath);
+    const response = await request(app).get(TEST_PATH);
     validateResponseAgainstSnapshot(response.body, '../../test-assets/addLivingAndVisiting-split.pdf');
   });
 
@@ -94,7 +71,7 @@ describe('addLivingAndVisiting', () => {
       },
     });
 
-    const response = await request(app).get(testPath);
+    const response = await request(app).get(TEST_PATH);
     validateResponseAgainstSnapshot(response.body, '../../test-assets/addLivingAndVisiting-adultWithNoVisits.pdf');
   });
 
@@ -123,7 +100,7 @@ describe('addLivingAndVisiting', () => {
       },
     });
 
-    const response = await request(app).get(testPath);
+    const response = await request(app).get(TEST_PATH);
     validateResponseAgainstSnapshot(response.body, '../../test-assets/addLivingAndVisiting-adultWithVisits.pdf');
   });
 });

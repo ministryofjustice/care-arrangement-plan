@@ -12,6 +12,8 @@ import {
   whatWillHappenComplete,
   whatOtherThingsMatterComplete,
   planLastMinuteChangesComplete,
+  planLongTermNoticeComplete,
+  planReviewComplete,
 } from '../utils/sessionHelpers';
 
 const taskListRoutes = (router: Router) => {
@@ -24,10 +26,12 @@ const taskListRoutes = (router: Router) => {
     const isWhatWillHappenComplete = whatWillHappenComplete(request.session);
     const isWhatOtherThingsMatterComplete = whatOtherThingsMatterComplete(request.session);
     const isPlanLastMinuteChangesComplete = planLastMinuteChangesComplete(request.session);
+    const isPlanLongTermNoticeComplete = planLongTermNoticeComplete(request.session);
+    const isPlanReviewComplete = planReviewComplete(request.session);
 
     response.render('pages/taskList', {
       title: i18n.__('taskList.title', { names: formattedChildrenNames(request.session) }),
-      // TODO - this should only be true when all tasks are complete
+      // This should only be true when all tasks are complete
       showContinue:
         isWhatWillHappenComplete &&
         isMostlyLiveComplete &&
@@ -36,7 +40,9 @@ const taskListRoutes = (router: Router) => {
         isWillChangeDuringSchoolHolidaysComplete &&
         isItemsForChangeoverComplete &&
         isWhatOtherThingsMatterComplete &&
-        isPlanLastMinuteChangesComplete,
+        isPlanLastMinuteChangesComplete &&
+        isPlanLongTermNoticeComplete &&
+        isPlanReviewComplete,
       mostlyLiveComplete: isMostlyLiveComplete,
       getBetweenHouseholdsComplete: isGetBetweenHouseholdsComplete,
       whereHandoverComplete: isWhereHandoverComplete,
@@ -45,6 +51,8 @@ const taskListRoutes = (router: Router) => {
       whatWillHappenComplete: isWhatWillHappenComplete,
       whatOtherThingsMatterComplete: isWhatOtherThingsMatterComplete,
       planLastMinuteChangesComplete: isPlanLastMinuteChangesComplete,
+      planLongTermNoticeComplete: isPlanLongTermNoticeComplete,
+      planReviewComplete: isPlanReviewComplete,
     });
   });
 };

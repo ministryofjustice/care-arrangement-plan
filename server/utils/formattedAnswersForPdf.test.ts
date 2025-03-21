@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import { SessionData } from 'express-session';
 import request from 'supertest';
 
-import { getBetweenHouseholdsField, whereHandoverField } from '../@types/fields';
+import { getBetweenHouseholdsField, planLastMinuteChangesField, whereHandoverField } from '../@types/fields';
 import setUpi18n from '../middleware/setUpi18n';
 import { sessionMock } from '../test-utils/testMocks';
 
@@ -20,6 +20,9 @@ import {
   willChangeDuringSchoolHolidays,
   howChangeDuringSchoolHolidays,
   whatOtherThingsMatter,
+  planReview,
+  planLongTermNotice,
+  planLastMinuteChanges,
 } from './formattedAnswersForPdf';
 
 const testPath = '/test';
@@ -50,6 +53,11 @@ const testAppSetup = (): Express => {
       },
       otherThings: {
         whatOtherThingsMatter: whatOtherThingsMatter(sessionMock),
+      },
+      decisionMaking: {
+        planLastMinuteChanges: planLastMinuteChanges(sessionMock),
+        planLongTermNotice: planLongTermNotice(sessionMock),
+        planReview: planReview(sessionMock),
       },
     });
   });
@@ -87,6 +95,17 @@ const session: Partial<SessionData> = {
   otherThings: {
     whatOtherThingsMatter: {
       noDecisionRequired: true,
+    },
+  },
+  decisionMaking: {
+    planLastMinuteChanges: {
+      noDecisionRequired: true,
+    },
+    planLongTermNotice: {
+      noDecisionRequired: true,
+    },
+    planReview: {
+      months: 2,
     },
   },
 };
@@ -408,6 +427,77 @@ describe('formattedAnswers', () => {
           expect(response.body.otherThings).toEqual({
             whatOtherThingsMatter: `${session.initialAdultName} suggested:\n"${answer}"`,
           });
+        });
+    });
+  });
+
+  describe('decisionMaking', () => {
+    it.each([
+      [
+        {
+          planLastMinuteChanges: { noDecisionRequired: true },
+          planLongTermNotice: { noDecisionRequired: true },
+          planReview: { months: 1 },
+        },
+        {
+          planLastMinuteChanges: `${session.initialAdultName} suggested that this does not need to be decided.`,
+          planLongTermNotice: `${session.initialAdultName} suggested that this does not need to be decided.`,
+          planReview: `${session.initialAdultName} suggested that you should review this arrangement in 1 month's time.`,
+        },
+      ],
+      [
+        {
+          planLastMinuteChanges: {
+            options: ['anotherArrangement'] as planLastMinuteChangesField[],
+            anotherArrangementDescription: 'planLastMinuteChanges answer',
+            noDecisionRequired: false,
+          },
+          planLongTermNotice: { noDecisionRequired: false, otherAnswer: 'planLongTermNotice answer' },
+          planReview: { months: 2 },
+        },
+        {
+          planLastMinuteChanges: `${session.initialAdultName} suggested:\n"planLastMinuteChanges answer"`,
+          planLongTermNotice: `${session.initialAdultName} suggested:\n"planLongTermNotice answer"`,
+          planReview: `${session.initialAdultName} suggested that you should review this arrangement in 2 months' time.`,
+        },
+      ],
+      [
+        {
+          planLastMinuteChanges: {
+            options: ['phone'] as planLastMinuteChangesField[],
+            noDecisionRequired: false,
+          },
+          planLongTermNotice: { noDecisionRequired: false, weeks: 2 },
+          planReview: { years: 1 },
+        },
+        {
+          planLastMinuteChanges: `${session.initialAdultName} suggested that last-minute changes should be communicated with a phone call.`,
+          planLongTermNotice: `${session.initialAdultName} suggested that you should both give each other 2 weeks' notice to change long-term arrangements.`,
+          planReview: `${session.initialAdultName} suggested that you should review this arrangement in 1 year's time.`,
+        },
+      ],
+      [
+        {
+          planLastMinuteChanges: {
+            options: ['phone', 'app', 'text', 'email'] as planLastMinuteChangesField[],
+            noDecisionRequired: false,
+          },
+          planLongTermNotice: { noDecisionRequired: false, weeks: 4 },
+          planReview: { years: 2 },
+        },
+        {
+          planLastMinuteChanges: `${session.initialAdultName} suggested that last-minute changes should be communicated with a phone call, using a parenting app, by text message and by email.`,
+          planLongTermNotice: `${session.initialAdultName} suggested that you should both give each other 4 weeks' notice to change long-term arrangements.`,
+          planReview: `${session.initialAdultName} suggested that you should review this arrangement in 2 years' time.`,
+        },
+      ],
+    ])('should return the correct value for decision making', (decisionMaking, expectedValues) => {
+      sessionMock.decisionMaking = decisionMaking;
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.decisionMaking).toEqual(expectedValues);
         });
     });
   });

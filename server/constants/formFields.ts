@@ -29,6 +29,10 @@ enum formFields {
   WHAT_OTHER_THINGS_MATTER = 'what-other-things-matter',
   PLAN_LAST_MINUTE_CHANGES = 'plan-last-minute-changes-method',
   PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT = 'plan-last-minute-changes-describe-arrangement',
+  PLAN_LONG_TERM_NOTICE = 'plan-long-term-notice',
+  PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT = 'plan-long-term-notice-describe-arrangement',
+  PLAN_REVIEW_MONTHS = 'plan-review-months',
+  PLAN_REVIEW_YEARS = 'plan-review-years',
 }
 
 export default formFields;

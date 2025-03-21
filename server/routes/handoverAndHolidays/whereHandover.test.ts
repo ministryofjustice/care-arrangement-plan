@@ -89,7 +89,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)).text);
 
       expect(dom.window.document.querySelectorAll(':checked')).toHaveLength(1);
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-5`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-5`)).toBeChecked();
       expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}`)).toHaveValue(someoneElse);
     });
 
@@ -103,8 +103,8 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)).text);
 
       expect(dom.window.document.querySelectorAll(':checked')).toHaveLength(2);
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}`)).toHaveAttribute('checked');
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-4`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-4`)).toBeChecked();
       expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}`)).toHaveValue(someoneElse);
     });
   });
