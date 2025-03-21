@@ -372,8 +372,8 @@
     "whatToDoNext": "What to do next",
     "sendToSecondary": "Send this proposed child arrangements plan to {{ otherAdult }}. {{ otherAdult }} will have the chance to respond.",
     "giveFeedback": "Give your feedback about this service",
-    "completeTheSurvey": "Complete the survey",
-    "emailUs": "You can also email {{ contactEmail }}",
+    "completeTheSurvey": "Complete the survey.",
+    "emailUs": "You can also email {{ contactEmail }}.",
     "ifTheyDoNotRespond": "If {{ otherAdult }} does not respond",
     "tryMediation": "If {{ otherAdult }} does not respond, you can try mediation. The next step would be to apply for a court order.",
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
@@ -457,7 +457,7 @@
       "whatHappensNowHeading": "What happens now?",
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.",
       "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.",
-      "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce ",
+      "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
       "doNotAgree": {
         "livingAndVisiting": {
           "mostlyLive": "If you do not agree, suggest where the children will mostly live",

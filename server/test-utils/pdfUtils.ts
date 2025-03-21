@@ -11,14 +11,18 @@ export const stripPdfMetadata = (pdfBuffer: Buffer) => {
 };
 
 export const validateResponseAgainstSnapshot = (response: Buffer, snapshotName: string) => {
-  if (process.env.UPDATE_PDF_SNAPSHOTS) {
-    fs.writeFileSync(path.resolve(__dirname, snapshotName), response);
-  }
-
   const responseHash = createHash('sha256').update(stripPdfMetadata(response)).digest('hex');
 
   const referenceFile = fs.readFileSync(path.resolve(__dirname, snapshotName));
   const referenceHash = createHash('sha256').update(stripPdfMetadata(referenceFile)).digest('hex');
 
-  expect(responseHash).toEqual(referenceHash);
+  try {
+    expect(responseHash).toEqual(referenceHash);
+  } catch (error) {
+    if (process.env.UPDATE_PDF_SNAPSHOTS) {
+      fs.writeFileSync(path.resolve(__dirname, snapshotName), response);
+    } else {
+      throw error;
+    }
+  }
 };

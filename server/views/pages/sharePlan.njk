@@ -15,7 +15,7 @@
 
       <h2 class="govuk-heading-s govuk-!-margin-bottom-2">{{ __('sharePlan.giveFeedback') }}</h2>
       <p><a href="{{ feedbackUrl }}">{{ __('sharePlan.completeTheSurvey') }}</a></p>
-      <p>{{ __('sharePlan.emailUs', { contactEmail: contactEmail })  | urlize | safe }}</p>
+      <p>{{ __('sharePlan.emailUs', { contactEmail: contactEmail })  | customUrlize | safe }}</p>
 
       <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
         {{ __('sharePlan.ifTheyDoNotRespond', {otherAdult: values.secondaryAdultName}) }}

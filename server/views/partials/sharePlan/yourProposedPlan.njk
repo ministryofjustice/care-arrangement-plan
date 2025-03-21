@@ -19,7 +19,7 @@
 </ul>
 {{ doYouAgree(questionText=__('sharePlan.yourProposedPlan.doYouAgreeOnBasics')) }}
 <p>{{ __('sharePlan.yourProposedPlan.doNotStoreNames') }}</p>
-<p>{{ __('sharePlan.yourProposedPlan.doNotAgreeOnBasics') | urlize | safe }}</p>
+<p>{{ __('sharePlan.yourProposedPlan.doNotAgreeOnBasics') | customUrlize | safe }}</p>
 
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
 
@@ -32,4 +32,4 @@
 <h2 class="govuk-heading-m">{{ __('sharePlan.yourProposedPlan.whatHappensNowHeading') }}</h2>
 <p>{{ __('sharePlan.yourProposedPlan.nowSendPlan', {senderName: values.initialAdultName}) }}</p>
 <p>{{ __('sharePlan.yourProposedPlan.unableToAgree') }}</p>
-<p>{{ __('sharePlan.yourProposedPlan.moreInfoAndSupport') | urlize | safe }}</p>
+<p>{{ __('sharePlan.yourProposedPlan.moreInfoAndSupport') | customUrlize | safe }}</p>
