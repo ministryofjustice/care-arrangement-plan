@@ -1,4 +1,5 @@
 import { Paragraph, PdfBuilder } from '../../@types/pdf';
+import logger from '../../logger';
 
 import BaseComponent from './base';
 
@@ -24,6 +25,9 @@ class Text extends BaseComponent {
 
   protected handleComponentOverflowingPage() {
     this.pdf.createNewPage();
+    if (this.pdf.heightWillOverflowDocument(this.getComponentHeight())) {
+      logger.error('Creating a PDF with an overflowing page');
+    }
     this.createComponent();
   }
 }

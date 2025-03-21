@@ -14,6 +14,7 @@ export interface PdfBuilder {
   heightWillOverflowDocument: (height: number) => boolean;
   createNewPage: () => void;
   drawBorder: (x: number, y: number, xSize: number, ySize: number) => void;
+  splitParagraph: (paragraph: Paragraph) => string[];
   getParagraphHeight: (paragraph: Paragraph) => number;
   addParagraph: (paragraph: Paragraph) => void;
 }
