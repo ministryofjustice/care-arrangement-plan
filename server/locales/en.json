@@ -311,7 +311,7 @@
     "planLastMinuteChanges": {
       "title": "How should last-minute changes be communicated?",
       "anotherDescriptionLabel": "Describe the arrangement",
-      "howChangesCommunicatedAdditionalDescription": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school. Select all that apply.",
+      "howChangesCommunicatedAdditionalDescription": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.",
       "textMessage": "By text message",
       "phoneCall": "With a phone call",
       "email": "By email",

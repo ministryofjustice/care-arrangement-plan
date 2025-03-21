@@ -11,6 +11,10 @@
 
       <form class="form" action="plan-last-minute-changes" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {% set hintHtml %}
+          <p>{{ __('decisionMaking.planLastMinuteChanges.howChangesCommunicatedAdditionalDescription') }}</p>
+          <p>{{ __('selectAllThatApply') }}</p>
+        {% endset -%}
 
         {% set anotherHtml %}
           {{
@@ -36,7 +40,7 @@
               }
             },
             hint: {
-              text: __('decisionMaking.planLastMinuteChanges.howChangesCommunicatedAdditionalDescription')
+              html: hintHtml
             },
             items: [
               {
