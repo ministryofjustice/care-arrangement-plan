@@ -17,6 +17,8 @@ import {
   itemsForChangeover,
   whatOtherThingsMatter,
   planLastMinuteChanges,
+  planLongTermNotice,
+  planReview,
 } from '../utils/formattedAnswersForPdf';
 import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
 
@@ -44,6 +46,8 @@ const sharePlanRoutes = (router: Router) => {
         whatWillHappenAnswer: whatWillHappen(request.session),
         whatOtherThingsMatterAnswer: whatOtherThingsMatter(request.session),
         planLastMinuteChanges: planLastMinuteChanges(request.session),
+        planLongTermNotice: planLongTermNotice(request.session),
+        planReview: planReview(request.session),
       },
     });
   });

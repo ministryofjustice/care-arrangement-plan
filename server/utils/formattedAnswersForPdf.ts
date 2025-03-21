@@ -193,3 +193,27 @@ export const planLastMinuteChanges = ({ decisionMaking, initialAdultName }: Part
   }
   return `${i18n.__('sharePlan.yourProposedPlan.decisionMaking.planLastMinuteChanges.howChangesCommunicated', { senderName: initialAdultName })} ${formatPlanChangesOptionsIntoList(decisionMaking.planLastMinuteChanges.options)}`;
 };
+
+export const planLongTermNotice = ({ decisionMaking, initialAdultName }: Partial<CAPSession>) => {
+  if (decisionMaking.planLongTermNotice.noDecisionRequired) {
+    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+  if (decisionMaking.planLastMinuteChanges.options.includes('anotherArrangement')) {
+    return `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName: initialAdultName, suggestion: decisionMaking.planLongTermNotice.otherAnwser })}`;
+  }
+  return i18n.__('sharePlan.yourProposedPlan.decisionMaking.planLongTermNotice.howChangesCommunicated', {
+    senderName: initialAdultName,
+    numberOfWeeks: decisionMaking.planLongTermNotice.weeks.toString(),
+  });
+};
+
+export const planReview = ({ decisionMaking, initialAdultName }: Partial<CAPSession>) =>
+  decisionMaking.planReview.months
+    ? i18n.__('sharePlan.yourProposedPlan.decisionMaking.planReview.suggestedMonths', {
+        senderName: initialAdultName,
+        numberOfMonths: decisionMaking.planReview.months.toString(),
+      })
+    : i18n.__('sharePlan.yourProposedPlan.decisionMaking.planReview.suggestedYears', {
+        senderName: initialAdultName,
+        numberOfYears: decisionMaking.planReview.years.toString(),
+      });

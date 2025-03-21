@@ -55,6 +55,11 @@ export const whatOtherThingsMatterComplete = (session: Partial<CAPSession>) =>
 export const planLastMinuteChangesComplete = (session: Partial<CAPSession>) =>
   !!session.decisionMaking?.planLastMinuteChanges;
 
+export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
+  !!session.decisionMaking?.planLongTermNotice;
+
+export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;
+
 export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => {
   // most recent value is the page for the current request
   if (session.pageHistory && session.pageHistory.length > 1) {

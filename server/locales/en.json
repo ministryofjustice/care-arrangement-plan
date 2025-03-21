@@ -309,15 +309,33 @@
   },
   "decisionMaking": {
     "planLastMinuteChanges": {
-      "title": "How will you agree changes?",
+      "title": "How should last-minute changes be communicated?",
       "anotherDescriptionLabel": "Describe the arrangement",
-      "howChangesCommunicated": "How should last-minute changes be communicated?",
       "howChangesCommunicatedAdditionalDescription": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school. Select all that apply.",
       "textMessage": "By text message",
       "phoneCall": "With a phone call",
       "email": "By email",
       "app": "Using a parenting app",
-      "anotherArrangement": "Another arrangement"
+      "selectOneOptionError": "Select a method for how you both communicate changes",
+      "descriptionEmptyError": "Describe how you will communicate changes"
+    },
+    "planLongTermNotice": {
+      "title": "How much notice should you give to change long-term arrangements?",
+      "weeks": "{{ number }} weeks",
+      "sometimesYouNeedToPlanAhead": "Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.",
+      "selectOneOptionError": "Select at least one option",
+      "descriptionEmptyError": "Describe what is the other arrangement you are proposing"
+    },
+    "planReview": {
+      "title": "When will the children’s needs change?",
+      "youCanAlsoReview": "You can also review these arrangements at an earlier time if they no longer meet your children’s needs.",
+      "childrensNeedsChange": "Children's needs change as they grow. When should you review this agreement to check it is still what's best for the children?",
+      "months": "Months",
+      "years": "Years",
+      "bothEmptyError": "Enter months or years",
+      "bothFilledError": "Enter months or years, not both",
+      "notNumberError": "Your answer must be a number",
+      "notIntError": "Your answer must be a whole number. For example, 3."
     }
   },
   "checkYourAnswers": {
@@ -428,6 +446,13 @@
       "decisionMaking": {
         "planLastMinuteChanges": {
           "howChangesCommunicated": "{{ senderName }} suggested that last minute changes should be communicated by"
+        },
+        "planLongTermNotice": {
+          "howChangesCommunicated": "{{ senderName }} suggested that you should both give each other {{ numberOfWeeks }} weeks notice to change long-term arrangements"
+        },
+        "planReview": {
+          "suggestedMonths": "{{ senderName }} suggested that you should review this arrangement in {{ numberOfMonths }} months time",
+          "suggestedYears": "{{ senderName }} suggested that you should review this arrangement in {{ numberOfYears }} years time"
         }
       },
       "whatHappensNowHeading": "What happens now?",
@@ -457,7 +482,9 @@
           "whatOtherThingsMatter": "If you do not agree, suggest what other things matter to your children"
         },
         "decisionMaking": {
-          "planLastMinuteChanges": "If you do not agree, suggest how last minute changes should be communicated"
+          "planLastMinuteChanges": "If you do not agree, suggest how last minute changes should be communicated",
+          "planLongTermNotice": "If you do not agree, suggest how much notice you should give each other",
+          "planReview": "If you do not agree, suggest when should you review this agreement"
         }
       },
       "compromise": {

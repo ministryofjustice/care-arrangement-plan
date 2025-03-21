@@ -155,6 +155,27 @@ export const planLastMinuteChanges = ({ decisionMaking }: Partial<CAPSession>) =
   if (decisionMaking.planLastMinuteChanges.noDecisionRequired) {
     return i18n.__('doNotNeedToDecide');
   }
+  if (decisionMaking.planLastMinuteChanges.anotherArrangmentDescription) {
+    return decisionMaking.planLastMinuteChanges.anotherArrangmentDescription;
+  }
   const planLastMinuteChangeList = formatPlanChangesOptionsIntoList(decisionMaking.planLastMinuteChanges.options);
   return capitilizeFirstLetter(planLastMinuteChangeList);
 };
+
+export const planLongTermNotice = ({ decisionMaking }: Partial<CAPSession>) => {
+  if (decisionMaking.planLongTermNotice.noDecisionRequired) {
+    return i18n.__('doNotNeedToDecide');
+  }
+  if (decisionMaking.planLongTermNotice.otherAnwser) {
+    return decisionMaking.planLongTermNotice.otherAnwser;
+  }
+  return i18n.__('decisionMaking.planLongTermNotice.weeks', {
+    number: decisionMaking.planLongTermNotice.weeks.toString(),
+  });
+};
+
+export const planReview = ({ decisionMaking }: Partial<CAPSession>) =>
+  (decisionMaking.planReview.months
+    ? `${decisionMaking.planReview.months} ${i18n.__('decisionMaking.planReview.months')}`
+    : `${decisionMaking.planReview.years} ${i18n.__('decisionMaking.planReview.years')}`
+  ).toLowerCase();

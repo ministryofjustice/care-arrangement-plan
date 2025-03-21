@@ -47,6 +47,12 @@ const session: Partial<SessionData> = {
     planLastMinuteChanges: {
       noDecisionRequired: true,
     },
+    planLongTermNotice: {
+      noDecisionRequired: true,
+    },
+    planReview: {
+      months: 1,
+    },
   },
 };
 

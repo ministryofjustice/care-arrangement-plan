@@ -26,12 +26,17 @@ const planLastMinuteChangesRoutes = (router: Router) => {
 
   router.post(
     paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES,
-    // TODO C5141-1013: Add error messages
-    body(formFields.PLAN_LAST_MINUTE_CHANGES).notEmpty().toArray(),
+    body(formFields.PLAN_LAST_MINUTE_CHANGES)
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('decisionMaking.planLastMinuteChanges.selectOneOptionError'))
+      .toArray()
+      .bail(),
     body(formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT)
       .if(body(formFields.PLAN_LAST_MINUTE_CHANGES).equals('anotherArrangement'))
       .trim()
-      .notEmpty(),
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('decisionMaking.planLastMinuteChanges.descriptionEmptyError'))
+      .bail(),
     body(formFields.PLAN_LAST_MINUTE_CHANGES).custom(
       // This is prevented by JS in the page, but possible for people with JS disabled to submit
       (planLastMinuteChanges: string | string[]) =>
@@ -65,7 +70,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
         },
       };
 
-      return response.redirect(paths.TASK_LIST);
+      return response.redirect(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
     },
   );
 
@@ -77,7 +82,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
       },
     };
 
-    return response.redirect(paths.TASK_LIST);
+    return response.redirect(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
   });
 };
 
