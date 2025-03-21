@@ -4,7 +4,7 @@ import request from 'supertest';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 import testAppSetup from '../test-utils/testAppSetup';
-import { flashMock, flashMockErrors, sessionMock } from '../test-utils/testMocks';
+import { flashMock, flashMockErrors } from '../test-utils/testMocks';
 
 const app = testAppSetup();
 
@@ -66,8 +66,6 @@ describe(paths.COURT_ORDER_CHECK, () => {
         .send({ [formFields.COURT_ORDER_CHECK]: 'Yes' })
         .expect(302)
         .expect('location', paths.EXISTING_COURT_ORDER);
-
-      expect(sessionMock.courtOrderInPlace).toBe(true);
     });
 
     it('should redirect to number of children page if the answer is no', async () => {
@@ -76,8 +74,6 @@ describe(paths.COURT_ORDER_CHECK, () => {
         .send({ [formFields.COURT_ORDER_CHECK]: 'No' })
         .expect(302)
         .expect('location', paths.NUMBER_OF_CHILDREN);
-
-      expect(sessionMock.courtOrderInPlace).toBe(false);
     });
   });
 });

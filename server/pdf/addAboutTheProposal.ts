@@ -11,7 +11,7 @@ import TextComponent from './components/text';
 import FontStyles from './fontStyles';
 
 const addAboutTheProposal = (pdf: PdfBuilder, request: Request) => {
-  const { initialAdultName, courtOrderInPlace, secondaryAdultName, numberOfChildren } = request.session;
+  const { initialAdultName, secondaryAdultName, numberOfChildren } = request.session;
   const childrenNames = formattedChildrenNames(request.session);
 
   new BulletListComponent(pdf, {
@@ -30,9 +30,7 @@ const addAboutTheProposal = (pdf: PdfBuilder, request: Request) => {
       },
     ],
     bulletText: [
-      courtOrderInPlace
-        ? i18n.__('sharePlan.yourProposedPlan.courtOrder')
-        : i18n.__('sharePlan.yourProposedPlan.noCourtOrder'),
+      i18n.__('sharePlan.yourProposedPlan.noCourtOrder'),
       numberOfChildren === 1
         ? i18n.__('sharePlan.yourProposedPlan.forOneChild', { childName: childrenNames })
         : i18n.__('sharePlan.yourProposedPlan.forMultipleChildren', {

@@ -38,19 +38,5 @@
 <p class="govuk-!-font-weight-bold">{{ __('sharePlan.whatWeAreTelling.stopIfAnyConcern') | urlize | safe }}</p>
 <h3 class="govuk-heading-s">{{ __('sharePlan.whatWeAreTelling.gettingHelpHeading') }}</h3>
 <p>{{ __('sharePlan.whatWeAreTelling.gettingHelp') | urlize | safe }}</p>
-{% if values.courtOrderInPlace %}
-  <h3 class="govuk-heading-s">{{ __('sharePlan.whatWeAreTelling.courtOrderHeading') }}</h3>
-  <p>{{ __('sharePlan.whatWeAreTelling.courtOrderInPlace', {senderName: values.initialAdultName}) }}</p>
-  <p>{{ __('existingCourtOrder.ordersInclude') }}</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>{{ __('existingCourtOrder.prohibitedSteps') }}</li>
-    <li>{{ __('existingCourtOrder.specificIssue') }}</li>
-    <li>{{ __('existingCourtOrder.nonMolestation') }}</li>
-    <li>{{ __('existingCourtOrder.noContact') }}</li>
-  </ul>
-  <p>{{ __('existingCourtOrder.checkDocuments') }}</p>
-  <p class="govuk-!-font-weight-bold">{{ __('sharePlan.whatWeAreTelling.stopIfOrders') }}</p>
-  <h3 class="govuk-heading-s">{{ __('existingCourtOrder.noRestrictionsOnContactHeading') }}</h3>
-  <p>{{ __('existingCourtOrder.noRestrictionsOnContact') }}</p>
-  <p>{{ __('existingCourtOrder.changeCourtArrangements') }}</p>
-{% endif %}
+<h3 class="govuk-heading-s">{{ __('sharePlan.whatWeAreTelling.courtOrderHeading') }}</h3>
+<p>{{ __('sharePlan.whatWeAreTelling.ifCourtOrderInIsPlace') | urlize | safe }}</p>
