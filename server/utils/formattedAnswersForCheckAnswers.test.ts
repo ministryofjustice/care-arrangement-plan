@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import { SessionData } from 'express-session';
 import request from 'supertest';
 
-import { getBetweenHouseholdsField, whereHandoverField } from '../@types/fields';
+import { getBetweenHouseholdsField, planLastMinuteChangesField, whereHandoverField } from '../@types/fields';
 import setUpi18n from '../middleware/setUpi18n';
 import { sessionMock } from '../test-utils/testMocks';
 
@@ -20,6 +20,9 @@ import {
   willDaytimeVisitsHappen,
   willOvernightsHappen,
   whatOtherThingsMatter,
+  planLastMinuteChanges,
+  planLongTermNotice,
+  planReview,
 } from './formattedAnswersForCheckAnswers';
 
 const testPath = '/test';
@@ -50,6 +53,11 @@ const testAppSetup = (): Express => {
       },
       otherThings: {
         whatOtherThingsMatter: whatOtherThingsMatter(sessionMock),
+      },
+      decisionMaking: {
+        planLastMinuteChanges: planLastMinuteChanges(sessionMock),
+        planLongTermNotice: planLongTermNotice(sessionMock),
+        planReview: planReview(sessionMock),
       },
     });
   });
@@ -87,6 +95,17 @@ const session: Partial<SessionData> = {
   otherThings: {
     whatOtherThingsMatter: {
       noDecisionRequired: true,
+    },
+  },
+  decisionMaking: {
+    planLastMinuteChanges: {
+      noDecisionRequired: true,
+    },
+    planLongTermNotice: {
+      noDecisionRequired: true,
+    },
+    planReview: {
+      months: 2,
     },
   },
 };
@@ -397,6 +416,77 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.otherThings).toEqual({ whatOtherThingsMatter: answer });
+        });
+    });
+  });
+
+  describe('decisionMaking', () => {
+    it.each([
+      [
+        {
+          planLastMinuteChanges: { noDecisionRequired: true },
+          planLongTermNotice: { noDecisionRequired: true },
+          planReview: { months: 1 },
+        },
+        {
+          planLastMinuteChanges: 'We do not need to decide this',
+          planLongTermNotice: 'We do not need to decide this',
+          planReview: '1 month',
+        },
+      ],
+      [
+        {
+          planLastMinuteChanges: {
+            options: ['anotherArrangement'] as planLastMinuteChangesField[],
+            anotherArrangementDescription: 'planLastMinuteChanges answer',
+            noDecisionRequired: false,
+          },
+          planLongTermNotice: { noDecisionRequired: false, otherAnswer: 'planLongTermNotice answer' },
+          planReview: { months: 2 },
+        },
+        {
+          planLastMinuteChanges: 'planLastMinuteChanges answer',
+          planLongTermNotice: 'planLongTermNotice answer',
+          planReview: '2 months',
+        },
+      ],
+      [
+        {
+          planLastMinuteChanges: {
+            options: ['phone'] as planLastMinuteChangesField[],
+            noDecisionRequired: false,
+          },
+          planLongTermNotice: { noDecisionRequired: false, weeks: 2 },
+          planReview: { years: 1 },
+        },
+        {
+          planLastMinuteChanges: 'With a phone call',
+          planLongTermNotice: '2 weeks',
+          planReview: '1 year',
+        },
+      ],
+      [
+        {
+          planLastMinuteChanges: {
+            options: ['phone', 'app', 'text', 'email'] as planLastMinuteChangesField[],
+            noDecisionRequired: false,
+          },
+          planLongTermNotice: { noDecisionRequired: false, weeks: 4 },
+          planReview: { years: 2 },
+        },
+        {
+          planLastMinuteChanges: 'With a phone call, using a parenting app, by text message and by email',
+          planLongTermNotice: '4 weeks',
+          planReview: '2 years',
+        },
+      ],
+    ])('should return the correct value for decision making', (decisionMaking, expectedValues) => {
+      sessionMock.decisionMaking = decisionMaking;
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.decisionMaking).toEqual(expectedValues);
         });
     });
   });

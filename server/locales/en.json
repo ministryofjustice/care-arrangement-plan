@@ -345,6 +345,12 @@
       "whichDaysOvernight": "The children will stay overnight with {{ adult }} on {{ days }}",
       "whichDaysDaytimeVisits": "The children will have daytime visits with {{ adult }} on {{ days }}"
     },
+    "decisionMaking": {
+      "monthsSingular": "1 month",
+      "yearsSingular": "1 year",
+      "monthsPlural": "{{ number }} months",
+      "yearsPlural": "{{ number }} years"
+    },
     "change": {
       "text": "Change",
       "users": "the users",
@@ -446,14 +452,16 @@
       },
       "decisionMaking": {
         "planLastMinuteChanges": {
-          "howChangesCommunicated": "{{ senderName }} suggested that last minute changes should be communicated by"
+          "howChangesCommunicated": "{{ senderName }} suggested that last-minute changes should be communicated {{ methods }}."
         },
         "planLongTermNotice": {
-          "howChangesCommunicated": "{{ senderName }} suggested that you should both give each other {{ numberOfWeeks }} weeks notice to change long-term arrangements"
+          "howChangesCommunicated": "{{ senderName }} suggested that you should both give each other {{ numberOfWeeks }} weeks' notice to change long-term arrangements."
         },
         "planReview": {
-          "suggestedMonths": "{{ senderName }} suggested that you should review this arrangement in {{ numberOfMonths }} months time",
-          "suggestedYears": "{{ senderName }} suggested that you should review this arrangement in {{ numberOfYears }} years time"
+          "suggestedMonthsSingular": "{{ senderName }} suggested that you should review this arrangement in 1 month's time.",
+          "suggestedYearsSingular": "{{ senderName }} suggested that you should review this arrangement in 1 year's time.",
+          "suggestedMonthsPlural": "{{ senderName }} suggested that you should review this arrangement in {{ number }} months' time.",
+          "suggestedYearsPlural": "{{ senderName }} suggested that you should review this arrangement in {{ number }} years' time."
         }
       },
       "whatHappensNowHeading": "What happens now?",

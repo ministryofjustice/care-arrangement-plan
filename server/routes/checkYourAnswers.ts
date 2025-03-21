@@ -28,7 +28,7 @@ const checkYourAnswersRoutes = (router: Router) => {
     const { initialAdultName, secondaryAdultName } = request.session;
 
     response.render('pages/checkYourAnswers', {
-      title: `${i18n.__('checkYourAnswers.title')}`,
+      title: i18n.__('checkYourAnswers.title'),
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
       values: {
         childrenNames: formattedChildrenNames(request.session),
