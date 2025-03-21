@@ -316,8 +316,9 @@
       "phoneCall": "With a phone call",
       "email": "By email",
       "app": "Using a parenting app",
-      "selectOneOptionError": "Select a method for how you both communicate changes",
-      "descriptionEmptyError": "Describe how you will communicate changes"
+      "emptyError": "Select a method for how you both communicate changes",
+      "descriptionEmptyError": "Describe how you will communicate changes",
+      "selectOneOptionError": "Describe what other arrangement you are proposing"
     },
     "planLongTermNotice": {
       "title": "How much notice should you give to change long-term arrangements?",
