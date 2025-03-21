@@ -13,7 +13,7 @@ jest.mock('../utils/getAssetPath', () => (fileName: string) => path.resolve(__di
 const app = testAppSetup(addAboutTheProposal);
 
 describe('addAboutTheProposal', () => {
-  test('pdf matches for no court order and one child', async () => {
+  test('pdf matches for one child', async () => {
     Object.assign(sessionMock, {
       numberOfChildren: 1,
       namesOfChildren: ['James'],
@@ -22,10 +22,10 @@ describe('addAboutTheProposal', () => {
     });
 
     const response = await request(app).get(TEST_PATH);
-    validateResponseAgainstSnapshot(response.body, '../../test-assets/addAboutTheProposal-noCourtOrderOneChild.pdf');
+    validateResponseAgainstSnapshot(response.body, '../../test-assets/addAboutTheProposal-oneChild.pdf');
   });
 
-  test('pdf matches for court order and multiple children', async () => {
+  test('pdf matches for multiple children', async () => {
     Object.assign(sessionMock, {
       numberOfChildren: 3,
       namesOfChildren: ['James', 'Rachel', 'Jack'],
@@ -34,9 +34,6 @@ describe('addAboutTheProposal', () => {
     });
 
     const response = await request(app).get(TEST_PATH);
-    validateResponseAgainstSnapshot(
-      response.body,
-      '../../test-assets/addAboutTheProposal-withCourtOrderMultipleChildren.pdf',
-    );
+    validateResponseAgainstSnapshot(response.body, '../../test-assets/addAboutTheProposal-multipleChildren.pdf');
   });
 });
