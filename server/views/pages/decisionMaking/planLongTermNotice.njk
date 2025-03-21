@@ -8,6 +8,8 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+
       <form class="form" action="{{ paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
 
@@ -27,11 +29,10 @@
         {{
           govukRadios({
             name: formFields.PLAN_LONG_TERM_NOTICE,
-                          value: formValues[formFields.PLAN_LONG_TERM_NOTICE],
-
+            value: formValues[formFields.PLAN_LONG_TERM_NOTICE],
             fieldset: {
               legend: {
-                text: __('decisionMaking.planLongTermNotice.title'),
+                text: title,
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }
@@ -60,7 +61,8 @@
                 value: "anotherArrangement",
                 text: __('anotherArrangement'),
                 conditional: {
-                  html: anotherHtml}
+                  html: anotherHtml
+                }
               }
             ],
             errorMessage: errors | findError(formFields.PLAN_LONG_TERM_NOTICE)

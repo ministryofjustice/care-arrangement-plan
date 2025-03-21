@@ -269,6 +269,8 @@ describe(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES, () => {
         value: '',
       },
     ]);
+
+    expect(sessionMock.decisionMaking?.planLastMinuteChanges).toBeUndefined();
   });
 });
 
