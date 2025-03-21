@@ -4,20 +4,9 @@ import request from 'supertest';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import testAppSetup from '../../test-utils/testAppSetup';
-import { flashMock, flashMockErrors, sessionMock } from '../../test-utils/testMocks';
+import { flashFormValues, flashMock, flashMockErrors, sessionMock } from '../../test-utils/testMocks';
 
 const app = testAppSetup();
-
-beforeEach(() => {
-  sessionMock.livingAndVisiting = {
-    mostlyLive: {
-      where: 'split',
-    },
-    daytimeVisits: {
-      willHappen: true,
-    },
-  };
-});
 
 describe(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, () => {
   describe('GET', () => {
@@ -38,10 +27,12 @@ describe(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, () => {
       expect(
         dom.window.document.querySelector(`#${formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT}`),
       ).not.toHaveAttribute('aria-describedby');
+      expect(dom.window.document.querySelector(':checked')).toBeNull();
     });
 
     it('should render error flash responses correctly', async () => {
       const primaryError = 'primaryError';
+      const textError = 'textError';
       Object.assign(flashMockErrors, [
         {
           location: 'body',
@@ -49,20 +40,82 @@ describe(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, () => {
           path: `${formFields.PLAN_LONG_TERM_NOTICE}`,
           type: 'field',
         },
+        {
+          location: 'body',
+          msg: textError,
+          path: `${formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT}`,
+          type: 'field',
+        },
       ]);
       const dom = new JSDOM((await request(app).get(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE)).text);
 
+      expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
+        'There is a problem',
+      );
+      expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
+        'aria-describedby',
+        expect.stringContaining(`${formFields.PLAN_LONG_TERM_NOTICE}-error`),
+      );
       expect(dom.window.document.querySelector(`#${formFields.PLAN_LONG_TERM_NOTICE}-error`)).toHaveTextContent(
         primaryError,
       );
+      expect(
+        dom.window.document.querySelector(`#${formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT}`),
+      ).toHaveAttribute('aria-describedby', `${formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT}-error`);
+      expect(
+        dom.window.document.querySelector(`#${formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT}-error`),
+      ).toHaveTextContent(textError);
     });
 
-    it('should render previous values correctly', async () => {
+    it('should render field value flash responses correctly with other arrangement', async () => {
+      const arrangement = 'arrangement';
+      Object.assign(flashFormValues, [
+        {
+          [formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT]: arrangement,
+          [formFields.PLAN_LONG_TERM_NOTICE]: ['anotherArrangement'],
+        },
+      ]);
+
+      sessionMock.decisionMaking = {
+        planLongTermNotice: {
+          weeks: 2,
+          noDecisionRequired: false,
+        },
+      };
+
+      const dom = new JSDOM((await request(app).get(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE)).text);
+
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_LONG_TERM_NOTICE}-5`)).toBeChecked();
+      expect(
+        dom.window.document.querySelector(`#${formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT}`),
+      ).toHaveValue(arrangement);
+    });
+
+    it('should render field value flash responses correctly with specified arrangements', async () => {
+      Object.assign(flashFormValues, [
+        {
+          [formFields.PLAN_LONG_TERM_NOTICE]: 2,
+        },
+      ]);
+
+      sessionMock.decisionMaking = {
+        planLongTermNotice: {
+          otherAnswer: 'description',
+          noDecisionRequired: false,
+        },
+      };
+
+      const dom = new JSDOM((await request(app).get(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE)).text);
+
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_LONG_TERM_NOTICE}`)).toBeChecked();
+    });
+
+    it('should render previous values correctly for other arrangement', async () => {
       const description = 'My description';
 
       sessionMock.decisionMaking = {
         planLongTermNotice: {
-          otherAnwser: description,
+          otherAnswer: description,
           noDecisionRequired: false,
         },
       };
@@ -73,6 +126,19 @@ describe(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, () => {
       expect(
         dom.window.document.querySelector(`#${formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT}`),
       ).toHaveValue(description);
+    });
+
+    it('should render previous values correctly for weeks', async () => {
+      sessionMock.decisionMaking = {
+        planLongTermNotice: {
+          weeks: 2,
+          noDecisionRequired: false,
+        },
+      };
+
+      const dom = new JSDOM((await request(app).get(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE)).text);
+
+      expect(dom.window.document.querySelector(`#${formFields.PLAN_LONG_TERM_NOTICE}`)).toBeChecked();
     });
   });
 
@@ -112,9 +178,13 @@ describe(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, () => {
           value: '',
         },
       ]);
+
+      expect(sessionMock.decisionMaking?.planLongTermNotice).toBeUndefined();
     });
 
-    it(`should redirect to ${paths.DECISION_MAKING_PLAN_REVIEW} when the answer is entered and set values in the session`, async () => {
+    it(`should redirect to ${paths.DECISION_MAKING_PLAN_REVIEW} when the answer is entered and set values in the session for another arrangement`, async () => {
+      const initialDecisionMaking = { planLastMinuteChanges: { noDecisionRequired: true } };
+      sessionMock.decisionMaking = initialDecisionMaking;
       const description = 'description';
 
       await request(app)
@@ -126,50 +196,48 @@ describe(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, () => {
         .expect(302)
         .expect('location', paths.DECISION_MAKING_PLAN_REVIEW);
 
-      expect(sessionMock.decisionMaking.planLongTermNotice).toEqual({
-        otherAnwser: description,
-        noDecisionRequired: false,
+      expect(sessionMock.decisionMaking).toEqual({
+        ...initialDecisionMaking,
+        planLongTermNotice: {
+          otherAnswer: description,
+          noDecisionRequired: false,
+        },
       });
-    });
-
-    it(`must have description if anotherArrangement is set`, async () => {
-      const options = 'anotherArrangement';
-
-      await request(app)
-        .post(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE)
-        .send({
-          [formFields.PLAN_LONG_TERM_NOTICE]: options,
-        })
-        .expect(302)
-        .expect('location', paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
-
-      expect(sessionMock.decisionMaking?.planLongTermNotice).toBeUndefined();
     });
   });
 
-  it('should render plan review and set session values', async () => {
-    const answer = 'response';
+  it('should render plan review and set session values for weeks', async () => {
+    const initialDecisionMaking = { planLastMinuteChanges: { noDecisionRequired: true } };
+    sessionMock.decisionMaking = initialDecisionMaking;
 
     await request(app)
       .post(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE)
       .send({
-        [formFields.PLAN_LONG_TERM_NOTICE]: 'anotherArrangement',
-        [formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT]: answer,
+        [formFields.PLAN_LONG_TERM_NOTICE]: '2',
       })
       .expect(302)
       .expect('location', paths.DECISION_MAKING_PLAN_REVIEW);
 
-    expect(sessionMock.decisionMaking.planLongTermNotice).toEqual({ noDecisionRequired: false, otherAnwser: answer });
+    expect(sessionMock.decisionMaking).toEqual({
+      ...initialDecisionMaking,
+      planLongTermNotice: { noDecisionRequired: false, weeks: 2 },
+    });
   });
 });
 
 describe(`POST ${paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE_CHANGES_NOT_REQUIRED}`, () => {
   it('should redirect to items for changeover when the answer is entered and set session values', async () => {
+    const initialDecisionMaking = { planLastMinuteChanges: { noDecisionRequired: true } };
+    sessionMock.decisionMaking = initialDecisionMaking;
+
     await request(app)
       .post(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE_CHANGES_NOT_REQUIRED)
       .expect(302)
       .expect('location', paths.DECISION_MAKING_PLAN_REVIEW);
 
-    expect(sessionMock.decisionMaking.planLongTermNotice).toEqual({ noDecisionRequired: true });
+    expect(sessionMock.decisionMaking).toEqual({
+      ...initialDecisionMaking,
+      planLongTermNotice: { noDecisionRequired: true },
+    });
   });
 });

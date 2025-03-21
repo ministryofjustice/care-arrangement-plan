@@ -13,7 +13,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
 
     const formValues = {
       [formFields.PLAN_LAST_MINUTE_CHANGES]: planLastMinuteChanges?.options,
-      [formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT]: planLastMinuteChanges?.anotherArrangmentDescription,
+      [formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT]: planLastMinuteChanges?.anotherArrangementDescription,
       ...request.flash('formValues')?.[0],
     };
     response.render('pages/decisionMaking/planLastMinuteChanges', {
@@ -26,22 +26,22 @@ const planLastMinuteChangesRoutes = (router: Router) => {
 
   router.post(
     paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES,
-    body(formFields.PLAN_LAST_MINUTE_CHANGES)
-      .notEmpty()
-      .withMessage((_value, { req }) => req.__('decisionMaking.planLastMinuteChanges.selectOneOptionError'))
-      .toArray()
-      .bail(),
     body(formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT)
       .if(body(formFields.PLAN_LAST_MINUTE_CHANGES).equals('anotherArrangement'))
       .trim()
       .notEmpty()
-      .withMessage((_value, { req }) => req.__('decisionMaking.planLastMinuteChanges.descriptionEmptyError'))
-      .bail(),
-    body(formFields.PLAN_LAST_MINUTE_CHANGES).custom(
-      // This is prevented by JS in the page, but possible for people with JS disabled to submit
-      (planLastMinuteChanges: string | string[]) =>
-        !(planLastMinuteChanges.length > 1 && planLastMinuteChanges.includes('anotherArrangement')),
-    ),
+      .withMessage((_value, { req }) => req.__('decisionMaking.planLastMinuteChanges.descriptionEmptyError')),
+    body(formFields.PLAN_LAST_MINUTE_CHANGES)
+      .notEmpty()
+      .withMessage((_value, { req }) => req.__('decisionMaking.planLastMinuteChanges.emptyError'))
+      .toArray(),
+    body(formFields.PLAN_LAST_MINUTE_CHANGES)
+      .custom(
+        // This is prevented by JS in the page, but possible for people with JS disabled to submit
+        (planLastMinuteChanges: string | string[]) =>
+          !(planLastMinuteChanges.length > 1 && planLastMinuteChanges.includes('anotherArrangement')),
+      )
+      .withMessage((_value, { req }) => req.__('decisionMaking.planLastMinuteChanges.selectOneOptionError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT]: string;
@@ -66,7 +66,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
         planLastMinuteChanges: {
           noDecisionRequired: false,
           options,
-          anotherArrangmentDescription: options.includes('anotherArrangement') ? describeArrangement : undefined,
+          anotherArrangementDescription: options.includes('anotherArrangement') ? describeArrangement : undefined,
         },
       };
 

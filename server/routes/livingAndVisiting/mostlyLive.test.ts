@@ -100,7 +100,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-5`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-5`)).toBeChecked();
       expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).toHaveValue(
         arrangement,
       );
@@ -118,7 +118,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-5`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-5`)).toBeChecked();
       expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).toHaveValue(
         arrangement,
       );

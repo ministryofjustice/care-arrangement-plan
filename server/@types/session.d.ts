@@ -75,12 +75,12 @@ export type CAPSession = {
   decisionMaking?: {
     planLastMinuteChanges?: {
       options?: planLastMinuteChangesField[];
-      anotherArrangmentDescription?: string;
+      anotherArrangementDescription?: string;
       noDecisionRequired: boolean;
     };
     planLongTermNotice?: {
       weeks?: number;
-      otherAnwser?: string;
+      otherAnswer?: string;
       noDecisionRequired: boolean;
     };
     planReview?: {

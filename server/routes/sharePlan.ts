@@ -27,7 +27,7 @@ const sharePlanRoutes = (router: Router) => {
     const childrenNames = formattedChildrenNames(request.session);
 
     response.render('pages/sharePlan', {
-      title: `${i18n.__('sharePlan.title', { names: childrenNames })}`,
+      title: i18n.__('sharePlan.title', { names: childrenNames }),
       values: {
         ...request.session,
         childrenNames,

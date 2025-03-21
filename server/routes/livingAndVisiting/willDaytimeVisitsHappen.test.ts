@@ -82,7 +82,7 @@ describe(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, () => {
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.WILL_DAYTIME_VISITS_HAPPEN}`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WILL_DAYTIME_VISITS_HAPPEN}`)).toBeChecked();
     });
 
     it('should render field value of no correctly', async () => {

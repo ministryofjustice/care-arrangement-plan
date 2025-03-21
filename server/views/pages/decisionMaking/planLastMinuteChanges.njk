@@ -7,8 +7,14 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+
       <form class="form" action="plan-last-minute-changes" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {% set hintHtml %}
+          <p>{{ __('decisionMaking.planLastMinuteChanges.howChangesCommunicatedAdditionalDescription') }}</p>
+          <p>{{ __('selectAllThatApply') }}</p>
+        {% endset -%}
 
         {% set anotherHtml %}
           {{
@@ -28,13 +34,13 @@
             name: formFields.PLAN_LAST_MINUTE_CHANGES,
             fieldset: {
               legend: {
-                text: __('decisionMaking.planLastMinuteChanges.title'),
+                text: title,
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }
             },
             hint: {
-              text: __('decisionMaking.planLastMinuteChanges.howChangesCommunicatedAdditionalDescription')
+              html: hintHtml
             },
             items: [
               {

@@ -27,7 +27,7 @@ const addPlanLongTermNotice = (pdf: PdfBuilder, request: Request) => {
     i18n.__('decisionMaking.planLongTermNotice.title'),
     i18n.__('decisionMaking.planLongTermNotice.sometimesYouNeedToPlanAhead'),
     planLongTermNotice(request.session),
-    i18n.__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLastMinuteChanges'),
+    i18n.__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLongTermNotice'),
   );
 };
 
@@ -38,7 +38,7 @@ const addPlanReview = (pdf: PdfBuilder, request: Request) => {
     i18n.__('decisionMaking.planReview.title'),
     i18n.__('decisionMaking.planReview.childrensNeedsChange'),
     planReview(request.session),
-    i18n.__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLastMinuteChanges'),
+    i18n.__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planReview'),
   );
 };
 

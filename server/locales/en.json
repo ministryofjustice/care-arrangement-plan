@@ -311,13 +311,14 @@
     "planLastMinuteChanges": {
       "title": "How should last-minute changes be communicated?",
       "anotherDescriptionLabel": "Describe the arrangement",
-      "howChangesCommunicatedAdditionalDescription": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school. Select all that apply.",
+      "howChangesCommunicatedAdditionalDescription": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.",
       "textMessage": "By text message",
       "phoneCall": "With a phone call",
       "email": "By email",
       "app": "Using a parenting app",
-      "selectOneOptionError": "Select a method for how you both communicate changes",
-      "descriptionEmptyError": "Describe how you will communicate changes"
+      "emptyError": "Select a method for how you both communicate changes",
+      "descriptionEmptyError": "Describe how you will communicate changes",
+      "selectOneOptionError": "Describe what other arrangement you are proposing"
     },
     "planLongTermNotice": {
       "title": "How much notice should you give to change long-term arrangements?",
@@ -343,6 +344,12 @@
     "livingAndVisiting": {
       "whichDaysOvernight": "The children will stay overnight with {{ adult }} on {{ days }}",
       "whichDaysDaytimeVisits": "The children will have daytime visits with {{ adult }} on {{ days }}"
+    },
+    "decisionMaking": {
+      "monthsSingular": "1 month",
+      "yearsSingular": "1 year",
+      "monthsPlural": "{{ number }} months",
+      "yearsPlural": "{{ number }} years"
     },
     "change": {
       "text": "Change",
@@ -445,14 +452,16 @@
       },
       "decisionMaking": {
         "planLastMinuteChanges": {
-          "howChangesCommunicated": "{{ senderName }} suggested that last minute changes should be communicated by"
+          "howChangesCommunicated": "{{ senderName }} suggested that last-minute changes should be communicated {{ methods }}."
         },
         "planLongTermNotice": {
-          "howChangesCommunicated": "{{ senderName }} suggested that you should both give each other {{ numberOfWeeks }} weeks notice to change long-term arrangements"
+          "howChangesCommunicated": "{{ senderName }} suggested that you should both give each other {{ numberOfWeeks }} weeks' notice to change long-term arrangements."
         },
         "planReview": {
-          "suggestedMonths": "{{ senderName }} suggested that you should review this arrangement in {{ numberOfMonths }} months time",
-          "suggestedYears": "{{ senderName }} suggested that you should review this arrangement in {{ numberOfYears }} years time"
+          "suggestedMonthsSingular": "{{ senderName }} suggested that you should review this arrangement in 1 month's time.",
+          "suggestedYearsSingular": "{{ senderName }} suggested that you should review this arrangement in 1 year's time.",
+          "suggestedMonthsPlural": "{{ senderName }} suggested that you should review this arrangement in {{ number }} months' time.",
+          "suggestedYearsPlural": "{{ senderName }} suggested that you should review this arrangement in {{ number }} years' time."
         }
       },
       "whatHappensNowHeading": "What happens now?",

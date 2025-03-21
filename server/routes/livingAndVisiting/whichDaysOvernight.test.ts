@@ -93,7 +93,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)).text);
 
       expect(dom.window.document.querySelectorAll(':checked')).toHaveLength(1);
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}-9`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}-9`)).toBeChecked();
       expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT_DESCRIBE_ARRANGEMENT}`)).toHaveValue(
         arrangement,
       );
@@ -113,8 +113,8 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)).text);
 
       expect(dom.window.document.querySelectorAll(':checked')).toHaveLength(2);
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}`)).toHaveAttribute('checked');
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}-4`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}-4`)).toBeChecked();
     });
 
     it('should render existing values correctly for other arrangement', async () => {
@@ -127,7 +127,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)).text);
 
       expect(dom.window.document.querySelectorAll(':checked')).toHaveLength(1);
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}-9`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}-9`)).toBeChecked();
       expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT_DESCRIBE_ARRANGEMENT}`)).toHaveValue(
         arrangement,
       );
@@ -141,8 +141,8 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)).text);
 
       expect(dom.window.document.querySelectorAll(':checked')).toHaveLength(2);
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}`)).toHaveAttribute('checked');
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}-4`)).toHaveAttribute('checked');
+      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.WHICH_DAYS_OVERNIGHT}-4`)).toBeChecked();
     });
   });
 
@@ -182,9 +182,10 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
     });
 
     it('should reload page and set flash when the checkboxes is other and a day', async () => {
+      const options = ['other', 'monday'];
       await request(app)
         .post(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT)
-        .send({ [formFields.WHICH_DAYS_OVERNIGHT]: ['other', 'monday'] })
+        .send({ [formFields.WHICH_DAYS_OVERNIGHT]: options })
         .expect(302)
         .expect('location', paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT);
 
@@ -194,7 +195,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
           msg: 'Describe what other arrangement you are proposing',
           path: formFields.WHICH_DAYS_OVERNIGHT,
           type: 'field',
-          value: ['other', 'monday'],
+          value: options,
         },
       ]);
     });
