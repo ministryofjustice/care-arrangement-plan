@@ -29,11 +29,6 @@ class Textbox extends TextComponent {
     this.pdf.drawBorder(MARGIN_WIDTH, this.pdf.currentY, this.pdf.maxPageWidth, this.TEXTBOX_HEIGHT);
     this.pdf.currentY += this.TEXTBOX_HEIGHT + PARAGRAPH_SPACE;
   }
-
-  protected handleComponentOverflowingPage() {
-    this.pdf.createNewPage();
-    this.createComponent();
-  }
 }
 
 export default Textbox;

@@ -4,7 +4,7 @@ import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
 
 import DoYouAgreeComponent from './components/doYouAgree';
-import TextComponent from './components/text';
+import SplittableTextComponent from './components/splittableText';
 import TextboxComponent from './components/textbox';
 import FontStyles from './fontStyles';
 
@@ -18,7 +18,7 @@ const addAnswer = (
 ) => {
   if (!answer) return;
 
-  new TextComponent(
+  new SplittableTextComponent(
     pdf,
     [
       sectionHeading
@@ -48,6 +48,7 @@ const addAnswer = (
         size: MAIN_TEXT_SIZE,
         style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
+        splittable: true,
       },
     ].filter((paragraph) => !!paragraph),
   ).addComponentToDocument();

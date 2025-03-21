@@ -9,6 +9,7 @@ import {
   MM_PER_POINT,
   PARAGRAPH_SPACE,
 } from '../../constants/pdfConstants';
+import logger from '../../logger';
 import FontStyles from '../fontStyles';
 
 import BaseComponent from './base';
@@ -19,11 +20,8 @@ class DoYouAgree extends BaseComponent {
   private currentX = MARGIN_WIDTH;
 
   private readonly CHECKBOX_SIZE = 10;
-
   private readonly CHECKBOX_HORIZONTAL_GAP = 7;
-
   private readonly CHECKBOX_TEXT_GAP = 3;
-
   private readonly doYouAgreeParagraph: Paragraph;
 
   constructor(pdf: PdfBuilder, text: string) {
@@ -82,6 +80,9 @@ class DoYouAgree extends BaseComponent {
 
   protected handleComponentOverflowingPage() {
     this.pdf.createNewPage();
+    if (this.pdf.heightWillOverflowDocument(this.getComponentHeight())) {
+      logger.error('Creating a PDF with an overflowing page');
+    }
     this.createComponent();
   }
 }

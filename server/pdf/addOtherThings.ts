@@ -7,6 +7,7 @@ import { whatOtherThingsMatter } from '../utils/formattedAnswersForPdf';
 
 import BulletListComponent from './components/bulletList';
 import DoYouAgreeComponent from './components/doYouAgree';
+import SplittableTextComponent from './components/splittableText';
 import TextboxComponent from './components/textbox';
 import FontStyles from './fontStyles';
 
@@ -38,15 +39,17 @@ const addOtherThings = (pdf: PdfBuilder, request: Request) => {
       i18n.__('otherThings.whatOtherThingsMatter.friendsAndFamily'),
       i18n.__('otherThings.whatOtherThingsMatter.otherContact'),
     ],
-    finalText: [
-      {
-        text: whatOtherThingsMatter(request.session),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
-    ],
   }).addComponentToDocument();
+
+  new SplittableTextComponent(pdf, [
+    {
+      text: whatOtherThingsMatter(request.session),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+      splittable: true,
+    },
+  ]).addComponentToDocument();
 
   new DoYouAgreeComponent(pdf, i18n.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument();
 
