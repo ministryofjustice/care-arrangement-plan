@@ -1,4 +1,3 @@
-import { Express } from 'express';
 import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
@@ -6,8 +5,9 @@ import config from './config';
 import cookieNames from './constants/cookieNames';
 import paths from './constants/paths';
 import testAppSetup from './test-utils/testAppSetup';
+import { mockNow } from './test-utils/testMocks';
 
-let app: Express;
+const app = testAppSetup();
 
 type languages = 'en' | 'cy';
 const homepageLanguageStrings = {
@@ -20,7 +20,6 @@ describe('App', () => {
     describe('when welsh is enabled', () => {
       beforeEach(() => {
         config.includeWelshLanguage = true;
-        app = testAppSetup();
       });
 
       it.each(['en', 'cy'])('should return %s when the Accept-Language header is %s', (language: languages) => {
@@ -46,11 +45,10 @@ describe('App', () => {
     describe('when welsh is disabled', () => {
       beforeEach(() => {
         config.includeWelshLanguage = false;
-        app = testAppSetup();
       });
 
       it.each(['en', 'cy'])('should return en when the Accept-Language header is %s', (language) => {
-        return request(app)
+        return request(testAppSetup())
           .get(paths.START)
           .set('Accept-Language', language)
           .expect((response) => {
@@ -60,7 +58,7 @@ describe('App', () => {
       });
 
       it.each(['en', 'cy'])('should return en when the lang query parameter is %s', (language) => {
-        return request(app)
+        return request(testAppSetup())
           .get(`${paths.START}?lang=${language}`)
           .expect((response) => {
             expect(response.text).toContain(`lang="en"`);
@@ -74,7 +72,6 @@ describe('App', () => {
     describe('when there is no GA4 ID', () => {
       beforeEach(() => {
         config.analytics.ga4Id = undefined;
-        app = testAppSetup();
       });
 
       it.each([undefined, JSON.stringify({ acceptAnalytics: 'No' }), JSON.stringify({ acceptAnalytics: 'Yes' })])(
@@ -98,7 +95,6 @@ describe('App', () => {
 
       beforeEach(() => {
         config.analytics.ga4Id = ga4Id;
-        app = testAppSetup();
       });
 
       it('should show the banner and not load ga4 if the consent cookie does not exist', async () => {
@@ -168,6 +164,32 @@ describe('App', () => {
 
     it.each(pathsWithNoAuthentication)('should not redirect to password page for %s when not authenticated', (path) => {
       return request(app).get(path).expect(200);
+    });
+  });
+
+  describe('Preview end', () => {
+    beforeEach(() => {
+      config.useAuth = false;
+    });
+
+    it('should return the service not available page after the preview end date', () => {
+      config.previewEnd = new Date(mockNow.getTime() - 24 * 60 * 60 * 1000); // one day ago
+
+      return request(app)
+        .get(paths.START)
+        .expect((response) => {
+          expect(response.text).toContain('The private view of this service is now finished');
+        });
+    });
+
+    it('should return the normal page before the preview end date', () => {
+      config.previewEnd = new Date(mockNow.getTime() + 24 * 60 * 60 * 1000); // one day ago
+
+      return request(app)
+        .get(paths.START)
+        .expect((response) => {
+          expect(response.text).toContain(homepageLanguageStrings['en']);
+        });
     });
   });
 });

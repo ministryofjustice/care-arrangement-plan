@@ -7,6 +7,7 @@ import setupAuthentication from '../middleware/setupAuthentication';
 import setupHistory from '../middleware/setupHistory';
 import setUpi18n from '../middleware/setUpi18n';
 import setUpWebRequestParsing from '../middleware/setupRequestParsing';
+import setupServiceNoLongerAvailable from '../middleware/setupServiceNoLongerAvailable';
 import routes from '../routes';
 import unauthenticatedRoutes from '../routes/unauthenticatedRoutes';
 import nunjucksSetup from '../utils/nunjucksSetup';
@@ -26,6 +27,7 @@ const testAppSetup = (): Express => {
   app.use(setUpWebRequestParsing());
   app.use(setupAnalytics());
   app.use(setupHistory());
+  app.use(setupServiceNoLongerAvailable());
   app.use(unauthenticatedRoutes());
   app.use(setupAuthentication());
   app.use(routes());
