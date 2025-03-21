@@ -1,4 +1,3 @@
-import { Express } from 'express';
 import request from 'supertest';
 
 import config from '../config';
@@ -8,7 +7,7 @@ import paths from '../constants/paths';
 import testAppSetup from '../test-utils/testAppSetup';
 import { flashMock, flashMockErrors } from '../test-utils/testMocks';
 
-let app: Express;
+const app = testAppSetup();
 
 const testPassword1 = 'testPassword';
 const testPassword2 = 'testPassword2';
@@ -19,7 +18,6 @@ describe('Password Handler', () => {
   describe('GET', () => {
     beforeEach(() => {
       config.useAuth = true;
-      app = testAppSetup();
     });
 
     it('should return password page without error', () =>
@@ -55,8 +53,6 @@ describe('Password Handler', () => {
         config.useAuth = true;
         config.passwords = [testPassword1, testPassword2];
         config.useHttps = true;
-
-        app = testAppSetup();
       });
 
       describe('and the password is correct', () => {

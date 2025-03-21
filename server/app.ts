@@ -10,6 +10,7 @@ import setUpHealthCheck from './middleware/setUpHealthCheck';
 import setUpi18n from './middleware/setUpi18n';
 import setupRequestLogging from './middleware/setupRequestLogging';
 import setUpWebRequestParsing from './middleware/setupRequestParsing';
+import setupServiceNoLongerAvailable from './middleware/setupServiceNoLongerAvailable';
 import setUpStaticResources from './middleware/setUpStaticResources';
 import setUpWebSecurity from './middleware/setUpWebSecurity';
 import setUpWebSession from './middleware/setUpWebSession';
@@ -34,6 +35,7 @@ const createApp = (): express.Application => {
   app.use(setUpCsrf());
   app.use(setupAnalytics());
   app.use(setupRequestLogging());
+  app.use(setupServiceNoLongerAvailable());
   app.use(unauthenticatedRoutes());
   app.use(setupAuthentication());
   app.use(routes());
