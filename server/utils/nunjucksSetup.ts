@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 
 import express from 'express';
-import { FieldValidationError } from 'express-validator';
 import i18n from 'i18n';
 import { configure as configureNunjucks } from 'nunjucks';
 
@@ -13,6 +12,9 @@ import paths from '../constants/paths';
 import logger from '../logger';
 
 import getAssetPath from './getAssetPath';
+import errorSummaryList from './nunjucksHelpers/errorSummaryList';
+import findError from './nunjucksHelpers/findError';
+import urlize from './nunjucksHelpers/urlize';
 
 const nunjucksSetup = (app: express.Express): void => {
   app.set('view engine', 'njk');
@@ -46,26 +48,9 @@ const nunjucksSetup = (app: express.Express): void => {
   njkEnv.addGlobal('cookieNames', cookieNames);
   njkEnv.addGlobal('__', i18n.__);
   njkEnv.addGlobal('getLocale', () => i18n.getLocale);
-  // find specific error and return errorMessage for field validation
-  njkEnv.addFilter('findError', (errors: FieldValidationError[], formFieldId: string) => {
-    if (!errors) return null;
-    const errorForMessage = errors.find((error) => error.path === formFieldId);
-
-    if (errorForMessage === undefined) return null;
-
-    return {
-      text: errorForMessage?.msg,
-    };
-  });
-  // convert errors to format for GOV.UK error summary component
-  njkEnv.addFilter('errorSummaryList', (errors = []) => {
-    return Object.keys(errors).map((error) => {
-      return {
-        text: errors[error].msg,
-        href: errors[error].path ? `#${errors[error].path}-error` : undefined,
-      };
-    });
-  });
+  njkEnv.addFilter('findError', findError);
+  njkEnv.addFilter('errorSummaryList', errorSummaryList);
+  njkEnv.addFilter('customUrlize', urlize);
 };
 
 export default nunjucksSetup;

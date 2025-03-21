@@ -6,7 +6,9 @@
       <h1 class="govuk-heading-l">{{ title }}</h1>
       <h2 class="govuk-heading-m">{{ __('accessibilityStatement.meetingNeeds') }}</h2>
       <p>{{ __('accessibilityStatement.availableToSmallGroup') }}</p>
-      <p>{{ __('accessibilityStatement.usableToAsManyAsPossible', { contactEmail: contactEmail }) | urlize | safe }}</p>
+      <p>
+        {{ __('accessibilityStatement.usableToAsManyAsPossible', { contactEmail: contactEmail }) | customUrlize | safe }}
+      </p>
       <p>{{ __('accessibilityStatement.statementPrepared') }}</p>
       <p>{{ __('accessibilityStatement.previewEnds', { previewEnd: previewEnd }) }}</p>
     </div>

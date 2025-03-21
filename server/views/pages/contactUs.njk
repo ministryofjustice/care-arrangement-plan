@@ -5,7 +5,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
       <p>{{ __('contactUs.reportProblem') }}</p>
-      <p>{{ contactEmail | urlize | safe }}</p>
+      <p>{{ contactEmail | customUrlize | safe }}</p>
       <p>{{ __('contactUs.onlyUseForFeedback') }}</p>
       <p>{{ __('contactUs.cannotAnswerQuestions') }}</p>
     </div>
