@@ -14,6 +14,7 @@ const pathsNotForHistory = [
   paths.COOKIES,
   paths.PRIVACY_NOTICE,
   paths.TERMS_AND_CONDITIONS,
+  paths.EXISTING_COURT_ORDER,
 ];
 const pathsForHistory = Object.values(paths).filter((path) => !pathsNotForHistory.includes(path));
 

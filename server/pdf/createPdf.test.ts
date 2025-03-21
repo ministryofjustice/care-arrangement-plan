@@ -14,7 +14,6 @@ const app = testAppSetup();
 describe('createPdf', () => {
   test('returns the expected pdf', async () => {
     Object.assign(sessionMock, {
-      courtOrderInPlace: true,
       numberOfChildren: 3,
       namesOfChildren: ['James', 'Rachel', 'Jack'],
       initialAdultName: 'Bob',

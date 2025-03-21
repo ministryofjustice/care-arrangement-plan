@@ -163,17 +163,9 @@
     "error": "Select whether you have a court order in place currently"
   },
   "existingCourtOrder": {
-    "title": "If you have a court order",
-    "ifYouHaveACourtOrder": "If you have an order in place that sets out restrictions on contact with your children or ex-partner, do not use this service.",
-    "ordersInclude": "This type of order may include:",
-    "prohibitedSteps": "a prohibited steps order",
-    "specificIssue": "a specific issue order",
-    "nonMolestation": "a non-molestation order",
-    "noContact": "a no contact order",
-    "checkDocuments": "Check any legal documents sent to you by a court to see whether you have any of these types of restrictions.",
-    "noRestrictionsOnContactHeading": "If you do not have any restrictions on contact",
-    "noRestrictionsOnContact": "If you do not have any restrictions on contact with your children or ex-partner, you can use this service.",
-    "changeCourtArrangements": "You can use this service to change child arrangements given to you by a court, so long as the other parent or carer agrees with the changes. You do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order."
+    "title": "Do not continue",
+    "doNotUse": "Do not use this service if you have a court order in place.",
+    "getHelpChangingCourtOrder": "Get help on <a href=\"https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order\">changing or enforcing a court order</a>."
   },
   "numberOfChildren": {
     "title": "How many children is this for?",
@@ -410,8 +402,8 @@
       "stopIfAnyConcern": "If you have any concerns about safety, stop now. Find another way to make arrangements by visiting https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements.",
       "gettingHelpHeading": "Getting help with abuse and domestic violence",
       "gettingHelp": "To find out more about what is child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse. If you’re unsure whether you’re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
-      "courtOrderHeading": "As there is a court order in place",
-      "courtOrderInPlace": "{{ senderName }} has told us there is a court order in place. If you have an order in place that sets out restrictions on contact with your children or ex-partner, you should find a different way to make your child arrangements.",
+      "courtOrderHeading": "If there is a court order in place",
+      "ifCourtOrderInIsPlace": "If there is a court order in place, do not continue. To change or enforce an existing order, visit https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order.",
       "stopIfOrders": "If you have one of these types of order, stop now and find another way to agree your child arrangements."
     },
     "yourProposedPlan": {
@@ -422,7 +414,6 @@
       "senderSuggestedDoNotDecide": "{{ senderName }} suggested that this does not need to be decided.",
       "doYouAgree": "Do you agree?",
       "endOfSection": "End of section",
-      "courtOrder": "there is a court order in place at this time",
       "noCourtOrder": "there is no court order in place at this time",
       "forOneChild": "this is a proposed child arrangements plan for 1 child, {{ childName }}",
       "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{ childrenNames }}",

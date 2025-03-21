@@ -158,72 +158,20 @@ const addPreamble = (pdf: PdfBuilder, request: Request) => {
     },
   ]).addComponentToDocument();
 
-  if (request.session.courtOrderInPlace) {
-    new BulletListComponent(pdf, {
-      initialText: [
-        {
-          text: i18n.__('sharePlan.whatWeAreTelling.courtOrderHeading'),
-          size: QUESTION_TITLE_SIZE,
-          style: FontStyles.BOLD,
-          bottomPadding: PARAGRAPH_SPACE,
-        },
-        {
-          text: i18n.__('sharePlan.whatWeAreTelling.courtOrderInPlace', {
-            senderName: request.session.initialAdultName,
-          }),
-          size: MAIN_TEXT_SIZE,
-          style: FontStyles.NORMAL,
-          bottomPadding: PARAGRAPH_SPACE,
-        },
-        {
-          text: i18n.__('existingCourtOrder.ordersInclude'),
-          size: MAIN_TEXT_SIZE,
-          style: FontStyles.NORMAL,
-          bottomPadding: PARAGRAPH_SPACE,
-        },
-      ],
-      bulletText: [
-        i18n.__('existingCourtOrder.prohibitedSteps'),
-        i18n.__('existingCourtOrder.specificIssue'),
-        i18n.__('existingCourtOrder.nonMolestation'),
-        i18n.__('existingCourtOrder.noContact'),
-      ],
-      finalText: [
-        {
-          text: i18n.__('existingCourtOrder.checkDocuments'),
-          size: MAIN_TEXT_SIZE,
-          style: FontStyles.NORMAL,
-          bottomPadding: PARAGRAPH_SPACE,
-        },
-        {
-          text: i18n.__('sharePlan.whatWeAreTelling.stopIfOrders'),
-          size: MAIN_TEXT_SIZE,
-          style: FontStyles.BOLD,
-          bottomPadding: PARAGRAPH_SPACE,
-        },
-      ],
-    }).addComponentToDocument();
-    new TextComponent(pdf, [
-      {
-        text: i18n.__('existingCourtOrder.noRestrictionsOnContactHeading'),
-        size: QUESTION_TITLE_SIZE,
-        style: FontStyles.BOLD,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
-      {
-        text: i18n.__('existingCourtOrder.noRestrictionsOnContact'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
-      {
-        text: i18n.__('existingCourtOrder.changeCourtArrangements'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
-    ]).addComponentToDocument();
-  }
+  new TextComponent(pdf, [
+    {
+      text: i18n.__('sharePlan.whatWeAreTelling.courtOrderHeading'),
+      size: QUESTION_TITLE_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+    {
+      text: i18n.__('sharePlan.whatWeAreTelling.ifCourtOrderInIsPlace'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+  ]).addComponentToDocument();
 };
 
 export default addPreamble;

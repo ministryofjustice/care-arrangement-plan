@@ -33,10 +33,8 @@ const courtOrderCheckRoutes = (router: Router) => {
       }>(request);
 
       if (existingCourtOrder === 'Yes') {
-        request.session.courtOrderInPlace = true;
         return response.redirect(paths.EXISTING_COURT_ORDER);
       }
-      request.session.courtOrderInPlace = false;
       return response.redirect(paths.NUMBER_OF_CHILDREN);
     },
   );

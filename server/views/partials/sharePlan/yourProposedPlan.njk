@@ -5,9 +5,7 @@
 
 <p class="govuk-body">{{ __('sharePlan.yourProposedPlan.senderSaid', {senderName: values.initialAdultName}) }}</p>
 <ul class="govuk-list govuk-list--bullet">
-  <li>
-    {{ __('sharePlan.yourProposedPlan.courtOrder' if values.courtOrderInPlace else 'sharePlan.yourProposedPlan.noCourtOrder') }}
-  </li>
+  <li>{{ __('sharePlan.yourProposedPlan.noCourtOrder') }}</li>
   <li>
     {% if values.numberOfChildren === 1 %}
       {{ __('sharePlan.yourProposedPlan.forOneChild', {childName: values.childrenNames}) }}

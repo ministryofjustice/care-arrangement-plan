@@ -13,7 +13,6 @@ export type WhichDays = {
 };
 
 export type CAPSession = {
-  courtOrderInPlace: boolean;
   numberOfChildren: number;
   namesOfChildren: string[];
   initialAdultName: string;

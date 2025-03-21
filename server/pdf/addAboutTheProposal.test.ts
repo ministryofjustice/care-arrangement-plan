@@ -15,7 +15,6 @@ const app = testAppSetup(addAboutTheProposal);
 describe('addAboutTheProposal', () => {
   test('pdf matches for no court order and one child', async () => {
     Object.assign(sessionMock, {
-      courtOrderInPlace: false,
       numberOfChildren: 1,
       namesOfChildren: ['James'],
       initialAdultName: 'Bob',
@@ -28,7 +27,6 @@ describe('addAboutTheProposal', () => {
 
   test('pdf matches for court order and multiple children', async () => {
     Object.assign(sessionMock, {
-      courtOrderInPlace: true,
       numberOfChildren: 3,
       namesOfChildren: ['James', 'Rachel', 'Jack'],
       initialAdultName: 'Bob',

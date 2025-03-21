@@ -15,7 +15,6 @@ const app = testAppSetup(addPreamble);
 describe('addPreamble', () => {
   test('pdf matches for no court order', async () => {
     Object.assign(sessionMock, {
-      courtOrderInPlace: false,
       numberOfChildren: 3,
       namesOfChildren: ['James', 'Rachel', 'Jack'],
       initialAdultName: 'Bob',
@@ -28,7 +27,6 @@ describe('addPreamble', () => {
 
   test('pdf matches for court order', async () => {
     Object.assign(sessionMock, {
-      courtOrderInPlace: true,
       numberOfChildren: 3,
       namesOfChildren: ['James', 'Rachel', 'Jack'],
       initialAdultName: 'Bob',
