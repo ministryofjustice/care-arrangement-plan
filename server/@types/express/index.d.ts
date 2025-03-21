@@ -5,6 +5,7 @@ export declare module 'express-session' {
   interface SessionData extends CAPSession {
     nowInMinutes: number;
     pageHistory: string[];
+    previousPage: string;
   }
 }
 

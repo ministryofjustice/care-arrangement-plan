@@ -20,7 +20,7 @@ const pathsForHistory = Object.values(paths).filter((path) => !pathsNotForHistor
 const setupHistory = (): Router => {
   const router = Router();
 
-  router.get('*', (request, response, next) => {
+  router.get('*', (request, _response, next) => {
     const requestUrl = request.originalUrl;
 
     if (requestUrl === paths.TASK_LIST) {
@@ -42,6 +42,9 @@ const setupHistory = (): Router => {
       if (request.session.pageHistory.length >= 20) {
         request.session.pageHistory.shift();
       }
+      request.session.previousPage = request.session.pageHistory[request.session.pageHistory.length - 2];
+    } else {
+      request.session.previousPage = request.session.pageHistory?.[request.session.pageHistory.length - 1];
     }
     next();
   });

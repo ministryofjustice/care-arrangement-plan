@@ -60,10 +60,4 @@ export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
 
 export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;
 
-export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => {
-  // most recent value is the page for the current request
-  if (session.pageHistory && session.pageHistory.length > 1) {
-    return session.pageHistory[session.pageHistory.length - 2];
-  }
-  return defaultUrl;
-};
+export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => session.previousPage || defaultUrl;

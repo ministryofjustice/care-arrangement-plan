@@ -1,6 +1,6 @@
 import { CAPSession } from '../@types/session';
 
-import { getBackUrl, mostlyLiveComplete, willChangeDuringSchoolHolidaysComplete } from './sessionHelpers';
+import { mostlyLiveComplete, willChangeDuringSchoolHolidaysComplete } from './sessionHelpers';
 
 describe('sessionHelpers', () => {
   describe('mostlyLiveComplete', () => {
@@ -216,26 +216,6 @@ describe('sessionHelpers', () => {
       };
 
       expect(willChangeDuringSchoolHolidaysComplete(session)).toBe(true);
-    });
-  });
-
-  describe('getBackUrl', () => {
-    test('returns default if the page history is undefined', () => {
-      const defaultPath = 'default';
-
-      expect(getBackUrl({}, defaultPath)).toEqual(defaultPath);
-    });
-
-    test('returns default if the page history only contains one item', () => {
-      const defaultPath = 'default';
-
-      expect(getBackUrl({ pageHistory: ['currentPage'] }, defaultPath)).toEqual(defaultPath);
-    });
-
-    test('returns the page history item', () => {
-      const historyPath = 'history';
-
-      expect(getBackUrl({ pageHistory: [historyPath, 'currentPage'] }, 'default')).toEqual(historyPath);
     });
   });
 });
