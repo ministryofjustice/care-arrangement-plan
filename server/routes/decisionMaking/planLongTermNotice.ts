@@ -12,8 +12,8 @@ const planLongTermNoticeRoutes = (router: Router) => {
 
     const formValues = {
       [formFields.PLAN_LONG_TERM_NOTICE]:
-        planLongTermNotice?.weeks ?? (planLongTermNotice?.otherAnwser && 'anotherArrangement'),
-      [formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT]: planLongTermNotice?.otherAnwser,
+        planLongTermNotice?.weeks ?? (planLongTermNotice?.otherAnswer && 'anotherArrangement'),
+      [formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT]: planLongTermNotice?.otherAnswer,
       ...request.flash('formValues')?.[0],
     };
     response.render('pages/decisionMaking/planLongTermNotice', {
@@ -58,7 +58,7 @@ const planLongTermNoticeRoutes = (router: Router) => {
         planLongTermNotice: {
           noDecisionRequired: false,
           weeks: Number.parseInt(weeks) || undefined,
-          otherAnwser: Number.parseInt(weeks) ? undefined : describeArrangement,
+          otherAnswer: Number.parseInt(weeks) ? undefined : describeArrangement,
         },
       };
 

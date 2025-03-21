@@ -70,11 +70,11 @@ describe('addDecisionMaking', () => {
       {
         planLastMinuteChanges: {
           options: ['anotherArrangement'],
-          anotherArrangmentDescription: 'plan last minute changes description',
+          anotherArrangementDescription: 'plan last minute changes description',
           noDecisionRequired: false,
         },
         planLongTermNotice: {
-          otherAnwser: 'long term notice description',
+          otherAnswer: 'long term notice description',
           noDecisionRequired: false,
         },
         planReview: {

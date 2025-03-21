@@ -62,7 +62,7 @@ describe(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, () => {
 
       sessionMock.decisionMaking = {
         planLongTermNotice: {
-          otherAnwser: description,
+          otherAnswer: description,
           noDecisionRequired: false,
         },
       };
@@ -127,7 +127,7 @@ describe(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, () => {
         .expect('location', paths.DECISION_MAKING_PLAN_REVIEW);
 
       expect(sessionMock.decisionMaking.planLongTermNotice).toEqual({
-        otherAnwser: description,
+        otherAnswer: description,
         noDecisionRequired: false,
       });
     });
@@ -159,7 +159,7 @@ describe(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, () => {
       .expect(302)
       .expect('location', paths.DECISION_MAKING_PLAN_REVIEW);
 
-    expect(sessionMock.decisionMaking.planLongTermNotice).toEqual({ noDecisionRequired: false, otherAnwser: answer });
+    expect(sessionMock.decisionMaking.planLongTermNotice).toEqual({ noDecisionRequired: false, otherAnswer: answer });
   });
 });
 

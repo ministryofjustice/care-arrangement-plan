@@ -189,7 +189,7 @@ export const planLastMinuteChanges = ({ decisionMaking, initialAdultName }: Part
     return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
   if (decisionMaking.planLastMinuteChanges.options.includes('anotherArrangement')) {
-    return `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName: initialAdultName, suggestion: decisionMaking.planLastMinuteChanges.anotherArrangmentDescription })}`;
+    return `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName: initialAdultName, suggestion: decisionMaking.planLastMinuteChanges.anotherArrangementDescription })}`;
   }
   return `${i18n.__('sharePlan.yourProposedPlan.decisionMaking.planLastMinuteChanges.howChangesCommunicated', { senderName: initialAdultName })} ${formatPlanChangesOptionsIntoList(decisionMaking.planLastMinuteChanges.options)}`;
 };
@@ -199,7 +199,7 @@ export const planLongTermNotice = ({ decisionMaking, initialAdultName }: Partial
     return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
   if (decisionMaking.planLastMinuteChanges.options.includes('anotherArrangement')) {
-    return `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName: initialAdultName, suggestion: decisionMaking.planLongTermNotice.otherAnwser })}`;
+    return `${i18n.__('sharePlan.yourProposedPlan.senderSuggested', { senderName: initialAdultName, suggestion: decisionMaking.planLongTermNotice.otherAnswer })}`;
   }
   return i18n.__('sharePlan.yourProposedPlan.decisionMaking.planLongTermNotice.howChangesCommunicated', {
     senderName: initialAdultName,

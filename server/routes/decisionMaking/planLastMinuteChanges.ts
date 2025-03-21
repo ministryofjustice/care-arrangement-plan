@@ -66,7 +66,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
         planLastMinuteChanges: {
           noDecisionRequired: false,
           options,
-          anotherArrangmentDescription: options.includes('anotherArrangement') ? describeArrangement : undefined,
+          anotherArrangementDescription: options.includes('anotherArrangement') ? describeArrangement : undefined,
         },
       };
 

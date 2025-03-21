@@ -31,7 +31,7 @@ const taskListRoutes = (router: Router) => {
 
     response.render('pages/taskList', {
       title: i18n.__('taskList.title', { names: formattedChildrenNames(request.session) }),
-      // TODO - this should only be true when all tasks are complete
+      // This should only be true when all tasks are complete
       showContinue:
         isWhatWillHappenComplete &&
         isMostlyLiveComplete &&
