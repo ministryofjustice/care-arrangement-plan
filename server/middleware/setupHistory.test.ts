@@ -11,6 +11,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.START);
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    expect(sessionMock.previousPage).toBeUndefined();
   });
 
   test('adds page to history when it starts with a value', async () => {
@@ -19,6 +20,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.START);
 
     expect(sessionMock.pageHistory).toEqual([paths.NUMBER_OF_CHILDREN, paths.START]);
+    expect(sessionMock.previousPage).toEqual(paths.NUMBER_OF_CHILDREN);
   });
 
   test('does not add page to history if it was the most recent page', async () => {
@@ -27,6 +29,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.START);
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    expect(sessionMock.previousPage).toBeUndefined();
   });
 
   test('resets the history when the task list is loaded', async () => {
@@ -35,6 +38,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.TASK_LIST);
 
     expect(sessionMock.pageHistory).toEqual([paths.TASK_LIST]);
+    expect(sessionMock.previousPage).toBeUndefined();
   });
 
   test("doesn't add invalid pages to the task list", async () => {
@@ -43,6 +47,7 @@ describe('setupHistory', () => {
     await request(app).get('/create-error');
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    expect(sessionMock.previousPage).toEqual(paths.START);
   });
 
   test("doesn't add pages on the not for history list", async () => {
@@ -51,6 +56,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.ACCESSIBILITY_STATEMENT);
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    expect(sessionMock.previousPage).toEqual(paths.START);
   });
 
   test('handles going back correctly', async () => {
@@ -59,6 +65,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.START);
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    expect(sessionMock.previousPage).toBeUndefined();
   });
 
   test('only stores 20 pages', async () => {
