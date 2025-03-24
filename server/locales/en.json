@@ -198,7 +198,7 @@
     "sameNameError": "Enter a way to tell the adults apart"
   },
   "taskList": {
-    "title": "Child arrangements plan for {{ names }}",
+    "title": "Child arrangements plan for {{{ names }}}",
     "completed": "Completed",
     "incomplete": "Incomplete",
     "cannotStart": "Cannot start yet",
@@ -214,8 +214,8 @@
   "livingAndVisiting": {
     "mostlyLive": {
       "title": "Where will the children mostly live?",
-      "with": "With {{ adult }}",
-      "split": "They will split time between {{ initialAdult }} and {{ secondaryAdult }}",
+      "with": "With {{{ adult }}}",
+      "split": "They will split time between {{{ initialAdult }}} and {{{ secondaryAdult }}}",
       "emptyError": "Choose where the children will mostly live",
       "arrangementMissingError": "Describe the living arrangement you are proposing"
     },
@@ -227,7 +227,7 @@
       "error": "Describe which schedule will best meet the children's needs"
     },
     "willOvernightsHappen": {
-      "title": "Will the children stay overnight with {{ adult }}?",
+      "title": "Will the children stay overnight with {{{ adult }}}?",
       "error": "Choose whether the children will do overnight stays"
     },
     "whichDaysOvernight": {
@@ -237,7 +237,7 @@
       "multiSelectedError": "Describe what other arrangement you are proposing"
     },
     "willDaytimeVisitsHappen": {
-      "title": "Will the children do daytime visits with {{ adult }}?",
+      "title": "Will the children do daytime visits with {{{ adult }}}?",
       "error": "Choose whether the children will do daytime visits"
     },
     "whichDaysDaytimeVisits": {
@@ -250,7 +250,7 @@
   "handoverAndHolidays": {
     "getBetweenHouseholds": {
       "title": "How will the children get between households?",
-      "collectsTheChildren": "{{ adult }} collects the children",
+      "collectsTheChildren": "{{{ adult }}} collects the children",
       "emptyError": "Select who will be responsible for getting the children",
       "arrangementMissingError": "Describe how the children will get between households"
     },
@@ -258,7 +258,7 @@
       "title": "Where does handover take place?",
       "explainer": "It may be easier for children if the handover takes place at a neutral location such as a park or railway station.",
       "neutralLocation": "Neutral location",
-      "atHome": "At {{ adult }}'s home",
+      "atHome": "At {{{ adult }}}'s home",
       "atSchool": "At school",
       "someoneElse": "Someone else will manage handover, such as a grandparent",
       "someoneElseName": "Name of the person who will manage handover",
@@ -334,8 +334,8 @@
   "checkYourAnswers": {
     "title": "Check your answers",
     "livingAndVisiting": {
-      "whichDaysOvernight": "The children will stay overnight with {{ adult }} on {{ days }}",
-      "whichDaysDaytimeVisits": "The children will have daytime visits with {{ adult }} on {{ days }}"
+      "whichDaysOvernight": "The children will stay overnight with {{{ adult }}} on {{ days }}",
+      "whichDaysDaytimeVisits": "The children will have daytime visits with {{{ adult }}} on {{ days }}"
     },
     "decisionMaking": {
       "monthsSingular": "1 month",
@@ -348,9 +348,9 @@
       "users": "the users",
       "whereWillTheChildrenLive": "where the children will mostly live",
       "whichSchedule": "which schedule best meets the children's needs",
-      "willOvernightsHappen": "if the children will stay overnight with {{ adult }}",
+      "willOvernightsHappen": "if the children will stay overnight with {{{ adult }}}",
       "whichDaysOvernight": "which days overnights will happen",
-      "willDaytimeVisitsHappen": "if the children will do daytime visits with {{ adult }}?",
+      "willDaytimeVisitsHappen": "if the children will do daytime visits with {{{ adult }}}?",
       "whichDaysDaytimeVisits": "which days daytime visits will happen",
       "getBetweenHouseholds": "who is responsible for collecting the children",
       "whereHandover": "where the handover takes place",
@@ -362,33 +362,33 @@
     }
   },
   "sharePlan": {
-    "title": "Child arrangements plan for {{ names }}",
+    "title": "Child arrangements plan for {{{ names }}}",
     "panelTitle": "Your proposed plan is ready to share",
     "nowShare": "Now share your plan",
-    "sendThePlanTo": "Send this proposed child arrangements plan to {{ name }}",
+    "sendThePlanTo": "Send this proposed child arrangements plan to {{{ name }}}",
     "download": "Download the plan",
     "print": "Print the plan",
-    "mustNowShare": "You've created a proposed child arrangements plan. You must now share the plan with {{ otherAdult }} to get their agreement.",
+    "mustNowShare": "You've created a proposed child arrangements plan. You must now share the plan with {{{ otherAdult }}} to get their agreement.",
     "whatToDoNext": "What to do next",
-    "sendToSecondary": "Send this proposed child arrangements plan to {{ otherAdult }}. {{ otherAdult }} will have the chance to respond.",
+    "sendToSecondary": "Send this proposed child arrangements plan to {{{ otherAdult }}}. {{{ otherAdult }}} will have the chance to respond.",
     "giveFeedback": "Give your feedback about this service",
     "completeTheSurvey": "Complete the survey.",
     "emailUs": "You can also email {{ contactEmail }}.",
-    "ifTheyDoNotRespond": "If {{ otherAdult }} does not respond",
-    "tryMediation": "If {{ otherAdult }} does not respond, you can try mediation. The next step would be to apply for a court order.",
+    "ifTheyDoNotRespond": "If {{{ otherAdult }}} does not respond",
+    "tryMediation": "If {{{ otherAdult }}} does not respond, you can try mediation. The next step would be to apply for a court order.",
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
     "whatWeAreTelling": {
-      "title": "What we're telling {{ name }} about this plan",
-      "proposedPlan": "Proposed child arrangements plan for {{ childrenNames }}",
-      "initialIsAsking": "{{ senderName }} is asking that you work together to come up with a plan for how to look after {{ childrenNames }}. Please read through the suggestions {{ senderName }} has made. You’re then invited to reply with any suggestions of your own.",
-      "doNotNeedToAccept": "You do not need to accept what {{ senderName }} is proposing. Instead you can:",
-      "suggestChanges": "use this form to suggest changes to what {{ senderName }} is proposing",
+      "title": "What we're telling {{{ name }}} about this plan",
+      "proposedPlan": "Proposed child arrangements plan for {{{ childrenNames }}}",
+      "initialIsAsking": "{{{ senderName }}} is asking that you work together to come up with a plan for how to look after {{{ childrenNames }}}. Please read through the suggestions {{{ senderName }}} has made. You’re then invited to reply with any suggestions of your own.",
+      "doNotNeedToAccept": "You do not need to accept what {{{ senderName }}} is proposing. Instead you can:",
+      "suggestChanges": "use this form to suggest changes to what {{{ senderName }}} is proposing",
       "startYourOwn": "start your own proposed child arrangements plan using the propose a child arrangements plan service on GOV.UK, or by finding a similar service",
       "makeCustom": "make a written plan of your own without using any service or template",
       "benefitsHeading": "The benefits of getting a written agreement in place",
-      "benefits": "If you and {{ senderName }} can work together to make written child arrangements, you’re more likely to avoid court. You’re also more likely to get an arrangement that works for you. That’s because people who go to court often find the judge makes decisions that don’t suit parents or children.",
+      "benefits": "If you and {{{ senderName }}} can work together to make written child arrangements, you’re more likely to avoid court. You’re also more likely to get an arrangement that works for you. That’s because people who go to court often find the judge makes decisions that don’t suit parents or children.",
       "topTips": "Top tips",
-      "compromise": "One of the main reasons people end up in court is that they are not willing to compromise to reach agreement. It may help you avoid court if you can work with {{ senderName }} to find a compromise that’s best for your children.",
+      "compromise": "One of the main reasons people end up in court is that they are not willing to compromise to reach agreement. It may help you avoid court if you can work with {{{ senderName }}} to find a compromise that’s best for your children.",
       "childrensInput": "Get your children’s input into the arrangements you are making so that they feel included and their needs are met.",
       "childrenFirst": "Remember to always put your children’s needs and feelings first.",
       "splitMayNotBeBest": "It may not be in the children’s best interests to split time exactly between households.",
@@ -408,62 +408,62 @@
     "yourProposedPlan": {
       "title": "Your proposed plan",
       "aboutThePlan": "About this child arrangements proposal",
-      "senderSaid": "{{ senderName }} said:",
-      "senderSuggested": "{{ senderName }} suggested:\n\"{{ suggestion }}\"",
-      "senderSuggestedDoNotDecide": "{{ senderName }} suggested that this does not need to be decided.",
+      "senderSaid": "{{{ senderName }}} said:",
+      "senderSuggested": "{{{ senderName }}} suggested:\n\"{{{ suggestion }}}\"",
+      "senderSuggestedDoNotDecide": "{{{ senderName }}} suggested that this does not need to be decided.",
       "doYouAgree": "Do you agree?",
       "endOfSection": "End of section",
       "noCourtOrder": "there is no court order in place at this time",
-      "forOneChild": "this is a proposed child arrangements plan for 1 child, {{ childName }}",
-      "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{ childrenNames }}",
-      "agreementBetween": "this agreement is between {{ senderName }} and {{ otherAdultName }}, who are the adults who will care for {{ childrenNames }}",
-      "doYouAgreeOnBasics": "Do you and {{ senderName }} agree about the children’s names, your names, and whether there is a court order in place?",
+      "forOneChild": "this is a proposed child arrangements plan for 1 child, {{{ childName }}}",
+      "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{{ childrenNames }}}",
+      "agreementBetween": "this agreement is between {{{ senderName }}} and {{{ otherAdultName }}}, who are the adults who will care for {{{ childrenNames }}}",
+      "doYouAgreeOnBasics": "Do you and {{{ senderName }}} agree about the children’s names, your names, and whether there is a court order in place?",
       "doNotStoreNames": "We do not store these names or share any of this information with other government departments.",
       "doNotAgreeOnBasics": "If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to https://www.gov.uk/looking-after-children-divorce.",
       "livingAndVisiting": {
-        "suggestedLiveWith": "{{ senderName }} suggested that the children mostly live with {{ adult }}.",
-        "suggestedSplit": "{{ senderName }} said the children will split their time between {{ otherAdult }}'s home and {{ senderName }}'s home.",
-        "suggestedStayOvernight": "{{ senderName }} suggested that the children stay overnight at {{ adult }}'s home.",
-        "suggestedNoOvernights": "{{ senderName }} suggested that overnights do not happen at this time.",
-        "suggestedOvernightDays": "{{ senderName }} suggested that overnight visits happen on {{ days }}.",
-        "suggestedDaytimeVisits": "{{ senderName }} suggested that the children do daytime visits to {{ adult }}'s home.",
-        "suggestedNoDaytimeVisits": "{{ senderName }} suggested that daytime visits do not happen at this time.",
-        "suggestedDaytimeVisitDays": "{{ senderName }} suggested that daytime visits happen on {{ days }}."
+        "suggestedLiveWith": "{{{ senderName }}} suggested that the children mostly live with {{{ adult }}}.",
+        "suggestedSplit": "{{{ senderName }}} said the children will split their time between {{{ otherAdult }}}'s home and {{{ senderName }}}'s home.",
+        "suggestedStayOvernight": "{{{ senderName }}} suggested that the children stay overnight at {{{ adult }}}'s home.",
+        "suggestedNoOvernights": "{{{ senderName }}} suggested that overnights do not happen at this time.",
+        "suggestedOvernightDays": "{{{ senderName }}} suggested that overnight visits happen on {{ days }}.",
+        "suggestedDaytimeVisits": "{{{ senderName }}} suggested that the children do daytime visits to {{{ adult }}}'s home.",
+        "suggestedNoDaytimeVisits": "{{{ senderName }}} suggested that daytime visits do not happen at this time.",
+        "suggestedDaytimeVisitDays": "{{{ senderName }}} suggested that daytime visits happen on {{ days }}."
       },
       "handoverAndHolidays": {
-        "suggestedCollects": "{{ senderName }} suggested that {{ adult }} collects the children.",
-        "suggestedHandover": "{{ senderName }} suggested that handover takes place at {{{ location }}}",
+        "suggestedCollects": "{{{ senderName }}} suggested that {{{ adult }}} collects the children.",
+        "suggestedHandover": "{{{ senderName }}} suggested that handover takes place at {{{ location }}}",
         "neutralLocation": "a neutral location",
-        "home": "{{ adult }}'s home",
+        "home": "{{{ adult }}}'s home",
         "school": "school",
-        "suggestedSomeoneElse": "{{ senderName }} suggested that someone else will manage handover. {{ senderName }} suggested:\n\"{{ someoneElse }}\"",
-        "suggestedChangeDuringSchoolHolidays": "{{ senderName }} suggested that these arrangements should change during school holidays.",
-        "suggestedNoChangeDuringSchoolHolidays": "{{ senderName }} suggested that these arrangements do not change during school holidays."
+        "suggestedSomeoneElse": "{{{ senderName }}} suggested that someone else will manage handover. {{{ senderName }}} suggested:\n\"{{{ someoneElse }}}\"",
+        "suggestedChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements should change during school holidays.",
+        "suggestedNoChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements do not change during school holidays."
       },
       "decisionMaking": {
         "planLastMinuteChanges": {
-          "howChangesCommunicated": "{{ senderName }} suggested that last-minute changes should be communicated {{ methods }}."
+          "howChangesCommunicated": "{{{ senderName }}} suggested that last-minute changes should be communicated {{ methods }}."
         },
         "planLongTermNotice": {
-          "howChangesCommunicated": "{{ senderName }} suggested that you should both give each other {{ numberOfWeeks }} weeks' notice to change long-term arrangements."
+          "howChangesCommunicated": "{{{ senderName }}} suggested that you should both give each other {{ numberOfWeeks }} weeks' notice to change long-term arrangements."
         },
         "planReview": {
-          "suggestedMonthsSingular": "{{ senderName }} suggested that you should review this arrangement in 1 month's time.",
-          "suggestedYearsSingular": "{{ senderName }} suggested that you should review this arrangement in 1 year's time.",
-          "suggestedMonthsPlural": "{{ senderName }} suggested that you should review this arrangement in {{ number }} months' time.",
-          "suggestedYearsPlural": "{{ senderName }} suggested that you should review this arrangement in {{ number }} years' time."
+          "suggestedMonthsSingular": "{{{ senderName }}} suggested that you should review this arrangement in 1 month's time.",
+          "suggestedYearsSingular": "{{{ senderName }}} suggested that you should review this arrangement in 1 year's time.",
+          "suggestedMonthsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} months' time.",
+          "suggestedYearsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} years' time."
         }
       },
       "whatHappensNowHeading": "What happens now?",
-      "nowSendPlan": "Now send this proposed child arrangements plan back to {{ senderName }}. You should try to create a written record of what you have both agreed.",
+      "nowSendPlan": "Now send this proposed child arrangements plan back to {{{ senderName }}}. You should try to create a written record of what you have both agreed.",
       "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.",
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
       "doNotAgree": {
         "livingAndVisiting": {
           "mostlyLive": "If you do not agree, suggest where the children will mostly live",
           "whichSchedule": "If you do not agree, suggest a schedule",
-          "willOvernightsHappen": "If you do not agree, suggest whether the children will stay overnight with {{ adult }}",
-          "whichDaysOvernight": "If you do not agree, suggest when the children will stay overnight with {{ adult }}",
+          "willOvernightsHappen": "If you do not agree, suggest whether the children will stay overnight with {{{ adult }}}",
+          "whichDaysOvernight": "If you do not agree, suggest when the children will stay overnight with {{{ adult }}}",
           "willDaytimeVisitsHappen": "If you do not agree, suggest whether the children will do daytime visits",
           "whichDaysDaytimeVisits": "If you do not agree, suggest when the children will do daytime visits"
         },
