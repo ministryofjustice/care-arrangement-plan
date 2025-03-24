@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: care-arrangement-plan-prod
-  namespace: care-arrangement-plan-prod
-data:
-  ENV: 'development'

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 'change-to-main-when-ready-to-deploy'
+      - 'main'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -29,8 +29,8 @@ jobs:
 
   deploy_production:
     name: 'Production'
-    needs: [image, deploy_dev]
     if: github.event.ref == 'refs/heads/main'
+    needs: [image, deploy_dev]
     uses: ./.github/workflows/deploy.yml
     with:
       environment: production
