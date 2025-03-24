@@ -36,7 +36,6 @@ const nunjucksSetup = (app: express.Express): void => {
   });
 
   njkEnv.addFilter('assetMap', (url: string) => assetManifest[url] || url);
-  // TODO - add correct URL
   njkEnv.addGlobal('feedbackUrl', config.feedbackUrl);
   njkEnv.addGlobal('contactEmail', config.contactEmail);
   njkEnv.addGlobal(

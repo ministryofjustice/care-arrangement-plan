@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${KUBE_NAMESPACE}
+  name: ${KUBE_NAMESPACE}-deployment
   namespace: ${KUBE_NAMESPACE}
   labels:
     app: ${KUBE_NAMESPACE}
@@ -21,7 +21,6 @@ spec:
         app: ${KUBE_NAMESPACE}
     spec:
       terminationGracePeriodSeconds: 35
-      serviceAccountName: cd-serviceaccount
       containers:
         - name: node
           image: ${ECR_URL}:${IMAGE_TAG}
@@ -32,15 +31,36 @@ spec:
             requests:
               cpu: 50m
               memory: 100Mi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
           ports:
-            - containerPort: 3052
+            - containerPort: 8080
               name: http
           securityContext:
-            runAsUser: 1000
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+          env:
+            - name: BUILD_NUMBER
+              value: ${BUILD_NUMBER}
+            - name: GIT_REF
+              value: ${GIT_REF}
+            - name: GIT_BRANCH
+              value: ${GIT_BRANCH}
+            - name: PORT
+              value: '8080'
           envFrom:
             - configMapRef:
-                name: ${KUBE_NAMESPACE}
+                name: ${KUBE_NAMESPACE}-config
             - secretRef:
                 name: ${KUBE_NAMESPACE}-secrets
-            - secretRef:
-                name: ${KUBE_NAMESPACE}-base64-secrets

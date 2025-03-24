@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${KUBE_NAMESPACE}-config
+  namespace: ${KUBE_NAMESPACE}
+data:
+  NODE_ENV: 'production'
+  USE_HTTPS: 'true'
+  STATIC_RESOURCE_CACHE_DURATION: '1h'
+  WEB_SESSION_TIMEOUT_IN_MINUTES: '120'
+  VALKEY_ENABLED: 'false'
+  INCLUDE_WELSH_LANGUAGE: 'false'
+  USE_AUTH: 'true'
+  CONTACT_EMAIL: 'childarrangements@justice.gov.uk'
+  FEEDBACK_URL: 'https://feedback.example.com'
+  PREVIEW_END: '2025-04-30T23:59:59'
