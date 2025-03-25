@@ -17,23 +17,21 @@ const getIntConfigValue = (name: string): number => {
 
 const getStringArray = (name: string) => getStringConfigValue(name).split(',');
 
-const getValkeyConfig = () => {
-  const enabled = getBoolConfigValue('VALKEY_ENABLED');
+const getCacheConfig = () => {
+  const enabled = getBoolConfigValue('CACHE_ENABLED');
 
   if (enabled) {
     return {
       enabled: true,
-      host: getStringConfigValue('VALKEY_HOST'),
-      port: getIntConfigValue('VALKEY_PORT'),
-      password: getStringConfigValue('VALKEY_PASSWORD'),
-      tls_enabled: getBoolConfigValue('VALKEY_TLS_ENABLED'),
+      host: getStringConfigValue('CACHE_HOST'),
+      password: getStringConfigValue('CACHE_PASSWORD'),
+      tls_enabled: getBoolConfigValue('CACHE_TLS_ENABLED'),
     };
   }
 
   return {
     enabled: false,
     host: undefined,
-    port: undefined,
     password: undefined,
     tls_enabled: undefined,
   };
@@ -50,7 +48,7 @@ const config = {
   analytics: {
     ga4Id: process.env.GA4_ID,
   },
-  valkey: getValkeyConfig(),
+  cache: getCacheConfig(),
   session: {
     secret: getStringConfigValue('SESSION_SECRET'),
     expiryMinutes: getIntConfigValue('WEB_SESSION_TIMEOUT_IN_MINUTES'),
@@ -62,15 +60,14 @@ const config = {
   previewEnd: new Date(getStringConfigValue('PREVIEW_END')),
 };
 
-// if (production) {
-//   // TODO C5141-953
-//   if (!config.useHttps || !config.valkey.tls_enabled) {
-//     throw new Error(`HTTPS must be enabled on production environments`)
-//   }
-//   // TODO C5141-954
-//   if (!config.valkey.enabled) {
-//     throw new Error(`Valkey must be used on production environments`)
-//   }
-// }
+if (production) {
+  if (!config.useHttps || !config.cache.tls_enabled) {
+    throw new Error(`HTTPS must be enabled on production environments`);
+  }
+
+  if (!config.cache.enabled) {
+    throw new Error(`Cache must be used on production environments`);
+  }
+}
 
 export default config;

@@ -5,14 +5,14 @@ import session, { MemoryStore, Store } from 'express-session';
 
 import config from '../config';
 import cookieNames from '../constants/cookieNames';
-import createValkeyClient from '../data/valkeyClient';
+import createCacheClient from '../data/cacheClient';
 import logger from '../logger';
 
 const setUpWebSession = (): Router => {
   let store: Store;
-  if (config.valkey.enabled) {
-    const client = createValkeyClient();
-    client.connect().catch((err: Error) => logger.error(`Error connecting to Valkey`, err));
+  if (config.cache.enabled) {
+    const client = createCacheClient();
+    client.connect().catch((err: Error) => logger.error(`Error connecting to cache`, err));
     store = new RedisStore({ client });
   } else {
     store = new MemoryStore();

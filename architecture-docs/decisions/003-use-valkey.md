@@ -4,7 +4,7 @@ Date: 2025-01-27
 
 ## Status
 
-✅ Accepted
+⌛️ Superseded
 
 ## Context
 

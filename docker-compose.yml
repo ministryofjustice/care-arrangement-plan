@@ -1,8 +1,8 @@
 services:
-  valkey:
-    image: valkey/valkey:latest
-    container_name: valkey
+  cache:
+    image: redis:7.2
+    container_name: redis
     ports:
-      - '${VALKEY_PORT}:${VALKEY_PORT}'
-    environment:
-      VALKEY_EXTRA_FLAGS: '--port ${VALKEY_PORT} --requirepass ${VALKEY_PASSWORD}'
+      - '6379:6379'
+    command: >
+      --requirepass ${CACHE_PASSWORD}
