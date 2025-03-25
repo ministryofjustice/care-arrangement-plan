@@ -23,7 +23,7 @@ data more permanently, allowing users to come back and edit it. A suggested arch
 1. ⌛ [Use Valkey](decisions/003-use-valkey.md)
 1. 🤔 [Sending emails](decisions/004-sending-emails.md)
 1. 🤔 [Persisting permanent data](decisions/005-persisting-permanent-data.md)
-1. ✅ [USe Redis](decisions/006-use-redis.md)
+1. ✅ [Use Redis](decisions/006-use-redis.md)
 
 ### Statuses
 

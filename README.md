@@ -19,7 +19,7 @@ To move the service into an open beta, the following changes should be made
 
 ## Installation
 
-Install Node 22. It is recommended to use a versioning manager such as [NVM](https://github.com/nvm-sh/nvm).
+Install Node 22. It is recommended to use a versioning manager such as [nvm](https://github.com/nvm-sh/nvm).
 
 To download the dependencies, run `npm install`.
 
