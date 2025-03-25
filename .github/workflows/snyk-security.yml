@@ -47,7 +47,7 @@ jobs:
         # Build the docker images for testing
       - name: Container monitor ~ build Docker image
         run: |
-          docker image build -t cap-node:snyk --target build-prod .
+          docker image build -t cap-node:snyk .
 
         # Runs Snyk Container (Container and SCA) analysis.
       - name: Container monitor ~ analyse
