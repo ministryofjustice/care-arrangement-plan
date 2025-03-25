@@ -60,12 +60,12 @@ spec:
               value: ${GIT_BRANCH}
             - name: PORT
               value: '8080'
-            - name: VALKEY_HOST
+            - name: CACHE_HOST
               valueFrom:
                 secretKeyRef:
                   name: elasticache-redis
                   key: primary_endpoint_address
-            - name: VALKEY_PASSWORD
+            - name: CACHE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: elasticache-redis

@@ -23,7 +23,7 @@ Install Node 22. It is recommended to use a versioning manager such as [NVM](htt
 
 To download the dependencies, run `npm install`.
 
-If you want to run the application locally with Valkey, install [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+If you want to run the application locally with a cache, install [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 ## Running
 
@@ -36,17 +36,17 @@ cp .env.example .env
 
 Now to run the app, run `npm run start:dev`, which will start the app (by default on port 8001), with hot reloading enabled.
 
-### Running with Valkey
+### Running with a cache
 
-When deployed to an environment with multiple pods we run applications with an instance of Valkey/Elasticache to provide
-a distributed cache of sessions. The app is, by default, configured not to use Valkey when running locally. In order to
-use Valkey locally, set the `VALKEY_ENABLED` environment variable to true, and start Valkey by running
+When deployed to an environment with multiple pods we run applications with an instance of Redis/Elasticache to provide
+a distributed cache of sessions. The app is, by default, configured not to use Redis when running locally. In order to
+use Redis locally, set the `CACHE_ENABLED` environment variable to true, and start Redis by running
 
 ```shell
 docker compose up -d
 ```
 
-The app will now connect to Valkey when running.
+The app will now connect to Redis when running.
 
 ### Running in Docker
 
