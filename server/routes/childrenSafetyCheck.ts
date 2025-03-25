@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import { yesOrNo } from '../@types/fields';
 import formFields from '../constants/formFields';
@@ -11,14 +10,14 @@ const safetyCheckRoutes = (router: Router) => {
   router.get(paths.CHILDREN_SAFETY_CHECK, (request, response) => {
     response.render('pages/childrenSafetyCheck', {
       errors: request.flash('errors'),
-      title: i18n.__('childrenSafetyCheck.title'),
+      title: request.__('childrenSafetyCheck.title'),
       backLinkHref: getBackUrl(request.session, paths.SAFETY_CHECK),
     });
   });
 
-  router.get(paths.CHILDREN_NOT_SAFE, (_request, response) => {
+  router.get(paths.CHILDREN_NOT_SAFE, (request, response) => {
     response.render('pages/childrenNotSafe', {
-      title: i18n.__('childrenNotSafe.title'),
+      title: request.__('childrenNotSafe.title'),
     });
   });
 

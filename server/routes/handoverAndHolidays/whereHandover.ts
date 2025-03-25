@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import { whereHandoverField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
@@ -19,7 +18,7 @@ const whereHandoverRoutes = (router: Router) => {
       errors: request.flash('errors'),
       formValues,
       values: request.session,
-      title: i18n.__('handoverAndHolidays.whereHandover.title'),
+      title: request.__('handoverAndHolidays.whereHandover.title'),
       backLinkHref: getBackUrl(request.session, paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS),
     });
   });

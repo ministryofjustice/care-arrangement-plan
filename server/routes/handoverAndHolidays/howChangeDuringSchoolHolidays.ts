@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
@@ -10,7 +9,7 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, (request, response) => {
     response.render('pages/handoverAndHolidays/howChangeDuringSchoolHolidays', {
       errors: request.flash('errors'),
-      title: i18n.__('handoverAndHolidays.howChangeDuringSchoolHolidays.title'),
+      title: request.__('handoverAndHolidays.howChangeDuringSchoolHolidays.title'),
       initialHowChangeDuringSchoolHolidays: request.session.handoverAndHolidays?.howChangeDuringSchoolHolidays?.answer,
       backLinkHref: getBackUrl(request.session, paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS),
     });

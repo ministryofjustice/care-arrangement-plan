@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import i18n from 'i18n';
+import { Request } from 'express';
 import JsPdf from 'jspdf';
 
 import { Paragraph, PdfBuilder } from '../@types/pdf';
@@ -21,14 +21,15 @@ import FontStyles from './fontStyles';
 
 class Pdf implements PdfBuilder {
   public readonly document: JsPdf;
+  public readonly request: Request;
 
   public currentY = HEADER_HEIGHT;
-
   public readonly maxPageWidth: number;
 
   private readonly logoData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/crest.png'), { encoding: 'base64' })}`;
 
-  constructor(autoPrint: boolean) {
+  constructor(autoPrint: boolean, request: Request) {
+    this.request = request;
     // @ts-expect-error There is an error into the jsPDF type declaration.
     this.document = new JsPdf({ lineHeight: LINE_HEIGHT_RATIO });
     this.maxPageWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
@@ -77,7 +78,7 @@ class Pdf implements PdfBuilder {
       .setFontSize(SECTION_HEADING_SIZE)
       .setTextColor(255, 255, 255)
       .text(
-        i18n.__('pdf.name'),
+        this.request.__('pdf.name'),
         headerLogoWidth +
           MARGIN_WIDTH +
           0.5 * (this.document.internal.pageSize.getWidth() - headerLogoWidth - MARGIN_WIDTH),
@@ -92,7 +93,7 @@ class Pdf implements PdfBuilder {
       .setFont(FONT, FontStyles.NORMAL)
       .setFontSize(MAIN_TEXT_SIZE)
       .text(
-        i18n.__('pdf.pageCount', {
+        this.request.__('pdf.pageCount', {
           currentPage: pageNumber.toString(),
           totalPages: this.document.getNumberOfPages().toString(),
         }),

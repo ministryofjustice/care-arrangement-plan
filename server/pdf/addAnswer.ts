@@ -1,5 +1,3 @@
-import i18n from 'i18n';
-
 import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
 
@@ -53,7 +51,7 @@ const addAnswer = (
     ].filter((paragraph) => !!paragraph),
   ).addComponentToDocument();
 
-  new DoYouAgreeComponent(pdf, i18n.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument();
+  new DoYouAgreeComponent(pdf, pdf.request.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument();
 
   new TextboxComponent(pdf, [
     {

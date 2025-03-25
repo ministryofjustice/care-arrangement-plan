@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
@@ -16,7 +15,7 @@ const numberOfChildrenRoutes = (router: Router) => {
     response.render('pages/numberOfChildren', {
       errors: request.flash('errors'),
       formValues,
-      title: i18n.__('numberOfChildren.title'),
+      title: request.__('numberOfChildren.title'),
       backLinkHref: getBackUrl(request.session, paths.COURT_ORDER_CHECK),
     });
   });

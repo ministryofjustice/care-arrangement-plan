@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
@@ -10,7 +9,7 @@ const doWhatsBestRoutes = (router: Router) => {
   router.get(paths.DO_WHATS_BEST, (request, response) => {
     response.render('pages/doWhatsBest', {
       errors: request.flash('errors'),
-      title: i18n.__('doWhatsBest.title'),
+      title: request.__('doWhatsBest.title'),
       backLinkHref: getBackUrl(request.session, paths.CHILDREN_SAFETY_CHECK),
     });
   });

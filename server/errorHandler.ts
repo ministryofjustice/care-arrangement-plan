@@ -1,5 +1,4 @@
 import type { Request, Response, NextFunction } from 'express';
-import i18n from 'i18n';
 import type { HTTPError } from 'superagent';
 
 import config from './config';
@@ -18,10 +17,10 @@ export default function createErrorHandler() {
     response.status(status);
 
     return status === 404
-      ? response.render('pages/errors/notFound', { title: i18n.__('errors.notFound.title') })
+      ? response.render('pages/errors/notFound', { title: request.__('errors.notFound.title') })
       : response.render('pages/errors/generic', {
           production,
-          title: production ? i18n.__('errors.generic.title') : error.message,
+          title: production ? request.__('errors.generic.title') : error.message,
         });
   };
 }

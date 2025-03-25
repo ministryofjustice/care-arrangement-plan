@@ -1,3 +1,4 @@
+import { Request } from 'express';
 import JsPdf from 'jspdf';
 
 export type Paragraph = {
@@ -9,6 +10,7 @@ export type Paragraph = {
 
 export interface PdfBuilder {
   document: JsPdf;
+  request: Request;
   currentY: number;
   maxPageWidth: number;
   heightWillOverflowDocument: (height: number) => boolean;

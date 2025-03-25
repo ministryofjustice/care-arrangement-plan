@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { ValidationError } from 'express-validator';
-import i18n from 'i18n';
 
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
@@ -25,7 +24,9 @@ const aboutTheChildrenRoutes = (router: Router) => {
       errors: request.flash('errors'),
       formValues,
       title:
-        numberOfChildren === 1 ? i18n.__('aboutTheChildren.singleTitle') : i18n.__('aboutTheChildren.multipleTitle'),
+        numberOfChildren === 1
+          ? request.__('aboutTheChildren.singleTitle')
+          : request.__('aboutTheChildren.multipleTitle'),
       backLinkHref: getBackUrl(request.session, paths.NUMBER_OF_CHILDREN),
       numberOfChildren,
     });

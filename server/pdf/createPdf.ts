@@ -11,18 +11,18 @@ import addWhatHappensNow from './addWhatHappensNow';
 import Pdf from './pdf';
 
 const createPdf = (autoPrint: boolean, request: Request) => {
-  const pdf = new Pdf(autoPrint);
+  const pdf = new Pdf(autoPrint, request);
 
-  addPreamble(pdf, request);
+  addPreamble(pdf);
   pdf.createNewPage();
 
-  addAboutTheProposal(pdf, request);
-  addLivingAndVisiting(pdf, request);
-  addHandoverAndHolidays(pdf, request);
-  addSpecialDays(pdf, request);
-  addOtherThings(pdf, request);
-  addDecisionMaking(pdf, request);
-  addWhatHappensNow(pdf, request);
+  addAboutTheProposal(pdf);
+  addLivingAndVisiting(pdf);
+  addHandoverAndHolidays(pdf);
+  addSpecialDays(pdf);
+  addOtherThings(pdf);
+  addDecisionMaking(pdf);
+  addWhatHappensNow(pdf);
 
   pdf.addFooterToEveryPage();
 

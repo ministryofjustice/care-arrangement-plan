@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import { whichDaysField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
@@ -23,7 +22,7 @@ const whichDaysDaytimeVisitsRoutes = (router: Router) => {
     response.render('pages/livingAndVisiting/whichDaysDaytimeVisits', {
       errors: request.flash('errors'),
       formValues,
-      title: i18n.__('livingAndVisiting.whichDaysDaytimeVisits.title'),
+      title: request.__('livingAndVisiting.whichDaysDaytimeVisits.title'),
       backLinkHref: getBackUrl(request.session, paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN),
     });
   });
