@@ -1,7 +1,7 @@
 # Architecture
 
 The app is a simple express app, using the nunjucks templating engine. It is hosted in AWS, with the infrastructure
-defined using Terraform.
+defined using Kubernetes deployment files.
 
 For MVS, as we only need to store transient session data, there is a simple architecture of the containerised web
 application connecting to a Elasticache cluster.
@@ -12,6 +12,9 @@ Post-MVS, we may wish to email a completed care arrangement plan to one/both par
 data more permanently, allowing users to come back and edit it. A suggested architecture is below.
 
 ![POST-MVS Technical Architecture Diagram](./assets/post-mvs-technical-architecture.svg)
+
+> [!NOTE]
+> These diagrams simplify the kubernetes cluster, reducing the application to a single block
 
 ## Architecture Decision Records
 
