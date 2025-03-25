@@ -5,7 +5,7 @@ import logger from '../logger';
 
 type ValkeyClient = ReturnType<typeof createClient>;
 
-const url = `${config.valkey.tls_enabled ? 'rediss' : 'redis'}://${config.valkey.host}:${config.valkey.port}`;
+const url = `${config.valkey.tls_enabled ? 'rediss' : 'redis'}://${config.valkey.host}`;
 
 const createValkeyClient = (): ValkeyClient => {
   const client = createClient({

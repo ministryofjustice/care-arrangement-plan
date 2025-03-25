@@ -24,7 +24,6 @@ const getValkeyConfig = () => {
     return {
       enabled: true,
       host: getStringConfigValue('VALKEY_HOST'),
-      port: getIntConfigValue('VALKEY_PORT'),
       password: getStringConfigValue('VALKEY_PASSWORD'),
       tls_enabled: getBoolConfigValue('VALKEY_TLS_ENABLED'),
     };
@@ -33,7 +32,6 @@ const getValkeyConfig = () => {
   return {
     enabled: false,
     host: undefined,
-    port: undefined,
     password: undefined,
     tls_enabled: undefined,
   };
@@ -62,15 +60,14 @@ const config = {
   previewEnd: new Date(getStringConfigValue('PREVIEW_END')),
 };
 
-// if (production) {
-//   // TODO C5141-953
-//   if (!config.useHttps || !config.valkey.tls_enabled) {
-//     throw new Error(`HTTPS must be enabled on production environments`)
-//   }
-//   // TODO C5141-954
-//   if (!config.valkey.enabled) {
-//     throw new Error(`Valkey must be used on production environments`)
-//   }
-// }
+if (production) {
+  if (!config.useHttps || !config.valkey.tls_enabled) {
+    throw new Error(`HTTPS must be enabled on production environments`);
+  }
+
+  if (!config.valkey.enabled) {
+    throw new Error(`Valkey must be used on production environments`);
+  }
+}
 
 export default config;

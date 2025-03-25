@@ -21,6 +21,7 @@ spec:
         app: ${KUBE_NAMESPACE}
     spec:
       terminationGracePeriodSeconds: 35
+      serviceAccountName: cd-serviceaccount
       containers:
         - name: node
           image: ${ECR_URL}:${IMAGE_TAG}
@@ -59,6 +60,16 @@ spec:
               value: ${GIT_BRANCH}
             - name: PORT
               value: '8080'
+            - name: VALKEY_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: elasticache-redis
+                  key: primary_endpoint_address
+            - name: VALKEY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: elasticache-redis
+                  key: auth_token
           envFrom:
             - configMapRef:
                 name: ${KUBE_NAMESPACE}-config
