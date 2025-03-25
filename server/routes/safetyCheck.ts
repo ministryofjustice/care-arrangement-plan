@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import { yesOrNo } from '../@types/fields';
 import formFields from '../constants/formFields';
@@ -10,13 +9,13 @@ const safetyCheckRoutes = (router: Router) => {
   router.get(paths.SAFETY_CHECK, (request, response) => {
     response.render('pages/safetyCheck', {
       errors: request.flash('errors'),
-      title: i18n.__('safetyCheck.title'),
+      title: request.__('safetyCheck.title'),
     });
   });
 
-  router.get(paths.NOT_SAFE, (_request, response) => {
+  router.get(paths.NOT_SAFE, (request, response) => {
     response.render('pages/notSafe', {
-      title: i18n.__('notSafe.title'),
+      title: request.__('notSafe.title'),
     });
   });
 

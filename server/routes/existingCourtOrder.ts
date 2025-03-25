@@ -1,12 +1,11 @@
 import { Router } from 'express';
-import i18n from 'i18n';
 
 import paths from '../constants/paths';
 
 const existingCourtOrderRoutes = (router: Router) => {
-  router.get(paths.EXISTING_COURT_ORDER, (_request, response) => {
+  router.get(paths.EXISTING_COURT_ORDER, (request, response) => {
     response.render('pages/existingCourtOrder', {
-      title: i18n.__('existingCourtOrder.title'),
+      title: request.__('existingCourtOrder.title'),
     });
   });
 };

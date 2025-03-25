@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
@@ -18,7 +17,7 @@ const planReviewRoutes = (router: Router) => {
     response.render('pages/decisionMaking/planReview', {
       errors: request.flash('errors'),
       formValues,
-      title: i18n.__('decisionMaking.planReview.title'),
+      title: request.__('decisionMaking.planReview.title'),
       backLinkHref: getBackUrl(request.session, paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE),
     });
   });

@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
@@ -17,7 +16,7 @@ const aboutTheAdultsRoutes = (router: Router) => {
     response.render('pages/aboutTheAdults', {
       errors: request.flash('errors'),
       formValues,
-      title: i18n.__('aboutTheAdults.title'),
+      title: request.__('aboutTheAdults.title'),
       backLinkHref: getBackUrl(request.session, paths.ABOUT_THE_CHILDREN),
     });
   });

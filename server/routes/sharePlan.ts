@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import i18n from 'i18n';
 
 import paths from '../constants/paths';
 import {
@@ -27,27 +26,27 @@ const sharePlanRoutes = (router: Router) => {
     const childrenNames = formattedChildrenNames(request.session);
 
     response.render('pages/sharePlan', {
-      title: i18n.__('sharePlan.title', { names: childrenNames }),
+      title: request.__('sharePlan.title', { names: childrenNames }),
       values: {
         ...request.session,
         childrenNames,
         parentNotMostlyLivedWith: parentNotMostlyLivedWith(request.session),
-        mostlyLiveAnswer: mostlyLive(request.session),
-        whichScheduleAnswer: whichSchedule(request.session),
-        willOvernightsHappenAnswer: willOvernightsHappen(request.session),
-        whichDaysOvernightAnswer: whichDaysOvernight(request.session),
-        willDaytimeVisitsHappenAnswer: willDaytimeVisitsHappen(request.session),
-        whichDaysDaytimeVisitsAnswer: whichDaysDaytimeVisits(request.session),
-        getBetweenHouseholdsAnswer: getBetweenHouseholds(request.session),
-        whereHandoverAnswer: whereHandover(request.session),
-        willChangeDuringSchoolHolidaysAnswer: willChangeDuringSchoolHolidays(request.session),
-        howChangeDuringSchoolHolidaysAnswer: howChangeDuringSchoolHolidays(request.session),
-        itemsForChangeoverAnswer: itemsForChangeover(request.session),
-        whatWillHappenAnswer: whatWillHappen(request.session),
-        whatOtherThingsMatterAnswer: whatOtherThingsMatter(request.session),
-        planLastMinuteChanges: planLastMinuteChanges(request.session),
-        planLongTermNotice: planLongTermNotice(request.session),
-        planReview: planReview(request.session),
+        mostlyLiveAnswer: mostlyLive(request),
+        whichScheduleAnswer: whichSchedule(request),
+        willOvernightsHappenAnswer: willOvernightsHappen(request),
+        whichDaysOvernightAnswer: whichDaysOvernight(request),
+        willDaytimeVisitsHappenAnswer: willDaytimeVisitsHappen(request),
+        whichDaysDaytimeVisitsAnswer: whichDaysDaytimeVisits(request),
+        getBetweenHouseholdsAnswer: getBetweenHouseholds(request),
+        whereHandoverAnswer: whereHandover(request),
+        willChangeDuringSchoolHolidaysAnswer: willChangeDuringSchoolHolidays(request),
+        howChangeDuringSchoolHolidaysAnswer: howChangeDuringSchoolHolidays(request),
+        itemsForChangeoverAnswer: itemsForChangeover(request),
+        whatWillHappenAnswer: whatWillHappen(request),
+        whatOtherThingsMatterAnswer: whatOtherThingsMatter(request),
+        planLastMinuteChanges: planLastMinuteChanges(request),
+        planLongTermNotice: planLongTermNotice(request),
+        planReview: planReview(request),
       },
     });
   });

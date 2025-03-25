@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import { yesOrNo } from '../../@types/fields';
 import formFields from '../../constants/formFields';
@@ -14,7 +13,7 @@ const willOvernightsHappenRoutes = (router: Router) => {
 
     response.render('pages/livingAndVisiting/willOvernightsHappen', {
       errors: request.flash('errors'),
-      title: i18n.__('livingAndVisiting.willOvernightsHappen.title', {
+      title: request.__('livingAndVisiting.willOvernightsHappen.title', {
         adult: parentNotMostlyLivedWith(request.session),
       }),
       backLinkHref: getBackUrl(request.session, paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN),

@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import { yesOrNo } from '../@types/fields';
 import formFields from '../constants/formFields';
@@ -11,7 +10,7 @@ const courtOrderCheckRoutes = (router: Router) => {
   router.get(paths.COURT_ORDER_CHECK, (request, response) => {
     response.render('pages/courtOrderCheck', {
       errors: request.flash('errors'),
-      title: i18n.__('courtOrderCheck.title'),
+      title: request.__('courtOrderCheck.title'),
       backLinkHref: getBackUrl(request.session, paths.DO_WHATS_BEST),
     });
   });

@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import i18n from 'i18n';
 
 import paths from '../constants/paths';
 import createPdf from '../pdf/createPdf';
@@ -10,7 +9,7 @@ const pdfRoutes = (router: Router) => {
     const pdf = createPdf(false, request);
 
     response.setHeader('Content-Type', 'application/pdf');
-    response.setHeader('Content-Disposition', `attachment; filename=${i18n.__('pdf.name')}.pdf`);
+    response.setHeader('Content-Disposition', `attachment; filename=${request.__('pdf.name')}.pdf`);
     response.send(Buffer.from(pdf));
   });
 
@@ -18,12 +17,12 @@ const pdfRoutes = (router: Router) => {
     const pdf = createPdf(true, request);
 
     response.setHeader('Content-Type', 'application/pdf');
-    response.setHeader('Content-Disposition', `inline; filename=${i18n.__('pdf.name')}.pdf`);
+    response.setHeader('Content-Disposition', `inline; filename=${request.__('pdf.name')}.pdf`);
     response.send(Buffer.from(pdf));
   });
 
-  router.get(paths.DOWNLOAD_PAPER_FORM, (_request, response) => {
-    response.download(getAssetPath('other/paperForm.pdf'), `${i18n.__('pdf.name')}.pdf`);
+  router.get(paths.DOWNLOAD_PAPER_FORM, (request, response) => {
+    response.download(getAssetPath('other/paperForm.pdf'), `${request.__('pdf.name')}.pdf`);
   });
 };
 

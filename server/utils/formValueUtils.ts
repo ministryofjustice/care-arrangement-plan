@@ -1,8 +1,9 @@
-import i18n from 'i18n';
+import { Request } from 'express';
 
 import { dayValues, planLastMinuteChangesField, whichDaysField, yesOrNo } from '../@types/fields';
 import { WhichDays } from '../@types/session';
 
+// TODO - this does not translate "and"
 export const formatListOfStrings = (words: string[]) => {
   switch (words.length) {
     case 0:
@@ -46,7 +47,7 @@ export const convertWhichDaysSessionValueToField = (whichDays: WhichDays | undef
   return [whichDays?.days, undefined];
 };
 
-//TODO C5141-1299 this does not translate
+// TODO - this does not translate the days or "a"
 export const formatWhichDaysSessionValue = (whichDays: WhichDays | undefined): string => {
   if (!whichDays?.days) {
     return '';
@@ -62,23 +63,25 @@ export const formatWhichDaysSessionValue = (whichDays: WhichDays | undefined): s
   return formatListOfStrings(uppercaseDays);
 };
 
-export const formatPlanChangesOptionsIntoList = (field: planLastMinuteChangesField[] | undefined): string => {
-  const translatedStrings = field.map(getTranslatedPlanChangesField).map((s) => s.toLowerCase());
-  return formatListOfStrings(translatedStrings);
-};
+export const formatPlanChangesOptionsIntoList = (request: Request): string => {
+  const getTranslatedPlanChangesField = (field: planLastMinuteChangesField) => {
+    const ns = 'decisionMaking.planLastMinuteChanges';
+    switch (field) {
+      case 'text':
+        return request.__(`${ns}.textMessage`);
+      case 'phone':
+        return request.__(`${ns}.phoneCall`);
+      case 'email':
+        return request.__(`${ns}.email`);
+      case 'app':
+        return request.__(`${ns}.app`);
+      case 'anotherArrangement':
+        return request.__(`${ns}.anotherArrangement`);
+    }
+  };
 
-const getTranslatedPlanChangesField = (field: planLastMinuteChangesField) => {
-  const ns = 'decisionMaking.planLastMinuteChanges';
-  switch (field) {
-    case 'text':
-      return i18n.__(`${ns}.textMessage`);
-    case 'phone':
-      return i18n.__(`${ns}.phoneCall`);
-    case 'email':
-      return i18n.__(`${ns}.email`);
-    case 'app':
-      return i18n.__(`${ns}.app`);
-    case 'anotherArrangement':
-      return i18n.__(`${ns}.anotherArrangement`);
-  }
+  const translatedStrings = request.session.decisionMaking.planLastMinuteChanges.options
+    .map(getTranslatedPlanChangesField)
+    .map((s) => s.toLowerCase());
+  return formatListOfStrings(translatedStrings);
 };

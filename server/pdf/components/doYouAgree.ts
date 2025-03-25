@@ -1,4 +1,3 @@
-import i18n from 'i18n';
 import { AcroFormRadioButton } from 'jspdf';
 
 import { Paragraph, PdfBuilder } from '../../@types/pdf';
@@ -68,8 +67,8 @@ class DoYouAgree extends BaseComponent {
 
     this.pdf.document.addField(this.radioGroup);
 
-    this.addOption(i18n.__('yes'));
-    this.addOption(i18n.__('no'));
+    this.addOption(this.pdf.request.__('yes'));
+    this.addOption(this.pdf.request.__('no'));
 
     // Set appearance must be done after the options are created, or it will not work
     // @ts-expect-error There is an error into the jsPDF type declaration.

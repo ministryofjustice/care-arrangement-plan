@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import { getBetweenHouseholdsField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
@@ -18,7 +17,7 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
 
     response.render('pages/handoverAndHolidays/getBetweenHouseholds', {
       errors: request.flash('errors'),
-      title: i18n.__('handoverAndHolidays.getBetweenHouseholds.title'),
+      title: request.__('handoverAndHolidays.getBetweenHouseholds.title'),
       values: request.session,
       formValues,
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),

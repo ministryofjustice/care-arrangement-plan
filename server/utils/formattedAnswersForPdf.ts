@@ -1,29 +1,28 @@
-import i18n from 'i18n';
+import { Request } from 'express';
 
 import { whereHandoverField } from '../@types/fields';
-import { CAPSession } from '../@types/session';
 
 import { formatListOfStrings, formatPlanChangesOptionsIntoList, formatWhichDaysSessionValue } from './formValueUtils';
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
 
-export const mostlyLive = (session: Partial<CAPSession>) => {
-  const { livingAndVisiting, initialAdultName, secondaryAdultName } = session;
+export const mostlyLive = (request: Request) => {
+  const { livingAndVisiting, initialAdultName, secondaryAdultName } = request.session;
   if (!livingAndVisiting.mostlyLive) return undefined;
   switch (livingAndVisiting.mostlyLive.where) {
     case 'withInitial':
     case 'withSecondary':
-      return i18n.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedLiveWith', {
+      return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedLiveWith', {
         senderName: initialAdultName,
-        adult: parentMostlyLivedWith(session),
+        adult: parentMostlyLivedWith(request.session),
       });
     case 'split':
-      return i18n.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedSplit', {
+      return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedSplit', {
         senderName: initialAdultName,
         otherAdult: secondaryAdultName,
       });
     case 'other':
-      return i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
-        senderName: session.initialAdultName,
+      return request.__('sharePlan.yourProposedPlan.senderSuggested', {
+        senderName: request.session.initialAdultName,
         suggestion: livingAndVisiting.mostlyLive.describeArrangement,
       });
     default:
@@ -31,97 +30,99 @@ export const mostlyLive = (session: Partial<CAPSession>) => {
   }
 };
 
-export const whichSchedule = ({ livingAndVisiting, initialAdultName }: Partial<CAPSession>) => {
+export const whichSchedule = (request: Request) => {
+  const { livingAndVisiting, initialAdultName } = request.session;
   if (!livingAndVisiting.whichSchedule) return undefined;
   return livingAndVisiting.whichSchedule.noDecisionRequired
-    ? i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
-    : i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
+    ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+    : request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
         suggestion: livingAndVisiting.whichSchedule.answer,
       });
 };
 
-export const willOvernightsHappen = (session: Partial<CAPSession>) => {
-  const { livingAndVisiting, initialAdultName } = session;
+export const willOvernightsHappen = (request: Request) => {
+  const { livingAndVisiting, initialAdultName } = request.session;
   if (!livingAndVisiting.overnightVisits) return undefined;
   return livingAndVisiting.overnightVisits.willHappen
-    ? i18n.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedStayOvernight', {
+    ? request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedStayOvernight', {
         senderName: initialAdultName,
-        adult: parentNotMostlyLivedWith(session),
+        adult: parentNotMostlyLivedWith(request.session),
       })
-    : i18n.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedNoOvernights', { senderName: initialAdultName });
+    : request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedNoOvernights', {
+        senderName: initialAdultName,
+      });
 };
 
-export const whichDaysOvernight = ({ livingAndVisiting, initialAdultName }: Partial<CAPSession>) => {
+export const whichDaysOvernight = (request: Request) => {
+  const { livingAndVisiting, initialAdultName } = request.session;
   if (!livingAndVisiting.overnightVisits?.whichDays) return undefined;
   if (livingAndVisiting.overnightVisits.whichDays.describeArrangement) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
+    return request.__('sharePlan.yourProposedPlan.senderSuggested', {
       senderName: initialAdultName,
       suggestion: livingAndVisiting.overnightVisits.whichDays.describeArrangement,
     });
   }
   if (livingAndVisiting.overnightVisits.whichDays.noDecisionRequired) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
 
-  return i18n.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedOvernightDays', {
+  return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedOvernightDays', {
     senderName: initialAdultName,
     days: formatWhichDaysSessionValue(livingAndVisiting.overnightVisits.whichDays),
   });
 };
 
-export const willDaytimeVisitsHappen = (session: Partial<CAPSession>) => {
-  const { livingAndVisiting, initialAdultName } = session;
+export const willDaytimeVisitsHappen = (request: Request) => {
+  const { livingAndVisiting, initialAdultName } = request.session;
   if (!livingAndVisiting.daytimeVisits) return undefined;
   return livingAndVisiting.daytimeVisits.willHappen
-    ? i18n.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedDaytimeVisits', {
+    ? request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedDaytimeVisits', {
         senderName: initialAdultName,
-        adult: parentNotMostlyLivedWith(session),
+        adult: parentNotMostlyLivedWith(request.session),
       })
-    : i18n.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedNoDaytimeVisits', {
+    : request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedNoDaytimeVisits', {
         senderName: initialAdultName,
       });
 };
 
-export const whichDaysDaytimeVisits = ({ livingAndVisiting, initialAdultName }: Partial<CAPSession>) => {
+export const whichDaysDaytimeVisits = (request: Request) => {
+  const { livingAndVisiting, initialAdultName } = request.session;
   if (!livingAndVisiting.daytimeVisits?.whichDays) return undefined;
   if (livingAndVisiting.daytimeVisits.whichDays.describeArrangement) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
+    return request.__('sharePlan.yourProposedPlan.senderSuggested', {
       senderName: initialAdultName,
       suggestion: livingAndVisiting.daytimeVisits.whichDays.describeArrangement,
     });
   }
   if (livingAndVisiting.daytimeVisits?.whichDays.noDecisionRequired) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
 
-  return i18n.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedDaytimeVisitDays', {
+  return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedDaytimeVisitDays', {
     senderName: initialAdultName,
     days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays),
   });
 };
 
-export const getBetweenHouseholds = ({
-  handoverAndHolidays,
-  initialAdultName,
-  secondaryAdultName,
-}: Partial<CAPSession>) => {
+export const getBetweenHouseholds = (request: Request) => {
+  const { handoverAndHolidays, initialAdultName, secondaryAdultName } = request.session;
   if (handoverAndHolidays.getBetweenHouseholds.noDecisionRequired) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
   switch (handoverAndHolidays.getBetweenHouseholds.how) {
     case 'initialCollects':
-      return i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
+      return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
         senderName: initialAdultName,
         adult: initialAdultName,
       });
     case 'secondaryCollects':
-      return i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
+      return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
         senderName: initialAdultName,
         adult: secondaryAdultName,
       });
     case 'other':
-      return i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
+      return request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
         suggestion: handoverAndHolidays.getBetweenHouseholds.describeArrangement,
       });
@@ -130,13 +131,14 @@ export const getBetweenHouseholds = ({
   }
 };
 
-export const whereHandover = ({ handoverAndHolidays, initialAdultName, secondaryAdultName }: Partial<CAPSession>) => {
+export const whereHandover = (request: Request) => {
+  const { handoverAndHolidays, initialAdultName, secondaryAdultName } = request.session;
   if (handoverAndHolidays.whereHandover.noDecisionRequired) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
 
   if (handoverAndHolidays.whereHandover.someoneElse) {
-    return i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedSomeoneElse', {
+    return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedSomeoneElse', {
       senderName: initialAdultName,
       someoneElse: handoverAndHolidays.whereHandover.someoneElse,
     });
@@ -145,105 +147,116 @@ export const whereHandover = ({ handoverAndHolidays, initialAdultName, secondary
   const getAnswerForWhereHandoverWhere = (where: whereHandoverField) => {
     switch (where) {
       case 'neutral':
-        return i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.neutralLocation');
+        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.neutralLocation');
       case 'initialHome':
-        return i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.home', { adult: initialAdultName });
+        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.home', { adult: initialAdultName });
       case 'secondaryHome':
-        return i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.home', { adult: secondaryAdultName });
+        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.home', { adult: secondaryAdultName });
       case 'school':
-        return i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.school');
+        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.school');
       default:
         return undefined;
     }
   };
 
-  return i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedHandover', {
+  return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedHandover', {
     senderName: initialAdultName,
     location: formatListOfStrings(handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere)),
   });
 };
 
-export const willChangeDuringSchoolHolidays = ({ handoverAndHolidays, initialAdultName }: Partial<CAPSession>) => {
+export const willChangeDuringSchoolHolidays = (request: Request) => {
+  const { handoverAndHolidays, initialAdultName } = request.session;
   if (handoverAndHolidays.willChangeDuringSchoolHolidays.noDecisionRequired) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
   return handoverAndHolidays.willChangeDuringSchoolHolidays.willChange
-    ? i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedChangeDuringSchoolHolidays', {
+    ? request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedChangeDuringSchoolHolidays', {
         senderName: initialAdultName,
       })
-    : i18n.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedNoChangeDuringSchoolHolidays', {
+    : request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedNoChangeDuringSchoolHolidays', {
         senderName: initialAdultName,
       });
 };
 
-export const howChangeDuringSchoolHolidays = ({ handoverAndHolidays, initialAdultName }: Partial<CAPSession>) => {
+export const howChangeDuringSchoolHolidays = (request: Request) => {
+  const { handoverAndHolidays, initialAdultName } = request.session;
   if (!handoverAndHolidays.howChangeDuringSchoolHolidays) return undefined;
 
   return handoverAndHolidays.howChangeDuringSchoolHolidays.noDecisionRequired
-    ? i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
-    : i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
+    ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+    : request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
         suggestion: handoverAndHolidays.howChangeDuringSchoolHolidays.answer,
       });
 };
 
-export const itemsForChangeover = ({ handoverAndHolidays, initialAdultName }: Partial<CAPSession>) =>
-  handoverAndHolidays.itemsForChangeover.noDecisionRequired
-    ? i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
-    : i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
+export const itemsForChangeover = (request: Request) => {
+  const { handoverAndHolidays, initialAdultName } = request.session;
+  return handoverAndHolidays.itemsForChangeover.noDecisionRequired
+    ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+    : request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
         suggestion: handoverAndHolidays.itemsForChangeover.answer,
       });
+};
 
-export const whatWillHappen = ({ specialDays, initialAdultName }: Partial<CAPSession>) =>
-  specialDays.whatWillHappen.noDecisionRequired
-    ? i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
-    : i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
+export const whatWillHappen = (request: Request) => {
+  const { specialDays, initialAdultName } = request.session;
+  return specialDays.whatWillHappen.noDecisionRequired
+    ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+    : request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
         suggestion: specialDays.whatWillHappen.answer,
       });
+};
 
-export const whatOtherThingsMatter = ({ otherThings, initialAdultName }: Partial<CAPSession>) =>
-  otherThings.whatOtherThingsMatter.noDecisionRequired
-    ? i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
-    : i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
+export const whatOtherThingsMatter = (request: Request) => {
+  const { otherThings, initialAdultName } = request.session;
+  return otherThings.whatOtherThingsMatter.noDecisionRequired
+    ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+    : request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
         suggestion: otherThings.whatOtherThingsMatter.answer,
       });
+};
 
-export const planLastMinuteChanges = ({ decisionMaking, initialAdultName }: Partial<CAPSession>) => {
+export const planLastMinuteChanges = (request: Request) => {
+  const { decisionMaking, initialAdultName } = request.session;
   if (decisionMaking.planLastMinuteChanges.noDecisionRequired) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
   if (decisionMaking.planLastMinuteChanges.options.includes('anotherArrangement')) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
+    return request.__('sharePlan.yourProposedPlan.senderSuggested', {
       senderName: initialAdultName,
       suggestion: decisionMaking.planLastMinuteChanges.anotherArrangementDescription,
     });
   }
-  return i18n.__('sharePlan.yourProposedPlan.decisionMaking.planLastMinuteChanges.howChangesCommunicated', {
+  return request.__('sharePlan.yourProposedPlan.decisionMaking.planLastMinuteChanges.howChangesCommunicated', {
     senderName: initialAdultName,
-    methods: formatPlanChangesOptionsIntoList(decisionMaking.planLastMinuteChanges.options),
+    methods: formatPlanChangesOptionsIntoList(request),
   });
 };
 
-export const planLongTermNotice = ({ decisionMaking, initialAdultName }: Partial<CAPSession>) => {
+export const planLongTermNotice = (request: Request) => {
+  const { decisionMaking, initialAdultName } = request.session;
   if (decisionMaking.planLongTermNotice.noDecisionRequired) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
   if (decisionMaking.planLongTermNotice.otherAnswer) {
-    return i18n.__('sharePlan.yourProposedPlan.senderSuggested', {
+    return request.__('sharePlan.yourProposedPlan.senderSuggested', {
       senderName: initialAdultName,
       suggestion: decisionMaking.planLongTermNotice.otherAnswer,
     });
   }
-  return i18n.__('sharePlan.yourProposedPlan.decisionMaking.planLongTermNotice.howChangesCommunicated', {
+  return request.__('sharePlan.yourProposedPlan.decisionMaking.planLongTermNotice.howChangesCommunicated', {
     senderName: initialAdultName,
     numberOfWeeks: decisionMaking.planLongTermNotice.weeks.toString(),
   });
 };
 
-export const planReview = ({ decisionMaking, initialAdultName }: Partial<CAPSession>) => {
+export const planReview = (request: Request) => {
+  const { decisionMaking, initialAdultName } = request.session;
   let number: number;
   let translationName: string;
 
@@ -257,7 +270,7 @@ export const planReview = ({ decisionMaking, initialAdultName }: Partial<CAPSess
 
   const translationSuffix = number === 1 ? 'Singular' : 'Plural';
 
-  return i18n.__(translationName + translationSuffix, {
+  return request.__(translationName + translationSuffix, {
     senderName: initialAdultName,
     number: number.toString(),
   });

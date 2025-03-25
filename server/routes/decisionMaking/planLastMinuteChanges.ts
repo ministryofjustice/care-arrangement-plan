@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import { planLastMinuteChangesField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
@@ -19,7 +18,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
     response.render('pages/decisionMaking/planLastMinuteChanges', {
       errors: request.flash('errors'),
       formValues,
-      title: i18n.__('decisionMaking.planLastMinuteChanges.title'),
+      title: request.__('decisionMaking.planLastMinuteChanges.title'),
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });
   });

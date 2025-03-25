@@ -1,5 +1,4 @@
 import { Request } from 'express';
-import i18n from 'i18n';
 
 import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants';
@@ -20,11 +19,11 @@ import FontStyles from './fontStyles';
 const addMostlyLive = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
     pdf,
-    i18n.__('taskList.livingAndVisiting'),
-    i18n.__('livingAndVisiting.mostlyLive.title'),
+    request.__('taskList.livingAndVisiting'),
+    request.__('livingAndVisiting.mostlyLive.title'),
     undefined,
-    mostlyLive(request.session),
-    i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.mostlyLive'),
+    mostlyLive(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.mostlyLive'),
   );
 };
 
@@ -32,10 +31,10 @@ const addWhichSchedule = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
     pdf,
     undefined,
-    i18n.__('livingAndVisiting.whichSchedule.title'),
-    i18n.__('livingAndVisiting.whichSchedule.exactSplitWarning'),
-    whichSchedule(request.session),
-    i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichSchedule'),
+    request.__('livingAndVisiting.whichSchedule.title'),
+    request.__('livingAndVisiting.whichSchedule.exactSplitWarning'),
+    whichSchedule(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichSchedule'),
   );
 };
 
@@ -45,10 +44,10 @@ const addWillOvernightsHappen = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
     pdf,
     undefined,
-    i18n.__('livingAndVisiting.willOvernightsHappen.title', { adult }),
+    request.__('livingAndVisiting.willOvernightsHappen.title', { adult }),
     undefined,
-    willOvernightsHappen(request.session),
-    i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.willOvernightsHappen', { adult }),
+    willOvernightsHappen(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.willOvernightsHappen', { adult }),
   );
 };
 
@@ -56,10 +55,10 @@ const addWhichDaysOvernight = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
     pdf,
     undefined,
-    i18n.__('livingAndVisiting.whichDaysOvernight.title'),
+    request.__('livingAndVisiting.whichDaysOvernight.title'),
     undefined,
-    whichDaysOvernight(request.session),
-    i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichDaysOvernight', {
+    whichDaysOvernight(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichDaysOvernight', {
       adult: parentNotMostlyLivedWith(request.session),
     }),
   );
@@ -69,10 +68,10 @@ const addWillDaytimeVisitsHappen = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
     pdf,
     undefined,
-    i18n.__('livingAndVisiting.willDaytimeVisitsHappen.title', { adult: parentNotMostlyLivedWith(request.session) }),
+    request.__('livingAndVisiting.willDaytimeVisitsHappen.title', { adult: parentNotMostlyLivedWith(request.session) }),
     undefined,
-    willDaytimeVisitsHappen(request.session),
-    i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.willDaytimeVisitsHappen'),
+    willDaytimeVisitsHappen(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.willDaytimeVisitsHappen'),
   );
 };
 
@@ -80,14 +79,15 @@ const addWWhichDaysDaytimeVisits = (pdf: PdfBuilder, request: Request) => {
   addAnswer(
     pdf,
     undefined,
-    i18n.__('livingAndVisiting.whichDaysDaytimeVisits.title'),
+    request.__('livingAndVisiting.whichDaysDaytimeVisits.title'),
     undefined,
-    whichDaysDaytimeVisits(request.session),
-    i18n.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichDaysDaytimeVisits'),
+    whichDaysDaytimeVisits(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichDaysDaytimeVisits'),
   );
 };
 
-const addLivingAndVisiting = (pdf: PdfBuilder, request: Request) => {
+const addLivingAndVisiting = (pdf: PdfBuilder) => {
+  const request = pdf.request;
   addMostlyLive(pdf, request);
   addWhichSchedule(pdf, request);
   addWillOvernightsHappen(pdf, request);
@@ -97,13 +97,13 @@ const addLivingAndVisiting = (pdf: PdfBuilder, request: Request) => {
 
   new TextboxComponent(pdf, [
     {
-      text: i18n.__('sharePlan.yourProposedPlan.endOfSection'),
+      text: request.__('sharePlan.yourProposedPlan.endOfSection'),
       size: QUESTION_TITLE_SIZE,
       style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: i18n.__('sharePlan.yourProposedPlan.compromise.livingAndVisiting'),
+      text: request.__('sharePlan.yourProposedPlan.compromise.livingAndVisiting'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
