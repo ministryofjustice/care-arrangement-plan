@@ -23,7 +23,6 @@ const pdfRoutes = (router: Router) => {
   });
 
   router.get(paths.DOWNLOAD_PAPER_FORM, (_request, response) => {
-    // TODO - fix name and asset
     response.download(getAssetPath('other/paperForm.pdf'), `${i18n.__('pdf.name')}.pdf`);
   });
 };
