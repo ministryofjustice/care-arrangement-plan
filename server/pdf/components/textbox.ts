@@ -1,14 +1,15 @@
 import { AcroFormTextField } from 'jspdf';
 
-import { Paragraph, PdfBuilder } from '../../@types/pdf';
+import { Paragraph } from '../../@types/pdf';
 import { MARGIN_WIDTH, PARAGRAPH_SPACE } from '../../constants/pdfConstants';
+import Pdf from '../pdf';
 
 import TextComponent from './text';
 
 class Textbox extends TextComponent {
   private readonly TEXTBOX_HEIGHT = 20;
 
-  constructor(pdf: PdfBuilder, paragraphs: Paragraph[]) {
+  constructor(pdf: Pdf, paragraphs: Paragraph[]) {
     super(pdf, paragraphs);
   }
 

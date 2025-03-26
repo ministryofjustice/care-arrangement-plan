@@ -1,12 +1,13 @@
-import { Paragraph, PdfBuilder } from '../../@types/pdf';
+import { Paragraph } from '../../@types/pdf';
 import { LINE_HEIGHT_RATIO, MM_PER_POINT } from '../../constants/pdfConstants';
 import logger from '../../logger';
+import Pdf from '../pdf';
 
 type SplittableParagraph = Paragraph & { splittable?: boolean };
 type PotentialNewPageParagraph = Paragraph & { canStartNewPage?: boolean };
 
 class SplittableText {
-  protected readonly pdf: PdfBuilder;
+  protected readonly pdf: Pdf;
   private readonly paragraphs: SplittableParagraph[];
 
   private stagedParagraphsHeight = 0;
@@ -14,7 +15,7 @@ class SplittableText {
 
   private readonly MIN_LINES_OF_TEXT = 3;
 
-  constructor(pdf: PdfBuilder, paragraphs: SplittableParagraph[]) {
+  constructor(pdf: Pdf, paragraphs: SplittableParagraph[]) {
     this.pdf = pdf;
     this.paragraphs = paragraphs;
   }

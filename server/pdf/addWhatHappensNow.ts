@@ -1,10 +1,10 @@
-import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
 
 import TextComponent from './components/text';
 import FontStyles from './fontStyles';
+import Pdf from './pdf';
 
-const addWhatHappensNow = (pdf: PdfBuilder) => {
+const addWhatHappensNow = (pdf: Pdf) => {
   const request = pdf.request;
   new TextComponent(pdf, [
     {

@@ -1,14 +1,14 @@
 import { Request } from 'express';
 
-import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants';
 import { planLastMinuteChanges, planLongTermNotice, planReview } from '../utils/formattedAnswersForPdf';
 
 import addAnswer from './addAnswer';
 import TextboxComponent from './components/textbox';
 import FontStyles from './fontStyles';
+import Pdf from './pdf';
 
-const addPlanLastMinuteChanges = (pdf: PdfBuilder, request: Request) => {
+const addPlanLastMinuteChanges = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     request.__('taskList.decisionMaking'),
@@ -19,7 +19,7 @@ const addPlanLastMinuteChanges = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addPlanLongTermNotice = (pdf: PdfBuilder, request: Request) => {
+const addPlanLongTermNotice = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
@@ -30,7 +30,7 @@ const addPlanLongTermNotice = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addPlanReview = (pdf: PdfBuilder, request: Request) => {
+const addPlanReview = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
@@ -41,7 +41,7 @@ const addPlanReview = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addDecisionMaking = (pdf: PdfBuilder) => {
+const addDecisionMaking = (pdf: Pdf) => {
   const request = pdf.request;
 
   addPlanLastMinuteChanges(pdf, request);

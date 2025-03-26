@@ -1,12 +1,13 @@
-import { Paragraph, PdfBuilder } from '../../@types/pdf';
+import { Paragraph } from '../../@types/pdf';
 import logger from '../../logger';
+import Pdf from '../pdf';
 
 import BaseComponent from './base';
 
 class Text extends BaseComponent {
   private readonly paragraphs: Paragraph[];
 
-  constructor(pdf: PdfBuilder, paragraphs: Paragraph[]) {
+  constructor(pdf: Pdf, paragraphs: Paragraph[]) {
     super(pdf);
     this.paragraphs = paragraphs;
   }

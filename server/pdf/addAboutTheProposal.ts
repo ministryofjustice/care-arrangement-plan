@@ -1,4 +1,3 @@
-import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
@@ -6,8 +5,9 @@ import BulletListComponent from './components/bulletList';
 import DoYouAgreeComponent from './components/doYouAgree';
 import TextComponent from './components/text';
 import FontStyles from './fontStyles';
+import Pdf from './pdf';
 
-const addAboutTheProposal = (pdf: PdfBuilder) => {
+const addAboutTheProposal = (pdf: Pdf) => {
   const request = pdf.request;
   const { initialAdultName, secondaryAdultName, numberOfChildren } = request.session;
   const childrenNames = formattedChildrenNames(request.session);

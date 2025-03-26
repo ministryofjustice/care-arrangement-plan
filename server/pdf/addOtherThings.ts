@@ -1,4 +1,3 @@
-import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
 import { whatOtherThingsMatter } from '../utils/formattedAnswersForPdf';
 
@@ -7,8 +6,9 @@ import DoYouAgreeComponent from './components/doYouAgree';
 import SplittableTextComponent from './components/splittableText';
 import TextboxComponent from './components/textbox';
 import FontStyles from './fontStyles';
+import Pdf from './pdf';
 
-const addOtherThings = (pdf: PdfBuilder) => {
+const addOtherThings = (pdf: Pdf) => {
   const request = pdf.request;
   new BulletListComponent(pdf, {
     initialText: [

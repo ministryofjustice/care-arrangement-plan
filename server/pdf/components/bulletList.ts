@@ -1,12 +1,13 @@
-import { Paragraph, PdfBuilder } from '../../@types/pdf';
+import { Paragraph } from '../../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE } from '../../constants/pdfConstants';
 import FontStyles from '../fontStyles';
+import Pdf from '../pdf';
 
 import TextComponent from './text';
 
 class BulletList extends TextComponent {
   constructor(
-    pdf: PdfBuilder,
+    pdf: Pdf,
     {
       initialText,
       bulletText,
