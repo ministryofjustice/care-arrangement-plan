@@ -1,3 +1,5 @@
+{% from "macros/doYouAgreeAndSuggestion.njk" import doYouAgreeAndSuggestion %}
+
 <h3 class="govuk-heading-m">{{ __('taskList.otherThings') }}</h3>
 
 <h4 class="govuk-heading-s">{{ __('otherThings.whatOtherThingsMatter.title') }}</h4>
@@ -9,6 +11,6 @@
   <li>{{ __('otherThings.whatOtherThingsMatter.otherContact') }}</li>
 </ul>
 <p class="newline-separated-paragraph">{{ values.whatOtherThingsMatterAnswer }}</p>
-{{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.otherThings.whatOtherThingsMatter')) }}
+{{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.otherThings.whatOtherThingsMatter'), "what-other-things-matter") }}
 
 {{ endOfSection(__('sharePlan.yourProposedPlan.compromise.otherThings'), "other-things") }}
