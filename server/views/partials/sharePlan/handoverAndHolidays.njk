@@ -1,26 +1,26 @@
-<h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays') }}</h2>
+<h3 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays') }}</h3>
 
-<h3 class="govuk-heading-s">{{ __('handoverAndHolidays.getBetweenHouseholds.title') }}</h3>
+<h4 class="govuk-heading-s">{{ __('handoverAndHolidays.getBetweenHouseholds.title') }}</h4>
 <p class="newline-separated-paragraph">{{ values.getBetweenHouseholdsAnswer }}</p>
 {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.getBetweenHouseholds')) }}
 
-<h3 class="govuk-heading-s">{{ __('handoverAndHolidays.whereHandover.title') }}</h3>
+<h4 class="govuk-heading-s">{{ __('handoverAndHolidays.whereHandover.title') }}</h4>
 <p>{{ __('handoverAndHolidays.whereHandover.explainer') }}</p>
 <p class="newline-separated-paragraph">{{ values.whereHandoverAnswer }}</p>
 {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.whereHandover')) }}
 
-<h3 class="govuk-heading-s">{{ __('handoverAndHolidays.willChangeDuringSchoolHolidays.title') }}</h3>
+<h4 class="govuk-heading-s">{{ __('handoverAndHolidays.willChangeDuringSchoolHolidays.title') }}</h4>
 <p class="newline-separated-paragraph">{{ values.willChangeDuringSchoolHolidaysAnswer }}</p>
 {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.willChangeDuringSchoolHolidays')) }}
 
 {% if values.howChangeDuringSchoolHolidaysAnswer %}
-  <h3 class="govuk-heading-s">{{ __('handoverAndHolidays.howChangeDuringSchoolHolidays.title') }}</h3>
+  <h4 class="govuk-heading-s">{{ __('handoverAndHolidays.howChangeDuringSchoolHolidays.title') }}</h4>
   <p>{{ __('handoverAndHolidays.howChangeDuringSchoolHolidays.content') }}</p>
   <p class="newline-separated-paragraph">{{ values.howChangeDuringSchoolHolidaysAnswer }}</p>
   {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.howChangeDuringSchoolHolidays')) }}
 {% endif %}
 
-<h3 class="govuk-heading-s">{{ __('handoverAndHolidays.itemsForChangeover.title') }}</h3>
+<h4 class="govuk-heading-s">{{ __('handoverAndHolidays.itemsForChangeover.title') }}</h4>
 <p class="newline-separated-paragraph">{{ values.itemsForChangeoverAnswer }}</p>
 {{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.itemsForChangeover')) }}
 

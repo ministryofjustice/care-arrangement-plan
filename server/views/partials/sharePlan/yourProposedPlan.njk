@@ -1,7 +1,7 @@
 {% from "macros/endOfSection.njk" import endOfSection %}
 {% from "macros/doYouAgree.njk" import doYouAgree %}
 
-<h2 class="govuk-heading-l">{{ __('sharePlan.yourProposedPlan.aboutThePlan') }}</h2>
+<h3 class="govuk-heading-l">{{ __('sharePlan.yourProposedPlan.aboutThePlan') }}</h3>
 
 <p class="govuk-body">{{ __('sharePlan.yourProposedPlan.senderSaid', {senderName: values.initialAdultName}) }}</p>
 <ul class="govuk-list govuk-list--bullet">
@@ -29,7 +29,7 @@
 {% include 'partials/sharePlan/otherThings.njk' %}
 {% include 'partials/sharePlan/decisionMaking.njk' %}
 
-<h2 class="govuk-heading-m">{{ __('sharePlan.yourProposedPlan.whatHappensNowHeading') }}</h2>
+<h3 class="govuk-heading-m">{{ __('sharePlan.yourProposedPlan.whatHappensNowHeading') }}</h3>
 <p>{{ __('sharePlan.yourProposedPlan.nowSendPlan', {senderName: values.initialAdultName}) }}</p>
 <p>{{ __('sharePlan.yourProposedPlan.unableToAgree') }}</p>
 <p>{{ __('sharePlan.yourProposedPlan.moreInfoAndSupport') | customUrlize | safe }}</p>
