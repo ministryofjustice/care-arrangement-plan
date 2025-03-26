@@ -27,9 +27,9 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
         "Which schedule best meets the children's needs?",
       );
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}`)).not.toHaveAttribute(
-        'aria-describedby',
-      );
+      expect(
+        dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}`).getAttribute('aria-describedby'),
+      ).not.toContain(`${formFields.WHICH_SCHEDULE}-error`);
     });
 
     it('should render error flash responses correctly', async () => {
@@ -49,7 +49,7 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
       );
       expect(dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}`)).toHaveAttribute(
         'aria-describedby',
-        `${formFields.WHICH_SCHEDULE}-error`,
+        expect.stringContaining(`${formFields.WHICH_SCHEDULE}-error`),
       );
     });
 

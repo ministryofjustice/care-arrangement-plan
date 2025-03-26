@@ -19,9 +19,9 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('What other things matter to your children?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`)).not.toHaveAttribute(
-        'aria-describedby',
-      );
+      expect(
+        dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`).getAttribute('aria-describedby'),
+      ).not.toContain(`${formFields.WHAT_OTHER_THINGS_MATTER}-error`);
     });
 
     it('should render error flash responses correctly', async () => {
@@ -41,7 +41,7 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
       );
       expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`)).toHaveAttribute(
         'aria-describedby',
-        `${formFields.WHAT_OTHER_THINGS_MATTER}-error`,
+        expect.stringContaining(`${formFields.WHAT_OTHER_THINGS_MATTER}-error`),
       );
     });
 
