@@ -1,18 +1,20 @@
-<h2 class="govuk-heading-m">{{ __('taskList.decisionMaking') }}</h2>
+{% from "macros/doYouAgreeAndSuggestion.njk" import doYouAgreeAndSuggestion %}
 
-<h3 class="govuk-heading-s">{{ __('decisionMaking.planLastMinuteChanges.title') }}</h3>
+<h3 class="govuk-heading-m">{{ __('taskList.decisionMaking') }}</h3>
+
+<h4 class="govuk-heading-s">{{ __('decisionMaking.planLastMinuteChanges.title') }}</h4>
 <p class="govuk-body">{{ __('decisionMaking.planLastMinuteChanges.howChangesCommunicatedAdditionalDescription') }}</p>
 <p class="newline-separated-paragraph">{{ values.planLastMinuteChanges }}</p>
-{{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLastMinuteChanges')) }}
+{{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLastMinuteChanges'), "plan-last-minute-changes") }}
 
-<h3 class="govuk-heading-s">{{ __('decisionMaking.planLongTermNotice.title') }}</h3>
+<h4 class="govuk-heading-s">{{ __('decisionMaking.planLongTermNotice.title') }}</h4>
 <p class="govuk-body">{{ __('decisionMaking.planLongTermNotice.sometimesYouNeedToPlanAhead') }}</p>
 <p class="newline-separated-paragraph">{{ values.planLongTermNotice }}</p>
-{{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLongTermNotice')) }}
+{{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLongTermNotice'), "plan-long-term-notice") }}
 
-<h3 class="govuk-heading-s">{{ __('decisionMaking.planReview.title') }}</h3>
+<h4 class="govuk-heading-s">{{ __('decisionMaking.planReview.title') }}</h4>
 <p class="govuk-body">{{ __('decisionMaking.planReview.childrensNeedsChange') }}</p>
 <p class="newline-separated-paragraph">{{ values.planReview }}</p>
-{{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planReview')) }}
+{{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planReview'), "plan-review") }}
 
-{{ endOfSection(__('sharePlan.yourProposedPlan.compromise.decisionMaking')) }}
+{{ endOfSection(__('sharePlan.yourProposedPlan.compromise.decisionMaking'), "decision-making") }}

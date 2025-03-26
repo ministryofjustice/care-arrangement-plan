@@ -345,6 +345,7 @@
     },
     "change": {
       "text": "Change",
+      "children": "the children",
       "users": "the users",
       "whereWillTheChildrenLive": "where the children will mostly live",
       "whichSchedule": "which schedule best meets the children's needs",
@@ -358,7 +359,10 @@
       "howChangeDuringSchoolHolidays": "how the arrangements will change during school holidays",
       "itemsForChangeover": "what items need to go between households",
       "whatWillHappen": "what will happen on special days",
-      "whatOtherThingsMatter": "what other things matter to your children"
+      "whatOtherThingsMatter": "what other things matter to your children",
+      "planLastMinuteChanges": "how last-minute changes should be communicated",
+      "planLongTermNotice": "how much notice you should give to change long-term arrangements",
+      "planReview": "when the children’s needs will change"
     }
   },
   "sharePlan": {

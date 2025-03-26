@@ -17,7 +17,9 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('What will happen on special days?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      expect(dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}`)).not.toHaveAttribute('aria-describedby');
+      expect(
+        dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}`).getAttribute('aria-describedby'),
+      ).not.toContain(`${formFields.SPECIAL_DAYS}-error`);
     });
 
     it('should render error flash responses correctly', async () => {
@@ -37,7 +39,7 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
       );
       expect(dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}`)).toHaveAttribute(
         'aria-describedby',
-        `${formFields.SPECIAL_DAYS}-error`,
+        expect.stringContaining(`${formFields.SPECIAL_DAYS}-error`),
       );
     });
 

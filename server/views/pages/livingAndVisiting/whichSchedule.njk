@@ -8,21 +8,28 @@
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
 
-      <h1 class="govuk-heading-l">{{ title }}</h1>
-
-      {{
-        govukDetails({
-            summaryText: __('livingAndVisiting.whichSchedule.getIdeas'),
-            html: __('livingAndVisiting.whichSchedule.commonSchedules')
-        })
-      }}
-
-      <p>{{ __('livingAndVisiting.whichSchedule.exactSplitWarning') }}</p>
+      {% set hintHtml %}
+        {{
+          govukDetails({
+          summaryText: __('livingAndVisiting.whichSchedule.getIdeas'),
+          html: __('livingAndVisiting.whichSchedule.commonSchedules')
+          })
+        }}
+        <p>{{ __('livingAndVisiting.whichSchedule.exactSplitWarning') }}</p>
+      {% endset %}
 
       <form class="form" action="{{ paths.LIVING_VISITING_WHICH_SCHEDULE }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukTextarea({
+            label: {
+              text: title,
+              classes: "govuk-label--l",
+              isPageHeading: true
+            },
+            hint: {
+              html: hintHtml
+            },
             name: formFields.WHICH_SCHEDULE,
             value: initialSchedule,
             errorMessage: errors | findError(formFields.WHICH_SCHEDULE)
