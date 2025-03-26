@@ -1,8 +1,10 @@
-<h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
+{% from "macros/doYouAgreeAndSuggestion.njk" import doYouAgreeAndSuggestion %}
 
-<h3 class="govuk-heading-s">{{ __('specialDays.whatWillHappen.title') }}</h3>
+<h3 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h3>
+
+<h4 class="govuk-heading-s">{{ __('specialDays.whatWillHappen.title') }}</h4>
 <p>{{ __('specialDays.whatWillHappen.content') }}</p>
 <p class="newline-separated-paragraph">{{ values.whatWillHappenAnswer }}</p>
-{{ doYouAgree(__('sharePlan.yourProposedPlan.doNotAgree.specialDays.whatWillHappen')) }}
+{{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.specialDays.whatWillHappen'), "what-will-happen") }}
 
-{{ endOfSection(__('sharePlan.yourProposedPlan.compromise.specialDays')) }}
+{{ endOfSection(__('sharePlan.yourProposedPlan.compromise.specialDays'), "special-days") }}

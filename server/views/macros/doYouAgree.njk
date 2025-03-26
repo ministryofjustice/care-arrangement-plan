@@ -1,44 +1,25 @@
-{% from "govuk/components/input/macro.njk" import govukInput %}
-{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
-{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
 
-{% macro doYouAgree(text, questionText=__('sharePlan.yourProposedPlan.doYouAgree')) %}
-  <p class="govuk-body govuk-!-margin-bottom-2">{{ questionText }}</p>
-
-  <div class="govuk-form-group">
-    {% call govukFieldset({}) %}
-      <div class="agreement-input__item">
-        {{
-          govukInput({
-            name: "answer-yes",
-            classes: "govuk-input--width-2",
-            label: {
-              text: __('yes')
-            }
-          })
-        }}
-      </div>
-      <div class="agreement-input__item">
-        {{
-          govukInput({
-            name: "answer-no",
-            classes: "govuk-input--width-2",
-            label: {
-              text: __('no')
-            }
-          })
-        }}
-      </div>
-    {% endcall %}
-  </div>
-
-  {% if text %}
-    {{
-      govukTextarea({
-        label: {
-          text: text
+{% macro doYouAgree(questionText, idPrefix) %}
+  {{
+    govukRadios({
+      classes: "govuk-radios--inline",
+      name: idPrefix + "-agree-radios",
+      fieldset: {
+        legend: {
+          text: questionText
         }
-      })
-    }}
-  {% endif %}
+      },
+      items: [
+        {
+          value: "Yes",
+          text: __('yes')
+        },
+        {
+          value: "No",
+          text: __('no')
+        }
+      ]
+    })
+  }}
 {% endmacro %}
