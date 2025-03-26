@@ -114,10 +114,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# terraform
-**/.terraform/
-**/*.tfstate*
-
 .idea
 .vscode
 dist/
