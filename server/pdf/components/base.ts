@@ -1,9 +1,9 @@
-import { PdfBuilder } from '../../@types/pdf';
+import Pdf from '../pdf';
 
 abstract class Base {
-  protected readonly pdf: PdfBuilder;
+  protected readonly pdf: Pdf;
 
-  protected constructor(pdf: PdfBuilder) {
+  protected constructor(pdf: Pdf) {
     this.pdf = pdf;
   }
 

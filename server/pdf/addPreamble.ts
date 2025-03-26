@@ -1,12 +1,12 @@
-import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
 import BulletListComponent from './components/bulletList';
 import TextComponent from './components/text';
 import FontStyles from './fontStyles';
+import Pdf from './pdf';
 
-const addPreamble = (pdf: PdfBuilder) => {
+const addPreamble = (pdf: Pdf) => {
   const request = pdf.request;
   new TextComponent(pdf, [
     {

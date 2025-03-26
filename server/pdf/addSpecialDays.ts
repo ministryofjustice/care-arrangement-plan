@@ -1,12 +1,12 @@
-import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants';
 import { whatWillHappen } from '../utils/formattedAnswersForPdf';
 
 import addAnswer from './addAnswer';
 import TextboxComponent from './components/textbox';
 import FontStyles from './fontStyles';
+import Pdf from './pdf';
 
-const addSpecialDays = (pdf: PdfBuilder) => {
+const addSpecialDays = (pdf: Pdf) => {
   const request = pdf.request;
   addAnswer(
     pdf,

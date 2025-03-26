@@ -1,13 +1,13 @@
-import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
 
 import DoYouAgreeComponent from './components/doYouAgree';
 import SplittableTextComponent from './components/splittableText';
 import TextboxComponent from './components/textbox';
 import FontStyles from './fontStyles';
+import Pdf from './pdf';
 
 const addAnswer = (
-  pdf: PdfBuilder,
+  pdf: Pdf,
   sectionHeading: string | undefined,
   question: string,
   subtext: string | undefined,

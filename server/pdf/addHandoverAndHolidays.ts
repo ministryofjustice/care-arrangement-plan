@@ -1,6 +1,5 @@
 import { Request } from 'express';
 
-import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants';
 import {
   getBetweenHouseholds,
@@ -13,8 +12,9 @@ import {
 import addAnswer from './addAnswer';
 import TextboxComponent from './components/textbox';
 import FontStyles from './fontStyles';
+import Pdf from './pdf';
 
-const addGetBetweenHouseholds = (pdf: PdfBuilder, request: Request) => {
+const addGetBetweenHouseholds = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     request.__('taskList.handoverAndHolidays'),
@@ -25,7 +25,7 @@ const addGetBetweenHouseholds = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addWhereHandover = (pdf: PdfBuilder, request: Request) => {
+const addWhereHandover = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
@@ -36,7 +36,7 @@ const addWhereHandover = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addWillChangeDuringSchoolHolidays = (pdf: PdfBuilder, request: Request) => {
+const addWillChangeDuringSchoolHolidays = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
@@ -47,7 +47,7 @@ const addWillChangeDuringSchoolHolidays = (pdf: PdfBuilder, request: Request) =>
   );
 };
 
-const addHowChangeDuringSchoolHolidays = (pdf: PdfBuilder, request: Request) => {
+const addHowChangeDuringSchoolHolidays = (pdf: Pdf, request: Request) => {
   const answer = howChangeDuringSchoolHolidays(request);
 
   if (answer) {
@@ -62,7 +62,7 @@ const addHowChangeDuringSchoolHolidays = (pdf: PdfBuilder, request: Request) => 
   }
 };
 
-const addItemsForChangeover = (pdf: PdfBuilder, request: Request) => {
+const addItemsForChangeover = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
@@ -73,7 +73,7 @@ const addItemsForChangeover = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addHandoverAndHolidays = (pdf: PdfBuilder) => {
+const addHandoverAndHolidays = (pdf: Pdf) => {
   const request = pdf.request;
   addGetBetweenHouseholds(pdf, request);
   addWhereHandover(pdf, request);

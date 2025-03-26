@@ -3,7 +3,7 @@ import fs from 'fs';
 import { Request } from 'express';
 import JsPdf from 'jspdf';
 
-import { Paragraph, PdfBuilder } from '../@types/pdf';
+import { Paragraph, Text } from '../@types/pdf';
 import {
   FONT,
   FOOTER_HEIGHT,
@@ -19,12 +19,12 @@ import getAssetPath from '../utils/getAssetPath';
 
 import FontStyles from './fontStyles';
 
-class Pdf implements PdfBuilder {
+class Pdf {
   public readonly document: JsPdf;
   public readonly request: Request;
+  public readonly maxPageWidth: number;
 
   public currentY = HEADER_HEIGHT;
-  public readonly maxPageWidth: number;
 
   private readonly logoData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/crest.png'), { encoding: 'base64' })}`;
 
@@ -119,23 +119,32 @@ class Pdf implements PdfBuilder {
     this.document.rect(x - 0.3, y - 0.3, xSize + 0.6, ySize + 0.6);
   }
 
-  splitParagraph({ text, size, style }: Paragraph): string[] {
+  splitParagraph({ text, size, style }: Text): string[] {
     this.document.setFontSize(size).setFont(FONT, style);
     return this.document.splitTextToSize(text, this.maxPageWidth);
   }
 
   getParagraphHeight({ text, size, style, bottomPadding }: Paragraph) {
     this.document.setFontSize(size).setFont(FONT, style);
-    const textLines = this.splitParagraph({ text, size, style, bottomPadding });
+    const textLines = this.splitParagraph({ text, size, style });
     return size * LINE_HEIGHT_RATIO * textLines.length * MM_PER_POINT + bottomPadding;
+  }
+
+  getTextWidth({ text, size, style }: Text) {
+    this.document.setFontSize(size).setFont(FONT, style);
+    return this.document.getTextWidth(text);
+  }
+
+  addText(text: string | string[], x: number, y: number, size: number, style: FontStyles) {
+    this.document.setFontSize(size).setFont(FONT, style).text(text, x, y);
   }
 
   addParagraph({ text, size, style, bottomPadding }: Paragraph) {
     // The first line of text goes above the current y value, so add a single line of spacing to make the paragraph
     // behave the same as all other components we add
     this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
-    const textLines = this.splitParagraph({ text, size, style, bottomPadding });
-    this.document.text(textLines, MARGIN_WIDTH, this.currentY);
+    const textLines = this.splitParagraph({ text, size, style });
+    this.addText(textLines, MARGIN_WIDTH, this.currentY, size, style);
     this.currentY += size * LINE_HEIGHT_RATIO * (textLines.length - 1) * MM_PER_POINT + bottomPadding;
   }
 }

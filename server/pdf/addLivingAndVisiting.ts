@@ -1,6 +1,5 @@
 import { Request } from 'express';
 
-import { PdfBuilder } from '../@types/pdf';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants';
 import {
   whichDaysDaytimeVisits,
@@ -15,8 +14,9 @@ import { parentNotMostlyLivedWith } from '../utils/sessionHelpers';
 import addAnswer from './addAnswer';
 import TextboxComponent from './components/textbox';
 import FontStyles from './fontStyles';
+import Pdf from './pdf';
 
-const addMostlyLive = (pdf: PdfBuilder, request: Request) => {
+const addMostlyLive = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     request.__('taskList.livingAndVisiting'),
@@ -27,7 +27,7 @@ const addMostlyLive = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addWhichSchedule = (pdf: PdfBuilder, request: Request) => {
+const addWhichSchedule = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
@@ -38,7 +38,7 @@ const addWhichSchedule = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addWillOvernightsHappen = (pdf: PdfBuilder, request: Request) => {
+const addWillOvernightsHappen = (pdf: Pdf, request: Request) => {
   const adult = parentNotMostlyLivedWith(request.session);
 
   addAnswer(
@@ -51,7 +51,7 @@ const addWillOvernightsHappen = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addWhichDaysOvernight = (pdf: PdfBuilder, request: Request) => {
+const addWhichDaysOvernight = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
@@ -64,7 +64,7 @@ const addWhichDaysOvernight = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addWillDaytimeVisitsHappen = (pdf: PdfBuilder, request: Request) => {
+const addWillDaytimeVisitsHappen = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
@@ -75,7 +75,7 @@ const addWillDaytimeVisitsHappen = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addWWhichDaysDaytimeVisits = (pdf: PdfBuilder, request: Request) => {
+const addWWhichDaysDaytimeVisits = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
@@ -86,7 +86,7 @@ const addWWhichDaysDaytimeVisits = (pdf: PdfBuilder, request: Request) => {
   );
 };
 
-const addLivingAndVisiting = (pdf: PdfBuilder) => {
+const addLivingAndVisiting = (pdf: Pdf) => {
   const request = pdf.request;
   addMostlyLive(pdf, request);
   addWhichSchedule(pdf, request);
