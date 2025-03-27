@@ -15,6 +15,7 @@ import {
   MM_PER_POINT,
   SECTION_HEADING_SIZE,
 } from '../constants/pdfConstants';
+import logger from '../logger';
 import getAssetPath from '../utils/getAssetPath';
 
 import FontStyles from './fontStyles';
@@ -151,13 +152,80 @@ class Pdf {
     this.document.setFontSize(size).setFont(FONT, style).text(text, x, y);
   }
 
-  addParagraph({ text, size, style, bottomPadding }: Paragraph) {
+  private addUrlizedParagraph(
+    {
+      text,
+      size,
+      style,
+    }: {
+      text: string[];
+      size: number;
+      style: FontStyles;
+    },
+    urls: string[],
+  ) {
+    this.document.setFontSize(size).setFont(FONT, style);
+
+    let startedUrl: string;
+
+    text.forEach((line) => {
+      this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+      let currentX = MARGIN_WIDTH;
+
+      line
+        .trim()
+        .split(/(\s+)/)
+        .forEach((word) => {
+          const nextUrl = urls[0];
+
+          const matches = RegExp(/^(\(|<|&lt;)?(.*?)(\.|,|\)|\n|&gt;)?$/).exec(word);
+
+          const leadingPunctuation = matches[1] || '';
+          const wordWithoutPunctuation = matches[2];
+          const trailingPunctuation = matches[3] || '';
+
+          if (leadingPunctuation) {
+            this.document.text(leadingPunctuation, currentX, this.currentY);
+            currentX += this.getTextWidth({ text: leadingPunctuation, size, style });
+          }
+
+          if (nextUrl?.startsWith(wordWithoutPunctuation) || startedUrl?.endsWith(wordWithoutPunctuation)) {
+            startedUrl = nextUrl;
+            this.document.textWithLink(wordWithoutPunctuation, currentX, this.currentY, { url: nextUrl });
+          } else {
+            this.document.text(wordWithoutPunctuation, currentX, this.currentY);
+          }
+          currentX += this.getTextWidth({ text: wordWithoutPunctuation, size, style });
+
+          if (startedUrl?.endsWith(wordWithoutPunctuation)) {
+            startedUrl = undefined;
+            urls.shift();
+          }
+
+          if (trailingPunctuation) {
+            this.document.text(trailingPunctuation, currentX, this.currentY);
+            currentX += this.getTextWidth({ text: trailingPunctuation, size, style });
+          }
+        });
+    });
+  }
+
+  addParagraph({ text, size, style, bottomPadding, urlize }: Paragraph) {
     // The first line of text goes above the current y value, so add a single line of spacing to make the paragraph
     // behave the same as all other components we add
-    this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
     const textLines = this.splitParagraph({ text, size, style });
-    this.addText({ text: textLines, x: MARGIN_WIDTH, y: this.currentY, size, style });
-    this.currentY += size * LINE_HEIGHT_RATIO * (textLines.length - 1) * MM_PER_POINT;
+    if (urlize) {
+      const urls = text.match(/https?:\/\/\S+/g).map((url) => url.replace(/^[(|<|&lt;]+|[.|,|)|\n|&gt;]+$/g, ''));
+      this.addUrlizedParagraph({ text: textLines, size, style }, urls);
+
+      if (urls.length !== 0) {
+        logger.error('URL was not linked in PDF. URL missed: ' + urls);
+      }
+    } else {
+      this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+      this.addText({ text: textLines, x: MARGIN_WIDTH, y: this.currentY, size, style });
+      this.currentY += size * LINE_HEIGHT_RATIO * (textLines.length - 1) * MM_PER_POINT;
+    }
 
     this.currentY += bottomPadding;
   }

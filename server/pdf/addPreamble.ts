@@ -137,6 +137,7 @@ const addPreamble = (pdf: Pdf) => {
         size: MAIN_TEXT_SIZE,
         style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
+        urlize: true,
       },
     ],
   }).addComponentToDocument();
@@ -153,6 +154,7 @@ const addPreamble = (pdf: Pdf) => {
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
+      urlize: true,
     },
   ]).addComponentToDocument();
 
@@ -168,6 +170,7 @@ const addPreamble = (pdf: Pdf) => {
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
+      urlize: true,
     },
   ]).addComponentToDocument();
 };
