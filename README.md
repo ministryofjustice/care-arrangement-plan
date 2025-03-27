@@ -19,7 +19,7 @@ To move the service into an open beta, the following changes should be made
 
 ## Installation
 
-Install Node 22. It is recommended to use a versioning manager such as [NVM](https://github.com/nvm-sh/nvm).
+Install Node 22. It is recommended to use a versioning manager such as [nvm](https://github.com/nvm-sh/nvm).
 
 To download the dependencies, run `npm install`.
 
@@ -94,8 +94,10 @@ It is recommended to use your IDE to run ESLint and Prettier on save, to ensure 
 ## Pipeline
 
 We have two pipelines. One runs for pull requests, and prevents the merge unless the tests and static analysis are passing.
-The second runs on merges to the `main` branch, and runs these tests, then releases the app to test. There is a manual
-step in this pipeline to release to production.
+The second runs on merges to the `main` branch, and runs these tests, then releases the app to the development environment.
+There is a manual step in this pipeline to release to production.
+
+Secrets used in the deployment pipeline are stored as GitHub Actions secrets, and are saved per-environment.
 
 ## Project Structure
 
@@ -138,9 +140,9 @@ based off IP address).
 
 For documentation on the project architecture, see [here](./architecture-docs/README.md)
 
-## Terraform
+## Infrastructure
 
-For documentation on our Terraform setup, see [here](./terraform/README.md)
+For documentation on our infrastructure, see [here](./deploy/README.md)
 
 ## Common Tasks
 
@@ -160,4 +162,25 @@ There are a few steps to adding a new question
 
 ## TODO
 
-- Sonar/Some SAST tool
+- Sonar/some SAST tool
+- Add alerts
+- Add more Cypress tests
+
+## Known issues
+
+- Days of the week are not translated in answers
+  > In the check answers, pdf, and share pages, the days of the week are not translated
+- Continue behaviour does not always make sense
+  > If I go to a question from the check your answers page, and then press continue, I should be taken back to the check
+  > your answers page, not back into the full question flow
+- Some characters are missed in the PDF
+  > Some characters such as Ǝ are not printed in the pdf, as the GDS transport font does not support them
+- Prevent users from starting midway through the journey
+  > We should prevent users from joining the service without a valid session.
+  >
+  > This should happen by redirecting them if they access any page other than the first without a valid session cookie.
+  >
+  > We should also consider use cases where the user has started the journey, but access a page they shouldn’t be able
+  > to yet (e.g children’s names before number of children)
+- PDF does not have heading structures
+  > The exported pdf has not been rendered using accessible heading structures.
