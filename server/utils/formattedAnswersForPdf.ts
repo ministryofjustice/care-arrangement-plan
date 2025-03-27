@@ -69,7 +69,7 @@ export const whichDaysOvernight = (request: Request) => {
 
   return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedOvernightDays', {
     senderName: initialAdultName,
-    days: formatWhichDaysSessionValue(livingAndVisiting.overnightVisits.whichDays),
+    days: formatWhichDaysSessionValue(livingAndVisiting.overnightVisits.whichDays, request),
   });
 };
 
@@ -101,7 +101,7 @@ export const whichDaysDaytimeVisits = (request: Request) => {
 
   return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedDaytimeVisitDays', {
     senderName: initialAdultName,
-    days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays),
+    days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays, request),
   });
 };
 
@@ -161,7 +161,7 @@ export const whereHandover = (request: Request) => {
 
   return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedHandover', {
     senderName: initialAdultName,
-    location: formatListOfStrings(handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere)),
+    location: formatListOfStrings(handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere), request),
   });
 };
 

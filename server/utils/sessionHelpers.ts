@@ -1,10 +1,12 @@
+import { Request } from 'express';
 import { SessionData } from 'express-session';
 
 import { CAPSession } from '../@types/session';
 
 import { formatListOfStrings } from './formValueUtils';
 
-export const formattedChildrenNames = (session: Partial<CAPSession>) => formatListOfStrings(session.namesOfChildren);
+export const formattedChildrenNames = (request: Request) =>
+  formatListOfStrings(request.session.namesOfChildren, request);
 
 export const parentMostlyLivedWith = (session: Partial<CAPSession>) =>
   session.livingAndVisiting.mostlyLive.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;

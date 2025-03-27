@@ -30,8 +30,8 @@ const checkYourAnswersRoutes = (router: Router) => {
       title: request.__('checkYourAnswers.title'),
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
       values: {
-        childrenNames: formattedChildrenNames(request.session),
-        adultNames: formatListOfStrings([initialAdultName, secondaryAdultName]),
+        childrenNames: formattedChildrenNames(request),
+        adultNames: formatListOfStrings([initialAdultName, secondaryAdultName], request),
         parentNotMostlyLivedWith: parentNotMostlyLivedWith(request.session),
         mostlyLive: mostlyLive(request),
         whichSchedule: whichSchedule(request),

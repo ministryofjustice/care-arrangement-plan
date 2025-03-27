@@ -1,3 +1,6 @@
+import { Request } from 'express';
+import i18n from 'i18n';
+
 import { dayValues } from '../@types/fields';
 import { WhichDays } from '../@types/session';
 
@@ -9,6 +12,10 @@ import {
   formatWhichDaysSessionValue,
 } from './formValueUtils';
 
+const mockRequest = {
+  __: i18n.__,
+} as Request;
+
 describe('formValueUtils', () => {
   describe('formatListOfStrings', () => {
     test.each([
@@ -18,7 +25,7 @@ describe('formValueUtils', () => {
       [['James', 'Rachel', 'Jack'], 'James, Rachel and Jack'],
       [['James', 'Rachel', 'Jack', 'Molly'], 'James, Rachel, Jack and Molly'],
     ])('returns the correct name for %s', (names, expectedFormattedNames) => {
-      expect(formatListOfStrings(names)).toEqual(expectedFormattedNames);
+      expect(formatListOfStrings(names, mockRequest)).toEqual(expectedFormattedNames);
     });
   });
 
@@ -71,7 +78,7 @@ describe('formValueUtils', () => {
       [{ days: ['monday', 'tuesday'] as dayValues[] }, 'Monday and Tuesday'],
       [{ days: ['monday', 'tuesday', 'wednesday'] as dayValues[] }, 'Monday, Tuesday and Wednesday'],
     ])('returns the correct name for %s', (whichDays: WhichDays, expectedFormattedDays) => {
-      expect(formatWhichDaysSessionValue(whichDays)).toEqual(expectedFormattedDays);
+      expect(formatWhichDaysSessionValue(whichDays, mockRequest)).toEqual(expectedFormattedDays);
     });
   });
 });

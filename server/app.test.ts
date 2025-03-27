@@ -23,7 +23,7 @@ describe('App', () => {
       });
 
       it.each(['en', 'cy'])('should return %s when the Accept-Language header is %s', (language: languages) => {
-        return request(app)
+        return request(testAppSetup())
           .get(paths.START)
           .set('Accept-Language', language)
           .expect((response) => {
@@ -33,7 +33,7 @@ describe('App', () => {
       });
 
       it.each(['en', 'cy'])('should return %s when the lang query parameter is %s', (language: languages) => {
-        return request(app)
+        return request(testAppSetup())
           .get(`${paths.START}?lang=${language}`)
           .expect((response) => {
             expect(response.text).toContain(`lang="${language}"`);

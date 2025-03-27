@@ -29,7 +29,7 @@ const taskListRoutes = (router: Router) => {
     const isPlanReviewComplete = planReviewComplete(request.session);
 
     response.render('pages/taskList', {
-      title: request.__('taskList.title', { names: formattedChildrenNames(request.session) }),
+      title: request.__('taskList.title', { names: formattedChildrenNames(request) }),
       // This should only be true when all tasks are complete
       showContinue:
         isWhatWillHappenComplete &&

@@ -1,19 +1,18 @@
 import { Request } from 'express';
 
-import { dayValues, planLastMinuteChangesField, whichDaysField, yesOrNo } from '../@types/fields';
+import { dayValues, whichDaysField, yesOrNo } from '../@types/fields';
 import { WhichDays } from '../@types/session';
 
-// TODO - this does not translate "and"
-export const formatListOfStrings = (words: string[]) => {
+export const formatListOfStrings = (words: string[], request: Request) => {
   switch (words.length) {
     case 0:
       return '';
     case 1:
       return words[0];
     case 2:
-      return words.join(' and ');
+      return request.__('aAndB', { itemA: words[0], itemB: words[1] });
     default:
-      return `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}`;
+      return request.__('aAndB', { itemA: words.slice(0, -1).join(', '), itemB: words[words.length - 1] });
   }
 };
 
@@ -47,41 +46,23 @@ export const convertWhichDaysSessionValueToField = (whichDays: WhichDays | undef
   return [whichDays?.days, undefined];
 };
 
-// TODO - this does not translate the days or "a"
-export const formatWhichDaysSessionValue = (whichDays: WhichDays | undefined): string => {
+export const formatWhichDaysSessionValue = (whichDays: WhichDays | undefined, request: Request): string => {
   if (!whichDays?.days) {
     return '';
   }
 
-  const lowercaseDays = convertWhichDaysSessionValueToField(whichDays)[0];
-  const uppercaseDays = lowercaseDays.map((day) => day.charAt(0).toUpperCase() + day.slice(1));
+  const days = convertWhichDaysSessionValueToField(whichDays)[0].map((day) => request.__(`days.${day}`));
 
-  if (uppercaseDays.length === 1) {
-    return `a ${uppercaseDays[0]}`;
+  if (days.length === 1) {
+    return request.__('aItem', { item: days[0] });
   }
 
-  return formatListOfStrings(uppercaseDays);
+  return formatListOfStrings(days, request);
 };
 
 export const formatPlanChangesOptionsIntoList = (request: Request): string => {
-  const getTranslatedPlanChangesField = (field: planLastMinuteChangesField) => {
-    const ns = 'decisionMaking.planLastMinuteChanges';
-    switch (field) {
-      case 'text':
-        return request.__(`${ns}.textMessage`);
-      case 'phone':
-        return request.__(`${ns}.phoneCall`);
-      case 'email':
-        return request.__(`${ns}.email`);
-      case 'app':
-        return request.__(`${ns}.app`);
-      case 'anotherArrangement':
-        return request.__(`${ns}.anotherArrangement`);
-    }
-  };
-
   const translatedStrings = request.session.decisionMaking.planLastMinuteChanges.options
-    .map(getTranslatedPlanChangesField)
+    .map((option) => request.__(`decisionMaking.planLastMinuteChanges.${option}`))
     .map((s) => s.toLowerCase());
-  return formatListOfStrings(translatedStrings);
+  return formatListOfStrings(translatedStrings, request);
 };

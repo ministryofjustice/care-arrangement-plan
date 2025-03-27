@@ -50,7 +50,7 @@ export const whichDaysOvernight = (request: Request) => {
 
   return request.__('checkYourAnswers.livingAndVisiting.whichDaysOvernight', {
     adult: parentNotMostlyLivedWith(request.session),
-    days: formatWhichDaysSessionValue(livingAndVisiting.overnightVisits.whichDays),
+    days: formatWhichDaysSessionValue(livingAndVisiting.overnightVisits.whichDays, request),
   });
 };
 
@@ -72,7 +72,7 @@ export const whichDaysDaytimeVisits = (request: Request) => {
 
   return request.__('checkYourAnswers.livingAndVisiting.whichDaysDaytimeVisits', {
     adult: parentNotMostlyLivedWith(request.session),
-    days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays),
+    days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays, request),
   });
 };
 

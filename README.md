@@ -168,8 +168,6 @@ There are a few steps to adding a new question
 
 ## Known issues
 
-- Days of the week are not translated in answers
-  > In the check answers, pdf, and share pages, the days of the week are not translated
 - Continue behaviour does not always make sense
   > If I go to a question from the check your answers page, and then press continue, I should be taken back to the check
   > your answers page, not back into the full question flow

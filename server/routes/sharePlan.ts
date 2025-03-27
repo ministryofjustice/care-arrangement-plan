@@ -23,7 +23,7 @@ import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessi
 
 const sharePlanRoutes = (router: Router) => {
   router.get(paths.SHARE_PLAN, (request, response) => {
-    const childrenNames = formattedChildrenNames(request.session);
+    const childrenNames = formattedChildrenNames(request);
 
     response.render('pages/sharePlan', {
       title: request.__('sharePlan.title', { names: childrenNames }),
