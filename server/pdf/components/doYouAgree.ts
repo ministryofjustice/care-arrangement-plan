@@ -38,16 +38,17 @@ class DoYouAgree extends BaseComponent {
   }
 
   private addOption(text: string) {
-    this.pdf.addText(
+    const textWithStyles = {
       text,
-      this.currentX,
-      this.pdf.currentY + this.CHECKBOX_SIZE / 2 + 0.25 * LINE_HEIGHT_RATIO * MAIN_TEXT_SIZE * MM_PER_POINT,
-      MAIN_TEXT_SIZE,
-      FontStyles.NORMAL,
-    );
+      x: this.currentX,
+      y: this.pdf.currentY + this.CHECKBOX_SIZE / 2 + 0.25 * LINE_HEIGHT_RATIO * MAIN_TEXT_SIZE * MM_PER_POINT,
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+    };
 
-    this.currentX +=
-      this.pdf.getTextWidth({ text, size: MAIN_TEXT_SIZE, style: FontStyles.NORMAL }) + this.CHECKBOX_TEXT_GAP;
+    this.pdf.addText(textWithStyles);
+
+    this.currentX += this.pdf.getTextWidth(textWithStyles) + this.CHECKBOX_TEXT_GAP;
 
     this.pdf.drawBorder(this.currentX, this.pdf.currentY, this.CHECKBOX_SIZE, this.CHECKBOX_SIZE);
     Object.assign(this.radioGroup.createOption(text), {
