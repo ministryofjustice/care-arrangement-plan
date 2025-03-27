@@ -11,7 +11,7 @@ const addPreamble = (pdf: Pdf) => {
   new TextComponent(pdf, [
     {
       text: request.__('sharePlan.whatWeAreTelling.proposedPlan', {
-        childrenNames: formattedChildrenNames(request.session),
+        childrenNames: formattedChildrenNames(request),
       }),
       size: SECTION_HEADING_SIZE,
       style: FontStyles.BOLD,
@@ -20,7 +20,7 @@ const addPreamble = (pdf: Pdf) => {
     {
       text: request.__('sharePlan.whatWeAreTelling.initialIsAsking', {
         senderName: request.session.initialAdultName,
-        childrenNames: formattedChildrenNames(request.session),
+        childrenNames: formattedChildrenNames(request),
       }),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,

@@ -10,7 +10,7 @@ import Pdf from './pdf';
 const addAboutTheProposal = (pdf: Pdf) => {
   const request = pdf.request;
   const { initialAdultName, secondaryAdultName, numberOfChildren } = request.session;
-  const childrenNames = formattedChildrenNames(request.session);
+  const childrenNames = formattedChildrenNames(request);
 
   new BulletListComponent(pdf, {
     initialText: [
