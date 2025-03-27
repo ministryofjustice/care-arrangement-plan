@@ -168,10 +168,6 @@ There are a few steps to adding a new question
 
 ## Known issues
 
-- i18n is not configured correctly for use in express requests
-  > When we use i18n in the express requests, the language context is not correctly used.
-  >
-  > We need to do: request.('safetyCheck.title') instead of i18n.('notSafe.title')
 - Days of the week are not translated in answers
   > In the check answers, pdf, and share pages, the days of the week are not translated
 - Continue behaviour does not always make sense
@@ -186,3 +182,5 @@ There are a few steps to adding a new question
   >
   > We should also consider use cases where the user has started the journey, but access a page they shouldn’t be able
   > to yet (e.g children’s names before number of children)
+- PDF does not have heading structures
+  > The exported pdf has not been rendered using accessible heading structures.
