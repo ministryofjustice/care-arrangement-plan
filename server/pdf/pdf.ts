@@ -135,7 +135,19 @@ class Pdf {
     return this.document.getTextWidth(text);
   }
 
-  addText(text: string | string[], x: number, y: number, size: number, style: FontStyles) {
+  addText({
+    text,
+    x,
+    y,
+    size,
+    style,
+  }: {
+    text: string | string[];
+    x: number;
+    y: number;
+    size: number;
+    style: FontStyles;
+  }) {
     this.document.setFontSize(size).setFont(FONT, style).text(text, x, y);
   }
 
@@ -144,8 +156,10 @@ class Pdf {
     // behave the same as all other components we add
     this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
     const textLines = this.splitParagraph({ text, size, style });
-    this.addText(textLines, MARGIN_WIDTH, this.currentY, size, style);
-    this.currentY += size * LINE_HEIGHT_RATIO * (textLines.length - 1) * MM_PER_POINT + bottomPadding;
+    this.addText({ text: textLines, x: MARGIN_WIDTH, y: this.currentY, size, style });
+    this.currentY += size * LINE_HEIGHT_RATIO * (textLines.length - 1) * MM_PER_POINT;
+
+    this.currentY += bottomPadding;
   }
 }
 
