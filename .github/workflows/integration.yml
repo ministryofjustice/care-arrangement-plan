@@ -17,11 +17,17 @@ jobs:
     uses: ./.github/workflows/build.yml
     secrets: inherit
 
+  validate:
+    name: 'Validate'
+    if: github.event.ref == 'refs/heads/main'
+    uses: ./.github/workflows/validation.yml
+    secrets: inherit
+
   deploy_dev:
     name: 'Development'
     if: github.event.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy.yml
-    needs: [image]
+    needs: [image, validate]
     with:
       environment: development
       registry: ${{ needs.image.outputs.registry }}
@@ -30,7 +36,7 @@ jobs:
   deploy_production:
     name: 'Production'
     if: github.event.ref == 'refs/heads/main'
-    needs: [image, deploy_dev]
+    needs: [image, validate, deploy_dev]
     uses: ./.github/workflows/deploy.yml
     with:
       environment: production
