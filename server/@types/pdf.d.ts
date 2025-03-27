@@ -6,4 +6,5 @@ export type Text = {
 
 export type Paragraph = Text & {
   bottomPadding: number;
+  urlize?: boolean;
 };

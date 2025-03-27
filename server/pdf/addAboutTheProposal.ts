@@ -60,6 +60,7 @@ const addAboutTheProposal = (pdf: Pdf) => {
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
+      urlize: true,
     },
   ]).addComponentToDocument();
 };
