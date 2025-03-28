@@ -11,20 +11,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  image:
-    name: 'Image'
-    if: github.event.ref == 'refs/heads/main'
-    uses: ./.github/workflows/build.yml
-    secrets: inherit
-
   validate:
     name: 'Validate'
     if: github.event.ref == 'refs/heads/main'
     uses: ./.github/workflows/validation.yml
     secrets: inherit
 
+  image:
+    name: 'Build and push image'
+    if: github.event.ref == 'refs/heads/main'
+    uses: ./.github/workflows/build.yml
+    needs: [validate]
+    secrets: inherit
+
   deploy_dev:
-    name: 'Development'
+    name: 'Deploy to development'
     if: github.event.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy.yml
     needs: [image, validate]
@@ -34,7 +35,7 @@ jobs:
     secrets: inherit
 
   deploy_production:
-    name: 'Production'
+    name: 'Deploy to production'
     if: github.event.ref == 'refs/heads/main'
     needs: [image, validate, deploy_dev]
     uses: ./.github/workflows/deploy.yml

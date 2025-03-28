@@ -1,7 +1,7 @@
 name: Validations
 
 on:
-  push:
+  workflow_call:
   pull_request:
   schedule:
     - cron: '0 3 * * *'
