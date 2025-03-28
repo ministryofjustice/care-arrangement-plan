@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import i18n from 'i18n';
 
 import paths from '../constants/paths';
 import {
@@ -30,7 +29,7 @@ const taskListRoutes = (router: Router) => {
     const isPlanReviewComplete = planReviewComplete(request.session);
 
     response.render('pages/taskList', {
-      title: i18n.__('taskList.title', { names: formattedChildrenNames(request.session) }),
+      title: request.__('taskList.title', { names: formattedChildrenNames(request) }),
       // This should only be true when all tasks are complete
       showContinue:
         isWhatWillHappenComplete &&

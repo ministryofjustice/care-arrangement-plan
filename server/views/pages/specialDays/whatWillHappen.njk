@@ -7,14 +7,18 @@
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
 
-      <h1 class="govuk-heading-l">{{ title }}</h1>
-
-      <p>{{ __('specialDays.whatWillHappen.content') }}</p>
-
       <form class="form" action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukTextarea({
+            label: {
+              text: title,
+              classes: "govuk-label--l",
+              isPageHeading: true
+            },
+            hint: {
+              text: __('specialDays.whatWillHappen.content')
+            },
             name: formFields.SPECIAL_DAYS,
             value: initialWhatWillHappen,
             errorMessage: errors | findError(formFields.SPECIAL_DAYS)

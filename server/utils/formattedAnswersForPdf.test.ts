@@ -31,33 +31,34 @@ const testAppSetup = (): Express => {
   const app = express();
 
   app.use(setUpi18n());
-  app.get(testPath, (req, response) => {
+  app.get(testPath, (request, response) => {
+    request.session = sessionMock;
     response.json({
       livingAndVisiting: {
-        mostlyLive: mostlyLive(sessionMock),
-        whichSchedule: whichSchedule(sessionMock),
-        willOvernightsHappen: willOvernightsHappen(sessionMock),
-        whichDaysOvernight: whichDaysOvernight(sessionMock),
-        willDaytimeVisitsHappen: willDaytimeVisitsHappen(sessionMock),
-        whichDaysDaytimeVisits: whichDaysDaytimeVisits(sessionMock),
+        mostlyLive: mostlyLive(request),
+        whichSchedule: whichSchedule(request),
+        willOvernightsHappen: willOvernightsHappen(request),
+        whichDaysOvernight: whichDaysOvernight(request),
+        willDaytimeVisitsHappen: willDaytimeVisitsHappen(request),
+        whichDaysDaytimeVisits: whichDaysDaytimeVisits(request),
       },
       handoverAndHolidays: {
-        getBetweenHouseholds: getBetweenHouseholds(sessionMock),
-        whereHandover: whereHandover(sessionMock),
-        willChangeDuringSchoolHolidays: willChangeDuringSchoolHolidays(sessionMock),
-        howChangeDuringSchoolHolidays: howChangeDuringSchoolHolidays(sessionMock),
-        itemsForChangeover: itemsForChangeover(sessionMock),
+        getBetweenHouseholds: getBetweenHouseholds(request),
+        whereHandover: whereHandover(request),
+        willChangeDuringSchoolHolidays: willChangeDuringSchoolHolidays(request),
+        howChangeDuringSchoolHolidays: howChangeDuringSchoolHolidays(request),
+        itemsForChangeover: itemsForChangeover(request),
       },
       specialDays: {
-        whatWillHappen: whatWillHappen(sessionMock),
+        whatWillHappen: whatWillHappen(request),
       },
       otherThings: {
-        whatOtherThingsMatter: whatOtherThingsMatter(sessionMock),
+        whatOtherThingsMatter: whatOtherThingsMatter(request),
       },
       decisionMaking: {
-        planLastMinuteChanges: planLastMinuteChanges(sessionMock),
-        planLongTermNotice: planLongTermNotice(sessionMock),
-        planReview: planReview(sessionMock),
+        planLastMinuteChanges: planLastMinuteChanges(request),
+        planLongTermNotice: planLongTermNotice(request),
+        planReview: planReview(request),
       },
     });
   });

@@ -1,7 +1,6 @@
-import i18n from 'i18n';
 import { AcroFormRadioButton } from 'jspdf';
 
-import { Paragraph, PdfBuilder } from '../../@types/pdf';
+import { Paragraph } from '../../@types/pdf';
 import {
   LINE_HEIGHT_RATIO,
   MAIN_TEXT_SIZE,
@@ -11,6 +10,7 @@ import {
 } from '../../constants/pdfConstants';
 import logger from '../../logger';
 import FontStyles from '../fontStyles';
+import Pdf from '../pdf';
 
 import BaseComponent from './base';
 
@@ -24,7 +24,7 @@ class DoYouAgree extends BaseComponent {
   private readonly CHECKBOX_TEXT_GAP = 3;
   private readonly doYouAgreeParagraph: Paragraph;
 
-  constructor(pdf: PdfBuilder, text: string) {
+  constructor(pdf: Pdf, text: string) {
     super(pdf);
     this.doYouAgreeParagraph = {
       text,
@@ -38,15 +38,17 @@ class DoYouAgree extends BaseComponent {
   }
 
   private addOption(text: string) {
-    this.pdf.document
-      .setFontSize(MAIN_TEXT_SIZE)
-      .text(
-        text,
-        this.currentX,
-        this.pdf.currentY + this.CHECKBOX_SIZE / 2 + 0.25 * LINE_HEIGHT_RATIO * MAIN_TEXT_SIZE * MM_PER_POINT,
-      );
+    const textWithStyles = {
+      text,
+      x: this.currentX,
+      y: this.pdf.currentY + this.CHECKBOX_SIZE / 2 + 0.25 * LINE_HEIGHT_RATIO * MAIN_TEXT_SIZE * MM_PER_POINT,
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+    };
 
-    this.currentX += this.pdf.document.getTextWidth(text) + this.CHECKBOX_TEXT_GAP;
+    this.pdf.addText(textWithStyles);
+
+    this.currentX += this.pdf.getTextWidth(textWithStyles) + this.CHECKBOX_TEXT_GAP;
 
     this.pdf.drawBorder(this.currentX, this.pdf.currentY, this.CHECKBOX_SIZE, this.CHECKBOX_SIZE);
     Object.assign(this.radioGroup.createOption(text), {
@@ -68,8 +70,8 @@ class DoYouAgree extends BaseComponent {
 
     this.pdf.document.addField(this.radioGroup);
 
-    this.addOption(i18n.__('yes'));
-    this.addOption(i18n.__('no'));
+    this.addOption(this.pdf.request.__('yes'));
+    this.addOption(this.pdf.request.__('no'));
 
     // Set appearance must be done after the options are created, or it will not work
     // @ts-expect-error There is an error into the jsPDF type declaration.

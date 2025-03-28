@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
@@ -10,7 +9,7 @@ const itemsForChangeoverRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, (request, response) => {
     response.render('pages/handoverAndHolidays/itemsForChangeover', {
       errors: request.flash('errors'),
-      title: i18n.__('handoverAndHolidays.itemsForChangeover.title'),
+      title: request.__('handoverAndHolidays.itemsForChangeover.title'),
       initialItemsForChangeover: request.session.handoverAndHolidays?.itemsForChangeover?.answer,
       backLinkHref: getBackUrl(request.session, paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS),
     });

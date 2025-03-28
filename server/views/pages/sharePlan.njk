@@ -7,19 +7,19 @@
     <div class="govuk-grid-column-two-thirds-from-desktop">
       {{ govukPanel({titleText: __('sharePlan.panelTitle') }) }}
 
-      <h1>{{ title }}</h1>
+      <h2>{{ title }}</h2>
       <p>{{ __('sharePlan.mustNowShare', {otherAdult: values.secondaryAdultName}) }}</p>
 
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-2">{{ __('sharePlan.whatToDoNext') }}</h2>
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ __('sharePlan.whatToDoNext') }}</h3>
       <p>{{ __('sharePlan.sendToSecondary', {otherAdult: values.secondaryAdultName}) }}</p>
 
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-2">{{ __('sharePlan.giveFeedback') }}</h2>
-      <p><a href="{{ feedbackUrl }}">{{ __('sharePlan.completeTheSurvey') }}</a></p>
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ __('sharePlan.helpImprove') }}</h3>
+      <p>{{ __('sharePlan.giveFeedback', {feedbackUrl: feedbackUrl}) | safe }}</p>
       <p>{{ __('sharePlan.emailUs', { contactEmail: contactEmail })  | customUrlize | safe }}</p>
 
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-2">
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">
         {{ __('sharePlan.ifTheyDoNotRespond', {otherAdult: values.secondaryAdultName}) }}
-      </h2>
+      </h3>
       <p>{{ __('sharePlan.tryMediation', {otherAdult: values.secondaryAdultName}) }}</p>
 
       <p>

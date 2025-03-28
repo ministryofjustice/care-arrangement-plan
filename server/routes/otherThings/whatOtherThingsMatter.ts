@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
@@ -10,7 +9,7 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
   router.get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, (request, response) => {
     response.render('pages/otherThings/whatOtherThingsMatter', {
       errors: request.flash('errors'),
-      title: i18n.__('otherThings.whatOtherThingsMatter.title'),
+      title: request.__('otherThings.whatOtherThingsMatter.title'),
       initialWhatOtherThingsMatter: request.session.otherThings?.whatOtherThingsMatter?.answer,
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });

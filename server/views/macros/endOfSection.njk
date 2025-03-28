@@ -1,9 +1,10 @@
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 
-{% macro endOfSection(text) %}
-  <h3 class="govuk-heading-s">{{ __('sharePlan.yourProposedPlan.endOfSection') }}</h3>
+{% macro endOfSection(text, idPrefix) %}
+  <p class="govuk-heading-s">{{ __('sharePlan.yourProposedPlan.endOfSection') }}</p>
   {{
     govukTextarea({
+      name: idPrefix + "-end-of-section",
       label: {
         text: text
       }

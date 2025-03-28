@@ -1,9 +1,9 @@
 import fs from 'fs';
 
-import i18n from 'i18n';
+import { Request } from 'express';
 import JsPdf from 'jspdf';
 
-import { Paragraph, PdfBuilder } from '../@types/pdf';
+import { Paragraph, Text } from '../@types/pdf';
 import {
   FONT,
   FOOTER_HEIGHT,
@@ -15,20 +15,22 @@ import {
   MM_PER_POINT,
   SECTION_HEADING_SIZE,
 } from '../constants/pdfConstants';
+import logger from '../logger';
 import getAssetPath from '../utils/getAssetPath';
 
 import FontStyles from './fontStyles';
 
-class Pdf implements PdfBuilder {
+class Pdf {
   public readonly document: JsPdf;
+  public readonly request: Request;
+  public readonly maxPageWidth: number;
 
   public currentY = HEADER_HEIGHT;
 
-  public readonly maxPageWidth: number;
-
   private readonly logoData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/crest.png'), { encoding: 'base64' })}`;
 
-  constructor(autoPrint: boolean) {
+  constructor(autoPrint: boolean, request: Request) {
+    this.request = request;
     // @ts-expect-error There is an error into the jsPDF type declaration.
     this.document = new JsPdf({ lineHeight: LINE_HEIGHT_RATIO });
     this.maxPageWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
@@ -77,7 +79,7 @@ class Pdf implements PdfBuilder {
       .setFontSize(SECTION_HEADING_SIZE)
       .setTextColor(255, 255, 255)
       .text(
-        i18n.__('pdf.name'),
+        this.request.__('pdf.name'),
         headerLogoWidth +
           MARGIN_WIDTH +
           0.5 * (this.document.internal.pageSize.getWidth() - headerLogoWidth - MARGIN_WIDTH),
@@ -92,7 +94,7 @@ class Pdf implements PdfBuilder {
       .setFont(FONT, FontStyles.NORMAL)
       .setFontSize(MAIN_TEXT_SIZE)
       .text(
-        i18n.__('pdf.pageCount', {
+        this.request.__('pdf.pageCount', {
           currentPage: pageNumber.toString(),
           totalPages: this.document.getNumberOfPages().toString(),
         }),
@@ -118,24 +120,114 @@ class Pdf implements PdfBuilder {
     this.document.rect(x - 0.3, y - 0.3, xSize + 0.6, ySize + 0.6);
   }
 
-  splitParagraph({ text, size, style }: Paragraph): string[] {
+  splitParagraph({ text, size, style }: Text): string[] {
     this.document.setFontSize(size).setFont(FONT, style);
     return this.document.splitTextToSize(text, this.maxPageWidth);
   }
 
   getParagraphHeight({ text, size, style, bottomPadding }: Paragraph) {
     this.document.setFontSize(size).setFont(FONT, style);
-    const textLines = this.splitParagraph({ text, size, style, bottomPadding });
+    const textLines = this.splitParagraph({ text, size, style });
     return size * LINE_HEIGHT_RATIO * textLines.length * MM_PER_POINT + bottomPadding;
   }
 
-  addParagraph({ text, size, style, bottomPadding }: Paragraph) {
+  getTextWidth({ text, size, style }: Text) {
+    this.document.setFontSize(size).setFont(FONT, style);
+    return this.document.getTextWidth(text);
+  }
+
+  addText({
+    text,
+    x,
+    y,
+    size,
+    style,
+  }: {
+    text: string | string[];
+    x: number;
+    y: number;
+    size: number;
+    style: FontStyles;
+  }) {
+    this.document.setFontSize(size).setFont(FONT, style).text(text, x, y);
+  }
+
+  private addUrlizedParagraph(
+    {
+      text,
+      size,
+      style,
+    }: {
+      text: string[];
+      size: number;
+      style: FontStyles;
+    },
+    urls: string[],
+  ) {
+    this.document.setFontSize(size).setFont(FONT, style);
+
+    let startedUrl: string;
+
+    text.forEach((line) => {
+      this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+      let currentX = MARGIN_WIDTH;
+
+      line
+        .trim()
+        .split(/(\s+)/)
+        .forEach((word) => {
+          const nextUrl = urls[0];
+
+          const matches = RegExp(/^(\(|<|&lt;)?(.*?)(\.|,|\)|\n|&gt;)?$/).exec(word);
+
+          const leadingPunctuation = matches[1] || '';
+          const wordWithoutPunctuation = matches[2];
+          const trailingPunctuation = matches[3] || '';
+
+          if (leadingPunctuation) {
+            this.document.text(leadingPunctuation, currentX, this.currentY);
+            currentX += this.getTextWidth({ text: leadingPunctuation, size, style });
+          }
+
+          if (nextUrl?.startsWith(wordWithoutPunctuation) || startedUrl?.endsWith(wordWithoutPunctuation)) {
+            startedUrl = nextUrl;
+            this.document.textWithLink(wordWithoutPunctuation, currentX, this.currentY, { url: nextUrl });
+          } else {
+            this.document.text(wordWithoutPunctuation, currentX, this.currentY);
+          }
+          currentX += this.getTextWidth({ text: wordWithoutPunctuation, size, style });
+
+          if (startedUrl?.endsWith(wordWithoutPunctuation)) {
+            startedUrl = undefined;
+            urls.shift();
+          }
+
+          if (trailingPunctuation) {
+            this.document.text(trailingPunctuation, currentX, this.currentY);
+            currentX += this.getTextWidth({ text: trailingPunctuation, size, style });
+          }
+        });
+    });
+  }
+
+  addParagraph({ text, size, style, bottomPadding, urlize }: Paragraph) {
     // The first line of text goes above the current y value, so add a single line of spacing to make the paragraph
     // behave the same as all other components we add
-    this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
-    const textLines = this.splitParagraph({ text, size, style, bottomPadding });
-    this.document.text(textLines, MARGIN_WIDTH, this.currentY);
-    this.currentY += size * LINE_HEIGHT_RATIO * (textLines.length - 1) * MM_PER_POINT + bottomPadding;
+    const textLines = this.splitParagraph({ text, size, style });
+    if (urlize) {
+      const urls = text.match(/https?:\/\/\S+/g).map((url) => url.replace(/^[(|<|&lt;]+|[.|,|)|\n|&gt;]+$/g, ''));
+      this.addUrlizedParagraph({ text: textLines, size, style }, urls);
+
+      if (urls.length !== 0) {
+        logger.error('URL was not linked in PDF. URL missed: ' + urls);
+      }
+    } else {
+      this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+      this.addText({ text: textLines, x: MARGIN_WIDTH, y: this.currentY, size, style });
+      this.currentY += size * LINE_HEIGHT_RATIO * (textLines.length - 1) * MM_PER_POINT;
+    }
+
+    this.currentY += bottomPadding;
   }
 }
 

@@ -1,20 +1,19 @@
-import i18n from 'i18n';
+import { Request } from 'express';
 
 import { whereHandoverField } from '../@types/fields';
-import { CAPSession } from '../@types/session';
 
 import { formatPlanChangesOptionsIntoList, formatWhichDaysSessionValue } from './formValueUtils';
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
 
-export const mostlyLive = (session: Partial<CAPSession>) => {
-  const { livingAndVisiting, initialAdultName, secondaryAdultName } = session;
+export const mostlyLive = (request: Request) => {
+  const { livingAndVisiting, initialAdultName, secondaryAdultName } = request.session;
   if (!livingAndVisiting.mostlyLive) return undefined;
   switch (livingAndVisiting.mostlyLive.where) {
     case 'withInitial':
     case 'withSecondary':
-      return i18n.__('livingAndVisiting.mostlyLive.with', { adult: parentMostlyLivedWith(session) });
+      return request.__('livingAndVisiting.mostlyLive.with', { adult: parentMostlyLivedWith(request.session) });
     case 'split':
-      return i18n.__('livingAndVisiting.mostlyLive.split', {
+      return request.__('livingAndVisiting.mostlyLive.split', {
         initialAdult: initialAdultName,
         secondaryAdult: secondaryAdultName,
       });
@@ -25,68 +24,68 @@ export const mostlyLive = (session: Partial<CAPSession>) => {
   }
 };
 
-export const whichSchedule = ({ livingAndVisiting }: Partial<CAPSession>) => {
+export const whichSchedule = (request: Request) => {
+  const { livingAndVisiting } = request.session;
   if (!livingAndVisiting.whichSchedule) return undefined;
   return livingAndVisiting.whichSchedule.noDecisionRequired
-    ? i18n.__('doNotNeedToDecide')
+    ? request.__('doNotNeedToDecide')
     : livingAndVisiting.whichSchedule.answer;
 };
 
-export const willOvernightsHappen = ({ livingAndVisiting }: Partial<CAPSession>) => {
+export const willOvernightsHappen = (request: Request) => {
+  const { livingAndVisiting } = request.session;
   if (!livingAndVisiting.overnightVisits) return undefined;
-  return livingAndVisiting.overnightVisits.willHappen ? i18n.__('yes') : i18n.__('no');
+  return livingAndVisiting.overnightVisits.willHappen ? request.__('yes') : request.__('no');
 };
 
-export const whichDaysOvernight = (session: Partial<CAPSession>) => {
-  const { livingAndVisiting } = session;
+export const whichDaysOvernight = (request: Request) => {
+  const { livingAndVisiting } = request.session;
   if (!livingAndVisiting.overnightVisits?.whichDays) return undefined;
   if (livingAndVisiting.overnightVisits.whichDays.describeArrangement) {
     return livingAndVisiting.overnightVisits.whichDays.describeArrangement;
   }
   if (livingAndVisiting.overnightVisits.whichDays.noDecisionRequired) {
-    return i18n.__('doNotNeedToDecide');
+    return request.__('doNotNeedToDecide');
   }
 
-  return i18n.__('checkYourAnswers.livingAndVisiting.whichDaysOvernight', {
-    adult: parentNotMostlyLivedWith(session),
-    days: formatWhichDaysSessionValue(livingAndVisiting.overnightVisits.whichDays),
+  return request.__('checkYourAnswers.livingAndVisiting.whichDaysOvernight', {
+    adult: parentNotMostlyLivedWith(request.session),
+    days: formatWhichDaysSessionValue(livingAndVisiting.overnightVisits.whichDays, request),
   });
 };
 
-export const willDaytimeVisitsHappen = ({ livingAndVisiting }: Partial<CAPSession>) => {
+export const willDaytimeVisitsHappen = (request: Request) => {
+  const { livingAndVisiting } = request.session;
   if (!livingAndVisiting.daytimeVisits) return undefined;
-  return livingAndVisiting.daytimeVisits.willHappen ? i18n.__('yes') : i18n.__('no');
+  return livingAndVisiting.daytimeVisits.willHappen ? request.__('yes') : request.__('no');
 };
 
-export const whichDaysDaytimeVisits = (session: Partial<CAPSession>) => {
-  const { livingAndVisiting } = session;
+export const whichDaysDaytimeVisits = (request: Request) => {
+  const { livingAndVisiting } = request.session;
   if (!livingAndVisiting.daytimeVisits?.whichDays) return undefined;
   if (livingAndVisiting.daytimeVisits.whichDays.describeArrangement) {
     return livingAndVisiting.daytimeVisits?.whichDays.describeArrangement;
   }
   if (livingAndVisiting.daytimeVisits?.whichDays.noDecisionRequired) {
-    return i18n.__('doNotNeedToDecide');
+    return request.__('doNotNeedToDecide');
   }
 
-  return i18n.__('checkYourAnswers.livingAndVisiting.whichDaysDaytimeVisits', {
-    adult: parentNotMostlyLivedWith(session),
-    days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays),
+  return request.__('checkYourAnswers.livingAndVisiting.whichDaysDaytimeVisits', {
+    adult: parentNotMostlyLivedWith(request.session),
+    days: formatWhichDaysSessionValue(livingAndVisiting.daytimeVisits.whichDays, request),
   });
 };
 
-export const getBetweenHouseholds = ({
-  handoverAndHolidays,
-  initialAdultName,
-  secondaryAdultName,
-}: Partial<CAPSession>) => {
+export const getBetweenHouseholds = (request: Request) => {
+  const { handoverAndHolidays, initialAdultName, secondaryAdultName } = request.session;
   if (handoverAndHolidays.getBetweenHouseholds.noDecisionRequired) {
-    return i18n.__('doNotNeedToDecide');
+    return request.__('doNotNeedToDecide');
   }
   switch (handoverAndHolidays.getBetweenHouseholds.how) {
     case 'initialCollects':
-      return i18n.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: initialAdultName });
+      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: initialAdultName });
     case 'secondaryCollects':
-      return i18n.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: secondaryAdultName });
+      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: secondaryAdultName });
     case 'other':
       return handoverAndHolidays.getBetweenHouseholds.describeArrangement;
     default:
@@ -94,21 +93,22 @@ export const getBetweenHouseholds = ({
   }
 };
 
-export const whereHandover = ({ handoverAndHolidays, initialAdultName, secondaryAdultName }: Partial<CAPSession>) => {
+export const whereHandover = (request: Request) => {
+  const { handoverAndHolidays, initialAdultName, secondaryAdultName } = request.session;
   if (handoverAndHolidays.whereHandover.noDecisionRequired) {
-    return i18n.__('doNotNeedToDecide');
+    return request.__('doNotNeedToDecide');
   }
 
   const getAnswerForWhereHandoverWhere = (where: whereHandoverField) => {
     switch (where) {
       case 'neutral':
-        return i18n.__('handoverAndHolidays.whereHandover.neutralLocation');
+        return request.__('handoverAndHolidays.whereHandover.neutralLocation');
       case 'initialHome':
-        return i18n.__('handoverAndHolidays.whereHandover.atHome', { adult: initialAdultName });
+        return request.__('handoverAndHolidays.whereHandover.atHome', { adult: initialAdultName });
       case 'secondaryHome':
-        return i18n.__('handoverAndHolidays.whereHandover.atHome', { adult: secondaryAdultName });
+        return request.__('handoverAndHolidays.whereHandover.atHome', { adult: secondaryAdultName });
       case 'school':
-        return i18n.__('handoverAndHolidays.whereHandover.atSchool');
+        return request.__('handoverAndHolidays.whereHandover.atSchool');
       case 'someoneElse':
         return handoverAndHolidays.whereHandover.someoneElse;
       default:
@@ -119,58 +119,71 @@ export const whereHandover = ({ handoverAndHolidays, initialAdultName, secondary
   return handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere).join(', ');
 };
 
-export const willChangeDuringSchoolHolidays = ({ handoverAndHolidays }: Partial<CAPSession>) => {
+export const willChangeDuringSchoolHolidays = (request: Request) => {
+  const { handoverAndHolidays } = request.session;
   if (handoverAndHolidays.willChangeDuringSchoolHolidays.noDecisionRequired) {
-    return i18n.__('doNotNeedToDecide');
+    return request.__('doNotNeedToDecide');
   }
-  return handoverAndHolidays.willChangeDuringSchoolHolidays.willChange ? i18n.__('yes') : i18n.__('no');
+  return handoverAndHolidays.willChangeDuringSchoolHolidays.willChange ? request.__('yes') : request.__('no');
 };
 
-export const howChangeDuringSchoolHolidays = ({ handoverAndHolidays }: Partial<CAPSession>) => {
+export const howChangeDuringSchoolHolidays = (request: Request) => {
+  const { handoverAndHolidays } = request.session;
   if (!handoverAndHolidays.howChangeDuringSchoolHolidays) return undefined;
 
   return handoverAndHolidays.howChangeDuringSchoolHolidays.noDecisionRequired
-    ? i18n.__('doNotNeedToDecide')
+    ? request.__('doNotNeedToDecide')
     : handoverAndHolidays.howChangeDuringSchoolHolidays.answer;
 };
 
-export const itemsForChangeover = ({ handoverAndHolidays }: Partial<CAPSession>) =>
-  handoverAndHolidays.itemsForChangeover.noDecisionRequired
-    ? i18n.__('doNotNeedToDecide')
+export const itemsForChangeover = (request: Request) => {
+  const { handoverAndHolidays } = request.session;
+  return handoverAndHolidays.itemsForChangeover.noDecisionRequired
+    ? request.__('doNotNeedToDecide')
     : handoverAndHolidays.itemsForChangeover.answer;
+};
 
-export const whatWillHappen = ({ specialDays }: Partial<CAPSession>) =>
-  specialDays.whatWillHappen.noDecisionRequired ? i18n.__('doNotNeedToDecide') : specialDays.whatWillHappen.answer;
+export const whatWillHappen = (request: Request) => {
+  const { specialDays } = request.session;
+  return specialDays.whatWillHappen.noDecisionRequired
+    ? request.__('doNotNeedToDecide')
+    : specialDays.whatWillHappen.answer;
+};
 
-export const whatOtherThingsMatter = ({ otherThings }: Partial<CAPSession>) =>
-  otherThings.whatOtherThingsMatter.noDecisionRequired
-    ? i18n.__('doNotNeedToDecide')
+export const whatOtherThingsMatter = (request: Request) => {
+  const { otherThings } = request.session;
+  return otherThings.whatOtherThingsMatter.noDecisionRequired
+    ? request.__('doNotNeedToDecide')
     : otherThings.whatOtherThingsMatter.answer;
+};
 
-export const planLastMinuteChanges = ({ decisionMaking }: Partial<CAPSession>) => {
+export const planLastMinuteChanges = (request: Request) => {
+  const { decisionMaking } = request.session;
   if (decisionMaking.planLastMinuteChanges.noDecisionRequired) {
-    return i18n.__('doNotNeedToDecide');
+    return request.__('doNotNeedToDecide');
   }
   if (decisionMaking.planLastMinuteChanges.anotherArrangementDescription) {
     return decisionMaking.planLastMinuteChanges.anotherArrangementDescription;
   }
-  const planLastMinuteChangeList = formatPlanChangesOptionsIntoList(decisionMaking.planLastMinuteChanges.options);
+  const planLastMinuteChangeList = formatPlanChangesOptionsIntoList(request);
   return planLastMinuteChangeList.charAt(0).toUpperCase() + String(planLastMinuteChangeList).slice(1);
 };
 
-export const planLongTermNotice = ({ decisionMaking }: Partial<CAPSession>) => {
+export const planLongTermNotice = (request: Request) => {
+  const { decisionMaking } = request.session;
   if (decisionMaking.planLongTermNotice.noDecisionRequired) {
-    return i18n.__('doNotNeedToDecide');
+    return request.__('doNotNeedToDecide');
   }
   if (decisionMaking.planLongTermNotice.otherAnswer) {
     return decisionMaking.planLongTermNotice.otherAnswer;
   }
-  return i18n.__('decisionMaking.planLongTermNotice.weeks', {
+  return request.__('decisionMaking.planLongTermNotice.weeks', {
     number: decisionMaking.planLongTermNotice.weeks.toString(),
   });
 };
 
-export const planReview = ({ decisionMaking }: Partial<CAPSession>) => {
+export const planReview = (request: Request) => {
+  const { decisionMaking } = request.session;
   let number: number;
   let translationName: string;
 
@@ -184,5 +197,5 @@ export const planReview = ({ decisionMaking }: Partial<CAPSession>) => {
 
   const translationSuffix = number === 1 ? 'Singular' : 'Plural';
 
-  return i18n.__(translationName + translationSuffix, { number: number.toString() });
+  return request.__(translationName + translationSuffix, { number: number.toString() });
 };

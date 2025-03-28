@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
@@ -19,7 +18,7 @@ const planLongTermNoticeRoutes = (router: Router) => {
     response.render('pages/decisionMaking/planLongTermNotice', {
       errors: request.flash('errors'),
       formValues,
-      title: i18n.__('decisionMaking.planLongTermNotice.title'),
+      title: request.__('decisionMaking.planLongTermNotice.title'),
       backLinkHref: getBackUrl(request.session, paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES),
     });
   });

@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
@@ -10,7 +9,7 @@ const whichScheduleRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WHICH_SCHEDULE, (request, response) => {
     response.render('pages/livingAndVisiting/whichSchedule', {
       errors: request.flash('errors'),
-      title: i18n.__('livingAndVisiting.whichSchedule.title'),
+      title: request.__('livingAndVisiting.whichSchedule.title'),
       initialSchedule: request.session.livingAndVisiting.whichSchedule?.answer,
       backLinkHref: getBackUrl(request.session, paths.LIVING_VISITING_MOSTLY_LIVE),
     });

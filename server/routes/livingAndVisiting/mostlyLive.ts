@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-import i18n from 'i18n';
 
 import { whereMostlyLive } from '../../@types/fields';
 import formFields from '../../constants/formFields';
@@ -17,7 +16,7 @@ const mostlyLiveRoutes = (router: Router) => {
 
     response.render('pages/livingAndVisiting/mostlyLive', {
       errors: request.flash('errors'),
-      title: i18n.__('livingAndVisiting.mostlyLive.title'),
+      title: request.__('livingAndVisiting.mostlyLive.title'),
       values: request.session,
       formValues,
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),

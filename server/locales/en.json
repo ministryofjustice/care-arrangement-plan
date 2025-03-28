@@ -7,6 +7,8 @@
   "doNotNeedToDecide": "We do not need to decide this",
   "anotherArrangement": "Another arrangement",
   "or": "or",
+  "aItem": "a {{ item }}",
+  "aAndB": "{{{ itemA }}} and {{{ itemB }}}",
   "describeArrangement": "Describe the arrangement",
   "selectAllThatApply": "Select all that apply",
   "days": {
@@ -18,7 +20,7 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
-  "phaseBannerText": "Give your <a href={{ feedbackUrl }}>feedback</a> about this service.",
+  "phaseBannerText": "Give your feedback about this service using our <a href={{ feedbackUrl }}>online survey</a>.",
   "footer": {
     "accessibility": "Accessibility",
     "contact": "Contact",
@@ -304,8 +306,8 @@
       "title": "How should last-minute changes be communicated?",
       "anotherDescriptionLabel": "Describe the arrangement",
       "howChangesCommunicatedAdditionalDescription": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.",
-      "textMessage": "By text message",
-      "phoneCall": "With a phone call",
+      "text": "By text message",
+      "phone": "With a phone call",
       "email": "By email",
       "app": "Using a parenting app",
       "emptyError": "Select a method for how you both communicate changes",
@@ -345,6 +347,7 @@
     },
     "change": {
       "text": "Change",
+      "children": "the children",
       "users": "the users",
       "whereWillTheChildrenLive": "where the children will mostly live",
       "whichSchedule": "which schedule best meets the children's needs",
@@ -358,7 +361,10 @@
       "howChangeDuringSchoolHolidays": "how the arrangements will change during school holidays",
       "itemsForChangeover": "what items need to go between households",
       "whatWillHappen": "what will happen on special days",
-      "whatOtherThingsMatter": "what other things matter to your children"
+      "whatOtherThingsMatter": "what other things matter to your children",
+      "planLastMinuteChanges": "how last-minute changes should be communicated",
+      "planLongTermNotice": "how much notice you should give to change long-term arrangements",
+      "planReview": "when the children’s needs will change"
     }
   },
   "sharePlan": {
@@ -366,13 +372,13 @@
     "panelTitle": "Your proposed plan is ready to share",
     "nowShare": "Now share your plan",
     "sendThePlanTo": "Send this proposed child arrangements plan to {{{ name }}}",
-    "download": "Download the plan",
+    "download": "Download as a PDF (0.5 MB)",
     "print": "Print the plan",
     "mustNowShare": "You've created a proposed child arrangements plan. You must now share the plan with {{{ otherAdult }}} to get their agreement.",
     "whatToDoNext": "What to do next",
     "sendToSecondary": "Send this proposed child arrangements plan to {{{ otherAdult }}}. {{{ otherAdult }}} will have the chance to respond.",
-    "giveFeedback": "Give your feedback about this service",
-    "completeTheSurvey": "Complete the survey.",
+    "helpImprove": "Help improve the service",
+    "giveFeedback": "Give your feedback using the <a href={{ feedbackUrl }}>online survey</a>.",
     "emailUs": "You can also email {{ contactEmail }}.",
     "ifTheyDoNotRespond": "If {{{ otherAdult }}} does not respond",
     "tryMediation": "If {{{ otherAdult }}} does not respond, you can try mediation. The next step would be to apply for a court order.",

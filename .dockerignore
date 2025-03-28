@@ -6,7 +6,6 @@ coverage
 dist
 integration-tests
 node_modules
-terraform
 test-results
 npm-debug.log
 **/*.test.ts

@@ -6,11 +6,13 @@
 
 {% block beforeContent %}
   {{ super() }}
-  {{
-    govukBreadcrumbs({
-      items: [{text: "Home"}, {text: "Negotiation tools and services"}, {text: "Make or change a child arrangements plan"}]
-    })
-  }}
+  <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+    <ol class="govuk-breadcrumbs__list">
+      <li class="govuk-breadcrumbs__list-item">Home</li>
+      <li class="govuk-breadcrumbs__list-item">Negotiation tools and services</li>
+      <li class="govuk-breadcrumbs__list-item" aria-current="page">Make or change a child arrangements plan</li>
+    </ol>
+  </nav>
 {% endblock %}
 
 {% block content %}
@@ -43,7 +45,10 @@
         })
       }}
 
-      <p>You can also <a href="{{ paths.DOWNLOAD_PAPER_FORM }}">download a template child arrangements plan.</a></p>
+      <p>
+        You can also
+        <a href="{{ paths.DOWNLOAD_PAPER_FORM }}">download a template child arrangements plan (PDF, 0.5MB)</a>.
+      </p>
 
       <p>
         If you think the other parent is a threat to you or your children's safety, you should not use this service.

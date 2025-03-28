@@ -1,0 +1,14 @@
+{% from "macros/doYouAgree.njk" import doYouAgree %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+
+{% macro doYouAgreeAndSuggestion(suggestionText, idPrefix) %}
+  {{ doYouAgree(__('sharePlan.yourProposedPlan.doYouAgree'), idPrefix) }}
+  {{
+    govukTextarea({
+      name: idPrefix + "-suggestion",
+      label: {
+        text: suggestionText
+      }
+    })
+  }}
+{% endmacro %}
