@@ -28,10 +28,14 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+    ignore:
+      - node
   - package-ecosystem: 'docker-compose'
     directory: '/'
     schedule:
       interval: 'daily'
+    ignore:
+      - redis
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
