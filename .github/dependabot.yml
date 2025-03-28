@@ -29,13 +29,13 @@ updates:
     schedule:
       interval: 'daily'
     ignore:
-      - node
+      - dependency-name: node
   - package-ecosystem: 'docker-compose'
     directory: '/'
     schedule:
       interval: 'daily'
     ignore:
-      - redis
+      - dependency-name: redis
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
