@@ -1,4 +1,0 @@
-trigger: none
-
-steps:
-  - template: templates/validation.yml

@@ -16,8 +16,8 @@
     "test": "DOTENV_CONFIG_PATH='.env.test' jest",
     "test:update-pdf-snapshots": "DOTENV_CONFIG_PATH='.env.test' UPDATE_PDF_SNAPSHOTS=true jest server/pdf",
     "test:ci": "DOTENV_CONFIG_PATH='.env.test' jest --runInBand --coverage",
-    "int-test": "DOTENV_CONFIG_PATH='.env.test' cypress run --config video=false",
-    "int-test:ci": "npx dotenv -e .env.test -- sh -c 'npm run build && start-server-and-test start http://localhost:8001/health int-test'",
+    "int-test": "cypress run --config video=false",
+    "int-test:ci": "dotenv -e .env.test -- sh -c 'npm run build && start-server-and-test start http://localhost:8001/health int-test'",
     "int-test-ui": "cypress open --e2e --browser chrome"
   },
   "engines": {
