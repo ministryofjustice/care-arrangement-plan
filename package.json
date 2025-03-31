@@ -1,7 +1,7 @@
 {
   "name": "pfl-care-arrangement-plan",
   "version": "0.0.1",
-  "description": "PFL Care Arrangement Plan",
+  "description": "Private Family Law - Care Arrangement Plan",
   "repository": "git@ssh.dev.azure.com:v3/ACE-C514/pfl-care-arrangement-plan/pfl-care-arrangement-plan",
   "license": "MIT",
   "scripts": {
