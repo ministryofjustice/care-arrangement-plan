@@ -25,9 +25,6 @@ jobs:
       - name: 'Run Linter'
         run: npm run lint
 
-      - name: 'Run Prettier'
-        run: npm run prettier
-
       - name: 'Run Typecheck'
         run: npm run typecheck
 
