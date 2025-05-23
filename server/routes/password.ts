@@ -22,7 +22,7 @@ const passwordRoutes = (router: Router) => {
 };
 
 const handlePostPassword = (request: Request, response: Response) => {
-  const providedUrl = request.body.returnURL;
+  const providedUrl = typeof request.body.returnURL === 'string' ? request.body.returnURL : undefined;
   const processedRedirectUrl = !providedUrl || providedUrl.startsWith(paths.PASSWORD) ? '/' : providedUrl;
   const errors = validationResult(request);
 
