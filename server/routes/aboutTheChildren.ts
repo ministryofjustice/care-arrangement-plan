@@ -40,7 +40,7 @@ const aboutTheChildrenRoutes = (router: Router) => {
 
     for (let i = 0; i < numberOfChildren; i++) {
       const fieldName = formFields.CHILD_NAME + i;
-      const value: string = request.body[fieldName]?.trim();
+      const value: string | null = typeof request.body[fieldName] === "string" ? request.body[fieldName].trim() : null;
       if (!value) {
         errors.push({
           location: 'body',

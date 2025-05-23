@@ -6,3 +6,31 @@ services:
       - '6379:6379'
     command: >
       --requirepass ${CACHE_PASSWORD}
+
+  app:
+    image: care-arrangement-plan
+    container_name: care-arrangement-plan
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    volumes:
+      - ./assets:/app/assets
+      - ./esbuild:/app/esbuild
+      - ./integration-tests:/app/integration-tests
+      - ./server:/app/server
+      - ./test-assets:/app/test-assets
+      - ./.env:/app/.env
+      - ./.env.test:/app/.env.test
+      - ./cypress.config.ts:/app/cypress.config.ts
+      - ./eslint.config.mjs:/app/eslint.config.mjs
+      - ./jest.config.mjs:/app/jest.config.mjs
+      - ./nodemon.json:/app/nodemon.json
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./reporter-config.json:/app/reporter-config.json
+      - ./tsconfig.json:/app/tsconfig.json
+    ports:
+      - "8001:8001"
+    profiles:
+      - dev
