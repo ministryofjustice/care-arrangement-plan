@@ -63,22 +63,10 @@ The app will now connect to Redis when running.
 
 ### Running in Docker
 
-You can run the app in a docker container, so more closely simulate the hosted environment. To build the docker image
+You can run the app in a docker container, so more closely simulate the hosted environment. To use docker for development, run
 
 ```shell
-docker build -t 'pfl-care-arrangement-plan' .
-```
-
-And then to run it
-
-```shell
-docker run --env-file .env -p 8001:8001 -d --rm --name pfl-care-arrangement-plan pfl-care-arrangement-plan
-```
-
-To stop the container
-
-```shell
-docker stop pfl-care-arrangement-plan
+docker compose --profile dev up
 ```
 
 ## Tests

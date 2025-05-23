@@ -15,6 +15,19 @@ RUN apt-get update && \
         rm -rf /var/lib/apt/lists/* && \
         npm install -g npm@latest
 
+# Stage: development image
+FROM base AS dev
+
+ENV NODE_ENV=development
+
+RUN npm i -g nodemon
+
+COPY ./bin/docker-entrypoint.dev.sh /app/bin/entrypoint.sh
+
+RUN chmod +x /app/bin/entrypoint.sh
+
+ENTRYPOINT [ "/app/bin/entrypoint.sh" ]
+
 # Stage: build assets
 FROM base AS build
 
