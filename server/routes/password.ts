@@ -22,7 +22,7 @@ const passwordRoutes = (router: Router) => {
 };
 
 const handlePostPassword = (request: Request, response: Response) => {
-  const providedUrl = typeof request.body.returnURL === 'string' ? request.body.returnURL : undefined;
+  const providedUrl = typeof request.body.returnURL === 'string' ? request.body.returnURL : null;
   const processedRedirectUrl = !providedUrl || providedUrl.startsWith(paths.PASSWORD) ? '/' : providedUrl;
   const errors = validationResult(request);
 
@@ -35,7 +35,7 @@ const handlePostPassword = (request: Request, response: Response) => {
     });
     logger.info(`Received successful login request`);
     // Ensure a single slash at the start of processedRedirectUrl to prevent open redirect attacks
-    return response.redirect(processedRedirectUrl.replace(/^\/+/g, '/'));
+    return response.redirect(processedRedirectUrl.replace(/^\/+/, '/'));
   }
 
   request.flash('errors', errors.array());
