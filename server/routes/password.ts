@@ -34,7 +34,8 @@ const handlePostPassword = (request: Request, response: Response) => {
       sameSite: 'lax',
     });
     logger.info(`Received successful login request`);
-    return response.redirect(processedRedirectUrl);
+    // Ensure a single slash at the start of processedRedirectUrl to prevent open redirect attacks
+    return response.redirect(processedRedirectUrl.replace(/^\/+/g, '/'));
   }
 
   request.flash('errors', errors.array());
