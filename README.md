@@ -69,6 +69,12 @@ You can run the app in a docker container, so more closely simulate the hosted e
 docker compose --profile dev up
 ```
 
+With the app running, run tests locally in Docker, with the command
+
+```shell
+docker compose exec -e NODE_ENV=test app npm run test
+```
+
 ## Tests
 
 We use [Jest](https://jestjs.io/) for unit tests. To run them run `npm run test`.
