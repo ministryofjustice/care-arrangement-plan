@@ -28,8 +28,21 @@ spec:
   tls:
     - hosts:
         - care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk
+    - hosts:
+        - child-arrangement-plan.service.justice.gov.uk
+      secretName: ${KUBE_NAMESPACE}-cert-secret
   rules:
     - host: care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ${KUBE_NAMESPACE}-node-service
+                port:
+                  number: 8080
+    - host: child-arrangement-plan.service.justice.gov.uk
       http:
         paths:
           - path: /
