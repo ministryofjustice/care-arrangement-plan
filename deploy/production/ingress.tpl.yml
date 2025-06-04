@@ -41,7 +41,7 @@ spec:
                 name: ${KUBE_NAMESPACE}-node-service
                 port:
                   number: 8080
-    - host: child-arrangement-plan.service.justice.gov.uk
+    - host: child-arrangements-plan.service.justice.gov.uk
       http:
         paths:
           - path: /
