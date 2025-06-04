@@ -29,7 +29,7 @@ spec:
         - care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk
     - hosts:
         - child-arrangements-plan.service.justice.gov.uk
-      secretName: ${KUBE_NAMESPACE}-cert-secret
+      secretName: care-arrangement-plan-cert-secret
   rules:
     - host: care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk
       http:
