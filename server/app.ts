@@ -4,19 +4,19 @@ import createError from 'http-errors';
 import errorHandler from './errorHandler';
 import logger from './logger';
 import setupAnalytics from './middleware/setupAnalytics';
-import setupAuthentication from './middleware/setupAuthentication';
+//import setupAuthentication from './middleware/setupAuthentication';
 import setUpCsrf from './middleware/setUpCsrf';
 import setUpHealthCheck from './middleware/setUpHealthCheck';
 import setupHistory from './middleware/setupHistory';
 import setUpi18n from './middleware/setUpi18n';
 import setupRequestLogging from './middleware/setupRequestLogging';
 import setUpWebRequestParsing from './middleware/setupRequestParsing';
-import setupServiceNoLongerAvailable from './middleware/setupServiceNoLongerAvailable';
+//import setupServiceNoLongerAvailable from './middleware/setupServiceNoLongerAvailable';
 import setUpStaticResources from './middleware/setUpStaticResources';
 import setUpWebSecurity from './middleware/setUpWebSecurity';
 import setUpWebSession from './middleware/setUpWebSession';
 import routes from './routes';
-import unauthenticatedRoutes from './routes/unauthenticatedRoutes';
+//import unauthenticatedRoutes from './routes/unauthenticatedRoutes';
 import nunjucksSetup from './utils/nunjucksSetup';
 
 const createApp = (): express.Application => {
@@ -37,9 +37,9 @@ const createApp = (): express.Application => {
   app.use(setupAnalytics());
   app.use(setupRequestLogging());
   app.use(setupHistory());
-  app.use(setupServiceNoLongerAvailable());
-  app.use(unauthenticatedRoutes());
-  app.use(setupAuthentication());
+  //app.use(setupServiceNoLongerAvailable());
+  //app.use(unauthenticatedRoutes());
+  //app.use(setupAuthentication());
   app.use(routes());
 
   app.use((_request, _response, next) => next(createError(404)));
