@@ -22,6 +22,7 @@ services:
       - ./test-assets:/app/test-assets
       - ./.env:/app/.env
       - ./.env.test:/app/.env.test
+      - ./.prettierrc.json:/app/.prettierrc.json
       - ./cypress.config.ts:/app/cypress.config.ts
       - ./eslint.config.mjs:/app/eslint.config.mjs
       - ./jest.config.mjs:/app/jest.config.mjs

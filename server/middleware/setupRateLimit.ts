@@ -1,6 +1,6 @@
-import { rateLimit } from 'express-rate-limit'
+import { rateLimit } from 'express-rate-limit';
 import type { Request, Response } from 'express-serve-static-core';
-import { RedisStore } from 'rate-limit-redis'
+import { RedisStore } from 'rate-limit-redis';
 
 import config from '../config';
 import createCacheClient from '../data/cacheClient';
@@ -29,9 +29,9 @@ const setupRateLimit = () => {
       response.status(429).render('pages/errors/rateLimit', {
         production: config.production,
         title: production ? request.__('errors.rateLimit.title') : 'Too many requests',
-      })
-    }
+      });
+    },
   });
-}
+};
 
 export default setupRateLimit;
