@@ -42,6 +42,11 @@
       "title": "Sorry, there is a problem with the service",
       "errorLogged": "The error has been logged.",
       "tryReloading": "You can try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
+    },
+    "rateLimit": {
+      "title": "You have made too many requests",
+      "info": "You have reloaded the page too many times in a short period.",
+      "tryReloading": "Please wait a period of 15 minutes, then try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
     }
   },
   "cookieBanner": {
