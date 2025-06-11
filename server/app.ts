@@ -11,6 +11,7 @@ import setupHistory from './middleware/setupHistory';
 import setUpi18n from './middleware/setUpi18n';
 import setupRequestLogging from './middleware/setupRequestLogging';
 import setUpWebRequestParsing from './middleware/setupRequestParsing';
+import setupRobotsTxt from './middleware/setupRobotsTxt';
 import setupServiceNoLongerAvailable from './middleware/setupServiceNoLongerAvailable';
 import setUpStaticResources from './middleware/setUpStaticResources';
 import setUpWebSecurity from './middleware/setUpWebSecurity';
@@ -26,6 +27,7 @@ const createApp = (): express.Application => {
   app.set('trust proxy', true);
   app.set('port', process.env.PORT || 3000);
 
+  app.use(setupRobotsTxt());
   app.use(setUpi18n());
   nunjucksSetup(app);
   app.use(setUpHealthCheck());
