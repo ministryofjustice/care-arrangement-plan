@@ -9,6 +9,7 @@ import setUpCsrf from './middleware/setUpCsrf';
 import setUpHealthCheck from './middleware/setUpHealthCheck';
 import setupHistory from './middleware/setupHistory';
 import setUpi18n from './middleware/setUpi18n';
+import setupRateLimit from './middleware/setupRateLimit';
 import setupRequestLogging from './middleware/setupRequestLogging';
 import setUpWebRequestParsing from './middleware/setupRequestParsing';
 import setupRobotsTxt from './middleware/setupRobotsTxt';
@@ -32,6 +33,7 @@ const createApp = (): express.Application => {
   nunjucksSetup(app);
   app.use(setUpHealthCheck());
   app.use(setUpWebSecurity());
+  app.use(setupRateLimit());
   app.use(setUpWebSession());
   app.use(setUpWebRequestParsing());
   app.use(setUpStaticResources());
