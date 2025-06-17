@@ -29,10 +29,10 @@
     "bunyan-format": "0.2.1",
     "compression": "1.8.0",
     "connect-flash": "0.1.1",
-    "connect-redis": "8.0.2",
+    "connect-redis": "9.0.0",
     "cookie-parser": "1.4.7",
     "csrf-sync": "4.1.0",
-    "express": "4.21.2",
+    "express": "5.1.0",
     "express-session": "1.18.1",
     "express-validator": "7.2.1",
     "govuk-frontend": "5.9.0",
@@ -42,7 +42,7 @@
     "jspdf": "3.0.1",
     "nocache": "4.0.0",
     "nunjucks": "3.2.4",
-    "redis": "4.7.0"
+    "redis": "5.5.6"
   },
   "devDependencies": {
     "@eslint/js": "9.28.0",
