@@ -1,0 +1,15 @@
+{% extends "partials/layout.njk" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1>{{ title }}</h1>
+      {% if not production %}
+        <h2>{{ status }}</h2>
+        <pre>{{ stack }}</pre>
+      {% endif %}
+      <p>{{ __('errors.rateLimit.info') | safe }}</p>
+      <p>{{ __('errors.rateLimit.tryReloading') | safe }}</p>
+    </div>
+  </div>
+{% endblock %}
