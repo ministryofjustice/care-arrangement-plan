@@ -14,4 +14,4 @@ data:
   USE_AUTH: 'true'
   CONTACT_EMAIL: 'childarrangements@justice.gov.uk'
   FEEDBACK_URL: 'https://feedback.example.com'
-  PREVIEW_END: '2025-06-30T23:59:59'
+  PREVIEW_END: '2025-07-30T23:59:59'
