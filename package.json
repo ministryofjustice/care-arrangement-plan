@@ -7,7 +7,7 @@
   "scripts": {
     "build": "node esbuild/esbuild.config.mjs --build",
     "start": "node $ENV_FILE_OPTION $NODE_OPTIONS dist/app.js | bunyan -o short",
-    "start:dev": "ENV_FILE_OPTION='--env-file=.env' nodemon --exec 'run-s build start'",
+    "start:dev": "ENV_FILE_OPTION='--env-file=.env' nodemon --exec 'npm run build && npm run start'",
     "lint": "eslint . --cache --max-warnings 0",
     "lint:fix": "eslint . --cache --max-warnings 0 --fix",
     "prettier": "prettier . --cache --check",
@@ -33,6 +33,7 @@
     "cookie-parser": "1.4.7",
     "csrf-sync": "4.1.0",
     "express": "4.21.2",
+    "express-rate-limit": "^7.5.0",
     "express-session": "1.18.1",
     "express-validator": "7.2.1",
     "govuk-frontend": "5.9.0",
@@ -42,6 +43,7 @@
     "jspdf": "3.0.1",
     "nocache": "4.0.0",
     "nunjucks": "3.2.4",
+    "rate-limit-redis": "^4.2.1",
     "redis": "4.7.0"
   },
   "devDependencies": {
@@ -90,7 +92,6 @@
     "jsdom": "26.1.0",
     "mocha-junit-reporter": "2.2.1",
     "nodemon": "3.1.10",
-    "npm-run-all": "4.1.5",
     "prettier": "3.5.3",
     "prettier-plugin-jinja-template": "2.1.0",
     "start-server-and-test": "2.0.12",
