@@ -32,8 +32,9 @@ const setupCookieBanner = () => {
     const domain = location.hostname;
     const expires = new Date(0).toUTCString();
     const ga4Id = document.querySelector('[data-ga4-id]').getAttribute('data-ga4-id').replace('G-', '');
-    document.cookie = `_ga=; domain=${domain}; expires=${expires}; path=/;`;
-    document.cookie = `_ga_${ga4Id}=; domain=${domain}; expires=${expires}; path=/;`;
+    const secure = location.protocol === 'https:';
+    document.cookie = `_ga=; domain=${domain}; expires=${expires}; path=/; ${secure ? 'Secure; ' : ''}`;
+    document.cookie = `_ga_${ga4Id}=; domain=${domain}; expires=${expires}; path=/; ${secure ? 'Secure; ' : ''}`;
   }
 
   function setAnalyticsPreferenceCookie(acceptAnalytics) {
