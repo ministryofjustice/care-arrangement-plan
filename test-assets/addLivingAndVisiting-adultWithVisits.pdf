@@ -1793,7 +1793,7 @@ endobj
 /Height 240
 /ColorSpace [/Indexed /DeviceRGB 255 87 0 R]
 /BitsPerComponent 8
-/DecodeParms <</Predictor 12 /Colors 1 /BitsPerComponent 8 /Columns 1184>>
+/DecodeParms <</Predictor 13 /Colors 1 /BitsPerComponent 8 /Columns 1184>>
 /SMask 86 0 R
 /Length 15406
 /Filter /FlateDecode
@@ -1879,7 +1879,7 @@ endobj
 /Height 240
 /ColorSpace /DeviceGray
 /BitsPerComponent 8
-/DecodeParms <</Predictor 12 /Colors 1 /BitsPerComponent 8 /Columns 1184>>
+/DecodeParms <</Predictor 13 /Colors 1 /BitsPerComponent 8 /Columns 1184>>
 /Length 19717
 /Filter /FlateDecode
 >>
@@ -2042,7 +2042,7 @@ endobj
 88 0 obj
 <<
 /Producer (jsPDF 3.0.1)
-/CreationDate (D:20250319100817-00'00')
+/CreationDate (D:20250101000000-00'00')
 >>
 endobj
 89 0 obj
@@ -2151,7 +2151,7 @@ trailer
 /Size 90
 /Root 89 0 R
 /Info 88 0 R
-/ID [ <6F87E1297EC872AA0CDEE6CC81874168> <6F87E1297EC872AA0CDEE6CC81874168> ]
+/ID [ <F906213012B15C526B2450AF56583BEB> <F906213012B15C526B2450AF56583BEB> ]
 >>
 startxref
 90891

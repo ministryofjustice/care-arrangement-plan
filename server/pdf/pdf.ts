@@ -73,6 +73,8 @@ class Pdf {
       0.5 * (HEADER_HEIGHT - HEADER_LOGO_HEIGHT),
       headerLogoWidth,
       HEADER_LOGO_HEIGHT,
+      null,
+      'MEDIUM'
     );
     this.document
       .setFont(FONT, FontStyles.BOLD)
