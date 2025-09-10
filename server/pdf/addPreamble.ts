@@ -38,13 +38,31 @@ const addPreamble = (pdf: Pdf) => {
         style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
+      {
+        text: request.__('sharePlan.whatWeAreTelling.insteadYouCan', {
+          senderName: request.session.initialAdultName,
+        }),
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+      },
     ],
     bulletText: [
       request.__('sharePlan.whatWeAreTelling.suggestChanges', {
         senderName: request.session.initialAdultName,
       }),
       request.__('sharePlan.whatWeAreTelling.startYourOwn'),
-      request.__('sharePlan.whatWeAreTelling.suggestChanges'),
+      request.__('sharePlan.whatWeAreTelling.makeCustom'),
+    ],
+    finalText: [
+      {
+        text: request.__('sharePlan.whatWeAreTelling.notLegallyBinding', {
+          senderName: request.session.initialAdultName,
+        }),
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+      },
     ],
   }).addComponentToDocument();
 
