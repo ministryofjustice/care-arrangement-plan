@@ -3,8 +3,8 @@ import fs from 'fs';
 import { Router } from 'express';
 
 import paths from '../constants/paths';
-import createPdf from '../pdf/createPdf';
 import createHtmlContent from '../html/createHtmlContent';
+import createPdf from '../pdf/createPdf';
 import getAssetPath from '../utils/getAssetPath';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
