@@ -48,11 +48,7 @@
     }
 
     .crest {
-      width: 36px;
       height: 32px;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzNiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMjUgMjVoLTZ2LTZoNnY2em0wLThoLTZ2LTZoNnY2em0tOCA4aC02di02aDZ2NnptMC04aC02di02aDZ2NnptLTgtOGgtNlY5aDZ2NnptMTYgMGgtNlY5aDZ2NnptLTggMGgtNlY5aDZ2NnptOC04aC02VjFoNnY2em0tOCAwdi02aDZ2Nmgtbm02em0tOCAwdi02aDZ2Nmgtbm02em0wIDhoNnYtNmgtNnY2em0tOCAwaDZ2LTZoLTZ2NnoiLz48L3N2Zz4=');
-      background-size: contain;
-      background-repeat: no-repeat;
     }
 
     .header h1 {
@@ -257,7 +253,7 @@
 <body>
   <div class="header">
     <div class="header-content">
-      <div class="crest"></div>
+      <img src="{{ crestImageData }}" alt="GOV.UK" class="crest">
       <h1>{{ __('sharePlan.whatWeAreTelling.proposedPlan', {childrenNames: values.childrenNames}) }}</h1>
     </div>
   </div>
@@ -335,10 +331,23 @@
 
       <div class="do-you-agree">
         <p>{{ __('sharePlan.yourProposedPlan.doYouAgreeOnBasics', {senderName: values.initialAdultName}) }}</p>
+        <div class="do-you-agree-options">
+          <label>
+            <input type="radio" name="question-about-proposal" value="yes">
+            <span>{{ __('yes') }}</span>
+          </label>
+          <label>
+            <input type="radio" name="question-about-proposal" value="no">
+            <span>{{ __('no') }}</span>
+          </label>
+        </div>
       </div>
 
-      <p>{{ __('sharePlan.yourProposedPlan.doNotStoreNames') }}</p>
-      <p>{{ __('sharePlan.yourProposedPlan.doNotAgreeOnBasics') | customUrlize | safe }}</p>
+      <div class="text-box">
+        <p>{{ __('sharePlan.yourProposedPlan.doNotStoreNames') }}</p>
+        <p>{{ __('sharePlan.yourProposedPlan.doNotAgreeOnBasics') | customUrlize | safe }}</p>
+        <textarea class="user-input-area" id="notes-about-proposal" aria-label="{{ __('sharePlan.yourProposedPlan.doNotAgreeOnBasics') }}"></textarea>
+      </div>
     </section>
 
     <!-- Answers rendered inline -->
