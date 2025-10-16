@@ -28,6 +28,8 @@ const escapeHtmlText = (text: string): string => {
     .replace(/'/g, '&#039;');
 };
 
+let questionCounter = 0;
+
 const renderAnswer = (
   sectionHeading: string | undefined,
   question: string,
@@ -37,6 +39,10 @@ const renderAnswer = (
   request: Request,
 ): string => {
   if (!answer) return '';
+
+  questionCounter++;
+  const radioName = `question-${questionCounter}`;
+  const textareaId = `notes-${questionCounter}`;
 
   let html = '<div class="answer-section">\n';
 
@@ -54,10 +60,21 @@ const renderAnswer = (
 
   html += `  <div class="do-you-agree">\n`;
   html += `    <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.doYouAgree'))}</p>\n`;
+  html += `    <div class="do-you-agree-options">\n`;
+  html += `      <label>\n`;
+  html += `        <input type="radio" name="${radioName}" value="yes">\n`;
+  html += `        <span>${escapeHtmlText(request.__('yes'))}</span>\n`;
+  html += `      </label>\n`;
+  html += `      <label>\n`;
+  html += `        <input type="radio" name="${radioName}" value="no">\n`;
+  html += `        <span>${escapeHtmlText(request.__('no'))}</span>\n`;
+  html += `      </label>\n`;
+  html += `    </div>\n`;
   html += `  </div>\n`;
 
   html += `  <div class="text-box">\n`;
   html += `    <p>${escapeHtmlText(disagreeText)}</p>\n`;
+  html += `    <textarea class="user-input-area" id="${textareaId}" aria-label="${escapeHtmlText(disagreeText)}"></textarea>\n`;
   html += `  </div>\n`;
 
   html += '</div>\n';
@@ -70,6 +87,8 @@ const renderTextBox = (heading: string, text: string): string => {
 };
 
 const createHtmlContent = (request: Request): string => {
+  // Reset question counter for each export
+  questionCounter = 0;
   let html = '';
 
   // Living and Visiting Section
@@ -221,6 +240,10 @@ const createHtmlContent = (request: Request): string => {
   // Other Things Section
   const otherThingsAnswer = whatOtherThingsMatter(request);
   if (otherThingsAnswer) {
+    questionCounter++;
+    const radioName = `question-${questionCounter}`;
+    const textareaId = `notes-${questionCounter}`;
+
     html += '<section id="other-things" aria-labelledby="other-things-heading">\n';
     html += `<div class="answer-section">\n`;
     html += `  <h2>${escapeHtmlText(request.__('taskList.otherThings'))}</h2>\n`;
@@ -235,9 +258,20 @@ const createHtmlContent = (request: Request): string => {
     html += `  <p class="answer">${escapeHtmlText(otherThingsAnswer)}</p>\n`;
     html += `  <div class="do-you-agree">\n`;
     html += `    <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.doYouAgree'))}</p>\n`;
+    html += `    <div class="do-you-agree-options">\n`;
+    html += `      <label>\n`;
+    html += `        <input type="radio" name="${radioName}" value="yes">\n`;
+    html += `        <span>${escapeHtmlText(request.__('yes'))}</span>\n`;
+    html += `      </label>\n`;
+    html += `      <label>\n`;
+    html += `        <input type="radio" name="${radioName}" value="no">\n`;
+    html += `        <span>${escapeHtmlText(request.__('no'))}</span>\n`;
+    html += `      </label>\n`;
+    html += `    </div>\n`;
     html += `  </div>\n`;
     html += `  <div class="text-box">\n`;
     html += `    <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.doNotAgree.otherThings.whatOtherThingsMatter'))}</p>\n`;
+    html += `    <textarea class="user-input-area" id="${textareaId}" aria-label="${escapeHtmlText(request.__('sharePlan.yourProposedPlan.doNotAgree.otherThings.whatOtherThingsMatter'))}"></textarea>\n`;
     html += `  </div>\n`;
     html += `</div>\n`;
     html += renderTextBox(
