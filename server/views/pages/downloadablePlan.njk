@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ __('sharePlan.whatWeAreTelling.proposedPlan', {childrenNames: values.childrenNames}) }} – {{ __('serviceName') }} – GOV.UK</title>
+  <!--
+    This accessible HTML export includes:
+    - Proper semantic heading structure (h1, h2, h3)
+    - Interactive hyperlinks
+    - Yes/No radio buttons for each "Do you agree?" question
+    - Text areas for notes and suggestions
+    - ARIA labels for screen reader compatibility
+  -->
   <style>
     /* GOV.UK Transport font fallback stack */
     body {
@@ -125,6 +133,10 @@
       margin-top: 0;
     }
 
+    .text-box p:last-child {
+      margin-bottom: 0;
+    }
+
     /* Do you agree component */
     .do-you-agree {
       margin: 30px 0;
@@ -136,7 +148,47 @@
     .do-you-agree p {
       font-size: 19px;
       font-weight: 700;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .do-you-agree-options {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .do-you-agree-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 19px;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .do-you-agree-options input[type="radio"] {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    /* Text areas for user input */
+    .user-input-area {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px;
+      border: 2px solid #0b0c0c;
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    .user-input-area:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
     }
 
     /* Answer sections */
@@ -150,8 +202,9 @@
     }
 
     .answer-section .answer {
-      padding-left: 20px;
       margin-bottom: 20px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
 
     .answer-section .hint {
