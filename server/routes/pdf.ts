@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import { Router } from 'express';
 
 import paths from '../constants/paths';
@@ -30,6 +32,7 @@ const pdfRoutes = (router: Router) => {
   router.get(paths.DOWNLOAD_HTML, (request, response) => {
     const htmlContent = createHtmlContent(request);
     const childrenNames = formattedChildrenNames(request);
+    const crestImageData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/crest.png'), { encoding: 'base64' })}`;
 
     response.setHeader('Content-Type', 'text/html; charset=utf-8');
     response.setHeader('Content-Disposition', `attachment; filename=${request.__('pdf.name')}.html`);
@@ -42,6 +45,7 @@ const pdfRoutes = (router: Router) => {
         childrenNames,
       },
       htmlContent,
+      crestImageData,
     });
   });
 };
