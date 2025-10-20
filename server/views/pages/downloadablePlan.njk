@@ -55,7 +55,9 @@
       font-size: 24px;
       font-weight: 700;
       margin: 0;
+      padding: 0;
       color: #ffffff;
+      line-height: 32px;
     }
 
     /* Typography */
@@ -254,14 +256,17 @@
   <div class="header">
     <div class="header-content">
       <img src="{{ crestImageData }}" alt="GOV.UK" class="crest">
-      <h1>{{ __('sharePlan.whatWeAreTelling.proposedPlan', {childrenNames: values.childrenNames}) }}</h1>
+      <h1>{{ __('pdf.name') }}</h1>
     </div>
   </div>
 
   <div class="container">
+    <!-- Main Title -->
+    <h1 style="font-size: 22pt; font-weight: bold; margin-bottom: 5pt;">{{ __('sharePlan.whatWeAreTelling.proposedPlan', {childrenNames: values.childrenNames}) }}</h1>
+
     <!-- Preamble Section -->
     <section id="preamble" aria-labelledby="preamble-heading">
-      <p><strong>{{ __('sharePlan.whatWeAreTelling.initialIsAsking', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</strong></p>
+      <p>{{ __('sharePlan.whatWeAreTelling.initialIsAsking', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</p>
 
       <p>{{ __('sharePlan.whatWeAreTelling.doNotNeedToAccept', {senderName: values.initialAdultName}) }}</p>
 
