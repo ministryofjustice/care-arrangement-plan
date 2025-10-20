@@ -1,0 +1,33 @@
+{# Survey Popup Modal #}
+<div id="survey-popup-overlay" class="survey-popup-overlay" aria-hidden="true"></div>
+
+<div id="survey-popup" class="survey-popup" role="dialog" aria-labelledby="survey-popup-title" aria-modal="true">
+  <div class="survey-popup__header">
+    <button
+      id="survey-popup-close"
+      class="survey-popup__close"
+      aria-label="Close survey popup"
+      type="button"
+    >
+      &#x2715;
+    </button>
+
+    <h2 id="survey-popup-title" class="survey-popup__title">
+      Your plan has been downloaded!
+    </h2>
+
+    <p class="survey-popup__description">
+      We would appreciate your feedback to help us improve the service.
+    </p>
+  </div>
+
+  <div class="survey-popup__iframe-container">
+    {# Replace this URL with your actual SmartSurvey embed URL #}
+    <iframe
+      class="survey-popup__iframe"
+      src="YOUR_SMARTSURVEY_EMBED_URL_HERE"
+      title="Feedback survey"
+      loading="lazy"
+    ></iframe>
+  </div>
+</div>
