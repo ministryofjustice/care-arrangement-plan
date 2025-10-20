@@ -19,6 +19,8 @@ import safetyCheckRoutes from './safetyCheck';
 import sharePlanRoutes from './sharePlan';
 import specialDaysRoutes from './specialDays';
 import taskListRoutes from './taskList';
+import accessibilityStatementRoutes from './accessibilityStatement';
+
 
 const routes = (): Router => {
   const router = Router();
@@ -43,6 +45,7 @@ const routes = (): Router => {
   otherThingsRoutes(router);
   decisionMakingRoutes(router);
   pdfRoutes(router);
+  accessibilityStatementRoutes(router);
 
   return router;
 };

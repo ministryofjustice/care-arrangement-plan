@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import accessibilityStatementRoutes from './accessibilityStatment';
+import accessibilityStatementRoutes from './accessibilityStatement';
 import contactUsRoutes from './contactUs';
 import cookiesRoutes from './cookies';
 import passwordRoutes from './password';

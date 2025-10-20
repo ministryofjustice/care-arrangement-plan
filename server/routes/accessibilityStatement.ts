@@ -10,6 +10,7 @@ const accessibilityStatementRoutes = (router: Router) => {
       backLinkHref: getBackUrl(request.session, paths.START),
     });
   });
+  
 };
 
 export default accessibilityStatementRoutes;
