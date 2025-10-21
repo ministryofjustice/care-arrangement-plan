@@ -4,6 +4,7 @@ import paths from '../constants/paths';
 
 import aboutTheAdultsRoutes from './aboutTheAdults';
 import aboutTheChildrenRoutes from './aboutTheChildren';
+import accessibilityStatementRoutes from './accessibilityStatement';
 import checkYourAnswersRoutes from './checkYourAnswers';
 import childrenSafetyRoutesCheck from './childrenSafetyCheck';
 import courtOrderCheckRoutes from './courtOrderCheck';
@@ -19,7 +20,6 @@ import safetyCheckRoutes from './safetyCheck';
 import sharePlanRoutes from './sharePlan';
 import specialDaysRoutes from './specialDays';
 import taskListRoutes from './taskList';
-import accessibilityStatementRoutes from './accessibilityStatement';
 
 
 const routes = (): Router => {
