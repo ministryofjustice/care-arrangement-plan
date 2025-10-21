@@ -37,10 +37,10 @@
       </ul>
 
       <h2>{{ __('accessibilityStatement.feedbackContact') }}</h2>
-      <p>{{ __('accessibilityStatement.reportProblems') }} <a href="mailto:childarrangements@justice.gov.uk">childarrangements@justice.gov.uk</a></p>
+      <p>{{ __('accessibilityStatement.reportProblems', { contactEmail: contactEmail }) | customUrlize | safe }}</p>
       <p>{{ __('accessibilityStatement.alternativeFormats') }}</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>{{ __('accessibilityStatement.email') }} <a href="mailto:childarrangements@justice.gov.uk">childarrangements@justice.gov.uk</a></li>
+        <li>{{ __('accessibilityStatement.email', { contactEmail: contactEmail }) | customUrlize | safe }}</li>
       </ul>
       <p>{{ __('accessibilityStatement.responseTime') }}</p>
 
