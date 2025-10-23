@@ -1,8 +1,8 @@
 import { Request } from 'express';
 
 import createHtmlContent from '../../html/createHtmlContent';
-import { sessionMock } from '../../test-utils/testMocks';
 import { expectHtmlToContain, validateHtmlStructure } from '../../test-utils/htmlUtils';
+import { sessionMock } from '../../test-utils/testMocks';
 
 describe('createHtmlContent', () => {
   let mockRequest: Partial<Request>;

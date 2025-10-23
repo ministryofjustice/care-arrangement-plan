@@ -1,8 +1,8 @@
 import { Request } from 'express';
 
 import addHandoverAndHolidays from '../../html/addHandoverAndHolidays';
-import { sessionMock } from '../../test-utils/testMocks';
 import { expectHtmlToContain, validateHtmlStructure } from '../../test-utils/htmlUtils';
+import { sessionMock } from '../../test-utils/testMocks';
 
 describe('addHandoverAndHolidays', () => {
   let mockRequest: Partial<Request>;

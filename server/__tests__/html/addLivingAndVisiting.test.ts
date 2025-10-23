@@ -1,8 +1,8 @@
 import { Request } from 'express';
 
 import addLivingAndVisiting from '../../html/addLivingAndVisiting';
+import { expectHtmlToContain, validateHtmlStructure } from '../../test-utils/htmlUtils';
 import { sessionMock } from '../../test-utils/testMocks';
-import { expectHtmlNotToContain, expectHtmlToContain, validateHtmlStructure } from '../../test-utils/htmlUtils';
 
 describe('addLivingAndVisiting', () => {
   let mockRequest: Partial<Request>;

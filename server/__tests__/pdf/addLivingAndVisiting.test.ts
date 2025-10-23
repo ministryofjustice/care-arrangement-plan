@@ -2,11 +2,11 @@ import path from 'path';
 
 import request from 'supertest';
 
+import addLivingAndVisiting from '../../pdf/addLivingAndVisiting';
 import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
 import { sessionMock } from '../../test-utils/testMocks';
 import testAppSetup, { TEST_PATH } from '../../test-utils/testPdfAppSetup';
 
-import addLivingAndVisiting from '../../pdf/addLivingAndVisiting';
 
 jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../../assets/${fileName}`));
 

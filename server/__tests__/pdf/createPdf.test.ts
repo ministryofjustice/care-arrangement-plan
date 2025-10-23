@@ -12,7 +12,7 @@ jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(_
 const app = testAppSetup();
 
 describe('createPdf', () => {
-  test('returns the expected pdf', async () => {
+  test('returns the expected pdf', async () => {.    
     Object.assign(sessionMock, {
       numberOfChildren: 3,
       namesOfChildren: ['James', 'Rachel', 'Jack'],

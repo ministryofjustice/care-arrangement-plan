@@ -1,8 +1,8 @@
 import { Request } from 'express';
 
 import addDecisionMaking from '../../html/addDecisionMaking';
-import { sessionMock } from '../../test-utils/testMocks';
 import { expectHtmlToContain, validateHtmlStructure } from '../../test-utils/htmlUtils';
+import { sessionMock } from '../../test-utils/testMocks';
 
 describe('addDecisionMaking', () => {
   let mockRequest: Partial<Request>;

@@ -2,11 +2,11 @@ import path from 'path';
 
 import request from 'supertest';
 
+import addAboutTheProposal from '../../pdf/addAboutTheProposal';
 import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
 import { sessionMock } from '../../test-utils/testMocks';
 import testAppSetup, { TEST_PATH } from '../../test-utils/testPdfAppSetup';
 
-import addAboutTheProposal from '../../pdf/addAboutTheProposal';
 
 jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../../assets/${fileName}`));
 

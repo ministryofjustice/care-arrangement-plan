@@ -2,11 +2,11 @@ import path from 'path';
 
 import request from 'supertest';
 
+import addHandoverAndHolidays from '../../pdf/addHandoverAndHolidays';
 import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
 import { sessionMock } from '../../test-utils/testMocks';
 import testAppSetup, { TEST_PATH } from '../../test-utils/testPdfAppSetup';
 
-import addHandoverAndHolidays from '../../pdf/addHandoverAndHolidays';
 
 jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../../assets/${fileName}`));
 
