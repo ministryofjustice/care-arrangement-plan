@@ -30,7 +30,7 @@ export const renderTextBox = (heading: string, text: string): string => {
   textboxCounter++;
   const textareaId = `textbox-${textboxCounter}`;
 
-  return `<div class="text-box">\n  <h4>${escapeHtmlText(heading)}</h4>\n  <p>${escapeHtmlText(text)}</p>\n  <textarea class="user-input-area" id="${textareaId}" aria-label="${escapeHtmlText(text)}"></textarea>\n</div>\n`;
+  return `<div class="text-box">\n  <h4>${escapeHtmlText(heading)}</h4>\n  <div class="govuk-form-group">\n    <label class="govuk-label" for="${textareaId}">\n      ${escapeHtmlText(text)}\n    </label>\n    <textarea class="govuk-textarea user-input-area" id="${textareaId}" name="${textareaId}" rows="5"></textarea>\n  </div>\n</div>\n`;
 };
 
 const addAnswer = (
@@ -62,22 +62,36 @@ const addAnswer = (
   html += `  <p class="answer">${escapeHtmlText(answer)}</p>\n`;
 
   html += `  <div class="do-you-agree">\n`;
-  html += `    <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.doYouAgree'))}</p>\n`;
-  html += `    <div class="do-you-agree-options">\n`;
-  html += `      <label>\n`;
-  html += `        <input type="radio" name="${radioName}" value="yes">\n`;
-  html += `        <span>${escapeHtmlText(request.__('yes'))}</span>\n`;
-  html += `      </label>\n`;
-  html += `      <label>\n`;
-  html += `        <input type="radio" name="${radioName}" value="no">\n`;
-  html += `        <span>${escapeHtmlText(request.__('no'))}</span>\n`;
-  html += `      </label>\n`;
+  html += `    <div class="govuk-form-group">\n`;
+  html += `      <fieldset class="govuk-fieldset">\n`;
+  html += `        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">\n`;
+  html += `          ${escapeHtmlText(request.__('sharePlan.yourProposedPlan.doYouAgree'))}\n`;
+  html += `        </legend>\n`;
+  html += `        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">\n`;
+  html += `          <div class="govuk-checkboxes__item">\n`;
+  html += `            <input class="govuk-checkboxes__input" id="${radioName}-yes" name="${radioName}" type="checkbox" value="yes">\n`;
+  html += `            <label class="govuk-label govuk-checkboxes__label" for="${radioName}-yes">\n`;
+  html += `              ${escapeHtmlText(request.__('yes'))}\n`;
+  html += `            </label>\n`;
+  html += `          </div>\n`;
+  html += `          <div class="govuk-checkboxes__item">\n`;
+  html += `            <input class="govuk-checkboxes__input" id="${radioName}-no" name="${radioName}" type="checkbox" value="no">\n`;
+  html += `            <label class="govuk-label govuk-checkboxes__label" for="${radioName}-no">\n`;
+  html += `              ${escapeHtmlText(request.__('no'))}\n`;
+  html += `            </label>\n`;
+  html += `          </div>\n`;
+  html += `        </div>\n`;
+  html += `      </fieldset>\n`;
   html += `    </div>\n`;
   html += `  </div>\n`;
 
   html += `  <div class="text-box">\n`;
-  html += `    <p>${escapeHtmlText(disagreeText)}</p>\n`;
-  html += `    <textarea class="user-input-area" id="${textareaId}" aria-label="${escapeHtmlText(disagreeText)}"></textarea>\n`;
+  html += `    <div class="govuk-form-group">\n`;
+  html += `      <label class="govuk-label" for="${textareaId}">\n`;
+  html += `        ${escapeHtmlText(disagreeText)}\n`;
+  html += `      </label>\n`;
+  html += `      <textarea class="govuk-textarea user-input-area" id="${textareaId}" name="${textareaId}" rows="5"></textarea>\n`;
+  html += `    </div>\n`;
   html += `  </div>\n`;
 
   html += '</div>\n';
