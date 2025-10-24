@@ -15,7 +15,7 @@ describe('createHtmlContent', () => {
           return `${key}:${JSON.stringify(options)}`;
         }
         return key;
-      }),
+      }) as any,
     } as Partial<Request>;
   });
 

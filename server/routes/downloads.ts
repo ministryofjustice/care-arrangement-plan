@@ -8,7 +8,11 @@ import createPdf from '../pdf/createPdf';
 import getAssetPath from '../utils/getAssetPath';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
-const pdfRoutes = (router: Router) => {
+/**
+ * Routes for downloading and exporting the care arrangement plan
+ * Handles multiple export formats: PDF, HTML, and paper forms
+ */
+const downloadRoutes = (router: Router) => {
   router.get(paths.DOWNLOAD_PDF, (request, response) => {
     const pdf = createPdf(false, request);
 
@@ -50,4 +54,4 @@ const pdfRoutes = (router: Router) => {
   });
 };
 
-export default pdfRoutes;
+export default downloadRoutes;

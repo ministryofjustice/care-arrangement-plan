@@ -14,7 +14,7 @@ import handoverAndHolidaysRoutes from './handoverAndHolidays';
 import livingAndVisitingRoutes from './livingAndVisiting';
 import numberOfChildrenRoutes from './numberOfChildren';
 import otherThingsRoutes from './otherThings';
-import pdfRoutes from './pdf';
+import downloadRoutes from './downloads';
 import safetyCheckRoutes from './safetyCheck';
 import sharePlanRoutes from './sharePlan';
 import specialDaysRoutes from './specialDays';
@@ -42,7 +42,7 @@ const routes = (): Router => {
   specialDaysRoutes(router);
   otherThingsRoutes(router);
   decisionMakingRoutes(router);
-  pdfRoutes(router);
+  downloadRoutes(router);
 
   return router;
 };
