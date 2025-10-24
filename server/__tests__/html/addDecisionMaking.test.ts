@@ -15,7 +15,7 @@ describe('addDecisionMaking', () => {
           return `${key}:${JSON.stringify(options)}`;
         }
         return key;
-      }) as any,
+      }) as jest.Mock,
     } as Partial<Request>;
   });
 
