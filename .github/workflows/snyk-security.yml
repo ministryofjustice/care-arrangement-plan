@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: 'Set up Snyk CLI to check for security issues'
-        uses: snyk/actions/setup@cdb760004ba9ea4d525f2e043745dfe85bb9077e
+        uses: snyk/actions/setup@v1
 
         # Runs Snyk Code (SAST) analysis and uploads results into GitHub.
       - name: 'Code (SAST) test and save SARIF'
@@ -42,9 +42,16 @@ jobs:
         run: snyk iac test --report || true
 
         # Test node
-      - name: 'Node test'
+      - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
         continue-on-error: true
+        with:
+          args: --sarif-file-output=snyk.sarif
+          
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: snyk.sarif
 
         # Build the docker images for testing
       - name: 'Container monitor ~ build Docker image'
