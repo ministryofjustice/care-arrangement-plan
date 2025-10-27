@@ -32,7 +32,8 @@ ENTRYPOINT [ "/app/bin/entrypoint.sh" ]
 FROM base AS build
 
 COPY package*.json ./
-RUN CYPRESS_INSTALL_BINARY=0 npm ci --no-audit
+RUN CYPRESS_INSTALL_BINARY=0
+RUN npm ci --no-audit
 
 COPY . .
 RUN npm run build
