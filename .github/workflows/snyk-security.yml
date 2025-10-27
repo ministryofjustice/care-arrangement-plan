@@ -31,20 +31,27 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: 'Set up Snyk CLI to check for security issues'
-        uses: snyk/actions/setup@cdb760004ba9ea4d525f2e043745dfe85bb9077e
+        uses: snyk/actions/setup@v1
 
         # Runs Snyk Code (SAST) analysis and uploads results into GitHub.
-      - name: 'Code (SAST) test'
-        run: snyk code test --sarif > snyk-code.sarif || true
+      - name: 'Code (SAST) test and save SARIF'
+        run: snyk code test --sarif-file-output=snyk-code.sarif || true
 
         # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result into GitHub.
       - name: 'Infrastructure as Code test and report'
         run: snyk iac test --report || true
 
         # Test node
-      - name: 'Node test'
+      - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
         continue-on-error: true
+        with:
+          args: --sarif-file-output=snyk.sarif
+          
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: snyk.sarif
 
         # Build the docker images for testing
       - name: 'Container monitor ~ build Docker image'
@@ -75,7 +82,6 @@ jobs:
 
       # Push the Snyk Code results into GitHub Code Scanning tab
       - name: 'Upload result to GitHub Code Scanning'
-        if: steps.validate-sarif.outputs.valid == 'true'
-        uses: github/codeql-action/upload-sarif@70df9def86d22bf0ea4e7f8b956e7b92e7c1ea22
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: snyk-code.sarif

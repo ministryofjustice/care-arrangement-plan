@@ -4,13 +4,74 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
-      <h2 class="govuk-heading-m">{{ __('accessibilityStatement.meetingNeeds') }}</h2>
-      <p>{{ __('accessibilityStatement.availableToSmallGroup') }}</p>
+      <h2 class="govuk-heading-m">{{ __('accessibilityStatement.appliesTo') }}</h2>
+      <p>{{ __('accessibilityStatement.usableToAsManyAsPossible') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('accessibilityStatement.changeColours') }}</li>
+        <li>{{ __('accessibilityStatement.zoomIn') }}</li>
+        <li>{{ __('accessibilityStatement.speechRecognition') }}</li>
+        <li>{{ __('accessibilityStatement.screenReader') }}</li>
+      </ul>
       <p>
-        {{ __('accessibilityStatement.usableToAsManyAsPossible', { contactEmail: contactEmail }) | customUrlize | safe }}
+        {{ __('accessibilityStatement.simpleToUnderstand') }}
       </p>
-      <p>{{ __('accessibilityStatement.statementPrepared') }}</p>
-      <p>{{ __('accessibilityStatement.previewEnds', { previewEnd: previewEnd }) }}</p>
+      <p>
+        <a href="https://mcmw.abilitynet.org.uk/" target="_blank" rel="noopener noreferrer" title="Visit AbilityNet for accessibility">AbilityNet</a>{{ __('accessibilityStatement.abilityNet') }}
+      </p>
+      <p>
+        {{ __('accessibilityStatement.htmlVersion') }}
+      </p>
+      <p>{{ __('accessibilityStatement.this') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('accessibilityStatement.interactive') }}</li>
+        <li>{{ __('accessibilityStatement.offline') }}</li>
+        <li>{{ __('accessibilityStatement.screenReaderSupport') }}</li>
+      </ul>
+
+      <h2>{{ __('accessibilityStatement.howAccessible') }}</h2>
+      <p>{{ __('accessibilityStatement.notFullyAccessible') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('accessibilityStatement.knownIssues.0') }}</li>
+        <li>{{ __('accessibilityStatement.knownIssues.1') }}</li>
+        <li>{{ __('accessibilityStatement.knownIssues.2') }}</li>
+      </ul>
+
+      <h2>{{ __('accessibilityStatement.feedbackContact') }}</h2>
+      <p>{{ __('accessibilityStatement.reportProblems', { contactEmail: contactEmail }) | customUrlize | safe }}</p>
+      <p>{{ __('accessibilityStatement.alternativeFormats') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('accessibilityStatement.email', { contactEmail: contactEmail }) | customUrlize | safe }}</li>
+      </ul>
+      <p>{{ __('accessibilityStatement.responseTime') }}</p>
+
+      <h2>{{ __('accessibilityStatement.enforcementProcedure') }}</h2>
+      <p>{{ __('accessibilityStatement.equalityCommission') }} <a href="https://www.equalityadvisoryservice.com/" target="_blank" rel="noopener noreferrer" title="Visit the Advisory and Support Server (EASS)">contact the Equality Advisory and Support Service (EASS)</a>.</p>
+
+      <h2>{{ __('accessibilityStatement.technicalInfo') }}</h2>
+      <p>{{ __('accessibilityStatement.commitment') }}</p>
+
+      <h2>{{ __('accessibilityStatement.complianceStatus') }}</h2>
+      <p>{{ __('accessibilityStatement.wcagStandard') }}</p>
+      <p>{{ __('accessibilityStatement.partialCompliance') }} <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer" title="Visit the Web Content Accessibility Guidelines (WCAG)">Web Content Accessibility Guidelines version 2.2</a> {{ __('accessibilityStatement.nonCompliances') }}</p>
+      
+      <h2>{{ __('accessibilityStatement.nonAccessibleContent') }}</h2>
+      <p>{{ __('accessibilityStatement.nonAccessibleReason') }}</p>
+
+      <h2>{{ __('accessibilityStatement.nonComplianceHeading') }}</h2>
+      <p>{{ __('accessibilityStatement.nonCompliance') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('accessibilityStatement.nonComplianceReasons.0') }}</li>
+        <li>{{ __('accessibilityStatement.nonComplianceReasons.1') }}</li>
+        <li>{{ __('accessibilityStatement.nonComplianceReasons.2') }}</li>
+        <li>{{ __('accessibilityStatement.nonComplianceReasons.3') }}</li>
+      </ul>
+      <p>{{ __('accessibilityStatement.fixTimeline') }}</p>
+      <p>{{ __('accessibilityStatement.replacePdf') }}</p>
+
+      <h2>{{ __('accessibilityStatement.statementPrep') }}</h2>
+      <p>{{ __('accessibilityStatement.statementDate') }}</p>
+      <p>{{ __('accessibilityStatement.testingDetails') }}</p>
+      <p>{{ __('accessibilityStatement.futureAudit') }}</p>
     </div>
   </div>
 {% endblock %}
