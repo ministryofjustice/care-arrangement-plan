@@ -2,17 +2,17 @@ import path from 'path';
 
 import request from 'supertest';
 
-import paths from '../constants/paths';
-import { validateResponseAgainstSnapshot } from '../test-utils/pdfUtils';
-import testAppSetup from '../test-utils/testAppSetup';
-import { sessionMock } from '../test-utils/testMocks';
+import paths from '../../constants/paths';
+import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
+import testAppSetup from '../../test-utils/testAppSetup';
+import { sessionMock } from '../../test-utils/testMocks';
 
-jest.mock('../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../assets/${fileName}`));
+jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../../assets/${fileName}`));
 
 const app = testAppSetup();
 
 describe('createPdf', () => {
-  test('returns the expected pdf', async () => {
+  test('returns the expected pdf', async () => {   
     Object.assign(sessionMock, {
       numberOfChildren: 3,
       namesOfChildren: ['James', 'Rachel', 'Jack'],
@@ -64,7 +64,7 @@ describe('createPdf', () => {
     });
 
     const response = await request(app).get(paths.DOWNLOAD_PDF);
-    validateResponseAgainstSnapshot(response.body, '../../test-assets/fullTestOutput.pdf');
+    validateResponseAgainstSnapshot(response.body, 'test-assets/fullTestOutput.pdf');
   });
 
   test('returns the for a long string', async () => {
@@ -135,6 +135,6 @@ describe('createPdf', () => {
     });
 
     const response = await request(app).get(paths.DOWNLOAD_PDF);
-    validateResponseAgainstSnapshot(response.body, '../../test-assets/fullTestOutput-longAnswers.pdf');
+    validateResponseAgainstSnapshot(response.body, 'test-assets/fullTestOutput-longAnswers.pdf');
   });
 });

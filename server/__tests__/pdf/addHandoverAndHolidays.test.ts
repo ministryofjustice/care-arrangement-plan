@@ -2,13 +2,13 @@ import path from 'path';
 
 import request from 'supertest';
 
-import { validateResponseAgainstSnapshot } from '../test-utils/pdfUtils';
-import { sessionMock } from '../test-utils/testMocks';
-import testAppSetup, { TEST_PATH } from '../test-utils/testPdfAppSetup';
+import addHandoverAndHolidays from '../../pdf/addHandoverAndHolidays';
+import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
+import { sessionMock } from '../../test-utils/testMocks';
+import testAppSetup, { TEST_PATH } from '../../test-utils/testPdfAppSetup';
 
-import addHandoverAndHolidays from './addHandoverAndHolidays';
 
-jest.mock('../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../assets/${fileName}`));
+jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../../assets/${fileName}`));
 
 const app = testAppSetup(addHandoverAndHolidays);
 
@@ -68,6 +68,6 @@ describe('addHandoverAndHolidays', () => {
     });
 
     const response = await request(app).get(TEST_PATH);
-    validateResponseAgainstSnapshot(response.body, `../../test-assets/${pdfName}.pdf`);
+    validateResponseAgainstSnapshot(response.body, `test-assets/${pdfName}.pdf`);
   });
 });

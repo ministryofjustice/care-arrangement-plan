@@ -423,6 +423,7 @@
     "nowShare": "Now share your plan",
     "sendThePlanTo": "Send this proposed child arrangements plan to {{{ name }}}",
     "download": "Download as a PDF (0.5 MB)",
+    "downloadHtml": "Download as HTML (accessible)",
     "print": "Print the plan",
     "mustNowShare": "You've created a proposed child arrangements plan. You must now share the plan with {{{ otherAdult }}} to get their agreement.",
     "notLegallyBinding": "Any plan you make using this service is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",

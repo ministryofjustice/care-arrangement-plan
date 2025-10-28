@@ -2,13 +2,13 @@ import path from 'path';
 
 import request from 'supertest';
 
-import { validateResponseAgainstSnapshot } from '../test-utils/pdfUtils';
-import { sessionMock } from '../test-utils/testMocks';
-import testAppSetup, { TEST_PATH } from '../test-utils/testPdfAppSetup';
+import addDecisionMaking from '../../pdf/addDecisionMaking';
+import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
+import { sessionMock } from '../../test-utils/testMocks';
+import testAppSetup, { TEST_PATH } from '../../test-utils/testPdfAppSetup';
 
-import addDecisionMaking from './addDecisionMaking';
 
-jest.mock('../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../assets/${fileName}`));
+jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../../assets/${fileName}`));
 
 const app = testAppSetup(addDecisionMaking);
 
@@ -89,6 +89,6 @@ describe('addDecisionMaking', () => {
     });
 
     const response = await request(app).get(TEST_PATH);
-    validateResponseAgainstSnapshot(response.body, `../../test-assets/${pdfName}.pdf`);
+    validateResponseAgainstSnapshot(response.body, `test-assets/${pdfName}.pdf`);
   });
 });
