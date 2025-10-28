@@ -61,26 +61,7 @@ jobs:
       - name: 'Container monitor ~ analyse'
         run: snyk container monitor cap-node:snyk --file=Dockerfile
 
-        # Validate SARIF file before uploading
-      - name: 'Validate SARIF file'
-        id: validate-sarif
-        run: |
-          if [ -f snyk-code.sarif ]; then
-            if jq empty snyk-code.sarif 2>/dev/null; then
-              echo "SARIF file is valid JSON"
-              echo "valid=true" >> $GITHUB_OUTPUT
-            else
-              echo "SARIF file is not valid JSON, skipping upload"
-              echo "Content of snyk-code.sarif:"
-              cat snyk-code.sarif
-              echo "valid=false" >> $GITHUB_OUTPUT
-            fi
-          else
-            echo "SARIF file not found, skipping upload"
-            echo "valid=false" >> $GITHUB_OUTPUT
-          fi
-
-      # Push the Snyk Code results into GitHub Code Scanning tab
+        # Push the Snyk Code results into GitHub Code Scanning tab
       - name: 'Upload result to GitHub Code Scanning'
         uses: github/codeql-action/upload-sarif@v4
         with:
