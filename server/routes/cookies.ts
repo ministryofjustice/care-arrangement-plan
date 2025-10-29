@@ -6,6 +6,7 @@ import cookieNames from '../constants/cookieNames';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 import { getBackUrl } from '../utils/sessionHelpers';
+import logger from '../logger';
 
 const cookiesRoutes = (router: Router) => {
   router.get(paths.COOKIES, (request, response) => {
@@ -16,6 +17,7 @@ const cookiesRoutes = (router: Router) => {
   });
 
   router.post(paths.COOKIES, (request, response) => {
+    logger.info(`Accepted analytics. POST ${paths.COOKIES}`);
     const acceptAnalytics = request.body[formFields.ACCEPT_OPTIONAL_COOKIES] as yesOrNo;
 
     response.cookie(cookieNames.ANALYTICS_CONSENT, JSON.stringify({ acceptAnalytics }), {
