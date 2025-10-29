@@ -5,8 +5,8 @@ import config from '../config';
 import cookieNames from '../constants/cookieNames';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
-import { getBackUrl } from '../utils/sessionHelpers';
 import logger from '../logger';
+import { getBackUrl } from '../utils/sessionHelpers';
 
 const cookiesRoutes = (router: Router) => {
   router.get(paths.COOKIES, (request, response) => {

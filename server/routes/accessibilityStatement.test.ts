@@ -2,8 +2,8 @@ import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
 import paths from '../constants/paths';
-import testAppSetup from '../test-utils/testAppSetup';
 import logger from '../logger';
+import testAppSetup from '../test-utils/testAppSetup';
 
 const app = testAppSetup();
 
