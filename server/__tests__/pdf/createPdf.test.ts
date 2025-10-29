@@ -62,7 +62,7 @@ const validatePdfResponse = (response: request.Response, minSize: number) => {
 describe('createPdf', () => {
   beforeEach(() => {
     // Clear sessionMock before each test
-    Object.keys(sessionMock).forEach(key => delete sessionMock[key]);
+    Object.keys(sessionMock).forEach((key: keyof CAPSession) => delete sessionMock[key]);
   });
 
   test('returns the expected pdf', async () => {   
