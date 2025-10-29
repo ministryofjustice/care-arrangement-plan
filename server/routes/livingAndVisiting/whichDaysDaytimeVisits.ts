@@ -5,7 +5,7 @@ import { whichDaysField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { convertWhichDaysFieldToSessionValue, convertWhichDaysSessionValueToField } from '../../utils/formValueUtils';
-import { getBackUrl } from '../../utils/sessionHelpers';
+import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const whichDaysDaytimeVisitsRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, (request, response) => {
@@ -71,7 +71,7 @@ const whichDaysDaytimeVisitsRoutes = (router: Router) => {
         },
       };
 
-      return response.redirect(paths.TASK_LIST);
+      return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );
 
@@ -86,7 +86,7 @@ const whichDaysDaytimeVisitsRoutes = (router: Router) => {
       },
     };
 
-    return response.redirect(paths.TASK_LIST);
+    return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
   });
 };
 

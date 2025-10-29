@@ -3,7 +3,7 @@ import { body, matchedData, validationResult } from 'express-validator';
 
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
-import { getBackUrl } from '../utils/sessionHelpers';
+import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../utils/sessionHelpers';
 
 const aboutTheAdultsRoutes = (router: Router) => {
   router.get(paths.ABOUT_THE_ADULTS, (request, response) => {
@@ -50,7 +50,7 @@ const aboutTheAdultsRoutes = (router: Router) => {
       request.session.initialAdultName = formData[formFields.INITIAL_ADULT_NAME];
       request.session.secondaryAdultName = formData[formFields.SECONDARY_ADULT_NAME];
 
-      return response.redirect(paths.TASK_LIST);
+      return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );
 };

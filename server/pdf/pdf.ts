@@ -35,6 +35,10 @@ class Pdf {
     this.document = new JsPdf({ lineHeight: LINE_HEIGHT_RATIO });
     this.maxPageWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
     this.setupFonts();
+    // Set document title for proper filename when printing/downloading
+    this.document.setProperties({
+      title: request.__('pdf.name'),
+    });
     if (autoPrint) this.document.autoPrint();
     this.addHeaderToPage();
   }

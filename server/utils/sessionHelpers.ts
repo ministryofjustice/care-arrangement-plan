@@ -63,3 +63,12 @@ export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
 export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;
 
 export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => session.previousPage || defaultUrl;
+
+export const getRedirectUrlAfterFormSubmit = (session: Partial<SessionData>, defaultUrl: string) => {
+  // If the user came directly from check answers page, redirect back there
+  const previousPage = session.previousPage;
+  if (previousPage === '/check-your-answers') {
+    return previousPage;
+  }
+  return defaultUrl;
+};
