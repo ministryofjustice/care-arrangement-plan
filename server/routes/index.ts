@@ -4,21 +4,23 @@ import paths from '../constants/paths';
 
 import aboutTheAdultsRoutes from './aboutTheAdults';
 import aboutTheChildrenRoutes from './aboutTheChildren';
+import accessibilityStatementRoutes from './accessibilityStatement';
 import checkYourAnswersRoutes from './checkYourAnswers';
 import childrenSafetyRoutesCheck from './childrenSafetyCheck';
 import courtOrderCheckRoutes from './courtOrderCheck';
 import decisionMakingRoutes from './decisionMaking';
 import doWhatsBestRoutes from './doWhatsBest';
+import downloadRoutes from './downloads';
 import existingCourtOrderRoutes from './existingCourtOrder';
 import handoverAndHolidaysRoutes from './handoverAndHolidays';
 import livingAndVisitingRoutes from './livingAndVisiting';
 import numberOfChildrenRoutes from './numberOfChildren';
 import otherThingsRoutes from './otherThings';
-import pdfRoutes from './pdf';
 import safetyCheckRoutes from './safetyCheck';
 import sharePlanRoutes from './sharePlan';
 import specialDaysRoutes from './specialDays';
 import taskListRoutes from './taskList';
+
 
 const routes = (): Router => {
   const router = Router();
@@ -42,7 +44,8 @@ const routes = (): Router => {
   specialDaysRoutes(router);
   otherThingsRoutes(router);
   decisionMakingRoutes(router);
-  pdfRoutes(router);
+  downloadRoutes(router);
+  accessibilityStatementRoutes(router);
 
   return router;
 };

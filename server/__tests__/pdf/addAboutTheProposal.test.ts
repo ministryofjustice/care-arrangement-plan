@@ -2,13 +2,13 @@ import path from 'path';
 
 import request from 'supertest';
 
-import { validateResponseAgainstSnapshot } from '../test-utils/pdfUtils';
-import { sessionMock } from '../test-utils/testMocks';
-import testAppSetup, { TEST_PATH } from '../test-utils/testPdfAppSetup';
+import addAboutTheProposal from '../../pdf/addAboutTheProposal';
+import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
+import { sessionMock } from '../../test-utils/testMocks';
+import testAppSetup, { TEST_PATH } from '../../test-utils/testPdfAppSetup';
 
-import addAboutTheProposal from './addAboutTheProposal';
 
-jest.mock('../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../assets/${fileName}`));
+jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../../assets/${fileName}`));
 
 const app = testAppSetup(addAboutTheProposal);
 
@@ -22,7 +22,7 @@ describe('addAboutTheProposal', () => {
     });
 
     const response = await request(app).get(TEST_PATH);
-    validateResponseAgainstSnapshot(response.body, '../../test-assets/addAboutTheProposal-oneChild.pdf');
+    validateResponseAgainstSnapshot(response.body, 'test-assets/addAboutTheProposal-oneChild.pdf');
   });
 
   test('pdf matches for multiple children', async () => {
@@ -34,6 +34,6 @@ describe('addAboutTheProposal', () => {
     });
 
     const response = await request(app).get(TEST_PATH);
-    validateResponseAgainstSnapshot(response.body, '../../test-assets/addAboutTheProposal-multipleChildren.pdf');
+    validateResponseAgainstSnapshot(response.body, 'test-assets/addAboutTheProposal-multipleChildren.pdf');
   });
 });

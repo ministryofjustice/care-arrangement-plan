@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ __('sharePlan.whatWeAreTelling.proposedPlan', {childrenNames: values.childrenNames}) }} – {{ __('serviceName') }} – GOV.UK</title>
+  <!--
+    This accessible HTML export includes:
+    - Proper semantic heading structure (h1, h2, h3)
+    - Interactive hyperlinks
+    - Yes/No radio buttons for each "Do you agree?" question
+    - Text areas for notes and suggestions
+    - ARIA labels for screen reader compatibility
+  -->
+  <style>
+    /* GOV.UK Transport font fallback stack */
+    body {
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.5;
+      color: #0b0c0c;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Header */
+    .header {
+      background-color: #0b0c0c;
+      color: #ffffff;
+      padding: 20px 0;
+      margin: -20px -20px 30px -20px;
+    }
+
+    .header-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .crest {
+      height: 32px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+      padding: 0;
+      color: #ffffff;
+      line-height: 32px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 36px;
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    h4 {
+      font-size: 19px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0 0 20px 0;
+    }
+
+    /* Links */
+    a {
+      color: #1d70b8;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #003078;
+    }
+
+    a:visited {
+      color: #4c2c92;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin: 0 0 20px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    /* Text box component */
+    .text-box {
+      border: 2px solid #0b0c0c;
+      padding: 15px;
+      margin: 20px 0;
+      background-color: #f3f2f1;
+    }
+
+    .text-box h3,
+    .text-box h4 {
+      margin-top: 0;
+    }
+
+    .text-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Do you agree component */
+    .do-you-agree {
+      margin: 30px 0;
+      padding: 20px;
+      background-color: #f3f2f1;
+      border-left: 5px solid #1d70b8;
+    }
+
+    /* GDS Form group */
+    .govuk-form-group {
+      margin-bottom: 20px;
+    }
+
+    /* GDS Label */
+    .govuk-label {
+      display: block;
+      font-weight: 400;
+      margin-bottom: 5px;
+      color: #0b0c0c;
+    }
+
+    /* GDS Textarea */
+    .govuk-textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 5px;
+      border: 2px solid #0b0c0c;
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.25;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    .govuk-textarea:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 2px;
+    }
+
+    /* Legacy class support */
+    .user-input-area {
+      width: 100%;
+      min-height: 80px;
+      padding: 5px;
+      border: 2px solid #0b0c0c;
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.25;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    .user-input-area:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 2px;
+    }
+
+    /* GDS Fieldset */
+    .govuk-fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      min-width: 0;
+    }
+
+    .govuk-fieldset__legend {
+      display: block;
+      font-weight: 400;
+      margin-bottom: 10px;
+      color: #0b0c0c;
+    }
+
+    .govuk-fieldset__legend--s {
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    /* GDS Checkboxes */
+    .govuk-checkboxes {
+      margin-bottom: 0;
+    }
+
+    .govuk-checkboxes__item {
+      display: block;
+      position: relative;
+      min-height: 40px;
+      margin-bottom: 10px;
+      padding-left: 40px;
+      clear: left;
+    }
+
+    .govuk-checkboxes__input {
+      cursor: pointer;
+      position: absolute;
+      z-index: 1;
+      top: -2px;
+      left: -2px;
+      width: 44px;
+      height: 44px;
+      margin: 0;
+      opacity: 0;
+    }
+
+    .govuk-checkboxes__label {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 8px 15px 5px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .govuk-checkboxes__label::before {
+      content: "";
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      border: 2px solid currentcolor;
+      background: transparent;
+    }
+
+    .govuk-checkboxes__label::after {
+      box-sizing: border-box;
+      content: "";
+      position: absolute;
+      top: 11px;
+      left: 9px;
+      width: 23px;
+      height: 12px;
+      transform: rotate(-45deg);
+      border: solid;
+      border-width: 0 0 5px 5px;
+      border-top-color: transparent;
+      opacity: 0;
+      background: transparent;
+    }
+
+    .govuk-checkboxes__input:checked + .govuk-checkboxes__label::after {
+      opacity: 1;
+    }
+
+    .govuk-checkboxes__input:focus + .govuk-checkboxes__label::before {
+      border-width: 4px;
+      outline: 3px solid transparent;
+      outline-offset: 1px;
+      box-shadow: 0 0 0 3px #ffdd00;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__item {
+      min-height: 0;
+      margin-bottom: 0;
+      padding-left: 34px;
+      float: left;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__input {
+      left: -5px;
+      width: 34px;
+      height: 34px;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__label {
+      padding: 6px 30px 5px 5px;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__label::before {
+      width: 24px;
+      height: 24px;
+      top: 6px;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__label::after {
+      width: 13.5px;
+      height: 7px;
+      top: 14px;
+      left: 5.5px;
+      border-width: 0 0 3px 3px;
+    }
+
+    /* Answer sections */
+    .answer-section {
+      margin: 30px 0;
+    }
+
+    .answer-section .question {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .answer-section .answer {
+      margin-bottom: 20px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .answer-section .hint {
+      color: #505a5f;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .answer-section .disagreement {
+      font-style: italic;
+      color: #505a5f;
+      margin-top: 10px;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        margin: 0 0 30px 0;
+      }
+
+      .no-print {
+        display: none;
+      }
+
+      a {
+        color: #1d70b8;
+        text-decoration: underline;
+      }
+
+      h2 {
+        page-break-after: avoid;
+      }
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid #b1b4b6;
+      text-align: center;
+      font-size: 16px;
+      color: #505a5f;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <img src="{{ crestImageData }}" alt="GOV.UK" class="crest">
+      <h1>{{ __('pdf.name') }}</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Main Title -->
+    <h1 style="font-size: 22pt; font-weight: bold; margin-bottom: 5pt;">{{ __('sharePlan.whatWeAreTelling.proposedPlan', {childrenNames: values.childrenNames}) }}</h1>
+
+    <!-- Preamble Section -->
+    <section id="preamble" aria-labelledby="preamble-heading">
+      <p>{{ __('sharePlan.whatWeAreTelling.initialIsAsking', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</p>
+
+      <p>{{ __('sharePlan.whatWeAreTelling.doNotNeedToAccept', {senderName: values.initialAdultName}) }}</p>
+
+      <p>{{ __('sharePlan.whatWeAreTelling.insteadYouCan', {senderName: values.initialAdultName}) }}</p>
+
+      <ul>
+        <li>{{ __('sharePlan.whatWeAreTelling.suggestChanges', {senderName: values.initialAdultName}) }}</li>
+        <li>{{ __('sharePlan.whatWeAreTelling.startYourOwn') }}</li>
+        <li>{{ __('sharePlan.whatWeAreTelling.makeCustom') }}</li>
+      </ul>
+
+      <p>{{ __('sharePlan.whatWeAreTelling.notLegallyBinding', {senderName: values.initialAdultName}) }}</p>
+
+      <h3>{{ __('sharePlan.whatWeAreTelling.benefitsHeading') }}</h3>
+      <p>{{ __('sharePlan.whatWeAreTelling.benefits', {senderName: values.initialAdultName}) }}</p>
+
+      <h3>{{ __('sharePlan.whatWeAreTelling.topTips') }}</h3>
+      <ul>
+        <li>{{ __('sharePlan.whatWeAreTelling.compromise', {senderName: values.initialAdultName}) }}</li>
+        <li>{{ __('sharePlan.whatWeAreTelling.childrensInput') }}</li>
+        <li>{{ __('sharePlan.whatWeAreTelling.childrenFirst') }}</li>
+        <li>{{ __('sharePlan.whatWeAreTelling.splitMayNotBeBest') }}</li>
+      </ul>
+
+      <h3>{{ __('sharePlan.whatWeAreTelling.moreInfoHeading') }}</h3>
+      <p>{{ __('sharePlan.whatWeAreTelling.moreInfo') }}</p>
+      <ul>
+        <li>{{ __('sharePlan.whatWeAreTelling.separatingOrDivorcing') | customUrlize | safe }}</li>
+        <li>{{ __('sharePlan.whatWeAreTelling.makingChildArrangements') | customUrlize | safe }}</li>
+      </ul>
+
+      <h3>{{ __('sharePlan.whatWeAreTelling.safetyCheckHeading') }}</h3>
+      <p>{{ __('sharePlan.whatWeAreTelling.safetyCheck') }}</p>
+      <p>{{ __('sharePlan.whatWeAreTelling.doNotContinueIf') }}</p>
+      <ul>
+        <li>{{ __('childrenSafetyCheck.domesticAbuse') }}</li>
+        <li>{{ __('childrenSafetyCheck.childAbduction') }}</li>
+        <li>{{ __('childrenSafetyCheck.childAbuse') }}</li>
+        <li>{{ __('childrenSafetyCheck.drugsOrAlcohol') }}</li>
+        <li>{{ __('childrenSafetyCheck.otherConcerns') }}</li>
+      </ul>
+      <p><strong>{{ __('sharePlan.whatWeAreTelling.stopIfAnyConcern') | customUrlize | safe }}</strong></p>
+
+      <h3>{{ __('sharePlan.whatWeAreTelling.gettingHelpHeading') }}</h3>
+      <p>{{ __('sharePlan.whatWeAreTelling.gettingHelp') | customUrlize | safe }}</p>
+
+      <h3>{{ __('sharePlan.whatWeAreTelling.courtOrderHeading') }}</h3>
+      <p>{{ __('sharePlan.whatWeAreTelling.ifCourtOrderInIsPlace') | customUrlize | safe }}</p>
+    </section>
+
+    <!-- About The Proposal -->
+    <section id="about-proposal" aria-labelledby="about-proposal-heading">
+      <h2 id="about-proposal-heading">{{ __('sharePlan.yourProposedPlan.aboutThePlan') }}</h2>
+
+      <p>{{ __('sharePlan.yourProposedPlan.senderSaid', {senderName: values.initialAdultName}) }}</p>
+      <ul>
+        <li>{{ __('sharePlan.yourProposedPlan.noCourtOrder') }}</li>
+        <li>
+          {% if values.numberOfChildren === 1 %}
+            {{ __('sharePlan.yourProposedPlan.forOneChild', {childName: values.childrenNames}) }}
+          {% else %}
+            {{ __('sharePlan.yourProposedPlan.forMultipleChildren', {childrenNames: values.childrenNames, numberOfChildren: values.numberOfChildren}) }}
+          {% endif %}
+        </li>
+        <li>{{ __('sharePlan.yourProposedPlan.agreementBetween', {senderName: values.initialAdultName, otherAdultName: values.secondaryAdultName, childrenNames: values.childrenNames}) }}</li>
+      </ul>
+
+      <div class="do-you-agree">
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              {{ __('sharePlan.yourProposedPlan.doYouAgreeOnBasics', {senderName: values.initialAdultName}) }}
+            </legend>
+            <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="question-about-proposal-yes" name="question-about-proposal" type="checkbox" value="yes">
+                <label class="govuk-label govuk-checkboxes__label" for="question-about-proposal-yes">
+                  {{ __('yes') }}
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="question-about-proposal-no" name="question-about-proposal" type="checkbox" value="no">
+                <label class="govuk-label govuk-checkboxes__label" for="question-about-proposal-no">
+                  {{ __('no') }}
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="text-box">
+        <p>{{ __('sharePlan.yourProposedPlan.doNotStoreNames') }}</p>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="notes-about-proposal">
+            {{ __('sharePlan.yourProposedPlan.doNotAgreeOnBasics') | customUrlize | safe }}
+          </label>
+          <textarea class="govuk-textarea user-input-area" id="notes-about-proposal" name="notes-about-proposal" rows="5"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Answers rendered inline -->
+    {{ htmlContent | safe }}
+
+    <div class="footer">
+      <p>Generated with {{ __('serviceName') }} on GOV.UK</p>
+      <p>This document is accessible and can be opened in any web browser.</p>
+    </div>
+  </div>
+</body>
+</html>
