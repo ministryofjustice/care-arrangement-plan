@@ -12,6 +12,11 @@ jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(_
 const app = testAppSetup();
 
 describe('createPdf', () => {
+  beforeEach(() => {
+    // Clear sessionMock before each test
+    Object.keys(sessionMock).forEach(key => delete sessionMock[key]);
+  });
+
   test('returns the expected pdf', async () => {   
     Object.assign(sessionMock, {
       numberOfChildren: 3,
@@ -63,7 +68,12 @@ describe('createPdf', () => {
       },
     });
 
-    const response = await request(app).get(paths.DOWNLOAD_PDF);
+    const response = await request(app).get(paths.DOWNLOAD_PDF).buffer(true).parse((res, callback) => {
+      res.setEncoding('binary');
+      let data = '';
+      res.on('data', (chunk) => data += chunk);
+      res.on('end', () => callback(null, Buffer.from(data, 'binary')));
+    });
     validateResponseAgainstSnapshot(response.body, 'test-assets/fullTestOutput.pdf');
   });
 
@@ -134,7 +144,12 @@ describe('createPdf', () => {
       },
     });
 
-    const response = await request(app).get(paths.DOWNLOAD_PDF);
+    const response = await request(app).get(paths.DOWNLOAD_PDF).buffer(true).parse((res, callback) => {
+      res.setEncoding('binary');
+      let data = '';
+      res.on('data', (chunk) => data += chunk);
+      res.on('end', () => callback(null, Buffer.from(data, 'binary')));
+    });
     validateResponseAgainstSnapshot(response.body, 'test-assets/fullTestOutput-longAnswers.pdf');
   });
 });

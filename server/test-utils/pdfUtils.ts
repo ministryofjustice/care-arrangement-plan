@@ -7,7 +7,8 @@ export const stripPdfMetadata = (pdfBuffer: Buffer) => {
   return pdfText
     .replace(/\/CreationDate\s+\(D:\d+-\d+'\d+'\)/g, '')
     .replace(/\/ID\s+\[\s+<.+?>\s+<.+?>\s+]/g, '')
-    .replace(/\/Producer\s+\(\w+\s\d+\.\d+\.\d+\)/g, '');
+    .replace(/\/Producer\s+\(\w+\s\d+\.\d+\.\d+\)/g, '')
+    .replace(/\/Title\s+\([^)]+\)/g, '');
 };
 
 export const validateResponseAgainstSnapshot = (response: Buffer, snapshotName: string) => {
