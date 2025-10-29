@@ -2,6 +2,7 @@ import path from 'path';
 
 import request from 'supertest';
 
+import { CAPSession } from '../../@types/session';
 import paths from '../../constants/paths';
 import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
 import testAppSetup from '../../test-utils/testAppSetup';
@@ -14,7 +15,7 @@ const app = testAppSetup();
 describe('createPdf', () => {
   beforeEach(() => {
     // Clear sessionMock before each test
-    Object.keys(sessionMock).forEach(key => delete sessionMock[key]);
+    Object.keys(sessionMock).forEach((key: keyof CAPSession) => delete sessionMock[key]);
   });
 
   test('returns the expected pdf', async () => {   
