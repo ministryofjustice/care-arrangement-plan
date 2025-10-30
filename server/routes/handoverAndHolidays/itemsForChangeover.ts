@@ -3,7 +3,7 @@ import { body, matchedData, validationResult } from 'express-validator';
 
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
-import { getBackUrl } from '../../utils/sessionHelpers';
+import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const itemsForChangeoverRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, (request, response) => {
@@ -41,7 +41,7 @@ const itemsForChangeoverRoutes = (router: Router) => {
         },
       };
 
-      return response.redirect(paths.TASK_LIST);
+      return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );
 
@@ -53,7 +53,7 @@ const itemsForChangeoverRoutes = (router: Router) => {
       },
     };
 
-    return response.redirect(paths.TASK_LIST);
+    return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
   });
 };
 

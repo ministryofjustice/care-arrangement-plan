@@ -4,7 +4,7 @@ import { body, matchedData, validationResult } from 'express-validator';
 import { whereMostlyLive } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
-import { getBackUrl } from '../../utils/sessionHelpers';
+import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const mostlyLiveRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_MOSTLY_LIVE, (request, response) => {
@@ -59,7 +59,7 @@ const mostlyLiveRoutes = (router: Router) => {
 
       switch (where) {
         case 'other':
-          return response.redirect(paths.TASK_LIST);
+          return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
         case 'split':
           return response.redirect(paths.LIVING_VISITING_WHICH_SCHEDULE);
         default:

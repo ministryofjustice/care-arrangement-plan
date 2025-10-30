@@ -5,7 +5,7 @@ import { yesOrNo } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils';
-import { parentNotMostlyLivedWith, getBackUrl } from '../../utils/sessionHelpers';
+import { parentNotMostlyLivedWith, getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const willDaytimeVisitsHappenRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, (request, response) => {
@@ -57,7 +57,7 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
         return response.redirect(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS);
       }
 
-      return response.redirect(paths.TASK_LIST);
+      return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );
 };
