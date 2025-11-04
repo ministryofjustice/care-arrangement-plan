@@ -418,20 +418,14 @@
     }
   },
   "sharePlan": {
+    "nextSteps": "Next steps",
     "title": "Child arrangements plan for {{{ names }}}",
-    "panelTitle": "Your proposed plan is ready to share",
-    "nowShare": "Now share your plan",
-    "sendThePlanTo": "Send this proposed child arrangements plan to {{{ name }}}",
-    "download": "Download as a PDF (0.5 MB)",
-    "downloadHtml": "Download as HTML (accessible)",
-    "print": "Print the plan",
     "mustNowShare": "You've created a proposed child arrangements plan. You must now share the plan with {{{ otherAdult }}} to get their agreement.",
     "notLegallyBinding": "Any plan you make using this service is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",
     "whatToDoNext": "What to do next",
     "sendToSecondary": "Send this proposed child arrangements plan to {{{ otherAdult }}}. {{{ otherAdult }}} will have the chance to respond.",
-    "helpImprove": "Help improve the service",
-    "giveFeedback": "Give your feedback using the <a href={{ feedbackUrl }}>online survey</a>.",
-    "emailUs": "You can also email {{{ contactEmail }}}.",
+    "downloadPlanButton": "Download Plan",
+    "downloadHtml": "Download as HTML (accessible)",
     "ifTheyDoNotRespond": "If {{{ otherAdult }}} does not respond",
     "tryMediation": "If {{{ otherAdult }}} does not respond, you can try mediation. The next step would be to apply for a court order.",
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
@@ -555,6 +549,18 @@
         "decisionMaking": "You can use this space to write your agreed compromise for the decision making section"
       }
     }
+  },
+  "confirmation": {
+    "panelTitle": "You have downloaded your plan",
+    "checkDownloadsFolder": "Check your downloads folder to view your plan.",
+    "helpUsImprove": "Help us improve this service",
+    "appreciateFeedback": "We would appreciate your feedback to help us improve the service.",
+    "emailFeedback": "You can email any feedback to {{{ contactEmail }}}.",
+    "whatDidYouThink": "What did you think of this service? (takes 5 minutes)",
+    "cantFindPlan": "Can't find your plan?",
+    "checkDownloads": "Check your downloads folder. If not then please download again.",
+    "downloadPdf": "Download as a PDF (0.5 MB)",
+    "downloadHtml": "Download as HTML (accessible)"
   },
   "pdf": {
     "name": "Proposed child arrangements plan",

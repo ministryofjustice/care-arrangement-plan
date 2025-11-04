@@ -7,6 +7,7 @@ import aboutTheChildrenRoutes from './aboutTheChildren';
 import accessibilityStatementRoutes from './accessibilityStatement';
 import checkYourAnswersRoutes from './checkYourAnswers';
 import childrenSafetyRoutesCheck from './childrenSafetyCheck';
+import confirmationRoutes from './confirmation';
 import courtOrderCheckRoutes from './courtOrderCheck';
 import decisionMakingRoutes from './decisionMaking';
 import doWhatsBestRoutes from './doWhatsBest';
@@ -39,6 +40,7 @@ const routes = (): Router => {
   taskListRoutes(router);
   checkYourAnswersRoutes(router);
   sharePlanRoutes(router);
+  confirmationRoutes(router);
   livingAndVisitingRoutes(router);
   handoverAndHolidaysRoutes(router);
   specialDaysRoutes(router);
