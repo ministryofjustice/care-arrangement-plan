@@ -13,6 +13,6 @@ data:
   INCLUDE_WELSH_LANGUAGE: 'false'
   USE_AUTH: 'true'
   CONTACT_EMAIL: 'childarrangements@justice.gov.uk'
-  FEEDBACK_URL: 'https://www.smartsurvey.co.uk/s/childarrangementplanpreview_feedback/'
+  FEEDBACK_URL: 'https://www.smartsurvey.co.uk/s/DPSA5Q/'
   PREVIEW_END: '2026-03-31T23:59:59'
   GA4_ID: 'G-YQSM58BJ59'
