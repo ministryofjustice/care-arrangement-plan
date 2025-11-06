@@ -22,8 +22,6 @@ const logEvent = (eventType: string, data: Record<string, string | number>) => {
 /**
  * Logs a 'page_visit' event.
  * This function is called by the structuredLogging middleware.
- * @param req - The Express Request object.
- * @param res - The Express Response object.
  */
 const logPageVisit = (req: Request, res: Response) => {
   const { method, path } = req;
