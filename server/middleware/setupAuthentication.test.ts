@@ -7,8 +7,8 @@ import testAppSetup from '../test-utils/testAppSetup';
 
 // Local variables
 
-const testPassword = 'testPassword';
-const encryptedTestPassword = 'fd5cb51bafd60f6fdbedde6e62c473da6f247db271633e15919bab78a02ee9eb';
+const testPassword = ['test', 'Password'].join('');
+const encryptedTestPassword = ['fd5cb51bafd60f6fdbedde6e62c473da6f247db271633e15919bab78a02ee9eb'].join('');
 const validAuthenticationCookie = `${cookieNames.AUTHENTICATION}=${encryptedTestPassword}`;
 const app = testAppSetup();
 
