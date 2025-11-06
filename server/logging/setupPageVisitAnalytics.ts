@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import onFinished from 'on-finished';
+
 import { logPageVisit } from '../services/analyticsService';
 
 const EXCLUDED_PATHS = ['/health', '/ping'];

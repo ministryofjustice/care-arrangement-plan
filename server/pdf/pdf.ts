@@ -15,7 +15,7 @@ import {
   MM_PER_POINT,
   SECTION_HEADING_SIZE,
 } from '../constants/pdfConstants';
-import logger from '../logger';
+import logger from '../logging/logger';
 import getAssetPath from '../utils/getAssetPath';
 
 import FontStyles from './fontStyles';

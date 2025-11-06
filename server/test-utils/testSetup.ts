@@ -7,7 +7,7 @@ import { CAPSession } from '../@types/session';
 
 import { flashFormValues, flashMockErrors, loggerMocks, mockNow, sessionMock } from './testMocks';
 
-jest.mock('../logger', () => loggerMocks);
+jest.mock('../logging/logger', () => loggerMocks);
 
 beforeAll(() => {
   i18n.configure({

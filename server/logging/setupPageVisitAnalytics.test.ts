@@ -1,8 +1,10 @@
-import request from 'supertest';
-import express, { Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
-import setupPageVisitAnalytics from './setupPageVisitAnalytics';
+import express, { Request, Response } from 'express';
+import request from 'supertest';
+
 import * as analyticsService from '../services/analyticsService';
+
+import setupPageVisitAnalytics from './setupPageVisitAnalytics';
 
 jest.mock('../services/analyticsService', () => ({
   logPageVisit: jest.fn(),

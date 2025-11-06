@@ -2,6 +2,9 @@ import express from 'express';
 import createError from 'http-errors';
 
 import errorHandler from './errorHandler';
+import logger from './logging/logger';
+import setupPageVisitAnalytics from './logging/setupPageVisitAnalytics';
+import setupRequestLogging from './logging/setupRequestLogging';
 import setupAnalytics from './middleware/setupAnalytics';
 import setUpCsrf from './middleware/setUpCsrf';
 import setUpHealthCheck from './middleware/setUpHealthCheck';
@@ -17,9 +20,6 @@ import setUpWebSession from './middleware/setUpWebSession';
 import routes from './routes';
 // import unauthenticatedRoutes from './routes/unauthenticatedRoutes';
 import nunjucksSetup from './utils/nunjucksSetup';
-import setupPageVisitAnalytics from './logging/setupPageVisitAnalytics';
-import setupRequestLogging from './logging/setupRequestLogging';
-import logger from './logging/logger';
 
 const createApp = (): express.Application => {
   const app = express();

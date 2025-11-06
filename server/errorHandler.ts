@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express';
 import type { HTTPError } from 'superagent';
 
 import config from './config';
-import logger from './logger';
+import logger from './logging/logger';
 
 export default function createErrorHandler() {
   return (error: HTTPError, request: Request, response: Response, _next: NextFunction): void => {

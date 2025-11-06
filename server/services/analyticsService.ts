@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
-import logger from '../logging/logger';
+
 import cookieNames from '../constants/cookieNames';
-import { UserEvents } from '../constants/userEvents';
+import UserEvents from '../constants/userEvents';
+import logger from '../logging/logger';
 
 /**
  * A generic event logging function that forms the base for all analytics events.
  * @param eventType - The type of the event (e.g., 'page_visit').
  * @param data - An object containing event-specific data.
  */
-const logEvent = (eventType: string, data: Record<string, any>) => {
+const logEvent = (eventType: string, data: Record<string, string | number>) => {
   
   const logEntry = {
     timestamp: new Date().toISOString(),
@@ -24,7 +25,7 @@ const logEvent = (eventType: string, data: Record<string, any>) => {
  * @param req - The Express Request object.
  * @param res - The Express Response object.
  */
-export const logPageVisit = (req: Request, res: Response) => {
+const logPageVisit = (req: Request, res: Response) => {
   const { method, path } = req;
   const { statusCode } = res;
 
@@ -39,3 +40,5 @@ export const logPageVisit = (req: Request, res: Response) => {
 
   logEvent(UserEvents.PAGE_VISIT, eventData);
 };
+
+export { logEvent, logPageVisit };
