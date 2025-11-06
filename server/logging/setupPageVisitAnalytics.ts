@@ -6,7 +6,6 @@ const EXCLUDED_PATHS = ['/health', '/ping'];
 
 /**
  * Middleware to set up page visit analytics logging.
- * 
  */
 const setupPageVisitAnalytics = () => {
   return (req: Request, res: Response, next: NextFunction) => {
