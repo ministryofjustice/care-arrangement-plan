@@ -2,15 +2,12 @@ import express from 'express';
 import createError from 'http-errors';
 
 import errorHandler from './errorHandler';
-import logger from './logger';
 import setupAnalytics from './middleware/setupAnalytics';
-// import setupAuthentication from './middleware/setupAuthentication';
 import setUpCsrf from './middleware/setUpCsrf';
 import setUpHealthCheck from './middleware/setUpHealthCheck';
 import setupHistory from './middleware/setupHistory';
 import setUpi18n from './middleware/setUpi18n';
 import setupRateLimit from './middleware/setupRateLimit';
-import setupRequestLogging from './middleware/setupRequestLogging';
 import setUpWebRequestParsing from './middleware/setupRequestParsing';
 import setupRobotsTxt from './middleware/setupRobotsTxt';
 // import setupServiceNoLongerAvailable from './middleware/setupServiceNoLongerAvailable';
@@ -20,6 +17,9 @@ import setUpWebSession from './middleware/setUpWebSession';
 import routes from './routes';
 // import unauthenticatedRoutes from './routes/unauthenticatedRoutes';
 import nunjucksSetup from './utils/nunjucksSetup';
+import setupPageVisitAnalytics from './logging/setupPageVisitAnalytics';
+import setupRequestLogging from './logging/setupRequestLogging';
+import logger from './logging/logger';
 
 const createApp = (): express.Application => {
   const app = express();
@@ -36,10 +36,11 @@ const createApp = (): express.Application => {
   app.use(setupRateLimit());
   app.use(setUpWebSession());
   app.use(setUpWebRequestParsing());
+  app.use(setupPageVisitAnalytics());
+  app.use(setupRequestLogging());
   app.use(setUpStaticResources());
   app.use(setUpCsrf());
   app.use(setupAnalytics());
-  app.use(setupRequestLogging());
   app.use(setupHistory());
   // app.use(setupServiceNoLongerAvailable());
   // app.use(unauthenticatedRoutes());

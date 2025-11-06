@@ -1,7 +1,7 @@
 import { createLogger, LogLevelString } from 'bunyan';
 import bunyanFormat from 'bunyan-format';
+import config from '../config';
 
-import config from './config';
 
 const formatOut = bunyanFormat({ outputMode: 'short', color: !config.production });
 
