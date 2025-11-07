@@ -37,7 +37,7 @@ const handlePostPassword = (request: Request, response: Response) => {
     });
     logger.info(`Received successful login request`);
     // Safe to redirect: processedRedirectUrl has been validated against whitelist
-    return response.redirect(processedRedirectUrl);
+    return response.redirect(processedRedirectUrl.replace(/^\/+/, '/'));
   }
 
   request.flash('errors', errors.array());
