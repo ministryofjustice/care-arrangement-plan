@@ -60,6 +60,8 @@ spec:
               value: ${GIT_BRANCH}
             - name: PORT
               value: '8080'
+            - name: NODE_OPTIONS
+              value: '--max-old-space-size=200'
             - name: CACHE_HOST
               valueFrom:
                 secretKeyRef:
