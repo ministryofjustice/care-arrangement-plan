@@ -4,6 +4,11 @@ $govuk-global-styles: true;
 .now-share-header {
   margin-top: 0;
   border-top: 10px solid #1d70b8;
+
+  // Hide blue bar on mobile devices
+  @include govuk-media-query($until: desktop) {
+    border-top: none;
+  }
 }
 
 .link-styled-button {
