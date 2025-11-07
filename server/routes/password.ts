@@ -24,6 +24,7 @@ const passwordRoutes = (router: Router) => {
 
 const handlePostPassword = (request: Request, response: Response) => {
   const providedUrl = typeof request.body.returnURL === 'string' ? request.body.returnURL : null;
+  // Validate redirect URL against whitelist to prevent open redirect attacks
   const processedRedirectUrl = validateRedirectUrl(providedUrl, paths.START);
   const errors = validationResult(request);
 
@@ -35,6 +36,7 @@ const handlePostPassword = (request: Request, response: Response) => {
       sameSite: 'lax',
     });
     logger.info(`Received successful login request`);
+    // Safe to redirect: processedRedirectUrl has been validated against whitelist
     return response.redirect(processedRedirectUrl);
   }
 
