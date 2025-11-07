@@ -1,8 +1,11 @@
 import cookieParser from 'cookie-parser';
-import express, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import request from 'supertest';
 
+import formFields from '../constants/formFields';
+import paths from '../constants/paths';
 import * as analyticsService from '../services/analyticsService';
+import testAppSetup from '../test-utils/testAppSetup';
 
 import setupPageVisitAnalytics from './setupPageVisitAnalytics';
 
@@ -10,7 +13,8 @@ jest.mock('../services/analyticsService', () => ({
   logPageVisit: jest.fn(),
 }));
 
-const app = express();
+const app = testAppSetup();
+
 app.use(cookieParser());
 app.use(setupPageVisitAnalytics());
 
@@ -36,7 +40,7 @@ describe('setupPageVisitAnalytics Middleware', () => {
   });
 
   it('should log a page_visit event for a successful GET request', async () => {
-    await request(app).get('/test-path').expect(200);
+    await request(app).get('/').expect(200);
 
     expect(analyticsService.logPageVisit).toHaveBeenCalledTimes(1);
   });
@@ -48,9 +52,10 @@ describe('setupPageVisitAnalytics Middleware', () => {
   });
 
   it('should NOT log non-GET requests or requests with a 4xx/5xx status code', async () => {
-    await request(app).post('/test-path').expect(200);
+    await request(app).post(paths.SAFETY_CHECK).send({ [formFields.SAFETY_CHECK]: 'Yes' }).expect(302);
     await request(app).get('/not-found').expect(404);
 
     expect(analyticsService.logPageVisit).not.toHaveBeenCalled();
   });
+
 });
