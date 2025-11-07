@@ -61,7 +61,7 @@ describe('Password Handler', () => {
         );
 
         it('should redirect to the return url', () => {
-          const returnURL = '/myPage';
+          const returnURL = paths.TASK_LIST; // Use a valid path from the whitelist
 
           return request(app)
             .post(paths.PASSWORD)
@@ -71,7 +71,7 @@ describe('Password Handler', () => {
         });
 
         it('should set authentication cookie', () => {
-          const returnURL = '/myPage';
+          const returnURL = paths.TASK_LIST; // Use a valid path from the whitelist
           const authenticatedCookieProperties = [
             `${cookieNames.AUTHENTICATION}=${encryptedTestPassword};`,
             `Max-Age=${60 * 60 * 24 * 30}`,
@@ -89,9 +89,9 @@ describe('Password Handler', () => {
       });
 
       describe('POST and the password is incorrect', () => {
-        it('should redirect to the password page with return Url', async () => {
-          const returnURL = 'myPage';
-          const incorrrectPasswordRedirectUrl = `${paths.PASSWORD}?returnURL=${returnURL}`;
+        it('should redirect to the password page with return Url (sanitized for security)', async () => {
+          const returnURL = 'myPage'; // Invalid path, will be sanitized to /
+          const incorrrectPasswordRedirectUrl = `${paths.PASSWORD}?returnURL=${encodeURIComponent('/')}`; // Sanitized to safe default
           const incorrectPassword = 'invalid';
 
           await request(app)
