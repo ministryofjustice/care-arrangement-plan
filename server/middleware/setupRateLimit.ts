@@ -4,7 +4,7 @@ import { RedisStore } from 'rate-limit-redis';
 
 import config from '../config';
 import createCacheClient from '../data/cacheClient';
-import logger from '../logger';
+import logger from '../logging/logger';
 
 const setupRateLimit = () => {
   let store: RedisStore;

@@ -6,7 +6,7 @@ import session, { MemoryStore, Store } from 'express-session';
 import config from '../config';
 import cookieNames from '../constants/cookieNames';
 import createCacheClient from '../data/cacheClient';
-import logger from '../logger';
+import logger from '../logging/logger';;
 
 const setUpWebSession = (): Router => {
   let store: Store;

@@ -9,7 +9,7 @@ import config from '../config';
 import cookieNames from '../constants/cookieNames';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
-import logger from '../logger';
+import logger from '../logging/logger';
 
 import getAssetPath from './getAssetPath';
 import errorSummaryList from './nunjucksHelpers/errorSummaryList';

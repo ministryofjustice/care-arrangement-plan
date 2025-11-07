@@ -2,7 +2,7 @@ import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
 import paths from '../constants/paths';
-import logger from '../logger';
+import logger from '../logging/logger';
 import testAppSetup from '../test-utils/testAppSetup';
 
 const app = testAppSetup();
