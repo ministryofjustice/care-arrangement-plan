@@ -1,5 +1,3 @@
-import cookieParser from 'cookie-parser';
-import { Request, Response } from 'express';
 import request from 'supertest';
 
 import formFields from '../constants/formFields';
@@ -7,7 +5,6 @@ import paths from '../constants/paths';
 import * as analyticsService from '../services/analyticsService';
 import testAppSetup from '../test-utils/testAppSetup';
 
-import setupPageVisitAnalytics from './setupPageVisitAnalytics';
 
 jest.mock('../services/analyticsService', () => ({
   logPageVisit: jest.fn(),
