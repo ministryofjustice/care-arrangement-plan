@@ -15,24 +15,6 @@ jest.mock('../services/analyticsService', () => ({
 
 const app = testAppSetup();
 
-app.use(cookieParser());
-app.use(setupPageVisitAnalytics());
-
-app.get('/test-path', (req: Request, res: Response) => {
-  res.status(200).send('Success');
-});
-
-app.post('/test-path', (req: Request, res: Response) => {
-  res.status(200).send('Success');
-});
-
-app.get('/health', (req: Request, res: Response) => {
-  res.status(200).send('OK');
-});
-
-app.get('/not-found', (req: Request, res: Response) => {
-  res.status(404).send('Not Found');
-});
 
 describe('setupPageVisitAnalytics Middleware', () => {
   beforeEach(() => {
