@@ -38,6 +38,13 @@ const addWhatHappensNow = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
       urlize: true,
     },
+    {
+      text: request.__('sharePlan.yourProposedPlan.helpUsImprove'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+      urlize: true,
+    },
   ]).addComponentToDocument();
 };
 
