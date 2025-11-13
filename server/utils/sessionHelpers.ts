@@ -4,6 +4,7 @@ import { SessionData } from 'express-session';
 import { CAPSession } from '../@types/session';
 
 import { formatListOfStrings } from './formValueUtils';
+import { validateRedirectUrl } from './redirectValidator';
 
 export const formattedChildrenNames = (request: Request) =>
   formatListOfStrings(request.session.namesOfChildren, request);
@@ -62,13 +63,19 @@ export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
 
 export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;
 
-export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => session.previousPage || defaultUrl;
+export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => {
+  if (!session.previousPage) {
+    return defaultUrl;
+  }
+  return validateRedirectUrl(session.previousPage, defaultUrl);
+};
 
 export const getRedirectUrlAfterFormSubmit = (session: Partial<SessionData>, defaultUrl: string) => {
   // If the user came directly from check answers page, redirect back there
   const previousPage = session.previousPage;
   if (previousPage === '/check-your-answers') {
-    return previousPage;
+    return validateRedirectUrl(previousPage, defaultUrl);
   }
+  // defaultUrl is already from paths enum, so it's safe
   return defaultUrl;
 };

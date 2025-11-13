@@ -4,6 +4,7 @@ import path from 'path';
 import i18n from 'i18n';
 
 import { CAPSession } from '../@types/session';
+import config from '../config';
 
 import { flashFormValues, flashMockErrors, loggerMocks, mockNow, sessionMock } from './testMocks';
 
@@ -24,6 +25,8 @@ beforeEach(() => {
   flashFormValues.length = 0;
   Object.keys(sessionMock).forEach((key: keyof CAPSession) => delete sessionMock[key]);
   jest.useFakeTimers({ advanceTimers: true }).setSystemTime(mockNow);
+  // Disable authentication by default for tests (can be overridden in individual tests)
+  config.useAuth = false;
 });
 
 afterEach(() => {
