@@ -28,7 +28,7 @@ const setupRateLimit = () => {
   // General rate limit for all requests
   const generalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 250, // Limit each IP to 250 requests per 15 minutes
+    max: 2500, // Limit each IP to 250 requests per 15 minutes
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     validate: { trustProxy: false }, // Don't warn about trusting the proxy
@@ -42,7 +42,7 @@ const setupRateLimit = () => {
   // Stricter rate limit for download/PDF generation endpoints (resource-intensive)
   const downloadLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 20, // Limit downloads to 20 per 15 minutes per IP
+    max: 200, // Limit downloads to 20 per 15 minutes per IP
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: false },
@@ -54,7 +54,7 @@ const setupRateLimit = () => {
   // Stricter rate limit for authentication endpoint
   const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 10, // Limit login attempts to 10 per 15 minutes per IP
+    max: 100, // Limit login attempts to 10 per 15 minutes per IP
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: false },
