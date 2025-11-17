@@ -42,7 +42,7 @@ const setupRateLimit = () => {
   // Stricter rate limit for download/PDF generation endpoints (resource-intensive)
   const downloadLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 200, // Limit downloads to 20 per 15 minutes per IP
+    max: 2000, // Limit downloads to 20 per 15 minutes per IP
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: false },
