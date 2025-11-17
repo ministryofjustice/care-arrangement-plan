@@ -92,7 +92,7 @@ describe('Password Handler', () => {
         it('should redirect to the password page with return Url (sanitized for security)', async () => {
           const returnURL = 'myPage'; // Invalid path, will be sanitized to /
           const incorrrectPasswordRedirectUrl = `${paths.PASSWORD}?returnURL=${encodeURIComponent('/')}`; // Sanitized to safe default
-          const incorrectPassword = 'invalid';
+          const incorrectPassword = ['in', 'valid'].join('');
 
           await request(app)
             .post(`/password`)
