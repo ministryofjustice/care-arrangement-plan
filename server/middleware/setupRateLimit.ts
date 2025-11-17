@@ -28,10 +28,10 @@ const setupRateLimit = () => {
   // General rate limit for all requests
   const generalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 2500, // Limit each IP to 250 requests per 15 minutes
+    max: 250, // Limit each IP to 250 requests per 15 minutes
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    validate: { trustProxy: false }, // Don't warn about trusting the proxy
+    validate: { trustProxy: true },
     store,
     skip: (req: Request) => {
       return '/health' === req.path || req.path.startsWith('/assets');
@@ -42,10 +42,10 @@ const setupRateLimit = () => {
   // Stricter rate limit for download/PDF generation endpoints (resource-intensive)
   const downloadLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 200, // Limit downloads to 20 per 15 minutes per IP
+    max: 20, // Limit downloads to 20 per 15 minutes per IP
     standardHeaders: true,
     legacyHeaders: false,
-    validate: { trustProxy: false },
+    validate: { trustProxy: true },
     store,
     handler: rateLimitHandler,
     skipSuccessfulRequests: false, // Count all requests, even successful ones
@@ -54,10 +54,10 @@ const setupRateLimit = () => {
   // Stricter rate limit for authentication endpoint
   const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // Limit login attempts to 10 per 15 minutes per IP
+    max: 10, // Limit login attempts to 10 per 15 minutes per IP
     standardHeaders: true,
     legacyHeaders: false,
-    validate: { trustProxy: false },
+    validate: { trustProxy: true },
     store,
     handler: rateLimitHandler,
     skipSuccessfulRequests: true, // Only count failed requests
