@@ -30,6 +30,7 @@ const testPath = '/test';
 const testAppSetup = (): Express => {
   const app = express();
 
+  app.disable('x-powered-by');
   app.use(setUpi18n());
   app.get(testPath, (request, response) => {
     request.session = sessionMock;

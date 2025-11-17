@@ -19,7 +19,8 @@ import { flashMock, sessionMock } from './testMocks';
 
 const testAppSetup = (): Express => {
   const app = express();
-
+  
+  app.disable('x-powered-by');
   app.use(setUpi18n());
   nunjucksSetup(app);
   app.use((request, _response, next) => {
