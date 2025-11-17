@@ -31,7 +31,7 @@ const setupRateLimit = () => {
     max: 250, // Limit each IP to 250 requests per 15 minutes
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    validate: { trustProxy: true },
+    validate: { trustProxy: false },
     store,
     skip: (req: Request) => {
       return '/health' === req.path || req.path.startsWith('/assets');
@@ -42,14 +42,10 @@ const setupRateLimit = () => {
   // Stricter rate limit for download/PDF generation endpoints (resource-intensive)
   const downloadLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-<<<<<<< HEAD
     max: 2000, // Limit downloads to 20 per 15 minutes per IP
-=======
-    max: 20, // Limit downloads to 20 per 15 minutes per IP
->>>>>>> b9bc525a8043fc94f7bf9416dcd8600fcebac0a0
     standardHeaders: true,
     legacyHeaders: false,
-    validate: { trustProxy: true },
+    validate: { trustProxy: false },
     store,
     handler: rateLimitHandler,
     skipSuccessfulRequests: false, // Count all requests, even successful ones
@@ -61,7 +57,7 @@ const setupRateLimit = () => {
     max: 10, // Limit login attempts to 10 per 15 minutes per IP
     standardHeaders: true,
     legacyHeaders: false,
-    validate: { trustProxy: true },
+    validate: { trustProxy: false },
     store,
     handler: rateLimitHandler,
     skipSuccessfulRequests: true, // Only count failed requests
