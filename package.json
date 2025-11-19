@@ -68,7 +68,7 @@
     "@types/supertest": "6.0.3",
     "@typescript-eslint/eslint-plugin": "8.34.0",
     "@typescript-eslint/parser": "8.34.0",
-    "cypress": "14.4.1",
+    "cypress": "^13.7.3",
     "cypress-multi-reporters": "2.0.5",
     "dotenv": "16.5.0",
     "dotenv-cli": "8.0.0",
