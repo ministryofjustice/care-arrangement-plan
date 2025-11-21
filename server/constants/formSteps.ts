@@ -1,0 +1,18 @@
+export const FORM_STEPS = {
+    START: 'step1',
+    SAFETY_CHECK: 'step2',
+    NOT_SAFE: 'step2A',
+    CHILDREN_SAFETY_CHECK: 'step3',
+    CHILDREN_NOT_SAFE: 'step3A',
+    DO_WHATS_BEST: 'step4',
+    COURT_ORDER_CHECK: 'step5',
+    EXISTING_COURT_ORDER: 'step5A',
+    NUMBER_OF_CHILDREN: 'step6',
+    ABOUT_THE_CHILDREN: 'step7',
+    ABOUT_THE_ADULTS: 'step8',
+    TASK_LIST: 'step9',
+    LIVING_AND_VISITING_MOSTLY_LIVE: 'step10_living_and_visiting',
+    LIVING_AND_VISITING_WILL_OVERNIGHTS_HAPPEN: 'step10_living_and_visiting_A_1',
+    LIVING_AND_VISITING_WHICH_DAYS_OVERNIGHT: 'step10_living_and_visiting_A_1A',
+    LIVING_AND_VISITING_WILL_DAYTIME_VISITS_HAPPEN: 'step10_living_and_visiting_A_2',   
+}

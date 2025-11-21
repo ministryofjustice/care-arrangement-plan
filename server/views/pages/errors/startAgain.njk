@@ -1,0 +1,12 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1>{{ title }}</h1>
+      <p>Start again!</p>
+      {{ govukButton({text: __('start again'), href: paths.SAFETY_CHECK }) }}
+    </div>
+  </div>
+{% endblock %}

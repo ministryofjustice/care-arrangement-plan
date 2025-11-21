@@ -13,6 +13,7 @@ export type WhichDays = {
 };
 
 export type CAPSession = {
+  completedSteps?: string[];
   numberOfChildren: number;
   namesOfChildren: string[];
   initialAdultName: string;

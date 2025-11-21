@@ -21,11 +21,14 @@ import safetyCheckRoutes from './safetyCheck';
 import sharePlanRoutes from './sharePlan';
 import specialDaysRoutes from './specialDays';
 import taskListRoutes from './taskList';
+import { addCompletedStep } from '../utils/addCompletedStep';
+import { FORM_STEPS } from '../constants/formSteps';
 
 
 const routes = (): Router => {
   const router = Router();
   router.get(paths.START, (_request, response) => {
+    addCompletedStep(_request, FORM_STEPS.START);
     response.render('pages/index');
   });
 
