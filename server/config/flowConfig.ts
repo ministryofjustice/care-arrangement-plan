@@ -26,104 +26,104 @@ export const TASK_FLOW_MAP : TaskFlowMapType = {
     dependsOn: [FORM_STEPS.SAFETY_CHECK],
   },
   [FORM_STEPS.CHILDREN_NOT_SAFE]: {
-    path: paths.CHILDREN_SAFETY_CHECK,
+    path: paths.CHILDREN_NOT_SAFE,
     dependsOn: [FORM_STEPS.CHILDREN_SAFETY_CHECK],
   },
-  step4: {
+  [FORM_STEPS.DO_WHATS_BEST]: {
     path: paths.DO_WHATS_BEST,
-    dependsOn: ['step3'],
+    dependsOn: [FORM_STEPS.CHILDREN_SAFETY_CHECK],
   },
-  step5: {
+  [FORM_STEPS.COURT_ORDER_CHECK]: {
     path: paths.COURT_ORDER_CHECK,
-    dependsOn: ['step4'],
+    dependsOn: [FORM_STEPS.DO_WHATS_BEST],
   },
-  step5A: {
+  [FORM_STEPS.EXISTING_COURT_ORDER]: {
     path: paths.EXISTING_COURT_ORDER,
-    dependsOn: ['step5']
+    dependsOn: [FORM_STEPS.COURT_ORDER_CHECK],
   },
-    step6: {
+  [FORM_STEPS.NUMBER_OF_CHILDREN]: {
     path: paths.NUMBER_OF_CHILDREN,
-    dependsOn: ['step5'],
+    dependsOn: [FORM_STEPS.COURT_ORDER_CHECK],
   },
-    step7: {
+  [FORM_STEPS.ABOUT_THE_CHILDREN]: {
     path: paths.ABOUT_THE_CHILDREN,
-    dependsOn: ['step6'],
+    dependsOn: [FORM_STEPS.NUMBER_OF_CHILDREN],
   },
-    step8: {
+  [FORM_STEPS.ABOUT_THE_ADULTS]: {
     path: paths.ABOUT_THE_ADULTS,
-    dependsOn: ['step7'],
+    dependsOn: [FORM_STEPS.ABOUT_THE_CHILDREN],
   },
-    step9: {
+  [FORM_STEPS.TASK_LIST]: {
     path: paths.TASK_LIST,
-    dependsOn: ['step8'],
+    dependsOn: [FORM_STEPS.ABOUT_THE_ADULTS],
   },
-    step10_living_and_visiting: { 
+  [FORM_STEPS.LIVING_VISITING_MOSTLY_LIVE]: { 
     path: paths.LIVING_VISITING_MOSTLY_LIVE,
-    dependsOn: ['step9'],
+    dependsOn: [FORM_STEPS.TASK_LIST],
   },
-    step10_living_and_visiting_A_1: { 
+  [FORM_STEPS.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN]: { 
     path: paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN,
-    dependsOn: ['step10_living_and_visiting'],
+    dependsOn: [FORM_STEPS.LIVING_VISITING_MOSTLY_LIVE],
   },
-    step10_living_and_visiting_A_1A: { 
+  [FORM_STEPS.LIVING_VISITING_WHICH_DAYS_OVERNIGHT]: { 
     path: paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT,
-    dependsOn: ['step10_living_and_visiting_A_1'],
+    dependsOn: [FORM_STEPS.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN],
   },
-    step10_living_and_visiting_A_2: { 
+  [FORM_STEPS.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN]: { 
     path: paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN,
-    dependsOn: ['step10_living_and_visiting_A_1'],
+    dependsOn: [FORM_STEPS.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN],
   },
-    step10_living_and_visiting_A_3: { 
+  [FORM_STEPS.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS]: { 
     path: paths. LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS,
-    dependsOn: ['step10_living_and_visiting_A_2'],
+    dependsOn: [FORM_STEPS.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN],
   },
-    step10_living_and_visiting_B: { 
-    path: paths.  LIVING_VISITING_WHICH_SCHEDULE,
-    dependsOn: ['step10_living_and_visiting'],
+  [FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE]: { 
+    path: paths.LIVING_VISITING_WHICH_SCHEDULE,
+    dependsOn: [FORM_STEPS.LIVING_VISITING_MOSTLY_LIVE ],
   },
-    step10_handovers_and_holidays_1: { 
+  [FORM_STEPS.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS]: { 
     path: paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS,
-    dependsOn: ['step9'],
+    dependsOn: [FORM_STEPS.TASK_LIST],
   },
-    step10_handovers_and_holidays_2: { 
+  [FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER]: {
     path: paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER,
-    dependsOn: ['step10_handovers_and_holidays_1'],
+    dependsOn: [FORM_STEPS.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS],
   },
-    step10_handovers_and_holidays_3: { 
+  [FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS]: {
     path: paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
-    dependsOn: ['step10_handovers_and_holidays_2'],
+    dependsOn: [FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER],
   },
-  step10_handovers_and_holidays_3A: { 
+  [FORM_STEPS.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS]: {
     path: paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS,
-    dependsOn: ['step10_handovers_and_holidays_3'],
+    dependsOn: [FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS ],
   },
-  step10_handovers_and_holidays_4: { 
+  [FORM_STEPS.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER]: {
     path: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER,
-    dependsOn: ['step10_handovers_and_holidays_3'],
+    dependsOn: [FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS],
   },
-    step10_decision_making_1: { 
+  [FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES]: {
     path: paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES,
-    dependsOn: ['step9'],
+    dependsOn: [FORM_STEPS.TASK_LIST],
   },
-  step10_decision_making_2: { 
+  [FORM_STEPS.DECISION_MAKING_PLAN_LONG_TERM_NOTICE]: {
     path: paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE,
-    dependsOn: ['step10_decision_making_1'],
+    dependsOn: [FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES],
   },
-  step10_decision_making_3: { 
+  [FORM_STEPS.DECISION_MAKING_PLAN_REVIEW]: {
     path: paths.DECISION_MAKING_PLAN_REVIEW,
-    dependsOn: ['step10_decision_making_3'],
+    dependsOn: [FORM_STEPS.DECISION_MAKING_PLAN_LONG_TERM_NOTICE],
   },
-    step11: { 
+  [FORM_STEPS.CHECK_YOUR_ANSWERS]: {
     path: paths.CHECK_YOUR_ANSWERS,
-    dependsOn: ['step9'],
+    dependsOn: [FORM_STEPS.TASK_LIST],
   },
-  step12: { 
+  [FORM_STEPS.SHARE_PLAN]: {
     path: paths.SHARE_PLAN,
-    dependsOn: ['step11'],
+    dependsOn: [FORM_STEPS.CHECK_YOUR_ANSWERS],
   },
-  step13: { 
+  [FORM_STEPS.CONFIRMATION]: {
     path: paths.CONFIRMATION,
-    dependsOn: ['step12'],
+    dependsOn: [FORM_STEPS.SHARE_PLAN],
   },
 
 };
