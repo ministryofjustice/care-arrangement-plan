@@ -1,4 +1,5 @@
 import logger from '../logging/logger';
+
 import { checkFormProgressFromConfig } from './checkFormProgressFromConfig';
 
 jest.mock('../config/flowConfig', () => ({

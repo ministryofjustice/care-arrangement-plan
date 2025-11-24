@@ -1,6 +1,8 @@
 import { Router } from 'express';
 
+import { FORM_STEPS } from '../constants/formSteps';
 import paths from '../constants/paths';
+import { addCompletedStep } from '../utils/addCompletedStep';
 
 import aboutTheAdultsRoutes from './aboutTheAdults';
 import aboutTheChildrenRoutes from './aboutTheChildren';
@@ -21,8 +23,6 @@ import safetyCheckRoutes from './safetyCheck';
 import sharePlanRoutes from './sharePlan';
 import specialDaysRoutes from './specialDays';
 import taskListRoutes from './taskList';
-import { addCompletedStep } from '../utils/addCompletedStep';
-import { FORM_STEPS } from '../constants/formSteps';
 
 
 const routes = (): Router => {

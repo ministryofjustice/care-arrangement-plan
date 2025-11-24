@@ -3,12 +3,12 @@ import { body, matchedData, validationResult } from 'express-validator';
 
 import { yesOrNo } from '../../@types/fields';
 import formFields from '../../constants/formFields';
+import { FORM_STEPS } from '../../constants/formSteps';
 import paths from '../../constants/paths';
+import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
+import { addCompletedStep } from '../../utils/addCompletedStep';
 import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils';
 import { getBackUrl } from '../../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
-import { FORM_STEPS } from '../../constants/formSteps';
-import { addCompletedStep } from '../../utils/addCompletedStep';
 
 const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS), (request, response) => {

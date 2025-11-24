@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
-import paths from '../constants/paths';
-import { formattedChildrenNames } from '../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
 import { FORM_STEPS } from '../constants/formSteps';
+import paths from '../constants/paths';
+import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
 import { addCompletedStep } from '../utils/addCompletedStep';
+import { formattedChildrenNames } from '../utils/sessionHelpers';
 
 const confirmationRoutes = (router: Router) => {
   router.get(paths.CONFIRMATION, checkFormProgressFromConfig(FORM_STEPS.CONFIRMATION), (request, response) => {

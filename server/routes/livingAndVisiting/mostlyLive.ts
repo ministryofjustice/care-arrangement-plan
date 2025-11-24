@@ -3,11 +3,11 @@ import { body, matchedData, validationResult } from 'express-validator';
 
 import { whereMostlyLive } from '../../@types/fields';
 import formFields from '../../constants/formFields';
-import paths from '../../constants/paths';
-import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
 import { FORM_STEPS } from '../../constants/formSteps';
+import paths from '../../constants/paths';
+import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
 import { addCompletedStep } from '../../utils/addCompletedStep';
+import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const mostlyLiveRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_MOSTLY_LIVE, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_MOSTLY_LIVE), (request, response) => {

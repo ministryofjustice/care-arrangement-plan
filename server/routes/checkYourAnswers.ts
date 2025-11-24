@@ -1,6 +1,9 @@
 import { Router } from 'express';
 
+import { FORM_STEPS } from '../constants/formSteps';
 import paths from '../constants/paths';
+import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
+import { addCompletedStep } from '../utils/addCompletedStep';
 import {
   mostlyLive,
   whichDaysDaytimeVisits,
@@ -21,9 +24,6 @@ import {
 } from '../utils/formattedAnswersForCheckAnswers';
 import { formatListOfStrings } from '../utils/formValueUtils';
 import { formattedChildrenNames, parentNotMostlyLivedWith, getBackUrl } from '../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
-import { FORM_STEPS } from '../constants/formSteps';
-import { addCompletedStep } from '../utils/addCompletedStep';
 
 const checkYourAnswersRoutes = (router: Router) => {
   router.get(paths.CHECK_YOUR_ANSWERS, checkFormProgressFromConfig(FORM_STEPS.CHECK_YOUR_ANSWERS), (request, response) => {

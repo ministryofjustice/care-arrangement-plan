@@ -2,11 +2,11 @@ import { Router } from 'express';
 import { ValidationError } from 'express-validator';
 
 import formFields from '../constants/formFields';
-import paths from '../constants/paths';
-import { getBackUrl } from '../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
 import { FORM_STEPS } from '../constants/formSteps';
+import paths from '../constants/paths';
+import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
 import { addCompletedStep } from '../utils/addCompletedStep';
+import { getBackUrl } from '../utils/sessionHelpers';
 
 const aboutTheChildrenRoutes = (router: Router) => {
   router.get(paths.ABOUT_THE_CHILDREN, checkFormProgressFromConfig(FORM_STEPS.ABOUT_THE_CHILDREN),(request, response) => {

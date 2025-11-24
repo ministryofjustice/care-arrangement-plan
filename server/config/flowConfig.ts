@@ -1,5 +1,5 @@
-import paths from "../constants/paths";
 import { FORM_STEPS } from "../constants/formSteps";
+import paths from "../constants/paths";
 
 interface TaskStepDefinition {
     path: string; 

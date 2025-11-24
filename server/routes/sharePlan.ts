@@ -1,6 +1,9 @@
 import { Router } from 'express';
 
+import { FORM_STEPS } from '../constants/formSteps';
 import paths from '../constants/paths';
+import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
+import { addCompletedStep } from '../utils/addCompletedStep';
 import {
   whatWillHappen,
   mostlyLive,
@@ -20,9 +23,6 @@ import {
   planReview,
 } from '../utils/formattedAnswersForPdf';
 import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
-import { FORM_STEPS } from '../constants/formSteps';
-import { addCompletedStep } from '../utils/addCompletedStep';
 
 const sharePlanRoutes = (router: Router) => {
   router.get(paths.SHARE_PLAN, checkFormProgressFromConfig(FORM_STEPS.SHARE_PLAN), (request, response) => {

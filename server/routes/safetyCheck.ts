@@ -3,10 +3,10 @@ import { body, matchedData, validationResult } from 'express-validator';
 
 import { yesOrNo } from '../@types/fields';
 import formFields from '../constants/formFields';
+import { FORM_STEPS } from '../constants/formSteps';
 import paths from '../constants/paths';
 import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
 import { addCompletedStep } from '../utils/addCompletedStep';
-import { FORM_STEPS } from '../constants/formSteps';
 
 const safetyCheckRoutes = (router: Router) => {
   router.get(paths.SAFETY_CHECK, checkFormProgressFromConfig(FORM_STEPS.SAFETY_CHECK), (request, response) => {

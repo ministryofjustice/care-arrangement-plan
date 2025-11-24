@@ -2,11 +2,11 @@ import { Router } from 'express';
 import { body, validationResult } from 'express-validator';
 
 import formFields from '../constants/formFields';
-import paths from '../constants/paths';
-import { getBackUrl } from '../utils/sessionHelpers';
 import { FORM_STEPS } from '../constants/formSteps';
+import paths from '../constants/paths';
 import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
 import { addCompletedStep } from '../utils/addCompletedStep';
+import { getBackUrl } from '../utils/sessionHelpers';
 
 const doWhatsBestRoutes = (router: Router) => {
   router.get(paths.DO_WHATS_BEST, checkFormProgressFromConfig(FORM_STEPS.DO_WHATS_BEST), (request, response) => {

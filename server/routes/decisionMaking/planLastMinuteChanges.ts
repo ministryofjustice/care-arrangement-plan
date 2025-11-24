@@ -3,11 +3,11 @@ import { body, matchedData, validationResult } from 'express-validator';
 
 import { planLastMinuteChangesField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
-import paths from '../../constants/paths';
-import { getBackUrl } from '../../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
 import { FORM_STEPS } from '../../constants/formSteps';
+import paths from '../../constants/paths';
+import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
 import { addCompletedStep } from '../../utils/addCompletedStep';
+import { getBackUrl } from '../../utils/sessionHelpers';
 
 const planLastMinuteChangesRoutes = (router: Router) => {
   router.get(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES, checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES), (request, response) => {

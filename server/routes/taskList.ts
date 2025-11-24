@@ -1,6 +1,9 @@
 import { Router } from 'express';
 
+import { FORM_STEPS } from '../constants/formSteps';
 import paths from '../constants/paths';
+import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
+import { addCompletedStep } from '../utils/addCompletedStep';
 import {
   formattedChildrenNames,
   mostlyLiveComplete,
@@ -14,9 +17,6 @@ import {
   planLongTermNoticeComplete,
   planReviewComplete,
 } from '../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
-import { FORM_STEPS } from '../constants/formSteps';
-import { addCompletedStep } from '../utils/addCompletedStep';
 
 const taskListRoutes = (router: Router) => {
   router.get(paths.TASK_LIST, checkFormProgressFromConfig(FORM_STEPS.TASK_LIST), (request, response) => {
