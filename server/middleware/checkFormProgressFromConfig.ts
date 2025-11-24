@@ -11,7 +11,7 @@ import logger from '../logging/logger';
  * defined in the `TASK_FLOW_MAP` for the given step key.
  * @param currentStepKey - A key from TASK_FLOW_MAP (e.g. 'step3')
  */
-export function checkFormProgressFromConfig(currentStepKey: keyof typeof TASK_FLOW_MAP) {
+function checkFormProgressFromConfig(currentStepKey: keyof typeof TASK_FLOW_MAP) {
   const startPage = TASK_FLOW_MAP.step1?.path ?? '/';
 
   if (!TASK_FLOW_MAP[currentStepKey]) {
@@ -36,3 +36,5 @@ export function checkFormProgressFromConfig(currentStepKey: keyof typeof TASK_FL
     return res.redirect(startPage);
   };
 }
+
+export default checkFormProgressFromConfig;

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import logger from '../logging/logger';
 
-import { checkFormProgressFromConfig } from './checkFormProgressFromConfig';
+import checkFormProgressFromConfig  from './checkFormProgressFromConfig';
 
 jest.mock('../config/flowConfig', () => ({
     step1: { path: '/' },

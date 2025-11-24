@@ -9,10 +9,7 @@ import config from '../config';
 import { flashFormValues, flashMockErrors, loggerMocks, mockCheckFormProgressFromConfig, mockNow, sessionMock } from './testMocks';
 
 jest.mock('../logging/logger', () => loggerMocks);
-jest.mock('../middleware/checkFormProgressFromConfig', () => {
-  const tm = require('./testMocks');
-  return { checkFormProgressFromConfig: tm.mockCheckFormProgressFromConfig };
-});
+jest.mock('../middleware/checkFormProgressFromConfig', () => mockCheckFormProgressFromConfig)
 
 beforeAll(() => {
   i18n.configure({
@@ -32,10 +29,6 @@ beforeEach(() => {
   // Disable authentication by default for tests (can be overridden in individual tests)
   config.useAuth = false;
   (mockCheckFormProgressFromConfig as jest.Mock).mockClear();
-  // reset mock histories exported from testMocks
-  // require here to avoid hoisting issues with jest.mock
-  // const { resetTestMocks } = require('./testMocks');
-  // resetTestMocks();
 });
 
 afterEach(() => {

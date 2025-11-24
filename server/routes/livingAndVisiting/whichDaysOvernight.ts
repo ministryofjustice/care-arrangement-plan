@@ -5,7 +5,7 @@ import { whichDaysField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
-import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
+import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
 import { convertWhichDaysFieldToSessionValue, convertWhichDaysSessionValueToField } from '../../utils/formValueUtils';
 import { getBackUrl } from '../../utils/sessionHelpers';
