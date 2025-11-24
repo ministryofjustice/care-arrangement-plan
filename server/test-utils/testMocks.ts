@@ -1,3 +1,4 @@
+import { NextFunction, Request, Response } from 'express';
 import { Session, SessionData } from 'express-session';
 import { ValidationError } from 'express-validator';
 
@@ -20,4 +21,4 @@ export const sessionMock = {} as Session & Partial<SessionData>;
 
 export const mockNow = new Date('2025-01-01T00:00:00Z');
 
-export const mockCheckFlowConfig
+export const mockCheckFormProgressFromConfig = jest.fn().mockImplementation(() => (_req: Request, _res: Response, next: NextFunction) => next());

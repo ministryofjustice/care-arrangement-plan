@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { TASK_FLOW_MAP } from "../config/flowConfig";
 import logger from '../logging/logger';
+import createError from 'http-errors';
 
 
 /**
@@ -13,7 +14,7 @@ export function checkFormProgressFromConfig(currentStepKey: keyof typeof TASK_FL
 
   if (!TASK_FLOW_MAP[currentStepKey]) {
     logger.error(`ERROR: Step '${String(currentStepKey)}' not found in TASK_FLOW_MAP.`);
-    return (req: Request, res: Response, next: NextFunction) => res.redirect(startPage);
+    createError(404)
   }
 
   const requiredSteps = TASK_FLOW_MAP[currentStepKey].dependsOn || [];
