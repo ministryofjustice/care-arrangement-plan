@@ -6,9 +6,12 @@ import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils';
 import { getBackUrl } from '../../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../../constants/formSteps';
+import { addCompletedStep } from '../../utils/addCompletedStep';
 
 const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
-  router.get(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, (request, response) => {
+  router.get(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS), (request, response) => {
     response.render('pages/handoverAndHolidays/willChangeDuringSchoolHolidays', {
       errors: request.flash('errors'),
       title: request.__('handoverAndHolidays.willChangeDuringSchoolHolidays.title'),
@@ -54,6 +57,8 @@ const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
 
       delete request.session.handoverAndHolidays?.howChangeDuringSchoolHolidays;
 
+      addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS);
+      
       return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
     },
   );
@@ -66,6 +71,8 @@ const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
       },
     };
     delete request.session.handoverAndHolidays?.howChangeDuringSchoolHolidays;
+
+    addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS);
 
     return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
   });

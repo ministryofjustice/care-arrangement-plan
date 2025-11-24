@@ -22,6 +22,8 @@ export const FORM_STEPS = {
     HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS: 'step10_handovers_and_holidays_3',
     HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS: 'step10_handovers_and_holidays_3A',
     HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER: 'step10_handovers_and_holidays_4',
+    SPECIAL_DAYS_WHAT_WILL_HAPPEN: 'step10_special_days',
+    OTHER_THINGS_WHAT_OTHER_THINGS_MATTER: 'step10_other_things',
     DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES: 'step10_decision_making_1',
     DECISION_MAKING_PLAN_LONG_TERM_NOTICE: 'step10_decision_making_2',
     DECISION_MAKING_PLAN_REVIEW: 'step10_decision_making_3',

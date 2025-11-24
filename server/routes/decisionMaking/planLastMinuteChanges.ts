@@ -5,9 +5,12 @@ import { planLastMinuteChangesField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { getBackUrl } from '../../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../../constants/formSteps';
+import { addCompletedStep } from '../../utils/addCompletedStep';
 
 const planLastMinuteChangesRoutes = (router: Router) => {
-  router.get(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES, (request, response) => {
+  router.get(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES, checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES), (request, response) => {
     const planLastMinuteChanges = request.session.decisionMaking?.planLastMinuteChanges;
 
     const formValues = {
@@ -68,7 +71,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
           anotherArrangementDescription: options.includes('anotherArrangement') ? describeArrangement : undefined,
         },
       };
-
+      addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES);
       return response.redirect(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
     },
   );
@@ -81,6 +84,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
       },
     };
 
+    addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES);
     return response.redirect(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
   });
 };

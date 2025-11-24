@@ -6,9 +6,12 @@ import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils';
 import { parentNotMostlyLivedWith, getBackUrl } from '../../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../../constants/formSteps';
+import { addCompletedStep } from '../../utils/addCompletedStep';
 
 const willOvernightsHappenRoutes = (router: Router) => {
-  router.get(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, (request, response) => {
+  router.get(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN), (request, response) => {
     const { livingAndVisiting } = request.session;
 
     response.render('pages/livingAndVisiting/willOvernightsHappen', {
@@ -52,6 +55,8 @@ const willOvernightsHappenRoutes = (router: Router) => {
           },
         };
       }
+
+      addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN);
 
       if (willOvernightsHappen) {
         return response.redirect(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT);

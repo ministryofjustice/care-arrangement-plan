@@ -21,11 +21,15 @@ import {
 } from '../utils/formattedAnswersForCheckAnswers';
 import { formatListOfStrings } from '../utils/formValueUtils';
 import { formattedChildrenNames, parentNotMostlyLivedWith, getBackUrl } from '../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../constants/formSteps';
+import { addCompletedStep } from '../utils/addCompletedStep';
 
 const checkYourAnswersRoutes = (router: Router) => {
-  router.get(paths.CHECK_YOUR_ANSWERS, (request, response) => {
+  router.get(paths.CHECK_YOUR_ANSWERS, checkFormProgressFromConfig(FORM_STEPS.CHECK_YOUR_ANSWERS), (request, response) => {
     const { initialAdultName, secondaryAdultName } = request.session;
 
+    addCompletedStep(request, FORM_STEPS.CHECK_YOUR_ANSWERS);
     response.render('pages/checkYourAnswers', {
       title: request.__('checkYourAnswers.title'),
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),

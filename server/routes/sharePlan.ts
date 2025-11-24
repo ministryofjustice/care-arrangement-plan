@@ -20,11 +20,15 @@ import {
   planReview,
 } from '../utils/formattedAnswersForPdf';
 import { formattedChildrenNames, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../constants/formSteps';
+import { addCompletedStep } from '../utils/addCompletedStep';
 
 const sharePlanRoutes = (router: Router) => {
-  router.get(paths.SHARE_PLAN, (request, response) => {
+  router.get(paths.SHARE_PLAN, checkFormProgressFromConfig(FORM_STEPS.SHARE_PLAN), (request, response) => {
     const childrenNames = formattedChildrenNames(request);
 
+    addCompletedStep(request, FORM_STEPS.SHARE_PLAN);
     response.render('pages/sharePlan', {
       title: request.__('sharePlan.title', { names: childrenNames }),
       values: {

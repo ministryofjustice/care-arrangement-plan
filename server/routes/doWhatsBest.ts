@@ -4,9 +4,12 @@ import { body, validationResult } from 'express-validator';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 import { getBackUrl } from '../utils/sessionHelpers';
+import { FORM_STEPS } from '../constants/formSteps';
+import { checkFormProgressFromConfig } from '../middleware/setUpFlowGuard';
+import { addCompletedStep } from '../utils/addCompletedStep';
 
 const doWhatsBestRoutes = (router: Router) => {
-  router.get(paths.DO_WHATS_BEST, (request, response) => {
+  router.get(paths.DO_WHATS_BEST, checkFormProgressFromConfig(FORM_STEPS.DO_WHATS_BEST), (request, response) => {
     response.render('pages/doWhatsBest', {
       errors: request.flash('errors'),
       title: request.__('doWhatsBest.title'),
@@ -26,6 +29,7 @@ const doWhatsBestRoutes = (router: Router) => {
         return response.redirect(paths.DO_WHATS_BEST);
       }
 
+      addCompletedStep(request, FORM_STEPS.DO_WHATS_BEST);
       return response.redirect(paths.COURT_ORDER_CHECK);
     },
   );

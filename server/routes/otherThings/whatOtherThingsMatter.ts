@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
-
+import { FORM_STEPS } from '../../constants/formSteps';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { addCompletedStep } from '../../utils/addCompletedStep';
 
 const whatOtherThingsMatterRoutes = (router: Router) => {
-  router.get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, (request, response) => {
+  router.get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, checkFormProgressFromConfig(FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER), (request, response) => {
     response.render('pages/otherThings/whatOtherThingsMatter', {
       errors: request.flash('errors'),
       title: request.__('otherThings.whatOtherThingsMatter.title'),
@@ -41,6 +43,8 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
         },
       };
 
+      addCompletedStep(request, FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER);
+      
       return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );
@@ -52,6 +56,8 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
         noDecisionRequired: true,
       },
     };
+
+    addCompletedStep(request, FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER);
 
     return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
   });

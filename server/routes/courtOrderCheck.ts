@@ -5,9 +5,12 @@ import { yesOrNo } from '../@types/fields';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 import { getBackUrl } from '../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../constants/formSteps';
+import { addCompletedStep } from '../utils/addCompletedStep';
 
 const courtOrderCheckRoutes = (router: Router) => {
-  router.get(paths.COURT_ORDER_CHECK, (request, response) => {
+  router.get(paths.COURT_ORDER_CHECK, checkFormProgressFromConfig(FORM_STEPS.COURT_ORDER_CHECK), (request, response) => {
     response.render('pages/courtOrderCheck', {
       errors: request.flash('errors'),
       title: request.__('courtOrderCheck.title'),
@@ -31,6 +34,7 @@ const courtOrderCheckRoutes = (router: Router) => {
         [formFields.COURT_ORDER_CHECK]: yesOrNo;
       }>(request);
 
+      addCompletedStep(request, FORM_STEPS.COURT_ORDER_CHECK);
       if (existingCourtOrder === 'Yes') {
         return response.redirect(paths.EXISTING_COURT_ORDER);
       }

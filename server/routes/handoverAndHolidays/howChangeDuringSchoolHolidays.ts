@@ -4,9 +4,12 @@ import { body, matchedData, validationResult } from 'express-validator';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { getBackUrl } from '../../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../../constants/formSteps';
+import { addCompletedStep } from '../../utils/addCompletedStep';
 
 const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
-  router.get(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, (request, response) => {
+  router.get(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS), (request, response) => {
     response.render('pages/handoverAndHolidays/howChangeDuringSchoolHolidays', {
       errors: request.flash('errors'),
       title: request.__('handoverAndHolidays.howChangeDuringSchoolHolidays.title'),
@@ -41,6 +44,8 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
         },
       };
 
+      addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS);
+
       return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
     },
   );
@@ -52,6 +57,8 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
         noDecisionRequired: true,
       },
     };
+
+    addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS);
 
     return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
   });

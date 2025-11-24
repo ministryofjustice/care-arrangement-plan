@@ -27,13 +27,9 @@ export function checkFormProgressFromConfig(currentStepKey: keyof typeof TASK_FL
       return next();
     }
 
-    // Determine where to redirect: prefer the first missing prerequisite's path,
-    // fall back to the start page.
-    // This will likely change once we have the content for the redirect page, placeholder
     const missing = requiredSteps.filter(s => !completed.includes(s));
-    const redirectTo = (missing.length > 0 && TASK_FLOW_MAP[missing[0]]?.path) || startPage;
 
-    console.log(`Access denied to ${req.path} (${String(currentStepKey)}). Missing steps: ${missing.join(', ')}. Redirecting to ${redirectTo}`);
-    return res.redirect(redirectTo);
+    logger.info(`Access denied to ${req.path} (${String(currentStepKey)}). Missing steps: ${missing.join(', ')}. Redirecting to ${startPage}`);
+    return res.redirect(startPage);
   };
 }

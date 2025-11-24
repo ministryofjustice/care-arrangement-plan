@@ -5,9 +5,12 @@ import { getBetweenHouseholdsField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { getBackUrl } from '../../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../../constants/formSteps';
+import { addCompletedStep } from '../../utils/addCompletedStep';
 
 const getBetweenHouseholdsRoutes = (router: Router) => {
-  router.get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, (request, response) => {
+  router.get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS), (request, response) => {
     const formValues = {
       [formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT]:
         request.session.handoverAndHolidays?.getBetweenHouseholds?.describeArrangement,
@@ -61,6 +64,8 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
         },
       };
 
+      addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS);
+
       return response.redirect(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
     },
   );
@@ -72,6 +77,8 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
         noDecisionRequired: true,
       },
     };
+
+    addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS);
 
     return response.redirect(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
   });

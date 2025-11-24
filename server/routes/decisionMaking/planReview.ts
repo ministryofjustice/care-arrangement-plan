@@ -4,9 +4,12 @@ import { body, matchedData, validationResult } from 'express-validator';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../../constants/formSteps';
+import { addCompletedStep } from '../../utils/addCompletedStep';
 
 const planReviewRoutes = (router: Router) => {
-  router.get(paths.DECISION_MAKING_PLAN_REVIEW, (request, response) => {
+  router.get(paths.DECISION_MAKING_PLAN_REVIEW, checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_REVIEW), (request, response) => {
     const planReview = request.session.decisionMaking?.planReview;
 
     const formValues = {
@@ -68,6 +71,7 @@ const planReviewRoutes = (router: Router) => {
         },
       };
 
+      addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_REVIEW);
       return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );

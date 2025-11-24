@@ -6,9 +6,12 @@ import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { convertWhichDaysFieldToSessionValue, convertWhichDaysSessionValueToField } from '../../utils/formValueUtils';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../../constants/formSteps';
+import { addCompletedStep } from '../../utils/addCompletedStep';
 
 const whichDaysDaytimeVisitsRoutes = (router: Router) => {
-  router.get(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, (request, response) => {
+  router.get(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS), (request, response) => {
     const { daytimeVisits } = request.session.livingAndVisiting;
 
     const [previousDays, previousDescribeArrangement] = convertWhichDaysSessionValueToField(daytimeVisits.whichDays);
@@ -71,6 +74,8 @@ const whichDaysDaytimeVisitsRoutes = (router: Router) => {
         },
       };
 
+      addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS);
+
       return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );
@@ -85,6 +90,8 @@ const whichDaysDaytimeVisitsRoutes = (router: Router) => {
         },
       },
     };
+
+    addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS);
 
     return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
   });

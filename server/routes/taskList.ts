@@ -14,9 +14,12 @@ import {
   planLongTermNoticeComplete,
   planReviewComplete,
 } from '../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../constants/formSteps';
+import { addCompletedStep } from '../utils/addCompletedStep';
 
 const taskListRoutes = (router: Router) => {
-  router.get(paths.TASK_LIST, (request, response) => {
+  router.get(paths.TASK_LIST, checkFormProgressFromConfig(FORM_STEPS.TASK_LIST), (request, response) => {
     const isMostlyLiveComplete = mostlyLiveComplete(request.session);
     const isGetBetweenHouseholdsComplete = getBetweenHouseholdsComplete(request.session);
     const isWhereHandoverComplete = whereHandoverComplete(request.session);
@@ -27,6 +30,8 @@ const taskListRoutes = (router: Router) => {
     const isPlanLastMinuteChangesComplete = planLastMinuteChangesComplete(request.session);
     const isPlanLongTermNoticeComplete = planLongTermNoticeComplete(request.session);
     const isPlanReviewComplete = planReviewComplete(request.session);
+
+    addCompletedStep(request, FORM_STEPS.TASK_LIST);
 
     response.render('pages/taskList', {
       title: request.__('taskList.title', { names: formattedChildrenNames(request) }),

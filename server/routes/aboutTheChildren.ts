@@ -4,9 +4,12 @@ import { ValidationError } from 'express-validator';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 import { getBackUrl } from '../utils/sessionHelpers';
+import { checkFormProgressFromConfig } from '../middleware/setUpFlowGuard';
+import { FORM_STEPS } from '../constants/formSteps';
+import { addCompletedStep } from '../utils/addCompletedStep';
 
 const aboutTheChildrenRoutes = (router: Router) => {
-  router.get(paths.ABOUT_THE_CHILDREN, (request, response) => {
+  router.get(paths.ABOUT_THE_CHILDREN, checkFormProgressFromConfig(FORM_STEPS.ABOUT_THE_CHILDREN),(request, response) => {
     const { numberOfChildren, namesOfChildren } = request.session;
 
     if (numberOfChildren == null) {
@@ -61,6 +64,7 @@ const aboutTheChildrenRoutes = (router: Router) => {
 
     request.session.namesOfChildren = Object.values(values);
 
+    addCompletedStep(request, FORM_STEPS.ABOUT_THE_CHILDREN);
     return response.redirect(paths.ABOUT_THE_ADULTS);
   });
 };
