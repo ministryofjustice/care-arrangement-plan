@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
 
 import { CAPSession } from '../@types/session';
-import { TASK_FLOW_MAP } from "../config/flowConfig";
+import TASK_FLOW_MAP from "../config/flowConfig";
 import logger from '../logging/logger';
 
 

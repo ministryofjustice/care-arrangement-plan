@@ -8,7 +8,7 @@ interface TaskStepDefinition {
 
 type TaskFlowMapType = Record<string, TaskStepDefinition>;
 
-export const TASK_FLOW_MAP : TaskFlowMapType = {
+const TASK_FLOW_MAP : TaskFlowMapType = {
   [FORM_STEPS.START]: {
     path: paths.START,
     dependsOn: [],
@@ -135,3 +135,5 @@ export const TASK_FLOW_MAP : TaskFlowMapType = {
   },
 
 };
+
+export default TASK_FLOW_MAP;

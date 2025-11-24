@@ -5,10 +5,8 @@ import logger from '../logging/logger';
 import { checkFormProgressFromConfig } from './checkFormProgressFromConfig';
 
 jest.mock('../config/flowConfig', () => ({
-  TASK_FLOW_MAP: {
     step1: { path: '/' },
     step2: { dependsOn: ['step1'], path: '/step2' },
-  },
 }));
 
 jest.unmock('../middleware/checkFormProgressFromConfig');
