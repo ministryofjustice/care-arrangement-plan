@@ -4,7 +4,7 @@ import { body, matchedData, validationResult } from 'express-validator';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
 import { FORM_STEPS } from '../../constants/formSteps';
 import { addCompletedStep } from '../../utils/addCompletedStep';
 

@@ -5,7 +5,7 @@ import { getBetweenHouseholdsField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { getBackUrl } from '../../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
 import { FORM_STEPS } from '../../constants/formSteps';
 import { addCompletedStep } from '../../utils/addCompletedStep';
 

@@ -14,7 +14,7 @@ import {
   planLongTermNoticeComplete,
   planReviewComplete,
 } from '../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../middleware/setUpFlowGuard';
+import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
 import { FORM_STEPS } from '../constants/formSteps';
 import { addCompletedStep } from '../utils/addCompletedStep';
 

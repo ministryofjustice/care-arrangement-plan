@@ -19,3 +19,5 @@ export const flashMock = jest
 export const sessionMock = {} as Session & Partial<SessionData>;
 
 export const mockNow = new Date('2025-01-01T00:00:00Z');
+
+export const mockCheckFlowConfig

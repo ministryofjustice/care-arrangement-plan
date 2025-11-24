@@ -6,7 +6,7 @@ import formFields from '../../constants/formFields';
 import paths from '../../constants/paths';
 import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils';
 import { getBackUrl } from '../../utils/sessionHelpers';
-import { checkFormProgressFromConfig } from '../../middleware/setUpFlowGuard';
+import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
 import { FORM_STEPS } from '../../constants/formSteps';
 import { addCompletedStep } from '../../utils/addCompletedStep';
 
@@ -58,7 +58,7 @@ const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
       delete request.session.handoverAndHolidays?.howChangeDuringSchoolHolidays;
 
       addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS);
-      
+
       return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
     },
   );

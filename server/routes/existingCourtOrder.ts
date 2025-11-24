@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import paths from '../constants/paths';
-import { checkFormProgressFromConfig } from '../middleware/setUpFlowGuard';
+import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
 import { FORM_STEPS } from '../constants/formSteps';
 
 const existingCourtOrderRoutes = (router: Router) => {

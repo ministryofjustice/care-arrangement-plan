@@ -4,7 +4,7 @@ import { body, matchedData, validationResult } from 'express-validator';
 import { yesOrNo } from '../@types/fields';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
-import { checkFormProgressFromConfig } from '../middleware/setUpFlowGuard';
+import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
 import { addCompletedStep } from '../utils/addCompletedStep';
 import { FORM_STEPS } from '../constants/formSteps';
 
