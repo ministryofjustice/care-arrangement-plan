@@ -3,6 +3,7 @@ import createError from 'http-errors';
 
 import { TASK_FLOW_MAP } from "../config/flowConfig";
 import logger from '../logging/logger';
+import { CAPSession } from '../@types/session';
 
 
 /**
@@ -20,7 +21,7 @@ export function checkFormProgressFromConfig(currentStepKey: keyof typeof TASK_FL
 
   const requiredSteps = TASK_FLOW_MAP[currentStepKey]?.dependsOn || [];
 
-  return (req: Request & { session?: any }, res: Response, next: NextFunction) => {
+  return (req: Request & { session?: Partial<CAPSession> }, res: Response, next: NextFunction) => {
     const completed: string[] = (req.session && req.session.completedSteps) || [];
 
     const hasProgress = requiredSteps.every(step => completed.includes(step));

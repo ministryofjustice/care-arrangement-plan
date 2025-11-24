@@ -8,7 +8,7 @@ describe('addCompletedStep', () => {
 
         addCompletedStep(req, 'step1');
 
-        expect((req as any).session.completedSteps).toEqual(['step1']);
+        expect((req as Request).session.completedSteps).toEqual(['step1']);
     });
 
     test('does not add a duplicate step if already present', () => {
@@ -16,7 +16,7 @@ describe('addCompletedStep', () => {
 
         addCompletedStep(req, 'step1');
 
-        expect((req as any).session.completedSteps).toEqual(['step1']);
+        expect((req as Request).session.completedSteps).toEqual(['step1']);
     });
 
     test('adds a new step to existing completedSteps', () => {
@@ -24,7 +24,7 @@ describe('addCompletedStep', () => {
 
         addCompletedStep(req, 'step2');
 
-        expect((req as any).session.completedSteps).toEqual(['step1', 'step2']);
+        expect((req as Request).session.completedSteps).toEqual(['step1', 'step2']);
     });
 
     test('calling twice with the same new step only adds it once', () => {
@@ -33,6 +33,6 @@ describe('addCompletedStep', () => {
         addCompletedStep(req, 'stepA');
         addCompletedStep(req, 'stepA');
 
-        expect((req as any).session.completedSteps).toEqual(['stepA']);
+        expect((req as Request).session.completedSteps).toEqual(['stepA']);
     });
 });

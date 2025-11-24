@@ -4,7 +4,6 @@ import { checkFormProgressFromConfig } from './checkFormProgressFromConfig';
 
 jest.mock('../config/flowConfig', () => ({
   TASK_FLOW_MAP: {
-    // start page
     step1: { path: '/' },
     step2: { dependsOn: ['step1'], path: '/step2' },
   },
@@ -15,14 +14,14 @@ jest.unmock('../middleware/checkFormProgressFromConfig');
 describe('checkFormProgressFromConfig middleware', () => {
 
   test('redirects to start when current step key is not in TASK_FLOW_MAP and logs an error', () => {
-    const req = { session: {}, path: '/somewhere' } as any;
-    const res = { redirect: jest.fn() } as any;
+    const req = { session: {}, path: '/somewhere' };
+    const res = { redirect: jest.fn() };
 
-    const middleware = checkFormProgressFromConfig('nonexistent' as any);
+    const middleware = checkFormProgressFromConfig('nonexistent');
 
     middleware(req, res, jest.fn());      
     expect(404),
-    expect((res: { text: any; }) => {
+    expect((res: { text: string; }) => {
         expect(res.text).toContain('Page not found');
     });
 
@@ -30,8 +29,8 @@ describe('checkFormProgressFromConfig middleware', () => {
   });
 
   test('calls next when required steps are completed', () => {
-    const req = { session: { completedSteps: ['step1'] }, path: '/step2' } as any;
-    const res = { redirect: jest.fn() } as any;
+    const req = { session: { completedSteps: ['step1'] }, path: '/step2' };
+    const res = { redirect: jest.fn() };
     const next = jest.fn();
 
     const middleware = checkFormProgressFromConfig('step2');
@@ -43,8 +42,8 @@ describe('checkFormProgressFromConfig middleware', () => {
   });
 
   test('redirects to start when required steps are missing and logs info', () => {
-    const req = { session: { completedSteps: [] }, path: '/step2' } as any;
-    const res = { redirect: jest.fn() } as any;
+    const req = { session: { completedSteps: [] }, path: '/step2' } as object;
+    const res = { redirect: jest.fn() };
     const next = jest.fn();
 
     const middleware = checkFormProgressFromConfig('step2');
