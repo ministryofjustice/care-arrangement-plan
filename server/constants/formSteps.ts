@@ -1,4 +1,4 @@
-export const FORM_STEPS = {
+const FORM_STEPS = {
     START: 'step1',
     SAFETY_CHECK: 'step2',
     NOT_SAFE: 'step2A',
@@ -31,3 +31,5 @@ export const FORM_STEPS = {
     SHARE_PLAN: 'step12',
     CONFIRMATION: 'step13',
 }
+
+export default FORM_STEPS;

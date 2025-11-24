@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { FORM_STEPS } from '../constants/formSteps';
+import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
 import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
 
