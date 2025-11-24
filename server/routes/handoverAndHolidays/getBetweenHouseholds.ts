@@ -6,7 +6,7 @@ import formFields from '../../constants/formFields';
 import { FORM_STEPS } from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import { checkFormProgressFromConfig } from '../../middleware/checkFormProgressFromConfig';
-import { addCompletedStep } from '../../utils/addCompletedStep';
+import addCompletedStep from '../../utils/addCompletedStep';
 import { getBackUrl } from '../../utils/sessionHelpers';
 
 const getBetweenHouseholdsRoutes = (router: Router) => {

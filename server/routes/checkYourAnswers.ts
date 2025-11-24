@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { FORM_STEPS } from '../constants/formSteps';
 import paths from '../constants/paths';
 import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
-import { addCompletedStep } from '../utils/addCompletedStep';
+import addCompletedStep from '../utils/addCompletedStep';
 import {
   mostlyLive,
   whichDaysDaytimeVisits,

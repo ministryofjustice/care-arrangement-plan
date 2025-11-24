@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { FORM_STEPS } from '../constants/formSteps';
 import paths from '../constants/paths';
-import { addCompletedStep } from '../utils/addCompletedStep';
+import addCompletedStep from '../utils/addCompletedStep';
 
 import aboutTheAdultsRoutes from './aboutTheAdults';
 import aboutTheChildrenRoutes from './aboutTheChildren';

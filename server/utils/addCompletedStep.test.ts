@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-import { addCompletedStep } from './addCompletedStep';
+import addCompletedStep from './addCompletedStep';
 
 describe('addCompletedStep', () => {
     test('initialises completedSteps when missing and adds the step', () => {

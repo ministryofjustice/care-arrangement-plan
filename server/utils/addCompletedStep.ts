@@ -5,7 +5,7 @@ import { Request } from 'express';
  * @param req The Express Request object.
  * @param stepKey The key of the step that was just completed (e.g., 'step2').
  */
-export function addCompletedStep(req: Request, stepKey: string): void {
+function addCompletedStep(req: Request, stepKey: string): void {
     if (!req.session.completedSteps) {
         req.session.completedSteps = [];
     }
@@ -14,3 +14,5 @@ export function addCompletedStep(req: Request, stepKey: string): void {
         req.session.completedSteps.push(stepKey);
     }
 }
+
+export default addCompletedStep;

@@ -6,7 +6,7 @@ import formFields from '../constants/formFields';
 import { FORM_STEPS } from '../constants/formSteps';
 import paths from '../constants/paths';
 import { checkFormProgressFromConfig } from '../middleware/checkFormProgressFromConfig';
-import { addCompletedStep } from '../utils/addCompletedStep';
+import addCompletedStep from '../utils/addCompletedStep';
 
 const safetyCheckRoutes = (router: Router) => {
   router.get(paths.SAFETY_CHECK, checkFormProgressFromConfig(FORM_STEPS.SAFETY_CHECK), (request, response) => {
