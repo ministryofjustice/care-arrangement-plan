@@ -17,7 +17,7 @@ export function checkFormProgressFromConfig(currentStepKey: keyof typeof TASK_FL
     createError(404)
   }
 
-  const requiredSteps = TASK_FLOW_MAP[currentStepKey].dependsOn || [];
+  const requiredSteps = TASK_FLOW_MAP[currentStepKey]?.dependsOn || [];
 
   return (req: Request & { session?: any }, res: Response, next: NextFunction) => {
     const completed: string[] = (req.session && req.session.completedSteps) || [];
