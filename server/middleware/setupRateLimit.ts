@@ -22,6 +22,9 @@ const setupRateLimit = () => {
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     validate: { trustProxy: true },
+    keyGenerator: (req: Request) => {
+      return req.ip || 'unknown';
+    },
     store: createRedisStore('general:'),
     skip: (req: Request) => {
       return '/health' === req.path || req.path.startsWith('/assets');
@@ -36,6 +39,9 @@ const setupRateLimit = () => {
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: true },
+    keyGenerator: (req: Request) => {
+      return req.ip || 'unknown';
+    },
     store: createRedisStore('download:'),
     handler: rateLimitHandler,
     skipSuccessfulRequests: false, // Count all requests, even successful ones
@@ -47,6 +53,9 @@ const setupRateLimit = () => {
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: true},
+    keyGenerator: (req: Request) => {
+      return req.ip || 'unknown';
+    },
     store: createRedisStore('auth:'),
     handler: rateLimitHandler,
     skipSuccessfulRequests: true, // Only count failed requests
