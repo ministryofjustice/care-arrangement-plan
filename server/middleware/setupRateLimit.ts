@@ -29,10 +29,10 @@ const setupRateLimit = () => {
     handler: rateLimitHandler,
   });
 
-  // Stricter rate limit for download/PDF generation endpoints (resource-intensive)
+  // download/PDF generation endpoints (resource-intensive)
   const downloadLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 20, // temporary fix until rate limit redis issue is resolved
+    windowMs: 15 * 60 * 1000,// 15 minutes
+    max: 20,// Limit each IP to 20 requests per 15 minutes
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: true },
@@ -41,7 +41,6 @@ const setupRateLimit = () => {
     skipSuccessfulRequests: false, // Count all requests, even successful ones
   });
 
-  // Stricter rate limit for authentication endpoint
   const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, 
     max: 10, // Limit login attempts to 10 per 15 minutes per IP
