@@ -1,21 +1,12 @@
 import { Router } from 'express';
-import { rateLimit } from 'express-rate-limit';
+import rateLimit from 'express-rate-limit';
 import type { Request, Response } from 'express-serve-static-core';
-import { RedisStore } from 'rate-limit-redis';
 
 import config from '../config';
-import createCacheClient from '../data/cacheClient';
-import logger from '../logging/logger';
+import createRedisStore from '../utils/redisStoreFactory';
 
 const setupRateLimit = () => {
   const router = Router();
-  let store: RedisStore | undefined;
-
-  if (config.cache.enabled) {
-    const client = createCacheClient();
-    client.connect().catch((err: Error) => logger.error(`Error connecting to cache`, err));
-    store = new RedisStore({ sendCommand: (...args: string[]) => client.sendCommand(args) });
-  }
 
   const rateLimitHandler = (request: Request, response: Response) => {
     const { production } = config;
@@ -25,14 +16,13 @@ const setupRateLimit = () => {
     });
   };
 
-  // General rate limit for all requests
   const generalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 250, // Limit each IP to 250 requests per 15 minutes
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     validate: { trustProxy: true },
-    store,
+    store: createRedisStore('general:'),
     skip: (req: Request) => {
       return '/health' === req.path || req.path.startsWith('/assets');
     },
@@ -41,24 +31,24 @@ const setupRateLimit = () => {
 
   // Stricter rate limit for download/PDF generation endpoints (resource-intensive)
   const downloadLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 2000, // Limit downloads to 20 per 15 minutes per IP
+    windowMs: 15 * 60 * 1000,
+    max: 20, // temporary fix until rate limit redis issue is resolved
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: true },
-    store,
+    store: createRedisStore('download:'),
     handler: rateLimitHandler,
     skipSuccessfulRequests: false, // Count all requests, even successful ones
   });
 
   // Stricter rate limit for authentication endpoint
   const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
+    windowMs: 15 * 60 * 1000, 
     max: 10, // Limit login attempts to 10 per 15 minutes per IP
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: true},
-    store,
+    store: createRedisStore('auth:'),
     handler: rateLimitHandler,
     skipSuccessfulRequests: true, // Only count failed requests
   });
