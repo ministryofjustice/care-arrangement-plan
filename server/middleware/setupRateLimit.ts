@@ -31,7 +31,7 @@ const setupRateLimit = () => {
     max: 250, // Limit each IP to 250 requests per 15 minutes
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    validate: { trustProxy: false },
+    validate: { trustProxy: true },
     store,
     skip: (req: Request) => {
       return '/health' === req.path || req.path.startsWith('/assets');
@@ -45,7 +45,7 @@ const setupRateLimit = () => {
     max: 2000, // Limit downloads to 20 per 15 minutes per IP
     standardHeaders: true,
     legacyHeaders: false,
-    validate: { trustProxy: false },
+    validate: { trustProxy: true },
     store,
     handler: rateLimitHandler,
     skipSuccessfulRequests: false, // Count all requests, even successful ones
@@ -57,7 +57,7 @@ const setupRateLimit = () => {
     max: 10, // Limit login attempts to 10 per 15 minutes per IP
     standardHeaders: true,
     legacyHeaders: false,
-    validate: { trustProxy: false },
+    validate: { trustProxy: true},
     store,
     handler: rateLimitHandler,
     skipSuccessfulRequests: true, // Only count failed requests
