@@ -25,7 +25,7 @@ const createApp = (): express.Application => {
   const app = express();
 
   app.set('json spaces', 2);
-  app.set('trust proxy', true);
+  app.set('trust proxy', 1);
   app.set('port', process.env.PORT || 3000);
   // Disable X-Powered-By header for security
   app.disable('x-powered-by');
