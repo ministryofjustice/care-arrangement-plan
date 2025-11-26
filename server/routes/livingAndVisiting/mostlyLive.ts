@@ -3,11 +3,14 @@ import { body, matchedData, validationResult } from 'express-validator';
 
 import { whereMostlyLive } from '../../@types/fields';
 import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
+import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
+import addCompletedStep from '../../utils/addCompletedStep';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const mostlyLiveRoutes = (router: Router) => {
-  router.get(paths.LIVING_VISITING_MOSTLY_LIVE, (request, response) => {
+  router.get(paths.LIVING_VISITING_MOSTLY_LIVE, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_MOSTLY_LIVE), (request, response) => {
     const formValues = {
       [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: request.session.livingAndVisiting?.mostlyLive?.describeArrangement,
       [formFields.MOSTLY_LIVE_WHERE]: request.session.livingAndVisiting?.mostlyLive?.where,
@@ -56,6 +59,8 @@ const mostlyLiveRoutes = (router: Router) => {
           mostlyLive: { where, describeArrangement: where === 'other' ? describeArrangement : undefined },
         };
       }
+
+      addCompletedStep(request, FORM_STEPS.LIVING_VISITING_MOSTLY_LIVE);
 
       switch (where) {
         case 'other':

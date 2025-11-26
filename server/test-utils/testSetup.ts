@@ -6,9 +6,10 @@ import i18n from 'i18n';
 import { CAPSession } from '../@types/session';
 import config from '../config';
 
-import { flashFormValues, flashMockErrors, loggerMocks, mockNow, sessionMock } from './testMocks';
+import { flashFormValues, flashMockErrors, loggerMocks, mockCheckFormProgressFromConfig, mockNow, sessionMock } from './testMocks';
 
 jest.mock('../logging/logger', () => loggerMocks);
+jest.mock('../middleware/checkFormProgressFromConfig', () => mockCheckFormProgressFromConfig)
 
 beforeAll(() => {
   i18n.configure({
@@ -27,6 +28,7 @@ beforeEach(() => {
   jest.useFakeTimers({ advanceTimers: true }).setSystemTime(mockNow);
   // Disable authentication by default for tests (can be overridden in individual tests)
   config.useAuth = false;
+  (mockCheckFormProgressFromConfig as jest.Mock).mockClear();
 });
 
 afterEach(() => {

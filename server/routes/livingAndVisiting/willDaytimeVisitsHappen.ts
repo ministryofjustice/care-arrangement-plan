@@ -3,12 +3,15 @@ import { body, matchedData, validationResult } from 'express-validator';
 
 import { yesOrNo } from '../../@types/fields';
 import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
+import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
+import addCompletedStep from '../../utils/addCompletedStep';
 import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils';
 import { parentNotMostlyLivedWith, getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const willDaytimeVisitsHappenRoutes = (router: Router) => {
-  router.get(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, (request, response) => {
+  router.get(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN), (request, response) => {
     const { livingAndVisiting } = request.session;
 
     response.render('pages/livingAndVisiting/willDaytimeVisitsHappen', {
@@ -56,6 +59,8 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
       if (willDaytimeVisitsHappen) {
         return response.redirect(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS);
       }
+
+      addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN);
 
       return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },

@@ -2,11 +2,14 @@ import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
 import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
+import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
+import addCompletedStep from '../../utils/addCompletedStep';
 import { getBackUrl } from '../../utils/sessionHelpers';
 
 const planLongTermNoticeRoutes = (router: Router) => {
-  router.get(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, (request, response) => {
+  router.get(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_LONG_TERM_NOTICE), (request, response) => {
     const planLongTermNotice = request.session.decisionMaking?.planLongTermNotice;
 
     const formValues = {
@@ -61,6 +64,7 @@ const planLongTermNoticeRoutes = (router: Router) => {
         },
       };
 
+      addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
       return response.redirect(paths.DECISION_MAKING_PLAN_REVIEW);
     },
   );
@@ -73,6 +77,7 @@ const planLongTermNoticeRoutes = (router: Router) => {
       },
     };
 
+    addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
     return response.redirect(paths.DECISION_MAKING_PLAN_REVIEW);
   });
 };

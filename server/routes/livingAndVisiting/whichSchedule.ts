@@ -2,11 +2,14 @@ import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
 import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
+import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
+import addCompletedStep from '../../utils/addCompletedStep';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const whichScheduleRoutes = (router: Router) => {
-  router.get(paths.LIVING_VISITING_WHICH_SCHEDULE, (request, response) => {
+  router.get(paths.LIVING_VISITING_WHICH_SCHEDULE, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE), (request, response) => {
     response.render('pages/livingAndVisiting/whichSchedule', {
       errors: request.flash('errors'),
       title: request.__('livingAndVisiting.whichSchedule.title'),
@@ -40,6 +43,7 @@ const whichScheduleRoutes = (router: Router) => {
           answer: whichSchedule,
         },
       };
+      addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE);
 
       return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
@@ -52,6 +56,7 @@ const whichScheduleRoutes = (router: Router) => {
         noDecisionRequired: true,
       },
     };
+    addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE);
 
     return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
   });

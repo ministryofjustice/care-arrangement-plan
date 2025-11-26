@@ -2,11 +2,14 @@ import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
 import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
+import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
+import addCompletedStep from '../../utils/addCompletedStep';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const whatWillHappenRoutes = (router: Router) => {
-  router.get(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, (request, response) => {
+  router.get(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, checkFormProgressFromConfig(FORM_STEPS.SPECIAL_DAYS_WHAT_WILL_HAPPEN), (request, response) => {
     response.render('pages/specialDays/whatWillHappen', {
       errors: request.flash('errors'),
       title: request.__('specialDays.whatWillHappen.title'),
@@ -41,6 +44,8 @@ const whatWillHappenRoutes = (router: Router) => {
         },
       };
 
+      addCompletedStep(request, FORM_STEPS.SPECIAL_DAYS_WHAT_WILL_HAPPEN);
+
       return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );
@@ -52,6 +57,8 @@ const whatWillHappenRoutes = (router: Router) => {
         noDecisionRequired: true,
       },
     };
+
+    addCompletedStep(request, FORM_STEPS.SPECIAL_DAYS_WHAT_WILL_HAPPEN);
 
     return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
   });

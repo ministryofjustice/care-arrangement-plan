@@ -1,6 +1,8 @@
 import { Router } from 'express';
 
+import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
+import addCompletedStep from '../utils/addCompletedStep';
 
 import aboutTheAdultsRoutes from './aboutTheAdults';
 import aboutTheChildrenRoutes from './aboutTheChildren';
@@ -26,6 +28,7 @@ import taskListRoutes from './taskList';
 const routes = (): Router => {
   const router = Router();
   router.get(paths.START, (_request, response) => {
+    addCompletedStep(_request, FORM_STEPS.START);
     response.render('pages/index');
   });
 

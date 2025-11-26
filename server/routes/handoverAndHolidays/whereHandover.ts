@@ -3,11 +3,14 @@ import { body, matchedData, validationResult } from 'express-validator';
 
 import { whereHandoverField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
+import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
+import addCompletedStep from '../../utils/addCompletedStep';
 import { getBackUrl } from '../../utils/sessionHelpers';
 
 const whereHandoverRoutes = (router: Router) => {
-  router.get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, (request, response) => {
+  router.get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER), (request, response) => {
     const formValues = {
       [formFields.WHERE_HANDOVER]: request.session.handoverAndHolidays?.whereHandover?.where,
       [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: request.session.handoverAndHolidays?.whereHandover?.someoneElse,
@@ -66,6 +69,8 @@ const whereHandoverRoutes = (router: Router) => {
         },
       };
 
+      addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
+
       return response.redirect(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS);
     },
   );
@@ -77,6 +82,8 @@ const whereHandoverRoutes = (router: Router) => {
         noDecisionRequired: true,
       },
     };
+
+    addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
 
     return response.redirect(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS);
   });

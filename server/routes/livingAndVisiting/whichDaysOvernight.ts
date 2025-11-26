@@ -3,12 +3,15 @@ import { body, matchedData, validationResult } from 'express-validator';
 
 import { whichDaysField } from '../../@types/fields';
 import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
+import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
+import addCompletedStep from '../../utils/addCompletedStep';
 import { convertWhichDaysFieldToSessionValue, convertWhichDaysSessionValueToField } from '../../utils/formValueUtils';
 import { getBackUrl } from '../../utils/sessionHelpers';
 
 const whichDaysOvernightRoutes = (router: Router) => {
-  router.get(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, (request, response) => {
+  router.get(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_DAYS_OVERNIGHT),(request, response) => {
     const { overnightVisits } = request.session.livingAndVisiting;
 
     const [previousDaysOvernight, previousDescribeArrangement] = convertWhichDaysSessionValueToField(
@@ -74,6 +77,8 @@ const whichDaysOvernightRoutes = (router: Router) => {
         },
       };
 
+      addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WHICH_DAYS_OVERNIGHT);
+
       return response.redirect(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN);
     },
   );
@@ -88,6 +93,8 @@ const whichDaysOvernightRoutes = (router: Router) => {
         },
       },
     };
+
+    addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WHICH_DAYS_OVERNIGHT);
 
     return response.redirect(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN);
   });
