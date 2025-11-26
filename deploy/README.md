@@ -16,31 +16,21 @@ The just defines the infrastructure for the express app. This includes:
 - [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) - secret config values for the app
 
 # Alerts
-Various custom Cloud Platform alerts have been set up for the Intranet, Intranet Archive, and Justice UK.
 The following sections are short runbooks to explain what each alert means, and actions that could be taken toremedy the issue.
 
 
 # SlowResponse
-Projects: `justice-gov-uk`
 This alert fires when, over a 3 minute period, more than 1% of requests were slower than 5 seconds. In other words the p99 latency is > 5s.
 This means that some users are experiencing slow loading of the website. 
 Action could include:
 - Reviewing the ingress dashboard - the link is in the Slack message.
 - Checking the pods e.g.
 ```
-NSP=intranet-dev
-2 kubectl -n $NSP get posd -owide
-```
-- Exec into a pod to identify if an fpm process has caused high CPU.
-```
-NSP=intranet-dev
-POD=$(kubectl -n $NSP get pod -l app=$NSP -o jsonpath="{.items[0].metadata.name}");
-kubectl -n $NSP exec -it $POD -c nginx -- ash
-/usr/local/bin/fpm-health/fpm-status.sh
+NSP=care-arrangement-plan-prod
+kubectl -n $NSP get posd -owide
 ```
 
 # SlownessOutage
-Projects: `justice-gov-uk`
 This alert fires when, over a 3 minute period, more than 10% of requests were slower than 7.5 seconds.
 In other words the p90 latency is > 7.5s.
 This means that a significant percentage of users are experiencing slow loading of the website.
@@ -48,18 +38,17 @@ Check the actions under the slow response section.
 Additional action could include:
 - Restart the pods with `kubectl rollout restart deployment/$NSP -n $NSP`
 
-# High404Rate
-Projects: `justice-gov-uk`
-This alert fires when, over a 3 minute period, x% of responses are 404 responses.
-Note: As this alert was frequently being triggered by bots hitting 404 pages throughout non-working hours, it hasbeen restricted to only firing during weekdays and working hours.
-This could indicate an issue with the database, or that a significant percentage of content has been deleted withoutadding a redirect.
+# High4xxRate
+This alert fires when, over a 3 minute period, x% of responses are 4xx responses.
+Note: As this alert was frequently being triggered by bots hitting 4xx pages throughout non-working hours, it hasbeen restricted to only firing during weekdays and working hours.
+This could indicate an issue with the database, or that a significant percentage of content has been deleted without adding a redirect.
 Action could include:
-- Reviewing Grafana to understand the extent and timeline.
+- Reviewing Grafana to understand the extent and timeline of the timeline and identify the specific 4cc codes (e.g. is it mostly 400 or 404?).
 - Checking the health of infrastructure.
 - Verifying content was not unintentionally deleted.
+- Investigating client request patterns to see if a new integration or client application is misbehaving.
 
 # High5xxRate
-Projects: justice-gov-uk
 This alert fires when, over a 3 minute period, 5% of responses are 5xx errors.
 This could indicate an issue with the codebase throwing a php error. Or, an issue with failing infrastructure like RDS orElastiCache triggering a php error.
 Action could include:
@@ -68,14 +57,12 @@ Action could include:
 - Checking the health of infrastructure.
 
 # ElastiCacheCPUUtilizationHigh
-Projects: `intranet`
 This alert fires when the ElastiCache CPU utilisation is above 70%.
 Actions could include:
 - Review and monitor the Grafana dashboard.
 - Provision a larger instance.
 
 # ElastiCacheFreeableMemoryLow
-Projects: `intranet`
 This alert fires when the ElastiCache freeable memory is lower than 500MB.
 Actions could include:
 - Review and monitor the Grafana dashboard.
