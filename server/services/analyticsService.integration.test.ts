@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 
-import { logPageVisit } from './analyticsService';
 import logger from '../logging/logger';
+
+import { logPageVisit } from './analyticsService';
 
 /**
  * Integration test that uses the REAL hashedIdentifier (not mocked)

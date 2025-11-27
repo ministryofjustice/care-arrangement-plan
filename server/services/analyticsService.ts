@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 
-import cookieNames from '../constants/cookieNames';
 import UserEvents from '../constants/userEvents';
 import logger from '../logging/logger';
 import { generateHashedIdentifier } from '../utils/hashedIdentifier';

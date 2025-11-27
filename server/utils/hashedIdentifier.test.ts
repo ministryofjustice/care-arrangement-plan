@@ -1,3 +1,5 @@
+import crypto from 'crypto';
+
 import { generateHashedIdentifier, getDailySalt } from './hashedIdentifier';
 
 describe('hashedIdentifier', () => {
@@ -102,7 +104,6 @@ describe('hashedIdentifier', () => {
     });
 
     it('generates different hashes than SHA256 of just the IP', () => {
-      const crypto = require('crypto');
       const ip = '192.168.1.1';
       const ua = 'Mozilla/5.0';
       const salt = '2025-01-15';

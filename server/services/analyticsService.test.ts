@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 
-import { logPageVisit } from './analyticsService';
 import logger from '../logging/logger';
 import { generateHashedIdentifier } from '../utils/hashedIdentifier';
+
+import { logPageVisit } from './analyticsService';
 
 // Mock the logger
 jest.mock('../logging/logger', () => ({
