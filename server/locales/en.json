@@ -193,9 +193,8 @@
   },
   "notSafe": {
     "title": "Finding the right route for you",
-    "content": "<p>This service may not be right for you if you’ve experienced domestic abuse.</p><p>Find out <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">how to recognise domestic abuse</a>.</p><p>Get help and advice on <a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">making child arrangements when there’s been domestic abuse</a>.</p>",
-    "feelConfident": "If you feel confident that you can discuss things without feeling intimidated, ",
-    "continue": "continue using the service"
+    "content": "<p>This service may not be right for you if you’ve experienced domestic abuse.</p><p>Find out <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">how to recognise domestic abuse</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">Get help and advice on making child arrangements when there’s been domestic abuse</a>.</p>",
+    "continue": "If you feel confident that you can discuss things without feeling intimidated continue using the service"
   },
   "childrenSafetyCheck": {
     "title": "Children’s safety",
@@ -210,9 +209,8 @@
   },
   "childrenNotSafe": {
     "title": "Getting help",
-    "content": "<p>It may not be appropriate to make child arrangements if there’s any risk of harm to the children.</p><p>Get advice on <a href=\"https://www.gov.uk/government/publications/coronavirus-covid-19-keeping-children-safe-from-abuse-and-harm/advice-to-parents-and-carers-on-keeping-children-safe-from-abuse-and-harm\">protecting children from abuse</a>.</p><p>Citizens Advice has advice on <a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">making child arrangements when there’s been domestic abuse</a>.</p>",
-    "feelConfident": "If you feel confident that making child arrangements will not put children at risk, ",
-    "continue": "continue using the service"
+    "content": "<p>It may not be appropriate to make child arrangements if there’s any risk of harm to the children.</p><p><a href=\"https://www.nspcc.org.uk/keeping-children-safe/types-of-abuse/domestic-abuse/?ac=221274\">Get advice on How to Protect Children From Domestic Abuse | NSPCC </a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">Citizens Advice has advice on making child arrangements when there’s been domestic abuse</a>.</p>",
+    "continue": "If you feel confident that making child arrangements will not put children at risk, continue using the service"
   },
   "doWhatsBest": {
     "title": "What’s best for the children?",
@@ -430,15 +428,14 @@
   },
   "sharePlan": {
     "nextSteps": "Next steps",
-    "title": "Child arrangements plan for {{{ names }}}",
-    "mustNowShare": "You've created a proposed child arrangements plan. You must now share the plan with {{{ otherAdult }}} to get their agreement.",
-    "notLegallyBinding": "Any plan you make using this service is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",
+    "title": "You've created a proposed child arrangements plan.",
     "whatToDoNext": "What to do next",
-    "sendToSecondary": "Send this proposed child arrangements plan to {{{ otherAdult }}}. {{{ otherAdult }}} will have the chance to respond.",
-    "downloadPlanButton": "Download Plan",
+    "sendToSecondary": "Download a PDF of this plan and share with {{{ otherAdult }}}.",
+    "collaborate": "You can collaborate with {{{ otherAdult }}} to create a version you both agree with.",
+    "downloadPlanButton": "Download plan as PDF",
     "downloadHtml": "Download as HTML (accessible)",
-    "ifTheyDoNotRespond": "If {{{ otherAdult }}} does not respond",
-    "tryMediation": "If {{{ otherAdult }}} does not respond, you can try mediation. The next step would be to apply for a court order.",
+    "ifTheyDoNotRespond": "If there's no response",
+    "tryMediation": "If {{{ otherAdult }}} does not respond or you can't make an agreement between yourselves, you could try mediation.",
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
     "whatWeAreTelling": {
       "title": "What we're telling {{{ name }}} about this plan",
@@ -564,11 +561,11 @@
   },
   "confirmation": {
     "panelTitle": "You have downloaded your plan",
-    "checkDownloadsFolder": "Check your downloads folder to view your plan.",
+    "whatYouNeedToDoNext": "What you need to do next:",
+    "checkDownloadsFolder": "Check your downloads folder for a PDF of your plan and share with {{{ otherAdult }}} who will get a chance to collaborate.",
     "helpUsImprove": "Help us improve this service",
-    "appreciateFeedback": "We would appreciate your feedback to help us improve the service.",
-    "emailFeedback": "You can email any feedback to {{{ contactEmail }}}.",
-    "whatDidYouThink": "What did you think of this service? (takes 5 minutes)",
+    "appreciateFeedback": "With your help we can continually improve this service for other users.",
+    "whatDidYouThink": "Sign up and receive an incentive when you take part in further research",
     "cantFindPlan": "Can't find your plan?",
     "checkDownloads": "Check your downloads folder. If not then please download again.",
     "downloadPdf": "Download as a PDF (0.5 MB)",

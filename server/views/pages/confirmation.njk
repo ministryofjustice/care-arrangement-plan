@@ -6,11 +6,10 @@
     <div class="govuk-grid-column-two-thirds-from-desktop">
       {{ govukPanel({titleText: __('confirmation.panelTitle') }) }}
 
-      <p class="govuk-body govuk-!-margin-top-6">{{ __('confirmation.checkDownloadsFolder') }}</p>
+      <p class="govuk-body govuk-!-margin-top-6"><b>{{ __('confirmation.whatYouNeedToDoNext') }}</b> {{ __('confirmation.checkDownloadsFolder') }}</p>
 
       <h2 class="govuk-heading-m govuk-!-margin-top-6">{{ __('confirmation.helpUsImprove') }}</h2>
       <p class="govuk-body">{{ __('confirmation.appreciateFeedback') }}</p>
-      <p class="govuk-body">{{ __('confirmation.emailFeedback', { contactEmail: contactEmail })  | customUrlize | safe }}</p>
 
       {% if feedbackUrl %}
       <p class="govuk-body govuk-!-margin-top-4">
