@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import cookieNames from '../constants/cookieNames';
 import UserEvents from '../constants/userEvents';
 import logger from '../logging/logger';
+import { generateHashedIdentifier } from '../utils/hashedIdentifier';
 
 /**
  * A generic event logging function that forms the base for all analytics events.
@@ -27,10 +28,12 @@ const logPageVisit = (req: Request, res: Response) => {
   const { method, path } = req;
   const { statusCode } = res;
 
-  const userId = req.cookies ? req.cookies[cookieNames.AUTHENTICATION] : null;
+  // Generate privacy-preserving hashed identifier
+  // This rotates every 24 hours for GDPR compliance while allowing deduplication
+  const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
 
   const eventData = {
-    user_id: userId || 'anonymous',
+    hashed_user_id: hashedUserId,
     path: path,
     method: method,
     status_code: statusCode,
