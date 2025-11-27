@@ -22,7 +22,7 @@ spec:
         rate(kube_pod_container_status_restarts_total{job="kube-state-metrics", namespace="care-arrangement-plan-dev"}[5m]) * 60 > 0
       for: 5m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
         
     - alert: KubePodNotReady
       annotations:
@@ -34,7 +34,7 @@ spec:
         > 0
       for: 5m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
         
     - alert: KubeDeploymentGenerationMismatch
       annotations:
@@ -47,7 +47,7 @@ spec:
         kube_deployment_metadata_generation{job="kube-state-metrics", namespace="care-arrangement-plan-dev"}
       for: 15m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
 
     - alert: KubeQuotaExceeded
       annotations:
@@ -61,7 +61,7 @@ spec:
         > 90
       for: 15m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
 
     - alert: KubeDeploymentReplicasMismatch
       annotations:
@@ -75,7 +75,7 @@ spec:
         kube_deployment_status_replicas_available{job="kube-state-metrics", namespace="care-arrangement-plan-dev"}
       for: 10m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
 
     - alert: KubeDeploymentUnready
       annotations:
@@ -86,7 +86,7 @@ spec:
         kube_deployment_status_replicas_available{job="kube-state-metrics", namespace="care-arrangement-plan-dev"} == 0
       for: 5m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
 
   - name: application-rules
     rules:
@@ -102,7 +102,7 @@ spec:
         > 0.05
       for: 3m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
 
     - alert: SlowResponses
       annotations:
@@ -121,7 +121,7 @@ spec:
         AND ON() (1 <= day_of_week() <= 5)
       for: 3m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
 
     - alert: SlownessOutage
       annotations:
@@ -139,7 +139,7 @@ spec:
           ) > 2
       for: 5m
       labels:
-          severity: care-arrangement-plan-alerts
+          severity: care-arrangement-plan-dev
 
     - alert: High4xxRate
       annotations:
@@ -153,7 +153,7 @@ spec:
         > 0.05
       for: 3m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
 
 
   - name: elasticache-rules
@@ -162,7 +162,7 @@ spec:
       expr: aws_elasticache_cpuutilization_average{cache_cluster_id=~"cp-ea0bf612cd395806-00[12]"} > 70
       for: 5m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
       annotations:
         message: ElastiCache instance {{ $labels.cache_cluster_id }} CPU utilization is above 70%.
         
@@ -171,7 +171,7 @@ spec:
       expr: aws_elasticache_freeable_memory_average{cache_cluster_id=~"cp-ea0bf612cd395806-00[12]"} < 500000000
       for: 5m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
       annotations:
         message: ElastiCache instance {{ $labels.cache_cluster_id }} freeable memory is below 500MB.
 
@@ -180,6 +180,6 @@ spec:
       expr: aws_elasticache_swap_usage_average{cache_cluster_id=~"cp-ea0bf612cd395806-00[12]"} > 50000000
       for: 5m
       labels:
-        severity: care-arrangement-plan-alerts
+        severity: care-arrangement-plan-dev
       annotations:
         message: ElastiCache instance {{ $labels.cache_cluster_id }} swap usage is high (above 50MB).

@@ -27,7 +27,7 @@ Action could include:
 - Checking the pods e.g.
 ```
 NSP=care-arrangement-plan-prod
-kubectl -n $NSP get posd -owide
+kubectl -n $NSP get pods -owide
 ```
 
 # SlownessOutage
@@ -36,7 +36,7 @@ In other words the p90 latency is > 7.5s.
 This means that a significant percentage of users are experiencing slow loading of the website.
 Check the actions under the slow response section.
 Additional action could include:
-- Restart the pods with `kubectl rollout restart deployment/$NSP -n $NSP`
+- Restart the pods with `kubectl rollout restart deployment/$NSP-deployment -n $NSP`
 
 # High4xxRate
 This alert fires when, over a 3 minute period, x% of responses are 4xx responses.
