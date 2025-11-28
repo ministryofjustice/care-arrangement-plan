@@ -13,7 +13,7 @@ import setupRateLimit from './middleware/setupRateLimit';
 import setupRequestLogging from './middleware/setupRequestLogging';
 import setUpWebRequestParsing from './middleware/setupRequestParsing';
 import setupRobotsTxt from './middleware/setupRobotsTxt';
-import setupServiceNoLongerAvailable from './middleware/setupServiceNoLongerAvailable';
+// import setupServiceNoLongerAvailable from './middleware/setupServiceNoLongerAvailable';
 import setUpStaticResources from './middleware/setUpStaticResources';
 import setUpWebSecurity from './middleware/setUpWebSecurity';
 import setUpWebSession from './middleware/setUpWebSession';
