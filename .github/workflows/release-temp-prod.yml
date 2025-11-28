@@ -1,8 +1,9 @@
 name: Deploy release to Cloud Platform Prod
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - '*'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
