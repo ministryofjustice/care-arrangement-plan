@@ -1,0 +1,27 @@
+name: Deploy release directly to Cloud Platform Production
+
+on:
+  # On https://github.com/ministryofjustice/care-arrangement-plan/actions/workflows/release-production.yml
+  # use the 'Run workflow' button to trigger this workflow.
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: 'Validate'
+    uses: ./.github/workflows/validation.yml
+    secrets: inherit
+
+  image:
+    name: 'Build & Push Image'
+    uses: ./.github/workflows/build-push-image.yml
+    needs: [validate]
+    secrets: inherit
+
+  deploy_production:
+    name: 'Deploy to Production'
+    needs: [image, validate]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: production
+      registry: ${{ needs.image.outputs.registry }}
+    secrets: inherit
