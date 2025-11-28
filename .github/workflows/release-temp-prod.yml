@@ -11,13 +11,11 @@ concurrency:
 jobs:
   validate:
     name: 'Validate'
-    if: github.event.ref == 'refs/heads/main'
     uses: ./.github/workflows/validation.yml
     secrets: inherit
 
   image:
     name: 'Build & Push Image'
-    if: github.event.ref == 'refs/heads/main'
     uses: ./.github/workflows/build-push-image.yml
     needs: [validate]
     secrets: inherit
