@@ -23,7 +23,7 @@ describe('analyticsService - Integration', () => {
     const mockReq = {
       method: 'GET',
       path: '/task-list',
-      ip: '192.168.1.1',
+      ip: '192.168.1.1', // Dummy IP from RFC 1918 private address range
       get: jest.fn().mockReturnValue('Mozilla/5.0 (Test Browser)'),
     } as unknown as Request;
 
@@ -48,10 +48,10 @@ describe('analyticsService - Integration', () => {
     expect(firstHashedId).toHaveLength(16);
     expect(firstHashedId).toMatch(/^[0-9a-f]{16}$/);
 
-    console.log('\n Integration Test Results:');
-    console.log(`   Same user made 2 visits`);
-    console.log(`   Both got hashed_user_id: ${firstHashedId}`);
-    console.log(`   ✓ Deduplication works!\n`);
+    logger.info('\n Integration Test Results:');
+    logger.info(`   Same user made 2 visits`);
+    logger.info(`   Both got hashed_user_id: ${firstHashedId}`);
+    logger.info(`   ✓ Deduplication works!\n`);
   });
 
   it('generates different hashed_user_id for different IPs', () => {
@@ -60,14 +60,14 @@ describe('analyticsService - Integration', () => {
     const mockReq1 = {
       method: 'GET',
       path: '/task-list',
-      ip: '192.168.1.1',
+      ip: '192.168.1.1', // Dummy IP from RFC 1918 private address range
       get: jest.fn().mockReturnValue(userAgent),
     } as unknown as Request;
 
     const mockReq2 = {
       method: 'GET',
       path: '/task-list',
-      ip: '192.168.1.2',
+      ip: '192.168.1.2', // Dummy IP from RFC 1918 private address range
       get: jest.fn().mockReturnValue(userAgent),
     } as unknown as Request;
 
@@ -81,17 +81,17 @@ describe('analyticsService - Integration', () => {
 
     expect(firstHashedId).not.toBe(secondHashedId);
 
-    console.log('\n Integration Test Results:');
-    console.log(`   User 1 (192.168.1.1): ${firstHashedId}`);
-    console.log(`   User 2 (192.168.1.2): ${secondHashedId}`);
-    console.log(`   ✓ Different users get different hashes!\n`);
+    logger.info('\n Integration Test Results:');
+    logger.info(`   User 1 (192.168.1.1): ${firstHashedId}`);
+    logger.info(`   User 2 (192.168.1.2): ${secondHashedId}`);
+    logger.info(`   ✓ Different users get different hashes!\n`);
   });
 
   it('logs complete event structure with real hashed identifiers', () => {
     const mockReq = {
       method: 'POST',
       path: '/about-the-children',
-      ip: '10.0.0.5',
+      ip: '10.0.0.5', // Dummy IP from RFC 1918 private address range
       get: jest.fn().mockReturnValue('Mozilla/5.0 (iPhone; CPU iPhone OS 17_0)'),
     } as unknown as Request;
 
@@ -112,13 +112,13 @@ describe('analyticsService - Integration', () => {
     );
 
     const loggedData = mockLogger.mock.calls[0][0];
-    console.log('\n Sample Log Output:');
-    console.log(JSON.stringify(loggedData, null, 2));
-    console.log();
+    logger.info('\n Sample Log Output:');
+    logger.info(JSON.stringify(loggedData, null, 2));
+    logger.info('');
   });
 
   it('demonstrates privacy: cannot reverse hash to get original IP', () => {
-    const secretIP = '203.0.113.42'; // User's real IP
+    const secretIP = '203.0.113.42'; // Dummy IP from RFC 5737 TEST-NET-3 documentation range
     const userAgent = 'Mozilla/5.0';
 
     const mockReq = {
@@ -144,9 +144,9 @@ describe('analyticsService - Integration', () => {
     const logString = JSON.stringify(loggedData);
     expect(logString).not.toContain(secretIP);
 
-    console.log('\n Privacy Verification:');
-    console.log(`   Real IP:      ${secretIP} (NEVER logged)`);
-    console.log(`   Hashed ID:    ${hashedId} (cannot be reversed)`);
-    console.log(`   ✓ Privacy preserved!\n`);
+    logger.info('\n Privacy Verification:');
+    logger.info(`   Real IP:      ${secretIP} (NEVER logged)`);
+    logger.info(`   Hashed ID:    ${hashedId} (cannot be reversed)`);
+    logger.info(`   ✓ Privacy preserved!\n`);
   });
 });
