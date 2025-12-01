@@ -16,9 +16,6 @@ export const getDailySalt = (): string => {
  * Creates a privacy-preserving hashed identifier from IP + User-Agent
  * This identifier rotates every 24 hours and cannot be traced back to the original IP
  *
- * Pattern used by GOV.UK services like Notify and Pay for GDPR-compliant analytics.
- * Allows deduplication and journey tracking within a 24-hour window without long-term tracking.
- *
  * @param ip - The user's IP address (from req.ip)
  * @param userAgent - The user's User-Agent header
  * @param salt - Optional salt override for testing (defaults to daily rotating salt)

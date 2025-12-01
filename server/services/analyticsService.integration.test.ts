@@ -48,7 +48,7 @@ describe('analyticsService - Integration', () => {
     expect(firstHashedId).toHaveLength(16);
     expect(firstHashedId).toMatch(/^[0-9a-f]{16}$/);
 
-    console.log('\n✅ Integration Test Results:');
+    console.log('\n Integration Test Results:');
     console.log(`   Same user made 2 visits`);
     console.log(`   Both got hashed_user_id: ${firstHashedId}`);
     console.log(`   ✓ Deduplication works!\n`);
@@ -81,7 +81,7 @@ describe('analyticsService - Integration', () => {
 
     expect(firstHashedId).not.toBe(secondHashedId);
 
-    console.log('\n✅ Integration Test Results:');
+    console.log('\n Integration Test Results:');
     console.log(`   User 1 (192.168.1.1): ${firstHashedId}`);
     console.log(`   User 2 (192.168.1.2): ${secondHashedId}`);
     console.log(`   ✓ Different users get different hashes!\n`);
@@ -112,7 +112,7 @@ describe('analyticsService - Integration', () => {
     );
 
     const loggedData = mockLogger.mock.calls[0][0];
-    console.log('\n✅ Sample Log Output:');
+    console.log('\n Sample Log Output:');
     console.log(JSON.stringify(loggedData, null, 2));
     console.log();
   });
@@ -144,7 +144,7 @@ describe('analyticsService - Integration', () => {
     const logString = JSON.stringify(loggedData);
     expect(logString).not.toContain(secretIP);
 
-    console.log('\n✅ Privacy Verification:');
+    console.log('\n Privacy Verification:');
     console.log(`   Real IP:      ${secretIP} (NEVER logged)`);
     console.log(`   Hashed ID:    ${hashedId} (cannot be reversed)`);
     console.log(`   ✓ Privacy preserved!\n`);
