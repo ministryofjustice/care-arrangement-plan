@@ -94,18 +94,30 @@ class Pdf {
   }
 
   private addFooterToPage(pageNumber: number) {
+    const pageCountText = this.request.__('pdf.pageCount', {
+      currentPage: pageNumber.toString(),
+      totalPages: this.document.getNumberOfPages().toString(),
+    });
+
+    // Optional extra footer text (displayed centred and bold). The key used here is
+    // `pdf.everyPageReminder` to match existing locale usage; change if you prefer a
+    // different i18n key (e.g. `pdf.footerExtra`).
+    const extraFooterText = this.request.__('pdf.everyPageReminder') || '';
+
+    const pageWidth = this.document.internal.pageSize.getWidth();
+    const pageHeight = this.document.internal.pageSize.getHeight();
+    const footerY = pageHeight - MARGIN_WIDTH;
+
+    // Draw centered, bold extra text if present
+    if (extraFooterText) {
+      this.document.setFont(FONT, FontStyles.BOLD).setFontSize(MAIN_TEXT_SIZE).text(extraFooterText, pageWidth / 2, footerY, { align: 'center' });
+    }
+
+    // Draw right-aligned page count on the same baseline (normal weight)
     this.document
       .setFont(FONT, FontStyles.NORMAL)
       .setFontSize(MAIN_TEXT_SIZE)
-      .text(
-        this.request.__('pdf.pageCount', {
-          currentPage: pageNumber.toString(),
-          totalPages: this.document.getNumberOfPages().toString(),
-        }),
-        this.document.internal.pageSize.getWidth() - MARGIN_WIDTH,
-        this.document.internal.pageSize.getHeight() - MARGIN_WIDTH,
-        { align: 'right' },
-      );
+      .text(pageCountText, pageWidth - MARGIN_WIDTH, footerY, { align: 'right' });
   }
 
   heightWillOverflowDocument(height: number) {
@@ -219,7 +231,7 @@ class Pdf {
     // behave the same as all other components we add
     const textLines = this.splitParagraph({ text, size, style });
     if (urlize) {
-      const urls = text.match(/https?:\/\/\S+/g).map((url) => url.replace(/^[(|<|&lt;]+|[.|,|)|\n|&gt;]+$/g, ''));
+      const urls = (text.match(/https?:\/\/\S+/g) || []).map((url) => url.replace(/^[(|<|&lt;]+|[.|,|)|\n|&gt;]+$/g, ''));
       this.addUrlizedParagraph({ text: textLines, size, style }, urls);
 
       if (urls.length !== 0) {

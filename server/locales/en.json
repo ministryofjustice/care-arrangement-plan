@@ -193,7 +193,7 @@
   },
   "notSafe": {
     "title": "Finding the right route for you",
-    "content": "<p>This service may not be right for you if you’ve experienced domestic abuse.</p><p>Find out <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">how to recognise domestic abuse</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">Get help and advice on making child arrangements when there’s been domestic abuse</a>.</p>",
+    "content": "<p>This service may not be right for you if you’ve experienced domestic abuse.</p><p><a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">Find out how to recognise domestic abuse</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">Get help and advice on making child arrangements when there’s been domestic abuse</a>.</p>",
     "continue": "If you feel confident that you can discuss things without feeling intimidated continue using the service"
   },
   "childrenSafetyCheck": {
@@ -204,6 +204,7 @@
     "childAbuse": "child abuse or neglect",
     "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
     "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm",
+    "stopNow": "If you have any concerns about safety, stop now.",
     "questionTitle": "Are the children safe?",
     "error": "Select whether the children are safe or not"
   },
@@ -439,30 +440,38 @@
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
     "whatWeAreTelling": {
       "title": "What we're telling {{{ name }}} about this plan",
+      "whatYouNeedToDo" : "What you need to do",
       "proposedPlan": "Proposed child arrangements plan for {{{ childrenNames }}}",
-      "initialIsAsking": "{{{ senderName }}} is asking that you work together to come up with a plan for how to look after {{{ childrenNames }}}. Please read through the suggestions {{{ senderName }}} has made. You’re then invited to reply with any suggestions of your own.",
-      "doNotNeedToAccept": "This plan you’ve been sent is not legally binding. It’s a suggestion from {{{ senderName }}}. You do not have to do what it says.",
+      "initialIsAsking": "{{{ senderName }}} has created this plan and is asking that you collaborate with them to agree the best way to look after {{{ childrenNames }}}.",
+      "pleaseReadThrough": "Please read through the suggestions made by {{{ senderName }}}. You can use this PDF to collaborate with {{{ senderName }}} to create a version you both agree with.",
+      "thePlanYouveBeenSent": "The plan you’ve been sent",
+      "doNotNeedToAccept": "This plan is not legally binding, it's a suggestion from {{{ senderName }}} on how to best look after {{{ childrenNames }}}’s needs. You do not have to do what it says. ",
       "insteadYouCan": "Instead, you can:",
-      "suggestChanges": "use this form to suggest changes to what {{{ senderName }}} is proposing",
+      "suggestChanges": "use this form to suggest changes to {{{ senderName }}}'s proposals start your own child arrangements plan, or find a similar service",
       "startYourOwn": "start your own proposed child arrangements plan using the propose a child arrangements plan service on GOV.UK, or by finding a similar service",
       "makeCustom": "make a written plan of your own without using any service or template",
       "notLegallyBinding": "Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",
       "benefitsHeading": "The benefits of getting a written agreement in place",
-      "benefits": "If you and {{{ senderName }}} can work together to make written child arrangements, you’re more likely to avoid court. You’re also more likely to get an arrangement that works for you. That’s because people who go to court often find the judge makes decisions that don’t suit parents or children.",
-      "topTips": "Top tips",
-      "compromise": "One of the main reasons people end up in court is that they are not willing to compromise to reach agreement. It may help you avoid court if you can work with {{{ senderName }}} to find a compromise that’s best for your children.",
-      "childrensInput": "Get your children’s input into the arrangements you are making so that they feel included and their needs are met.",
+      "avoidCourt": "If you and {{{ senderName }}} can collaborate to make written child arrangements for {{{ childrenNames }}}, you’re more like to avoid court  and the cost associated with it.",
+      "bestOutcome": "You’re also more likely to reach an arrangement which is the best outcome for your children.",
+      "judgeMakeDecisions": "That’s because people who go to court often find the judge makes decisions which don't suit parents or children.",
+      "topTips": "Tips to help you and your children",
+      "childrensInput": "Get your children’s input into any arrangements plan so they feel included and their needs are met remember to put you children’s needs and feelings first  it may not be in the children’s best interests to split time exactly between households.",
       "childrenFirst": "Remember to always put your children’s needs and feelings first.",
       "splitMayNotBeBest": "It may not be in the children’s best interests to split time exactly between households.",
       "moreInfoHeading": "More information about divorce and separation",
-      "moreInfo": "Check GOV.UK to find what support is available. You can search for topics including:",
-      "separatingOrDivorcing": "separating or divorcing: what you need to do",
+      "moreInfo": "Check GOV.UK to see what support and advice available to you.",
+      "separatingOrDivorcing": "Search for topics including: separating or divorcing, what you need to do making child arrangements if you divorce or separate",
       "makingChildArrangements": "making child arrangements if you divorce or separate",
       "safetyCheckHeading": "Safety check",
-      "safetyCheck": "To make child arrangements you need to be able to state your needs and views without feeling intimidated. The other parent or carer must not be a threat to you or to your children's safety.",
+      "safetyCheck": "To make child arrangements you need to be able to state your needs and views without feeling intimidated.",
+      "childrensSafety": "The other parent or carer must not be a threat to you or to your children's safety.",
       "doNotContinueIf": "Do not continue with this process if there has been:",
-      "stopIfAnyConcern": "If you have any concerns about safety, stop now. Find another way to make arrangements by visiting https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements.",
-      "gettingHelpHeading": "Getting help with abuse and domestic violence",
+      "stopIfAnyConcern": "If you have any concerns about safety, stop now.",
+      "findAnotherWay": "Find another way to make arrangements by visiting https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements.",
+      "gettingHelpDomesticAbuse":"Getting help with domestic abuse To find out more about what is child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse.",
+      "unsureVictim":"If you’re unsure whether you’re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
+      "gettingHelpHeading": "Getting help with domestic abuse",
       "gettingHelp": "To find out more about what is child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse. If you’re unsure whether you’re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
       "courtOrderHeading": "If there is a court order in place",
       "ifCourtOrderInIsPlace": "If there is a court order in place, do not continue. To change or enforce an existing order, visit https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order."
@@ -516,12 +525,15 @@
           "suggestedYearsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} years' time."
         }
       },
-      "whatHappensNowHeading": "What happens now?",
+      "whatHappensNowHeading": "What you need to do now",
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{{ senderName }}}. You should try to create a written record of what you have both agreed.",
       "notLegallyBinding": "Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",
-      "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation. The next step would be to apply for a court order.",
+      "cantAgreeHeading":"If you can't agree",
+      "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation.",
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
-      "helpUsImprove": "Help us improve this service by taking a short survey about the Child Arrangements Plan - it will take 5 minutes: https://www.smartsurvey.co.uk/s/EI62BL/",
+      "helpUsImproveHeading": "Help us improve this service",
+      "helpUsImprove": "With your help we can continually improve this service for other users",
+      "surveyLink":"Link: Sign up and receive an incentive when you take part in further research https://www.smartsurvey.co.uk/s/EI62BL/",
       "doNotAgree": {
         "livingAndVisiting": {
           "mostlyLive": "If you do not agree, suggest where the children will mostly live",
@@ -560,7 +572,7 @@
     }
   },
   "confirmation": {
-    "panelTitle": "You have downloaded your plan",
+    "downloadedYourPlanTitle": "You have downloaded your plan",
     "whatYouNeedToDoNext": "What you need to do next:",
     "checkDownloadsFolder": "Check your downloads folder for a PDF of your plan and share with {{{ otherAdult }}} who will get a chance to collaborate.",
     "helpUsImprove": "Help us improve this service",
@@ -573,6 +585,7 @@
   },
   "pdf": {
     "name": "Proposed child arrangements plan",
+    "everyPageReminder" : "Make sure you have received every page of this document",
     "pageCount": "Page {{ currentPage }} of {{ totalPages }}"
   }
 }
