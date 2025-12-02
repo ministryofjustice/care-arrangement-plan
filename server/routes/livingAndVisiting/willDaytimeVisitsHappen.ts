@@ -57,6 +57,7 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
       }
 
       if (willDaytimeVisitsHappen) {
+        addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN);
         return response.redirect(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS);
       }
 
