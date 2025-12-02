@@ -21,7 +21,7 @@
       <h1 class="govuk-heading-xl">{{ __('serviceName') }}</h1>
       <p>This service helps you work out a plan for your child arrangements with a co-parent or carer.</p>
       <p>This service works best if you collaborate with the other parent or carer but it can also be done individually.</p>
-      <p>The service creates a PDF containing your proposed plan which you can share with another parent or carer to ask their agreement.
+      <p>The service creates a PDF or accessible HTML page containing your proposed plan which you can share with another parent or carer to ask their agreement.
       </p>
       <p>Any plan you create using this service is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time. 
       </p>
@@ -40,6 +40,12 @@
         <li>you want to propose changes to your existing arrangements and there is no court order in place.</li>
       </ul>
 
+            <p>
+        You can also
+        <a href="{{ paths.DOWNLOAD_PAPER_FORM }}">download a template child arrangements plan (PDF, 0.5MB)</a>.
+      </p>
+
+
       {{
         govukButton({
           text: "Start now",
@@ -48,23 +54,19 @@
         })
       }}
 
-      <p>
-        You can also
-        <a href="{{ paths.DOWNLOAD_PAPER_FORM }}">download a template child arrangements plan (PDF, 0.5MB)</a>.
-      </p>
-
+      <h2 class="govuk-heading-m">External help links</h2>
       <p>
         If you think the other parent is a threat to you or your children's safety, you should not use this service.
         <a
           href="https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements"
           target="_blank" rel="noopener noreferrer" title="Visit citizens advice"
-          >Find another way to make arrangements from citizens advice (opens in new tab)</a
+          >Find another way to make arrangements (opens in new tab)</a
         >.
       </p>
 
       <p><a href="https://www.nspcc.org.uk/what-is-child-abuse"
         target="_blank" rel="noopener noreferrer" title="Visit NSPCC to find out about child abuse and neglect"
-        >Find out more about child abuse and neglect from the NSPCC (opens in new tab)</a>.</p>
+        >Find out more about child abuse and neglect (opens in new tab)</a>.</p>
       <p>
         <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse"
           target="_blank" rel="noopener noreferrer" title="Find out about signs of domestic violence"
@@ -76,7 +78,7 @@
       <p>
         <a href="https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf"
           target="_blank" rel="noopener noreferrer" title="Visit cafass to see tips for parents"
-          >Visit cafcass to see tips for parents (pdf opens in new tab)</a
+          >Tips for parents (opens in new tab)</a
         >
         from a child's perspective.
       </p>

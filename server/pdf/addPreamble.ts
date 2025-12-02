@@ -53,6 +53,7 @@ const addPreamble = (pdf: Pdf) => {
       {
         text: request.__('sharePlan.whatWeAreTelling.doNotNeedToAccept', {
           senderName: request.session.initialAdultName,
+          childrenNames: formattedChildrenNames(request),
         }),
         size: MAIN_TEXT_SIZE,
         style: FontStyles.NORMAL,
@@ -98,6 +99,7 @@ const addPreamble = (pdf: Pdf) => {
     bulletText: [
       request.__('sharePlan.whatWeAreTelling.avoidCourt', {
         senderName: request.session.initialAdultName,
+        childrenNames: formattedChildrenNames(request),
       }),
       request.__('sharePlan.whatWeAreTelling.bestOutcome'),
       request.__('sharePlan.whatWeAreTelling.judgeMakeDecisions'),
