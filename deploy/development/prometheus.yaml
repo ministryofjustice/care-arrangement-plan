@@ -1,0 +1,185 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  namespace: care-arrangement-plan-dev
+  labels:
+    prometheus: prometheus-operator
+    role: alert-rules
+    release: prometheus-operator
+  name: monitoring-rules-care-arrangement-plan-dev
+spec:
+  groups:
+  
+  - name: kubernetes-apps
+    rules:
+    - alert: KubePodCrashLooping
+      annotations:
+        message: Pod {{ $labels.namespace }}/{{ $labels.pod }} ({{ $labels.container }}) is restarting {{ printf "%.2f" $value }} times / 5 minutes.
+        
+        runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubepodcrashlooping
+        summary: Pod container is crash looping.
+      expr: |
+        rate(kube_pod_container_status_restarts_total{job="kube-state-metrics", namespace="care-arrangement-plan-dev"}[5m]) * 60 > 0
+      for: 5m
+      labels:
+        severity: care-arrangement-plan-dev
+        
+    - alert: KubePodNotReady
+      annotations:
+        message: Pod {{ $labels.namespace }}/{{ $labels.pod }} has been in a non-ready state for longer than 5 minutes.
+        runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubepodnotready
+        summary: Pod is not in a Ready state.
+      expr: |
+        sum by (namespace, pod) (kube_pod_status_phase{job="kube-state-metrics", phase=~"Pending|Unknown", namespace="care-arrangement-plan-dev"}) 
+        > 0
+      for: 5m
+      labels:
+        severity: care-arrangement-plan-dev
+        
+    - alert: KubeDeploymentGenerationMismatch
+      annotations:
+        message: Deployment generation for {{ $labels.namespace }}/{{ $labels.deployment }} does not match (Deployment failed but not rolled back).
+        runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubedeploymentgenerationmismatch
+        summary: Deployment failed to update.
+      expr: |
+        kube_deployment_status_observed_generation{job="kube-state-metrics", namespace="care-arrangement-plan-dev"}
+        !=
+        kube_deployment_metadata_generation{job="kube-state-metrics", namespace="care-arrangement-plan-dev"}
+      for: 15m
+      labels:
+        severity: care-arrangement-plan-dev
+
+    - alert: KubeQuotaExceeded
+      annotations:
+        message: Namespace {{ $labels.namespace }} is using {{ printf "%0.0f" $value }}% of its {{ $labels.resource }} quota.
+        runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubequotaexceeded
+        summary: Namespace quota is nearing its limit.
+      expr: |
+        100 * kube_resourcequota{job="kube-state-metrics", type="used", namespace="care-arrangement-plan-dev"} 
+        / ignoring(instance, job, type)
+        (kube_resourcequota{job="kube-state-metrics", type="hard", namespace="care-arrangement-plan-dev"} > 0)
+        > 90
+      for: 15m
+      labels:
+        severity: care-arrangement-plan-dev
+
+    - alert: KubeDeploymentReplicasMismatch
+      annotations:
+        message: |
+          Deployment {{ $labels.namespace }}/{{ $labels.deployment }} has not matched the expected number of replicas for 10 minutes. Available: {{ $labels.current_replicas }}, Desired: {{ $labels.expected_replicas }}.
+        runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubedeploymentreplicasmismatch
+        summary: Deployment has a replica mismatch.
+      expr: |
+        kube_deployment_spec_replicas{job="kube-state-metrics", namespace="care-arrangement-plan-dev"}
+        !=
+        kube_deployment_status_replicas_available{job="kube-state-metrics", namespace="care-arrangement-plan-dev"}
+      for: 10m
+      labels:
+        severity: care-arrangement-plan-dev
+
+    - alert: KubeDeploymentUnready
+      annotations:
+        message: Deployment {{ $labels.namespace }}/{{ $labels.deployment }} has 0 available replicas. This is a critical service outage.
+        runbook_url: See README document in care-arrangement-plan GitHub repository for more details.
+        summary: All deployment replicas are unavailable.
+      expr: |
+        kube_deployment_status_replicas_available{job="kube-state-metrics", namespace="care-arrangement-plan-dev"} == 0
+      for: 5m
+      labels:
+        severity: care-arrangement-plan-dev
+
+  - name: application-rules
+    rules:
+    - alert: High5xxRate
+      annotations:
+        message: More than 5% of responses were 5xx errors in the last 3 minutes.
+        runbook_url: See README document in care-arrangement-plan GitHub repository for more details. 
+        summary: High rate of application errors.
+      expr: |
+        sum by (ingress, cluster) (rate(nginx_ingress_controller_requests{exported_namespace="care-arrangement-plan-dev",status=~"5.."}[1m]))
+        /
+        sum by (ingress) (rate(nginx_ingress_controller_requests{exported_namespace="care-arrangement-plan-dev"}[1m]))
+        > 0.05
+      for: 3m
+      labels:
+        severity: care-arrangement-plan-dev
+
+    - alert: SlowResponses
+      annotations:
+        message: For 3 minutes, more than 1% of requests were slower than 5 seconds (during weekday working hours).
+        summary: High P99 latency.
+      expr: |
+        histogram_quantile(
+          0.99,
+          sum by (le, ingress) (
+            rate(
+              nginx_ingress_controller_request_duration_seconds_bucket{exported_namespace="care-arrangement-plan-dev",status!="404",status!="500"}[1m]
+            )
+          )
+        ) > 5
+        AND ON() (7 <= hour() <= 19)
+        AND ON() (1 <= day_of_week() <= 5)
+      for: 3m
+      labels:
+        severity: care-arrangement-plan-dev
+
+    - alert: SlownessOutage
+      annotations:
+          message: CRITICAL APPLICATION SLOWNESS. The 95th percentile (P95) of request durations is above 2 seconds for 5 consecutive minutes, indicating widespread user impact in {{ $labels.exported_namespace }}.
+          runbook_url: https://dsdmoj.atlassian.net/wiki/spaces/CDPT/pages/5124292758/Alerts+PHP+NodeJS+runbooks#SlownessOutage
+          summary: Critical application slowness (High P95 latency).
+      expr: |
+          histogram_quantile(
+            0.95,
+            sum by (le, ingress) (
+              rate(
+                nginx_ingress_controller_request_duration_seconds_bucket{exported_namespace="care-arrangement-plan-dev"}[5m]
+              )
+            )
+          ) > 2
+      for: 5m
+      labels:
+          severity: care-arrangement-plan-dev
+
+    - alert: High4xxRate
+      annotations:
+        message: More than 5% of responses were 4xx errors (excluding 404 Not Found) in the last 3 minutes. This may indicate broken links or authentication issues.
+        runbook_url: See README document in care-arrangement-plan GitHub repository for more details. 
+        summary: High rate of client errors (4xx).
+      expr: |
+        sum by (ingress, cluster) (rate(nginx_ingress_controller_requests{exported_namespace="care-arrangement-plan-dev",status=~"4[012356789].", status!="404"}[1m]))
+        /
+        sum by (ingress) (rate(nginx_ingress_controller_requests{exported_namespace="care-arrangement-plan-dev"}[1m]))
+        > 0.05
+      for: 3m
+      labels:
+        severity: care-arrangement-plan-dev
+
+
+  - name: elasticache-rules
+    rules:
+    - alert: ElastiCacheCPUUtilizationHigh
+      expr: aws_elasticache_cpuutilization_average{cache_cluster_id=~"cp-ea0bf612cd395806-00[12]"} > 70
+      for: 5m
+      labels:
+        severity: care-arrangement-plan-dev
+      annotations:
+        message: ElastiCache instance {{ $labels.cache_cluster_id }} CPU utilization is above 70%.
+        
+    - alert: ElastiCacheFreeableMemoryLow
+      # Alert if freeable memory drops below 500MB
+      expr: aws_elasticache_freeable_memory_average{cache_cluster_id=~"cp-ea0bf612cd395806-00[12]"} < 500000000
+      for: 5m
+      labels:
+        severity: care-arrangement-plan-dev
+      annotations:
+        message: ElastiCache instance {{ $labels.cache_cluster_id }} freeable memory is below 500MB.
+
+    - alert: ElastiCacheSwapUsageHigh
+      # Alert if swap usage is above 50MB (indicates memory pressure)
+      expr: aws_elasticache_swap_usage_average{cache_cluster_id=~"cp-ea0bf612cd395806-00[12]"} > 50000000
+      for: 5m
+      labels:
+        severity: care-arrangement-plan-dev
+      annotations:
+        message: ElastiCache instance {{ $labels.cache_cluster_id }} swap usage is high (above 50MB).

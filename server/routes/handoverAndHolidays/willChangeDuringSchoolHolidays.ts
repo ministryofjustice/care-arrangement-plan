@@ -52,6 +52,7 @@ const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
       };
 
       if (willArrangementsChange) {
+        addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS);
         return response.redirect(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS);
       }
 
