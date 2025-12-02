@@ -30,17 +30,12 @@
               { text: cookieNames.SESSION },
               { text: __('cookies.sessionPurpose') },
               { text: __('cookies.sessionExpiry') }
-            ],
-            [
-              { text: cookieNames.AUTHENTICATION },
-              { text: __('cookies.authenticationPurpose') },
-              { text: __('cookies.authenticationExpiry') }
             ]
           ]
         })
       }}
 
-      {% if ga4Id %}
+  
         {{ __('cookies.cookiesMessage') | safe }}
 
         {{
@@ -116,7 +111,7 @@
 
           {{ govukButton({text: __('cookies.saveCookieSettings')}) }}
         </form>
-      {% endif %}
+    
     </div>
   </div>
 {% endblock %}
