@@ -99,9 +99,6 @@ class Pdf {
       totalPages: this.document.getNumberOfPages().toString(),
     });
 
-    // Optional extra footer text (displayed centred and bold). The key used here is
-    // `pdf.everyPageReminder` to match existing locale usage; change if you prefer a
-    // different i18n key (e.g. `pdf.footerExtra`).
     const extraFooterText = this.request.__('pdf.everyPageReminder') || '';
 
     const pageWidth = this.document.internal.pageSize.getWidth();

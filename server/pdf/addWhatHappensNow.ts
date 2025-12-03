@@ -44,7 +44,7 @@ const addWhatHappensNow = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
       urlize: true,
     },
-        {
+    {
       text: request.__('sharePlan.yourProposedPlan.helpUsImproveHeading'),
       size: QUESTION_TITLE_SIZE,
       style: FontStyles.BOLD,
@@ -58,7 +58,7 @@ const addWhatHappensNow = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
       urlize: true,
     },
-        {
+    {
       text: request.__('sharePlan.yourProposedPlan.surveyLink'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.BOLD,
