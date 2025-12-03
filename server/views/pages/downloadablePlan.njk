@@ -395,9 +395,16 @@
 
     <!-- Preamble Section -->
     <section id="preamble" aria-labelledby="preamble-heading">
+
+      <h3>{{ __('sharePlan.whatWeAreTelling.whatYouNeedToDo') }}</h3>
+
       <p>{{ __('sharePlan.whatWeAreTelling.initialIsAsking', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</p>
 
-      <p>{{ __('sharePlan.whatWeAreTelling.doNotNeedToAccept', {senderName: values.initialAdultName}) }}</p>
+      <p>{{ __('sharePlan.whatWeAreTelling.pleaseReadThrough', {senderName: values.initialAdultName}) }}</p>
+
+      <h3>{{ __('sharePlan.whatWeAreTelling.thePlanYouveBeenSent') }}</h3>
+
+      <p>{{ __('sharePlan.whatWeAreTelling.doNotNeedToAccept', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</p>
 
       <p>{{ __('sharePlan.whatWeAreTelling.insteadYouCan', {senderName: values.initialAdultName}) }}</p>
 
@@ -407,18 +414,15 @@
         <li>{{ __('sharePlan.whatWeAreTelling.makeCustom') }}</li>
       </ul>
 
-      <p>{{ __('sharePlan.whatWeAreTelling.notLegallyBinding', {senderName: values.initialAdultName}) }}</p>
-
       <h3>{{ __('sharePlan.whatWeAreTelling.benefitsHeading') }}</h3>
-      <p>{{ __('sharePlan.whatWeAreTelling.benefits', {senderName: values.initialAdultName}) }}</p>
+      <ul>
+        <li>{{ __('sharePlan.whatWeAreTelling.avoidCourt', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</li>
+        <li>{{ __('sharePlan.whatWeAreTelling.bestOutcome') }}</li>
+        <li>{{ __('sharePlan.whatWeAreTelling.judgeMakeDecisions') }}</li>
+      </ul>
 
       <h3>{{ __('sharePlan.whatWeAreTelling.topTips') }}</h3>
-      <ul>
-        <li>{{ __('sharePlan.whatWeAreTelling.compromise', {senderName: values.initialAdultName}) }}</li>
-        <li>{{ __('sharePlan.whatWeAreTelling.childrensInput') }}</li>
-        <li>{{ __('sharePlan.whatWeAreTelling.childrenFirst') }}</li>
-        <li>{{ __('sharePlan.whatWeAreTelling.splitMayNotBeBest') }}</li>
-      </ul>
+      <p>{{ __('sharePlan.whatWeAreTelling.childrensInput') }}</p>
 
       <h3>{{ __('sharePlan.whatWeAreTelling.moreInfoHeading') }}</h3>
       <p>{{ __('sharePlan.whatWeAreTelling.moreInfo') }}</p>
@@ -429,7 +433,7 @@
 
       <h3>{{ __('sharePlan.whatWeAreTelling.safetyCheckHeading') }}</h3>
       <p>{{ __('sharePlan.whatWeAreTelling.safetyCheck') }}</p>
-      <p>{{ __('sharePlan.whatWeAreTelling.doNotContinueIf') }}</p>
+      <p><b>{{ __('sharePlan.whatWeAreTelling.doNotContinueIf') }}</b></p>
       <ul>
         <li>{{ __('childrenSafetyCheck.domesticAbuse') }}</li>
         <li>{{ __('childrenSafetyCheck.childAbduction') }}</li>
@@ -438,9 +442,11 @@
         <li>{{ __('childrenSafetyCheck.otherConcerns') }}</li>
       </ul>
       <p><strong>{{ __('sharePlan.whatWeAreTelling.stopIfAnyConcern') | customUrlize | safe }}</strong></p>
+          <p>{{ __('sharePlan.whatWeAreTelling.findAnotherWay') | customUrlize | safe }}</p>
 
       <h3>{{ __('sharePlan.whatWeAreTelling.gettingHelpHeading') }}</h3>
       <p>{{ __('sharePlan.whatWeAreTelling.gettingHelp') | customUrlize | safe }}</p>
+      <p>{{ __('sharePlan.whatWeAreTelling.unsureVictim') | customUrlize | safe }}</p>
 
       <h3>{{ __('sharePlan.whatWeAreTelling.courtOrderHeading') }}</h3>
       <p>{{ __('sharePlan.whatWeAreTelling.ifCourtOrderInIsPlace') | customUrlize | safe }}</p>
