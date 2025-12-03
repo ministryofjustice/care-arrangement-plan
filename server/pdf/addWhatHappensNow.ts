@@ -1,4 +1,4 @@
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
 
 import TextComponent from './components/text';
 import FontStyles from './fontStyles';
@@ -26,6 +26,12 @@ const addWhatHappensNow = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
+      text: request.__('sharePlan.yourProposedPlan.cantAgreeHeading'),
+      size: QUESTION_TITLE_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+    {
       text: request.__('sharePlan.yourProposedPlan.unableToAgree'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
@@ -39,9 +45,23 @@ const addWhatHappensNow = (pdf: Pdf) => {
       urlize: true,
     },
     {
+      text: request.__('sharePlan.yourProposedPlan.helpUsImproveHeading'),
+      size: QUESTION_TITLE_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+      urlize: true,
+    },
+    {
       text: request.__('sharePlan.yourProposedPlan.helpUsImprove'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+      urlize: true,
+    },
+    {
+      text: request.__('sharePlan.yourProposedPlan.surveyLink'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
       urlize: true,
     },

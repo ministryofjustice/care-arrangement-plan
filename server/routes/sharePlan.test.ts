@@ -61,38 +61,30 @@ describe(`GET ${paths.SHARE_PLAN}`, () => {
     Object.assign(sessionMock, structuredClone(session));
   });
 
-  it('should render existing court order page', () => {
+  it('should render share plan page', () => {
     return request(app)
       .get(paths.SHARE_PLAN)
       .expect('Content-Type', /html/)
       .expect((response) => {
-        expect(response.text).toContain('Child arrangements plan for James, Rachel and Jack');
+        expect(response.text).toContain('You&#39;ve created a proposed child arrangements plan.');
       });
   });
 
-  it('should include special days answer', () => {
+  it('should include instructions to download the plan', () => {
     return request(app)
       .get(paths.SHARE_PLAN)
       .expect('Content-Type', /html/)
       .expect((response) => {
-        expect(response.text).toMatch(
-          new RegExp(
-            `${session.initialAdultName} suggested:\\s+&quot;${session.specialDays.whatWillHappen.answer}&quot;`,
-          ),
-        );
+        expect(response.text).toMatch('Download a PDF or accessible HTML version of this plan and share with Sam.');
       });
   });
 
-  it('should include other things answer', () => {
+  it('should include what to do if the other coparent does not respond', () => {
     return request(app)
       .get(paths.SHARE_PLAN)
       .expect('Content-Type', /html/)
       .expect((response) => {
-        expect(response.text).toMatch(
-          new RegExp(
-            `${session.initialAdultName} suggested:\\s+&quot;${session.otherThings.whatOtherThingsMatter.answer}&quot;`,
-          ),
-        );
+        expect(response.text).toMatch('If Sam does not respond or you can&#39;t make an agreement between yourselves, you could try mediation.');
       });
   });
 });

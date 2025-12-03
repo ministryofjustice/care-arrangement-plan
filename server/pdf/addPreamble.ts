@@ -18,6 +18,12 @@ const addPreamble = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
+      text: request.__('sharePlan.whatWeAreTelling.whatYouNeedToDo'),
+      size: QUESTION_TITLE_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+    {
       text: request.__('sharePlan.whatWeAreTelling.initialIsAsking', {
         senderName: request.session.initialAdultName,
         childrenNames: formattedChildrenNames(request),
@@ -26,13 +32,28 @@ const addPreamble = (pdf: Pdf) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
+    {
+      text: request.__('sharePlan.whatWeAreTelling.pleaseReadThrough', {
+        senderName: request.session.initialAdultName
+      }),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+    }
   ]).addComponentToDocument();
 
   new BulletListComponent(pdf, {
     initialText: [
       {
+      text: request.__('sharePlan.whatWeAreTelling.thePlanYouveBeenSent'),
+      size: QUESTION_TITLE_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+      },
+      {
         text: request.__('sharePlan.whatWeAreTelling.doNotNeedToAccept', {
           senderName: request.session.initialAdultName,
+          childrenNames: formattedChildrenNames(request),
         }),
         size: MAIN_TEXT_SIZE,
         style: FontStyles.NORMAL,
@@ -54,51 +75,41 @@ const addPreamble = (pdf: Pdf) => {
       request.__('sharePlan.whatWeAreTelling.startYourOwn'),
       request.__('sharePlan.whatWeAreTelling.makeCustom'),
     ],
-    finalText: [
-      {
-        text: request.__('sharePlan.whatWeAreTelling.notLegallyBinding', {
-          senderName: request.session.initialAdultName,
-        }),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
+  }).addComponentToDocument();
+
+
+   new BulletListComponent(pdf, {
+    initialText: [    {
+      text: request.__('sharePlan.whatWeAreTelling.benefitsHeading'),
+      size: QUESTION_TITLE_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+    }], 
+
+    bulletText: [
+      request.__('sharePlan.whatWeAreTelling.avoidCourt', {
+        senderName: request.session.initialAdultName,
+        childrenNames: formattedChildrenNames(request),
+      }),
+      request.__('sharePlan.whatWeAreTelling.bestOutcome'),
+      request.__('sharePlan.whatWeAreTelling.judgeMakeDecisions'),
     ],
   }).addComponentToDocument();
 
   new TextComponent(pdf, [
     {
-      text: request.__('sharePlan.whatWeAreTelling.benefitsHeading'),
-      size: QUESTION_TITLE_SIZE,
-      style: FontStyles.BOLD,
-      bottomPadding: PARAGRAPH_SPACE,
+        text: request.__('sharePlan.whatWeAreTelling.topTips'),
+        size: QUESTION_TITLE_SIZE,
+        style: FontStyles.BOLD,
+        bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.whatWeAreTelling.benefits', { senderName: request.session.initialAdultName }),
+      text: request.__('sharePlan.whatWeAreTelling.childrensInput', { senderName: request.session.initialAdultName }),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument();
-
-  new BulletListComponent(pdf, {
-    initialText: [
-      {
-        text: request.__('sharePlan.whatWeAreTelling.topTips'),
-        size: QUESTION_TITLE_SIZE,
-        style: FontStyles.BOLD,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
-    ],
-    bulletText: [
-      request.__('sharePlan.whatWeAreTelling.compromise', {
-        senderName: request.session.initialAdultName,
-      }),
-      request.__('sharePlan.whatWeAreTelling.childrensInput'),
-      request.__('sharePlan.whatWeAreTelling.childrenFirst'),
-      request.__('sharePlan.whatWeAreTelling.splitMayNotBeBest'),
-    ],
-  }).addComponentToDocument();
 
   new BulletListComponent(pdf, {
     initialText: [
@@ -138,7 +149,7 @@ const addPreamble = (pdf: Pdf) => {
       {
         text: request.__('sharePlan.whatWeAreTelling.doNotContinueIf'),
         size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
+        style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
@@ -154,6 +165,13 @@ const addPreamble = (pdf: Pdf) => {
         text: request.__('sharePlan.whatWeAreTelling.stopIfAnyConcern'),
         size: MAIN_TEXT_SIZE,
         style: FontStyles.BOLD,
+        bottomPadding: PARAGRAPH_SPACE,
+        urlize: true,
+      },
+      {
+        text: request.__('sharePlan.whatWeAreTelling.findAnotherWay'),
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
         urlize: true,
       },
@@ -174,6 +192,13 @@ const addPreamble = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
       urlize: true,
     },
+    {
+        text: request.__('sharePlan.whatWeAreTelling.unsureVictim'),
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+        urlize: true,
+      },
   ]).addComponentToDocument();
 
   new TextComponent(pdf, [

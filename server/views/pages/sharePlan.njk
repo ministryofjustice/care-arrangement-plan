@@ -8,11 +8,10 @@
       <h1 class="govuk-heading-xl">{{ __('sharePlan.nextSteps') }}</h1>
 
       <h2 class="govuk-heading-m">{{ title }}</h2>
-      <p class="govuk-body">{{ __('sharePlan.mustNowShare', {otherAdult: values.secondaryAdultName}) }}</p>
-      <p class="govuk-body">{{ __('sharePlan.notLegallyBinding') }}</p>
 
       <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ __('sharePlan.whatToDoNext') }}</h3>
       <p class="govuk-body">{{ __('sharePlan.sendToSecondary', {otherAdult: values.secondaryAdultName}) }}</p>
+      <p class="govuk-body">{{ __('sharePlan.collaborate', {otherAdult: values.secondaryAdultName}) }}</p>
 
       <h3 class="govuk-heading-s govuk-!-margin-bottom-2">
         {{ __('sharePlan.ifTheyDoNotRespond', {otherAdult: values.secondaryAdultName}) }}
@@ -24,33 +23,6 @@
           >{{ __('sharePlan.ifYouCannotAgree') }}</a
         >
       </p>
-
-      {% set whatWeAreTelling %}{% include 'partials/sharePlan/whatWeAreTelling.njk' %}{% endset %}
-      {% set yourProposedPlan %}{% include 'partials/sharePlan/yourProposedPlan.njk' %}{% endset %}
-
-      {{
-        govukAccordion({
-          id: "share-page-accordion",
-          items: [
-            {
-              heading: {
-                text: __('sharePlan.whatWeAreTelling.title', { name: values.secondaryAdultName })
-              },
-              content: {
-                html: whatWeAreTelling
-              }
-            },
-            {
-              heading: {
-                text: __('sharePlan.yourProposedPlan.title')
-              },
-              content: {
-                html: yourProposedPlan
-              }
-            }
-          ]
-        })
-      }}
 
       <div class="govuk-!-margin-top-6">
         {{

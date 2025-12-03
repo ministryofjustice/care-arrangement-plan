@@ -11,8 +11,11 @@ const confirmationRoutes = (router: Router) => {
     const childrenNames = formattedChildrenNames(request);
 
     addCompletedStep(request, FORM_STEPS.CONFIRMATION);
+    const { secondaryAdultName } = request.session;
+
     response.render('pages/confirmation', {
       title: request.__('confirmation.title', { names: childrenNames }),
+      otherAdult: secondaryAdultName,
     });
   });
 };
