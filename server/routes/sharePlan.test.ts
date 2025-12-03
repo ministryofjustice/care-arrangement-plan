@@ -75,7 +75,7 @@ describe(`GET ${paths.SHARE_PLAN}`, () => {
       .get(paths.SHARE_PLAN)
       .expect('Content-Type', /html/)
       .expect((response) => {
-        expect(response.text).toMatch('Download a PDF of this plan and share with Sam.');
+        expect(response.text).toMatch('Download a PDF or accessible HTML version of this plan and share with Sam.');
       });
   });
 
