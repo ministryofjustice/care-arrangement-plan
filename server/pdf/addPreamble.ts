@@ -170,15 +170,9 @@ const addPreamble = (pdf: Pdf) => {
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
-        text: request.__('sharePlan.whatWeAreTelling.childrensSafety'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
-      {
         text: request.__('sharePlan.whatWeAreTelling.doNotContinueIf'),
         size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
+        style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
@@ -193,26 +187,12 @@ const addPreamble = (pdf: Pdf) => {
       {
         text: request.__('sharePlan.whatWeAreTelling.stopIfAnyConcern'),
         size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
+        style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
         urlize: true,
       },
             {
         text: request.__('sharePlan.whatWeAreTelling.findAnotherWay'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-        urlize: true,
-      },
-      {
-        text: request.__('sharePlan.whatWeAreTelling.gettingHelpDomesticAbuse'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-        urlize: true,
-      },
-            {
-        text: request.__('sharePlan.whatWeAreTelling.unsureVictim'),
         size: MAIN_TEXT_SIZE,
         style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
@@ -235,6 +215,13 @@ const addPreamble = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
       urlize: true,
     },
+    {
+        text: request.__('sharePlan.whatWeAreTelling.unsureVictim'),
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+        urlize: true,
+      },
   ]).addComponentToDocument();
 
   new TextComponent(pdf, [
