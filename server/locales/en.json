@@ -184,7 +184,7 @@
   },
   "safetyCheck": {
     "title": "Safety check",
-    "workWithPartner": "This service asks you to work with your parenting partner to agree a plan for your children. You need to be able to state your needs and views without feeling intimidated.",
+    "workWithPartner": "This service asks you to work with the other parent to agree a plan for your children. You need to be able to state your needs and views without feeling intimidated.",
     "safeAndConfident": "Do you feel safe and confident?",
     "error": "Select whether you feel safe and confident or not"
   },
@@ -212,7 +212,7 @@
   },
   "doWhatsBest": {
     "title": "What’s best for the children?",
-    "content": "<p>Your child arrangements plan should reflect what is best for the children. You must consider their wants and needs when making these arrangements.</p><p>Remember, the aim is to make sure your children are as happy as they can be.</p>",
+    "content": "<p>Your child arrangements plan should reflect what is best for the children. You must consider their wants and needs when making these arrangements.</p><p>Remember, the aim is to make sure your children are as happy as they can be.</p><p><a href=\"https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf\">Tips for parents</a> from a child's perspective.</p>",
     "childrensNeedsFirst": "I will put my children’s needs first",
     "error": "You must select the box to continue"
   },
