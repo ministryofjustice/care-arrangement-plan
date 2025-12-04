@@ -34,7 +34,7 @@ const setupLinkTracking = () => {
       const linkHost = new URL(url, window.location.origin).hostname;
       const currentHost = window.location.hostname;
       return linkHost !== currentHost;
-    } catch (e) {
+    } catch {
       // If URL parsing fails, treat as internal
       return false;
     }
