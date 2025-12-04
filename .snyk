@@ -1,0 +1,228 @@
+# Snyk (https://snyk.io) policy file
+# Security false positive suppressions for Care Arrangement Plan
+
+version: v1.25.0
+
+# Language settings
+language-settings:
+  javascript:
+    ignore-dependencies: []
+
+ignore:
+  # ============================================================================
+  # OPEN SOURCE DEPENDENCY VULNERABILITIES
+  # ============================================================================
+
+  # bunyan@1.8.15 > inflight transitive dependency
+  # CWE-772: Missing Release of Resource after Effective Lifetime
+  'SNYK-JS-INFLIGHT-6095116':
+    - '*':
+        reason: 'ACKNOWLEDGED: bunyan@1.8.15 is the latest version available. Package no longer actively maintained. Transitive dependency via mv > rimraf > glob > inflight. Risk acceptable - logging properly configured with stream management, no memory leaks observed in production. Consider migrating to pino/winston in future.'
+        expires: '2026-12-04T00:00:00.000Z'
+        created: '2025-12-04T00:00:00.000Z'
+
+  # ============================================================================
+  # SNYK CODE (SAST) VULNERABILITIES - For reference only
+  # ============================================================================
+
+  # ============================================================================
+  # CWE-770: Allocation of Resources Without Limits or Throttling
+  # FALSE POSITIVE: Snyk incorrectly identifies response.render() as expensive
+  # file system operations requiring individual rate limiting
+  # ============================================================================
+  # MITIGATION: Application-level rate limiting is implemented globally via
+  # express-rate-limit middleware (250 req/15min for all routes, 20 req/15min
+  # for download endpoints, 10 req/15min for auth endpoints)
+  # See: server/middleware/setupRateLimit.ts and server/app.ts:39
+  # ============================================================================
+
+  'SNYK-CODE-0070':
+    - 'server/routes/**/*.ts':
+        reason: 'FALSE POSITIVE: response.render() calls are template rendering operations (Nunjucks), not file system operations. All routes protected by application-level rate limiting (250 req/15min) applied in server/app.ts:39'
+        expires: '2026-12-04T00:00:00.000Z'
+        created: '2025-12-04T00:00:00.000Z'
+
+    - 'server/routes/aboutTheAdults.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/aboutTheChildren.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/numberOfChildren.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/courtOrderCheck.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/childrenSafetyCheck.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/safetyCheck.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/doWhatsBest.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/livingAndVisiting/mostlyLive.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/livingAndVisiting/whichSchedule.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/livingAndVisiting/willOvernightsHappen.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/livingAndVisiting/whichDaysOvernight.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/livingAndVisiting/willDaytimeVisitsHappen.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/livingAndVisiting/whichDaysDaytimeVisits.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/handoverAndHolidays/getBetweenHouseholds.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/handoverAndHolidays/whereHandover.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/handoverAndHolidays/willChangeDuringSchoolHolidays.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/handoverAndHolidays/howChangeDuringSchoolHolidays.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/handoverAndHolidays/itemsForChangeover.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/specialDays/whatWillHappen.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/otherThings/whatOtherThingsMatter.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/decisionMaking/planReview.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/decisionMaking/planLongTermNotice.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/decisionMaking/planLastMinuteChanges.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/checkYourAnswers.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/confirmation.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/taskList.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/contactUs.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/cookies.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/password.ts':
+        reason: 'Additional auth-specific rate limiting active (10 attempts/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/downloads.ts':
+        reason: 'Additional download rate limiting active (20 req/15min). PDF generation is resource-intensive but rate-limited.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/sharePlan.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/accessibilityStatement.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/privacyNotice.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+    - 'server/routes/termsAndConditions.ts':
+        reason: 'Application-level rate limiting active (250 req/15min). Template rendering, not FS operation.'
+        expires: '2026-12-04T00:00:00.000Z'
+
+  # ============================================================================
+  # CWE-601: Open Redirect
+  # FALSE POSITIVE: Snyk flags redirects that ARE protected by whitelist
+  # validation via validateRedirectUrl() function
+  # ============================================================================
+  # MITIGATION: All redirects use validateRedirectUrl() which enforces strict
+  # whitelist of internal-only paths. No user-controlled data can bypass.
+  # See: server/utils/redirectValidator.ts
+  # ============================================================================
+
+  'SNYK-CODE-0601':
+    - 'server/routes/password.ts > handlePostPassword':
+        reason: 'FALSE POSITIVE: Redirect URL validated by validateRedirectUrl() on line 28 with whitelist of allowed internal paths. Safe redirect on line 40 uses already-validated URL.'
+        expires: '2026-12-04T00:00:00.000Z'
+        created: '2025-12-04T00:00:00.000Z'
+
+    - 'server/utils/sessionHelpers.ts > getRedirectUrlAfterFormSubmit':
+        reason: 'FALSE POSITIVE: Function calls validateRedirectUrl() which enforces whitelist validation. Only internal paths from paths enum allowed. Returns fallback if validation fails.'
+        expires: '2026-12-04T00:00:00.000Z'
+        created: '2025-12-04T00:00:00.000Z'
+
+  # ============================================================================
+  # CWE-1004: Sensitive Cookie with HttpOnly Explicitly Disabled
+  # BY DESIGN: Analytics consent cookie must be readable by client-side JS
+  # ============================================================================
+  # JUSTIFICATION: ANALYTICS_CONSENT cookie contains only user preference
+  # (Yes/No), not sensitive data. Required for Google Analytics control.
+  # All security-sensitive cookies (session, auth) have HttpOnly=true.
+  # See: server/routes/cookies.ts:26, server/middleware/setUpWebSession.ts:26,
+  #      server/routes/password.ts:35
+  # ============================================================================
+
+  'SNYK-CODE-1004':
+    - 'server/routes/cookies.ts':
+        reason: 'BY DESIGN: ANALYTICS_CONSENT cookie must be readable by client-side JavaScript to control Google Analytics. Contains only user preference (Yes/No), not sensitive data (no auth tokens, no PII). All security cookies (session, auth) properly use HttpOnly=true.'
+        expires: '2026-12-04T00:00:00.000Z'
+        created: '2025-12-04T00:00:00.000Z'
+
+# Patch overrides (none currently needed)
+patch: {}
+
+# ============================================================================
+# Review Notes:
+# - This file should be reviewed annually on 2026-12-04
+# - Verify that all mitigations are still in place
+# - Update expiry dates for another year if protections remain valid
+# - Check for any new Snyk false positives that need suppression
+# ============================================================================
