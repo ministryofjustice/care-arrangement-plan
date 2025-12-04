@@ -42,8 +42,6 @@ const setupAccessibleExitThisPage = () => {
       return;
     }
 
-    const exitUrl = button.getAttribute('href');
-
     // Remove the indicator dots since we're using a single key press
     const indicator = component.querySelector('.govuk-exit-this-page__indicator');
     if (indicator) {

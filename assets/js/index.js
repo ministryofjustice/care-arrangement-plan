@@ -11,8 +11,8 @@ import {
   PasswordInput,
 } from 'govuk-frontend';
 
-import setupCookieBanner from './cookieBanner';
 import setupAccessibleExitThisPage from './accessibleExitThisPage';
+import setupCookieBanner from './cookieBanner';
 
 // Disable GOV.UK's default Shift key listener before components initialise
 // This prevents the Shift key shortcut from being set up
