@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import logger from '../logging/logger';
 import { generateHashedIdentifier } from '../utils/hashedIdentifier';
 
-import { logPageVisit } from './analyticsService';
+import { logDownload, logLinkClick, logPageVisit } from './analyticsService';
 
 // Mock the logger
 jest.mock('../logging/logger', () => ({
@@ -186,6 +186,231 @@ describe('analyticsService', () => {
           timestamp: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/),
         }),
         'page_visit event'
+      );
+    });
+  });
+
+  describe('logDownload', () => {
+    it('logs a download event for output_pdf with correct structure', () => {
+      const mockHashedId = 'download123456789';
+      mockedGenerateHashedIdentifier.mockReturnValue(mockHashedId);
+
+      const mockReq = {
+        path: '/download-pdf',
+        ip: '192.168.1.1',
+        get: jest.fn().mockReturnValue('Mozilla/5.0 (Test Browser)'),
+      } as unknown as Request;
+
+      logDownload(mockReq, 'output_pdf');
+
+      expect(mockedGenerateHashedIdentifier).toHaveBeenCalledWith(
+        '192.168.1.1',
+        'Mozilla/5.0 (Test Browser)'
+      );
+
+      expect(mockedLogger.info).toHaveBeenCalledWith(
+        expect.objectContaining({
+          timestamp: expect.any(String),
+          event_type: 'download',
+          hashed_user_id: mockHashedId,
+          download_type: 'output_pdf',
+          path: '/download-pdf',
+        }),
+        'download event'
+      );
+    });
+
+    it('logs a download event for output_html with correct structure', () => {
+      const mockHashedId = 'htmldownload12345';
+      mockedGenerateHashedIdentifier.mockReturnValue(mockHashedId);
+
+      const mockReq = {
+        path: '/download-html',
+        ip: '192.168.1.2',
+        get: jest.fn().mockReturnValue('Mozilla/5.0 (Test Browser)'),
+      } as unknown as Request;
+
+      logDownload(mockReq, 'output_html');
+
+      expect(mockedLogger.info).toHaveBeenCalledWith(
+        expect.objectContaining({
+          event_type: 'download',
+          hashed_user_id: mockHashedId,
+          download_type: 'output_html',
+          path: '/download-html',
+        }),
+        'download event'
+      );
+    });
+
+    it('logs a download event for offline_pdf with correct structure', () => {
+      const mockHashedId = 'offlinepdf123456';
+      mockedGenerateHashedIdentifier.mockReturnValue(mockHashedId);
+
+      const mockReq = {
+        path: '/download-paper-form',
+        ip: '192.168.1.3',
+        get: jest.fn().mockReturnValue('Mozilla/5.0 (Test Browser)'),
+      } as unknown as Request;
+
+      logDownload(mockReq, 'offline_pdf');
+
+      expect(mockedLogger.info).toHaveBeenCalledWith(
+        expect.objectContaining({
+          event_type: 'download',
+          hashed_user_id: mockHashedId,
+          download_type: 'offline_pdf',
+          path: '/download-paper-form',
+        }),
+        'download event'
+      );
+    });
+
+    it('handles requests with missing IP address', () => {
+      const mockHashedId = 'noipdownload12345';
+      mockedGenerateHashedIdentifier.mockReturnValue(mockHashedId);
+
+      const mockReq = {
+        path: '/download-pdf',
+        ip: undefined,
+        get: jest.fn().mockReturnValue('Chrome/120.0'),
+      } as unknown as Request;
+
+      logDownload(mockReq, 'output_pdf');
+
+      expect(mockedGenerateHashedIdentifier).toHaveBeenCalledWith(
+        undefined,
+        'Chrome/120.0'
+      );
+
+      expect(mockedLogger.info).toHaveBeenCalledWith(
+        expect.objectContaining({
+          hashed_user_id: mockHashedId,
+        }),
+        'download event'
+      );
+    });
+  });
+
+  describe('logLinkClick', () => {
+    it('logs a link click event with link text', () => {
+      const mockHashedId = 'linkclick1234567';
+      mockedGenerateHashedIdentifier.mockReturnValue(mockHashedId);
+
+      const mockReq = {
+        path: '/share-plan',
+        ip: '192.168.1.1',
+        get: jest.fn().mockReturnValue('Mozilla/5.0 (Test Browser)'),
+      } as unknown as Request;
+
+      const linkUrl = 'https://www.gov.uk/looking-after-children-divorce';
+      const linkText = 'More information and support';
+
+      logLinkClick(mockReq, linkUrl, linkText);
+
+      expect(mockedGenerateHashedIdentifier).toHaveBeenCalledWith(
+        '192.168.1.1',
+        'Mozilla/5.0 (Test Browser)'
+      );
+
+      expect(mockedLogger.info).toHaveBeenCalledWith(
+        expect.objectContaining({
+          timestamp: expect.any(String),
+          event_type: 'link_click',
+          hashed_user_id: mockHashedId,
+          link_url: linkUrl,
+          link_text: linkText,
+          path: '/share-plan',
+        }),
+        'link_click event'
+      );
+    });
+
+    it('logs a link click event without link text when not provided', () => {
+      const mockHashedId = 'linkclick7654321';
+      mockedGenerateHashedIdentifier.mockReturnValue(mockHashedId);
+
+      const mockReq = {
+        path: '/task-list',
+        ip: '192.168.1.2',
+        get: jest.fn().mockReturnValue('Mozilla/5.0 (Test Browser)'),
+      } as unknown as Request;
+
+      const linkUrl = 'https://www.smartsurvey.co.uk/s/EFO5FJ/';
+
+      logLinkClick(mockReq, linkUrl);
+
+      const callArgs = mockedLogger.info.mock.calls[0][0];
+
+      expect(callArgs).toMatchObject({
+        timestamp: expect.any(String),
+        event_type: 'link_click',
+        hashed_user_id: mockHashedId,
+        link_url: linkUrl,
+        path: '/task-list',
+      });
+
+      expect(callArgs.link_text).toBeUndefined();
+    });
+
+    it('tracks different external links with their URLs', () => {
+      mockedGenerateHashedIdentifier.mockReturnValue('sameuser12345678');
+
+      const mockReq = {
+        path: '/share-plan',
+        ip: '192.168.1.1',
+        get: jest.fn().mockReturnValue('Mozilla/5.0'),
+      } as unknown as Request;
+
+      const govLink = 'https://www.gov.uk/looking-after-children-divorce';
+      const surveyLink = 'https://www.smartsurvey.co.uk/s/EFO5FJ/';
+
+      logLinkClick(mockReq, govLink, 'Gov.uk Link');
+      logLinkClick(mockReq, surveyLink, 'Survey Link');
+
+      expect(mockedLogger.info).toHaveBeenCalledTimes(2);
+
+      expect(mockedLogger.info).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({
+          link_url: govLink,
+          link_text: 'Gov.uk Link',
+        }),
+        'link_click event'
+      );
+
+      expect(mockedLogger.info).toHaveBeenNthCalledWith(
+        2,
+        expect.objectContaining({
+          link_url: surveyLink,
+          link_text: 'Survey Link',
+        }),
+        'link_click event'
+      );
+    });
+
+    it('handles requests with missing User-Agent', () => {
+      const mockHashedId = 'nouaclick1234567';
+      mockedGenerateHashedIdentifier.mockReturnValue(mockHashedId);
+
+      const mockReq = {
+        path: '/task-list',
+        ip: '10.0.0.5',
+        get: jest.fn().mockReturnValue(undefined),
+      } as unknown as Request;
+
+      logLinkClick(mockReq, 'https://www.gov.uk/link');
+
+      expect(mockedGenerateHashedIdentifier).toHaveBeenCalledWith(
+        '10.0.0.5',
+        undefined
+      );
+
+      expect(mockedLogger.info).toHaveBeenCalledWith(
+        expect.objectContaining({
+          hashed_user_id: mockHashedId,
+        }),
+        'link_click event'
       );
     });
   });

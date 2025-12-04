@@ -41,4 +41,47 @@ const logPageVisit = (req: Request, res: Response) => {
   logEvent(UserEvents.PAGE_VISIT, eventData);
 };
 
-export { logEvent, logPageVisit };
+/**
+ * Logs a 'download' event.
+ * This function is called when a user downloads a PDF or HTML file.
+ * @param req - Express request object
+ * @param downloadType - Type of download (e.g., 'output_pdf', 'output_html', 'offline_pdf')
+ */
+const logDownload = (req: Request, downloadType: string) => {
+  // Generate privacy-preserving hashed identifier
+  const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
+
+  const eventData = {
+    hashed_user_id: hashedUserId,
+    download_type: downloadType,
+    path: req.path,
+  };
+
+  logEvent(UserEvents.DOWNLOAD, eventData);
+};
+
+/**
+ * Logs a 'link_click' event.
+ * This function is called when a user clicks an external link.
+ * @param req - Express request object
+ * @param linkUrl - The URL of the external link that was clicked
+ * @param linkText - Optional text/label of the link
+ */
+const logLinkClick = (req: Request, linkUrl: string, linkText?: string) => {
+  // Generate privacy-preserving hashed identifier
+  const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
+
+  const eventData: Record<string, string | number> = {
+    hashed_user_id: hashedUserId,
+    link_url: linkUrl,
+    path: req.path,
+  };
+
+  if (linkText) {
+    eventData.link_text = linkText;
+  }
+
+  logEvent(UserEvents.LINK_CLICK, eventData);
+};
+
+export { logEvent, logPageVisit, logDownload, logLinkClick };

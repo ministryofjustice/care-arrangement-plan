@@ -7,6 +7,7 @@ import addCompletedStep from '../utils/addCompletedStep';
 import aboutTheAdultsRoutes from './aboutTheAdults';
 import aboutTheChildrenRoutes from './aboutTheChildren';
 import accessibilityStatementRoutes from './accessibilityStatement';
+import analyticsRoutes from './analytics';
 import checkYourAnswersRoutes from './checkYourAnswers';
 import childrenSafetyRoutesCheck from './childrenSafetyCheck';
 import confirmationRoutes from './confirmation';
@@ -32,6 +33,7 @@ const routes = (): Router => {
     response.render('pages/index');
   });
 
+  analyticsRoutes(router);
   safetyCheckRoutes(router);
   childrenSafetyRoutesCheck(router);
   doWhatsBestRoutes(router);
