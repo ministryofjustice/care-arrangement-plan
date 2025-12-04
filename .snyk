@@ -10,6 +10,22 @@ language-settings:
 
 ignore:
   # ============================================================================
+  # OPEN SOURCE DEPENDENCY VULNERABILITIES
+  # ============================================================================
+
+  # bunyan@1.8.15 > inflight transitive dependency
+  # CWE-772: Missing Release of Resource after Effective Lifetime
+  'SNYK-JS-INFLIGHT-6095116':
+    - '*':
+        reason: 'ACKNOWLEDGED: bunyan@1.8.15 is the latest version available. Package no longer actively maintained. Transitive dependency via mv > rimraf > glob > inflight. Risk acceptable - logging properly configured with stream management, no memory leaks observed in production. Consider migrating to pino/winston in future.'
+        expires: '2026-12-04T00:00:00.000Z'
+        created: '2025-12-04T00:00:00.000Z'
+
+  # ============================================================================
+  # SNYK CODE (SAST) VULNERABILITIES - For reference only
+  # ============================================================================
+
+  # ============================================================================
   # CWE-770: Allocation of Resources Without Limits or Throttling
   # FALSE POSITIVE: Snyk incorrectly identifies response.render() as expensive
   # file system operations requiring individual rate limiting
