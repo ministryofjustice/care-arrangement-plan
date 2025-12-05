@@ -34,22 +34,88 @@ jobs:
       registry: ${{ needs.image.outputs.registry }}
     secrets: inherit
 
+  e2e_test_dev:
+    name: 'E2E Tests (Development)'
+    if: github.event.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: [deploy_dev]
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: 'Setup Node.js'
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: 'Install Dependencies'
+        run: npm ci --no-audit
+
+      - name: 'Run E2E Tests for Development'
+        run: npm run int-test:dev
+        env:
+          CYPRESS_BETA_ACCESS_PASSWORD: ${{ secrets.BETA_ACCESS_PASSWORD }}
+
   deploy_staging:
     name: 'Deploy to Staging'
     if: github.event.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy.yml
-    needs: [image, validate, deploy_dev]
+    needs: [image, validate, deploy_dev, e2e_test_dev]
     with:
       environment: staging
       registry: ${{ needs.image.outputs.registry }}
     secrets: inherit
 
+  e2e_test_staging:
+    name: 'E2E Tests (Staging)'
+    if: github.event.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: [deploy_staging]
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: 'Setup Node.js'
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: 'Install Dependencies'
+        run: npm ci --no-audit
+
+      - name: 'Run E2E Tests for Staging'
+        run: npm run int-test:staging
+        env:
+          CYPRESS_BETA_ACCESS_PASSWORD: ${{ secrets.BETA_ACCESS_PASSWORD }}
+
   deploy_production:
     name: 'Deploy to Production'
     if: github.event.ref == 'refs/heads/main'
-    needs: [image, validate, deploy_dev, deploy_staging]
+    needs: [image, validate, deploy_dev, deploy_staging, e2e_test_dev, e2e_test_staging]
     uses: ./.github/workflows/deploy.yml
     with:
       environment: production
       registry: ${{ needs.image.outputs.registry }}
     secrets: inherit
+
+  e2e_test_production:
+    name: 'E2E Tests (Production)'
+    if: github.event.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: [deploy_production]
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: 'Setup Node.js'
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: 'Install Dependencies'
+        run: npm ci --no-audit
+
+      - name: 'Run E2E Tests for Production'
+        run: npm run int-test:prod
+        env:
+          CYPRESS_BETA_ACCESS_PASSWORD: ${{ secrets.BETA_ACCESS_PASSWORD }}

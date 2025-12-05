@@ -18,6 +18,9 @@
     "test:ci": "DOTENV_CONFIG_PATH='.env.test' jest --runInBand --coverage",
     "int-test": "cypress run --config video=false",
     "int-test:ci": "dotenv -e .env.test -- sh -c 'npm run build && start-server-and-test start http://localhost:8001/health int-test'",
+    "int-test:dev": "cypress run --config baseUrl=https://dev-care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk,video=false",
+    "int-test:staging": "cypress run --config baseUrl=https://staging-care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk,video=false",
+    "int-test:prod": "cypress run --config baseUrl=https://care-arrangement-plan.service.gov.uk,video=false",
     "int-test-ui": "cypress open --e2e --browser chrome"
   },
   "engines": {
