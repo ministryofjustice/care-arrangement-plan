@@ -97,40 +97,40 @@ class PdfGenerator {
    * Add section heading (large, bold) - 22pt
    */
   addSectionHeading(text) {
-    this.currentY += 3; // Add spacing above heading
+    this.currentY += 2; // Reduced spacing above heading
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.SECTION_HEADING_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
     this.doc.text(text, PdfStyles.MARGIN_WIDTH, this.currentY);
-    this.currentY += 8;
+    this.currentY += 8; // Increased spacing below heading
   }
 
   /**
    * Add subsection heading (medium, bold) - 14pt
    */
   addSubsectionHeading(text) {
-    this.currentY += 2; // Add spacing above heading
+    this.currentY += 2; // Spacing above heading
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.QUESTION_TITLE_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
     this.doc.text(text, PdfStyles.MARGIN_WIDTH, this.currentY);
-    this.currentY += 6;
+    this.currentY += 10; // Increased spacing below heading
   }
 
   /**
    * Add question heading (medium, bold) - 14pt
    */
   addQuestionHeading(text) {
-    this.currentY += 2; // Add spacing above heading
+    this.currentY += 2; // Spacing above heading
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.QUESTION_TITLE_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
     this.doc.text(text, PdfStyles.MARGIN_WIDTH, this.currentY);
-    this.currentY += 6;
+    this.currentY += 10; // Increased spacing below heading
   }
 
   /**
-   * Add body text (normal weight)
+   * Add body text (normal weight) with optional clickable links
    */
   addBodyText(text, options = {}) {
     const {
@@ -149,10 +149,47 @@ class PdfGenerator {
 
     if (wrap) {
       const lines = this.doc.splitTextToSize(text, maxWidth);
-      lines.forEach(line => {
-        this.doc.text(line, x, this.currentY);
-        this.currentY += 5; // Increased from 4 to 5 for better line spacing
-      });
+
+      // Check if text contains URLs
+      const urlRegex = /(https?:\/\/[^\s]+)/g;
+      const hasLinks = urlRegex.test(text);
+
+      if (hasLinks) {
+        // Extract URLs from original text
+        const urls = text.match(urlRegex) || [];
+        let urlIndex = 0;
+
+        lines.forEach(line => {
+          // Check if this line contains a URL
+          const lineUrls = line.match(urlRegex);
+          if (lineUrls) {
+            // Split line by URL and add clickable links
+            let currentX = x;
+            const parts = line.split(urlRegex);
+
+            parts.forEach((part) => {
+              if (urlRegex.test(part) && urls[urlIndex]) {
+                // This is a URL - make it clickable
+                this.doc.textWithLink(part, currentX, this.currentY, { url: urls[urlIndex] });
+                urlIndex++;
+              } else if (part) {
+                // Regular text
+                this.doc.text(part, currentX, this.currentY);
+              }
+              currentX += this.doc.getTextWidth(part);
+            });
+          } else {
+            this.doc.text(line, x, this.currentY);
+          }
+          this.currentY += 6;
+        });
+      } else {
+        // No links - render normally
+        lines.forEach(line => {
+          this.doc.text(line, x, this.currentY);
+          this.currentY += 6;
+        });
+      }
     } else {
       this.doc.text(text, x, this.currentY);
     }
@@ -202,12 +239,18 @@ class PdfGenerator {
    * Add two side-by-side parent response boxes
    */
   addParentResponseBoxes(height = 60) {
+    // Check if box will overflow into footer
+    const maxY = this.pageHeight - PdfStyles.FOOTER_HEIGHT - 5;
+    if (this.currentY + height > maxY) {
+      height = Math.max(20, maxY - this.currentY); // Reduce height to fit
+    }
+
     const boxWidth = (this.pageWidth - 3 * PdfStyles.MARGIN_WIDTH) / 2;
     const rightBoxX = PdfStyles.MARGIN_WIDTH + boxWidth + PdfStyles.MARGIN_WIDTH;
 
     // Left box
     this.doc.setDrawColor(...PdfStyles.COLOR_BLACK);
-    this.doc.setLineWidth(0.5);
+    this.doc.setLineWidth(0.2); // Thinner lines
     this.doc.rect(PdfStyles.MARGIN_WIDTH, this.currentY, boxWidth, height);
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
@@ -225,10 +268,16 @@ class PdfGenerator {
    * Add compromise box
    */
   addCompromiseBox(height = 80) {
-    this.addBodyText('You can use this space to write your agreed compromise for this question.', { spacing: 5 });
+    this.addBodyText('You can use this space to write your agreed compromise for this question.', { spacing: 2 }); // Reduced spacing to bring text closer to box
+
+    // Check if box will overflow into footer
+    const maxY = this.pageHeight - PdfStyles.FOOTER_HEIGHT - 5;
+    if (this.currentY + height > maxY) {
+      height = Math.max(30, maxY - this.currentY); // Reduce height to fit
+    }
 
     this.doc.setDrawColor(...PdfStyles.COLOR_BLACK);
-    this.doc.setLineWidth(0.5);
+    this.doc.setLineWidth(0.2); // Thinner lines
     this.doc.rect(
       PdfStyles.MARGIN_WIDTH,
       this.currentY,
@@ -279,15 +328,15 @@ class PdfGenerator {
   /**
    * Add a single input box
    */
-  addInputBox(height = 20, label = null, helperText = null) {
+  addInputBox(height = 12, label = null, helperText = null, boldLabel = false) {
     const boxWidth = this.pageWidth - 2 * PdfStyles.MARGIN_WIDTH;
 
     if (label) {
-      this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
+      this.doc.setFont(PdfStyles.FONT_FAMILY, boldLabel ? PdfStyles.FONT_BOLD : PdfStyles.FONT_NORMAL);
       this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
       this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
       this.doc.text(label, PdfStyles.MARGIN_WIDTH, this.currentY);
-      this.currentY += 4; // Increased from 2 to 4 for more spacing
+      this.currentY += 4;
     }
 
     if (helperText) {
@@ -300,7 +349,7 @@ class PdfGenerator {
     }
 
     this.doc.setDrawColor(...PdfStyles.COLOR_BLACK);
-    this.doc.setLineWidth(0.5);
+    this.doc.setLineWidth(0.2); // Thinner lines
     this.doc.rect(PdfStyles.MARGIN_WIDTH, this.currentY, boxWidth, height);
     this.currentY += height + 6;
   }
@@ -310,7 +359,7 @@ class PdfGenerator {
    */
   addChildNameGrid() {
     const boxWidth = (this.pageWidth - 3 * PdfStyles.MARGIN_WIDTH) / 2;
-    const boxHeight = 20;
+    const boxHeight = 12; // Reduced from 20 to make boxes 2 lines tall
     const rightBoxX = PdfStyles.MARGIN_WIDTH + boxWidth + PdfStyles.MARGIN_WIDTH;
 
     const children = [
@@ -323,12 +372,12 @@ class PdfGenerator {
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
     this.doc.setFontSize(PdfStyles.SMALL_TEXT_SIZE);
     this.doc.setDrawColor(...PdfStyles.COLOR_BLACK);
-    this.doc.setLineWidth(0.5);
+    this.doc.setLineWidth(0.2); // Thinner lines
 
     for (let i = 0; i < children.length; i++) {
       const child = children[i];
 
-      // Label above box
+      // Label above box (removed trailing space)
       this.doc.text(child.label, child.x + 3, this.currentY - 2);
 
       // Box

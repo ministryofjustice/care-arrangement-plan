@@ -123,8 +123,8 @@ const generatePdf = () => {
     pdf.addBodyText('If there are more than 4 children, you can attach a separate sheet', { spacing: 8 });
 
     pdf.addSubsectionHeading('The adults who will care for the children');
-    pdf.addInputBox(20, 'Your first name', 'If you are answering these questions for someone else, enter their first name');
-    pdf.addInputBox(20, 'First name of the other parent or carer');
+    pdf.addInputBox(12, 'Your first name', 'If you are answering these questions for someone else, enter their first name', false);
+    pdf.addInputBox(12, 'First name of the other parent or carer', null, false);
 
     pdf.addFooter(4);
 
@@ -141,7 +141,7 @@ const generatePdf = () => {
     ]);
     pdf.addSpacing(3);
 
-    pdf.addTip('Tip: An exact split of time between two households does not always suit child\'s best interests.');
+    pdf.addBodyText('Tip: An exact split of time between two households does not always suit child\'s best interests.', { spacing: 0 });
     pdf.addSpacing(5);
 
     pdf.addParentBoxInstruction();
@@ -158,7 +158,7 @@ const generatePdf = () => {
     pdf.addTip('Tip: It may not be in the children\'s best interests to split time exactly between households.');
     pdf.addSpacing(6);
 
-    // Info box with schedules
+    // Info box with schedules (increased height to fit content)
     pdf.addInfoBox((startX, boxWidth) => {
       const col1X = startX;
       const col2X = startX + boxWidth / 2;
@@ -167,51 +167,43 @@ const generatePdf = () => {
       pdf.doc.setFont('Helvetica', 'bold');
       pdf.doc.setFontSize(10);
       pdf.doc.text('Here are some common schedules that can benefit children.', col1X, boxY);
-      boxY += 4;
+      boxY += 6; // Increased from 4 to 6 for more space
 
       // Column 1
       pdf.doc.setFont('Helvetica', 'bold');
       pdf.doc.setFontSize(9);
       pdf.doc.text('Alternating weeks', col1X, boxY);
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text('The children will spend one week in one', col1X, boxY + 3);
-      pdf.doc.text('household and the next week in the other.', col1X, boxY + 6);
+      pdf.doc.text('The children will spend one week in one', col1X, boxY + 4); // Increased spacing
+      pdf.doc.text('household and the next week in the other.', col1X, boxY + 7);
 
       pdf.doc.setFont('Helvetica', 'bold');
-      pdf.doc.text('2-2-3 schedule', col1X, boxY + 11);
+      pdf.doc.text('2-2-3 schedule', col1X, boxY + 13); // Increased spacing
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text('Children spend two days in one household,', col1X, boxY + 14);
-      pdf.doc.text('two days in the other, then back to the first', col1X, boxY + 17);
-      pdf.doc.text('house for 3 days including the weekend.', col1X, boxY + 20);
+      pdf.doc.text('Children spend two days in one household,', col1X, boxY + 17);
+      pdf.doc.text('two days in the other, then back to the first', col1X, boxY + 20);
+      pdf.doc.text('house for 3 days including the weekend.', col1X, boxY + 23);
 
       // Column 2
       pdf.doc.setFont('Helvetica', 'bold');
       pdf.doc.text('4-4-3 schedule', col2X, boxY);
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text('Children spend three days in one household', col2X, boxY + 3);
-      pdf.doc.text('then four days in the other. The next week', col2X, boxY + 6);
-      pdf.doc.text('they switch.', col2X, boxY + 9);
+      pdf.doc.text('Children spend three days in one household', col2X, boxY + 4);
+      pdf.doc.text('then four days in the other. The next week', col2X, boxY + 7);
+      pdf.doc.text('they switch.', col2X, boxY + 10);
 
       pdf.doc.setFont('Helvetica', 'bold');
-      pdf.doc.text('2-2-5-5 schedule', col2X, boxY + 14);
+      pdf.doc.text('2-2-5-5 schedule', col2X, boxY + 16); // Increased spacing
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text('Children spend two days in one household,', col2X, boxY + 17);
-      pdf.doc.text('then two days in the other. After that they spend', col2X, boxY + 20);
-      pdf.doc.text('five days in one household, then five', col2X, boxY + 23);
-      pdf.doc.text('days in the other.', col2X, boxY + 26);
+      pdf.doc.text('Children spend two days in one household,', col2X, boxY + 20);
+      pdf.doc.text('then two days in the other. After that they spend', col2X, boxY + 23);
+      pdf.doc.text('five days in one household, then five', col2X, boxY + 26);
+      pdf.doc.text('days in the other.', col2X, boxY + 29);
 
-      pdf.currentY = boxY + 29;
-    });
+      pdf.currentY = boxY + 32; // Adjusted for new spacing
+    }, 41); // Increased height to accommodate more spacing
 
-    const scheduleInstruction = 'Enter your name and proposed schedule in one of the boxes. The other parent should enter their response in the other box.';
-    const scheduleLines = pdf.doc.splitTextToSize(scheduleInstruction, pdf.pageWidth - 20);
-    scheduleLines.forEach(line => {
-      pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.setFontSize(11);
-      pdf.doc.text(line, 10, pdf.currentY);
-      pdf.currentY += 4;
-    });
-    pdf.addSpacing(4);
+    pdf.addBodyText('Enter your name and proposed schedule in one of the boxes. The other parent should enter their response in the other box.', { spacing: 6 });
 
     pdf.addParentResponseBoxes(75);
     pdf.addCompromiseBox(50);
