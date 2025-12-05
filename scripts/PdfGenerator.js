@@ -97,6 +97,7 @@ class PdfGenerator {
    * Add section heading (large, bold) - 22pt
    */
   addSectionHeading(text) {
+    this.currentY += 3; // Add spacing above heading
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.SECTION_HEADING_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
@@ -108,6 +109,7 @@ class PdfGenerator {
    * Add subsection heading (medium, bold) - 14pt
    */
   addSubsectionHeading(text) {
+    this.currentY += 2; // Add spacing above heading
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.QUESTION_TITLE_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
@@ -119,6 +121,7 @@ class PdfGenerator {
    * Add question heading (medium, bold) - 14pt
    */
   addQuestionHeading(text) {
+    this.currentY += 2; // Add spacing above heading
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.QUESTION_TITLE_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
@@ -148,7 +151,7 @@ class PdfGenerator {
       const lines = this.doc.splitTextToSize(text, maxWidth);
       lines.forEach(line => {
         this.doc.text(line, x, this.currentY);
-        this.currentY += 4;
+        this.currentY += 5; // Increased from 4 to 5 for better line spacing
       });
     } else {
       this.doc.text(text, x, this.currentY);
@@ -270,7 +273,7 @@ class PdfGenerator {
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
     content(boxX + 3, boxW);
 
-    this.currentY = boxY + height + 3;
+    this.currentY = boxY + height + 5; // Increased from 3 to 5 for more spacing below box
   }
 
   /**
@@ -284,7 +287,7 @@ class PdfGenerator {
       this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
       this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
       this.doc.text(label, PdfStyles.MARGIN_WIDTH, this.currentY);
-      this.currentY += 2;
+      this.currentY += 4; // Increased from 2 to 4 for more spacing
     }
 
     if (helperText) {

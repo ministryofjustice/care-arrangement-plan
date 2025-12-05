@@ -274,8 +274,8 @@ const generatePdf = () => {
     pdf.addBodyText('Keep your children\'s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother\'s Day and Father\'s Day, and birthdays.', { spacing: 5 });
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(90);
-    pdf.addCompromiseBox(110);
+    pdf.addParentResponseBoxes(80); // Reduced from 90
+    pdf.addCompromiseBox(90); // Reduced from 110
 
     pdf.addFooter(11);
 
@@ -328,8 +328,8 @@ const generatePdf = () => {
     pdf.addBodyText('Children\'s needs change as they grow. When should you review this agreement to check it is still what\'s best for the children?', { spacing: 5 });
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(90);
-    pdf.addCompromiseBox(110);
+    pdf.addParentResponseBoxes(80); // Reduced from 90
+    pdf.addCompromiseBox(90); // Reduced from 110
 
     pdf.addFooter(14);
 
