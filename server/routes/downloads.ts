@@ -5,6 +5,7 @@ import { Router } from 'express';
 import paths from '../constants/paths';
 import createHtmlContent from '../html/createHtmlContent';
 import createPdf from '../pdf/createPdf';
+import { logDownload } from '../services/analyticsService';
 import getAssetPath from '../utils/getAssetPath';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
@@ -19,6 +20,9 @@ const downloadRoutes = (router: Router) => {
     response.setHeader('Content-Type', 'application/pdf');
     response.setHeader('Content-Disposition', `attachment; filename=${request.__('pdf.name')}.pdf`);
     response.send(Buffer.from(pdf));
+
+    // Log download event
+    logDownload(request, 'output_pdf');
   });
 
   router.get(paths.PRINT_PDF, (request, response) => {
@@ -31,6 +35,9 @@ const downloadRoutes = (router: Router) => {
 
   router.get(paths.DOWNLOAD_PAPER_FORM, (request, response) => {
     response.download(getAssetPath('other/paperForm.pdf'), `${request.__('pdf.name')}.pdf`);
+
+    // Log download event
+    logDownload(request, 'offline_pdf');
   });
 
   router.get(paths.DOWNLOAD_HTML, (request, response) => {
@@ -51,6 +58,9 @@ const downloadRoutes = (router: Router) => {
       htmlContent,
       crestImageData,
     });
+
+    // Log download event
+    logDownload(request, 'output_html');
   });
 };
 
