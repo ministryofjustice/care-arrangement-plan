@@ -2,11 +2,14 @@ import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
 import formFields from '../constants/formFields';
+import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
-import { getBackUrl } from '../utils/sessionHelpers';
+import checkFormProgressFromConfig  from '../middleware/checkFormProgressFromConfig';
+import addCompletedStep from '../utils/addCompletedStep';
+import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../utils/sessionHelpers';
 
 const aboutTheAdultsRoutes = (router: Router) => {
-  router.get(paths.ABOUT_THE_ADULTS, (request, response) => {
+  router.get(paths.ABOUT_THE_ADULTS, checkFormProgressFromConfig(FORM_STEPS.ABOUT_THE_ADULTS), (request, response) => {
     const formValues = {
       [formFields.INITIAL_ADULT_NAME]: request.session.initialAdultName,
       [formFields.SECONDARY_ADULT_NAME]: request.session.secondaryAdultName,
@@ -50,7 +53,8 @@ const aboutTheAdultsRoutes = (router: Router) => {
       request.session.initialAdultName = formData[formFields.INITIAL_ADULT_NAME];
       request.session.secondaryAdultName = formData[formFields.SECONDARY_ADULT_NAME];
 
-      return response.redirect(paths.TASK_LIST);
+      addCompletedStep(request, FORM_STEPS.ABOUT_THE_ADULTS);
+      return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );
 };

@@ -1,7 +1,7 @@
 import { createClient } from 'redis';
 
 import config from '../config';
-import logger from '../logger';
+import logger from '../logging/logger';
 
 type CacheClient = ReturnType<typeof createClient>;
 

@@ -1,12 +1,16 @@
 import { Router } from 'express';
 
+import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
+import addCompletedStep from '../utils/addCompletedStep';
 
 import aboutTheAdultsRoutes from './aboutTheAdults';
 import aboutTheChildrenRoutes from './aboutTheChildren';
 import accessibilityStatementRoutes from './accessibilityStatement';
+import analyticsRoutes from './analytics';
 import checkYourAnswersRoutes from './checkYourAnswers';
 import childrenSafetyRoutesCheck from './childrenSafetyCheck';
+import confirmationRoutes from './confirmation';
 import courtOrderCheckRoutes from './courtOrderCheck';
 import decisionMakingRoutes from './decisionMaking';
 import doWhatsBestRoutes from './doWhatsBest';
@@ -25,9 +29,11 @@ import taskListRoutes from './taskList';
 const routes = (): Router => {
   const router = Router();
   router.get(paths.START, (_request, response) => {
+    addCompletedStep(_request, FORM_STEPS.START);
     response.render('pages/index');
   });
 
+  analyticsRoutes(router);
   safetyCheckRoutes(router);
   childrenSafetyRoutesCheck(router);
   doWhatsBestRoutes(router);
@@ -39,6 +45,7 @@ const routes = (): Router => {
   taskListRoutes(router);
   checkYourAnswersRoutes(router);
   sharePlanRoutes(router);
+  confirmationRoutes(router);
   livingAndVisitingRoutes(router);
   handoverAndHolidaysRoutes(router);
   specialDaysRoutes(router);

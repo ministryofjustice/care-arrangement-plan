@@ -1,6 +1,6 @@
 import { Paragraph } from '../../@types/pdf';
 import { LINE_HEIGHT_RATIO, MM_PER_POINT } from '../../constants/pdfConstants';
-import logger from '../../logger';
+import logger from '../../logging/logger'
 import Pdf from '../pdf';
 
 type SplittableParagraph = Paragraph & { splittable?: boolean };

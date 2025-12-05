@@ -1,5 +1,5 @@
 import { Paragraph } from '../../@types/pdf';
-import logger from '../../logger';
+import logger from '../../logging/logger';
 import Pdf from '../pdf';
 
 import BaseComponent from './base';

@@ -1,71 +1,41 @@
 {% extends "partials/layout.njk" %}
-{% from "govuk/components/panel/macro.njk" import govukPanel %}
 {% from "govuk/components/accordion/macro.njk" import govukAccordion %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop">
-      {{ govukPanel({titleText: __('sharePlan.panelTitle') }) }}
+      <h1 class="govuk-heading-xl">{{ __('sharePlan.nextSteps') }}</h1>
 
-      <h2>{{ title }}</h2>
-      <p>{{ __('sharePlan.mustNowShare', {otherAdult: values.secondaryAdultName}) }}</p>
-      <p>{{ __('sharePlan.notLegallyBinding') }}</p>
+      <h2 class="govuk-heading-m">{{ title }}</h2>
 
       <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ __('sharePlan.whatToDoNext') }}</h3>
-      <p>{{ __('sharePlan.sendToSecondary', {otherAdult: values.secondaryAdultName}) }}</p>
-
-      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ __('sharePlan.helpImprove') }}</h3>
-      <p>{{ __('sharePlan.giveFeedback', {feedbackUrl: feedbackUrl}) | safe }}</p>
-      <p>{{ __('sharePlan.emailUs', { contactEmail: contactEmail })  | customUrlize | safe }}</p>
+      <p class="govuk-body">{{ __('sharePlan.sendToSecondary', {otherAdult: values.secondaryAdultName}) }}</p>
+      <p class="govuk-body">{{ __('sharePlan.collaborate', {otherAdult: values.secondaryAdultName}) }}</p>
 
       <h3 class="govuk-heading-s govuk-!-margin-bottom-2">
         {{ __('sharePlan.ifTheyDoNotRespond', {otherAdult: values.secondaryAdultName}) }}
       </h3>
-      <p>{{ __('sharePlan.tryMediation', {otherAdult: values.secondaryAdultName}) }}</p>
+      <p class="govuk-body">{{ __('sharePlan.tryMediation', {otherAdult: values.secondaryAdultName}) }}</p>
 
-      <p>
-        <a href="https://www.gov.uk/looking-after-children-divorce/types-of-court-order"
+      <p class="govuk-body">
+        <a href="https://www.gov.uk/looking-after-children-divorce/types-of-court-order" class="govuk-link"
           >{{ __('sharePlan.ifYouCannotAgree') }}</a
         >
       </p>
 
-      {% set whatWeAreTelling %}{% include 'partials/sharePlan/whatWeAreTelling.njk' %}{% endset %}
-      {% set yourProposedPlan %}{% include 'partials/sharePlan/yourProposedPlan.njk' %}{% endset %}
+      <div class="govuk-!-margin-top-6">
+        {{
+          govukButton({
+            text: __('sharePlan.downloadPlanButton'),
+            href: paths.CONFIRMATION
+          })
+        }}
+      </div>
 
-      {{
-        govukAccordion({
-          id: "share-page-accordion",
-          items: [
-            {
-              heading: {
-                text: __('sharePlan.whatWeAreTelling.title', { name: values.secondaryAdultName })
-              },
-              content: {
-                html: whatWeAreTelling
-              }
-            },
-            {
-              heading: {
-                text: __('sharePlan.yourProposedPlan.title')
-              },
-              content: {
-                html: yourProposedPlan
-              }
-            }
-          ]
-        })
-      }}
-    </div>
-
-    <div class="govuk-grid-column-one-third">
-      <hr class="govuk-!-margin-bottom-4 now-share-header" />
-      <h2 class="govuk-heading-m govuk-!-margin-bottom-1">{{ __('sharePlan.nowShare') }}</h2>
-      <p class="govuk-body govuk-!-margin-bottom-2">
-        {{ __('sharePlan.sendThePlanTo', {name: values.secondaryAdultName}) }}
+      <p class="govuk-body">
+        <a href="{{ paths.DOWNLOAD_HTML }}" class="govuk-link">{{ __('sharePlan.downloadHtml') }}</a>
       </p>
-      <p><a href="{{ paths.DOWNLOAD_PDF }}">{{ __('sharePlan.download') }}</a></p>
-      <p><a href="{{ paths.DOWNLOAD_HTML }}">{{ __('sharePlan.downloadHtml') }}</a></p>
-      <p><a href="{{ paths.PRINT_PDF }}" target="_blank">{{ __('sharePlan.print') }}</a></p>
     </div>
   </div>
 {% endblock %}

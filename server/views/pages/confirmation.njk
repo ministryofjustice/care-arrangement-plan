@@ -1,0 +1,52 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-l">{{ __('confirmation.downloadedYourPlanTitle') }}</h1>
+
+  <p class="govuk-body govuk-!-margin-top-6"><b>{{ __('confirmation.whatYouNeedToDoNext') }}</b> {{ __('confirmation.checkDownloadsFolder', { otherAdult: otherAdult }) }}</p>
+
+      <h2 class="govuk-heading-m govuk-!-margin-top-6">{{ __('confirmation.helpUsImprove') }}</h2>
+      <p class="govuk-body">{{ __('confirmation.appreciateFeedback') }}</p>
+
+      {% if feedbackUrl %}
+      <p class="govuk-body govuk-!-margin-top-4">
+        <a href="https://www.smartsurvey.co.uk/s/EFO5FJ/" class="govuk-link" target="_blank" rel="noopener noreferrer">{{ __('confirmation.whatDidYouThink') }}</a>
+      </p>
+      {% endif %}
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+      <hr class="govuk-!-margin-bottom-4 now-share-header" />
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-2">{{ __('confirmation.cantFindPlan') }}</h2>
+      <p class="govuk-body govuk-!-margin-bottom-4">
+        {{ __('confirmation.checkDownloads') }}
+      </p>
+      <p class="govuk-body"><a href="{{ paths.DOWNLOAD_PDF }}" class="govuk-link">{{ __('confirmation.downloadPdf') }}</a></p>
+      <p class="govuk-body"><a href="{{ paths.DOWNLOAD_HTML }}" class="govuk-link">{{ __('confirmation.downloadHtml') }}</a></p>
+    </div>
+  </div>
+
+  <script nonce="{{ cspNonce }}">
+    (function() {
+      'use strict';
+
+      // Auto-trigger PDF download when page loads
+      // Check if this is the first visit to this page (not a refresh or back navigation)
+      if (!sessionStorage.getItem('downloadTriggered')) {
+        sessionStorage.setItem('downloadTriggered', 'true');
+
+        // Create a temporary link and trigger download
+        const link = document.createElement('a');
+        link.href = '{{ paths.DOWNLOAD_PDF }}';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    })();
+  </script>
+{% endblock %}

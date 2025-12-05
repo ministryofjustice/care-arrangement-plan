@@ -2,11 +2,14 @@ import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
 import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
-import { getBackUrl } from '../../utils/sessionHelpers';
+import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
+import addCompletedStep from '../../utils/addCompletedStep';
+import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const planReviewRoutes = (router: Router) => {
-  router.get(paths.DECISION_MAKING_PLAN_REVIEW, (request, response) => {
+  router.get(paths.DECISION_MAKING_PLAN_REVIEW, checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_REVIEW), (request, response) => {
     const planReview = request.session.decisionMaking?.planReview;
 
     const formValues = {
@@ -68,7 +71,8 @@ const planReviewRoutes = (router: Router) => {
         },
       };
 
-      return response.redirect(paths.TASK_LIST);
+      addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_REVIEW);
+      return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );
 };

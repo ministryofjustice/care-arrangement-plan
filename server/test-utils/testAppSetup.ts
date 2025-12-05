@@ -2,8 +2,11 @@ import express, { Express, Router } from 'express';
 import createError from 'http-errors';
 
 import errorHandler from '../errorHandler';
+import setupPageVisitAnalytics from '../logging/setupPageVisitAnalytics';
+import setupRequestLogging from '../logging/setupRequestLogging';
 import setupAnalytics from '../middleware/setupAnalytics';
 import setupAuthentication from '../middleware/setupAuthentication';
+import setUpHealthCheck from '../middleware/setUpHealthCheck';
 import setupHistory from '../middleware/setupHistory';
 import setUpi18n from '../middleware/setUpi18n';
 import setUpWebRequestParsing from '../middleware/setupRequestParsing';
@@ -16,7 +19,8 @@ import { flashMock, sessionMock } from './testMocks';
 
 const testAppSetup = (): Express => {
   const app = express();
-
+  
+  app.disable('x-powered-by');
   app.use(setUpi18n());
   nunjucksSetup(app);
   app.use((request, _response, next) => {
@@ -24,11 +28,14 @@ const testAppSetup = (): Express => {
     request.flash = flashMock;
     next();
   });
+  app.use(setUpHealthCheck());
   app.use(setUpWebRequestParsing());
   app.use(setupAnalytics());
   app.use(setupHistory());
   app.use(setupServiceNoLongerAvailable());
   app.use(unauthenticatedRoutes());
+  app.use(setupPageVisitAnalytics());
+  app.use(setupRequestLogging());
   app.use(setupAuthentication());
   app.use(routes());
 

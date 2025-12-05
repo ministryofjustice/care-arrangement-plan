@@ -9,6 +9,7 @@ export const TEST_PATH = '/test';
 const testAppSetup = (addToPdf: (pdf: Pdf) => void): Express => {
   const app = express();
 
+  app.disable('x-powered-by');
   app.use(setUpi18n());
   app.use((req, _response, next) => {
     req.session = sessionMock;

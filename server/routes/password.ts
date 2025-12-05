@@ -5,8 +5,9 @@ import config from '../config';
 import cookieNames from '../constants/cookieNames';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
-import logger from '../logger';
+import logger from '../logging/logger';
 import encryptPassword from '../utils/encryptPassword';
+import { validateRedirectUrl } from '../utils/redirectValidator';
 
 const passwordRoutes = (router: Router) => {
   router.get(paths.PASSWORD, handleGetPassword);
@@ -23,7 +24,8 @@ const passwordRoutes = (router: Router) => {
 
 const handlePostPassword = (request: Request, response: Response) => {
   const providedUrl = typeof request.body.returnURL === 'string' ? request.body.returnURL : null;
-  const processedRedirectUrl = !providedUrl || providedUrl.startsWith(paths.PASSWORD) ? '/' : providedUrl;
+  // Validate redirect URL against whitelist to prevent open redirect attacks
+  const processedRedirectUrl = validateRedirectUrl(providedUrl, paths.START);
   const errors = validationResult(request);
 
   if (errors.isEmpty()) {
@@ -34,7 +36,7 @@ const handlePostPassword = (request: Request, response: Response) => {
       sameSite: 'lax',
     });
     logger.info(`Received successful login request`);
-    // Ensure a single slash at the start of processedRedirectUrl to prevent open redirect attacks
+    // Safe to redirect: processedRedirectUrl has been validated against whitelist
     return response.redirect(processedRedirectUrl.replace(/^\/+/, '/'));
   }
 
@@ -43,7 +45,8 @@ const handlePostPassword = (request: Request, response: Response) => {
 };
 
 const handleGetPassword = async (request: Request, response: Response) => {
-  const returnURL = request.query.returnURL || '/';
+  const providedReturnURL = typeof request.query.returnURL === 'string' ? request.query.returnURL : undefined;
+  const returnURL = validateRedirectUrl(providedReturnURL, paths.START);
 
   response.render('pages/password', { returnURL, errors: request.flash('errors'), title: 'Sign in' });
 };

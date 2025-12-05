@@ -8,7 +8,7 @@ import {
   MM_PER_POINT,
   PARAGRAPH_SPACE,
 } from '../../constants/pdfConstants';
-import logger from '../../logger';
+import logger from '../../logging/logger';
 import FontStyles from '../fontStyles';
 import Pdf from '../pdf';
 
