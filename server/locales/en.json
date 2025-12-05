@@ -530,7 +530,7 @@
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
       "helpUsImproveHeading": "Help us improve this service",
       "helpUsImprove": "With your help we can continually improve this service for other users",
-      "surveyLink":"Sign up and receive an incentive when you take part in further research https://www.smartsurvey.co.uk/s/EFO5FJ/",
+      "surveyLink":"Sign up and receive an incentive when you take part in further research {{{ feedbackUrl }}}",
       "doNotAgree": {
         "livingAndVisiting": {
           "mostlyLive": "If you do not agree, suggest where the children will mostly live",

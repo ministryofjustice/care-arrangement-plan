@@ -1,5 +1,7 @@
 import { Request } from 'express';
 
+import config from '../config';
+
 const escapeHtmlText = (text: string): string => {
   return text
     .replace(/&/g, '&amp;')
@@ -16,10 +18,10 @@ const addWhatHappensNow = (request: Request): string => {
   html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.notLegallyBinding'))}</p>\n`;
   html += `  <h3 id="what-happens-now-heading">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.cantAgreeHeading'))}</h3>\n`;
   html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.unableToAgree'))}</p>\n`;
-  html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.moreInfoAndSupport'))}</p>\n`;
+  html += `  <p><a href="https://www.gov.uk/looking-after-children-divorce">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.moreInfoAndSupport'))}</a></p>\n`;
   html += `  <h3 id="what-happens-now-heading">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.helpUsImproveHeading'))}</h3>\n`;
   html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.helpUsImprove'))}</p>\n`;
-  html += `  <p><b>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.surveyLink'))}</b></p>\n`;
+  html += `  <p><b><a href="${config.feedbackUrl}">${escapeHtmlText(request.__('confirmation.whatDidYouThink'))}</a></b></p>\n`;
   // Note: The last paragraph has URLs, so we don't escape it - it's handled by the customUrlize filter in the template
   html += '</section>\n';
 
