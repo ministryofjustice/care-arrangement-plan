@@ -83,20 +83,9 @@ class PdfGenerator {
   }
 
   /**
-   * Add main heading (large, bold) - 48pt for first page
+   * Add main heading (large, bold) - 22pt
    */
   addMainHeading(text) {
-    this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
-    this.doc.setFontSize(PdfStyles.MAIN_PAGE_HEADING_SIZE);
-    this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
-    this.doc.text(text, PdfStyles.MARGIN_WIDTH, this.currentY);
-    this.currentY += 18;
-  }
-
-  /**
-   * Add section heading (large, bold) - 32pt
-   */
-  addSectionHeading(text) {
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.SECTION_HEADING_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
@@ -105,25 +94,36 @@ class PdfGenerator {
   }
 
   /**
-   * Add subsection heading (medium, bold) - 19pt
+   * Add section heading (large, bold) - 22pt
    */
-  addSubsectionHeading(text) {
+  addSectionHeading(text) {
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
-    this.doc.setFontSize(PdfStyles.SUBSECTION_HEADING_SIZE);
+    this.doc.setFontSize(PdfStyles.SECTION_HEADING_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
     this.doc.text(text, PdfStyles.MARGIN_WIDTH, this.currentY);
     this.currentY += 8;
   }
 
   /**
-   * Add question heading (medium, bold) - 19pt
+   * Add subsection heading (medium, bold) - 14pt
+   */
+  addSubsectionHeading(text) {
+    this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
+    this.doc.setFontSize(PdfStyles.QUESTION_TITLE_SIZE);
+    this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
+    this.doc.text(text, PdfStyles.MARGIN_WIDTH, this.currentY);
+    this.currentY += 6;
+  }
+
+  /**
+   * Add question heading (medium, bold) - 14pt
    */
   addQuestionHeading(text) {
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.QUESTION_TITLE_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
     this.doc.text(text, PdfStyles.MARGIN_WIDTH, this.currentY);
-    this.currentY += 8;
+    this.currentY += 6;
   }
 
   /**
@@ -148,7 +148,7 @@ class PdfGenerator {
       const lines = this.doc.splitTextToSize(text, maxWidth);
       lines.forEach(line => {
         this.doc.text(line, x, this.currentY);
-        this.currentY += 6;
+        this.currentY += 4;
       });
     } else {
       this.doc.text(text, x, this.currentY);
@@ -174,9 +174,9 @@ class PdfGenerator {
       lines.forEach((line, idx) => {
         const x = PdfStyles.MARGIN_WIDTH + indent + (idx === 0 ? 0 : 2);
         this.doc.text(line, x, this.currentY);
-        this.currentY += 6;
+        this.currentY += 4;
       });
-      this.currentY += (itemSpacing - 6);
+      this.currentY += (itemSpacing - 4);
     });
   }
 
@@ -208,21 +208,21 @@ class PdfGenerator {
     this.doc.rect(PdfStyles.MARGIN_WIDTH, this.currentY, boxWidth, height);
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
-    this.doc.setFontSize(PdfStyles.HINT_TEXT_SIZE);
-    this.doc.text('Parent name:', PdfStyles.MARGIN_WIDTH + 3, this.currentY + 5);
+    this.doc.setFontSize(PdfStyles.SMALL_TEXT_SIZE);
+    this.doc.text('Parent name:', PdfStyles.MARGIN_WIDTH + 3, this.currentY + 4);
 
     // Right box
     this.doc.rect(rightBoxX, this.currentY, boxWidth, height);
-    this.doc.text('Parent name:', rightBoxX + 3, this.currentY + 5);
+    this.doc.text('Parent name:', rightBoxX + 3, this.currentY + 4);
 
-    this.currentY += height + 8;
+    this.currentY += height + 6;
   }
 
   /**
    * Add compromise box
    */
   addCompromiseBox(height = 80) {
-    this.addBodyText('You can use this space to write your agreed compromise for this question.', { spacing: 6 });
+    this.addBodyText('You can use this space to write your agreed compromise for this question.', { spacing: 5 });
 
     this.doc.setDrawColor(...PdfStyles.COLOR_BLACK);
     this.doc.setLineWidth(0.5);
@@ -233,7 +233,7 @@ class PdfGenerator {
       height
     );
 
-    this.currentY += height + 8;
+    this.currentY += height + 6;
   }
 
   /**
@@ -248,9 +248,9 @@ class PdfGenerator {
 
     lines.forEach(line => {
       this.doc.text(line, PdfStyles.MARGIN_WIDTH, this.currentY);
-      this.currentY += 6;
+      this.currentY += 4;
     });
-    this.currentY += 6;
+    this.currentY += 5;
   }
 
   /**
@@ -274,40 +274,36 @@ class PdfGenerator {
   }
 
   /**
-   * Add a single input box with label above (not inside)
+   * Add a single input box
    */
   addInputBox(height = 20, label = null, helperText = null) {
     const boxWidth = this.pageWidth - 2 * PdfStyles.MARGIN_WIDTH;
 
     if (label) {
       this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
-      this.doc.setFontSize(PdfStyles.QUESTION_TITLE_SIZE);
+      this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
       this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
       this.doc.text(label, PdfStyles.MARGIN_WIDTH, this.currentY);
-      this.currentY += 7;
+      this.currentY += 2;
     }
 
     if (helperText) {
       this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
-      this.doc.setFontSize(PdfStyles.HINT_TEXT_SIZE);
+      this.doc.setFontSize(PdfStyles.SMALL_TEXT_SIZE);
       this.doc.setTextColor(...PdfStyles.COLOR_GRAY);
-      const lines = this.doc.splitTextToSize(helperText, boxWidth);
-      lines.forEach(line => {
-        this.doc.text(line, PdfStyles.MARGIN_WIDTH, this.currentY);
-        this.currentY += 5;
-      });
-      this.currentY += 2;
+      this.doc.text(helperText, PdfStyles.MARGIN_WIDTH, this.currentY);
+      this.currentY += 3;
       this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
     }
 
     this.doc.setDrawColor(...PdfStyles.COLOR_BLACK);
     this.doc.setLineWidth(0.5);
     this.doc.rect(PdfStyles.MARGIN_WIDTH, this.currentY, boxWidth, height);
-    this.currentY += height + 8;
+    this.currentY += height + 6;
   }
 
   /**
-   * Add 2x2 grid of child name boxes with labels above
+   * Add 2x2 grid of child name boxes
    */
   addChildNameGrid() {
     const boxWidth = (this.pageWidth - 3 * PdfStyles.MARGIN_WIDTH) / 2;
@@ -321,23 +317,23 @@ class PdfGenerator {
       { label: 'Child 4 (first name)', x: rightBoxX },
     ];
 
+    this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
+    this.doc.setFontSize(PdfStyles.SMALL_TEXT_SIZE);
     this.doc.setDrawColor(...PdfStyles.COLOR_BLACK);
     this.doc.setLineWidth(0.5);
 
     for (let i = 0; i < children.length; i++) {
       const child = children[i];
 
-      // Label above box in bold
-      this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
-      this.doc.setFontSize(PdfStyles.QUESTION_TITLE_SIZE);
-      this.doc.text(child.label, child.x, this.currentY);
+      // Label above box
+      this.doc.text(child.label, child.x + 3, this.currentY - 2);
 
       // Box
-      this.doc.rect(child.x, this.currentY + 5, boxWidth, boxHeight);
+      this.doc.rect(child.x, this.currentY, boxWidth, boxHeight);
 
       // Move down after every 2 boxes
       if (i % 2 === 1) {
-        this.currentY += boxHeight + 12;
+        this.currentY += boxHeight + 8;
       }
     }
   }
@@ -353,9 +349,9 @@ class PdfGenerator {
     const lines = this.doc.splitTextToSize(text, this.pageWidth - 2 * PdfStyles.MARGIN_WIDTH);
     lines.forEach(line => {
       this.doc.text(line, PdfStyles.MARGIN_WIDTH, this.currentY);
-      this.currentY += 6;
+      this.currentY += 4;
     });
-    this.currentY += 2;
+    this.currentY += 1;
   }
 
   /**

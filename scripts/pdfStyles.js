@@ -15,22 +15,18 @@ const PdfStyles = {
   MM_PER_POINT: 0.352778,
   PARAGRAPH_SPACE: 5,
 
-  // Font sizes (matching screenshot formatting)
-  MAIN_PAGE_HEADING_SIZE: 48, // pt - for first page main heading
-  SECTION_HEADING_SIZE: 32, // pt - for major sections
-  SUBSECTION_HEADING_SIZE: 19, // pt - for subsections
-  QUESTION_TITLE_SIZE: 19, // pt - for questions
-  MAIN_TEXT_SIZE: 16, // pt - for body text
-  SMALL_TEXT_SIZE: 14, // pt - for helper text
-  INFO_BOX_TEXT_SIZE: 14, // pt - for info boxes
-  HINT_TEXT_SIZE: 14, // pt - for gray helper text
+  // Font sizes (matching TypeScript version exactly)
+  SECTION_HEADING_SIZE: 22, // pt - for major sections
+  QUESTION_TITLE_SIZE: 14, // pt - for questions
+  MAIN_TEXT_SIZE: 12, // pt - for body text
+  SMALL_TEXT_SIZE: 10, // pt - for helper text
+  INFO_BOX_TEXT_SIZE: 10, // pt - for info boxes
 
   // Colors
   COLOR_BLACK: [0, 0, 0],
   COLOR_WHITE: [255, 255, 255],
   COLOR_GRAY: [100, 100, 100],
   COLOR_LIGHT_GRAY: [200, 200, 200],
-  COLOR_BORDER_GRAY: [180, 180, 180],
 
   // Font styles
   FONT_NORMAL: 'normal',
