@@ -137,10 +137,10 @@ describe('PDF Generator Integration Tests', () => {
   // Clean up after all tests
   afterAll(() => {
     // Keep the generated PDFs for manual inspection if needed - comment out the following lines
-    [sourceOutputPath, distOutputPath].forEach(filePath => {
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-      }
-    });
+    // [sourceOutputPath, distOutputPath].forEach(filePath => {
+    //   if (fs.existsSync(filePath)) {
+    //     fs.unlinkSync(filePath);
+    //   }
+    // });
   });
 });
