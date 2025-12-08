@@ -153,7 +153,7 @@ const generatePdf = () => {
     pdf.addSpacing(4);
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(70)
+    pdf.addParentResponseBoxes(60)
     pdf.addSpacing(4);;
     pdf.addCompromiseBox(90);
 
@@ -170,7 +170,7 @@ const generatePdf = () => {
     // Info box with schedules (increased height to fit content)
     pdf.addInfoBox((startX, boxWidth) => {
       const col1X = startX;
-      const col2X = startX + boxWidth / 2;
+      const col2X = startX + boxWidth / 2; // Reduced margin between columns
       let boxY = pdf.currentY;
 
       pdf.doc.setFont('Helvetica', 'bold');
@@ -210,11 +210,12 @@ const generatePdf = () => {
       pdf.doc.text('days in the other.', col2X, boxY + 29);
 
       pdf.currentY = boxY + 32; // Adjusted for new spacing
-    }, 41); // Increased height to accommodate more spacing
-
+    }, 45); // Increased height for more bottom padding
+    pdf.addSpacing(6);
     pdf.addBodyText('Enter your name and proposed schedule in one of the boxes. The other parent should enter their response in the other box.', { spacing: 6 });
 
     pdf.addParentResponseBoxes(75);
+    pdf.addSpacing(6);
     pdf.addCompromiseBox(50);
 
     pdf.addFooter(6);
@@ -226,7 +227,8 @@ const generatePdf = () => {
     pdf.addQuestionHeading('How will the children get between households?');
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(90);
+    pdf.addParentResponseBoxes(60);
+    pdf.addSpacing(8);
     pdf.addCompromiseBox(110);
 
     pdf.addFooter(7);
@@ -238,7 +240,8 @@ const generatePdf = () => {
     pdf.addBodyText('It may be easier for children if the handover takes place at a neutral location such as a park or railway station.', { spacing: 5 });
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(90);
+    pdf.addParentResponseBoxes(60);
+    pdf.addSpacing(8);
     pdf.addCompromiseBox(110);
 
     pdf.addFooter(8);
@@ -250,7 +253,8 @@ const generatePdf = () => {
     pdf.addBodyText('School holidays include half terms, bank holidays and inset days.', { spacing: 5 });
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(90);
+    pdf.addParentResponseBoxes(60);
+    pdf.addSpacing(8);
     pdf.addCompromiseBox(110);
 
     pdf.addFooter(9);
@@ -262,7 +266,8 @@ const generatePdf = () => {
     pdf.addBodyText('Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes.', { spacing: 5 });
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(90);
+    pdf.addParentResponseBoxes(60);
+    pdf.addSpacing(8);
     pdf.addCompromiseBox(110);
 
     pdf.addFooter(10);
@@ -275,7 +280,8 @@ const generatePdf = () => {
     pdf.addBodyText('Keep your children\'s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother\'s Day and Father\'s Day, and birthdays.', { spacing: 5 });
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(80); // Reduced from 90
+    pdf.addParentResponseBoxes(60); // Reduced from 90
+    pdf.addSpacing(8);
     pdf.addCompromiseBox(90); // Reduced from 110
 
     pdf.addFooter(11);
@@ -295,7 +301,8 @@ const generatePdf = () => {
     pdf.addSpacing(3);
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(70);
+    pdf.addParentResponseBoxes(60);
+    pdf.addSpacing(8);
     pdf.addCompromiseBox(90);
 
     pdf.addFooter(12);
@@ -316,7 +323,8 @@ const generatePdf = () => {
     pdf.addSpacing(3);
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(70);
+    pdf.addParentResponseBoxes(60);
+    pdf.addSpacing(8);
     pdf.addCompromiseBox(90);
 
     pdf.addFooter(13);
@@ -329,7 +337,8 @@ const generatePdf = () => {
     pdf.addBodyText('Children\'s needs change as they grow. When should you review this agreement to check it is still what\'s best for the children?', { spacing: 5 });
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(80); // Reduced from 90
+    pdf.addParentResponseBoxes(60); // Reduced from 90
+    pdf.addSpacing(8);
     pdf.addCompromiseBox(90); // Reduced from 110
 
     pdf.addFooter(14);

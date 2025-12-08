@@ -256,11 +256,11 @@ class PdfGenerator {
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
     this.doc.setFontSize(PdfStyles.SMALL_TEXT_SIZE);
-    this.doc.text('Parent name:', PdfStyles.MARGIN_WIDTH + 3, this.currentY + 4);
+    this.doc.text('Parent name:', PdfStyles.MARGIN_WIDTH + 3, this.currentY + 6);
 
     // Right box
     this.doc.rect(rightBoxX, this.currentY, boxWidth, height);
-    this.doc.text('Parent name:', rightBoxX + 3, this.currentY + 4);
+    this.doc.text('Parent name:', rightBoxX + 3, this.currentY + 6);
 
     this.currentY += height + 6;
   }
@@ -319,7 +319,7 @@ class PdfGenerator {
     this.doc.rect(boxX, boxY, boxW, height, 'F');
 
     // Render content on top of gray box
-    this.currentY = boxY + 3;
+    this.currentY = boxY + 5; // Increased spacing from top of box
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
     content(boxX + 3, boxW);
 
