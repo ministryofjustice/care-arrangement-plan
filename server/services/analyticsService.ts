@@ -84,4 +84,42 @@ const logLinkClick = (req: Request, linkUrl: string, linkText?: string) => {
   logEvent(UserEvents.LINK_CLICK, eventData);
 };
 
-export { logEvent, logPageVisit, logDownload, logLinkClick };
+/**
+ * Logs a 'page_exit' event.
+ * This function is called when a user closes the browser window, tab, or navigates away.
+ * @param req - Express request object
+ * @param exitPage - The page path from which the user is exiting
+ */
+const logPageExit = (req: Request, exitPage: string) => {
+  // Generate privacy-preserving hashed identifier
+  const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
+
+  const eventData = {
+    hashed_user_id: hashedUserId,
+    exit_page: exitPage,
+    path: req.path,
+  };
+
+  logEvent(UserEvents.PAGE_EXIT, eventData);
+};
+
+/**
+ * Logs a 'quick_exit' event.
+ * This function is called when a user presses the quick exit button or uses the keyboard shortcut.
+ * @param req - Express request object
+ * @param exitPage - The page path from which the user is exiting
+ */
+const logQuickExit = (req: Request, exitPage: string) => {
+  // Generate privacy-preserving hashed identifier
+  const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
+
+  const eventData = {
+    hashed_user_id: hashedUserId,
+    exit_page: exitPage,
+    path: req.path,
+  };
+
+  logEvent(UserEvents.QUICK_EXIT, eventData);
+};
+
+export { logEvent, logPageVisit, logDownload, logLinkClick, logPageExit, logQuickExit };

@@ -12,6 +12,7 @@ import {
 } from 'govuk-frontend';
 
 import setupCookieBanner from './cookieBanner';
+import setupExitTracking from './exitTracker';
 import setupLinkTracking from './linkTracker';
 
 const components = [Accordion, Button, Checkboxes, ErrorSummary, ExitThisPage, Header, Radios, SkipLink, PasswordInput];
@@ -21,3 +22,4 @@ components.forEach((Component) => {
 
 setupCookieBanner();
 setupLinkTracking();
+setupExitTracking();
