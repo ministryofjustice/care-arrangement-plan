@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { logLinkClick } from '../services/analyticsService';
+import { logLinkClick, logPageExit, logQuickExit } from '../services/analyticsService';
 
 /**
  * Routes for analytics events
@@ -21,6 +21,44 @@ const analyticsRoutes = (router: Router) => {
 
     // Log the link click event
     logLinkClick(request, url, linkText);
+
+    // Return success response
+    response.status(204).send();
+  });
+
+  /**
+   * POST endpoint for logging page exits
+   * Called by client-side JavaScript when a user closes tab/window or navigates away
+   */
+  router.post('/api/analytics/page-exit', (request, response) => {
+    const { exitPage } = request.body;
+
+    // Validate that we have the required data
+    if (!exitPage || typeof exitPage !== 'string') {
+      return response.status(400).json({ error: 'Invalid request: exitPage is required' });
+    }
+
+    // Log the page exit event
+    logPageExit(request, exitPage);
+
+    // Return success response
+    response.status(204).send();
+  });
+
+  /**
+   * POST endpoint for logging quick exits
+   * Called by client-side JavaScript when a user clicks the quick exit button
+   */
+  router.post('/api/analytics/quick-exit', (request, response) => {
+    const { exitPage } = request.body;
+
+    // Validate that we have the required data
+    if (!exitPage || typeof exitPage !== 'string') {
+      return response.status(400).json({ error: 'Invalid request: exitPage is required' });
+    }
+
+    // Log the quick exit event
+    logQuickExit(request, exitPage);
 
     // Return success response
     response.status(204).send();
