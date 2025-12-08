@@ -386,24 +386,43 @@ class PdfGenerator {
 
       // Move down after every 2 boxes
       if (i % 2 === 1) {
-        this.currentY += boxHeight + 8;
+        this.currentY += boxHeight + 12; // Increased spacing between rows
       }
     }
   }
 
   /**
-   * Add tip text
+   * Add tip text with bold "Tip:" prefix
    */
   addTip(text) {
-    this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
 
-    const lines = this.doc.splitTextToSize(text, this.pageWidth - 2 * PdfStyles.MARGIN_WIDTH);
-    lines.forEach(line => {
-      this.doc.text(line, PdfStyles.MARGIN_WIDTH, this.currentY);
-      this.currentY += 4;
-    });
+    // Remove "Tip: " prefix if it exists in the text
+    const tipText = text.replace(/^Tip:\s*/i, '');
+
+    // Calculate width of "Tip: " in bold
+    this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
+    const tipPrefixWidth = this.doc.getTextWidth('Tip: ');
+
+    // Draw "Tip: " in bold
+    this.doc.text('Tip: ', PdfStyles.MARGIN_WIDTH, this.currentY);
+
+    // Draw the rest in normal weight on the same line
+    this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
+    const maxWidth = this.pageWidth - 2 * PdfStyles.MARGIN_WIDTH - tipPrefixWidth;
+    const lines = this.doc.splitTextToSize(tipText, maxWidth);
+
+    // First line continues after "Tip: "
+    this.doc.text(lines[0], PdfStyles.MARGIN_WIDTH + tipPrefixWidth, this.currentY);
+    this.currentY += 6;
+
+    // Subsequent lines (if any) start at normal indent
+    for (let i = 1; i < lines.length; i++) {
+      this.doc.text(lines[i], PdfStyles.MARGIN_WIDTH, this.currentY);
+      this.currentY += 6;
+    }
+
     this.currentY += 1;
   }
 

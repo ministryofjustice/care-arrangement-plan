@@ -128,8 +128,10 @@ const generatePdf = () => {
 
     pdf.addBodyText('If there are more than 4 children, you can attach a separate sheet', { spacing: 8 });
 
+    pdf.addSpacing(8); // Additional spacing between child name boxes and adult name section
     pdf.addSubsectionHeading('The adults who will care for the children');
     pdf.addInputBox(10, 'Your first name', 'If you are answering these questions for someone else, enter their first name', false);
+    pdf.addSpacing(4);
     pdf.addInputBox(10, 'First name of the other parent or carer', null, false);
 
     pdf.addFooter(4);
@@ -147,11 +149,12 @@ const generatePdf = () => {
     ]);
     pdf.addSpacing(3);
 
-    pdf.addBodyText('Tip: An exact split of time between two households does not always suit child\'s best interests.', { spacing: 0 });
-    pdf.addSpacing(5);
+    pdf.addTip('Tip: An exact split of time between two households does not always suit child\'s best interests.', { spacing: 0 });
+    pdf.addSpacing(4);
 
     pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(70);
+    pdf.addParentResponseBoxes(70)
+    pdf.addSpacing(4);;
     pdf.addCompromiseBox(90);
 
     pdf.addFooter(5);
