@@ -25,7 +25,8 @@ const generatePdf = () => {
     pdf.addSpacing(4); // Add extra spacing above main heading
     pdf.addMainHeading('Propose a child arrangements plan');
 
-    pdf.addBodyText('This form helps two people work out their child arrangements without having to go to court.', { spacing: 3 });
+    pdf.addBodyText('This form helps two people collaborate to work out their child arrangements without having to go to court.', { spacing: 3 });
+    pdf.addBodyText('Any plan you create using this service is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time. ')
 
     pdf.addSubsectionHeading('How to use this form');
     pdf.addNumberedList([
@@ -46,10 +47,12 @@ const generatePdf = () => {
     pdf.addSpacing(8);
 
     pdf.addSubsectionHeading('The benefits of getting a written agreement in place');
-    pdf.addBodyText('If you the other parent or carer can work together to make written child arrangements, you\'re more likely to avoid court. You\'re also more likely to get an arrangement that works for you. That\'s because people who go to court often find the judge makes decisions that don\'t suit parents or children.', { spacing: 4 });
+    pdf.addBodyText('If you the other parent or carer can work together to make written child arrangements, you’re more likely to avoid court.', { spacing: 2 });
+    pdf.addBodyText('You’re also more likely to get an arrangement that works for you.', { spacing: 2 });
+    pdf.addBodyText('That\'s because people who go to court can often find they don’t keep their ability to make decisions on their children’s wellbeing.', { spacing: 2 })
     pdf.addSpacing(8);
 
-    pdf.addSubsectionHeading('Top tips');
+    pdf.addSubsectionHeading('Top tips for you and your children');
     pdf.addBulletList([
       '• One of the main reasons people end up in court is that they are not willing to compromise to reach agreement. It may help you avoid court if you can work together to find a compromise that\'s best for your children.',
       '• Get your children\'s input into the arrangements you are making so that they feel included and their needs are met.',
