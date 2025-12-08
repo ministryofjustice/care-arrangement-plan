@@ -379,13 +379,7 @@ const generatePdf = () => {
 
     fs.writeFileSync(sourceAssetPath, pdfBuffer);
     fs.writeFileSync(distAssetPath, pdfBuffer);
-
-    // eslint-disable-next-line no-console
-    console.log(`✓ Generated blank PDF at ${sourceAssetPath}`);
-    // eslint-disable-next-line no-console
-    console.log(`✓ Generated blank PDF at ${distAssetPath}`);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Failed to generate PDF:', error);
     process.exit(1);
   }

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+
 const generatePdf = require('../../../scripts/generatePdf');
 
 describe('PDF Generator Integration Tests', () => {
