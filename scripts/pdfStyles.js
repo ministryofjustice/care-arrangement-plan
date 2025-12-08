@@ -16,11 +16,12 @@ const PdfStyles = {
   PARAGRAPH_SPACE: 5,
 
   // Font sizes (matching TypeScript version exactly)
-  SECTION_HEADING_SIZE: 22, // pt - for major sections
+  SECTION_HEADING_SIZE: 16, // pt - for major sections
   QUESTION_TITLE_SIZE: 14, // pt - for questions
   MAIN_TEXT_SIZE: 10, // pt - for body text (reduced to make it lighter/thinner)
   SMALL_TEXT_SIZE: 10, // pt - for helper text
   INFO_BOX_TEXT_SIZE: 10, // pt - for info boxes
+  MAIN_HEADING_SIZE: 22,
 
   // Colors
   COLOR_BLACK: [0, 0, 0],

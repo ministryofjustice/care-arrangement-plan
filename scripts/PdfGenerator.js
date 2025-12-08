@@ -87,7 +87,7 @@ class PdfGenerator {
    */
   addMainHeading(text) {
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
-    this.doc.setFontSize(PdfStyles.SECTION_HEADING_SIZE);
+    this.doc.setFontSize(PdfStyles.MAIN_HEADING_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
     this.doc.text(text, PdfStyles.MARGIN_WIDTH, this.currentY);
     this.currentY += 12;
@@ -109,7 +109,7 @@ class PdfGenerator {
    * Add subsection heading (medium, bold) - 14pt
    */
   addSubsectionHeading(text) {
-    this.currentY += 2; // Spacing above heading
+    this.currentY += 0; // Reduced spacing above heading
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.QUESTION_TITLE_SIZE);
     this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
@@ -137,10 +137,11 @@ class PdfGenerator {
       indent = 0,
       gray = false,
       spacing = 5,
-      wrap = true
+      wrap = true,
+      bold = false
     } = options;
 
-    this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
+    this.doc.setFont(PdfStyles.FONT_FAMILY, bold ? PdfStyles.FONT_BOLD : PdfStyles.FONT_NORMAL);
     this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
     this.doc.setTextColor(...(gray ? PdfStyles.COLOR_GRAY : PdfStyles.COLOR_BLACK));
 
@@ -204,7 +205,7 @@ class PdfGenerator {
    * Add bulleted list
    */
   addBulletList(items, options = {}) {
-    const { indent = 3, itemSpacing = 5 } = options;
+    const { indent = 0, itemSpacing = 8 } = options;
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
     this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
@@ -224,7 +225,7 @@ class PdfGenerator {
    * Add numbered list
    */
   addNumberedList(items, options = {}) {
-    const { indent = 2, itemSpacing = 5 } = options;
+    const { indent = 0, itemSpacing = 8 } = options;
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
     this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
@@ -359,7 +360,7 @@ class PdfGenerator {
    */
   addChildNameGrid() {
     const boxWidth = (this.pageWidth - 3 * PdfStyles.MARGIN_WIDTH) / 2;
-    const boxHeight = 12; // Reduced from 20 to make boxes 2 lines tall
+    const boxHeight = 10; // Further reduced box height
     const rightBoxX = PdfStyles.MARGIN_WIDTH + boxWidth + PdfStyles.MARGIN_WIDTH;
 
     const children = [
