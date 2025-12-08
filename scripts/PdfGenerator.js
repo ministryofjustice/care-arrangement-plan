@@ -58,16 +58,28 @@ class PdfGenerator {
   }
 
   /**
-   * Add footer with page number
+   * Add footer with page number and document message
    */
   addFooter(pageNumber = this.currentPage) {
-    this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
+    const footerY = this.pageHeight - PdfStyles.MARGIN_WIDTH;
+
+    // Center: Bold message
+    this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
-    const pageCountText = `Page ${pageNumber}  of ${this.totalPages}`;
+    this.doc.text(
+      'Make sure you have every page of this document',
+      this.pageWidth / 2,
+      footerY,
+      { align: 'center' }
+    );
+
+    // Right side: Page number
+    this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
+    const pageCountText = `Page ${pageNumber} of ${this.totalPages}`;
     this.doc.text(
       pageCountText,
       this.pageWidth - PdfStyles.MARGIN_WIDTH,
-      this.pageHeight - PdfStyles.MARGIN_WIDTH,
+      footerY,
       { align: 'right' }
     );
   }
@@ -256,11 +268,11 @@ class PdfGenerator {
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
     this.doc.setFontSize(PdfStyles.SMALL_TEXT_SIZE);
-    this.doc.text('Parent name:', PdfStyles.MARGIN_WIDTH + 3, this.currentY + 6);
+    this.doc.text('Parent/carer name and response:', PdfStyles.MARGIN_WIDTH + 3, this.currentY + 6);
 
     // Right box
     this.doc.rect(rightBoxX, this.currentY, boxWidth, height);
-    this.doc.text('Parent name:', rightBoxX + 3, this.currentY + 6);
+    this.doc.text('Parent/carer name and response:', rightBoxX + 3, this.currentY + 6);
 
     this.currentY += height + 6;
   }
@@ -269,7 +281,7 @@ class PdfGenerator {
    * Add compromise box
    */
   addCompromiseBox(height = 80) {
-    this.addBodyText('You can use this space to write your agreed compromise for this question.', { spacing: 2 }); // Reduced spacing to bring text closer to box
+    this.addBodyText('Tell us your agreed compromise for this question.', { spacing: 2 }); // Reduced spacing to bring text closer to box
 
     // Check if box will overflow into footer
     const maxY = this.pageHeight - PdfStyles.FOOTER_HEIGHT - 5;

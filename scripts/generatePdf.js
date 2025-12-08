@@ -68,8 +68,8 @@ const generatePdf = () => {
     pdf.addSectionHeading('More information about divorce and separation');
     pdf.addBodyText('Check GOV.UK to find what support is available. You can search for topics including:', { spacing: 2 });
     pdf.addBulletList([
-      '• separating or divorcing: what you need to do',
-      '• making child arrangements if you divorce or separate',
+      '• what you need to do if separating or divorcing',
+      '• making child arrangements',
     ]);
     pdf.addSpacing(8);
 
@@ -77,7 +77,7 @@ const generatePdf = () => {
     pdf.addBodyText('To make child arrangements you need to be able to state your needs and views without feeling intimidated. The other parent or carer must not be a threat to you or to your children\'s safety.', { spacing: 5 });
     pdf.addBodyText('Do not continue with this process if there has been:', { spacing: 2 });
     pdf.addBulletList([
-      '• any form of domestic abuse or violence, even if the abuse was not directed at the children',
+      '• any form of domestic abuse, even if the abuse was not directed at the children',
       '• actual or attempted child abduction',
       '• misuse of drugs, alcohol or other substances',
       '• any other safety or welfare concerns that place anyone at significant risk of harm',
@@ -88,11 +88,11 @@ const generatePdf = () => {
     pdf.addBodyText('https://helpwithchildarrangements.service.justice.gov.uk', { bold: true });
     
     pdf.addSpacing(8);
-    pdf.addSubsectionHeading('Getting help with abuse and domestic violence');
+    pdf.addSubsectionHeading('Getting help with domestic abuse');
     pdf.addBodyText('To find out more about what is child abuse and neglect, visit ', { spacing: 0});
     pdf.addBodyText(' https://www.nspcc.org.uk/what-is-child-abuse', { bold: true })
     pdf.addBodyText('If you\'re unsure whether you\'re a victim of domestic abuse, visit ', { spacing: 0 });
-    pdf.addBodyText('https://www.nhs.uk/live-well/getting-help-for-domestic-violence/', { bold: true });
+    pdf.addBodyText('https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.', { bold: true });
 
     pdf.addFooter(2);
 
@@ -215,7 +215,7 @@ const generatePdf = () => {
       pdf.currentY = boxY + 32; // Adjusted for new spacing
     }, 45); // Increased height for more bottom padding
     pdf.addSpacing(6);
-    pdf.addBodyText('Enter your name and proposed schedule in one of the boxes. The other parent should enter their response in the other box.', { spacing: 6 });
+    pdf.addBodyText('Add your first name and response in the box - the other parent/carer should add their first name and response in the other box.', { spacing: 6 });
 
     pdf.addParentResponseBoxes(75);
     pdf.addSpacing(6);
@@ -349,10 +349,15 @@ const generatePdf = () => {
     // ===== PAGE 15: What happens now =====
     pdf.addPage();
 
-    pdf.addSectionHeading('What happens now?');
-    pdf.addBodyText('Now give this proposed child arrangements plan to the other parent or carer so they can add their response.', { spacing: 5 });
-    pdf.addBodyText('If you are unable to reach agreement about your child arrangements, you can try mediation. You can get help towards the cost of mediation.');
-
+    pdf.addSectionHeading('What you need to do now');
+    pdf.addBodyText('Now give this proposed child arrangements plan to the other parent or carer so they can add their response.', { spacing: 2 });
+    pdf.addBodyText('When they have added their response, you can collaborate to reach a shared agreement.')
+    pdf.addQuestionHeading('If you can\'t agree');
+    pdf.addBodyText('If you are unable to reach agreement about your child arrangements, you can try mediation.',{ spacing: 2 });
+    pdf.addBodyText('More information and support is available by visiting https://www.gov.uk/looking-after-children-divorce')
+    pdf.addQuestionHeading('Help us improve this service')
+    pdf.addBodyText('With your help we can continually improve this service for other users.', { spacing: 2 });
+    pdf.addBodyText('Email email address to express an interest in taking part in research and receive an incentive.');
     pdf.addFooter(15);
 
     // Set document title for PDF metadata
