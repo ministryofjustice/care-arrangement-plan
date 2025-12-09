@@ -7,8 +7,11 @@ const app = testAppSetup();
 
 jest.mock('../services/analyticsService');
 
+const mockedLogLinkClick = analyticsService.logLinkClick as jest.MockedFunction<typeof analyticsService.logLinkClick>;
+const mockedLogPageExit = analyticsService.logPageExit as jest.MockedFunction<typeof analyticsService.logPageExit>;
+const mockedLogQuickExit = analyticsService.logQuickExit as jest.MockedFunction<typeof analyticsService.logQuickExit>;
+
 describe('POST /api/analytics/link-click', () => {
-  const mockedLogLinkClick = analyticsService.logLinkClick as jest.MockedFunction<typeof analyticsService.logLinkClick>;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -141,6 +144,168 @@ describe('POST /api/analytics/link-click', () => {
       expect.anything(),
       linkData.url,
       linkData.linkText
+    );
+  });
+});
+
+describe('POST /api/analytics/page-exit', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('logs a page exit event with exitPage', async () => {
+    const exitData = {
+      exitPage: '/share-plan',
+    };
+
+    const response = await request(app)
+      .post('/api/analytics/page-exit')
+      .send(exitData)
+      .expect(204);
+
+    expect(response.body).toEqual({});
+    expect(mockedLogPageExit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        path: '/api/analytics/page-exit',
+      }),
+      exitData.exitPage
+    );
+  });
+
+  it('returns 400 when exitPage is missing', async () => {
+    const exitData = {};
+
+    const response = await request(app)
+      .post('/api/analytics/page-exit')
+      .send(exitData)
+      .expect(400);
+
+    expect(response.body).toEqual({ error: 'Invalid request: exitPage is required' });
+    expect(mockedLogPageExit).not.toHaveBeenCalled();
+  });
+
+  it('returns 400 when exitPage is not a string', async () => {
+    const exitData = {
+      exitPage: 12345,
+    };
+
+    const response = await request(app)
+      .post('/api/analytics/page-exit')
+      .send(exitData)
+      .expect(400);
+
+    expect(response.body).toEqual({ error: 'Invalid request: exitPage is required' });
+    expect(mockedLogPageExit).not.toHaveBeenCalled();
+  });
+
+  it('returns 400 when exitPage is an empty string', async () => {
+    const exitData = {
+      exitPage: '',
+    };
+
+    const response = await request(app)
+      .post('/api/analytics/page-exit')
+      .send(exitData)
+      .expect(400);
+
+    expect(response.body).toEqual({ error: 'Invalid request: exitPage is required' });
+    expect(mockedLogPageExit).not.toHaveBeenCalled();
+  });
+
+  it('logs page exit from confirmation page', async () => {
+    const exitData = {
+      exitPage: '/confirmation',
+    };
+
+    await request(app)
+      .post('/api/analytics/page-exit')
+      .send(exitData)
+      .expect(204);
+
+    expect(mockedLogPageExit).toHaveBeenCalledWith(
+      expect.anything(),
+      exitData.exitPage
+    );
+  });
+});
+
+describe('POST /api/analytics/quick-exit', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('logs a quick exit event with exitPage', async () => {
+    const exitData = {
+      exitPage: '/safety-check',
+    };
+
+    const response = await request(app)
+      .post('/api/analytics/quick-exit')
+      .send(exitData)
+      .expect(204);
+
+    expect(response.body).toEqual({});
+    expect(mockedLogQuickExit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        path: '/api/analytics/quick-exit',
+      }),
+      exitData.exitPage
+    );
+  });
+
+  it('returns 400 when exitPage is missing', async () => {
+    const exitData = {};
+
+    const response = await request(app)
+      .post('/api/analytics/quick-exit')
+      .send(exitData)
+      .expect(400);
+
+    expect(response.body).toEqual({ error: 'Invalid request: exitPage is required' });
+    expect(mockedLogQuickExit).not.toHaveBeenCalled();
+  });
+
+  it('returns 400 when exitPage is not a string', async () => {
+    const exitData = {
+      exitPage: 12345,
+    };
+
+    const response = await request(app)
+      .post('/api/analytics/quick-exit')
+      .send(exitData)
+      .expect(400);
+
+    expect(response.body).toEqual({ error: 'Invalid request: exitPage is required' });
+    expect(mockedLogQuickExit).not.toHaveBeenCalled();
+  });
+
+  it('returns 400 when exitPage is an empty string', async () => {
+    const exitData = {
+      exitPage: '',
+    };
+
+    const response = await request(app)
+      .post('/api/analytics/quick-exit')
+      .send(exitData)
+      .expect(400);
+
+    expect(response.body).toEqual({ error: 'Invalid request: exitPage is required' });
+    expect(mockedLogQuickExit).not.toHaveBeenCalled();
+  });
+
+  it('logs quick exit from children safety check page', async () => {
+    const exitData = {
+      exitPage: '/children-safety-check',
+    };
+
+    await request(app)
+      .post('/api/analytics/quick-exit')
+      .send(exitData)
+      .expect(204);
+
+    expect(mockedLogQuickExit).toHaveBeenCalledWith(
+      expect.anything(),
+      exitData.exitPage
     );
   });
 });

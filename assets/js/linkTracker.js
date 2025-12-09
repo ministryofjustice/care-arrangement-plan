@@ -7,8 +7,8 @@ const setupLinkTracking = () => {
   function logLinkClick(url, linkText) {
     // Use sendBeacon for reliable tracking even if user navigates away
     if (navigator.sendBeacon) {
-      const data = JSON.stringify({ url, linkText });
-      navigator.sendBeacon('/api/analytics/link-click', data);
+      const blob = new Blob([JSON.stringify({ url, linkText })], { type: 'application/json' });
+      navigator.sendBeacon('/api/analytics/link-click', blob);
     } else {
       // Fallback for browsers that don't support sendBeacon
       fetch('/api/analytics/link-click', {

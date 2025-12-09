@@ -13,6 +13,7 @@ import {
 
 import setupAccessibleExitThisPage from './accessibleExitThisPage';
 import setupCookieBanner from './cookieBanner';
+import setupExitTracking from './exitTracker';
 import setupLinkTracking from './linkTracker';
 
 // Disable GOV.UK's default Shift key listener before components initialise
@@ -28,3 +29,4 @@ setupCookieBanner();
 // Set up our accessible Escape key shortcut after GOV.UK components initialise
 setupAccessibleExitThisPage();
 setupLinkTracking();
+setupExitTracking();
