@@ -33,6 +33,7 @@ const setUpWebSecurity = (): Router => {
           ],
           imgSrc: ["'self'", 'data:', 'https://*.google-analytics.com', 'https://*.googletagmanager.com'],
           connectSrc: [
+            "'self'",
             'https://*.google-analytics.com',
             'https://*.analytics.google.com',
             'https://*.googletagmanager.com',
