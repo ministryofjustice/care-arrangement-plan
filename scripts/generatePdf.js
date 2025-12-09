@@ -357,7 +357,7 @@ const generatePdf = () => {
     pdf.addBodyText('More information and support is available by visiting https://www.gov.uk/looking-after-children-divorce')
     pdf.addQuestionHeading('Help us improve this service')
     pdf.addBodyText('With your help we can continually improve this service for other users.', { spacing: 2 });
-    pdf.addBodyText('Email email address to express an interest in taking part in research and receive an incentive.');
+    pdf.addBodyText('Email childarrangements@justice.gov.uk to express an interest in taking part in research and receive an incentive.');
     pdf.addFooter(15);
 
     // Set document title for PDF metadata
