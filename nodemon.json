@@ -1,4 +1,5 @@
 {
   "watch": ["server", "esbuild", "assets", ".env"],
-  "ext": "*"
+  "ext": "*",
+  "ignore": ["scripts/**/*", "dist/**/*", "assets/other/paperForm.pdf"]
 }

@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node esbuild/esbuild.config.mjs --build",
+    "postbuild": "node scripts/generatePdf.js",
     "start": "node $ENV_FILE_OPTION $NODE_OPTIONS dist/app.js | bunyan -o short",
     "start:dev": "ENV_FILE_OPTION='--env-file=.env' nodemon --exec 'npm run build && npm run start'",
     "lint": "eslint . --cache --max-warnings 0",

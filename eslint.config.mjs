@@ -11,7 +11,7 @@ import { config as tslintConfig, configs as tslintConfigs } from 'typescript-esl
 
 export default tslintConfig(
   {
-    ignores: ['dist/**'],
+    ignores: ['dist/**', 'scripts/**', 'server/__tests__/scripts/**'],
   },
   eslint.configs.recommended,
   tslintConfigs.recommended,
