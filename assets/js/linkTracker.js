@@ -59,6 +59,7 @@ const setupLinkTracking = () => {
     // Only track external links
     if (isExternalLink(href)) {
       const linkText = link.textContent.trim();
+      console.log('[Link Tracker] External link clicked:', { url: href, linkText });
       logLinkClick(href, linkText);
     }
   });
