@@ -86,6 +86,7 @@
     "interactive": "has interactive, clickable hyperlinks",
     "offline": "can be opened in any web browser offline",
     "screenReaderSupport": "works perfectly with screen readers",
+    "notFullyAccessible": "The accessibility statement is not fully accessible:",
     "howAccessible": "How accessible this website is",
     "knownIssues": [
       "Screen reader users may struggle with some of the links.",
