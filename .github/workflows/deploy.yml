@@ -15,6 +15,8 @@ jobs:
     name: 'Deploy'
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
+    permissions:
+      contents: write
     env:
       KUBE_NAMESPACE: ${{ secrets.KUBE_NAMESPACE }}
 
@@ -77,3 +79,23 @@ jobs:
       - name: 'Apply manifest files'
         run: |
           kubectl apply -f deploy/${{ inputs.environment }} -n ${KUBE_NAMESPACE}
+
+      - name: 'Create deployment tag'
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Read version from package.json
+          VERSION=$(node -p "require('./package.json').version")
+
+          case "${{ inputs.environment }}" in
+            development) TAG="dev-v${VERSION}-${{ github.run_number }}" ;;
+            staging) TAG="staging-v${VERSION}" ;;
+            production) TAG="v${VERSION}" ;;
+            *) TAG="${{ inputs.environment }}-v${VERSION}-${{ github.run_number }}" ;;
+          esac
+
+          echo "Creating tag: $TAG"
+          git tag -a "$TAG" -m "Deployed v$VERSION to ${{ inputs.environment }}"
+          git push origin "$TAG"
