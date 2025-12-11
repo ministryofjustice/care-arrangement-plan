@@ -529,8 +529,8 @@
       "cantAgreeHeading":"If you can't agree",
       "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation.",
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
-      "helpUsImproveHeading": "Help us improve this service",
-      "helpUsImprove": "With your help we can continually improve this service for other users",
+      "helpUsImproveHeading": "Get paid to give your feedback",
+      "helpUsImprove": "With your help we can improve this service and understand how you use your plan.",
       "surveyLink":"Sign up and receive an incentive when you take part in further research {{{ feedbackUrl }}}",
       "doNotAgree": {
         "livingAndVisiting": {
@@ -573,8 +573,8 @@
     "downloadedYourPlanTitle": "You have downloaded your plan",
     "whatYouNeedToDoNext": "What you need to do next:",
     "checkDownloadsFolder": "Check your downloads folder for a PDF or accessible HTML page of your plan and share with {{{ otherAdult }}} who will get a chance to collaborate.",
-    "helpUsImprove": "Help us improve this service",
-    "appreciateFeedback": "With your help we can continually improve this service for other users.",
+    "helpUsImprove": "Get paid to give your feedback",
+    "appreciateFeedback": "With your help we can improve this service and understand how you use your plan.",
     "whatDidYouThink": "Sign up and receive an incentive when you take part in further research",
     "cantFindPlan": "Can't find your plan?",
     "checkDownloads": "Check your downloads folder. If not then please download again.",
