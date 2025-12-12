@@ -31,7 +31,7 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
-  "phaseBannerText": "Give your feedback about this service using our <a href={{ feedbackUrl }}>online survey</a>.",
+  "phaseBannerText": "This is a new service. Help us improve it and <a href={{ feedbackUrl }} target=\"_blank\" rel=\"noopener noreferrer\">give your feedback (opens in new tab)</a>.",
   "footer": {
     "accessibility": "Accessibility",
     "contact": "Contact",
@@ -78,7 +78,7 @@
     "changeColours": "change colours, contrast levels and fonts using browser or device settings",
     "zoomIn": "zoom in up to 400% without the text spilling off the screen",
     "speechRecognition": "navigate most of the website using a keyboard or speech recognition software",
-    "screenReader":"listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)",
+    "screenReader": "listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)",
     "simpleToUnderstand": "We've also made the website text as simple as possible to understand.",
     "abilityNet": " has advice on making your device easier to use if you have a disability.",
     "htmlVersion": "There is also an HTML version of this statement.",
@@ -109,7 +109,7 @@
     "nonAccessibleContent": "Non-accessible content",
     "nonCompliance": "The website does not comply for the following reasons:",
     "nonAccessibleReason": "The content listed below is non-accessible for the following reasons:",
-    "nonComplianceHeading":"Non-compliance with the accessibility regulations",
+    "nonComplianceHeading": "Non-compliance with the accessibility regulations",
     "doesNotComply": "The website does not comply for the following reasons:",
     "nonComplianceReasons": [
       "Some of the links are displayed as raw URLs with no accessible text. 2.4.4 link purpose (in context).",
@@ -118,7 +118,7 @@
       "Some buttons have a conditional reveal which is not allowed for this button type. 4.1.2 name, role, value."
     ],
     "fixTimeline": "We plan to address these issues by early 2026.",
-    "replacePdf":"The team intends to replace the PDF with accessible content.",
+    "replacePdf": "The team intends to replace the PDF with accessible content.",
     "statementPrep": "Preparation of this accessibility statement",
     "statementDate": "This statement was prepared on 14th October 2025. It was last reviewed on 14th October 2025.",
     "testingDetails": "The test was carried out by a member of the MoJ digital accessibility team in March 2025. The most viewed pages were tested using automated testing tools by our website team.",
@@ -177,7 +177,7 @@
     "informationAboutYou": "We collect information about you in accordance with our <a href={{ privacyUrl }}>privacy policy</a> and our <a href={{ cookieUrl }}>cookie policy</a>. By using this service you agree to us collecting this information and confirm that any data you provide is accurate.",
     "limitationsHeading": "Limitations of the service",
     "limitations": "Using this service does not guarantee that you will be able to resolve your child arrangements without going to court. While this tool is designed to help you create a child arrangement plan, some cases may need to be resolved in other ways, perhaps by going to court.",
-    "notLegallyEnforceable":"Any agreement you reach through this service is not legally enforceable in a court. This means that there is no legal requirement for you or the other parent or carer to comply with what you have agreed.",
+    "notLegallyEnforceable": "Any agreement you reach through this service is not legally enforceable in a court. This means that there is no legal requirement for you or the other parent or carer to comply with what you have agreed.",
     "misuseHeading": "Misuse",
     "misuse": "You must not impersonate another person, provide false or misleading information, or use this service on behalf of someone else without their consent.  ",
     "restrictionsOnUseHeading": "Restrictions on use",
@@ -191,8 +191,13 @@
   },
   "notSafe": {
     "title": "Finding the right route for you",
-    "content": "<p>This service may not be right for you if you’ve experienced domestic abuse.</p><p><a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">Find out how to recognise domestic abuse</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">Get help and advice on making child arrangements when there’s been domestic abuse</a>.</p>",
-    "continue": "If you feel confident that you can discuss things without feeling intimidated continue using the service"
+    "intro": "<p>This service may not be right for you if you've experienced domestic abuse.</p>",
+    "warningText": "If you are in immediate danger, call 999 and ask for the police.",
+    "warningIconFallback": "Warning",
+    "content": "<p><a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">Find out how to recognise domestic abuse</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">Get help and advice on making child arrangements when there's been domestic abuse</a>.</p>",
+    "continueTitle": "If you want to continue",
+    "continue": "If you feel confident that you can carry on without any danger to yourself or the children, continue using the service.",
+    "escapeKeyAnnouncement": "If you need to exit this page quickly, press the Escape key on your keyboard."
   },
   "childrenSafetyCheck": {
     "title": "Children’s safety",
@@ -208,8 +213,13 @@
   },
   "childrenNotSafe": {
     "title": "Getting help",
-    "content": "<p>It may not be appropriate to make child arrangements if there’s any risk of harm to the children.</p><p><a href=\"https://www.nspcc.org.uk/keeping-children-safe/types-of-abuse/domestic-abuse/?ac=221274\">Get advice on How to Protect Children From Domestic Abuse | NSPCC </a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">Citizens Advice has advice on making child arrangements when there’s been domestic abuse</a>.</p>",
-    "continue": "If you feel confident that making child arrangements will not put children at risk, continue using the service"
+    "intro": "<p>It may not be appropriate to make child arrangements if there's any risk of harm to the children.</p>",
+    "warningText": "If you are in immediate danger, call 999 and ask for the police.",
+    "warningIconFallback": "Warning",
+    "content": "<p><a href=\"https://www.nspcc.org.uk/keeping-children-safe/types-of-abuse/domestic-abuse/?ac=221274\">Get advice on How to Protect Children From Domestic Abuse | NSPCC </a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">Citizens Advice has advice on making child arrangements when there's been domestic abuse</a>.</p>",
+    "continue": "If you feel confident that you can carry on without any danger to yourself or the children, continue using the service.",
+    "continueTitle": "If you want to continue",
+    "escapeKeyAnnouncement": "If you need to exit this page quickly, press the Escape key on your keyboard."
   },
   "doWhatsBest": {
     "title": "What’s best for the children?",
@@ -438,7 +448,7 @@
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
     "whatWeAreTelling": {
       "title": "What we're telling {{{ name }}} about this plan",
-      "whatYouNeedToDo" : "What you need to do",
+      "whatYouNeedToDo": "What you need to do",
       "proposedPlan": "Proposed child arrangements plan for {{{ childrenNames }}}",
       "initialIsAsking": "{{{ senderName }}} has created this plan and is asking that you collaborate with them to agree the best way to look after {{{ childrenNames }}}.",
       "pleaseReadThrough": "Please read through the suggestions made by {{{ senderName }}}. You can use this PDF to collaborate with {{{ senderName }}} to create a version you both agree with.",
@@ -467,8 +477,8 @@
       "stopIfAnyConcern": "If you have any concerns about safety, stop now.",
       "findAnotherWay": "Find another way to make arrangements by visiting https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements.",
       "domesticAbuseHeading": "Getting help with domestic abuse",
-      "gettingHelpDomesticAbuse":"To find out more about what is child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse.",
-      "unsureVictim":"If you’re unsure whether you’re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
+      "gettingHelpDomesticAbuse": "To find out more about what is child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse.",
+      "unsureVictim": "If you’re unsure whether you’re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
       "gettingHelpHeading": "Getting help with domestic abuse",
       "gettingHelp": "To find out more about what is child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse.",
       "courtOrderHeading": "If there is a court order in place",
@@ -526,12 +536,12 @@
       "whatHappensNowHeading": "What you need to do now",
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{{ senderName }}}. You should try to create a written record of what you have both agreed.",
       "notLegallyBinding": "Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",
-      "cantAgreeHeading":"If you can't agree",
+      "cantAgreeHeading": "If you can't agree",
       "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation.",
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
       "helpUsImproveHeading": "Help us improve this service",
       "helpUsImprove": "With your help we can continually improve this service for other users",
-      "surveyLink":"Sign up and receive an incentive when you take part in further research {{{ feedbackUrl }}}",
+      "surveyLink": "Sign up and receive an incentive when you take part in further research {{{ feedbackUrl }}}",
       "doNotAgree": {
         "livingAndVisiting": {
           "mostlyLive": "If you do not agree, suggest where the children will mostly live",
@@ -583,7 +593,7 @@
   },
   "pdf": {
     "name": "Proposed child arrangements plan",
-    "everyPageReminder" : "Make sure you have received every page of this document",
+    "everyPageReminder": "Make sure you have received every page of this document",
     "pageCount": "Page {{ currentPage }} of {{ totalPages }}"
   }
 }

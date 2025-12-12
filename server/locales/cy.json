@@ -1,3 +1,26 @@
 {
-  "serviceName": "Cynnig cynllun trefniant plentyn"
+  "serviceName": "Cynnig cynllun trefniant plentyn",
+  "back": "Yn ôl",
+  "continue": "Parhau",
+  "notSafe": {
+    "title": "Dod o hyd i'r llwybr cywir i chi",
+    "warningText": "Os ydych mewn perygl uniongyrchol, ffoniwch 999 a gofynnwch am yr heddlu.",
+    "warningIconFallback": "Rhybudd",
+    "content": "<p><a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">Darganfyddwch sut i adnabod cam-drin domestig</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">Cael cymorth a chyngor ar wneud trefniadau plant pan fu cam-drin domestig</a>.</p>",
+    "continue": "Os ydych chi'n teimlo'n hyderus y gallwch barhau heb unrhyw berygl i chi'ch hun na'r plant, parhewch i ddefnyddio'r gwasanaeth.",
+    "intro": "<p>Efallai na fydd y gwasanaeth hwn yn iawn i chi os ydych wedi profi cam-drin domestig.</p>",
+    "continueTitle": "Os ydych am barhau",
+    "escapeKeyAnnouncement": "Os oes angen i chi adael y dudalen hon yn gyflym, gwasgwch y botwm Escape ar eich bysellfwrdd."
+  },
+  "childrenNotSafe": {
+    "title": "Cael cymorth",
+    "warningText": "Os ydych mewn perygl uniongyrchol, ffoniwch 999 a gofynnwch am yr heddlu.",
+    "warningIconFallback": "Rhybudd",
+    "content": "<p><a href=\"https://www.nspcc.org.uk/keeping-children-safe/types-of-abuse/domestic-abuse/?ac=221274\">Cael cyngor ar Sut i Amddiffyn Plant Rhag Cam-drin Domestig | NSPCC</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">Mae gan Cyngor ar Bopeth gyngor ar wneud trefniadau plant pan fu cam-drin domestig</a>.</p>",
+    "continue": "Os ydych chi'n teimlo'n hyderus y gallwch barhau heb unrhyw berygl i chi'ch hun na'r plant, parhewch i ddefnyddio'r gwasanaeth.",
+    "intro": "<p>Efallai na fydd yn briodol gwneud trefniadau plant os oes unrhyw risg o niwed i'r plant.</p>",
+    "continueTitle": "Os ydych am barhau",
+    "escapeKeyAnnouncement": "Os oes angen i chi adael y dudalen hon yn gyflym, gwasgwch y botwm Escape ar eich bysellfwrdd."
+  },
+  "phaseBannerText": "Mae hwn yn wasanaeth newydd. Helpwch ni i'w wella a <a href={{ feedbackUrl }} target=\"_blank\" rel=\"noopener noreferrer\">rhowch eich adborth (yn agor mewn tab newydd)</a>."
 }
