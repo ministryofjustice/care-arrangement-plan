@@ -51,6 +51,11 @@ const setupLinkTracking = () => {
       return;
     }
 
+    // Skip quick exit button - it has its own analytics event (quick_exit)
+    if (link.classList.contains('govuk-exit-this-page__button')) {
+      return;
+    }
+
     const href = link.getAttribute('href');
 
     // Only track links with href attributes
