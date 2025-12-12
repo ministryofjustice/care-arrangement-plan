@@ -12,7 +12,7 @@ const analyticsRoutes = (router: Router) => {
    * Called by client-side JavaScript when a user clicks an external link
    */
   router.post('/api/analytics/link-click', (request, response) => {
-    const { url, linkText } = request.body;
+    const { url, linkText, currentPage } = request.body;
 
     // Validate that we have the required data
     if (!url || typeof url !== 'string') {
@@ -20,7 +20,7 @@ const analyticsRoutes = (router: Router) => {
     }
 
     // Log the link click event
-    logLinkClick(request, url, linkText);
+    logLinkClick(request, url, linkText, currentPage);
 
     // Return success response
     response.status(204).send();

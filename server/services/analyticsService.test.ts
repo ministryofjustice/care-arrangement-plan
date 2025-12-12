@@ -298,15 +298,16 @@ describe('analyticsService', () => {
       mockedGenerateHashedIdentifier.mockReturnValue(mockHashedId);
 
       const mockReq = {
-        path: '/share-plan',
+        path: '/api/analytics/link-click',
         ip: '192.168.1.1',
         get: jest.fn().mockReturnValue('Mozilla/5.0 (Test Browser)'),
       } as unknown as Request;
 
       const linkUrl = 'https://www.gov.uk/looking-after-children-divorce';
       const linkText = 'More information and support';
+      const currentPage = '/share-plan';
 
-      logLinkClick(mockReq, linkUrl, linkText);
+      logLinkClick(mockReq, linkUrl, linkText, currentPage);
 
       expect(mockedGenerateHashedIdentifier).toHaveBeenCalledWith(
         '192.168.1.1',
@@ -320,7 +321,7 @@ describe('analyticsService', () => {
           hashed_user_id: mockHashedId,
           link_url: linkUrl,
           link_text: linkText,
-          path: '/share-plan',
+          page: currentPage,
         }),
         'link_click event'
       );
@@ -331,7 +332,7 @@ describe('analyticsService', () => {
       mockedGenerateHashedIdentifier.mockReturnValue(mockHashedId);
 
       const mockReq = {
-        path: '/task-list',
+        path: '/api/analytics/link-click',
         ip: '192.168.1.2',
         get: jest.fn().mockReturnValue('Mozilla/5.0 (Test Browser)'),
       } as unknown as Request;
@@ -347,7 +348,7 @@ describe('analyticsService', () => {
         event_type: 'link_click',
         hashed_user_id: mockHashedId,
         link_url: linkUrl,
-        path: '/task-list',
+        page: '/api/analytics/link-click',
       });
 
       expect(callArgs.link_text).toBeUndefined();
@@ -357,16 +358,17 @@ describe('analyticsService', () => {
       mockedGenerateHashedIdentifier.mockReturnValue('sameuser12345678');
 
       const mockReq = {
-        path: '/share-plan',
+        path: '/api/analytics/link-click',
         ip: '192.168.1.1',
         get: jest.fn().mockReturnValue('Mozilla/5.0'),
       } as unknown as Request;
 
       const govLink = 'https://www.gov.uk/looking-after-children-divorce';
       const surveyLink = 'https://www.smartsurvey.co.uk/s/EFO5FJ/';
+      const currentPage = '/share-plan';
 
-      logLinkClick(mockReq, govLink, 'Gov.uk Link');
-      logLinkClick(mockReq, surveyLink, 'Survey Link');
+      logLinkClick(mockReq, govLink, 'Gov.uk Link', currentPage);
+      logLinkClick(mockReq, surveyLink, 'Survey Link', currentPage);
 
       expect(mockedLogger.info).toHaveBeenCalledTimes(2);
 
@@ -394,12 +396,12 @@ describe('analyticsService', () => {
       mockedGenerateHashedIdentifier.mockReturnValue(mockHashedId);
 
       const mockReq = {
-        path: '/task-list',
+        path: '/api/analytics/link-click',
         ip: '10.0.0.5',
         get: jest.fn().mockReturnValue(undefined),
       } as unknown as Request;
 
-      logLinkClick(mockReq, 'https://www.gov.uk/link');
+      logLinkClick(mockReq, 'https://www.gov.uk/link', undefined, '/task-list');
 
       expect(mockedGenerateHashedIdentifier).toHaveBeenCalledWith(
         '10.0.0.5',
