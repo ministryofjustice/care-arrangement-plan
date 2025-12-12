@@ -34,7 +34,8 @@ describe('POST /api/analytics/link-click', () => {
         path: '/api/analytics/link-click',
       }),
       linkData.url,
-      linkData.linkText
+      linkData.linkText,
+      undefined
     );
   });
 
@@ -53,6 +54,7 @@ describe('POST /api/analytics/link-click', () => {
         path: '/api/analytics/link-click',
       }),
       linkData.url,
+      undefined,
       undefined
     );
   });
@@ -125,7 +127,8 @@ describe('POST /api/analytics/link-click', () => {
     expect(mockedLogLinkClick).toHaveBeenCalledWith(
       expect.anything(),
       linkData.url,
-      linkData.linkText
+      linkData.linkText,
+      undefined
     );
   });
 
@@ -143,7 +146,8 @@ describe('POST /api/analytics/link-click', () => {
     expect(mockedLogLinkClick).toHaveBeenCalledWith(
       expect.anything(),
       linkData.url,
-      linkData.linkText
+      linkData.linkText,
+      undefined
     );
   });
 });
