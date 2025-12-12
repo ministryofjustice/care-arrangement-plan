@@ -66,15 +66,16 @@ const logDownload = (req: Request, downloadType: string) => {
  * @param req - Express request object
  * @param linkUrl - The URL of the external link that was clicked
  * @param linkText - Optional text/label of the link
+ * @param currentPage - Optional page path where the link was clicked
  */
-const logLinkClick = (req: Request, linkUrl: string, linkText?: string) => {
+const logLinkClick = (req: Request, linkUrl: string, linkText?: string, currentPage?: string) => {
   // Generate privacy-preserving hashed identifier
   const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
 
   const eventData: Record<string, string | number> = {
     hashed_user_id: hashedUserId,
     link_url: linkUrl,
-    path: req.path,
+    page: currentPage || req.path,
   };
 
   if (linkText) {

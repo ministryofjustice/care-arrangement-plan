@@ -1,18 +1,36 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/exit-this-page/macro.njk" import govukExitThisPage %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block content %}
 
   {{ govukExitThisPage() }}
 
+  <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+    {{ __('notSafe.escapeKeyAnnouncement') }}
+  </div>
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
+      {{ __('notSafe.intro') | safe }}
+
+      {{ govukWarningText({
+        text: __('notSafe.warningText'),
+        iconFallbackText: __('notSafe.warningIconFallback')
+      }) }}
+
       {{ __('notSafe.content') | safe }}
-      <p>
-        <a href="{{ paths.CHILDREN_SAFETY_CHECK }}">{{ __('notSafe.continue') }}</a>.
-      </p>
+
+      <h2 class="govuk-heading-m">{{ __('notSafe.continueTitle') }}</h2>
+
+      <p>{{ __('notSafe.continue') }}</p>
+
+      <a href="{{ paths.CHILDREN_SAFETY_CHECK }}" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+        {{ __('continue') }}
+      </a>
     </div>
   </div>
 {% endblock %}
