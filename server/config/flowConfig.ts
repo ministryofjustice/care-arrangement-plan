@@ -2,8 +2,10 @@ import FORM_STEPS from "../constants/formSteps";
 import paths from "../constants/paths";
 
 interface TaskStepDefinition {
-    path: string; 
+    path: string;
     dependsOn: string[];
+    /** Alternative dependency paths - user needs to have completed at least one of these paths */
+    dependsOnAny?: string[][];
 }
 
 type TaskFlowMapType = Record<string, TaskStepDefinition>;
@@ -23,7 +25,11 @@ const TASK_FLOW_MAP : TaskFlowMapType = {
   },
   [FORM_STEPS.CHILDREN_SAFETY_CHECK]: {
     path: paths.CHILDREN_SAFETY_CHECK,
-    dependsOn: [FORM_STEPS.SAFETY_CHECK],
+    dependsOn: [],
+    dependsOnAny: [
+      [FORM_STEPS.SAFETY_CHECK],
+      [FORM_STEPS.NOT_SAFE]
+    ],
   },
   [FORM_STEPS.CHILDREN_NOT_SAFE]: {
     path: paths.CHILDREN_NOT_SAFE,
@@ -31,7 +37,11 @@ const TASK_FLOW_MAP : TaskFlowMapType = {
   },
   [FORM_STEPS.DO_WHATS_BEST]: {
     path: paths.DO_WHATS_BEST,
-    dependsOn: [FORM_STEPS.CHILDREN_SAFETY_CHECK],
+    dependsOn: [],
+    dependsOnAny: [
+      [FORM_STEPS.CHILDREN_SAFETY_CHECK],
+      [FORM_STEPS.CHILDREN_NOT_SAFE]
+    ],
   },
   [FORM_STEPS.COURT_ORDER_CHECK]: {
     path: paths.COURT_ORDER_CHECK,

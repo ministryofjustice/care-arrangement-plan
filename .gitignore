@@ -123,3 +123,6 @@ integration-tests/screenshots/
 */*.iml
 **/Chart.lock
 **/.DS_Store
+
+# Paper form PDF
+assets/other/paperForm.pdf
