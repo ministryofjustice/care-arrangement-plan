@@ -25,7 +25,7 @@ const setUpWebSession = (): Router => {
       name: cookieNames.SESSION,
       cookie: { secure: config.useHttps, sameSite: 'lax', maxAge: config.session.expiryMinutes * 60 * 1000 },
       secret: config.session.secret,
-      resave: false, // connect-redis implements touch so shouldn't need this
+      resave: true, // Ensures session is saved on every request, preventing race conditions with Redis
       saveUninitialized: false,
       rolling: true,
     }),
