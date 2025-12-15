@@ -1,15 +1,10 @@
-import TASK_FLOW_MAP from '../config/flowConfig';
 import paths from '../constants/paths';
 
 /**
  * Whitelist of allowed redirect paths for the application
  * This prevents open redirect vulnerabilities by ensuring only internal paths are used
- * Automatically includes all paths from the paths enum and flow configuration
  */
-const ALLOWED_REDIRECT_PATHS = new Set<string>([
-  ...Object.values(paths),
-  ...Object.values(TASK_FLOW_MAP).map(step => step.path),
-]);
+const ALLOWED_REDIRECT_PATHS = new Set<string>(Object.values(paths));
 
 /**
  * Validates that a redirect URL is safe and within the application's allowed paths
