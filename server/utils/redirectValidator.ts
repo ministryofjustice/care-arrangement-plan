@@ -1,5 +1,5 @@
-import paths from '../constants/paths';
 import TASK_FLOW_MAP from '../config/flowConfig';
+import paths from '../constants/paths';
 
 /**
  * Whitelist of allowed redirect paths for the application
