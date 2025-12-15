@@ -91,6 +91,7 @@ const addPreamble = (pdf: Pdf) => {
         senderName: request.session.initialAdultName,
         childrenNames: formattedChildrenNames(request),
       }),
+      request.__('sharePlan.whatWeAreTelling.takesAround'),
       request.__('sharePlan.whatWeAreTelling.bestOutcome'),
       request.__('sharePlan.whatWeAreTelling.judgeMakeDecisions'),
     ],

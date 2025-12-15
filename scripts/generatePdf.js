@@ -47,7 +47,7 @@ const generatePdf = () => {
     pdf.addSpacing(8);
 
     pdf.addSubsectionHeading('The benefits of getting a written agreement in place');
-    pdf.addBodyText('If you the other parent or carer can work together to make written child arrangements, you’re more likely to avoid court.', { spacing: 2 });
+    pdf.addBodyText('If you the other parent or carer can work together to make written child arrangements, you’re more likely to avoid court. It usually takes around 10 months to get a court order, depending on where you live and your situation.', { spacing: 2 });
     pdf.addBodyText('You’re also more likely to get an arrangement that works for you.', { spacing: 2 });
     pdf.addBodyText('That\'s because people who go to court can often find they don’t keep their ability to make decisions on their children’s wellbeing.', { spacing: 2 })
     pdf.addSpacing(8);
@@ -353,10 +353,11 @@ const generatePdf = () => {
     pdf.addBodyText('Now give this proposed child arrangements plan to the other parent or carer so they can add their response.', { spacing: 2 });
     pdf.addBodyText('When they have added their response, you can collaborate to reach a shared agreement.')
     pdf.addQuestionHeading('If you can\'t agree');
-    pdf.addBodyText('If you are unable to reach agreement about your child arrangements, you can try mediation.',{ spacing: 2 });
+    pdf.addBodyText('If you are unable to reach an agreement about your child arrangements, you can try mediation.',{ spacing: 2 });
+    pdf.addBodyText('A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both sides and take a neutral approach.',{ spacing: 2 });
     pdf.addBodyText('More information and support is available by visiting https://www.gov.uk/looking-after-children-divorce')
-    pdf.addQuestionHeading('Help us improve this service')
-    pdf.addBodyText('With your help we can continually improve this service for other users.', { spacing: 2 });
+    pdf.addQuestionHeading('Get paid to give your feedback');
+    pdf.addBodyText('With your help we can continually improve this service and understand how you use your plan.', { spacing: 2 });
     pdf.addBodyText('Email childarrangements@justice.gov.uk to express an interest in taking part in research and receive an incentive.');
     pdf.addFooter(15);
 
