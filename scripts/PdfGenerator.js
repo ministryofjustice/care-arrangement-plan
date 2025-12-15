@@ -305,7 +305,7 @@ class PdfGenerator {
    * Add instruction text for parent boxes
    */
   addParentBoxInstruction() {
-    const text = 'Enter your name and response to this question in one of the boxes. The other parent should enter their response in the other box.';
+    const text = 'Add your first name and response in the box - the other parent/carer should add their first name and response in the other box.';
     const lines = this.doc.splitTextToSize(text, this.pageWidth - 2 * PdfStyles.MARGIN_WIDTH);
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
