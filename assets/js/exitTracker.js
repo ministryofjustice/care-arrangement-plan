@@ -32,10 +32,12 @@ const setupExitTracking = () => {
     return window.location.pathname;
   }
 
-  // Track page exits (browser close, tab close, or navigation away)
-  window.addEventListener('beforeunload', () => {
-    const exitPage = getCurrentPagePath();
-    sendAnalyticsEvent('/api/analytics/page-exit', { exitPage });
+  // Track page exits using visibilitychange 
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      const exitPage = getCurrentPagePath();
+      sendAnalyticsEvent('/api/analytics/page-exit', { exitPage });
+    }
   });
 
   // Track quick exit button clicks
