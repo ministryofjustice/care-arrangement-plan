@@ -51,6 +51,7 @@
       html: __('phaseBannerText', {feedbackUrl: feedbackUrl})
     })
   }}
+  {% include "partials/notificationBanner.njk" %}
   {% if backLinkHref %}
     <div role="navigation">{{ govukBackLink({text: __('back'), href: backLinkHref}) }}</div>
   {% endif %}

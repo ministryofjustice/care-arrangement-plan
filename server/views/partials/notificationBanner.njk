@@ -1,0 +1,11 @@
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
+
+{% if info | length %}
+  {% for message in info %}
+    {{
+      govukNotificationBanner({
+        html: '<p class="govuk-notification-banner__heading">' + message + '</p>'
+      })
+    }}
+  {% endfor %}
+{% endif %}

@@ -8,6 +8,7 @@ import setupRequestLogging from './logging/setupRequestLogging';
 import setupAnalytics from './middleware/setupAnalytics';
 import setupAuthentication from './middleware/setupAuthentication';
 import setUpCsrf from './middleware/setUpCsrf';
+import setupFlashMessages from './middleware/setupFlashMessages';
 import setUpHealthCheck from './middleware/setUpHealthCheck';
 import setupHistory from './middleware/setupHistory';
 import setUpi18n from './middleware/setUpi18n';
@@ -43,6 +44,7 @@ const createApp = (): express.Application => {
   app.use(setupRequestLogging());
   app.use(setUpStaticResources());
   app.use(setUpCsrf());
+  app.use(setupFlashMessages());
   app.use(setupAnalytics());
   app.use(setupHistory());
   // app.use(setupServiceNoLongerAvailable());
