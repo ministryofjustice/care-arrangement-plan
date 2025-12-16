@@ -18,6 +18,7 @@ const addWhatHappensNow = (request: Request): string => {
   html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.notLegallyBinding'))}</p>\n`;
   html += `  <h3 id="what-happens-now-heading">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.cantAgreeHeading'))}</h3>\n`;
   html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.unableToAgree'))}</p>\n`;
+  html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.aMediatorIs'))}</p>\n`;
   html += `  <p><a href="https://www.gov.uk/looking-after-children-divorce">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.moreInfoAndSupport'))}</a></p>\n`;
   html += `  <h3 id="what-happens-now-heading">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.helpUsImproveHeading'))}</h3>\n`;
   html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.helpUsImprove'))}</p>\n`;
