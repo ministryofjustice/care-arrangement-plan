@@ -32,13 +32,9 @@ const setupExitTracking = () => {
     return window.location.pathname;
   }
 
-  // Track page exits using visibilitychange 
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') {
-      const exitPage = getCurrentPagePath();
-      sendAnalyticsEvent('/api/analytics/page-exit', { exitPage });
-    }
-  });
+  // Page exit tracking is disabled to prevent race conditions with form submissions.
+  // The visibilitychange event fires on internal navigation and can interfere with POST requests.
+  // We only track intentional quick exits via the button/keyboard shortcut below.
 
   // Track quick exit button clicks
   // The GOV.UK Exit This Page component adds a button with class 'govuk-exit-this-page__button'
