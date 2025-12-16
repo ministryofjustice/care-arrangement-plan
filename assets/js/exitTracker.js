@@ -32,10 +32,7 @@ const setupExitTracking = () => {
     return window.location.pathname;
   }
 
-  // Page exit tracking is disabled to prevent race conditions with form submissions.
-  // The visibilitychange event fires on internal navigation and can interfere with POST requests.
-  // We only track intentional quick exits via the button/keyboard shortcut below.
-
+  
   // Track quick exit button clicks
   // The GOV.UK Exit This Page component adds a button with class 'govuk-exit-this-page__button'
   // This branch uses Escape key instead of Shift+3 for accessibility
