@@ -24,15 +24,9 @@ function checkFormProgressFromConfig(currentStepKey: keyof typeof TASK_FLOW_MAP)
   return (req: Request & { session?: Partial<CAPSession> }, res: Response, next: NextFunction) => {
     const completed: string[] = (req.session && req.session.completedSteps) || [];
 
-    // Check standard dependencies (all must be completed)
     const hasRequiredSteps = requiredSteps.every(step => completed.includes(step));
 
-    // Check alternative dependencies (at least one path must be completed)
-    const alternativePaths = TASK_FLOW_MAP[currentStepKey]?.dependsOnAny || [];
-    const hasAlternativePath = alternativePaths.length === 0 ||
-      alternativePaths.some(path => path.every(step => completed.includes(step)));
-
-    if (hasRequiredSteps && hasAlternativePath) {
+    if (hasRequiredSteps) {
       return next();
     }
 

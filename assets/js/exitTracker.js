@@ -32,12 +32,7 @@ const setupExitTracking = () => {
     return window.location.pathname;
   }
 
-  // Track page exits (browser close, tab close, or navigation away)
-  window.addEventListener('beforeunload', () => {
-    const exitPage = getCurrentPagePath();
-    sendAnalyticsEvent('/api/analytics/page-exit', { exitPage });
-  });
-
+  
   // Track quick exit button clicks
   // The GOV.UK Exit This Page component adds a button with class 'govuk-exit-this-page__button'
   // This branch uses Escape key instead of Shift+3 for accessibility
