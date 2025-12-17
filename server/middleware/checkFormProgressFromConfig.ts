@@ -6,7 +6,6 @@ import TASK_FLOW_MAP from '../config/flowConfig';
 import logger from '../logging/logger';
 import {
   hasCompletedRequiredSteps,
-  hasCompletedAlternativePath,
   hasUserStartedJourney,
   getRedirectPath,
   getFlashMessage,
@@ -35,17 +34,14 @@ function checkFormProgressFromConfig(currentStepKey: keyof typeof TASK_FLOW_MAP)
   }
 
   const requiredSteps = stepConfig.dependsOn || [];
-  const alternativePaths = stepConfig.dependsOnAny || [];
 
   return (req: SessionRequest, res: Response, next: NextFunction) => {
     const completedSteps: string[] = req.session?.completedSteps || [];
     const pageHistory: string[] = req.session?.pageHistory || [];
 
-    // Check if user has met all prerequisites
     const hasRequired = hasCompletedRequiredSteps(completedSteps, requiredSteps);
-    const hasAlternative = hasCompletedAlternativePath(completedSteps, alternativePaths);
 
-    if (hasRequired && hasAlternative) {
+    if (hasRequired) {
       return next();
     }
 
@@ -61,7 +57,7 @@ function checkFormProgressFromConfig(currentStepKey: keyof typeof TASK_FLOW_MAP)
 
     // User has started journey but is missing prerequisites
     const missingSteps = requiredSteps.filter(step => !completedSteps.includes(step));
-    const redirectPath = getRedirectPath(missingSteps, alternativePaths, startPage);
+    const redirectPath = getRedirectPath(missingSteps, startPage);
     const hasVisitedRedirectPage = pageHistory.includes(redirectPath);
 
     logger.info(
