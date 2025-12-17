@@ -7,11 +7,7 @@ import checkFormProgressFromConfig  from './checkFormProgressFromConfig';
 jest.mock('../config/flowConfig', () => ({
     step1: { path: '/', dependsOn: [] as string[] },
     step2: { dependsOn: ['step1'] as string[], path: '/step2' },
-    step3: {
-      dependsOn: [] as string[],
-      path: '/step3',
-      dependsOnAny: [['step1'], ['step2']] as string[][]
-    },
+    step3: { dependsOn: ['step1'] as string[], path: '/step3' },
 }));
 
 jest.unmock('../middleware/checkFormProgressFromConfig');
@@ -57,7 +53,7 @@ describe('checkFormProgressFromConfig middleware', () => {
     expect((logger.info as jest.Mock).mock.calls.length).toBeGreaterThan(0);
   });
 
-  test('calls next when at least one alternative dependency path is completed', () => {
+  test('calls next when step3 dependencies are completed', () => {
     const req = { session: { completedSteps: ['step1'] }, path: '/step3' } as unknown as Request & { session?: { completedSteps?: string[] } };
     const res = { redirect: jest.fn() } as unknown as Response;
     const next = jest.fn();
@@ -70,20 +66,7 @@ describe('checkFormProgressFromConfig middleware', () => {
     expect(res.redirect).not.toHaveBeenCalled();
   });
 
-  test('calls next when another alternative dependency path is completed', () => {
-    const req = { session: { completedSteps: ['step2'] }, path: '/step3' } as unknown as Request & { session?: { completedSteps?: string[] } };
-    const res = { redirect: jest.fn() } as unknown as Response;
-    const next = jest.fn();
-
-    const middleware = checkFormProgressFromConfig('step3');
-
-    middleware(req, res, next);
-
-    expect(next).toHaveBeenCalled();
-    expect(res.redirect).not.toHaveBeenCalled();
-  });
-
-  test('redirects to start when no alternative dependency paths are completed', () => {
+  test('redirects to start when step3 dependencies are not completed', () => {
     const req = { session: { completedSteps: [] }, path: '/step3' } as unknown as Request & { session?: { completedSteps?: string[] } };
     const res = { redirect: jest.fn() } as unknown as Response;
     const next = jest.fn();

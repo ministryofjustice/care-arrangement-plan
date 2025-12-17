@@ -17,6 +17,7 @@ const safetyCheckRoutes = (router: Router) => {
   });
 
   router.get(paths.NOT_SAFE, checkFormProgressFromConfig(FORM_STEPS.NOT_SAFE),(request, response) => {
+    addCompletedStep(request, FORM_STEPS.NOT_SAFE);
     response.render('pages/notSafe', {
       title: request.__('notSafe.title'),
       backLinkHref: paths.SAFETY_CHECK,
