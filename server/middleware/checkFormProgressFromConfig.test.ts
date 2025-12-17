@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 
 import logger from '../logging/logger';
 
@@ -14,8 +14,8 @@ jest.mock('../config/flowConfig', () => ({
 jest.unmock('../middleware/checkFormProgressFromConfig');
 
 describe('checkFormProgressFromConfig middleware', () => {
-  let req: any;
-  let res: any;
+  let req: Request & { path: string };
+  let res: Response;
   let next: jest.Mock;
 
   beforeEach(() => {
@@ -23,10 +23,10 @@ describe('checkFormProgressFromConfig middleware', () => {
       session: {},
       path: '/test',
       flash: jest.fn(),
-    };
+    } as unknown as Request & { path: string };
     res = {
       redirect: jest.fn(),
-    };
+    } as unknown as Response;
     next = jest.fn();
     jest.clearAllMocks();
   });
@@ -34,7 +34,7 @@ describe('checkFormProgressFromConfig middleware', () => {
   describe('Error handling', () => {
     test('throws 404 error when current step key is not in TASK_FLOW_MAP and logs an error', () => {
       expect(() => {
-        checkFormProgressFromConfig('nonexistent' as any);
+        checkFormProgressFromConfig('nonexistent');
       }).toThrow();
 
       expect((logger.error as jest.Mock).mock.calls.length).toBeGreaterThan(0);
