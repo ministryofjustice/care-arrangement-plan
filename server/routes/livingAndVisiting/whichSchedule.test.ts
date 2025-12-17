@@ -9,6 +9,10 @@ import { flashMock, flashMockErrors, sessionMock } from '../../test-utils/testMo
 const app = testAppSetup();
 
 beforeEach(() => {
+  // Mock completedSteps to satisfy checkFormProgressFromConfig middleware
+  sessionMock.completedSteps = ['livingAndVisitingMostlyLive'];
+  sessionMock.pageHistory = ['/living-and-visiting/mostly-live'];
+
   sessionMock.livingAndVisiting = {
     mostlyLive: {
       where: 'split',
