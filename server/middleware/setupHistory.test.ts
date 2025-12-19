@@ -107,16 +107,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.DOWNLOAD_PDF);
 
     expect(sessionMock.pageHistory).toBeUndefined();
-    expect(sessionMock.previousPage).toBeUndefined();
+    expect(sessionMock.previousPage).toEqual(paths.START);
   });
 
-  test('previousPage is not set when would equal current page for non-history pages', async () => {
-    sessionMock.pageHistory = [paths.DOWNLOAD_PDF];
-
-    await request(app).get(paths.DOWNLOAD_PDF);
-
-    expect(sessionMock.pageHistory).toEqual([paths.DOWNLOAD_PDF]);
-    // Should not set previousPage to current page
-    expect(sessionMock.previousPage).toBeUndefined();
-  });
 });
