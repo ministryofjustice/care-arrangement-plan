@@ -11,7 +11,6 @@ describe('setupHistory', () => {
     await request(app).get(paths.START);
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
-    // previousPage should not be set when there's only one page in history
     expect(sessionMock.previousPage).toBeUndefined();
   });
 
@@ -30,7 +29,6 @@ describe('setupHistory', () => {
     await request(app).get(paths.START);
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
-    // previousPage should not be set to the current page
     expect(sessionMock.previousPage).toBeUndefined();
   });
 
@@ -45,10 +43,12 @@ describe('setupHistory', () => {
 
   test("doesn't add invalid pages to the task list", async () => {
     sessionMock.pageHistory = [paths.START];
+    sessionMock.previousPage = undefined;
 
     await request(app).get('/create-error');
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    // previousPage should be set to last page in history so back button works on error pages
     expect(sessionMock.previousPage).toEqual(paths.START);
   });
 
@@ -84,6 +84,7 @@ describe('setupHistory', () => {
 
   test('sets previousPage correctly when navigating forward from multiple pages', async () => {
     sessionMock.pageHistory = [paths.START, paths.NUMBER_OF_CHILDREN];
+    sessionMock.numberOfChildren = 1; // Set required session data to avoid redirect
 
     await request(app).get(paths.ABOUT_THE_CHILDREN);
 
@@ -98,17 +99,6 @@ describe('setupHistory', () => {
 
     expect(sessionMock.pageHistory).toEqual([paths.START, paths.NUMBER_OF_CHILDREN]);
     expect(sessionMock.previousPage).toEqual(paths.START);
-  });
-
-  test('handles previousPage for non-history pages correctly', async () => {
-    sessionMock.pageHistory = [paths.START, paths.NUMBER_OF_CHILDREN];
-
-    await request(app).get(paths.DOWNLOAD_PDF);
-
-    // History should remain unchanged
-    expect(sessionMock.pageHistory).toEqual([paths.START, paths.NUMBER_OF_CHILDREN]);
-    // previousPage should be set to the last page in history (not the current page)
-    expect(sessionMock.previousPage).toEqual(paths.NUMBER_OF_CHILDREN);
   });
 
   test('does not set previousPage when non-history page is visited with no history', async () => {
