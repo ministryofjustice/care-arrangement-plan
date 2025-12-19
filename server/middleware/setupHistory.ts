@@ -25,13 +25,6 @@ const setupHistory = (): Router => {
     const requestUrl = request.originalUrl;
     const isTrackedPath = pathsForHistory.includes(requestUrl as paths);
 
-    // Special case: task list resets history
-    if (requestUrl === paths.TASK_LIST) {
-      request.session.pageHistory = [requestUrl];
-      next();
-      return;
-    }
-
     // Only update history after response is sent and only if it was successful (200)
     response.on('finish', () => {
       const history = request.session.pageHistory || [paths.START];
@@ -46,6 +39,13 @@ const setupHistory = (): Router => {
         return;
       }
 
+      // Special case: task list resets history
+      if (requestUrl === paths.TASK_LIST) {
+        request.session.pageHistory = [requestUrl];
+        request.session.previousPage = undefined;
+        return;
+      }
+
       if (isTrackedPath) {
         request.session.pageHistory = history;
 
@@ -54,17 +54,15 @@ const setupHistory = (): Router => {
           history.pop();
         } else if (lastPage !== requestUrl) {
           history.push(requestUrl);
-        }
 
-        // Limit history to 20 pages
-        if (history.length >= 20) {
-          history.shift();
+          // Limit history to 20 pages
+          if (history.length >= 20) {
+            history.shift();
+          }
         }
 
         const previousPage = history[history.length - 2];
-        if (previousPage && previousPage !== requestUrl) {
-          request.session.previousPage = previousPage;
-        }
+        request.session.previousPage = previousPage && previousPage !== requestUrl ? previousPage : undefined;
       } else {
         // For non-tracked paths, set previousPage to last tracked page
         if (lastPage && lastPage !== requestUrl) {
