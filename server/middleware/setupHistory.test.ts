@@ -11,6 +11,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.START);
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    // previousPage should not be set when there's only one page in history
     expect(sessionMock.previousPage).toBeUndefined();
   });
 
@@ -29,6 +30,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.START);
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    // previousPage should not be set to the current page
     expect(sessionMock.previousPage).toBeUndefined();
   });
 
@@ -65,6 +67,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.START);
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    // When at the first page in history, previousPage should be undefined
     expect(sessionMock.previousPage).toBeUndefined();
   });
 
@@ -77,5 +80,53 @@ describe('setupHistory', () => {
     expectedHistory.push(paths.NUMBER_OF_CHILDREN);
 
     expect(sessionMock.pageHistory).toEqual(expectedHistory);
+  });
+
+  test('sets previousPage correctly when navigating forward from multiple pages', async () => {
+    sessionMock.pageHistory = [paths.START, paths.NUMBER_OF_CHILDREN];
+
+    await request(app).get(paths.ABOUT_THE_CHILDREN);
+
+    expect(sessionMock.pageHistory).toEqual([paths.START, paths.NUMBER_OF_CHILDREN, paths.ABOUT_THE_CHILDREN]);
+    expect(sessionMock.previousPage).toEqual(paths.NUMBER_OF_CHILDREN);
+  });
+
+  test('does not set previousPage to current page when going back', async () => {
+    sessionMock.pageHistory = [paths.START, paths.NUMBER_OF_CHILDREN, paths.ABOUT_THE_CHILDREN];
+
+    await request(app).get(paths.NUMBER_OF_CHILDREN);
+
+    expect(sessionMock.pageHistory).toEqual([paths.START, paths.NUMBER_OF_CHILDREN]);
+    expect(sessionMock.previousPage).toEqual(paths.START);
+  });
+
+  test('handles previousPage for non-history pages correctly', async () => {
+    sessionMock.pageHistory = [paths.START, paths.NUMBER_OF_CHILDREN];
+
+    await request(app).get(paths.DOWNLOAD_PDF);
+
+    // History should remain unchanged
+    expect(sessionMock.pageHistory).toEqual([paths.START, paths.NUMBER_OF_CHILDREN]);
+    // previousPage should be set to the last page in history (not the current page)
+    expect(sessionMock.previousPage).toEqual(paths.NUMBER_OF_CHILDREN);
+  });
+
+  test('does not set previousPage when non-history page is visited with no history', async () => {
+    sessionMock.pageHistory = undefined;
+
+    await request(app).get(paths.DOWNLOAD_PDF);
+
+    expect(sessionMock.pageHistory).toBeUndefined();
+    expect(sessionMock.previousPage).toBeUndefined();
+  });
+
+  test('previousPage is not set when would equal current page for non-history pages', async () => {
+    sessionMock.pageHistory = [paths.DOWNLOAD_PDF];
+
+    await request(app).get(paths.DOWNLOAD_PDF);
+
+    expect(sessionMock.pageHistory).toEqual([paths.DOWNLOAD_PDF]);
+    // Should not set previousPage to current page
+    expect(sessionMock.previousPage).toBeUndefined();
   });
 });

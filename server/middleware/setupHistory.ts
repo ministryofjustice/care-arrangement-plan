@@ -21,32 +21,72 @@ const pathsForHistory = Object.values(paths).filter((path) => !pathsNotForHistor
 const setupHistory = (): Router => {
   const router = Router();
 
-  router.get('*', (request, _response, next) => {
+  router.get('*', (request, response, next) => {
     const requestUrl = request.originalUrl;
 
+    // @ts-expect-error this is not necessarily of type paths
+    const isTrackedPath = pathsForHistory.includes(requestUrl);
+
+    // Special case: task list resets history
     if (requestUrl === paths.TASK_LIST) {
-      // Don't go back into the start flow once we've made it to the task list
       request.session.pageHistory = [requestUrl];
       next();
       return;
     }
 
-    // @ts-expect-error this is not necessarily of type paths
-    if (pathsForHistory.includes(requestUrl)) {
-      request.session.pageHistory = request.session.pageHistory || [];
-      // Going back in the history
-      if (request.session.pageHistory[request.session.pageHistory.length - 2] === requestUrl) {
-        request.session.pageHistory.pop();
-      } else if (request.session.pageHistory[request.session.pageHistory.length - 1] !== requestUrl) {
-        request.session.pageHistory.push(requestUrl);
+    // Only update history after response is sent and only if it was successful (200)
+    response.on('finish', () => {
+      // Only track successful page renders, not redirects or errors
+      if (response.statusCode !== 200) {
+        console.log(`[setupHistory] Skipping ${requestUrl} - status ${response.statusCode}`);
+        return;
       }
-      if (request.session.pageHistory.length >= 20) {
-        request.session.pageHistory.shift();
+
+      console.log(`[setupHistory] Current URL: ${requestUrl}`);
+      console.log(`[setupHistory] Page history BEFORE: ${JSON.stringify(request.session.pageHistory)}`);
+      console.log(`[setupHistory] Previous page BEFORE: ${request.session.previousPage}`);
+
+      if (isTrackedPath) {
+        request.session.pageHistory = request.session.pageHistory || [];
+
+        // Going back in the history
+        if (request.session.pageHistory[request.session.pageHistory.length - 2] === requestUrl) {
+          console.log(`[setupHistory] Detected going back - popping last entry`);
+          request.session.pageHistory.pop();
+        } else if (request.session.pageHistory[request.session.pageHistory.length - 1] !== requestUrl) {
+          console.log(`[setupHistory] Pushing new page to history`);
+          request.session.pageHistory.push(requestUrl);
+        } else {
+          console.log(`[setupHistory] Current page already at end of history - not pushing`);
+        }
+
+        if (request.session.pageHistory.length >= 20) {
+          request.session.pageHistory.shift();
+        }
+
+        console.log(`[setupHistory] Page history AFTER: ${JSON.stringify(request.session.pageHistory)}`);
+
+        const calculatedPreviousPage = request.session.pageHistory[request.session.pageHistory.length - 2];
+        console.log(`[setupHistory] Calculated previous page: ${calculatedPreviousPage}`);
+
+        // Never set previousPage to the current page
+        if (calculatedPreviousPage !== requestUrl) {
+          request.session.previousPage = calculatedPreviousPage;
+          console.log(`[setupHistory] Set previous page to: ${calculatedPreviousPage}`);
+        } else {
+          console.log(`[setupHistory] NOT setting previous page (would be current page)`);
+        }
+      } else {
+        // For non-tracked paths (like /download-pdf), set previousPage to last tracked page
+        const calculatedPreviousPage = request.session.pageHistory?.[request.session.pageHistory.length - 1];
+        // Never set previousPage to the current page
+        if (calculatedPreviousPage !== requestUrl) {
+          request.session.previousPage = calculatedPreviousPage;
+          console.log(`[setupHistory] Non-tracked page - set previous page to: ${calculatedPreviousPage}`);
+        }
       }
-      request.session.previousPage = request.session.pageHistory[request.session.pageHistory.length - 2];
-    } else {
-      request.session.previousPage = request.session.pageHistory?.[request.session.pageHistory.length - 1];
-    }
+    });
+
     next();
   });
   return router;
