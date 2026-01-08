@@ -1,0 +1,223 @@
+<testsuites id="" name="" tests="29" failures="0" skipped="0" errors="0" time="7.740913000000001">
+<testsuite name="accessibility.spec.ts" timestamp="2026-01-08T11:43:36.882Z" hostname="chromium" tests="5" failures="0" skipped="0" time="1.39" errors="0">
+<testcase name="Accessibility › should have proper heading hierarchy on homepage" classname="accessibility.spec.ts" time="0.35">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/accessibility-Accessibilit-ec0fa-ading-hierarchy-on-homepage-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Accessibility › should have accessible form labels" classname="accessibility.spec.ts" time="0.416">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/accessibility-Accessibilit-c40ba-have-accessible-form-labels-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Accessibility › should have skip to main content link" classname="accessibility.spec.ts" time="0.193">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/accessibility-Accessibilit-bac87-e-skip-to-main-content-link-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Accessibility › should have proper ARIA landmarks" classname="accessibility.spec.ts" time="0.211">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/accessibility-Accessibilit-b77bb--have-proper-ARIA-landmarks-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Accessibility › should have proper button and link roles" classname="accessibility.spec.ts" time="0.22">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/accessibility-Accessibilit-0bbb3-roper-button-and-link-roles-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="complete-journey.spec.ts" timestamp="2026-01-08T11:43:36.882Z" hostname="chromium" tests="3" failures="0" skipped="0" time="2.704" errors="0">
+<testcase name="Complete User Journey › should complete the full journey to task list" classname="complete-journey.spec.ts" time="0.941">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/complete-journey-Complete--1bd7e-e-full-journey-to-task-list-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Complete User Journey › should handle multiple children" classname="complete-journey.spec.ts" time="0.855">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/complete-journey-Complete--47bdc-ld-handle-multiple-children-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Complete User Journey › should persist data when returning to task list" classname="complete-journey.spec.ts" time="0.908">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/complete-journey-Complete--e43b0-when-returning-to-task-list-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="health.spec.ts" timestamp="2026-01-08T11:43:36.882Z" hostname="chromium" tests="1" failures="0" skipped="0" time="0.017" errors="0">
+<testcase name="Healthcheck › should return healthy status" classname="health.spec.ts" time="0.017">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/health-Healthcheck-should-return-healthy-status-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="homepage.spec.ts" timestamp="2026-01-08T11:43:36.882Z" hostname="chromium" tests="3" failures="0" skipped="0" time="0.707" errors="0">
+<testcase name="Homepage › should display the homepage with correct title and start button" classname="homepage.spec.ts" time="0.225">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/homepage-Homepage-should-d-9d556-rect-title-and-start-button-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Homepage › should have working navigation links" classname="homepage.spec.ts" time="0.217">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/homepage-Homepage-should-have-working-navigation-links-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Homepage › should navigate to safety check when clicking start (auth disabled)" classname="homepage.spec.ts" time="0.265">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/homepage-Homepage-should-n-c11d7-icking-start-auth-disabled--chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="journey-flow.spec.ts" timestamp="2026-01-08T11:43:36.882Z" hostname="chromium" tests="4" failures="0" skipped="0" time="2.571" errors="0">
+<testcase name="User Journey Flow › should complete the initial onboarding flow" classname="journey-flow.spec.ts" time="0.498">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/journey-flow-User-Journey--f6dab-the-initial-onboarding-flow-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="User Journey Flow › should navigate to not-safe page when selecting unsafe option" classname="journey-flow.spec.ts" time="0.421">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/journey-flow-User-Journey--29d71-hen-selecting-unsafe-option-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="User Journey Flow › should handle number of children input" classname="journey-flow.spec.ts" time="0.795">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/journey-flow-User-Journey--23817-le-number-of-children-input-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="User Journey Flow › should validate form inputs and show errors" classname="journey-flow.spec.ts" time="0.857">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/journey-flow-User-Journey--a5eca-form-inputs-and-show-errors-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="page-object-example.spec.ts" timestamp="2026-01-08T11:43:36.882Z" hostname="chromium" tests="2" failures="0" skipped="0" time="1.24" errors="0">
+<testcase name="User Journey with Page Objects › should complete safety check using page objects" classname="page-object-example.spec.ts" time="0.386">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/page-object-example-User-J-d91d3-ty-check-using-page-objects-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="User Journey with Page Objects › should navigate to task list using helper" classname="page-object-example.spec.ts" time="0.854">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/page-object-example-User-J-22f93-e-to-task-list-using-helper-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="session-persistence.spec.ts" timestamp="2026-01-08T11:43:36.882Z" hostname="chromium" tests="2" failures="0" skipped="0" time="1.146" errors="0">
+<testcase name="Session Persistence › should maintain form data when navigating back" classname="session-persistence.spec.ts" time="0.93">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/session-persistence-Sessio-82619-m-data-when-navigating-back-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Session Persistence › should handle cookie banner preferences" classname="session-persistence.spec.ts" time="0.216">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/session-persistence-Sessio-bb5cf-e-cookie-banner-preferences-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="static-pages.spec.ts" timestamp="2026-01-08T11:43:36.882Z" hostname="chromium" tests="7" failures="0" skipped="0" time="1.439" errors="0">
+<testcase name="Static Pages › should load /cookies page successfully" classname="static-pages.spec.ts" time="0.195">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/static-pages-Static-Pages--5faa4-d-cookies-page-successfully-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Static Pages › should load /privacy-notice page successfully" classname="static-pages.spec.ts" time="0.215">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/static-pages-Static-Pages--7bd9e-cy-notice-page-successfully-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Static Pages › should load /accessibility-statement page successfully" classname="static-pages.spec.ts" time="0.219">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/static-pages-Static-Pages--d59ed-statement-page-successfully-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Static Pages › should load /terms-and-conditions page successfully" classname="static-pages.spec.ts" time="0.203">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/static-pages-Static-Pages--3b96d-onditions-page-successfully-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Static Pages › should load /contact-us page successfully" classname="static-pages.spec.ts" time="0.213">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/static-pages-Static-Pages--181e5-ontact-us-page-successfully-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Static Pages › should display cookies page with accept/reject options" classname="static-pages.spec.ts" time="0.193">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/static-pages-Static-Pages--d98ea--with-accept-reject-options-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Static Pages › should display contact information on contact us page" classname="static-pages.spec.ts" time="0.201">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/static-pages-Static-Pages--2c215-ormation-on-contact-us-page-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="task-list.spec.ts" timestamp="2026-01-08T11:43:36.882Z" hostname="chromium" tests="2" failures="0" skipped="0" time="1.389" errors="0">
+<testcase name="Task List › should display task list after completing initial steps" classname="task-list.spec.ts" time="0.875">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/task-list-Task-List-should-7c360-er-completing-initial-steps-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Task List › should show task list sections" classname="task-list.spec.ts" time="0.514">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/task-list-Task-List-should-show-task-list-sections-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
