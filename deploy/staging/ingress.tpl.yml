@@ -50,4 +50,4 @@ spec:
                 port:
                   number: 8080
     - host: staging.child-arrangements-plan.service.justice.gov.uk
-      http: &paths
+      http: *paths
