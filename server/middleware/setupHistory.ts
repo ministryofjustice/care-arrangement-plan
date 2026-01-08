@@ -21,32 +21,56 @@ const pathsForHistory = Object.values(paths).filter((path) => !pathsNotForHistor
 const setupHistory = (): Router => {
   const router = Router();
 
-  router.get('*', (request, _response, next) => {
+  router.get('*', (request, response, next) => {
     const requestUrl = request.originalUrl;
+    const isTrackedPath = pathsForHistory.includes(requestUrl as paths);
 
-    if (requestUrl === paths.TASK_LIST) {
-      // Don't go back into the start flow once we've made it to the task list
-      request.session.pageHistory = [requestUrl];
-      next();
-      return;
-    }
+    // Only update history after response is sent and only if it was successful (200)
+    response.on('finish', () => {
+      const history = request.session.pageHistory || [paths.START];
+      const lastPage = history[history.length - 1];
+      const secondLastPage = history[history.length - 2];
 
-    // @ts-expect-error this is not necessarily of type paths
-    if (pathsForHistory.includes(requestUrl)) {
-      request.session.pageHistory = request.session.pageHistory || [];
-      // Going back in the history
-      if (request.session.pageHistory[request.session.pageHistory.length - 2] === requestUrl) {
-        request.session.pageHistory.pop();
-      } else if (request.session.pageHistory[request.session.pageHistory.length - 1] !== requestUrl) {
-        request.session.pageHistory.push(requestUrl);
+      // For error pages (404, 500) and redirects (302), don't add to history but still set previousPage
+      if (response.statusCode !== 200) {
+        if (lastPage && lastPage !== requestUrl) {
+          request.session.previousPage = lastPage;
+        }
+        return;
       }
-      if (request.session.pageHistory.length >= 20) {
-        request.session.pageHistory.shift();
+
+      // Special case: task list resets history
+      if (requestUrl === paths.TASK_LIST) {
+        request.session.pageHistory = [requestUrl];
+        request.session.previousPage = undefined;
+        return;
       }
-      request.session.previousPage = request.session.pageHistory[request.session.pageHistory.length - 2];
-    } else {
-      request.session.previousPage = request.session.pageHistory?.[request.session.pageHistory.length - 1];
-    }
+
+      if (isTrackedPath) {
+        request.session.pageHistory = history;
+
+        // Going back in the history
+        if (secondLastPage === requestUrl) {
+          history.pop();
+        } else if (lastPage !== requestUrl) {
+          history.push(requestUrl);
+
+          // Limit history to 20 pages
+          if (history.length >= 20) {
+            history.shift();
+          }
+        }
+
+        const previousPage = history[history.length - 2];
+        request.session.previousPage = previousPage && previousPage !== requestUrl ? previousPage : undefined;
+      } else {
+        // For non-tracked paths, set previousPage to last tracked page
+        if (lastPage && lastPage !== requestUrl) {
+          request.session.previousPage = lastPage;
+        }
+      }
+    });
+
     next();
   });
   return router;
