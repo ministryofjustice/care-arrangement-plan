@@ -21,7 +21,7 @@ metadata:
       }
       
       ### Domain redirect
-      if ($host ~* ".cloud-platform.service.justice.gov.uk") {
+      if ($host = 'care-arrangement-plan-staging.apps.live.cloud-platform.service.justice.gov.uk') {
         return 301 https://staging.child-arrangements-plan.service.justice.gov.uk;
       }
       ###/ end
