@@ -19,6 +19,13 @@ metadata:
         add_header Content-Type text/plain;
         return 200 "OK";
       }
+      
+      ### Domain redirect
+      if ($host ~* ".cloud-platform.service.justice.gov.uk") {
+        return 301 https://staging.child-arrangements-plan.service.justice.gov.uk;
+      }
+      ###/ end
+      
       location = /.well-known/security.txt {
         auth_basic off;
         return 301 https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt;
@@ -27,11 +34,13 @@ spec:
   ingressClassName: modsec
   tls:
     - hosts:
+        - care-arrangement-plan-staging.apps.live.cloud-platform.service.justice.gov.uk
+    - hosts:
         - staging.child-arrangements-plan.service.justice.gov.uk
       secretName: care-arrangement-plan-cert-secret
   rules:
-    - host: staging.child-arrangements-plan.service.justice.gov.uk
-      http:
+    - host: care-arrangement-plan-staging.apps.live.cloud-platform.service.justice.gov.uk
+      http: &paths
         paths:
           - path: /
             pathType: Prefix
@@ -40,3 +49,5 @@ spec:
                 name: ${KUBE_NAMESPACE}-node-service
                 port:
                   number: 8080
+    - host: staging.child-arrangements-plan.service.justice.gov.uk
+      http: *paths
