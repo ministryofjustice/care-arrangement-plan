@@ -12,6 +12,7 @@ import setupFlashMessages from './middleware/setupFlashMessages';
 import setUpHealthCheck from './middleware/setUpHealthCheck';
 import setupHistory from './middleware/setupHistory';
 import setUpi18n from './middleware/setUpi18n';
+import setupProductionStartRedirect from './middleware/setupProductionStartRedirect';
 import setupRateLimit from './middleware/setupRateLimit';
 import setUpWebRequestParsing from './middleware/setupRequestParsing';
 import setupRobotsTxt from './middleware/setupRobotsTxt';
@@ -49,6 +50,7 @@ const createApp = (): express.Application => {
   app.use(setupHistory());
   // app.use(setupServiceNoLongerAvailable());
   app.use(unauthenticatedRoutes());
+  app.use(setupProductionStartRedirect());
   app.use(setupAuthentication());
   app.use(routes());
 

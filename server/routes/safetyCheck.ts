@@ -6,15 +6,20 @@ import formFields from '../constants/formFields';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
 import checkFormProgressFromConfig  from '../middleware/checkFormProgressFromConfig';
+import validateSafetyCheckAccess from '../middleware/validateSafetyCheckAccess';
 import addCompletedStep from '../utils/addCompletedStep';
 
 const safetyCheckRoutes = (router: Router) => {
-  router.get(paths.SAFETY_CHECK, checkFormProgressFromConfig(FORM_STEPS.SAFETY_CHECK), (request, response) => {
-    response.render('pages/safetyCheck', {
-      errors: request.flash('errors'),
-      title: request.__('safetyCheck.title'),
-    });
-  });
+  router.get(
+    paths.SAFETY_CHECK,
+    validateSafetyCheckAccess,
+    (request, response) => {
+      response.render('pages/safetyCheck', {
+        errors: request.flash('errors'),
+        title: request.__('safetyCheck.title'),
+      });
+    }
+  );
 
   router.get(paths.NOT_SAFE, checkFormProgressFromConfig(FORM_STEPS.NOT_SAFE),(request, response) => {
     addCompletedStep(request, FORM_STEPS.NOT_SAFE);
