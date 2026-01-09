@@ -1,8 +1,8 @@
-import {Request} from 'express';
-
-import jsPDF from 'jspdf';
-
 import fs from 'fs';
+
+import { Request } from 'express';
+import { jsPDF } from 'jspdf';
+
 import {Paragraph, Text} from '../@types/pdf';
 import {
   FONT,
@@ -17,6 +17,7 @@ import {
 } from '../constants/pdfConstants';
 import logger from '../logging/logger';
 import getAssetPath from '../utils/getAssetPath';
+
 import FontStyles from './fontStyles';
 
 class Pdf {
