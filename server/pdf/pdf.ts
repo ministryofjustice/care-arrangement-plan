@@ -1,7 +1,9 @@
+import {Request} from 'express';
+
+import jsPDF from 'jspdf';
+
 import fs from 'fs';
-import { jsPDF } from "jspdf";
-import { Request } from 'express';
-import { Paragraph, Text } from '../@types/pdf';
+import {Paragraph, Text} from '../@types/pdf';
 import {
   FONT,
   FOOTER_HEIGHT,
