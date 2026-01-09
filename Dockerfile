@@ -31,13 +31,11 @@ ENTRYPOINT [ "/app/bin/entrypoint.sh" ]
 # Stage: build assets
 FROM base AS build
 
-COPY package*.json ./
+COPY . .
 RUN CYPRESS_INSTALL_BINARY=0
 RUN npm ci --no-audit
 
-COPY . .
 RUN npm run build
-
 RUN npm prune --no-audit --omit=dev
 
 # Stage: copy production assets and dependencies
