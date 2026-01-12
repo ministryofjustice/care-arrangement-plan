@@ -8,7 +8,8 @@ on:
       environment:
         type: choice
         description: Target environment
-        options: 
+        options:
+        - development
         - staging
         - production
 
@@ -22,6 +23,16 @@ jobs:
     name: 'Build & Push Image'
     uses: ./.github/workflows/build-push-image.yml
     needs: [validate]
+    secrets: inherit
+
+  deploy_development:
+    name: 'Deploy to Development'
+    if: github.event.inputs.environment == 'development'
+    uses: ./.github/workflows/deploy.yml
+    needs: [image, validate]
+    with:
+      environment: development
+      registry: ${{ needs.image.outputs.registry }}
     secrets: inherit
 
   deploy_staging:
