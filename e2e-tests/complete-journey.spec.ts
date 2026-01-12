@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+
 import { navigateToTaskList, fillAllChildrenAndContinue, generateTestChildData } from './fixtures/test-helpers';
 
 test.describe('Complete User Journey', () => {

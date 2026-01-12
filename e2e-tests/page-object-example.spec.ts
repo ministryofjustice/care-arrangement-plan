@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+
 import { SafetyCheckPage } from './fixtures/page-objects';
 import { navigateToTaskList } from './fixtures/test-helpers';
 
