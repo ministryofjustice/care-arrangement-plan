@@ -54,6 +54,8 @@ export default tslintConfig(
             'cypress.config.ts',
             'eslint.config.mjs',
             'esbuild/**',
+            'playwright.config.ts',
+            'e2e-tests/**',
           ],
         },
       ],
