@@ -31,9 +31,8 @@ ENTRYPOINT [ "/app/bin/entrypoint.sh" ]
 # Stage: build assets
 FROM base AS build
 
-COPY package*.json ./
-RUN CYPRESS_INSTALL_BINARY=0
-RUN npm ci --no-audit
+COPY package.json package-lock.json ./
+RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --no-audit
 
 COPY . .
 RUN npm run build
