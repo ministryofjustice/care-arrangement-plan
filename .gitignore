@@ -118,8 +118,6 @@ dist
 .vscode
 dist/
 test-results/
-integration-tests/videos/
-integration-tests/screenshots/
 playwright-results.xml
 playwright-report/
 */*.iml
