@@ -32,11 +32,11 @@ ENTRYPOINT [ "/app/bin/entrypoint.sh" ]
 FROM base AS build
 
 COPY package.json package-lock.json ./
-RUN CYPRESS_INSTALL_BINARY=0
-RUN npm ci --no-audit
+RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --no-audit
 
 COPY . .
 RUN npm run build
+
 RUN npm prune --no-audit --omit=dev
 
 # Stage: copy production assets and dependencies

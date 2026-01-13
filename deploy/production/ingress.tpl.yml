@@ -19,16 +19,6 @@ metadata:
         add_header Content-Type text/plain;
         return 200 "OK";
       }
-
-      ### Domain redirects
-      if ($host = 'child-arrangements-plan.service.justice.gov.uk') {
-        return 301 https://propose-child-arrangements-plan.service.gov.uk;
-      }
-      if ($host = 'care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk') {
-        return 301 https://propose-child-arrangements-plan.service.gov.uk;
-      }
-      ###/ end
-
       location = /.well-known/security.txt {
         return 301 https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt;
       }
@@ -38,14 +28,11 @@ spec:
     - hosts:
         - care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk
     - hosts:
-        - propose-child-arrangements-plan.service.gov.uk
-      secretName: pcap-cert-secret
-    - hosts:
         - child-arrangements-plan.service.justice.gov.uk
       secretName: care-arrangement-plan-cert-secret
   rules:
     - host: care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk
-      http: &paths
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -54,7 +41,13 @@ spec:
                 name: ${KUBE_NAMESPACE}-node-service
                 port:
                   number: 8080
-    - host: propose-child-arrangements-plan.service.gov.uk
-      http: *paths
     - host: child-arrangements-plan.service.justice.gov.uk
-      http: *paths
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ${KUBE_NAMESPACE}-node-service
+                port:
+                  number: 8080

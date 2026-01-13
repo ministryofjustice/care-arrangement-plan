@@ -1,9 +1,9 @@
 import fs from 'fs';
 
 import { Request } from 'express';
-import { jsPDF } from 'jspdf';
+import JsPdf from 'jspdf';
 
-import {Paragraph, Text} from '../@types/pdf';
+import { Paragraph, Text } from '../@types/pdf';
 import {
   FONT,
   FOOTER_HEIGHT,
@@ -21,7 +21,7 @@ import getAssetPath from '../utils/getAssetPath';
 import FontStyles from './fontStyles';
 
 class Pdf {
-  public readonly document: jsPDF;
+  public readonly document: JsPdf;
   public readonly request: Request;
   public readonly maxPageWidth: number;
 
@@ -32,8 +32,7 @@ class Pdf {
   constructor(autoPrint: boolean, request: Request) {
     this.request = request;
     // @ts-expect-error There is an error into the jsPDF type declaration.
-    this.document = new jsPDF({ lineHeight: LINE_HEIGHT_RATIO });
-    this.document.allowFsRead = [getAssetPath("fonts/") + "*"];
+    this.document = new JsPdf({ lineHeight: LINE_HEIGHT_RATIO });
     this.maxPageWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
     this.setupFonts();
     // Set document title for proper filename when printing/downloading

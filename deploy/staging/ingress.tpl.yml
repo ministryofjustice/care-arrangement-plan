@@ -1,21 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: care-arrangement-plan-staging-ingress
-  namespace: care-arrangement-plan-staging
+  name: ${KUBE_NAMESPACE}-ingress
+  namespace: ${KUBE_NAMESPACE}
   annotations:
-    external-dns.alpha.kubernetes.io/set-identifier: care-arrangement-plan-staging-ingress-care-arrangement-plan-staging-green
+    external-dns.alpha.kubernetes.io/set-identifier: ${KUBE_NAMESPACE}-ingress-${KUBE_NAMESPACE}-green
     external-dns.alpha.kubernetes.io/aws-weight: '100'
     nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
     nginx.ingress.kubernetes.io/modsecurity-snippet: |
       SecAuditEngine On
       SecRuleEngine DetectionOnly
-      SecDefaultAction "phase:2,pass,log,tag:github_team=central-digital-product-team,tag:namespace=care-arrangement-plan-staging"
+      SecDefaultAction "phase:2,pass,log,tag:github_team=central-digital-product-team,tag:namespace=${KUBE_NAMESPACE}"
     nginx.ingress.kubernetes.io/server-snippet: |
-      if ($host = 'care-arrangement-plan-staging.apps.live.cloud-platform.service.justice.gov.uk') {
-        return 301 https://staging.child-arrangements-plan.service.justice.gov.uk;
-      }
-
       location = /health {
         auth_basic off;
         access_log off;
@@ -23,7 +19,6 @@ metadata:
         add_header Content-Type text/plain;
         return 200 "OK";
       }
-
       location = /.well-known/security.txt {
         auth_basic off;
         return 301 https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt;
@@ -32,20 +27,16 @@ spec:
   ingressClassName: modsec
   tls:
     - hosts:
-        - care-arrangement-plan-staging.apps.live.cloud-platform.service.justice.gov.uk
-    - hosts:
         - staging.child-arrangements-plan.service.justice.gov.uk
       secretName: care-arrangement-plan-cert-secret
   rules:
-    - host: care-arrangement-plan-staging.apps.live.cloud-platform.service.justice.gov.uk
-      http: &paths
+    - host: staging.child-arrangements-plan.service.justice.gov.uk
+      http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: care-arrangement-plan-staging-node-service
+                name: ${KUBE_NAMESPACE}-node-service
                 port:
                   number: 8080
-    - host: staging.child-arrangements-plan.service.justice.gov.uk
-      http: *paths

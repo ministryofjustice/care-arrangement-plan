@@ -1,6 +1,5 @@
 import eslint from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
-import pluginCypress from 'eslint-plugin-cypress/flat';
 import importPlugin from 'eslint-plugin-import';
 import jestPlugin from 'eslint-plugin-jest';
 import jestDomPlugin from 'eslint-plugin-jest-dom';
@@ -15,7 +14,6 @@ export default tslintConfig(
   },
   eslint.configs.recommended,
   tslintConfigs.recommended,
-  pluginCypress.configs.recommended,
   jestDomPlugin.configs['flat/recommended'],
   jestPlugin.configs['flat/recommended'],
   jestPlugin.configs['flat/style'],
@@ -32,6 +30,14 @@ export default tslintConfig(
       },
     },
     ...importPlugin.flatConfigs.recommended,
+  },
+  {
+    files: ['assets/**/*.js'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
   },
   {
     languageOptions: {
@@ -51,9 +57,10 @@ export default tslintConfig(
           devDependencies: [
             '**/*.test.ts',
             'server/test-utils/**',
-            'cypress.config.ts',
             'eslint.config.mjs',
             'esbuild/**',
+            'playwright.config.ts',
+            'e2e-tests/**',
           ],
         },
       ],
