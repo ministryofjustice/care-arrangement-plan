@@ -25,32 +25,71 @@ jobs:
     needs: [validate]
     secrets: inherit
 
+  e2e_pre_deploy:
+    name: 'E2E Tests (Pre-Deploy)'
+    uses: ./.github/workflows/playwright-e2e.yml
+    needs: [validate]
+    with:
+      environment: ${{ github.event.inputs.environment }}
+      base_url: 'http://localhost:8001'
+    secrets: inherit
+
   deploy_development:
     name: 'Deploy to Development'
     if: github.event.inputs.environment == 'development'
     uses: ./.github/workflows/deploy.yml
-    needs: [image, validate]
+    needs: [image, validate, e2e_pre_deploy]
     with:
       environment: development
       registry: ${{ needs.image.outputs.registry }}
+    secrets: inherit
+
+  e2e_development:
+    name: 'E2E Tests (Development)'
+    if: github.event.inputs.environment == 'development'
+    uses: ./.github/workflows/playwright-e2e.yml
+    needs: [deploy_development]
+    with:
+      environment: development
+      base_url: 'https://care-arrangement-plan-dev.apps.live.cloud-platform.service.justice.gov.uk'
     secrets: inherit
 
   deploy_staging:
     name: 'Deploy to Staging'
     if: github.event.inputs.environment == 'staging'
     uses: ./.github/workflows/deploy.yml
-    needs: [image, validate]
+    needs: [image, validate, e2e_pre_deploy]
     with:
       environment: staging
       registry: ${{ needs.image.outputs.registry }}
     secrets: inherit
 
+  e2e_staging:
+    name: 'E2E Tests (Staging)'
+    if: github.event.inputs.environment == 'staging'
+    uses: ./.github/workflows/playwright-e2e.yml
+    needs: [deploy_staging]
+    with:
+      environment: staging
+      base_url: 'https://staging.child-arrangements-plan.service.justice.gov.uk'
+    secrets: inherit
+
   deploy_production:
     name: 'Deploy to Production'
     if: github.event.inputs.environment == 'production'
-    needs: [image, validate]
+    needs: [image, validate, e2e_pre_deploy]
     uses: ./.github/workflows/deploy.yml
     with:
       environment: production
       registry: ${{ needs.image.outputs.registry }}
+    secrets: inherit
+
+  e2e_production:
+    name: 'E2E Tests (Production)'
+    if: github.event.inputs.environment == 'production'
+    uses: ./.github/workflows/playwright-e2e.yml
+    needs: [deploy_production]
+    with:
+      environment: production
+      base_url: 'https://child-arrangements-plan.service.justice.gov.uk'
     secrets: inherit
