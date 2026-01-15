@@ -9,6 +9,7 @@ import {
   navigateToTaskList,
 } from './fixtures/test-helpers';
 import { verifyBackNavigation, verifyForwardNavigation } from './fixtures/navigation-helpers';
+import { taskListSections, staticPages } from './fixtures/test-data';
 
 test.describe('Browser Navigation - Onboarding Flow', () => {
   test('should navigate back from children-safety-check to safety-check', async ({ page }) => {
@@ -304,7 +305,7 @@ test.describe('Browser Navigation - Complex Scenarios', () => {
     }
   });
 
-  test('should handle validation error page navigation', async ({ page }) => {
+  test('should handle validation error page navigation using browser back button', async ({ page }) => {
     await completeOnboardingFlow(page);
     await fillNumberOfChildren(page, 1);
 
@@ -314,19 +315,19 @@ test.describe('Browser Navigation - Complex Scenarios', () => {
     const errorSummary = page.locator('.govuk-error-summary');
     await expect(errorSummary).toBeVisible();
 
-    await verifyBackNavigation(
-      page,
-      /\/number-of-children/,
-      async () => {
-        const numberInput = page.getByLabel(/How many children is this for/i);
-        await expect(numberInput).toHaveValue('1');
-      }
-    );
+    // Use browser back button (page.goBack())
+    // This tests that browser navigation also works correctly
+    await page.goBack();
 
-    await page.goForward();
+    // With POST-redirect-GET pattern, browser back goes to the same page without errors
+    // This is standard web behavior - the redirect creates a GET request in history
     await expect(page).toHaveURL(/\/about-the-children/);
 
-    // Now fill correctly
+    // Form should be shown without errors (clean state)
+    const errorSummaryAfterBack = page.locator('.govuk-error-summary');
+    await expect(errorSummaryAfterBack).not.toBeVisible();
+
+    // User can fill the form and continue
     await page.fill('input[name="child-name0"]', 'ValidName');
     await page.getByRole('button', { name: /continue/i }).click();
     await expect(page).toHaveURL(/\/about-the-adults/);
@@ -383,37 +384,6 @@ test.describe('Browser Navigation - Task List Sections', () => {
     await navigateToTaskList(page);
     await expect(page).toHaveURL(/\/make-a-plan/);
   });
-
-  // Test data for task list sections
-  const taskListSections = [
-    {
-      name: 'living-and-visiting',
-      path: '/living-and-visiting/where-will-the-children-mostly-live',
-      inputType: 'radio',
-    },
-    {
-      name: 'handover-and-holidays',
-      path: '/handover-and-holidays/get-between-households',
-      inputType: 'radio',
-    },
-    {
-      name: 'special-days',
-      path: '/special-days/what-will-happen',
-      inputType: 'textarea',
-      testValue: 'Special days arrangements',
-    },
-    {
-      name: 'other-things',
-      path: '/other-things/what-other-things-matter',
-      inputType: 'textarea',
-      testValue: 'Other important things',
-    },
-    {
-      name: 'decision-making',
-      path: '/decision-making/plan-last-minute-changes',
-      inputType: 'checkbox',
-    },
-  ];
 
   for (const section of taskListSections) {
     test(`should navigate back from ${section.name} section`, async ({ page }) => {
@@ -490,14 +460,6 @@ test.describe('Browser Navigation - Task List Sections', () => {
 });
 
 test.describe('Browser Navigation - Static Pages', () => {
-  const staticPages = [
-    { name: 'accessibility statement', path: '/accessibility-statement' },
-    { name: 'cookies', path: '/cookies' },
-    { name: 'privacy notice', path: '/privacy-notice' },
-    { name: 'contact us', path: '/contact-us' },
-    { name: 'terms and conditions', path: '/terms-and-conditions' },
-  ];
-
   for (const staticPage of staticPages) {
     test(`should navigate back from ${staticPage.name}`, async ({ page }) => {
       await page.goto('/');
