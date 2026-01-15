@@ -118,8 +118,8 @@ dist
 .vscode
 dist/
 test-results/
-playwright-results.xml
-playwright-report/
+integration-tests/videos/
+integration-tests/screenshots/
 */*.iml
 **/Chart.lock
 **/.DS_Store
