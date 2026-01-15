@@ -36,7 +36,6 @@ RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --no-audit
 
 COPY . .
 RUN npm run build
-
 RUN npm prune --no-audit --omit=dev
 
 # Stage: copy production assets and dependencies
