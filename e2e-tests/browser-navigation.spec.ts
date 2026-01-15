@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+import { verifyBackNavigation, verifyForwardNavigation } from './fixtures/navigation-helpers';
+import { taskListSections, staticPages } from './fixtures/test-data';
 import {
   startJourney,
   completeSafetyChecks,
@@ -8,8 +10,6 @@ import {
   fillAllChildrenAndContinue,
   navigateToTaskList,
 } from './fixtures/test-helpers';
-import { verifyBackNavigation, verifyForwardNavigation } from './fixtures/navigation-helpers';
-import { taskListSections, staticPages } from './fixtures/test-data';
 
 test.describe('Browser Navigation - Onboarding Flow', () => {
   test('should navigate back from children-safety-check to safety-check', async ({ page }) => {

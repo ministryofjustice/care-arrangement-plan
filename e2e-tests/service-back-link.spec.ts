@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+import { verifyServiceBackLink } from './fixtures/navigation-helpers';
+import { taskListSections, staticPages } from './fixtures/test-data';
 import {
   startJourney,
   completeSafetyChecks,
@@ -8,8 +10,6 @@ import {
   fillAllChildrenAndContinue,
   navigateToTaskList,
 } from './fixtures/test-helpers';
-import { verifyServiceBackLink } from './fixtures/navigation-helpers';
-import { taskListSections, staticPages } from './fixtures/test-data';
 
 /**
  * TODO: Radio buttons and checkboxes don't remember their state when using the service Back link
