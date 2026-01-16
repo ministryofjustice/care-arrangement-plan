@@ -12,6 +12,20 @@ export type WhichDays = {
   noDecisionRequired?: boolean;
 };
 
+// Per-child answer structure for questions that can have different answers for each child
+export type PerChildAnswer<T> = {
+  // Default answer that applies to all children unless overridden
+  default: T;
+  // Optional per-child overrides, keyed by child index (0, 1, 2, etc.)
+  byChild?: Record<number, T>;
+};
+
+// Answer type for howChangeDuringSchoolHolidays
+export type HowChangeDuringSchoolHolidaysAnswer = {
+  noDecisionRequired: boolean;
+  answer?: string;
+};
+
 export type CAPSession = {
   completedSteps?: string[];
   numberOfChildren: number;
@@ -51,10 +65,8 @@ export type CAPSession = {
       noDecisionRequired: boolean;
       willChange?: boolean;
     };
-    howChangeDuringSchoolHolidays?: {
-      noDecisionRequired: boolean;
-      answer?: string;
-    };
+    // Updated to support per-child answers
+    howChangeDuringSchoolHolidays?: PerChildAnswer<HowChangeDuringSchoolHolidaysAnswer>;
     itemsForChangeover?: {
       noDecisionRequired: boolean;
       answer?: string;

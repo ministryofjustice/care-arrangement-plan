@@ -18,7 +18,20 @@
 {% if values.howChangeDuringSchoolHolidaysAnswer %}
   <h4 class="govuk-heading-s">{{ __('handoverAndHolidays.howChangeDuringSchoolHolidays.title') }}</h4>
   <p>{{ __('handoverAndHolidays.howChangeDuringSchoolHolidays.content') }}</p>
-  <p class="newline-separated-paragraph">{{ values.howChangeDuringSchoolHolidaysAnswer }}</p>
+  {% if values.howChangeDuringSchoolHolidaysAnswer.defaultAnswer is defined %}
+    {# Per-child answer structure #}
+    <p class="govuk-body govuk-!-margin-bottom-1"><strong>For all children:</strong></p>
+    <p class="newline-separated-paragraph">{{ values.howChangeDuringSchoolHolidaysAnswer.defaultAnswer }}</p>
+    {% if values.howChangeDuringSchoolHolidaysAnswer.perChildAnswers %}
+      {% for childAnswer in values.howChangeDuringSchoolHolidaysAnswer.perChildAnswers %}
+        <p class="govuk-body govuk-!-margin-bottom-1"><strong>For {{ childAnswer.childName }}:</strong></p>
+        <p class="newline-separated-paragraph">{{ childAnswer.answer }}</p>
+      {% endfor %}
+    {% endif %}
+  {% else %}
+    {# Simple string answer #}
+    <p class="newline-separated-paragraph">{{ values.howChangeDuringSchoolHolidaysAnswer }}</p>
+  {% endif %}
   {{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.howChangeDuringSchoolHolidays'), "how-change-during-school-holidays") }}
 {% endif %}
 

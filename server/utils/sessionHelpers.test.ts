@@ -185,7 +185,9 @@ describe('sessionHelpers', () => {
             noDecisionRequired: false,
           },
           howChangeDuringSchoolHolidays: {
-            noDecisionRequired: true,
+            default: {
+              noDecisionRequired: true,
+            },
           },
         },
       };

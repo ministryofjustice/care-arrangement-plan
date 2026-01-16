@@ -2,6 +2,24 @@
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
+{# Macro to format per-child answers for display #}
+{% macro formatPerChildAnswer(answer) %}
+  {% if answer.defaultAnswer is defined %}
+    {# This is a per-child answer structure #}
+    <p class="govuk-body govuk-!-margin-bottom-1"><strong>For all children:</strong></p>
+    <p class="govuk-body govuk-!-margin-bottom-2">{{ answer.defaultAnswer }}</p>
+    {% if answer.perChildAnswers %}
+      {% for childAnswer in answer.perChildAnswers %}
+        <p class="govuk-body govuk-!-margin-bottom-1"><strong>For {{ childAnswer.childName }}:</strong></p>
+        <p class="govuk-body govuk-!-margin-bottom-2">{{ childAnswer.answer }}</p>
+      {% endfor %}
+    {% endif %}
+  {% else %}
+    {# Simple string answer #}
+    {{ answer }}
+  {% endif %}
+{% endmacro %}
+
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop">
@@ -222,7 +240,7 @@
                 text: __('handoverAndHolidays.howChangeDuringSchoolHolidays.title')
               },
               value: {
-                text: values.howChangeDuringSchoolHolidays
+                html: formatPerChildAnswer(values.howChangeDuringSchoolHolidays)
               },
               actions: {
                 items: [
