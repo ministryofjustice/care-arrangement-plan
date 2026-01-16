@@ -12,10 +12,6 @@ metadata:
       SecRuleEngine DetectionOnly
       SecDefaultAction "phase:2,pass,log,tag:github_team=central-digital-product-team,tag:namespace=care-arrangement-plan-staging"
     nginx.ingress.kubernetes.io/server-snippet: |
-      if ($host = 'care-arrangement-plan-staging.apps.live.cloud-platform.service.justice.gov.uk') {
-        return 301 https://staging.child-arrangements-plan.service.justice.gov.uk;
-      }
-
       location = /health {
         auth_basic off;
         access_log off;
@@ -32,13 +28,11 @@ spec:
   ingressClassName: modsec
   tls:
     - hosts:
-        - care-arrangement-plan-staging.apps.live.cloud-platform.service.justice.gov.uk
-    - hosts:
         - staging.child-arrangements-plan.service.justice.gov.uk
       secretName: care-arrangement-plan-cert-secret
   rules:
-    - host: care-arrangement-plan-staging.apps.live.cloud-platform.service.justice.gov.uk
-      http: &paths
+    - host: staging.child-arrangements-plan.service.justice.gov.uk
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -47,5 +41,3 @@ spec:
                 name: care-arrangement-plan-staging-node-service
                 port:
                   number: 8080
-    - host: staging.child-arrangements-plan.service.justice.gov.uk
-      http: *paths
