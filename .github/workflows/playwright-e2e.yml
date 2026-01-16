@@ -1,0 +1,80 @@
+name: 'Playwright E2E Tests'
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: 'Environment to test against (development, staging, production)'
+        required: true
+        type: string
+      base_url:
+        description: 'Base URL to run tests against'
+        required: true
+        type: string
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to test against'
+        required: true
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+      base_url:
+        description: 'Base URL to run tests against'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  e2e_tests:
+    name: "E2E Tests - ${{ inputs.environment || 'PR' }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: 'Setup Node.js'
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: 'Install Dependencies'
+        run: npm ci --no-audit
+
+      - name: 'Install Playwright Browsers'
+        run: npx playwright install --with-deps chromium
+
+      - name: 'Run Playwright E2E Tests (PR - Local)'
+        if: github.event_name == 'pull_request'
+        run: npm run e2e
+
+      - name: 'Run Playwright E2E Tests (Against Environment)'
+        if: inputs.base_url
+        run: npm run e2e
+        env:
+          BASE_URL: ${{ inputs.base_url }}
+
+      - name: 'Upload Playwright Report'
+        if: always()
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
+        with:
+          name: playwright-report-${{ inputs.environment || 'pr' }}-${{ github.run_number }}
+          path: playwright-report/
+          retention-days: 30
+
+      - name: 'Upload Test Results'
+        if: always()
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
+        with:
+          name: playwright-results-${{ inputs.environment || 'pr' }}-${{ github.run_number }}
+          path: playwright-results.xml
+          retention-days: 30
