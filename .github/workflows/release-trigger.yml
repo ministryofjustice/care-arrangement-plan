@@ -13,6 +13,8 @@ on:
         - staging
         - production
 
+permissions: {}
+
 jobs:
   validate:
     name: 'Validate'

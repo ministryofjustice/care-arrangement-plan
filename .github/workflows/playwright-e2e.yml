@@ -29,6 +29,9 @@ on:
         required: true
         type: string
 
+permissions:
+  contents: read
+
 jobs:
   e2e_tests:
     name: "E2E Tests - ${{ inputs.environment || 'PR' }}"
