@@ -1,5 +1,7 @@
 import { Request } from 'express';
 
+import { PerChildFormattedAnswerForPdf } from '../utils/formattedAnswersForPdf';
+
 export const escapeHtmlText = (text: string): string => {
   return text
     .replace(/&/g, '&amp;')
@@ -7,6 +9,27 @@ export const escapeHtmlText = (text: string): string => {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+};
+
+// Type guard to check if answer is a per-child answer structure
+export const isPerChildAnswer = (answer: string | PerChildFormattedAnswerForPdf): answer is PerChildFormattedAnswerForPdf => {
+  return typeof answer === 'object' && 'defaultAnswer' in answer;
+};
+
+// Render per-child answer as HTML
+export const renderPerChildAnswerHtml = (answer: PerChildFormattedAnswerForPdf): string => {
+  let html = '';
+  html += `  <p class="govuk-body govuk-!-margin-bottom-1"><strong>For all children:</strong></p>\n`;
+  html += `  <p class="answer">${escapeHtmlText(answer.defaultAnswer)}</p>\n`;
+
+  if (answer.perChildAnswers) {
+    for (const childAnswer of answer.perChildAnswers) {
+      html += `  <p class="govuk-body govuk-!-margin-bottom-1"><strong>For ${escapeHtmlText(childAnswer.childName)}:</strong></p>\n`;
+      html += `  <p class="answer">${escapeHtmlText(childAnswer.answer)}</p>\n`;
+    }
+  }
+
+  return html;
 };
 
 let questionCounter = 0;
@@ -37,7 +60,7 @@ const addAnswer = (
   sectionHeading: string | undefined,
   question: string,
   subtext: string | undefined,
-  answer: string | undefined,
+  answer: string | PerChildFormattedAnswerForPdf | undefined,
   disagreeText: string,
   request: Request,
 ): string => {
@@ -59,7 +82,12 @@ const addAnswer = (
     html += `  <p class="hint">${escapeHtmlText(subtext)}</p>\n`;
   }
 
-  html += `  <p class="answer">${escapeHtmlText(answer)}</p>\n`;
+  // Handle per-child answer structure
+  if (isPerChildAnswer(answer)) {
+    html += renderPerChildAnswerHtml(answer);
+  } else {
+    html += `  <p class="answer">${escapeHtmlText(answer)}</p>\n`;
+  }
 
   html += `  <div class="do-you-agree">\n`;
   html += `    <div class="govuk-form-group">\n`;

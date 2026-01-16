@@ -324,7 +324,7 @@ describe('formattedAnswers', () => {
             someoneElse: 'Grandma',
           },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
-          howChangeDuringSchoolHolidays: { noDecisionRequired: false, answer: 'howChangeDuringSchoolHolidays answer' },
+          howChangeDuringSchoolHolidays: { default: { noDecisionRequired: false, answer: 'howChangeDuringSchoolHolidays answer' } },
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
         },
         {
@@ -340,7 +340,7 @@ describe('formattedAnswers', () => {
           getBetweenHouseholds: { noDecisionRequired: false, how: 'secondaryCollects' as getBetweenHouseholdsField },
           whereHandover: { noDecisionRequired: false, where: ['secondaryHome'] as whereHandoverField[] },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
-          howChangeDuringSchoolHolidays: { noDecisionRequired: true },
+          howChangeDuringSchoolHolidays: { default: { noDecisionRequired: true } },
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
         },
         {

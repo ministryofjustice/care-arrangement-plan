@@ -89,7 +89,7 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
     });
 
     it('should redirect to items for changeover if the answer is no', async () => {
-      sessionMock.handoverAndHolidays = { howChangeDuringSchoolHolidays: { noDecisionRequired: true } };
+      sessionMock.handoverAndHolidays = { howChangeDuringSchoolHolidays: { default: { noDecisionRequired: true } } };
 
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
@@ -103,7 +103,7 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
     });
 
     it('should redirect to which change during holidays if the answer is yes', async () => {
-      const initialHandoverAndHolidays = { howChangeDuringSchoolHolidays: { noDecisionRequired: true } };
+      const initialHandoverAndHolidays = { howChangeDuringSchoolHolidays: { default: { noDecisionRequired: true } } };
       sessionMock.handoverAndHolidays = initialHandoverAndHolidays;
 
       await request(app)
@@ -122,7 +122,7 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
 
 describe(`POST ${paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED}`, () => {
   it('should redirect to items for changeover when the answer is entered and set willChangeDuringSchoolHolidays', async () => {
-    sessionMock.handoverAndHolidays = { howChangeDuringSchoolHolidays: { noDecisionRequired: true } };
+    sessionMock.handoverAndHolidays = { howChangeDuringSchoolHolidays: { default: { noDecisionRequired: true } } };
 
     await request(app)
       .post(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED)

@@ -127,13 +127,41 @@ export const willChangeDuringSchoolHolidays = (request: Request) => {
   return handoverAndHolidays.willChangeDuringSchoolHolidays.willChange ? request.__('yes') : request.__('no');
 };
 
-export const howChangeDuringSchoolHolidays = (request: Request) => {
-  const { handoverAndHolidays } = request.session;
+export type PerChildFormattedAnswer = {
+  defaultAnswer: string;
+  perChildAnswers?: { childName: string; answer: string }[];
+};
+
+export const howChangeDuringSchoolHolidays = (request: Request): string | PerChildFormattedAnswer | undefined => {
+  const { handoverAndHolidays, namesOfChildren } = request.session;
   if (!handoverAndHolidays.howChangeDuringSchoolHolidays) return undefined;
 
-  return handoverAndHolidays.howChangeDuringSchoolHolidays.noDecisionRequired
-    ? request.__('doNotNeedToDecide')
-    : handoverAndHolidays.howChangeDuringSchoolHolidays.answer;
+  const data = handoverAndHolidays.howChangeDuringSchoolHolidays;
+
+  // Handle the "do not need to decide" case
+  if (data.default?.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const defaultAnswer = data.default?.answer || '';
+
+  // If there are no per-child overrides, return just the default answer
+  if (!data.byChild || Object.keys(data.byChild).length === 0) {
+    return defaultAnswer;
+  }
+
+  // Return structured data with per-child answers
+  const perChildAnswers = Object.entries(data.byChild)
+    .filter(([_, answer]) => answer.answer && !answer.noDecisionRequired)
+    .map(([childIndex, answer]) => ({
+      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
+      answer: answer.answer!,
+    }));
+
+  return {
+    defaultAnswer,
+    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
+  };
 };
 
 export const itemsForChangeover = (request: Request) => {

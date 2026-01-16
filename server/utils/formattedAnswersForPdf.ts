@@ -179,16 +179,47 @@ export const willChangeDuringSchoolHolidays = (request: Request) => {
       });
 };
 
-export const howChangeDuringSchoolHolidays = (request: Request) => {
-  const { handoverAndHolidays, initialAdultName } = request.session;
+export type PerChildFormattedAnswerForPdf = {
+  defaultAnswer: string;
+  perChildAnswers?: { childName: string; answer: string }[];
+};
+
+export const howChangeDuringSchoolHolidays = (request: Request): string | PerChildFormattedAnswerForPdf | undefined => {
+  const { handoverAndHolidays, initialAdultName, namesOfChildren } = request.session;
   if (!handoverAndHolidays.howChangeDuringSchoolHolidays) return undefined;
 
-  return handoverAndHolidays.howChangeDuringSchoolHolidays.noDecisionRequired
-    ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
-    : request.__('sharePlan.yourProposedPlan.senderSuggested', {
+  const data = handoverAndHolidays.howChangeDuringSchoolHolidays;
+
+  // Handle the "do not need to decide" case
+  if (data.default?.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const defaultSuggestion = request.__('sharePlan.yourProposedPlan.senderSuggested', {
+    senderName: initialAdultName,
+    suggestion: data.default?.answer || '',
+  });
+
+  // If there are no per-child overrides, return just the default answer
+  if (!data.byChild || Object.keys(data.byChild).length === 0) {
+    return defaultSuggestion;
+  }
+
+  // Return structured data with per-child answers
+  const perChildAnswers = Object.entries(data.byChild)
+    .filter(([_, answer]) => answer.answer && !answer.noDecisionRequired)
+    .map(([childIndex, answer]) => ({
+      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
+      answer: request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
-        suggestion: handoverAndHolidays.howChangeDuringSchoolHolidays.answer,
-      });
+        suggestion: answer.answer!,
+      }),
+    }));
+
+  return {
+    defaultAnswer: defaultSuggestion,
+    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
+  };
 };
 
 export const itemsForChangeover = (request: Request) => {
