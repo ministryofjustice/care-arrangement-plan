@@ -4,6 +4,8 @@ metadata:
   name: care-arrangement-plan-staging-redirect
   namespace: care-arrangement-plan-staging
   annotations:
+    external-dns.alpha.kubernetes.io/set-identifier: care-arrangement-plan-staging-redirect-care-arrangement-plan-staging-green
+    external-dns.alpha.kubernetes.io/aws-weight: '100'
     nginx.ingress.kubernetes.io/permanent-redirect: "https://staging.child-arrangements-plan.service.justice.gov.uk"
 spec:
   ingressClassName: modsec
