@@ -3,6 +3,7 @@
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 {% set htmlLang = getLocale() %}
 {% set mainClasses = "app-container govuk-body" %}
+{% set govukRebrand = true %}
 
 {% block pageTitle %}
   {% if errors | length %}
