@@ -11,7 +11,7 @@ data:
   CACHE_ENABLED: 'true'
   CACHE_TLS_ENABLED: 'true'
   INCLUDE_WELSH_LANGUAGE: 'false'
-  USE_AUTH: 'true'
+  USE_AUTH: 'false'
   CONTACT_EMAIL: 'childarrangements@justice.gov.uk'
   FEEDBACK_URL: 'https://www.smartsurvey.co.uk/s/EFO5FJ/'
   PREVIEW_END: '2026-03-31T23:59:59'

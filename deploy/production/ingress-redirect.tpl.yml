@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${KUBE_NAMESPACE}-redirect
+  namespace: ${KUBE_NAMESPACE}
+  annotations:
+    external-dns.alpha.kubernetes.io/set-identifier: ${KUBE_NAMESPACE}-redirect-${KUBE_NAMESPACE}-green
+    external-dns.alpha.kubernetes.io/aws-weight: '100'
+    nginx.ingress.kubernetes.io/permanent-redirect: "https://propose-child-arrangements-plan.service.gov.uk"
+spec:
+  ingressClassName: modsec
+  tls:
+    - hosts:
+        - care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk
+    - hosts:
+        - child-arrangements-plan.service.justice.gov.uk
+      secretName: care-arrangement-plan-cert-secret
+  rules:
+    - host: care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ${KUBE_NAMESPACE}-node-service
+                port:
+                  number: 8080
+    - host: child-arrangements-plan.service.justice.gov.uk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ${KUBE_NAMESPACE}-node-service
+                port:
+                  number: 8080
