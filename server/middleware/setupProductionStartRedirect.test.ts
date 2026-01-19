@@ -1,9 +1,11 @@
-import type { Request, Response } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 
 import config from '../config';
 import paths from '../constants/paths';
 
 import setupProductionStartRedirect from './setupProductionStartRedirect';
+
+type RequestHandler = (req: Request, res: Response, next: NextFunction) => void;
 
 const GDS_START_PAGE_URL = 'https://www.gov.uk/make-child-arrangements-if-you-divorce-or-separate';
 
@@ -41,10 +43,10 @@ describe('setupProductionStartRedirect middleware', () => {
   });
 
   // Helper to get the middleware handler from the router
-  const getMiddlewareHandler = () => {
+  const getMiddlewareHandler = (): RequestHandler => {
     // The router.stack contains the registered routes
     // We need to get the handle function from the first layer
-    const layer = (router as unknown as { stack: Array<{ handle: Function }> }).stack[0];
+    const layer = (router as unknown as { stack: Array<{ handle: RequestHandler }> }).stack[0];
     return layer.handle;
   };
 
