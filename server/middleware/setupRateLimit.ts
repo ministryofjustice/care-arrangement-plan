@@ -8,6 +8,8 @@ import createRedisStore from '../utils/redisStoreFactory';
 const setupRateLimit = () => {
   const router = Router();
 
+  const isTestEnvironment = process.env.NODE_ENV === 'test';
+
   const rateLimitHandler = (request: Request, response: Response) => {
     const { production } = config;
     response.status(429).render('pages/errors/rateLimit', {
@@ -18,7 +20,7 @@ const setupRateLimit = () => {
 
   const generalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 250, // Limit each IP to 250 requests per 15 minutes
+    max: isTestEnvironment ? 10000 : 250, // Much higher limit for tests to avoid false failures
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     validate: { trustProxy: true },
@@ -35,7 +37,7 @@ const setupRateLimit = () => {
   // download/PDF generation endpoints (resource-intensive)
   const downloadLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,// 15 minutes
-    max: 20,// Limit each IP to 20 requests per 15 minutes
+    max: isTestEnvironment ? 1000 : 20,// Higher limit for tests
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: true },
@@ -48,8 +50,8 @@ const setupRateLimit = () => {
   });
 
   const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, 
-    max: 10, // Limit login attempts to 10 per 15 minutes per IP
+    windowMs: 15 * 60 * 1000,
+    max: isTestEnvironment ? 1000 : 10, // Higher limit for tests
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: true},

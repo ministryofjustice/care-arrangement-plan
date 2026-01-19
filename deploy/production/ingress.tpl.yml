@@ -19,6 +19,7 @@ metadata:
         add_header Content-Type text/plain;
         return 200 "OK";
       }
+
       location = /.well-known/security.txt {
         return 301 https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt;
       }
@@ -26,22 +27,10 @@ spec:
   ingressClassName: modsec
   tls:
     - hosts:
-        - care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk
-    - hosts:
-        - child-arrangements-plan.service.justice.gov.uk
-      secretName: care-arrangement-plan-cert-secret
+        - propose-child-arrangements-plan.service.gov.uk
+      secretName: pcap-cert-secret
   rules:
-    - host: care-arrangement-plan.apps.live.cloud-platform.service.justice.gov.uk
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: ${KUBE_NAMESPACE}-node-service
-                port:
-                  number: 8080
-    - host: child-arrangements-plan.service.justice.gov.uk
+    - host: propose-child-arrangements-plan.service.gov.uk
       http:
         paths:
           - path: /
