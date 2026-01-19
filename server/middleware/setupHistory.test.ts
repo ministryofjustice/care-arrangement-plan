@@ -34,6 +34,10 @@ describe('setupHistory', () => {
 
   test('resets the history when the task list is loaded', async () => {
     sessionMock.pageHistory = [paths.START];
+    // Set completedSteps so user can access task list without being redirected
+    sessionMock.completedSteps = ['aboutTheAdults'];
+    // Set required session data for task list to render
+    sessionMock.namesOfChildren = ['Child'];
 
     await request(app).get(paths.TASK_LIST);
 
