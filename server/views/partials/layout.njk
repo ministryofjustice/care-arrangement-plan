@@ -3,6 +3,7 @@
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 {% set htmlLang = getLocale() %}
 {% set mainClasses = "app-container govuk-body" %}
+{% set govukRebrand = true %}
 
 {% block pageTitle %}
   {% if errors | length %}
@@ -24,7 +25,7 @@
   <meta name="robots" content="noindex, nofollow" />
   <link href="{{ '/assets/css/app.css' | assetMap }}" rel="stylesheet" />
   {% if analyticsEnabled and ga4Id != undefined %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga4Id }}"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga4Id }}" nonce="{{ cspNonce }}"></script>
     <script nonce="{{ cspNonce }}">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
