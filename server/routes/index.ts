@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import config from '../config';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
 import addCompletedStep from '../utils/addCompletedStep';
@@ -29,6 +30,9 @@ import taskListRoutes from './taskList';
 const routes = (): Router => {
   const router = Router();
   router.get(paths.START, (_request, response) => {
+    if (config.production) {
+      return response.redirect(paths.SAFETY_CHECK);
+    }
     addCompletedStep(_request, FORM_STEPS.START);
     response.render('pages/index');
   });

@@ -15,7 +15,7 @@ const TASK_FLOW_MAP : TaskFlowMapType = {
   },
   [FORM_STEPS.SAFETY_CHECK]: {
     path: paths.SAFETY_CHECK,
-    dependsOn: [FORM_STEPS.START],
+    dependsOn: [],
   },
   [FORM_STEPS.NOT_SAFE]: {
     path: paths.NOT_SAFE,
