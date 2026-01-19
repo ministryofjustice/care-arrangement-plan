@@ -17,7 +17,10 @@ const validateSafetyCheckAccess = (request: Request, response: Response, next: N
   const completedSteps: string[] = request.session?.completedSteps || [];
   const referrer = request.get('Referer') || '';
   const hasCompletedStart = completedSteps.includes(FORM_STEPS.START);
-  const isFromGDS = referrer.startsWith(config.gdsStartPageUrl);
+
+  // Check if GDS URL is properly configured (not empty or just '/')
+  const hasGdsUrl = config.gdsStartPageUrl && config.gdsStartPageUrl !== '/';
+  const isFromGDS = hasGdsUrl && referrer.startsWith(config.gdsStartPageUrl);
 
   // Allow access if user came from GDS or already completed START
   if (isFromGDS || hasCompletedStart) {
@@ -31,7 +34,14 @@ const validateSafetyCheckAccess = (request: Request, response: Response, next: N
     return next();
   }
 
-  // In production, redirect unauthorized users to GDS start page
+  // In production without GDS URL configured (interim), allow direct access to safety check
+  // This prevents redirect loops when GDS_START_PAGE_URL is not set
+  if (!hasGdsUrl) {
+    addCompletedStep(request, FORM_STEPS.START);
+    return next();
+  }
+
+  // In production with GDS URL configured, redirect unauthorized users to GDS start page
   return response.redirect(config.gdsStartPageUrl);
 };
 

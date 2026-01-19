@@ -167,6 +167,41 @@ describe('validateSafetyCheckAccess middleware', () => {
     });
   });
 
+  describe('Interim solution (no GDS URL configured)', () => {
+    beforeEach(() => {
+      (config as { production: boolean }).production = true;
+    });
+
+    it('should allow direct access when GDS URL is empty', () => {
+      (config as { gdsStartPageUrl: string }).gdsStartPageUrl = '';
+      (req.get as jest.Mock).mockReturnValue('');
+
+      validateSafetyCheckAccess(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+      expect(res.redirect).not.toHaveBeenCalled();
+    });
+
+    it('should allow direct access when GDS URL is "/"', () => {
+      (config as { gdsStartPageUrl: string }).gdsStartPageUrl = '/';
+      (req.get as jest.Mock).mockReturnValue('');
+
+      validateSafetyCheckAccess(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+      expect(res.redirect).not.toHaveBeenCalled();
+    });
+
+    it('should mark START step as completed when GDS URL is not configured', () => {
+      (config as { gdsStartPageUrl: string }).gdsStartPageUrl = '';
+      (req.get as jest.Mock).mockReturnValue('');
+
+      validateSafetyCheckAccess(req, res, next);
+
+      expect(req.session.completedSteps).toContain(FORM_STEPS.START);
+    });
+  });
+
   describe('Edge cases', () => {
     it('should handle missing completedSteps array and initialise it', () => {
       req.session.completedSteps = undefined;
