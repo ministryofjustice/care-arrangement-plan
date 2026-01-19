@@ -58,7 +58,7 @@ const config = {
   feedbackUrl: getStringConfigValue('FEEDBACK_URL'),
   contactEmail: getStringConfigValue('CONTACT_EMAIL'),
   previewEnd: new Date(getStringConfigValue('PREVIEW_END')),
-  gdsStartPageUrl: getStringConfigValue('GDS_START_PAGE_URL'),
+  gdsStartPageUrl: process.env.GDS_START_PAGE_URL || '/',
 };
 
 if (production) {
