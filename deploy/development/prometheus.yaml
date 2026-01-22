@@ -167,13 +167,13 @@ spec:
         message: ElastiCache instance {{ $labels.cache_cluster_id }} CPU utilization is above 70%.
         
     - alert: ElastiCacheFreeableMemoryLow
-      # Alert if freeable memory drops below 500MB
-      expr: aws_elasticache_freeable_memory_average{cache_cluster_id=~"cp-ea0bf612cd395806-00[12]"} < 500000000
+      # Alert if freeable memory drops below 300MB
+      expr: aws_elasticache_freeable_memory_average{cache_cluster_id=~"cp-ea0bf612cd395806-00[12]"} < 300000000
       for: 5m
       labels:
         severity: care-arrangement-plan-dev
       annotations:
-        message: ElastiCache instance {{ $labels.cache_cluster_id }} freeable memory is below 500MB.
+        message: ElastiCache instance {{ $labels.cache_cluster_id }} freeable memory is below 300MB.
 
     - alert: ElastiCacheSwapUsageHigh
       # Alert if swap usage is above 50MB (indicates memory pressure)
