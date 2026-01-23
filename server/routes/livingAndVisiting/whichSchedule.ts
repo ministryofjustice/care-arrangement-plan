@@ -6,14 +6,17 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
+import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const whichScheduleRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WHICH_SCHEDULE, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE), (request, response) => {
+    const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting');
+
     response.render('pages/livingAndVisiting/whichSchedule', {
       errors: request.flash('errors'),
       title: request.__('livingAndVisiting.whichSchedule.title'),
-      initialSchedule: request.session.livingAndVisiting.whichSchedule?.answer,
+      initialSchedule: livingAndVisiting?.whichSchedule?.answer,
       backLinkHref: getBackUrl(request.session, paths.LIVING_VISITING_MOSTLY_LIVE),
     });
   });
@@ -36,13 +39,14 @@ const whichScheduleRoutes = (router: Router) => {
         [formFields.WHICH_SCHEDULE]: string;
       }>(request, { onlyValidData: false });
 
-      request.session.livingAndVisiting = {
-        ...request.session.livingAndVisiting,
+      const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting') || {};
+      setSessionSection(request.session, 'livingAndVisiting', {
+        ...livingAndVisiting,
         whichSchedule: {
           noDecisionRequired: false,
           answer: whichSchedule,
         },
-      };
+      });
       addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE);
 
       return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
@@ -50,12 +54,13 @@ const whichScheduleRoutes = (router: Router) => {
   );
 
   router.post(paths.LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED, (request, response) => {
-    request.session.livingAndVisiting = {
-      ...request.session.livingAndVisiting,
+    const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting') || {};
+    setSessionSection(request.session, 'livingAndVisiting', {
+      ...livingAndVisiting,
       whichSchedule: {
         noDecisionRequired: true,
       },
-    };
+    });
     addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE);
 
     return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));

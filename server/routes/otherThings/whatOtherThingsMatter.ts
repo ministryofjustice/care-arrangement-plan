@@ -6,14 +6,17 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
+import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const whatOtherThingsMatterRoutes = (router: Router) => {
   router.get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, checkFormProgressFromConfig(FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER), (request, response) => {
+    const otherThings = getSessionValue<any>(request.session, 'otherThings');
+
     response.render('pages/otherThings/whatOtherThingsMatter', {
       errors: request.flash('errors'),
       title: request.__('otherThings.whatOtherThingsMatter.title'),
-      initialWhatOtherThingsMatter: request.session.otherThings?.whatOtherThingsMatter?.answer,
+      initialWhatOtherThingsMatter: otherThings?.whatOtherThingsMatter?.answer,
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });
   });
@@ -36,13 +39,14 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
         [formFields.WHAT_OTHER_THINGS_MATTER]: string;
       }>(request, { onlyValidData: false });
 
-      request.session.otherThings = {
-        ...request.session.otherThings,
+      const otherThings = getSessionValue<any>(request.session, 'otherThings') || {};
+      setSessionSection(request.session, 'otherThings', {
+        ...otherThings,
         whatOtherThingsMatter: {
           noDecisionRequired: false,
           answer: whatOtherThingsMatter,
         },
-      };
+      });
 
       addCompletedStep(request, FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER);
       
@@ -51,12 +55,13 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
   );
 
   router.post(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED, (request, response) => {
-    request.session.otherThings = {
-      ...request.session.otherThings,
+    const otherThings = getSessionValue<any>(request.session, 'otherThings') || {};
+    setSessionSection(request.session, 'otherThings', {
+      ...otherThings,
       whatOtherThingsMatter: {
         noDecisionRequired: true,
       },
-    };
+    });
 
     addCompletedStep(request, FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER);
 

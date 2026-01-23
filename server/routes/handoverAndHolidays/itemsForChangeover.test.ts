@@ -80,7 +80,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
     });
 
     it('should redirect to task list when the answer is entered and set itemsForChangeover', async () => {
-      const initialHandoverAndHolidays = { whereHandover: { noDecisionRequired: true } };
+      const initialHandoverAndHolidays = { whereHandover: { default: { noDecisionRequired: true } } };
       sessionMock.handoverAndHolidays = initialHandoverAndHolidays;
       const answer = 'response';
 
@@ -100,7 +100,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
 
 describe(`POST ${paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED}`, () => {
   it('should redirect to task list when the answer is entered and set itemsForChangeover', async () => {
-    const initialHandoverAndHolidays = { whereHandover: { noDecisionRequired: true } };
+    const initialHandoverAndHolidays = { whereHandover: { default: { noDecisionRequired: true } } };
     sessionMock.handoverAndHolidays = initialHandoverAndHolidays;
 
     await request(app)

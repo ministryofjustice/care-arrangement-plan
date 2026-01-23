@@ -24,6 +24,45 @@ export type PerChildAnswer<T> = {
 export type HowChangeDuringSchoolHolidaysAnswer = {
   noDecisionRequired: boolean;
   answer?: string;
+  notApplicable?: boolean; // This question does not apply to this child
+};
+
+export type GetBetweenHouseholdsAnswer = {
+  noDecisionRequired: boolean;
+  how?: getBetweenHouseholdsField;
+  describeArrangement?: string;
+  notApplicable?: boolean; // This question does not apply to this child
+};
+
+export type WhereHandoverAnswer = {
+  noDecisionRequired: boolean;
+  where?: whereHandoverField[];
+  someoneElse?: string;
+  notApplicable?: boolean; // This question does not apply to this child
+};
+
+export type WhatWillHappenAnswer = {
+  noDecisionRequired: boolean;
+  answer?: string;
+  notApplicable?: boolean; // This question does not apply to this child
+};
+
+// Design mode for per-child answers
+export type PerChildDesignMode = 'design1' | 'design2';
+
+// Design 2: Per-child plan structure - a complete plan for each child
+export type ChildPlan = {
+  childIndex: number;
+  childName: string;
+  isComplete: boolean;
+  copiedFromChildIndex?: number; // If this plan was copied from another child
+  livingAndVisiting?: CAPSession['livingAndVisiting'];
+  handoverAndHolidays?: Omit<NonNullable<CAPSession['handoverAndHolidays']>, 'howChangeDuringSchoolHolidays'> & {
+    howChangeDuringSchoolHolidays?: HowChangeDuringSchoolHolidaysAnswer;
+  };
+  specialDays?: CAPSession['specialDays'];
+  otherThings?: CAPSession['otherThings'];
+  decisionMaking?: CAPSession['decisionMaking'];
 };
 
 export type CAPSession = {
@@ -32,6 +71,12 @@ export type CAPSession = {
   namesOfChildren: string[];
   initialAdultName: string;
   secondaryAdultName: string;
+  // Design mode toggle: 'design1' = inline per-child (default), 'design2' = task list level
+  perChildDesignMode?: PerChildDesignMode;
+  // Design 2 specific: which child's plan is currently being edited
+  currentChildIndex?: number;
+  // Design 2 specific: per-child plans
+  childPlans?: ChildPlan[];
   livingAndVisiting?: {
     mostlyLive?: {
       where: whereMostlyLive;
@@ -51,16 +96,8 @@ export type CAPSession = {
     };
   };
   handoverAndHolidays?: {
-    getBetweenHouseholds?: {
-      noDecisionRequired: boolean;
-      how?: getBetweenHouseholdsField;
-      describeArrangement?: string;
-    };
-    whereHandover?: {
-      noDecisionRequired: boolean;
-      where?: whereHandoverField[];
-      someoneElse?: string;
-    };
+    getBetweenHouseholds?: PerChildAnswer<GetBetweenHouseholdsAnswer>;
+    whereHandover?: PerChildAnswer<WhereHandoverAnswer>;
     willChangeDuringSchoolHolidays?: {
       noDecisionRequired: boolean;
       willChange?: boolean;
@@ -73,10 +110,7 @@ export type CAPSession = {
     };
   };
   specialDays?: {
-    whatWillHappen?: {
-      noDecisionRequired: boolean;
-      answer?: string;
-    };
+    whatWillHappen?: PerChildAnswer<WhatWillHappenAnswer>;
   };
   otherThings?: {
     whatOtherThingsMatter?: {

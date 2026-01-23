@@ -54,15 +54,191 @@ function setupPerChildAnswers() {
       selector.appendChild(optionEl);
     });
 
-    // Update textarea IDs and names
-    const textarea = entryDiv.querySelector('textarea');
-    textarea.id = fieldName;
-    textarea.name = fieldName;
+    // Handle child selection change to update "not applicable" label
+    selector.addEventListener('change', function() {
+      const selectedChildIndex = parseInt(this.value, 10);
+      if (!isNaN(selectedChildIndex) && namesOfChildren[selectedChildIndex]) {
+        const childName = namesOfChildren[selectedChildIndex];
+        const notApplicableLabel = entryDiv.querySelector('.not-applicable-checkbox + label');
+        if (notApplicableLabel) {
+          notApplicableLabel.textContent = `This question does not apply to ${childName}`;
+        }
+      }
+    });
 
-    // Update textarea label
-    const textareaLabel = entryDiv.querySelector(`label[for="FIELD_NAME"]`);
-    if (textareaLabel) {
-      textareaLabel.setAttribute('for', fieldName);
+    // Update "not applicable" checkbox if present
+    const notApplicableCheckbox = entryDiv.querySelector('.not-applicable-checkbox');
+    if (notApplicableCheckbox) {
+      const notApplicableFieldName = `${fieldBaseName}-not-applicable-${entryIndex}`;
+      notApplicableCheckbox.id = notApplicableFieldName;
+      notApplicableCheckbox.name = notApplicableFieldName;
+
+      const notApplicableLabel = entryDiv.querySelector(`label[for="NOT_APPLICABLE_FIELD_NAME"]`);
+      if (notApplicableLabel) {
+        notApplicableLabel.setAttribute('for', notApplicableFieldName);
+        // Label text will be updated when child is selected
+      }
+
+      // Handle checkbox state change - hide/show answer field
+      const answerContainer = entryDiv.querySelector('.answer-field-container');
+      notApplicableCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+          answerContainer.style.display = 'none';
+          // Clear the answer field when marking as not applicable
+          const answerField = answerContainer.querySelector('textarea, input[type="text"]');
+          if (answerField) answerField.value = '';
+        } else {
+          answerContainer.style.display = 'block';
+        }
+      });
+    }
+
+    // Update textarea IDs and names (for simple textarea fields)
+    const textarea = entryDiv.querySelector('textarea');
+    if (textarea && !textarea.closest('.govuk-radios__conditional')) {
+      // Only update simple textareas, not those inside radio conditionals
+      textarea.id = fieldName;
+      textarea.name = fieldName;
+
+      // Update textarea label
+      const textareaLabel = entryDiv.querySelector(`label[for="FIELD_NAME"]`);
+      if (textareaLabel) {
+        textareaLabel.setAttribute('for', fieldName);
+      }
+    }
+
+    // Update radio button IDs and names (for radio fields)
+    const radioInputs = entryDiv.querySelectorAll('input[type="radio"]');
+    if (radioInputs.length > 0) {
+      radioInputs.forEach(radio => {
+        // Update the name attribute (all radios in a group share the same name)
+        const oldName = radio.getAttribute('name');
+        if (oldName === 'FIELD_NAME') {
+          radio.setAttribute('name', fieldName);
+        }
+
+        // Update the id attribute
+        const oldId = radio.getAttribute('id');
+        if (oldId && oldId.includes('FIELD_NAME')) {
+          const newId = oldId.replace(/FIELD_NAME/g, fieldName);
+          radio.setAttribute('id', newId);
+
+          // Update corresponding label's for attribute
+          const label = entryDiv.querySelector(`label[for="${oldId}"]`);
+          if (label) {
+            label.setAttribute('for', newId);
+          }
+
+          // Update data-aria-controls if present
+          const ariaControls = radio.getAttribute('data-aria-controls');
+          if (ariaControls && ariaControls.includes('FIELD_NAME')) {
+            const newAriaControls = ariaControls.replace(/FIELD_NAME/g, fieldName);
+            radio.setAttribute('data-aria-controls', newAriaControls);
+          }
+        }
+      });
+
+      // Update conditional content IDs (for radio conditional reveals)
+      const conditionals = entryDiv.querySelectorAll('.govuk-radios__conditional');
+      conditionals.forEach(conditional => {
+        const oldId = conditional.getAttribute('id');
+        if (oldId && oldId.includes('FIELD_NAME')) {
+          const newId = oldId.replace(/FIELD_NAME/g, fieldName);
+          conditional.setAttribute('id', newId);
+
+          // Update textarea inside conditional if present
+          const conditionalTextarea = conditional.querySelector('textarea');
+          if (conditionalTextarea) {
+            const describeFieldName = `${fieldBaseName}-describe-arrangement-${entryIndex}`;
+            const oldTextareaId = conditionalTextarea.getAttribute('id');
+            if (oldTextareaId === 'DESCRIBE_FIELD_NAME') {
+              conditionalTextarea.setAttribute('id', describeFieldName);
+              conditionalTextarea.setAttribute('name', describeFieldName);
+
+              // Update corresponding label
+              const textareaLabel = conditional.querySelector(`label[for="DESCRIBE_FIELD_NAME"]`);
+              if (textareaLabel) {
+                textareaLabel.setAttribute('for', describeFieldName);
+              }
+            }
+          }
+        }
+      });
+
+      // Re-initialize GOV.UK Radios component for the new radios
+      const radiosModule = entryDiv.querySelector('[data-module="govuk-radios"]');
+      if (radiosModule && window.GOVUKFrontend && window.GOVUKFrontend.Radios) {
+        new window.GOVUKFrontend.Radios(radiosModule).init();
+      }
+    }
+
+    // Update checkbox IDs and names (for checkbox fields)
+    const checkboxInputs = entryDiv.querySelectorAll('input[type="checkbox"]');
+    if (checkboxInputs.length > 0) {
+      checkboxInputs.forEach(checkbox => {
+        // Update the name attribute (all checkboxes in a group share the same name)
+        const oldName = checkbox.getAttribute('name');
+        if (oldName === 'FIELD_NAME') {
+          checkbox.setAttribute('name', fieldName);
+        }
+
+        // Update the id attribute
+        const oldId = checkbox.getAttribute('id');
+        if (oldId && oldId.includes('FIELD_NAME')) {
+          const newId = oldId.replace(/FIELD_NAME/g, fieldName);
+          checkbox.setAttribute('id', newId);
+
+          // Update corresponding label's for attribute
+          const label = entryDiv.querySelector(`label[for="${oldId}"]`);
+          if (label) {
+            label.setAttribute('for', newId);
+          }
+
+          // Update data-aria-controls if present
+          const ariaControls = checkbox.getAttribute('data-aria-controls');
+          if (ariaControls && ariaControls.includes('FIELD_NAME')) {
+            const newAriaControls = ariaControls.replace(/FIELD_NAME/g, fieldName);
+            checkbox.setAttribute('data-aria-controls', newAriaControls);
+          }
+        }
+      });
+
+      // Update conditional content IDs (for checkbox conditional reveals)
+      const checkboxConditionals = entryDiv.querySelectorAll('.govuk-checkboxes__conditional');
+      checkboxConditionals.forEach(conditional => {
+        const oldId = conditional.getAttribute('id');
+        if (oldId && oldId.includes('FIELD_NAME')) {
+          const newId = oldId.replace(/FIELD_NAME/g, fieldName);
+          conditional.setAttribute('id', newId);
+
+          // Update textarea inside conditional if present
+          const conditionalTextarea = conditional.querySelector('textarea');
+          if (conditionalTextarea) {
+            // For whereHandover, use someone-else field naming
+            const someoneElseFieldName = fieldBaseName.includes('where-handover')
+              ? `${fieldBaseName}-someone-else-${entryIndex}`
+              : `${fieldBaseName}-describe-arrangement-${entryIndex}`;
+
+            const oldTextareaId = conditionalTextarea.getAttribute('id');
+            if (oldTextareaId === 'SOMEONE_ELSE_FIELD_NAME' || oldTextareaId === 'DESCRIBE_FIELD_NAME') {
+              conditionalTextarea.setAttribute('id', someoneElseFieldName);
+              conditionalTextarea.setAttribute('name', someoneElseFieldName);
+
+              // Update corresponding label
+              const textareaLabel = conditional.querySelector(`label[for="${oldTextareaId}"]`);
+              if (textareaLabel) {
+                textareaLabel.setAttribute('for', someoneElseFieldName);
+              }
+            }
+          }
+        }
+      });
+
+      // Re-initialize GOV.UK Checkboxes component for the new checkboxes
+      const checkboxesModule = entryDiv.querySelector('[data-module="govuk-checkboxes"]');
+      if (checkboxesModule && window.GOVUKFrontend && window.GOVUKFrontend.Checkboxes) {
+        new window.GOVUKFrontend.Checkboxes(checkboxesModule).init();
+      }
     }
 
     // Add remove button handler

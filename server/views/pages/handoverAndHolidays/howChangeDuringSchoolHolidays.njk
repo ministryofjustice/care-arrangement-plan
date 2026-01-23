@@ -2,6 +2,7 @@
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -44,20 +45,23 @@
           {# Existing per-child entries will be rendered here by JavaScript on page load #}
         </div>
 
-        {% if showPerChildOption %}
-          {# Add another child button - gray/secondary style #}
-          <button
-            type="button"
-            class="govuk-button govuk-button--secondary govuk-!-margin-bottom-6"
-            id="add-another-child-btn"
-            data-number-of-children="{{ numberOfChildren }}"
-            data-child-options="{{ childOptions | dump | escape }}"
-            data-names-of-children="{{ namesOfChildren | dump | escape }}"
-            data-field-base-name="{{ formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS }}"
-          >
-            Add answer for a specific child
-          </button>
-        {% endif %}
+        {# Button group with proper spacing #}
+        <div class="govuk-button-group govuk-!-margin-top-6">
+          {% if showPerChildOption %}
+            {# Add another child button - gray/secondary style #}
+            <button
+              type="button"
+              class="govuk-button govuk-button--secondary"
+              id="add-another-child-btn"
+              data-number-of-children="{{ numberOfChildren }}"
+              data-child-options="{{ childOptions | dump | escape }}"
+              data-names-of-children="{{ namesOfChildren | dump | escape }}"
+              data-field-base-name="{{ formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS }}"
+            >
+              Add answer for a specific child
+            </button>
+          {% endif %}
+        </div>
 
         {{ govukButton({text: __('continue')}) }}
       </form>
@@ -76,7 +80,7 @@
   {% if showPerChildOption %}
     {# Template for per-child entry - hidden, cloned by JavaScript #}
     <template id="per-child-entry-template">
-      <div class="per-child-entry govuk-!-margin-top-6 govuk-!-padding-top-4" style="border-top: 1px solid #b1b4b6;">
+      <div class="per-child-entry govuk-!-margin-top-6 govuk-!-padding-top-6 govuk-!-padding-bottom-2" style="border-top: 2px solid #b1b4b6;">
         <div class="govuk-form-group">
           <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
             This answer is for:
@@ -86,13 +90,21 @@
             {# Options populated by JavaScript #}
           </select>
         </div>
-        <div class="govuk-form-group">
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input not-applicable-checkbox" id="NOT_APPLICABLE_FIELD_NAME" name="NOT_APPLICABLE_FIELD_NAME" type="checkbox" value="true">
+            <label class="govuk-label govuk-checkboxes__label" for="NOT_APPLICABLE_FIELD_NAME">
+              This question does not apply to CHILD_NAME
+            </label>
+          </div>
+        </div>
+        <div class="govuk-form-group answer-field-container">
           <label class="govuk-label govuk-visually-hidden" for="FIELD_NAME">
             Describe the arrangement for this child
           </label>
           <textarea class="govuk-textarea" id="FIELD_NAME" name="FIELD_NAME" rows="5"></textarea>
         </div>
-        <button type="button" class="govuk-button govuk-button--warning govuk-!-margin-bottom-0 remove-child-entry-btn">
+        <button type="button" class="govuk-button govuk-button--warning govuk-!-margin-bottom-4 remove-child-entry-btn">
           Remove
         </button>
       </div>

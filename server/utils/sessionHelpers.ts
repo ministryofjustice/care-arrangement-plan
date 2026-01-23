@@ -4,21 +4,27 @@ import { SessionData } from 'express-session';
 import { CAPSession } from '../@types/session';
 
 import { formatListOfStrings } from './formValueUtils';
+import { getSessionValue } from './perChildSession';
 import { validateRedirectUrl } from './redirectValidator';
 
 export const formattedChildrenNames = (request: Request) =>
   formatListOfStrings(request.session.namesOfChildren, request);
 
-export const parentMostlyLivedWith = (session: Partial<CAPSession>) =>
-  session.livingAndVisiting.mostlyLive.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;
+export const parentMostlyLivedWith = (session: Partial<CAPSession>) => {
+  const livingAndVisiting = getSessionValue<any>(session, 'livingAndVisiting');
+  return livingAndVisiting?.mostlyLive?.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;
+};
 
-export const parentNotMostlyLivedWith = (session: Partial<CAPSession>) =>
-  session.livingAndVisiting.mostlyLive.where === 'withInitial' ? session.secondaryAdultName : session.initialAdultName;
+export const parentNotMostlyLivedWith = (session: Partial<CAPSession>) => {
+  const livingAndVisiting = getSessionValue<any>(session, 'livingAndVisiting');
+  return livingAndVisiting?.mostlyLive?.where === 'withInitial' ? session.secondaryAdultName : session.initialAdultName;
+};
 
 export const mostlyLiveComplete = (session: Partial<CAPSession>) => {
-  if (!session.livingAndVisiting?.mostlyLive) return false;
+  const livingAndVisiting = getSessionValue<any>(session, 'livingAndVisiting');
+  if (!livingAndVisiting?.mostlyLive) return false;
 
-  const { mostlyLive, overnightVisits, daytimeVisits, whichSchedule } = session.livingAndVisiting;
+  const { mostlyLive, overnightVisits, daytimeVisits, whichSchedule } = livingAndVisiting;
 
   if (mostlyLive.where === 'other') {
     return true;
@@ -34,12 +40,18 @@ export const mostlyLiveComplete = (session: Partial<CAPSession>) => {
   return overnightComplete && daytimeVisitsComplete;
 };
 
-export const getBetweenHouseholdsComplete = (session: Partial<CAPSession>) =>
-  !!session.handoverAndHolidays?.getBetweenHouseholds;
+export const getBetweenHouseholdsComplete = (session: Partial<CAPSession>) => {
+  const handoverAndHolidays = getSessionValue<any>(session, 'handoverAndHolidays');
+  return !!handoverAndHolidays?.getBetweenHouseholds;
+};
 
-export const whereHandoverComplete = (session: Partial<CAPSession>) => !!session.handoverAndHolidays?.whereHandover;
+export const whereHandoverComplete = (session: Partial<CAPSession>) => {
+  const handoverAndHolidays = getSessionValue<any>(session, 'handoverAndHolidays');
+  return !!handoverAndHolidays?.whereHandover;
+};
 
-export const willChangeDuringSchoolHolidaysComplete = ({ handoverAndHolidays }: Partial<CAPSession>) => {
+export const willChangeDuringSchoolHolidaysComplete = (session: Partial<CAPSession>) => {
+  const handoverAndHolidays = getSessionValue<any>(session, 'handoverAndHolidays');
   if (!handoverAndHolidays?.willChangeDuringSchoolHolidays) return false;
 
   return !(
@@ -47,21 +59,35 @@ export const willChangeDuringSchoolHolidaysComplete = ({ handoverAndHolidays }: 
   );
 };
 
-export const itemsForChangeoverComplete = (session: Partial<CAPSession>) =>
-  !!session.handoverAndHolidays?.itemsForChangeover;
+export const itemsForChangeoverComplete = (session: Partial<CAPSession>) => {
+  const handoverAndHolidays = getSessionValue<any>(session, 'handoverAndHolidays');
+  return !!handoverAndHolidays?.itemsForChangeover;
+};
 
-export const whatWillHappenComplete = (session: Partial<CAPSession>) => !!session.specialDays?.whatWillHappen;
+export const whatWillHappenComplete = (session: Partial<CAPSession>) => {
+  const specialDays = getSessionValue<any>(session, 'specialDays');
+  return !!specialDays?.whatWillHappen;
+};
 
-export const whatOtherThingsMatterComplete = (session: Partial<CAPSession>) =>
-  !!session.otherThings?.whatOtherThingsMatter;
+export const whatOtherThingsMatterComplete = (session: Partial<CAPSession>) => {
+  const otherThings = getSessionValue<any>(session, 'otherThings');
+  return !!otherThings?.whatOtherThingsMatter;
+};
 
-export const planLastMinuteChangesComplete = (session: Partial<CAPSession>) =>
-  !!session.decisionMaking?.planLastMinuteChanges;
+export const planLastMinuteChangesComplete = (session: Partial<CAPSession>) => {
+  const decisionMaking = getSessionValue<any>(session, 'decisionMaking');
+  return !!decisionMaking?.planLastMinuteChanges;
+};
 
-export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
-  !!session.decisionMaking?.planLongTermNotice;
+export const planLongTermNoticeComplete = (session: Partial<CAPSession>) => {
+  const decisionMaking = getSessionValue<any>(session, 'decisionMaking');
+  return !!decisionMaking?.planLongTermNotice;
+};
 
-export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;
+export const planReviewComplete = (session: Partial<CAPSession>) => {
+  const decisionMaking = getSessionValue<any>(session, 'decisionMaking');
+  return !!decisionMaking?.planReview;
+};
 
 export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => {
   if (!session.previousPage) {

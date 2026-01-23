@@ -6,11 +6,13 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
+import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { getBackUrl } from '../../utils/sessionHelpers';
 
 const planLongTermNoticeRoutes = (router: Router) => {
   router.get(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_LONG_TERM_NOTICE), (request, response) => {
-    const planLongTermNotice = request.session.decisionMaking?.planLongTermNotice;
+    const decisionMaking = getSessionValue<any>(request.session, 'decisionMaking');
+    const planLongTermNotice = decisionMaking?.planLongTermNotice;
 
     const formValues = {
       [formFields.PLAN_LONG_TERM_NOTICE]:
@@ -55,14 +57,15 @@ const planLongTermNoticeRoutes = (router: Router) => {
         [formFields.PLAN_LONG_TERM_NOTICE_DESCRIBE_ARRANGEMENT]: describeArrangement,
       } = formData;
 
-      request.session.decisionMaking = {
-        ...request.session.decisionMaking,
+      const decisionMaking = getSessionValue<any>(request.session, 'decisionMaking') || {};
+      setSessionSection(request.session, 'decisionMaking', {
+        ...decisionMaking,
         planLongTermNotice: {
           noDecisionRequired: false,
           weeks: Number.parseInt(weeks) || undefined,
           otherAnswer: Number.parseInt(weeks) ? undefined : describeArrangement,
         },
-      };
+      });
 
       addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
       return response.redirect(paths.DECISION_MAKING_PLAN_REVIEW);
@@ -70,12 +73,13 @@ const planLongTermNoticeRoutes = (router: Router) => {
   );
 
   router.post(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE_CHANGES_NOT_REQUIRED, (request, response) => {
-    request.session.decisionMaking = {
-      ...request.session.decisionMaking,
+    const decisionMaking = getSessionValue<any>(request.session, 'decisionMaking') || {};
+    setSessionSection(request.session, 'decisionMaking', {
+      ...decisionMaking,
       planLongTermNotice: {
         noDecisionRequired: true,
       },
-    };
+    });
 
     addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
     return response.redirect(paths.DECISION_MAKING_PLAN_REVIEW);

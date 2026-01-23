@@ -21,6 +21,7 @@ import handoverAndHolidaysRoutes from './handoverAndHolidays';
 import livingAndVisitingRoutes from './livingAndVisiting';
 import numberOfChildrenRoutes from './numberOfChildren';
 import otherThingsRoutes from './otherThings';
+import perChildDesignRoutes from './perChildDesign';
 import safetyCheckRoutes from './safetyCheck';
 import sharePlanRoutes from './sharePlan';
 import specialDaysRoutes from './specialDays';
@@ -57,6 +58,7 @@ const routes = (): Router => {
   decisionMakingRoutes(router);
   downloadRoutes(router);
   accessibilityStatementRoutes(router);
+  perChildDesignRoutes(router);
 
   return router;
 };

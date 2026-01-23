@@ -12,6 +12,8 @@ const app = testAppSetup();
 const session: Partial<SessionData> = {
   initialAdultName: 'Sarah',
   secondaryAdultName: 'Steph',
+  numberOfChildren: 1,
+  namesOfChildren: ['Child 1'],
 };
 
 beforeEach(() => {
@@ -43,13 +45,13 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
         {
           location: 'body',
           msg: primaryError,
-          path: formFields.WHERE_HANDOVER,
+          path: `${formFields.WHERE_HANDOVER}-0`,
           type: 'field',
         },
         {
           location: 'body',
           msg: secondaryError,
-          path: formFields.WHERE_HANDOVER_SOMEONE_ELSE,
+          path: `${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`,
           type: 'field',
         },
       ]);
@@ -61,14 +63,14 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
-        expect.stringContaining(`${formFields.WHERE_HANDOVER}-error`),
+        expect.stringContaining(`${formFields.WHERE_HANDOVER}-0-error`),
       );
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-error`)).toHaveTextContent(primaryError);
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}`)).toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-0-error`)).toHaveTextContent(primaryError);
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`)).toHaveAttribute(
         'aria-describedby',
-        `${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-error`,
+        `${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0-error`,
       );
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-error`)).toHaveTextContent(
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0-error`)).toHaveTextContent(
         secondaryError,
       );
     });
@@ -77,35 +79,39 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       const someoneElse = 'someone else';
       Object.assign(flashFormValues, [
         {
-          [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: someoneElse,
-          [formFields.WHERE_HANDOVER]: ['someoneElse'],
+          [`${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`]: someoneElse,
+          [`${formFields.WHERE_HANDOVER}-0`]: ['someoneElse'],
         },
       ]);
 
       sessionMock.handoverAndHolidays = {
-        whereHandover: { where: ['neutral', 'school'], someoneElse: 'wrong someone else', noDecisionRequired: false },
+        whereHandover: {
+          default: { where: ['neutral', 'school'], someoneElse: 'wrong someone else', noDecisionRequired: false },
+        },
       };
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)).text);
 
       expect(dom.window.document.querySelectorAll(':checked')).toHaveLength(1);
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-5`)).toBeChecked();
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}`)).toHaveValue(someoneElse);
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-0-5`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`)).toHaveValue(someoneElse);
     });
 
     it('should render existing values correctly', async () => {
       const someoneElse = 'someone else';
 
       sessionMock.handoverAndHolidays = {
-        whereHandover: { where: ['neutral', 'school'], someoneElse, noDecisionRequired: false },
+        whereHandover: {
+          default: { where: ['neutral', 'school'], someoneElse, noDecisionRequired: false },
+        },
       };
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)).text);
 
       expect(dom.window.document.querySelectorAll(':checked')).toHaveLength(2);
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}`)).toBeChecked();
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-4`)).toBeChecked();
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}`)).toHaveValue(someoneElse);
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-0`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER}-0-4`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`)).toHaveValue(someoneElse);
     });
   });
 
@@ -120,7 +126,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
         {
           location: 'body',
           msg: 'Select where handover takes place',
-          path: formFields.WHERE_HANDOVER,
+          path: `${formFields.WHERE_HANDOVER}-0`,
           type: 'field',
         },
       ]);
@@ -129,7 +135,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
     it('should reload page and set flash when the checkboxes is someone else, but the someone else is not described', async () => {
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)
-        .send({ [formFields.WHERE_HANDOVER]: 'someoneElse' })
+        .send({ [`${formFields.WHERE_HANDOVER}-0`]: 'someoneElse' })
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
 
@@ -137,7 +143,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
         {
           location: 'body',
           msg: 'Describe who will manage handover',
-          path: formFields.WHERE_HANDOVER_SOMEONE_ELSE,
+          path: `${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`,
           type: 'field',
           value: '',
         },
@@ -147,7 +153,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
     it('should reload page and set flash when the checkboxes is someone else and a place', async () => {
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)
-        .send({ [formFields.WHERE_HANDOVER]: ['someoneElse', 'neutral'] })
+        .send({ [`${formFields.WHERE_HANDOVER}-0`]: ['someoneElse', 'neutral'] })
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
 
@@ -155,7 +161,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
         {
           location: 'body',
           msg: 'Describe what other arrangement you are proposing',
-          path: formFields.WHERE_HANDOVER,
+          path: `${formFields.WHERE_HANDOVER}-0`,
           type: 'field',
           value: ['someoneElse', 'neutral'],
         },
@@ -165,22 +171,28 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
     it('should redirect to will change during school holidays page when the answer is complete', async () => {
       const where = 'someoneElse';
       const someoneElse = 'someone else';
-      const initialHandoverAndHolidays = { getBetweenHouseholds: { noDecisionRequired: true } };
+      const initialHandoverAndHolidays = {
+        getBetweenHouseholds: {
+          default: { noDecisionRequired: true },
+        },
+      };
 
       sessionMock.handoverAndHolidays = initialHandoverAndHolidays;
 
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)
         .send({
-          [formFields.WHERE_HANDOVER]: 'someoneElse',
-          [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: someoneElse,
+          [`${formFields.WHERE_HANDOVER}-0`]: 'someoneElse',
+          [`${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`]: someoneElse,
         })
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS);
 
       expect(sessionMock.handoverAndHolidays).toEqual({
         ...initialHandoverAndHolidays,
-        whereHandover: { noDecisionRequired: false, where: [where], someoneElse },
+        whereHandover: {
+          default: { noDecisionRequired: false, where: [where], someoneElse },
+        },
       });
     });
   });
@@ -188,7 +200,11 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
 
 describe(`POST ${paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED}`, () => {
   it('should redirect to will change during school holidays page when the answer is entered and set whereHandover', async () => {
-    const initialHandoverAndHolidays = { getBetweenHouseholds: { noDecisionRequired: true } };
+    const initialHandoverAndHolidays = {
+      getBetweenHouseholds: {
+        default: { noDecisionRequired: true },
+      },
+    };
 
     sessionMock.handoverAndHolidays = initialHandoverAndHolidays;
 
@@ -199,7 +215,9 @@ describe(`POST ${paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED}`, () => {
 
     expect(sessionMock.handoverAndHolidays).toEqual({
       ...initialHandoverAndHolidays,
-      whereHandover: { noDecisionRequired: true },
+      whereHandover: {
+        default: { noDecisionRequired: true },
+      },
     });
   });
 });

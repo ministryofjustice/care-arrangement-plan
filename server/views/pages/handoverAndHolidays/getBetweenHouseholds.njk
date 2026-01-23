@@ -2,58 +2,98 @@
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS }}" method="post" novalidate>
+      <form
+        class="form"
+        action="{{ paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS }}"
+        method="post"
+        novalidate
+        id="per-child-form"
+      >
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
 
-        {% set describeArrangementHtml %}
+        <h1 class="govuk-heading-l">{{ title }}</h1>
+
+        {# Default/All children answer #}
+        <div class="per-child-entry" data-entry-index="0">
+          {% if showPerChildOption %}
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2">For all children:</p>
+          {% endif %}
+
+          {% set describeArrangementHtml0 %}
+            {{
+              govukTextarea({
+                name: formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT + "-0",
+                label: {
+                  text: __('describeArrangement')
+                },
+                value: formValues[formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT + "-0"],
+                errorMessage: errors | findError(formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT + "-0")
+              })
+            }}
+          {% endset -%}
+
           {{
-            govukTextarea({
-              name: formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT,
-              label: {
-                text: __('describeArrangement')
+            govukRadios({
+              name: formFields.GET_BETWEEN_HOUSEHOLDS + "-0",
+              fieldset: {
+                legend: {
+                  text: title if not showPerChildOption else "How will the children get between the two households?",
+                  classes: "govuk-visually-hidden" if showPerChildOption else "govuk-fieldset__legend--l",
+                  isPageHeading: not showPerChildOption
+                }
               },
-              value: formValues[formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT],
-              errorMessage: errors | findError(formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT)
+              items: [
+                {
+                  value: "initialCollects",
+                  text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.initialAdultName})
+                },
+                {
+                  value: "secondaryCollects",
+                  text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.secondaryAdultName})
+                },
+                {
+                  value: "other",
+                  text: __('anotherArrangement'),
+                  conditional: {
+                    html: describeArrangementHtml0
+                  }
+                }
+              ],
+              value: formValues[formFields.GET_BETWEEN_HOUSEHOLDS + "-0"],
+              errorMessage: errors | findError(formFields.GET_BETWEEN_HOUSEHOLDS + "-0")
             })
           }}
-        {% endset -%}
+        </div>
 
-        {{
-          govukRadios({
-            name: formFields.GET_BETWEEN_HOUSEHOLDS,
-            fieldset: {
-              legend: {
-                text: title,
-                isPageHeading: true,
-                classes: "govuk-fieldset__legend--l"
-              }
-            },
-            items: [
-              {
-                value: "initialCollects",
-                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.initialAdultName})
-              },
-              {
-                value: "secondaryCollects",
-                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.secondaryAdultName})
-              },
-              {
-                value: "other",
-                text: __('anotherArrangement'),
-                conditional: {
-                  html: describeArrangementHtml
-                }
-              }
-            ],
-            value: formValues[formFields.GET_BETWEEN_HOUSEHOLDS],
-            errorMessage: errors | findError(formFields.GET_BETWEEN_HOUSEHOLDS)
-          })
-        }}
+        {# Container for additional per-child entries #}
+        <div id="additional-children-container">
+          {# Existing per-child entries will be rendered here by JavaScript on page load #}
+        </div>
+
+        {# Button group with proper spacing #}
+        <div class="govuk-button-group govuk-!-margin-top-6">
+          {% if showPerChildOption %}
+            {# Add another child button - gray/secondary style #}
+            <button
+              type="button"
+              class="govuk-button govuk-button--secondary"
+              id="add-another-child-btn"
+              data-number-of-children="{{ numberOfChildren }}"
+              data-child-options="{{ childOptions | dump | escape }}"
+              data-names-of-children="{{ namesOfChildren | dump | escape }}"
+              data-field-base-name="{{ formFields.GET_BETWEEN_HOUSEHOLDS }}"
+            >
+              Add answer for a specific child
+            </button>
+          {% endif %}
+        </div>
+
         {{ govukButton({text: __('continue')}) }}
       </form>
       <form
@@ -67,4 +107,59 @@
       </form>
     </div>
   </div>
+
+  {% if showPerChildOption %}
+    {# Template for per-child entry - hidden, cloned by JavaScript #}
+    <template id="per-child-entry-template">
+      <div class="per-child-entry govuk-!-margin-top-6 govuk-!-padding-top-6 govuk-!-padding-bottom-2" style="border-top: 2px solid #b1b4b6;">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
+            This answer is for:
+          </label>
+          <select class="govuk-select" id="child-selector-ENTRY_INDEX" name="child-selector-ENTRY_INDEX">
+            <option value="">Select a child</option>
+            {# Options populated by JavaScript #}
+          </select>
+        </div>
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-visually-hidden">
+              How will this child get between the two households?
+            </legend>
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="FIELD_NAME-initialCollects" name="FIELD_NAME" type="radio" value="initialCollects" data-aria-controls="conditional-FIELD_NAME-other">
+                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-initialCollects">
+                  {{ __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.initialAdultName}) }}
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="FIELD_NAME-secondaryCollects" name="FIELD_NAME" type="radio" value="secondaryCollects" data-aria-controls="conditional-FIELD_NAME-other">
+                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-secondaryCollects">
+                  {{ __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.secondaryAdultName}) }}
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="FIELD_NAME-other" name="FIELD_NAME" type="radio" value="other" data-aria-controls="conditional-FIELD_NAME-other">
+                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-other">
+                  {{ __('anotherArrangement') }}
+                </label>
+              </div>
+              <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-FIELD_NAME-other">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="DESCRIBE_FIELD_NAME">
+                    {{ __('describeArrangement') }}
+                  </label>
+                  <textarea class="govuk-textarea" id="DESCRIBE_FIELD_NAME" name="DESCRIBE_FIELD_NAME" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <button type="button" class="govuk-button govuk-button--warning govuk-!-margin-bottom-4 remove-child-entry-btn">
+          Remove
+        </button>
+      </div>
+    </template>
+  {% endif %}
 {% endblock %}

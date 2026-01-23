@@ -36,9 +36,12 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
       if (existingAnswers.byChild) {
         Object.entries(existingAnswers.byChild).forEach(([childIndex, answer]) => {
           const idx = parseInt(childIndex, 10);
-          if (answer.answer) {
+          if (answer.answer || answer.notApplicable) {
             childrenWithAnswers.push(idx);
-            formValues[getFieldName(idx)] = answer.answer;
+            if (answer.answer) {
+              formValues[getFieldName(idx)] = answer.answer;
+            }
+            // Note: notApplicable checkbox state will be handled by the template/JavaScript
           }
         });
       }
@@ -123,16 +126,19 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
           const entryIndex = parseInt(key.replace('child-selector-', ''), 10);
           const childIndex = parseInt(request.body[key], 10);
           const answerFieldName = getFieldName(entryIndex);
+          const notApplicableFieldName = `${formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS}-not-applicable-${entryIndex}`;
           const answer = request.body[answerFieldName]?.trim() || '';
-          return { childIndex, answer, entryIndex };
+          const notApplicable = request.body[notApplicableFieldName] === 'true';
+          return { childIndex, answer, entryIndex, notApplicable };
         })
-        .filter(entry => !isNaN(entry.childIndex) && entry.answer);
+        .filter(entry => !isNaN(entry.childIndex) && (entry.answer || entry.notApplicable));
 
       // Store per-child answers
       additionalEntries.forEach(entry => {
         byChild[entry.childIndex] = {
           noDecisionRequired: false,
-          answer: entry.answer,
+          answer: entry.notApplicable ? undefined : entry.answer,
+          notApplicable: entry.notApplicable,
         };
       });
 

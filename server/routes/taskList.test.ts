@@ -18,10 +18,14 @@ const session: Partial<SessionData> = {
   },
   handoverAndHolidays: {
     getBetweenHouseholds: {
-      noDecisionRequired: true,
+      default: {
+        noDecisionRequired: true,
+      },
     },
     whereHandover: {
-      noDecisionRequired: true,
+      default: {
+        noDecisionRequired: true,
+      },
     },
     willChangeDuringSchoolHolidays: {
       noDecisionRequired: true,
@@ -32,7 +36,9 @@ const session: Partial<SessionData> = {
   },
   specialDays: {
     whatWillHappen: {
-      noDecisionRequired: true,
+      default: {
+        noDecisionRequired: true,
+      },
     },
   },
   otherThings: {

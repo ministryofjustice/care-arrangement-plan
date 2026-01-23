@@ -52,6 +52,10 @@ enum paths {
   DOWNLOAD_HTML = '/download-html',
   PRINT_PDF = '/print-pdf',
   DOWNLOAD_PAPER_FORM = '/download-paper-form',
+  // Design toggle and Design 2 routes
+  TOGGLE_DESIGN_MODE = '/toggle-design-mode',
+  SELECT_CHILD = '/select-child',
+  COPY_CHILD_PLAN = '/copy-child-plan',
 }
 
 export default paths;

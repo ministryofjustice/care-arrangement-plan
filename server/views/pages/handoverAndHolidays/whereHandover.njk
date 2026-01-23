@@ -2,80 +2,197 @@
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER }}" method="post" novalidate>
+      <form
+        class="form"
+        action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER }}"
+        method="post"
+        novalidate
+        id="per-child-form"
+      >
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        {% set hintHtml %}
-          <p>{{ __('handoverAndHolidays.whereHandover.explainer') }}</p>
-          <p>{{ __('selectAllThatApply') }}</p>
-        {% endset -%}
 
-        {% set anotherHtml %}
+        <h1 class="govuk-heading-l">{{ title }}</h1>
+
+        {# Default/All children answer #}
+        <div class="per-child-entry" data-entry-index="0">
+          {% if showPerChildOption %}
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2">For all children:</p>
+          {% endif %}
+
+          {% set hintHtml0 %}
+            <p>{{ __('handoverAndHolidays.whereHandover.explainer') }}</p>
+            <p>{{ __('selectAllThatApply') }}</p>
+          {% endset -%}
+
+          {% set anotherHtml0 %}
+            {{
+              govukTextarea({
+                name: formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0",
+                label: {
+                  text: __('handoverAndHolidays.whereHandover.someoneElseName')
+                },
+                value: formValues[formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0"],
+                errorMessage: errors | findError(formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0")
+              })
+            }}
+          {% endset -%}
+
           {{
-            govukTextarea({
-              name: formFields.WHERE_HANDOVER_SOMEONE_ELSE,
-              label: {
-                text: __('handoverAndHolidays.whereHandover.someoneElseName')
+            govukCheckboxes({
+              name: formFields.WHERE_HANDOVER + "-0",
+              fieldset: {
+                legend: {
+                  text: title if not showPerChildOption else "Where will the handover take place?",
+                  classes: "govuk-visually-hidden" if showPerChildOption else "govuk-fieldset__legend--l",
+                  isPageHeading: not showPerChildOption
+                }
               },
-              value: formValues[formFields.WHERE_HANDOVER_SOMEONE_ELSE],
-              errorMessage: errors | findError(formFields.WHERE_HANDOVER_SOMEONE_ELSE)
+              hint: {
+                html: hintHtml0
+              },
+              items: [
+                {
+                  value: "neutral",
+                  text: __('handoverAndHolidays.whereHandover.neutralLocation')
+                },
+                {
+                  value: "initialHome",
+                  text: __('handoverAndHolidays.whereHandover.atHome', {adult: values.initialAdultName})
+                },
+                {
+                  value: "secondaryHome",
+                  text: __('handoverAndHolidays.whereHandover.atHome', {adult: values.secondaryAdultName})
+                },
+                {
+                  value: "school",
+                  text: __('handoverAndHolidays.whereHandover.atSchool')
+                },
+                {
+                  value: "someoneElse",
+                  text: __('handoverAndHolidays.whereHandover.someoneElse'),
+                  behaviour: "exclusive",
+                  conditional: {
+                    html: anotherHtml0
+                  }
+                }
+              ],
+              values: formValues[formFields.WHERE_HANDOVER + "-0"],
+              errorMessage: errors | findError(formFields.WHERE_HANDOVER + "-0")
             })
           }}
-        {% endset -%}
+        </div>
 
-        {{
-          govukCheckboxes({
-            name: formFields.WHERE_HANDOVER,
-            fieldset: {
-              legend: {
-                text: title,
-                isPageHeading: true,
-                classes: "govuk-fieldset__legend--l"
-              }
-            },
-            hint: {
-              html: hintHtml
-            },
-            items: [
-              {
-                value: "neutral",
-                text: __('handoverAndHolidays.whereHandover.neutralLocation')
-              },
-              {
-                value: "initialHome",
-                text: __('handoverAndHolidays.whereHandover.atHome', {adult: values.initialAdultName})
-              },
-              {
-                value: "secondaryHome",
-                text: __('handoverAndHolidays.whereHandover.atHome', {adult: values.secondaryAdultName})
-              },
-              {
-                value: "school",
-                text: __('handoverAndHolidays.whereHandover.atSchool')
-              },
-              {
-                value: "someoneElse",
-                text: __('handoverAndHolidays.whereHandover.someoneElse'),
-                behaviour: "exclusive",
-                conditional: {
-                  html: anotherHtml
-                }
-              }
-            ],
-            values: formValues[formFields.WHERE_HANDOVER],
-            errorMessage: errors | findError(formFields.WHERE_HANDOVER)
-          })
-        }}
+        {# Container for additional per-child entries #}
+        <div id="additional-children-container">
+          {# Existing per-child entries will be rendered here by JavaScript on page load #}
+        </div>
+
+        {# Button group with proper spacing #}
+        <div class="govuk-button-group govuk-!-margin-top-6">
+          {% if showPerChildOption %}
+            {# Add another child button - gray/secondary style #}
+            <button
+              type="button"
+              class="govuk-button govuk-button--secondary"
+              id="add-another-child-btn"
+              data-number-of-children="{{ numberOfChildren }}"
+              data-child-options="{{ childOptions | dump | escape }}"
+              data-names-of-children="{{ namesOfChildren | dump | escape }}"
+              data-field-base-name="{{ formFields.WHERE_HANDOVER }}"
+            >
+              Add answer for a specific child
+            </button>
+          {% endif %}
+        </div>
+
         {{ govukButton({text: __('continue')}) }}
       </form>
-      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED }}" method="post" novalidate>
+      <form
+        class="form"
+        action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED }}"
+        method="post"
+        novalidate
+      >
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideHandoverLocation') }}</button>
       </form>
     </div>
   </div>
+
+  {% if showPerChildOption %}
+    {# Template for per-child entry - hidden, cloned by JavaScript #}
+    <template id="per-child-entry-template">
+      <div class="per-child-entry govuk-!-margin-top-6 govuk-!-padding-top-6 govuk-!-padding-bottom-2" style="border-top: 2px solid #b1b4b6;">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
+            This answer is for:
+          </label>
+          <select class="govuk-select" id="child-selector-ENTRY_INDEX" name="child-selector-ENTRY_INDEX">
+            <option value="">Select a child</option>
+            {# Options populated by JavaScript #}
+          </select>
+        </div>
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-visually-hidden">
+              Where will the handover take place?
+            </legend>
+            <div class="govuk-hint">
+              <p>{{ __('handoverAndHolidays.whereHandover.explainer') }}</p>
+              <p>{{ __('selectAllThatApply') }}</p>
+            </div>
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="FIELD_NAME-neutral" name="FIELD_NAME" type="checkbox" value="neutral">
+                <label class="govuk-label govuk-checkboxes__label" for="FIELD_NAME-neutral">
+                  {{ __('handoverAndHolidays.whereHandover.neutralLocation') }}
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="FIELD_NAME-initialHome" name="FIELD_NAME" type="checkbox" value="initialHome">
+                <label class="govuk-label govuk-checkboxes__label" for="FIELD_NAME-initialHome">
+                  {{ __('handoverAndHolidays.whereHandover.atHome', {adult: values.initialAdultName}) }}
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="FIELD_NAME-secondaryHome" name="FIELD_NAME" type="checkbox" value="secondaryHome">
+                <label class="govuk-label govuk-checkboxes__label" for="FIELD_NAME-secondaryHome">
+                  {{ __('handoverAndHolidays.whereHandover.atHome', {adult: values.secondaryAdultName}) }}
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="FIELD_NAME-school" name="FIELD_NAME" type="checkbox" value="school">
+                <label class="govuk-label govuk-checkboxes__label" for="FIELD_NAME-school">
+                  {{ __('handoverAndHolidays.whereHandover.atSchool') }}
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="FIELD_NAME-someoneElse" name="FIELD_NAME" type="checkbox" value="someoneElse" data-aria-controls="conditional-FIELD_NAME-someoneElse" data-behaviour="exclusive">
+                <label class="govuk-label govuk-checkboxes__label" for="FIELD_NAME-someoneElse">
+                  {{ __('handoverAndHolidays.whereHandover.someoneElse') }}
+                </label>
+              </div>
+              <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-FIELD_NAME-someoneElse">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="SOMEONE_ELSE_FIELD_NAME">
+                    {{ __('handoverAndHolidays.whereHandover.someoneElseName') }}
+                  </label>
+                  <textarea class="govuk-textarea" id="SOMEONE_ELSE_FIELD_NAME" name="SOMEONE_ELSE_FIELD_NAME" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <button type="button" class="govuk-button govuk-button--warning govuk-!-margin-bottom-4 remove-child-entry-btn">
+          Remove
+        </button>
+      </div>
+    </template>
+  {% endif %}
 {% endblock %}
