@@ -148,61 +148,120 @@ export const whichDaysDaytimeVisits = (request: Request) => {
   });
 };
 
-export const getBetweenHouseholds = (request: Request) => {
-  const { initialAdultName, secondaryAdultName } = request.session;
+export const getBetweenHouseholds = (request: Request): string | PerChildFormattedAnswer | undefined => {
+  const { initialAdultName, secondaryAdultName, namesOfChildren } = request.session;
   const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays');
   if (!handoverAndHolidays?.getBetweenHouseholds) return undefined;
 
-  // Handle PerChildAnswer structure - use default value
-  const getBetweenHouseholdsData = handoverAndHolidays.getBetweenHouseholds.default || handoverAndHolidays.getBetweenHouseholds;
+  const data = handoverAndHolidays.getBetweenHouseholds;
 
-  if (getBetweenHouseholdsData.noDecisionRequired) {
-    return request.__('doNotNeedToDecide');
-  }
-  switch (getBetweenHouseholdsData.how) {
-    case 'initialCollects':
-      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: initialAdultName });
-    case 'secondaryCollects':
-      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: secondaryAdultName });
-    case 'other':
-      return getBetweenHouseholdsData.describeArrangement;
-    default:
-      return undefined;
-  }
-};
-
-export const whereHandover = (request: Request) => {
-  const { initialAdultName, secondaryAdultName } = request.session;
-  const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays');
-  if (!handoverAndHolidays?.whereHandover) return undefined;
-
-  // Handle PerChildAnswer structure - use default value
-  const whereHandoverData = handoverAndHolidays.whereHandover.default || handoverAndHolidays.whereHandover;
-
-  if (whereHandoverData.noDecisionRequired) {
-    return request.__('doNotNeedToDecide');
-  }
-
-  if (!whereHandoverData.where) return undefined;
-
-  const getAnswerForWhereHandoverWhere = (where: whereHandoverField) => {
-    switch (where) {
-      case 'neutral':
-        return request.__('handoverAndHolidays.whereHandover.neutralLocation');
-      case 'initialHome':
-        return request.__('handoverAndHolidays.whereHandover.atHome', { adult: initialAdultName });
-      case 'secondaryHome':
-        return request.__('handoverAndHolidays.whereHandover.atHome', { adult: secondaryAdultName });
-      case 'school':
-        return request.__('handoverAndHolidays.whereHandover.atSchool');
-      case 'someoneElse':
-        return whereHandoverData.someoneElse;
+  // Helper to format a single answer
+  const formatAnswer = (answer: any): string | undefined => {
+    if (!answer) return undefined;
+    if (answer.noDecisionRequired) {
+      return request.__('doNotNeedToDecide');
+    }
+    switch (answer.how) {
+      case 'initialCollects':
+        return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: initialAdultName });
+      case 'secondaryCollects':
+        return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: secondaryAdultName });
+      case 'other':
+        return answer.describeArrangement;
       default:
         return undefined;
     }
   };
 
-  return whereHandoverData.where.map(getAnswerForWhereHandoverWhere).join(', ');
+  // Handle legacy format (direct answer without default wrapper)
+  if (data.how !== undefined && data.default === undefined) {
+    return formatAnswer(data);
+  }
+
+  // Handle new PerChildAnswer format
+  const defaultAnswer = formatAnswer(data.default) || '';
+
+  // If there are no per-child overrides, return just the default answer
+  if (!data.byChild || Object.keys(data.byChild).length === 0) {
+    return defaultAnswer;
+  }
+
+  // Return structured data with per-child answers
+  const perChildAnswers = Object.entries(data.byChild)
+    .filter(([_, answer]: [string, any]) => answer.how || answer.noDecisionRequired)
+    .map(([childIndex, answer]: [string, any]) => ({
+      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
+      answer: formatAnswer(answer) || '',
+    }))
+    .filter(item => item.answer);
+
+  return {
+    defaultAnswer,
+    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
+  };
+};
+
+export const whereHandover = (request: Request): string | PerChildFormattedAnswer | undefined => {
+  const { initialAdultName, secondaryAdultName, namesOfChildren } = request.session;
+  const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays');
+  if (!handoverAndHolidays?.whereHandover) return undefined;
+
+  const data = handoverAndHolidays.whereHandover;
+
+  // Helper to format a single answer
+  const formatAnswer = (answer: any): string | undefined => {
+    if (!answer) return undefined;
+    if (answer.noDecisionRequired) {
+      return request.__('doNotNeedToDecide');
+    }
+    if (!answer.where) return undefined;
+
+    const getAnswerForWhereHandoverWhere = (where: whereHandoverField) => {
+      switch (where) {
+        case 'neutral':
+          return request.__('handoverAndHolidays.whereHandover.neutralLocation');
+        case 'initialHome':
+          return request.__('handoverAndHolidays.whereHandover.atHome', { adult: initialAdultName });
+        case 'secondaryHome':
+          return request.__('handoverAndHolidays.whereHandover.atHome', { adult: secondaryAdultName });
+        case 'school':
+          return request.__('handoverAndHolidays.whereHandover.atSchool');
+        case 'someoneElse':
+          return answer.someoneElse;
+        default:
+          return undefined;
+      }
+    };
+
+    return answer.where.map(getAnswerForWhereHandoverWhere).join(', ');
+  };
+
+  // Handle legacy format (direct answer without default wrapper)
+  if (data.where !== undefined && data.default === undefined) {
+    return formatAnswer(data);
+  }
+
+  // Handle new PerChildAnswer format
+  const defaultAnswer = formatAnswer(data.default) || '';
+
+  // If there are no per-child overrides, return just the default answer
+  if (!data.byChild || Object.keys(data.byChild).length === 0) {
+    return defaultAnswer;
+  }
+
+  // Return structured data with per-child answers
+  const perChildAnswers = Object.entries(data.byChild)
+    .filter(([_, answer]: [string, any]) => answer.where || answer.noDecisionRequired)
+    .map(([childIndex, answer]: [string, any]) => ({
+      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
+      answer: formatAnswer(answer) || '',
+    }))
+    .filter(item => item.answer);
+
+  return {
+    defaultAnswer,
+    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
+  };
 };
 
 export const willChangeDuringSchoolHolidays = (request: Request) => {
@@ -254,12 +313,42 @@ export const itemsForChangeover = (request: Request) => {
     : handoverAndHolidays.itemsForChangeover.answer;
 };
 
-export const whatWillHappen = (request: Request) => {
+export const whatWillHappen = (request: Request): string | PerChildFormattedAnswer | undefined => {
+  const { namesOfChildren } = request.session;
   const specialDays = getSessionValue<any>(request.session, 'specialDays');
   if (!specialDays?.whatWillHappen) return undefined;
-  return specialDays.whatWillHappen.default?.noDecisionRequired
-    ? request.__('doNotNeedToDecide')
-    : specialDays.whatWillHappen.default?.answer;
+
+  const data = specialDays.whatWillHappen;
+
+  // Handle legacy format (direct answer without default wrapper)
+  if (data.noDecisionRequired !== undefined && data.default === undefined) {
+    return data.noDecisionRequired ? request.__('doNotNeedToDecide') : data.answer;
+  }
+
+  // Handle the "do not need to decide" case
+  if (data.default?.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const defaultAnswer = data.default?.answer || '';
+
+  // If there are no per-child overrides, return just the default answer
+  if (!data.byChild || Object.keys(data.byChild).length === 0) {
+    return defaultAnswer;
+  }
+
+  // Return structured data with per-child answers
+  const perChildAnswers = Object.entries(data.byChild)
+    .filter(([_, answer]: [string, any]) => answer.answer && !answer.noDecisionRequired)
+    .map(([childIndex, answer]: [string, any]) => ({
+      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
+      answer: answer.answer!,
+    }));
+
+  return {
+    defaultAnswer,
+    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
+  };
 };
 
 export const whatOtherThingsMatter = (request: Request) => {

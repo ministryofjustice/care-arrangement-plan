@@ -1,15 +1,37 @@
 {% from "macros/doYouAgreeAndSuggestion.njk" import doYouAgreeAndSuggestion %}
 
+{# Macro to format per-child answers for display in PDF/HTML #}
+{% macro formatPerChildAnswerForPdf(answer, numberOfChildren) %}
+  {% if answer.defaultAnswer is defined %}
+    {# Per-child answer structure #}
+    {% set perChildCount = answer.perChildAnswers | length if answer.perChildAnswers else 0 %}
+    {% if perChildCount < numberOfChildren %}
+      {# Show default answer only if not all children have specific answers #}
+      <p class="govuk-body govuk-!-margin-bottom-1"><strong>{% if perChildCount > 0 %}For all other children:{% else %}For all children:{% endif %}</strong></p>
+      <p class="newline-separated-paragraph">{{ answer.defaultAnswer }}</p>
+    {% endif %}
+    {% if answer.perChildAnswers %}
+      {% for childAnswer in answer.perChildAnswers %}
+        <p class="govuk-body govuk-!-margin-bottom-1"><strong>For {{ childAnswer.childName }}:</strong></p>
+        <p class="newline-separated-paragraph">{{ childAnswer.answer }}</p>
+      {% endfor %}
+    {% endif %}
+  {% else %}
+    {# Simple string answer #}
+    <p class="newline-separated-paragraph">{{ answer }}</p>
+  {% endif %}
+{% endmacro %}
+
 <h3 class="govuk-heading-m">{{ __('taskList.livingAndVisiting') }}</h3>
 
 <h4 class="govuk-heading-s">{{ __('livingAndVisiting.mostlyLive.title') }}</h4>
-<p class="newline-separated-paragraph">{{ values.mostlyLiveAnswer }}</p>
+{{ formatPerChildAnswerForPdf(values.mostlyLiveAnswer, values.numberOfChildren) }}
 {{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.mostlyLive'), "mostly-live") }}
 
 {% if values.whichScheduleAnswer %}
   <h4 class="govuk-heading-s">{{ __('livingAndVisiting.whichSchedule.title') }}</h4>
   <p>{{ __('livingAndVisiting.whichSchedule.exactSplitWarning') }}</p>
-  <p class="newline-separated-paragraph">{{ values.whichScheduleAnswer }}</p>
+  {{ formatPerChildAnswerForPdf(values.whichScheduleAnswer, values.numberOfChildren) }}
   {{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.whichSchedule'), "which-schedule") }}
 {% endif %}
 

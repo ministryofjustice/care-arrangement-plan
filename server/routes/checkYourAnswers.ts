@@ -27,13 +27,14 @@ import { formattedChildrenNames, parentNotMostlyLivedWith, getBackUrl } from '..
 
 const checkYourAnswersRoutes = (router: Router) => {
   router.get(paths.CHECK_YOUR_ANSWERS, checkFormProgressFromConfig(FORM_STEPS.CHECK_YOUR_ANSWERS), (request, response) => {
-    const { initialAdultName, secondaryAdultName } = request.session;
+    const { initialAdultName, secondaryAdultName, numberOfChildren } = request.session;
 
     addCompletedStep(request, FORM_STEPS.CHECK_YOUR_ANSWERS);
     response.render('pages/checkYourAnswers', {
       title: request.__('checkYourAnswers.title'),
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
       values: {
+        numberOfChildren,
         childrenNames: formattedChildrenNames(request),
         adultNames: formatListOfStrings([initialAdultName, secondaryAdultName], request),
         parentNotMostlyLivedWith: parentNotMostlyLivedWith(request.session),

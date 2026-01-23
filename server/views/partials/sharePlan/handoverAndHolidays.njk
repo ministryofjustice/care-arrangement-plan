@@ -1,14 +1,36 @@
 {% from "macros/doYouAgreeAndSuggestion.njk" import doYouAgreeAndSuggestion %}
 
+{# Macro to format per-child answers for display in PDF/HTML #}
+{% macro formatPerChildAnswerForPdf(answer, numberOfChildren) %}
+  {% if answer.defaultAnswer is defined %}
+    {# Per-child answer structure #}
+    {% set perChildCount = answer.perChildAnswers | length if answer.perChildAnswers else 0 %}
+    {% if perChildCount < numberOfChildren %}
+      {# Show default answer only if not all children have specific answers #}
+      <p class="govuk-body govuk-!-margin-bottom-1"><strong>{% if perChildCount > 0 %}For all other children:{% else %}For all children:{% endif %}</strong></p>
+      <p class="newline-separated-paragraph">{{ answer.defaultAnswer }}</p>
+    {% endif %}
+    {% if answer.perChildAnswers %}
+      {% for childAnswer in answer.perChildAnswers %}
+        <p class="govuk-body govuk-!-margin-bottom-1"><strong>For {{ childAnswer.childName }}:</strong></p>
+        <p class="newline-separated-paragraph">{{ childAnswer.answer }}</p>
+      {% endfor %}
+    {% endif %}
+  {% else %}
+    {# Simple string answer #}
+    <p class="newline-separated-paragraph">{{ answer }}</p>
+  {% endif %}
+{% endmacro %}
+
 <h3 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays') }}</h3>
 
 <h4 class="govuk-heading-s">{{ __('handoverAndHolidays.getBetweenHouseholds.title') }}</h4>
-<p class="newline-separated-paragraph">{{ values.getBetweenHouseholdsAnswer }}</p>
+{{ formatPerChildAnswerForPdf(values.getBetweenHouseholdsAnswer, values.numberOfChildren) }}
 {{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.getBetweenHouseholds'), "get-between-households") }}
 
 <h4 class="govuk-heading-s">{{ __('handoverAndHolidays.whereHandover.title') }}</h4>
 <p>{{ __('handoverAndHolidays.whereHandover.explainer') }}</p>
-<p class="newline-separated-paragraph">{{ values.whereHandoverAnswer }}</p>
+{{ formatPerChildAnswerForPdf(values.whereHandoverAnswer, values.numberOfChildren) }}
 {{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.whereHandover'), "where-handover") }}
 
 <h4 class="govuk-heading-s">{{ __('handoverAndHolidays.willChangeDuringSchoolHolidays.title') }}</h4>
@@ -18,20 +40,7 @@
 {% if values.howChangeDuringSchoolHolidaysAnswer %}
   <h4 class="govuk-heading-s">{{ __('handoverAndHolidays.howChangeDuringSchoolHolidays.title') }}</h4>
   <p>{{ __('handoverAndHolidays.howChangeDuringSchoolHolidays.content') }}</p>
-  {% if values.howChangeDuringSchoolHolidaysAnswer.defaultAnswer is defined %}
-    {# Per-child answer structure #}
-    <p class="govuk-body govuk-!-margin-bottom-1"><strong>For all children:</strong></p>
-    <p class="newline-separated-paragraph">{{ values.howChangeDuringSchoolHolidaysAnswer.defaultAnswer }}</p>
-    {% if values.howChangeDuringSchoolHolidaysAnswer.perChildAnswers %}
-      {% for childAnswer in values.howChangeDuringSchoolHolidaysAnswer.perChildAnswers %}
-        <p class="govuk-body govuk-!-margin-bottom-1"><strong>For {{ childAnswer.childName }}:</strong></p>
-        <p class="newline-separated-paragraph">{{ childAnswer.answer }}</p>
-      {% endfor %}
-    {% endif %}
-  {% else %}
-    {# Simple string answer #}
-    <p class="newline-separated-paragraph">{{ values.howChangeDuringSchoolHolidaysAnswer }}</p>
-  {% endif %}
+  {{ formatPerChildAnswerForPdf(values.howChangeDuringSchoolHolidaysAnswer, values.numberOfChildren) }}
   {{ doYouAgreeAndSuggestion(__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.howChangeDuringSchoolHolidays'), "how-change-during-school-holidays") }}
 {% endif %}
 

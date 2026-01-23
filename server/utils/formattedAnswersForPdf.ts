@@ -6,8 +6,13 @@ import { formatListOfStrings, formatPlanChangesOptionsIntoList, formatWhichDaysS
 import { getSessionValue } from './perChildSession';
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
 
-export const mostlyLive = (request: Request) => {
-  const { initialAdultName, secondaryAdultName } = request.session;
+export type PerChildFormattedAnswerForPdf = {
+  defaultAnswer: string;
+  perChildAnswers?: { childName: string; answer: string }[];
+};
+
+export const mostlyLive = (request: Request): string | PerChildFormattedAnswerForPdf | undefined => {
+  const { initialAdultName, secondaryAdultName, namesOfChildren } = request.session;
   const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting');
   if (!livingAndVisiting?.mostlyLive) return undefined;
 
@@ -47,16 +52,50 @@ export const mostlyLive = (request: Request) => {
     return formatAnswer(data);
   }
 
-  // Handle new PerChildAnswer format - use default answer for PDF
-  return formatAnswer(data.default);
+  // Handle new PerChildAnswer format
+  const defaultAnswer = formatAnswer(data.default) || '';
+
+  // If there are no per-child overrides, return just the default answer
+  if (!data.byChild || Object.keys(data.byChild).length === 0) {
+    return defaultAnswer;
+  }
+
+  // Return structured data with per-child answers
+  const perChildAnswers = Object.entries(data.byChild)
+    .filter(([_, answer]: [string, any]) => answer.where)
+    .map(([childIndex, answer]: [string, any]) => ({
+      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
+      answer: formatAnswer(answer) || '',
+    }))
+    .filter(item => item.answer);
+
+  return {
+    defaultAnswer,
+    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
+  };
 };
 
-export const whichSchedule = (request: Request) => {
-  const { initialAdultName } = request.session;
+export const whichSchedule = (request: Request): string | PerChildFormattedAnswerForPdf | undefined => {
+  const { initialAdultName, namesOfChildren } = request.session;
   const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting');
   if (!livingAndVisiting?.whichSchedule) return undefined;
 
   const data = livingAndVisiting.whichSchedule;
+
+  // Helper to format a single answer
+  const formatAnswer = (answer: any): string | undefined => {
+    if (!answer) return undefined;
+    if (answer.noDecisionRequired) {
+      return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    }
+    if (answer.answer) {
+      return request.__('sharePlan.yourProposedPlan.senderSuggested', {
+        senderName: initialAdultName,
+        suggestion: answer.answer,
+      });
+    }
+    return undefined;
+  };
 
   // Handle legacy format (direct answer without default wrapper)
   if (data.noDecisionRequired !== undefined && data.default === undefined) {
@@ -68,13 +107,31 @@ export const whichSchedule = (request: Request) => {
         });
   }
 
-  // Handle new PerChildAnswer format
-  return data.default?.noDecisionRequired
-    ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
-    : request.__('sharePlan.yourProposedPlan.senderSuggested', {
-        senderName: initialAdultName,
-        suggestion: data.default?.answer,
-      });
+  // Handle the "do not need to decide" case
+  if (data.default?.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const defaultAnswer = formatAnswer(data.default) || '';
+
+  // If there are no per-child overrides, return just the default answer
+  if (!data.byChild || Object.keys(data.byChild).length === 0) {
+    return defaultAnswer;
+  }
+
+  // Return structured data with per-child answers
+  const perChildAnswers = Object.entries(data.byChild)
+    .filter(([_, answer]: [string, any]) => answer.answer && !answer.noDecisionRequired)
+    .map(([childIndex, answer]: [string, any]) => ({
+      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
+      answer: formatAnswer(answer) || '',
+    }))
+    .filter(item => item.answer);
+
+  return {
+    defaultAnswer,
+    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
+  };
 };
 
 export const willOvernightsHappen = (request: Request) => {
@@ -145,78 +202,138 @@ export const whichDaysDaytimeVisits = (request: Request) => {
   });
 };
 
-export const getBetweenHouseholds = (request: Request) => {
-  const { initialAdultName, secondaryAdultName } = request.session;
+export const getBetweenHouseholds = (request: Request): string | PerChildFormattedAnswerForPdf | undefined => {
+  const { initialAdultName, secondaryAdultName, namesOfChildren } = request.session;
   const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays');
   if (!handoverAndHolidays?.getBetweenHouseholds) return undefined;
 
-  // Handle PerChildAnswer structure - use default value
-  const getBetweenHouseholdsData = handoverAndHolidays.getBetweenHouseholds.default || handoverAndHolidays.getBetweenHouseholds;
+  const data = handoverAndHolidays.getBetweenHouseholds;
 
-  if (getBetweenHouseholdsData.noDecisionRequired) {
-    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
-  }
-  switch (getBetweenHouseholdsData.how) {
-    case 'initialCollects':
-      return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
-        senderName: initialAdultName,
-        adult: initialAdultName,
-      });
-    case 'secondaryCollects':
-      return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
-        senderName: initialAdultName,
-        adult: secondaryAdultName,
-      });
-    case 'other':
-      return request.__('sharePlan.yourProposedPlan.senderSuggested', {
-        senderName: initialAdultName,
-        suggestion: getBetweenHouseholdsData.describeArrangement,
-      });
-    default:
-      return undefined;
-  }
-};
-
-export const whereHandover = (request: Request) => {
-  const { initialAdultName, secondaryAdultName } = request.session;
-  const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays');
-  if (!handoverAndHolidays?.whereHandover) return undefined;
-
-  // Handle PerChildAnswer structure - use default value
-  const whereHandoverData = handoverAndHolidays.whereHandover.default || handoverAndHolidays.whereHandover;
-
-  if (whereHandoverData.noDecisionRequired) {
-    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
-  }
-
-  if (whereHandoverData.someoneElse) {
-    return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedSomeoneElse', {
-      senderName: initialAdultName,
-      someoneElse: whereHandoverData.someoneElse,
-    });
-  }
-
-  if (!whereHandoverData.where) return undefined;
-
-  const getAnswerForWhereHandoverWhere = (where: whereHandoverField) => {
-    switch (where) {
-      case 'neutral':
-        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.neutralLocation');
-      case 'initialHome':
-        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.home', { adult: initialAdultName });
-      case 'secondaryHome':
-        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.home', { adult: secondaryAdultName });
-      case 'school':
-        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.school');
+  // Helper to format a single answer
+  const formatAnswer = (answer: any): string | undefined => {
+    if (!answer) return undefined;
+    if (answer.noDecisionRequired) {
+      return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    }
+    switch (answer.how) {
+      case 'initialCollects':
+        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
+          senderName: initialAdultName,
+          adult: initialAdultName,
+        });
+      case 'secondaryCollects':
+        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
+          senderName: initialAdultName,
+          adult: secondaryAdultName,
+        });
+      case 'other':
+        return request.__('sharePlan.yourProposedPlan.senderSuggested', {
+          senderName: initialAdultName,
+          suggestion: answer.describeArrangement,
+        });
       default:
         return undefined;
     }
   };
 
-  return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedHandover', {
-    senderName: initialAdultName,
-    location: formatListOfStrings(whereHandoverData.where.map(getAnswerForWhereHandoverWhere), request),
-  });
+  // Handle legacy format (direct answer without default wrapper)
+  if (data.how !== undefined && data.default === undefined) {
+    return formatAnswer(data);
+  }
+
+  // Handle new PerChildAnswer format
+  const defaultAnswer = formatAnswer(data.default) || '';
+
+  // If there are no per-child overrides, return just the default answer
+  if (!data.byChild || Object.keys(data.byChild).length === 0) {
+    return defaultAnswer;
+  }
+
+  // Return structured data with per-child answers
+  const perChildAnswers = Object.entries(data.byChild)
+    .filter(([_, answer]: [string, any]) => answer.how || answer.noDecisionRequired)
+    .map(([childIndex, answer]: [string, any]) => ({
+      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
+      answer: formatAnswer(answer) || '',
+    }))
+    .filter(item => item.answer);
+
+  return {
+    defaultAnswer,
+    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
+  };
+};
+
+export const whereHandover = (request: Request): string | PerChildFormattedAnswerForPdf | undefined => {
+  const { initialAdultName, secondaryAdultName, namesOfChildren } = request.session;
+  const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays');
+  if (!handoverAndHolidays?.whereHandover) return undefined;
+
+  const data = handoverAndHolidays.whereHandover;
+
+  // Helper to format a single answer
+  const formatAnswer = (answer: any): string | undefined => {
+    if (!answer) return undefined;
+    if (answer.noDecisionRequired) {
+      return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    }
+
+    if (answer.someoneElse) {
+      return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedSomeoneElse', {
+        senderName: initialAdultName,
+        someoneElse: answer.someoneElse,
+      });
+    }
+
+    if (!answer.where) return undefined;
+
+    const getAnswerForWhereHandoverWhere = (where: whereHandoverField) => {
+      switch (where) {
+        case 'neutral':
+          return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.neutralLocation');
+        case 'initialHome':
+          return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.home', { adult: initialAdultName });
+        case 'secondaryHome':
+          return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.home', { adult: secondaryAdultName });
+        case 'school':
+          return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.school');
+        default:
+          return undefined;
+      }
+    };
+
+    return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedHandover', {
+      senderName: initialAdultName,
+      location: formatListOfStrings(answer.where.map(getAnswerForWhereHandoverWhere), request),
+    });
+  };
+
+  // Handle legacy format (direct answer without default wrapper)
+  if (data.where !== undefined && data.default === undefined) {
+    return formatAnswer(data);
+  }
+
+  // Handle new PerChildAnswer format
+  const defaultAnswer = formatAnswer(data.default) || '';
+
+  // If there are no per-child overrides, return just the default answer
+  if (!data.byChild || Object.keys(data.byChild).length === 0) {
+    return defaultAnswer;
+  }
+
+  // Return structured data with per-child answers
+  const perChildAnswers = Object.entries(data.byChild)
+    .filter(([_, answer]: [string, any]) => answer.where || answer.noDecisionRequired)
+    .map(([childIndex, answer]: [string, any]) => ({
+      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
+      answer: formatAnswer(answer) || '',
+    }))
+    .filter(item => item.answer);
+
+  return {
+    defaultAnswer,
+    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
+  };
 };
 
 export const willChangeDuringSchoolHolidays = (request: Request) => {
@@ -233,11 +350,6 @@ export const willChangeDuringSchoolHolidays = (request: Request) => {
     : request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedNoChangeDuringSchoolHolidays', {
         senderName: initialAdultName,
       });
-};
-
-export type PerChildFormattedAnswerForPdf = {
-  defaultAnswer: string;
-  perChildAnswers?: { childName: string; answer: string }[];
 };
 
 export const howChangeDuringSchoolHolidays = (request: Request): string | PerChildFormattedAnswerForPdf | undefined => {
@@ -291,16 +403,63 @@ export const itemsForChangeover = (request: Request) => {
       });
 };
 
-export const whatWillHappen = (request: Request) => {
-  const { initialAdultName } = request.session;
+export const whatWillHappen = (request: Request): string | PerChildFormattedAnswerForPdf | undefined => {
+  const { initialAdultName, namesOfChildren } = request.session;
   const specialDays = getSessionValue<any>(request.session, 'specialDays');
   if (!specialDays?.whatWillHappen) return undefined;
-  return specialDays.whatWillHappen.default?.noDecisionRequired
-    ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
-    : request.__('sharePlan.yourProposedPlan.senderSuggested', {
+
+  const data = specialDays.whatWillHappen;
+
+  // Helper to format a single answer
+  const formatAnswer = (answer: any): string | undefined => {
+    if (!answer) return undefined;
+    if (answer.noDecisionRequired) {
+      return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+    }
+    if (answer.answer) {
+      return request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
-        suggestion: specialDays.whatWillHappen.default?.answer,
+        suggestion: answer.answer,
       });
+    }
+    return undefined;
+  };
+
+  // Handle legacy format (direct answer without default wrapper)
+  if (data.noDecisionRequired !== undefined && data.default === undefined) {
+    return data.noDecisionRequired
+      ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+      : request.__('sharePlan.yourProposedPlan.senderSuggested', {
+          senderName: initialAdultName,
+          suggestion: data.answer,
+        });
+  }
+
+  // Handle the "do not need to decide" case
+  if (data.default?.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const defaultAnswer = formatAnswer(data.default) || '';
+
+  // If there are no per-child overrides, return just the default answer
+  if (!data.byChild || Object.keys(data.byChild).length === 0) {
+    return defaultAnswer;
+  }
+
+  // Return structured data with per-child answers
+  const perChildAnswers = Object.entries(data.byChild)
+    .filter(([_, answer]: [string, any]) => answer.answer && !answer.noDecisionRequired)
+    .map(([childIndex, answer]: [string, any]) => ({
+      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
+      answer: formatAnswer(answer) || '',
+    }))
+    .filter(item => item.answer);
+
+  return {
+    defaultAnswer,
+    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
+  };
 };
 
 export const whatOtherThingsMatter = (request: Request) => {

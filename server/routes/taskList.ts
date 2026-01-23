@@ -140,9 +140,9 @@ const taskListRoutes = (router: Router) => {
 
     response.render('pages/taskList', {
       title: request.__('taskList.title', { names: formattedChildrenNames(request) }),
-      // Design mode toggle
+      // Design mode toggle - hidden for now, keeping Design 1 as the default
       designMode,
-      showDesignToggle: numberOfChildren > 1,
+      showDesignToggle: false,
       numberOfChildren,
       namesOfChildren,
       // This should only be true when all tasks are complete

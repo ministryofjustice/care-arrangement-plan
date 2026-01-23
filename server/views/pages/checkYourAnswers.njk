@@ -3,11 +3,15 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {# Macro to format per-child answers for display #}
-{% macro formatPerChildAnswer(answer) %}
+{% macro formatPerChildAnswer(answer, numberOfChildren) %}
   {% if answer.defaultAnswer is defined %}
     {# This is a per-child answer structure #}
-    <p class="govuk-body govuk-!-margin-bottom-1"><strong>For all children:</strong></p>
-    <p class="govuk-body govuk-!-margin-bottom-2">{{ answer.defaultAnswer }}</p>
+    {% set perChildCount = answer.perChildAnswers | length if answer.perChildAnswers else 0 %}
+    {% if perChildCount < numberOfChildren %}
+      {# Show default answer only if not all children have specific answers #}
+      <p class="govuk-body govuk-!-margin-bottom-1"><strong>{% if perChildCount > 0 %}For all other children:{% else %}For all children:{% endif %}</strong></p>
+      <p class="govuk-body govuk-!-margin-bottom-2">{{ answer.defaultAnswer }}</p>
+    {% endif %}
     {% if answer.perChildAnswers %}
       {% for childAnswer in answer.perChildAnswers %}
         <p class="govuk-body govuk-!-margin-bottom-1"><strong>For {{ childAnswer.childName }}:</strong></p>
@@ -78,7 +82,7 @@
                 text: __('livingAndVisiting.mostlyLive.title')
               },
               value: {
-                text: values.mostlyLive
+                html: formatPerChildAnswer(values.mostlyLive, values.numberOfChildren)
               },
               actions: {
                 items: [
@@ -95,7 +99,7 @@
                 text: __('livingAndVisiting.whichSchedule.title')
               },
               value: {
-                text: values.whichSchedule
+                html: formatPerChildAnswer(values.whichSchedule, values.numberOfChildren)
               },
               actions: {
                 items: [
@@ -189,7 +193,7 @@
                 text: __('handoverAndHolidays.getBetweenHouseholds.title')
               },
               value: {
-                text: values.getBetweenHouseholds
+                html: formatPerChildAnswer(values.getBetweenHouseholds, values.numberOfChildren)
               },
               actions: {
                 items: [
@@ -206,7 +210,7 @@
                 text: __('handoverAndHolidays.whereHandover.title')
               },
               value: {
-                text: values.whereHandover
+                html: formatPerChildAnswer(values.whereHandover, values.numberOfChildren)
               },
               actions: {
                 items: [
@@ -240,7 +244,7 @@
                 text: __('handoverAndHolidays.howChangeDuringSchoolHolidays.title')
               },
               value: {
-                html: formatPerChildAnswer(values.howChangeDuringSchoolHolidays)
+                html: formatPerChildAnswer(values.howChangeDuringSchoolHolidays, values.numberOfChildren)
               },
               actions: {
                 items: [
@@ -283,7 +287,7 @@
               text: __('specialDays.whatWillHappen.title')
             },
             value: {
-              text: values.whatWillHappen
+              html: formatPerChildAnswer(values.whatWillHappen, values.numberOfChildren)
             },
             actions: {
               items: [
