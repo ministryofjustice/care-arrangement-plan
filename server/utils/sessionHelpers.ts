@@ -10,14 +10,25 @@ import { validateRedirectUrl } from './redirectValidator';
 export const formattedChildrenNames = (request: Request) =>
   formatListOfStrings(request.session.namesOfChildren, request);
 
+// Helper to get the 'where' value from mostlyLive, handling both old and new formats
+const getMostlyLiveWhere = (mostlyLive: any): string | undefined => {
+  if (!mostlyLive) return undefined;
+  // New PerChildAnswer format
+  if (mostlyLive.default?.where) return mostlyLive.default.where;
+  // Legacy format
+  return mostlyLive.where;
+};
+
 export const parentMostlyLivedWith = (session: Partial<CAPSession>) => {
   const livingAndVisiting = getSessionValue<any>(session, 'livingAndVisiting');
-  return livingAndVisiting?.mostlyLive?.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;
+  const where = getMostlyLiveWhere(livingAndVisiting?.mostlyLive);
+  return where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;
 };
 
 export const parentNotMostlyLivedWith = (session: Partial<CAPSession>) => {
   const livingAndVisiting = getSessionValue<any>(session, 'livingAndVisiting');
-  return livingAndVisiting?.mostlyLive?.where === 'withInitial' ? session.secondaryAdultName : session.initialAdultName;
+  const where = getMostlyLiveWhere(livingAndVisiting?.mostlyLive);
+  return where === 'withInitial' ? session.secondaryAdultName : session.initialAdultName;
 };
 
 export const mostlyLiveComplete = (session: Partial<CAPSession>) => {
@@ -25,11 +36,12 @@ export const mostlyLiveComplete = (session: Partial<CAPSession>) => {
   if (!livingAndVisiting?.mostlyLive) return false;
 
   const { mostlyLive, overnightVisits, daytimeVisits, whichSchedule } = livingAndVisiting;
+  const where = getMostlyLiveWhere(mostlyLive);
 
-  if (mostlyLive.where === 'other') {
+  if (where === 'other') {
     return true;
   }
-  if (mostlyLive.where === 'split') {
+  if (where === 'split') {
     return !!whichSchedule;
   }
 

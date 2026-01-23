@@ -2,67 +2,170 @@
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-      <form class="form" action="{{ paths.LIVING_VISITING_MOSTLY_LIVE }}" method="post" novalidate>
+      <form
+        class="form"
+        action="{{ paths.LIVING_VISITING_MOSTLY_LIVE }}"
+        method="post"
+        novalidate
+        id="per-child-form"
+      >
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
 
-        {% set describeArrangementHtml %}
+        <h1 class="govuk-heading-l">{{ title }}</h1>
+
+        {# Default/All children answer #}
+        <div class="per-child-entry default-answer-section" data-entry-index="0">
+          {% if showPerChildOption %}
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2 default-answer-label">For all children:</p>
+          {% endif %}
+
+          {% set describeArrangementHtml0 %}
+            {{
+              govukTextarea({
+                name: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT + "-0",
+                id: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT + "-0",
+                label: {
+                  text: __('describeArrangement')
+                },
+                value: formValues[formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT + "-0"],
+                errorMessage: errors | findError(formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT + "-0")
+              })
+            }}
+          {% endset -%}
+
           {{
-            govukTextarea({
-              name: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT,
-              label: {
-                text: __('describeArrangement')
+            govukRadios({
+              name: formFields.MOSTLY_LIVE_WHERE + "-0",
+              fieldset: {
+                legend: {
+                  text: title if not showPerChildOption else "Where will the children mostly live?",
+                  classes: "govuk-visually-hidden" if showPerChildOption else "govuk-fieldset__legend--l",
+                  isPageHeading: not showPerChildOption
+                }
               },
-              value: formValues[formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT],
-              errorMessage: errors | findError(formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT)
+              items: [
+                {
+                  value: "withInitial",
+                  text: __('livingAndVisiting.mostlyLive.with', {adult: values.initialAdultName})
+                },
+                {
+                  value: "withSecondary",
+                  text: __('livingAndVisiting.mostlyLive.with', {adult: values.secondaryAdultName})
+                },
+                {
+                  value: "split",
+                  text: __('livingAndVisiting.mostlyLive.split', {initialAdult: values.initialAdultName, secondaryAdult: values.secondaryAdultName})
+                },
+                {
+                  divider: __('or')
+                },
+                {
+                  value: "other",
+                  text: __('anotherArrangement'),
+                  conditional: {
+                    html: describeArrangementHtml0
+                  }
+                }
+              ],
+              value: formValues[formFields.MOSTLY_LIVE_WHERE + "-0"],
+              errorMessage: errors | findError(formFields.MOSTLY_LIVE_WHERE + "-0")
             })
           }}
-        {% endset -%}
+        </div>
 
-        {{
-          govukRadios({
-            name: formFields.MOSTLY_LIVE_WHERE,
-            fieldset: {
-              legend: {
-                text: title,
-                isPageHeading: true,
-                classes: "govuk-fieldset__legend--l"
-              }
-            },
-            items: [
-              {
-                value: "withInitial",
-                text: __('livingAndVisiting.mostlyLive.with', {adult: values.initialAdultName})
-              },
-              {
-                value: "withSecondary",
-                text: __('livingAndVisiting.mostlyLive.with', {adult: values.secondaryAdultName})
-              },
-              {
-                value: "split",
-                text: __('livingAndVisiting.mostlyLive.split', {initialAdult: values.initialAdultName, secondaryAdult: values.secondaryAdultName})
-              },
-              {
-                divider: __('or')
-              },
-              {
-                value: "other",
-                text: __('anotherArrangement'),
-                conditional: {
-                  html: describeArrangementHtml
-                }
-              }
-            ],
-            value: formValues[formFields.MOSTLY_LIVE_WHERE],
-            errorMessage: errors | findError(formFields.MOSTLY_LIVE_WHERE)
-          })
-        }}
+        {# Container for additional per-child entries #}
+        <div id="additional-children-container">
+          {# Existing per-child entries will be rendered here by JavaScript on page load #}
+        </div>
+
+        {# Button group with proper spacing #}
+        <div class="govuk-button-group govuk-!-margin-top-6">
+          {% if showPerChildOption %}
+            {# Add another child button - gray/secondary style #}
+            <button
+              type="button"
+              class="govuk-button govuk-button--secondary"
+              id="add-another-child-btn"
+              data-number-of-children="{{ numberOfChildren }}"
+              data-child-options="{{ childOptions | dump | escape }}"
+              data-names-of-children="{{ namesOfChildren | dump | escape }}"
+              data-field-base-name="{{ formFields.MOSTLY_LIVE_WHERE }}"
+            >
+              Add answer for a specific child
+            </button>
+          {% endif %}
+        </div>
+
         {{ govukButton({text: __('continue')}) }}
       </form>
     </div>
   </div>
+
+  {% if showPerChildOption %}
+    {# Template for per-child entry - hidden, cloned by JavaScript #}
+    <template id="per-child-entry-template">
+      <div class="per-child-entry govuk-!-margin-top-6 govuk-!-padding-top-6 govuk-!-padding-bottom-2" style="border-top: 2px solid #b1b4b6;">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
+            This answer is for:
+          </label>
+          <select class="govuk-select" id="child-selector-ENTRY_INDEX" name="child-selector-ENTRY_INDEX">
+            <option value="">Select a child</option>
+            {# Options populated by JavaScript #}
+          </select>
+        </div>
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-visually-hidden">
+              Where will this child mostly live?
+            </legend>
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="FIELD_NAME-withInitial" name="FIELD_NAME" type="radio" value="withInitial">
+                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-withInitial">
+                  {{ __('livingAndVisiting.mostlyLive.with', {adult: values.initialAdultName}) }}
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="FIELD_NAME-withSecondary" name="FIELD_NAME" type="radio" value="withSecondary">
+                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-withSecondary">
+                  {{ __('livingAndVisiting.mostlyLive.with', {adult: values.secondaryAdultName}) }}
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="FIELD_NAME-split" name="FIELD_NAME" type="radio" value="split">
+                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-split">
+                  {{ __('livingAndVisiting.mostlyLive.split', {initialAdult: values.initialAdultName, secondaryAdult: values.secondaryAdultName}) }}
+                </label>
+              </div>
+              <div class="govuk-radios__divider">{{ __('or') }}</div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="FIELD_NAME-other" name="FIELD_NAME" type="radio" value="other" data-aria-controls="conditional-FIELD_NAME-other">
+                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-other">
+                  {{ __('anotherArrangement') }}
+                </label>
+              </div>
+              <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-FIELD_NAME-other">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="DESCRIBE_FIELD_NAME">
+                    {{ __('describeArrangement') }}
+                  </label>
+                  <textarea class="govuk-textarea" id="DESCRIBE_FIELD_NAME" name="DESCRIBE_FIELD_NAME" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <button type="button" class="govuk-button govuk-button--warning govuk-!-margin-bottom-4 remove-child-entry-btn">
+          Remove
+        </button>
+      </div>
+    </template>
+  {% endif %}
 {% endblock %}

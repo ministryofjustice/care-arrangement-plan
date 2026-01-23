@@ -10,37 +10,70 @@ export const mostlyLive = (request: Request) => {
   const { initialAdultName, secondaryAdultName } = request.session;
   const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting');
   if (!livingAndVisiting?.mostlyLive) return undefined;
-  switch (livingAndVisiting.mostlyLive.where) {
-    case 'withInitial':
-    case 'withSecondary':
-      return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedLiveWith', {
-        senderName: initialAdultName,
-        adult: parentMostlyLivedWith(request.session),
-      });
-    case 'split':
-      return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedSplit', {
-        senderName: initialAdultName,
-        otherAdult: secondaryAdultName,
-      });
-    case 'other':
-      return request.__('sharePlan.yourProposedPlan.senderSuggested', {
-        senderName: request.session.initialAdultName,
-        suggestion: livingAndVisiting.mostlyLive.describeArrangement,
-      });
-    default:
-      return undefined;
+
+  const data = livingAndVisiting.mostlyLive;
+
+  // Helper to format a single answer for PDF
+  const formatAnswer = (answer: any): string | undefined => {
+    if (!answer?.where) return undefined;
+    switch (answer.where) {
+      case 'withInitial':
+        return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedLiveWith', {
+          senderName: initialAdultName,
+          adult: initialAdultName,
+        });
+      case 'withSecondary':
+        return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedLiveWith', {
+          senderName: initialAdultName,
+          adult: secondaryAdultName,
+        });
+      case 'split':
+        return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedSplit', {
+          senderName: initialAdultName,
+          otherAdult: secondaryAdultName,
+        });
+      case 'other':
+        return request.__('sharePlan.yourProposedPlan.senderSuggested', {
+          senderName: initialAdultName,
+          suggestion: answer.describeArrangement,
+        });
+      default:
+        return undefined;
+    }
+  };
+
+  // Handle legacy format (direct answer without default wrapper)
+  if (data.where !== undefined && data.default === undefined) {
+    return formatAnswer(data);
   }
+
+  // Handle new PerChildAnswer format - use default answer for PDF
+  return formatAnswer(data.default);
 };
 
 export const whichSchedule = (request: Request) => {
   const { initialAdultName } = request.session;
   const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting');
   if (!livingAndVisiting?.whichSchedule) return undefined;
-  return livingAndVisiting.whichSchedule.noDecisionRequired
+
+  const data = livingAndVisiting.whichSchedule;
+
+  // Handle legacy format (direct answer without default wrapper)
+  if (data.noDecisionRequired !== undefined && data.default === undefined) {
+    return data.noDecisionRequired
+      ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+      : request.__('sharePlan.yourProposedPlan.senderSuggested', {
+          senderName: initialAdultName,
+          suggestion: data.answer,
+        });
+  }
+
+  // Handle new PerChildAnswer format
+  return data.default?.noDecisionRequired
     ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
     : request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
-        suggestion: livingAndVisiting.whichSchedule.answer,
+        suggestion: data.default?.answer,
       });
 };
 

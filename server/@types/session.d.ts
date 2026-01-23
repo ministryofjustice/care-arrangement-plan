@@ -47,6 +47,16 @@ export type WhatWillHappenAnswer = {
   notApplicable?: boolean; // This question does not apply to this child
 };
 
+export type WhichScheduleAnswer = {
+  noDecisionRequired: boolean;
+  answer?: string;
+};
+
+export type MostlyLiveAnswer = {
+  where: whereMostlyLive;
+  describeArrangement?: string;
+};
+
 // Design mode for per-child answers
 export type PerChildDesignMode = 'design1' | 'design2';
 
@@ -78,14 +88,8 @@ export type CAPSession = {
   // Design 2 specific: per-child plans
   childPlans?: ChildPlan[];
   livingAndVisiting?: {
-    mostlyLive?: {
-      where: whereMostlyLive;
-      describeArrangement?: string;
-    };
-    whichSchedule?: {
-      noDecisionRequired: boolean;
-      answer?: string;
-    };
+    mostlyLive?: PerChildAnswer<MostlyLiveAnswer>;
+    whichSchedule?: PerChildAnswer<WhichScheduleAnswer>;
     overnightVisits?: {
       willHappen: boolean;
       whichDays?: WhichDays;

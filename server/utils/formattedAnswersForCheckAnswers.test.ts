@@ -136,8 +136,10 @@ describe('formattedAnswers', () => {
       const arrangement = 'arrangement';
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          where: 'other',
-          describeArrangement: arrangement,
+          default: {
+            where: 'other',
+            describeArrangement: arrangement,
+          },
         },
       };
 
@@ -152,11 +154,15 @@ describe('formattedAnswers', () => {
       const arrangement = 'arrangement';
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          where: 'split',
+          default: {
+            where: 'split',
+          },
         },
         whichSchedule: {
-          noDecisionRequired: false,
-          answer: arrangement,
+          default: {
+            noDecisionRequired: false,
+            answer: arrangement,
+          },
         },
       };
 
@@ -175,10 +181,14 @@ describe('formattedAnswers', () => {
       sessionMock.numberOfChildren = 1;
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          where: 'split',
+          default: {
+            where: 'split',
+          },
         },
         whichSchedule: {
-          noDecisionRequired: true,
+          default: {
+            noDecisionRequired: true,
+          },
         },
       };
 
@@ -195,7 +205,9 @@ describe('formattedAnswers', () => {
     it('should return correctly for with adult with no overnights', () => {
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          where: 'withInitial',
+          default: {
+            where: 'withInitial',
+          },
         },
         overnightVisits: {
           willHappen: false,
@@ -223,7 +235,9 @@ describe('formattedAnswers', () => {
     it('should return correctly for with adult with no daytime visits', () => {
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          where: 'withInitial',
+          default: {
+            where: 'withInitial',
+          },
         },
         overnightVisits: {
           willHappen: true,
@@ -252,7 +266,9 @@ describe('formattedAnswers', () => {
       const arrangement = 'arrangement';
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          where: 'withSecondary',
+          default: {
+            where: 'withSecondary',
+          },
         },
         overnightVisits: {
           willHappen: true,

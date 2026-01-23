@@ -13,8 +13,10 @@ const session: Partial<SessionData> = {
   secondaryAdultName: 'Sam',
   livingAndVisiting: {
     mostlyLive: {
-      where: 'other',
-      describeArrangement: 'describeArrangement',
+      default: {
+        where: 'other',
+        describeArrangement: 'describeArrangement',
+      },
     },
   },
   handoverAndHolidays: {

@@ -93,8 +93,10 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
 
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          where: 'withInitial',
-          describeArrangement: 'wrong arrangement',
+          default: {
+            where: 'withInitial',
+            describeArrangement: 'wrong arrangement',
+          },
         },
       };
 
@@ -111,8 +113,10 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
 
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          where: 'other',
-          describeArrangement: arrangement,
+          default: {
+            where: 'other',
+            describeArrangement: arrangement,
+          },
         },
       };
 
@@ -172,7 +176,14 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
         .expect(302)
         .expect('location', paths.TASK_LIST);
 
-      expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where, describeArrangement } });
+      expect(sessionMock.livingAndVisiting).toEqual({
+        mostlyLive: {
+          default: {
+            where,
+            describeArrangement,
+          },
+        },
+      });
     });
 
     it.each([
@@ -182,7 +193,10 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
     ])(
       'should redirect to %s if the page is correctly filled and %s is selected',
       async (expectedRedirect, selection) => {
-        sessionMock.livingAndVisiting = { mostlyLive: { where: 'other' }, overnightVisits: { willHappen: true } };
+        sessionMock.livingAndVisiting = {
+          mostlyLive: { default: { where: 'other' } },
+          overnightVisits: { willHappen: true },
+        };
 
         await request(app)
           .post(paths.LIVING_VISITING_MOSTLY_LIVE)
@@ -193,13 +207,22 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
           .expect(302)
           .expect('location', expectedRedirect);
 
-        expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where: selection } });
+        expect(sessionMock.livingAndVisiting).toEqual({
+          mostlyLive: {
+            default: {
+              where: selection,
+            },
+          },
+        });
       },
     );
 
     it('should not reset the livingAndVisiting data if the same option is set', async () => {
       const where: whereMostlyLive = 'withInitial';
-      const initialLivingAndVisiting = { mostlyLive: { where }, overnightVisits: { willHappen: true } };
+      const initialLivingAndVisiting = {
+        mostlyLive: { default: { where } },
+        overnightVisits: { willHappen: true },
+      };
 
       sessionMock.livingAndVisiting = initialLivingAndVisiting;
 
@@ -216,13 +239,22 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       const where: whereMostlyLive = 'other';
       const arrangement = 'new arrangement';
 
-      sessionMock.livingAndVisiting = { mostlyLive: { where, describeArrangement: 'old arrangement' } };
+      sessionMock.livingAndVisiting = {
+        mostlyLive: { default: { where, describeArrangement: 'old arrangement' } },
+      };
 
       await request(app)
         .post(paths.LIVING_VISITING_MOSTLY_LIVE)
         .send({ [formFields.MOSTLY_LIVE_WHERE]: where, [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: arrangement });
 
-      expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where, describeArrangement: arrangement } });
+      expect(sessionMock.livingAndVisiting).toEqual({
+        mostlyLive: {
+          default: {
+            where,
+            describeArrangement: arrangement,
+          },
+        },
+      });
     });
   });
 });

@@ -21,9 +21,9 @@
         <p class="govuk-hint">{{ __('handoverAndHolidays.howChangeDuringSchoolHolidays.content') }}</p>
 
         {# Default/All children answer #}
-        <div class="per-child-entry" data-entry-index="0">
+        <div class="per-child-entry default-answer-section" data-entry-index="0">
           {% if showPerChildOption %}
-            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2">For all children:</p>
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2 default-answer-label">For all children:</p>
           {% endif %}
           {{
             govukTextarea({
@@ -90,15 +90,7 @@
             {# Options populated by JavaScript #}
           </select>
         </div>
-        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input not-applicable-checkbox" id="NOT_APPLICABLE_FIELD_NAME" name="NOT_APPLICABLE_FIELD_NAME" type="checkbox" value="true">
-            <label class="govuk-label govuk-checkboxes__label" for="NOT_APPLICABLE_FIELD_NAME">
-              This question does not apply to CHILD_NAME
-            </label>
-          </div>
-        </div>
-        <div class="govuk-form-group answer-field-container">
+        <div class="govuk-form-group">
           <label class="govuk-label govuk-visually-hidden" for="FIELD_NAME">
             Describe the arrangement for this child
           </label>

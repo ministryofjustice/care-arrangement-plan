@@ -9,6 +9,8 @@ function setupPerChildAnswers() {
 
   const template = document.getElementById('per-child-entry-template');
   const container = document.getElementById('additional-children-container');
+  const defaultAnswerSection = document.querySelector('.default-answer-section');
+  const defaultAnswerLabel = document.querySelector('.default-answer-label');
 
   if (!template || !container) return;
 
@@ -19,6 +21,39 @@ function setupPerChildAnswers() {
   const fieldBaseName = addButton.dataset.fieldBaseName;
 
   let entryCounter = 1; // Start from 1 since 0 is the default/all children entry
+
+  // Track which children have been assigned specific entries
+  const assignedChildren = new Set();
+
+  /**
+   * Updates the default answer label and visibility based on assigned children
+   */
+  function updateDefaultAnswerSection() {
+    const numAssigned = assignedChildren.size;
+
+    if (numAssigned === 0) {
+      // No children assigned - show "For all children"
+      if (defaultAnswerLabel) {
+        defaultAnswerLabel.textContent = 'For all children:';
+      }
+      if (defaultAnswerSection) {
+        defaultAnswerSection.style.display = '';
+      }
+    } else if (numAssigned >= numberOfChildren) {
+      // All children have specific answers - hide the default section
+      if (defaultAnswerSection) {
+        defaultAnswerSection.style.display = 'none';
+      }
+    } else {
+      // Some children assigned - show "For all other children"
+      if (defaultAnswerLabel) {
+        defaultAnswerLabel.textContent = 'For all other children:';
+      }
+      if (defaultAnswerSection) {
+        defaultAnswerSection.style.display = '';
+      }
+    }
+  }
 
   /**
    * Creates a new per-child entry
@@ -54,44 +89,25 @@ function setupPerChildAnswers() {
       selector.appendChild(optionEl);
     });
 
-    // Handle child selection change to update "not applicable" label
+    // Handle child selection change
     selector.addEventListener('change', function() {
       const selectedChildIndex = parseInt(this.value, 10);
-      if (!isNaN(selectedChildIndex) && namesOfChildren[selectedChildIndex]) {
-        const childName = namesOfChildren[selectedChildIndex];
-        const notApplicableLabel = entryDiv.querySelector('.not-applicable-checkbox + label');
-        if (notApplicableLabel) {
-          notApplicableLabel.textContent = `This question does not apply to ${childName}`;
-        }
+      const previousValue = this.dataset.previousValue;
+
+      // Remove previous assignment
+      if (previousValue !== undefined && previousValue !== '') {
+        assignedChildren.delete(parseInt(previousValue, 10));
       }
+
+      // Add new assignment
+      if (!isNaN(selectedChildIndex)) {
+        assignedChildren.add(selectedChildIndex);
+        this.dataset.previousValue = selectedChildIndex;
+      }
+
+      updateDefaultAnswerSection();
+      updateAddButtonVisibility();
     });
-
-    // Update "not applicable" checkbox if present
-    const notApplicableCheckbox = entryDiv.querySelector('.not-applicable-checkbox');
-    if (notApplicableCheckbox) {
-      const notApplicableFieldName = `${fieldBaseName}-not-applicable-${entryIndex}`;
-      notApplicableCheckbox.id = notApplicableFieldName;
-      notApplicableCheckbox.name = notApplicableFieldName;
-
-      const notApplicableLabel = entryDiv.querySelector(`label[for="NOT_APPLICABLE_FIELD_NAME"]`);
-      if (notApplicableLabel) {
-        notApplicableLabel.setAttribute('for', notApplicableFieldName);
-        // Label text will be updated when child is selected
-      }
-
-      // Handle checkbox state change - hide/show answer field
-      const answerContainer = entryDiv.querySelector('.answer-field-container');
-      notApplicableCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-          answerContainer.style.display = 'none';
-          // Clear the answer field when marking as not applicable
-          const answerField = answerContainer.querySelector('textarea, input[type="text"]');
-          if (answerField) answerField.value = '';
-        } else {
-          answerContainer.style.display = 'block';
-        }
-      });
-    }
 
     // Update textarea IDs and names (for simple textarea fields)
     const textarea = entryDiv.querySelector('textarea');
@@ -244,15 +260,23 @@ function setupPerChildAnswers() {
     // Add remove button handler
     const removeBtn = entryDiv.querySelector('.remove-child-entry-btn');
     removeBtn.addEventListener('click', () => {
+      // Remove from assigned children
+      const selectedValue = selector.value;
+      if (selectedValue !== '') {
+        assignedChildren.delete(parseInt(selectedValue, 10));
+      }
+
       entryDiv.remove();
+      updateDefaultAnswerSection();
       updateAddButtonVisibility();
     });
 
     // Add to container
     container.appendChild(entryDiv);
 
-    // Update visibility of add button
+    // Update visibility of add button and default section
     updateAddButtonVisibility();
+    updateDefaultAnswerSection();
 
     // Focus the new selector
     selector.focus();
@@ -264,9 +288,7 @@ function setupPerChildAnswers() {
    */
   function updateAddButtonVisibility() {
     const existingEntries = container.querySelectorAll('.per-child-entry').length;
-    // Allow adding entries up to (numberOfChildren - 1) since entry 0 is for "all children"
-    // But actually, users might want different answers for each child individually
-    // So we allow up to numberOfChildren additional entries
+    // Allow adding entries up to numberOfChildren
     if (existingEntries >= numberOfChildren) {
       addButton.style.display = 'none';
     } else {
@@ -279,6 +301,16 @@ function setupPerChildAnswers() {
 
   // Update button visibility on initial load
   updateAddButtonVisibility();
+
+  // Check for any pre-existing entries (e.g., from server-rendered data)
+  const existingEntries = container.querySelectorAll('.per-child-entry');
+  existingEntries.forEach(entry => {
+    const selector = entry.querySelector('select');
+    if (selector && selector.value !== '') {
+      assignedChildren.add(parseInt(selector.value, 10));
+    }
+  });
+  updateDefaultAnswerSection();
 }
 
 export default setupPerChildAnswers;
