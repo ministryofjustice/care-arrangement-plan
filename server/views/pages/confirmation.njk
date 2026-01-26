@@ -35,12 +35,15 @@
       'use strict';
 
       // Auto-trigger PDF download when page loads
+      // Use a unique key per plan attempt to allow multiple plans in the same browser session
+      var downloadKey = 'downloadTriggered_' + '{{ planStartTime }}';
+
       // Check if this is the first visit to this page (not a refresh or back navigation)
-      if (!sessionStorage.getItem('downloadTriggered')) {
-        sessionStorage.setItem('downloadTriggered', 'true');
+      if (!sessionStorage.getItem(downloadKey)) {
+        sessionStorage.setItem(downloadKey, 'true');
 
         // Create a temporary link and trigger download
-        const link = document.createElement('a');
+        var link = document.createElement('a');
         link.href = '{{ paths.DOWNLOAD_PDF }}';
         link.style.display = 'none';
         document.body.appendChild(link);

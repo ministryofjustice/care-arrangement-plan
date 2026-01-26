@@ -12,8 +12,10 @@ describe('sessionHelpers', () => {
       const session: Partial<CAPSession> = {
         livingAndVisiting: {
           mostlyLive: {
-            where: 'other',
-            describeArrangement: 'arrangement',
+            default: {
+              where: 'other',
+              describeArrangement: 'arrangement',
+            },
           },
         },
       };
@@ -25,7 +27,9 @@ describe('sessionHelpers', () => {
       const session: Partial<CAPSession> = {
         livingAndVisiting: {
           mostlyLive: {
-            where: 'split',
+            default: {
+              where: 'split',
+            },
           },
         },
       };
@@ -37,10 +41,14 @@ describe('sessionHelpers', () => {
       const session: Partial<CAPSession> = {
         livingAndVisiting: {
           mostlyLive: {
-            where: 'split',
+            default: {
+              where: 'split',
+            },
           },
           whichSchedule: {
-            noDecisionRequired: true,
+            default: {
+              noDecisionRequired: true,
+            },
           },
         },
       };
@@ -52,7 +60,9 @@ describe('sessionHelpers', () => {
       const session: Partial<CAPSession> = {
         livingAndVisiting: {
           mostlyLive: {
-            where: 'withInitial',
+            default: {
+              where: 'withInitial',
+            },
           },
           overnightVisits: {
             willHappen: false,
@@ -70,7 +80,9 @@ describe('sessionHelpers', () => {
       const session: Partial<CAPSession> = {
         livingAndVisiting: {
           mostlyLive: {
-            where: 'withInitial',
+            default: {
+              where: 'withInitial',
+            },
           },
           overnightVisits: {
             willHappen: true,
@@ -94,7 +106,9 @@ describe('sessionHelpers', () => {
       const session: Partial<CAPSession> = {
         livingAndVisiting: {
           mostlyLive: {
-            where: 'withInitial',
+            default: {
+              where: 'withInitial',
+            },
           },
           daytimeVisits: {
             willHappen: false,
@@ -109,7 +123,9 @@ describe('sessionHelpers', () => {
       const session: Partial<CAPSession> = {
         livingAndVisiting: {
           mostlyLive: {
-            where: 'withInitial',
+            default: {
+              where: 'withInitial',
+            },
           },
           overnightVisits: {
             willHappen: true,
@@ -127,7 +143,9 @@ describe('sessionHelpers', () => {
       const session: Partial<CAPSession> = {
         livingAndVisiting: {
           mostlyLive: {
-            where: 'withInitial',
+            default: {
+              where: 'withInitial',
+            },
           },
           overnightVisits: {
             willHappen: false,
@@ -142,7 +160,9 @@ describe('sessionHelpers', () => {
       const session: Partial<CAPSession> = {
         livingAndVisiting: {
           mostlyLive: {
-            where: 'withInitial',
+            default: {
+              where: 'withInitial',
+            },
           },
           overnightVisits: {
             willHappen: false,
@@ -185,7 +205,9 @@ describe('sessionHelpers', () => {
             noDecisionRequired: false,
           },
           howChangeDuringSchoolHolidays: {
-            noDecisionRequired: true,
+            default: {
+              noDecisionRequired: true,
+            },
           },
         },
       };

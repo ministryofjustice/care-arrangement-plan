@@ -32,16 +32,17 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
-      expect(dom.window.document.querySelector(`label[for="${formFields.MOSTLY_LIVE_WHERE}"]`)).toHaveTextContent(
+      // Field names now use -0 suffix for the default/all children entry
+      expect(dom.window.document.querySelector(`label[for="${formFields.MOSTLY_LIVE_WHERE}-0"]`)).toHaveTextContent(
         `With ${session.initialAdultName}`,
       );
-      expect(dom.window.document.querySelector(`label[for="${formFields.MOSTLY_LIVE_WHERE}-2"]`)).toHaveTextContent(
+      expect(dom.window.document.querySelector(`label[for="${formFields.MOSTLY_LIVE_WHERE}-0-2"]`)).toHaveTextContent(
         `With ${session.secondaryAdultName}`,
       );
-      expect(dom.window.document.querySelector(`label[for="${formFields.MOSTLY_LIVE_WHERE}-3"]`)).toHaveTextContent(
+      expect(dom.window.document.querySelector(`label[for="${formFields.MOSTLY_LIVE_WHERE}-0-3"]`)).toHaveTextContent(
         `They will split time between ${session.initialAdultName} and ${session.secondaryAdultName}`,
       );
-      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).not.toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0`)).not.toHaveAttribute(
         'aria-describedby',
       );
     });
@@ -53,13 +54,13 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
         {
           location: 'body',
           msg: primaryError,
-          path: formFields.MOSTLY_LIVE_WHERE,
+          path: `${formFields.MOSTLY_LIVE_WHERE}-0`,
           type: 'field',
         },
         {
           location: 'body',
           msg: secondaryError,
-          path: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT,
+          path: `${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0`,
           type: 'field',
         },
       ]);
@@ -71,37 +72,40 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
-        `${formFields.MOSTLY_LIVE_WHERE}-error`,
+        `${formFields.MOSTLY_LIVE_WHERE}-0-error`,
       );
-      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-error`)).toHaveTextContent(
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-0-error`)).toHaveTextContent(
         primaryError,
       );
-      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0`)).toHaveAttribute(
         'aria-describedby',
-        `${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-error`,
+        `${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0-error`,
       );
       expect(
-        dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-error`),
+        dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0-error`),
       ).toHaveTextContent(secondaryError);
     });
 
     it('should render field value flash responses correctly', async () => {
       const arrangement = 'arrangement';
       Object.assign(flashFormValues, [
-        { [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: arrangement, [formFields.MOSTLY_LIVE_WHERE]: 'other' },
+        { [`${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0`]: arrangement, [`${formFields.MOSTLY_LIVE_WHERE}-0`]: 'other' },
       ]);
 
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          where: 'withInitial',
-          describeArrangement: 'wrong arrangement',
+          default: {
+            where: 'withInitial',
+            describeArrangement: 'wrong arrangement',
+          },
         },
       };
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-5`)).toBeChecked();
-      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).toHaveValue(
+      // The "other" option is the 5th item, so it gets ID suffix -0-5
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-0-5`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0`)).toHaveValue(
         arrangement,
       );
     });
@@ -111,15 +115,18 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
 
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          where: 'other',
-          describeArrangement: arrangement,
+          default: {
+            where: 'other',
+            describeArrangement: arrangement,
+          },
         },
       };
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_MOSTLY_LIVE)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-5`)).toBeChecked();
-      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}`)).toHaveValue(
+      // The "other" option is the 5th item, so it gets ID suffix -0-5
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_WHERE}-0-5`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0`)).toHaveValue(
         arrangement,
       );
     });
@@ -136,7 +143,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
         {
           location: 'body',
           msg: 'Choose where the children will mostly live',
-          path: formFields.MOSTLY_LIVE_WHERE,
+          path: `${formFields.MOSTLY_LIVE_WHERE}-0`,
           type: 'field',
         },
       ]);
@@ -145,7 +152,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
     it('should reload page and set flash when the radio button is other, but arrangements are not described', async () => {
       await request(app)
         .post(paths.LIVING_VISITING_MOSTLY_LIVE)
-        .send({ [formFields.MOSTLY_LIVE_WHERE]: 'other' })
+        .send({ [`${formFields.MOSTLY_LIVE_WHERE}-0`]: 'other' })
         .expect(302)
         .expect('location', paths.LIVING_VISITING_MOSTLY_LIVE);
 
@@ -153,7 +160,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
         {
           location: 'body',
           msg: 'Describe the living arrangement you are proposing',
-          path: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT,
+          path: `${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0`,
           type: 'field',
           value: '',
         },
@@ -166,13 +173,20 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       await request(app)
         .post(paths.LIVING_VISITING_MOSTLY_LIVE)
         .send({
-          [formFields.MOSTLY_LIVE_WHERE]: where,
-          [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: describeArrangement,
+          [`${formFields.MOSTLY_LIVE_WHERE}-0`]: where,
+          [`${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0`]: describeArrangement,
         })
         .expect(302)
         .expect('location', paths.TASK_LIST);
 
-      expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where, describeArrangement } });
+      expect(sessionMock.livingAndVisiting).toEqual({
+        mostlyLive: {
+          default: {
+            where,
+            describeArrangement,
+          },
+        },
+      });
     });
 
     it.each([
@@ -182,30 +196,42 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
     ])(
       'should redirect to %s if the page is correctly filled and %s is selected',
       async (expectedRedirect, selection) => {
-        sessionMock.livingAndVisiting = { mostlyLive: { where: 'other' }, overnightVisits: { willHappen: true } };
+        sessionMock.livingAndVisiting = {
+          mostlyLive: { default: { where: 'other' } },
+          overnightVisits: { willHappen: true },
+        };
 
         await request(app)
           .post(paths.LIVING_VISITING_MOSTLY_LIVE)
           .send({
-            [formFields.MOSTLY_LIVE_WHERE]: selection,
-            [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: 'arrangement',
+            [`${formFields.MOSTLY_LIVE_WHERE}-0`]: selection,
+            [`${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0`]: 'arrangement',
           })
           .expect(302)
           .expect('location', expectedRedirect);
 
-        expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where: selection } });
+        expect(sessionMock.livingAndVisiting).toEqual({
+          mostlyLive: {
+            default: {
+              where: selection,
+            },
+          },
+        });
       },
     );
 
     it('should not reset the livingAndVisiting data if the same option is set', async () => {
       const where: whereMostlyLive = 'withInitial';
-      const initialLivingAndVisiting = { mostlyLive: { where }, overnightVisits: { willHappen: true } };
+      const initialLivingAndVisiting = {
+        mostlyLive: { default: { where } },
+        overnightVisits: { willHappen: true },
+      };
 
       sessionMock.livingAndVisiting = initialLivingAndVisiting;
 
       await request(app)
         .post(paths.LIVING_VISITING_MOSTLY_LIVE)
-        .send({ [formFields.MOSTLY_LIVE_WHERE]: where })
+        .send({ [`${formFields.MOSTLY_LIVE_WHERE}-0`]: where })
         .expect(302)
         .expect('location', paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN);
 
@@ -216,13 +242,22 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       const where: whereMostlyLive = 'other';
       const arrangement = 'new arrangement';
 
-      sessionMock.livingAndVisiting = { mostlyLive: { where, describeArrangement: 'old arrangement' } };
+      sessionMock.livingAndVisiting = {
+        mostlyLive: { default: { where, describeArrangement: 'old arrangement' } },
+      };
 
       await request(app)
         .post(paths.LIVING_VISITING_MOSTLY_LIVE)
-        .send({ [formFields.MOSTLY_LIVE_WHERE]: where, [formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]: arrangement });
+        .send({ [`${formFields.MOSTLY_LIVE_WHERE}-0`]: where, [`${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-0`]: arrangement });
 
-      expect(sessionMock.livingAndVisiting).toEqual({ mostlyLive: { where, describeArrangement: arrangement } });
+      expect(sessionMock.livingAndVisiting).toEqual({
+        mostlyLive: {
+          default: {
+            where,
+            describeArrangement: arrangement,
+          },
+        },
+      });
     });
   });
 });
