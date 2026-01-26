@@ -20,6 +20,25 @@ const getSomeoneElseFieldName = (childIndex: number) => `${formFields.WHERE_HAND
 // Helper to get the child selector field name for a specific entry index
 const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
 
+// Helper to safely get a trimmed string from request body
+const safeString = (value: unknown): string => {
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+  return '';
+};
+
+// Helper to safely get an array from request body
+const safeArray = (value: unknown): string[] => {
+  if (Array.isArray(value)) {
+    return value.filter((item): item is string => typeof item === 'string');
+  }
+  if (typeof value === 'string') {
+    return [value];
+  }
+  return [];
+};
+
 const whereHandoverRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER), (request, response) => {
     const { numberOfChildren, namesOfChildren, handoverAndHolidays } = request.session;
@@ -158,8 +177,8 @@ const whereHandoverRoutes = (router: Router) => {
       }
 
       // Process the default answer
-      const defaultWhere = request.body[getFieldName(0)] || [];
-      const defaultSomeoneElse = request.body[getSomeoneElseFieldName(0)]?.trim() || '';
+      const defaultWhere = safeArray(request.body[getFieldName(0)]);
+      const defaultSomeoneElse = safeString(request.body[getSomeoneElseFieldName(0)]);
 
       // Build the per-child answers structure
       const byChild: Record<number, WhereHandoverAnswer> = {};
@@ -174,8 +193,8 @@ const whereHandoverRoutes = (router: Router) => {
           const childIndex = parseInt(request.body[key], 10);
           const whereFieldName = getFieldName(entryIndex);
           const someoneElseFieldName = getSomeoneElseFieldName(entryIndex);
-          const where = request.body[whereFieldName] || [];
-          const someoneElse = request.body[someoneElseFieldName]?.trim() || '';
+          const where = safeArray(request.body[whereFieldName]);
+          const someoneElse = safeString(request.body[someoneElseFieldName]);
           return { childIndex, where, someoneElse, entryIndex };
         })
         .filter(entry => !isNaN(entry.childIndex) && entry.where.length > 0);

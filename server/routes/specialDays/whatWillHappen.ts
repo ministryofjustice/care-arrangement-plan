@@ -16,6 +16,14 @@ const getFieldName = (childIndex: number) => `${formFields.SPECIAL_DAYS}-${child
 // Helper to get the child selector field name for a specific entry index
 const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
 
+// Helper to safely get a trimmed string from request body
+const safeString = (value: unknown): string => {
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+  return '';
+};
+
 const whatWillHappenRoutes = (router: Router) => {
   router.get(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, checkFormProgressFromConfig(FORM_STEPS.SPECIAL_DAYS_WHAT_WILL_HAPPEN), (request, response) => {
     const { numberOfChildren, namesOfChildren, specialDays } = request.session;
@@ -109,7 +117,7 @@ const whatWillHappenRoutes = (router: Router) => {
       }
 
       // Process the default answer
-      const defaultAnswer = request.body[getFieldName(0)]?.trim() || '';
+      const defaultAnswer = safeString(request.body[getFieldName(0)]);
 
       // Build the per-child answers structure
       const byChild: Record<number, WhatWillHappenAnswer> = {};
@@ -123,7 +131,7 @@ const whatWillHappenRoutes = (router: Router) => {
           const entryIndex = parseInt(key.replace('child-selector-', ''), 10);
           const childIndex = parseInt(request.body[key], 10);
           const answerFieldName = getFieldName(entryIndex);
-          const answer = request.body[answerFieldName]?.trim() || '';
+          const answer = safeString(request.body[answerFieldName]);
           return { childIndex, answer, entryIndex };
         })
         .filter(entry => !isNaN(entry.childIndex) && entry.answer);

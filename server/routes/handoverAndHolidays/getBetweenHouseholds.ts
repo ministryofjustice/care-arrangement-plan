@@ -20,6 +20,14 @@ const getDescribeArrangementFieldName = (childIndex: number) => `${formFields.GE
 // Helper to get the child selector field name for a specific entry index
 const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
 
+// Helper to safely get a trimmed string from request body
+const safeString = (value: unknown): string => {
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+  return '';
+};
+
 const getBetweenHouseholdsRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS), (request, response) => {
     const { numberOfChildren, namesOfChildren, handoverAndHolidays } = request.session;
@@ -138,8 +146,8 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
       }
 
       // Process the default answer
-      const defaultHow = request.body[getFieldName(0)]?.trim() || '';
-      const defaultDescribeArrangement = request.body[getDescribeArrangementFieldName(0)]?.trim() || '';
+      const defaultHow = safeString(request.body[getFieldName(0)]);
+      const defaultDescribeArrangement = safeString(request.body[getDescribeArrangementFieldName(0)]);
 
       // Build the per-child answers structure
       const byChild: Record<number, GetBetweenHouseholdsAnswer> = {};
@@ -154,8 +162,8 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
           const childIndex = parseInt(request.body[key], 10);
           const howFieldName = getFieldName(entryIndex);
           const describeFieldName = getDescribeArrangementFieldName(entryIndex);
-          const how = request.body[howFieldName]?.trim() || '';
-          const describeArrangement = request.body[describeFieldName]?.trim() || '';
+          const how = safeString(request.body[howFieldName]);
+          const describeArrangement = safeString(request.body[describeFieldName]);
           return { childIndex, how, describeArrangement, entryIndex };
         })
         .filter(entry => !isNaN(entry.childIndex) && entry.how);

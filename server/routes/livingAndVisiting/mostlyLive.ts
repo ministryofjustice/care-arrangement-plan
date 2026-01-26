@@ -16,6 +16,15 @@ import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHe
 const getFieldName = (childIndex: number) => `${formFields.MOSTLY_LIVE_WHERE}-${childIndex}`;
 const getDescribeFieldName = (childIndex: number) => `${formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT}-${childIndex}`;
 
+// Helper to safely get a trimmed string from request body
+const safeString = (value: unknown): string | undefined => {
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    return trimmed || undefined;
+  }
+  return undefined;
+};
+
 const mostlyLiveRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_MOSTLY_LIVE, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_MOSTLY_LIVE), (request, response) => {
     const { numberOfChildren, namesOfChildren } = request.session;
@@ -136,7 +145,7 @@ const mostlyLiveRoutes = (router: Router) => {
 
       // Process the default answer
       const defaultWhere = request.body[getFieldName(0)] as whereMostlyLive;
-      const defaultDescribe = request.body[getDescribeFieldName(0)]?.trim() || undefined;
+      const defaultDescribe = safeString(request.body[getDescribeFieldName(0)]);
 
       // Build the per-child answers structure
       const byChild: Record<number, MostlyLiveAnswer> = {};
@@ -150,7 +159,7 @@ const mostlyLiveRoutes = (router: Router) => {
           const whereFieldName = getFieldName(entryIndex);
           const describeFieldName = getDescribeFieldName(entryIndex);
           const where = request.body[whereFieldName] as whereMostlyLive;
-          const describeArrangement = request.body[describeFieldName]?.trim() || undefined;
+          const describeArrangement = safeString(request.body[describeFieldName]);
           return { childIndex, where, describeArrangement, entryIndex };
         })
         .filter(entry => !isNaN(entry.childIndex) && entry.where);

@@ -17,6 +17,14 @@ const getFieldName = (childIndex: number) => `${formFields.WHICH_SCHEDULE}-${chi
 // Helper to get the child selector field name for a specific entry index
 const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
 
+// Helper to safely get a trimmed string from request body
+const safeString = (value: unknown): string => {
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+  return '';
+};
+
 const whichScheduleRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WHICH_SCHEDULE, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE), (request, response) => {
     const { numberOfChildren, namesOfChildren } = request.session;
@@ -117,7 +125,7 @@ const whichScheduleRoutes = (router: Router) => {
       }
 
       // Process the default answer
-      const defaultAnswer = request.body[getFieldName(0)]?.trim() || '';
+      const defaultAnswer = safeString(request.body[getFieldName(0)]);
 
       // Build the per-child answers structure
       const byChild: Record<number, WhichScheduleAnswer> = {};
@@ -129,7 +137,7 @@ const whichScheduleRoutes = (router: Router) => {
           const entryIndex = parseInt(key.replace('child-selector-', ''), 10);
           const childIndex = parseInt(request.body[key], 10);
           const answerFieldName = getFieldName(entryIndex);
-          const answer = request.body[answerFieldName]?.trim() || '';
+          const answer = safeString(request.body[answerFieldName]);
           return { childIndex, answer, entryIndex };
         })
         .filter(entry => !isNaN(entry.childIndex) && entry.answer);
