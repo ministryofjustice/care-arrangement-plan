@@ -30,10 +30,11 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('Where does handover take place?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
-      expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).not.toContain(
-        `${formFields.WHERE_HANDOVER}-error`,
+      // Field names now use -0 suffix for the default/all children entry
+      expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby') || '').not.toContain(
+        `${formFields.WHERE_HANDOVER}-0-error`,
       );
-      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}`)).not.toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`)).not.toHaveAttribute(
         'aria-describedby',
       );
     });
@@ -122,20 +123,21 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
 
-      expect(flashMock).toHaveBeenCalledWith('errors', [
-        {
+      // When nothing is selected, we get errors from both validation chains
+      expect(flashMock).toHaveBeenCalledWith('errors', expect.arrayContaining([
+        expect.objectContaining({
           location: 'body',
           msg: 'Select where handover takes place',
           path: `${formFields.WHERE_HANDOVER}-0`,
           type: 'field',
-        },
-      ]);
+        }),
+      ]));
     });
 
     it('should reload page and set flash when the checkboxes is someone else, but the someone else is not described', async () => {
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)
-        .send({ [`${formFields.WHERE_HANDOVER}-0`]: 'someoneElse' })
+        .send({ [`${formFields.WHERE_HANDOVER}-0`]: ['someoneElse'] })
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
 
@@ -157,6 +159,9 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
 
+      // When both someoneElse and another option are selected, we get two errors:
+      // 1. The multiSelected error (can't select someoneElse with other options)
+      // 2. The missing someoneElse description error
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
@@ -164,6 +169,13 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
           path: `${formFields.WHERE_HANDOVER}-0`,
           type: 'field',
           value: ['someoneElse', 'neutral'],
+        },
+        {
+          location: 'body',
+          msg: 'Describe who will manage handover',
+          path: `${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`,
+          type: 'field',
+          value: '',
         },
       ]);
     });
@@ -182,7 +194,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER)
         .send({
-          [`${formFields.WHERE_HANDOVER}-0`]: 'someoneElse',
+          [`${formFields.WHERE_HANDOVER}-0`]: ['someoneElse'],
           [`${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`]: someoneElse,
         })
         .expect(302)

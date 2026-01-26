@@ -12,6 +12,8 @@ const app = testAppSetup();
 const session: Partial<SessionData> = {
   initialAdultName: 'Sarah',
   secondaryAdultName: 'Steph',
+  numberOfChildren: 1,
+  namesOfChildren: ['Child 1'],
 };
 
 beforeEach(() => {
@@ -33,11 +35,12 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
-      expect(dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}-0-initialCollects"]`)).toHaveTextContent(
+      // govukRadios generates IDs: {name}, {name}-2, {name}-3 for subsequent items
+      expect(dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}-0"]`)).toHaveTextContent(
         `${session.initialAdultName} collects the children`,
       );
       expect(
-        dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}-0-secondaryCollects"]`),
+        dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}-0-2"]`),
       ).toHaveTextContent(`${session.secondaryAdultName} collects the children`);
       expect(
         dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`),
@@ -103,7 +106,8 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-0-other`)).toBeChecked();
+      // "other" is the 3rd item, so ID is {name}-3
+      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-0-3`)).toBeChecked();
       expect(
         dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`),
       ).toHaveValue(arrangement);
@@ -124,7 +128,8 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-0-other`)).toBeChecked();
+      // "other" is the 3rd item, so ID is {name}-3
+      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-0-3`)).toBeChecked();
       expect(
         dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`),
       ).toHaveValue(arrangement);

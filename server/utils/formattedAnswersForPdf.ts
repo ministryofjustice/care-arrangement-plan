@@ -422,11 +422,25 @@ export const itemsForChangeover = (request: Request) => {
   const { initialAdultName } = request.session;
   const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays');
   if (!handoverAndHolidays?.itemsForChangeover) return undefined;
-  return handoverAndHolidays.itemsForChangeover.noDecisionRequired
+
+  const data = handoverAndHolidays.itemsForChangeover;
+
+  // Handle the new format with "default" wrapper
+  if (data.default) {
+    return data.default.noDecisionRequired
+      ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
+      : request.__('sharePlan.yourProposedPlan.senderSuggested', {
+          senderName: initialAdultName,
+          suggestion: data.default.answer,
+        });
+  }
+
+  // Handle legacy format (direct properties without default wrapper)
+  return data.noDecisionRequired
     ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
     : request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
-        suggestion: handoverAndHolidays.itemsForChangeover.answer,
+        suggestion: data.answer,
       });
 };
 
