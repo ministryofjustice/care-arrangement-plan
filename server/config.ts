@@ -55,6 +55,7 @@ const config = {
   },
   passwords: getStringArray('BETA_ACCESS_PASSWORDS'),
   useAuth: getBoolConfigValue('USE_AUTH'),
+  isLiveService: process.env.IS_LIVE_SERVICE === 'true',
   feedbackUrl: getStringConfigValue('FEEDBACK_URL'),
   contactEmail: getStringConfigValue('CONTACT_EMAIL'),
   previewEnd: new Date(getStringConfigValue('PREVIEW_END')),
