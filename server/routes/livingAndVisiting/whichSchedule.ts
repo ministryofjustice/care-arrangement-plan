@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
-import { body, matchedData, validationResult } from 'express-validator';
+import { body, validationResult } from 'express-validator';
 
 import { WhichScheduleAnswer } from '../../@types/session';
 import formFields from '../../constants/formFields';
@@ -14,7 +15,7 @@ import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHe
 const getFieldName = (childIndex: number) => `${formFields.WHICH_SCHEDULE}-${childIndex}`;
 
 // Helper to get the child selector field name for a specific entry index
-const getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
+const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
 
 const whichScheduleRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WHICH_SCHEDULE, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE), (request, response) => {

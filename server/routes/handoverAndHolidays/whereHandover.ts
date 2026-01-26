@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { body, matchedData, validationResult } from 'express-validator';
+import { body, validationResult } from 'express-validator';
 
 import { whereHandoverField } from '../../@types/fields';
 import { WhereHandoverAnswer } from '../../@types/session';
@@ -8,7 +8,7 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { getSessionValue, setSessionSection, isPerChildPoCEnabled } from '../../utils/perChildSession';
+import { isPerChildPoCEnabled } from '../../utils/perChildSession';
 import { getBackUrl } from '../../utils/sessionHelpers';
 
 // Helper to get the field name for a specific child index
@@ -18,7 +18,7 @@ const getFieldName = (childIndex: number) => `${formFields.WHERE_HANDOVER}-${chi
 const getSomeoneElseFieldName = (childIndex: number) => `${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-${childIndex}`;
 
 // Helper to get the child selector field name for a specific entry index
-const getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
+const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
 
 const whereHandoverRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER), (request, response) => {
@@ -149,7 +149,6 @@ const whereHandoverRoutes = (router: Router) => {
         .catch(next);
     },
     (request, response) => {
-      const { numberOfChildren } = request.session;
       const errors = validationResult(request);
 
       if (!errors.isEmpty()) {
@@ -190,9 +189,8 @@ const whereHandoverRoutes = (router: Router) => {
         };
       });
 
-      const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays') || {};
-      setSessionSection(request.session, 'handoverAndHolidays', {
-        ...handoverAndHolidays,
+      request.session.handoverAndHolidays = {
+        ...request.session.handoverAndHolidays,
         whereHandover: {
           default: {
             noDecisionRequired: false,
@@ -201,7 +199,7 @@ const whereHandoverRoutes = (router: Router) => {
           },
           ...(Object.keys(byChild).length > 0 ? { byChild } : {}),
         },
-      });
+      };
 
       addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
 
@@ -210,13 +208,14 @@ const whereHandoverRoutes = (router: Router) => {
   );
 
   router.post(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED, (request, response) => {
-    const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays') || {};
-    setSessionSection(request.session, 'handoverAndHolidays', {
-      ...handoverAndHolidays,
+    request.session.handoverAndHolidays = {
+      ...request.session.handoverAndHolidays,
       whereHandover: {
-        noDecisionRequired: true,
+        default: {
+          noDecisionRequired: true,
+        },
       },
-    });
+    };
 
     addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
 

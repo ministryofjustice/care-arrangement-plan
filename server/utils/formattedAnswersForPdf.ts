@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request } from 'express';
 
 import { whereHandoverField } from '../@types/fields';
 
 import { formatListOfStrings, formatPlanChangesOptionsIntoList, formatWhichDaysSessionValue } from './formValueUtils';
 import { getSessionValue } from './perChildSession';
-import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
+import { parentNotMostlyLivedWith } from './sessionHelpers';
 
 export type PerChildFormattedAnswerForPdf = {
   defaultAnswer: string;

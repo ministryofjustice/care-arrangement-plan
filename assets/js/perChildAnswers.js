@@ -17,7 +17,7 @@ function setupPerChildAnswers() {
   // Parse data from the button's data attributes
   const numberOfChildren = parseInt(addButton.dataset.numberOfChildren, 10);
   const childOptions = JSON.parse(addButton.dataset.childOptions || '[]');
-  const namesOfChildren = JSON.parse(addButton.dataset.namesOfChildren || '[]');
+  const _namesOfChildren = JSON.parse(addButton.dataset.namesOfChildren || '[]');
   const fieldBaseName = addButton.dataset.fieldBaseName;
 
   let entryCounter = 1; // Start from 1 since 0 is the default/all children entry

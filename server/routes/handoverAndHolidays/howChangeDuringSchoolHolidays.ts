@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ValidationError, body, matchedData, validationResult } from 'express-validator';
+import { body, validationResult } from 'express-validator';
 
 import { HowChangeDuringSchoolHolidaysAnswer } from '../../@types/session';
 import formFields from '../../constants/formFields';
@@ -14,7 +14,7 @@ import { getBackUrl } from '../../utils/sessionHelpers';
 const getFieldName = (childIndex: number) => `${formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS}-${childIndex}`;
 
 // Helper to get the child selector field name for a specific entry index
-const getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
+const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
 
 const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS), (request, response) => {
@@ -103,7 +103,6 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
         .catch(next);
     },
     (request, response) => {
-      const { numberOfChildren, namesOfChildren } = request.session;
       const errors = validationResult(request);
 
       if (!errors.isEmpty()) {

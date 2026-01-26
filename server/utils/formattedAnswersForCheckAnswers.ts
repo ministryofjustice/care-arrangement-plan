@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request } from 'express';
 
 import { whereHandoverField } from '../@types/fields';
 
 import { formatPlanChangesOptionsIntoList, formatWhichDaysSessionValue } from './formValueUtils';
-import { isDesign2, getSessionValue } from './perChildSession';
-import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
+import { getSessionValue } from './perChildSession';
+import { parentNotMostlyLivedWith } from './sessionHelpers';
 
 export type PerChildFormattedAnswer = {
   defaultAnswer: string;

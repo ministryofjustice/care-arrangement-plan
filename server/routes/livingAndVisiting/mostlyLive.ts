@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
-import { body, matchedData, validationResult } from 'express-validator';
+import { body, validationResult } from 'express-validator';
 
 import { whereMostlyLive } from '../../@types/fields';
 import { MostlyLiveAnswer } from '../../@types/session';

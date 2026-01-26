@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
 
 import { ChildPlan } from '../@types/session';

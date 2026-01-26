@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { body, validationResult } from 'express-validator';
 
-import { ChildPlan, PerChildDesignMode } from '../@types/session';
+import { PerChildDesignMode } from '../@types/session';
 import paths from '../constants/paths';
 
 /**

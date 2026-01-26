@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ValidationError, body, matchedData, validationResult } from 'express-validator';
+import { body, validationResult } from 'express-validator';
 
 import { WhatWillHappenAnswer } from '../../@types/session';
 import formFields from '../../constants/formFields';
@@ -14,7 +14,7 @@ import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHe
 const getFieldName = (childIndex: number) => `${formFields.SPECIAL_DAYS}-${childIndex}`;
 
 // Helper to get the child selector field name for a specific entry index
-const getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
+const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
 
 const whatWillHappenRoutes = (router: Router) => {
   router.get(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, checkFormProgressFromConfig(FORM_STEPS.SPECIAL_DAYS_WHAT_WILL_HAPPEN), (request, response) => {
@@ -100,7 +100,6 @@ const whatWillHappenRoutes = (router: Router) => {
         .catch(next);
     },
     (request, response) => {
-      const { numberOfChildren, namesOfChildren } = request.session;
       const errors = validationResult(request);
 
       if (!errors.isEmpty()) {

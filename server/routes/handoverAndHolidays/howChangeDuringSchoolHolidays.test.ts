@@ -30,9 +30,7 @@ describe(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
       const textarea = dom.window.document.querySelector(`#${formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS}-0`);
       expect(textarea).not.toBeNull();
       const ariaDescribedBy = textarea?.getAttribute('aria-describedby');
-      if (ariaDescribedBy) {
-        expect(ariaDescribedBy).not.toContain(`${formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS}-0-error`);
-      }
+      expect(ariaDescribedBy || '').not.toContain(`${formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS}-0-error`);
     });
 
     it('should render error flash responses correctly', async () => {

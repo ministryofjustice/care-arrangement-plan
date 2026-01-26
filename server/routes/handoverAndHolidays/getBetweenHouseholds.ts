@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { body, matchedData, validationResult } from 'express-validator';
+import { body, validationResult } from 'express-validator';
 
 import { getBetweenHouseholdsField } from '../../@types/fields';
 import { GetBetweenHouseholdsAnswer } from '../../@types/session';
@@ -8,7 +8,7 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { getSessionValue, setSessionSection, isPerChildPoCEnabled } from '../../utils/perChildSession';
+import { isPerChildPoCEnabled } from '../../utils/perChildSession';
 import { getBackUrl } from '../../utils/sessionHelpers';
 
 // Helper to get the field name for a specific child index
@@ -18,7 +18,7 @@ const getFieldName = (childIndex: number) => `${formFields.GET_BETWEEN_HOUSEHOLD
 const getDescribeArrangementFieldName = (childIndex: number) => `${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-${childIndex}`;
 
 // Helper to get the child selector field name for a specific entry index
-const getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
+const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
 
 const getBetweenHouseholdsRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS), (request, response) => {
@@ -129,7 +129,6 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
         .catch(next);
     },
     (request, response) => {
-      const { numberOfChildren } = request.session;
       const errors = validationResult(request);
 
       if (!errors.isEmpty()) {

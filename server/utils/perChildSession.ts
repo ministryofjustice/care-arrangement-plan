@@ -3,6 +3,8 @@
  * Abstracts Design 1 (inline per-child) vs Design 2 (task list level) logic
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { CAPSession, ChildPlan, PerChildAnswer } from '../@types/session';
 
 // Type for session that may or may not be fully initialized
