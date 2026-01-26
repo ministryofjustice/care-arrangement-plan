@@ -7,6 +7,7 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
+import { isPerChildPoCEnabled } from '../../utils/perChildSession';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 // Helper to get the field name for a specific child index
@@ -59,7 +60,7 @@ const whatWillHappenRoutes = (router: Router) => {
       namesOfChildren,
       childOptions,
       childrenWithAnswers,
-      showPerChildOption: numberOfChildren > 1,
+      showPerChildOption: numberOfChildren > 1 && isPerChildPoCEnabled(request.session),
     });
   });
 

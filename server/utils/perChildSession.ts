@@ -9,6 +9,14 @@ import { CAPSession, ChildPlan, PerChildAnswer } from '../@types/session';
 type SessionLike = Partial<CAPSession>;
 
 /**
+ * Check if the per-child PoC is enabled for this session
+ * Returns true only if the user selected the PoC version in the UR toggle
+ */
+export function isPerChildPoCEnabled(session: SessionLike): boolean {
+  return session.usePerChildPoC === true;
+}
+
+/**
  * Check if the session is using Design 2 (task list level per-child)
  */
 export function isDesign2(session: SessionLike): boolean {

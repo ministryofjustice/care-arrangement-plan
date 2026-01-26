@@ -8,7 +8,7 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { isDesign2, getSessionValue, setSessionSection } from '../../utils/perChildSession';
+import { isDesign2, isPerChildPoCEnabled, getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 // Helper to get the field name for a specific child index
@@ -76,7 +76,7 @@ const mostlyLiveRoutes = (router: Router) => {
       namesOfChildren,
       childOptions,
       childrenWithAnswers,
-      showPerChildOption: numberOfChildren > 1 && !isDesign2(request.session),
+      showPerChildOption: numberOfChildren > 1 && !isDesign2(request.session) && isPerChildPoCEnabled(request.session),
     });
   });
 

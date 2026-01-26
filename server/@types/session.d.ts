@@ -81,6 +81,10 @@ export type CAPSession = {
   namesOfChildren: string[];
   initialAdultName: string;
   secondaryAdultName: string;
+  // UR toggle: enable per-child PoC features (default false for current service)
+  usePerChildPoC?: boolean;
+  // Unique identifier for each plan attempt (timestamp when user clicks "Start now")
+  planStartTime?: number;
   // Design mode toggle: 'design1' = inline per-child (default), 'design2' = task list level
   perChildDesignMode?: PerChildDesignMode;
   // Design 2 specific: which child's plan is currently being edited

@@ -8,7 +8,7 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
+import { getSessionValue, setSessionSection, isPerChildPoCEnabled } from '../../utils/perChildSession';
 import { getBackUrl } from '../../utils/sessionHelpers';
 
 // Helper to get the field name for a specific child index
@@ -71,7 +71,7 @@ const whereHandoverRoutes = (router: Router) => {
       namesOfChildren,
       childOptions,
       childrenWithAnswers,
-      showPerChildOption: numberOfChildren > 1,
+      showPerChildOption: numberOfChildren > 1 && isPerChildPoCEnabled(request.session),
     });
   });
 

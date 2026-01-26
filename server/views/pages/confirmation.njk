@@ -35,8 +35,8 @@
       'use strict';
 
       // Auto-trigger PDF download when page loads
-      // Use a unique key per session to allow multiple plans in the same browser session
-      var downloadKey = 'downloadTriggered_' + '{{ sessionId }}';
+      // Use a unique key per plan attempt to allow multiple plans in the same browser session
+      var downloadKey = 'downloadTriggered_' + '{{ planStartTime }}';
 
       // Check if this is the first visit to this page (not a refresh or back navigation)
       if (!sessionStorage.getItem(downloadKey)) {
