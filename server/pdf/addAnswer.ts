@@ -56,24 +56,12 @@ const addAnswer = (
 
   // Handle per-child answer structure
   if (isPerChildAnswer(answer)) {
-    // Add "For all children:" label
-    paragraphs.push({
-      text: 'For all children:',
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.BOLD,
-      bottomPadding: PARAGRAPH_SPACE / 2,
-    });
+    const numberOfChildren = pdf.request.session.numberOfChildren || 1;
+    const perChildCount = answer.perChildAnswers?.length || 0;
+    const hasPerChildAnswers = perChildCount > 0;
+    const allChildrenHaveSpecificAnswers = perChildCount >= numberOfChildren;
 
-    // Add the default answer
-    paragraphs.push({
-      text: answer.defaultAnswer,
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-      splittable: true,
-    });
-
-    // Add per-child answers if they exist
+    // Add per-child answers first
     if (answer.perChildAnswers) {
       for (const childAnswer of answer.perChildAnswers) {
         // Add child name label
@@ -93,6 +81,26 @@ const addAnswer = (
           splittable: true,
         });
       }
+    }
+
+    // Then show default answer for remaining children (if not all have specific answers)
+    if (!allChildrenHaveSpecificAnswers && answer.defaultAnswer) {
+      // Add label - "For all other children:" if some have specific answers, otherwise "For all children:"
+      paragraphs.push({
+        text: hasPerChildAnswers ? 'For all other children:' : 'For all children:',
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.BOLD,
+        bottomPadding: PARAGRAPH_SPACE / 2,
+      });
+
+      // Add the default answer
+      paragraphs.push({
+        text: answer.defaultAnswer,
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+        splittable: true,
+      });
     }
   } else {
     // Simple string answer

@@ -19,23 +19,30 @@ export const mostlyLive = (request: Request): string | PerChildFormattedAnswerFo
   const data = livingAndVisiting.mostlyLive;
 
   // Helper to format a single answer for PDF
-  const formatAnswer = (answer: any): string | undefined => {
+  // context: 'default' for all children, 'child' for specific child, 'other' for other children
+  const formatAnswer = (answer: any, context: 'default' | 'child' | 'other' = 'default', childName?: string): string | undefined => {
     if (!answer?.where) return undefined;
+
+    const suffix = context === 'child' ? 'Child' : context === 'other' ? 'OtherChildren' : '';
+
     switch (answer.where) {
       case 'withInitial':
-        return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedLiveWith', {
+        return request.__(`sharePlan.yourProposedPlan.livingAndVisiting.suggestedLiveWith${suffix}`, {
           senderName: initialAdultName,
           adult: initialAdultName,
+          childName,
         });
       case 'withSecondary':
-        return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedLiveWith', {
+        return request.__(`sharePlan.yourProposedPlan.livingAndVisiting.suggestedLiveWith${suffix}`, {
           senderName: initialAdultName,
           adult: secondaryAdultName,
+          childName,
         });
       case 'split':
-        return request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedSplit', {
+        return request.__(`sharePlan.yourProposedPlan.livingAndVisiting.suggestedSplit${suffix}`, {
           senderName: initialAdultName,
           otherAdult: secondaryAdultName,
+          childName,
         });
       case 'other':
         return request.__('sharePlan.yourProposedPlan.senderSuggested', {
@@ -52,22 +59,25 @@ export const mostlyLive = (request: Request): string | PerChildFormattedAnswerFo
     return formatAnswer(data);
   }
 
-  // Handle new PerChildAnswer format
-  const defaultAnswer = formatAnswer(data.default) || '';
-
   // If there are no per-child overrides, return just the default answer
   if (!data.byChild || Object.keys(data.byChild).length === 0) {
-    return defaultAnswer;
+    return formatAnswer(data.default) || '';
   }
 
   // Return structured data with per-child answers
   const perChildAnswers = Object.entries(data.byChild)
     .filter(([_, answer]: [string, any]) => answer.where)
-    .map(([childIndex, answer]: [string, any]) => ({
-      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
-      answer: formatAnswer(answer) || '',
-    }))
+    .map(([childIndex, answer]: [string, any]) => {
+      const childName = namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`;
+      return {
+        childName,
+        answer: formatAnswer(answer, 'child', childName) || '',
+      };
+    })
     .filter(item => item.answer);
+
+  // Use 'other' context for default answer when there are per-child answers
+  const defaultAnswer = formatAnswer(data.default, perChildAnswers.length > 0 ? 'other' : 'default') || '';
 
   return {
     defaultAnswer,
@@ -210,21 +220,27 @@ export const getBetweenHouseholds = (request: Request): string | PerChildFormatt
   const data = handoverAndHolidays.getBetweenHouseholds;
 
   // Helper to format a single answer
-  const formatAnswer = (answer: any): string | undefined => {
+  // context: 'default' for all children, 'child' for specific child, 'other' for other children
+  const formatAnswer = (answer: any, context: 'default' | 'child' | 'other' = 'default', childName?: string): string | undefined => {
     if (!answer) return undefined;
     if (answer.noDecisionRequired) {
       return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
     }
+
+    const suffix = context === 'child' ? 'Child' : context === 'other' ? 'OtherChildren' : '';
+
     switch (answer.how) {
       case 'initialCollects':
-        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
+        return request.__(`sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects${suffix}`, {
           senderName: initialAdultName,
           adult: initialAdultName,
+          childName,
         });
       case 'secondaryCollects':
-        return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
+        return request.__(`sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects${suffix}`, {
           senderName: initialAdultName,
           adult: secondaryAdultName,
+          childName,
         });
       case 'other':
         return request.__('sharePlan.yourProposedPlan.senderSuggested', {
@@ -241,22 +257,25 @@ export const getBetweenHouseholds = (request: Request): string | PerChildFormatt
     return formatAnswer(data);
   }
 
-  // Handle new PerChildAnswer format
-  const defaultAnswer = formatAnswer(data.default) || '';
-
   // If there are no per-child overrides, return just the default answer
   if (!data.byChild || Object.keys(data.byChild).length === 0) {
-    return defaultAnswer;
+    return formatAnswer(data.default) || '';
   }
 
   // Return structured data with per-child answers
   const perChildAnswers = Object.entries(data.byChild)
     .filter(([_, answer]: [string, any]) => answer.how || answer.noDecisionRequired)
-    .map(([childIndex, answer]: [string, any]) => ({
-      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
-      answer: formatAnswer(answer) || '',
-    }))
+    .map(([childIndex, answer]: [string, any]) => {
+      const childName = namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`;
+      return {
+        childName,
+        answer: formatAnswer(answer, 'child', childName) || '',
+      };
+    })
     .filter(item => item.answer);
+
+  // Use 'other' context for default answer when there are per-child answers
+  const defaultAnswer = formatAnswer(data.default, perChildAnswers.length > 0 ? 'other' : 'default') || '';
 
   return {
     defaultAnswer,
@@ -272,7 +291,8 @@ export const whereHandover = (request: Request): string | PerChildFormattedAnswe
   const data = handoverAndHolidays.whereHandover;
 
   // Helper to format a single answer
-  const formatAnswer = (answer: any): string | undefined => {
+  // context: 'default' for all children, 'child' for specific child, 'other' for other children
+  const formatAnswer = (answer: any, context: 'default' | 'child' | 'other' = 'default', childName?: string): string | undefined => {
     if (!answer) return undefined;
     if (answer.noDecisionRequired) {
       return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
@@ -302,9 +322,12 @@ export const whereHandover = (request: Request): string | PerChildFormattedAnswe
       }
     };
 
-    return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedHandover', {
+    const suffix = context === 'child' ? 'Child' : context === 'other' ? 'OtherChildren' : '';
+
+    return request.__(`sharePlan.yourProposedPlan.handoverAndHolidays.suggestedHandover${suffix}`, {
       senderName: initialAdultName,
       location: formatListOfStrings(answer.where.map(getAnswerForWhereHandoverWhere), request),
+      childName,
     });
   };
 
@@ -313,22 +336,25 @@ export const whereHandover = (request: Request): string | PerChildFormattedAnswe
     return formatAnswer(data);
   }
 
-  // Handle new PerChildAnswer format
-  const defaultAnswer = formatAnswer(data.default) || '';
-
   // If there are no per-child overrides, return just the default answer
   if (!data.byChild || Object.keys(data.byChild).length === 0) {
-    return defaultAnswer;
+    return formatAnswer(data.default) || '';
   }
 
   // Return structured data with per-child answers
   const perChildAnswers = Object.entries(data.byChild)
     .filter(([_, answer]: [string, any]) => answer.where || answer.noDecisionRequired)
-    .map(([childIndex, answer]: [string, any]) => ({
-      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
-      answer: formatAnswer(answer) || '',
-    }))
+    .map(([childIndex, answer]: [string, any]) => {
+      const childName = namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`;
+      return {
+        childName,
+        answer: formatAnswer(answer, 'child', childName) || '',
+      };
+    })
     .filter(item => item.answer);
+
+  // Use 'other' context for default answer when there are per-child answers
+  const defaultAnswer = formatAnswer(data.default, perChildAnswers.length > 0 ? 'other' : 'default') || '';
 
   return {
     defaultAnswer,

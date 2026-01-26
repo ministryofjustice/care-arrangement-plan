@@ -503,7 +503,11 @@
       "doNotAgreeOnBasics": "If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to https://www.gov.uk/looking-after-children-divorce.",
       "livingAndVisiting": {
         "suggestedLiveWith": "{{{ senderName }}} suggested that the children mostly live with {{{ adult }}}.",
+        "suggestedLiveWithChild": "{{{ senderName }}} suggested that {{{ childName }}} mostly lives with {{{ adult }}}.",
+        "suggestedLiveWithOtherChildren": "{{{ senderName }}} suggested that the other children mostly live with {{{ adult }}}.",
         "suggestedSplit": "{{{ senderName }}} said the children will split their time between {{{ otherAdult }}}'s home and {{{ senderName }}}'s home.",
+        "suggestedSplitChild": "{{{ senderName }}} said {{{ childName }}} will split their time between {{{ otherAdult }}}'s home and {{{ senderName }}}'s home.",
+        "suggestedSplitOtherChildren": "{{{ senderName }}} said the other children will split their time between {{{ otherAdult }}}'s home and {{{ senderName }}}'s home.",
         "suggestedStayOvernight": "{{{ senderName }}} suggested that the children stay overnight at {{{ adult }}}'s home.",
         "suggestedNoOvernights": "{{{ senderName }}} suggested that overnights do not happen at this time.",
         "suggestedOvernightDays": "{{{ senderName }}} suggested that overnight visits happen on {{ days }}.",
@@ -513,7 +517,11 @@
       },
       "handoverAndHolidays": {
         "suggestedCollects": "{{{ senderName }}} suggested that {{{ adult }}} collects the children.",
+        "suggestedCollectsChild": "{{{ senderName }}} suggested that {{{ adult }}} collects {{{ childName }}}.",
+        "suggestedCollectsOtherChildren": "{{{ senderName }}} suggested that {{{ adult }}} collects the other children.",
         "suggestedHandover": "{{{ senderName }}} suggested that handover takes place at {{{ location }}}",
+        "suggestedHandoverChild": "{{{ senderName }}} suggested that handover for {{{ childName }}} takes place at {{{ location }}}",
+        "suggestedHandoverOtherChildren": "{{{ senderName }}} suggested that handover for the other children takes place at {{{ location }}}",
         "neutralLocation": "a neutral location",
         "home": "{{{ adult }}}'s home",
         "school": "school",

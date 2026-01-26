@@ -5,16 +5,17 @@
   {% if answer.defaultAnswer is defined %}
     {# Per-child answer structure #}
     {% set perChildCount = answer.perChildAnswers | length if answer.perChildAnswers else 0 %}
-    {% if perChildCount < numberOfChildren %}
-      {# Show default answer only if not all children have specific answers #}
-      <p class="govuk-body govuk-!-margin-bottom-1"><strong>{% if perChildCount > 0 %}For all other children:{% else %}For all children:{% endif %}</strong></p>
-      <p class="newline-separated-paragraph">{{ answer.defaultAnswer }}</p>
-    {% endif %}
+    {# Show per-child specific answers first #}
     {% if answer.perChildAnswers %}
       {% for childAnswer in answer.perChildAnswers %}
         <p class="govuk-body govuk-!-margin-bottom-1"><strong>For {{ childAnswer.childName }}:</strong></p>
         <p class="newline-separated-paragraph">{{ childAnswer.answer }}</p>
       {% endfor %}
+    {% endif %}
+    {# Then show default answer for remaining children #}
+    {% if perChildCount < numberOfChildren %}
+      <p class="govuk-body govuk-!-margin-bottom-1"><strong>{% if perChildCount > 0 %}For all other children:{% else %}For all children:{% endif %}</strong></p>
+      <p class="newline-separated-paragraph">{{ answer.defaultAnswer }}</p>
     {% endif %}
   {% else %}
     {# Simple string answer #}
