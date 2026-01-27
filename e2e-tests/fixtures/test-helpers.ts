@@ -85,7 +85,7 @@ export async function expectErrorSummaryVisible(page: Page, expectedTitle = 'The
   const errorSummary = page.locator('.govuk-error-summary');
   await expect(errorSummary).toBeVisible();
   await expect(page.locator('.govuk-error-summary__title')).toHaveText(expectedTitle);
-
+}
   /**
  * Complete the Living and Visiting section with minimal required data
  */
