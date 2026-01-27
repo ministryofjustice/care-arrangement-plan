@@ -16,9 +16,9 @@ describe(`GET ${paths.START}`, () => {
       });
   });
 
-  it('should redirect to safety check in production', async () => {
-    const originalProduction = config.production;
-    Object.defineProperty(config, 'production', { value: true, writable: true });
+  it('should redirect to safety check when live service', async () => {
+    const originalIsLiveService = config.isLiveService;
+    Object.defineProperty(config, 'isLiveService', { value: true, writable: true });
 
     try {
       await request(app)
@@ -26,7 +26,7 @@ describe(`GET ${paths.START}`, () => {
         .expect(302)
         .expect('Location', paths.SAFETY_CHECK);
     } finally {
-      Object.defineProperty(config, 'production', { value: originalProduction, writable: true });
+      Object.defineProperty(config, 'isLiveService', { value: originalIsLiveService, writable: true });
     }
   });
 });

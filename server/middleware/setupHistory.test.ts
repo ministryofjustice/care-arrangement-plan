@@ -34,6 +34,10 @@ describe('setupHistory', () => {
 
   test('resets the history when the task list is loaded', async () => {
     sessionMock.pageHistory = [paths.START];
+    // Set completedSteps so user can access task list without being redirected
+    sessionMock.completedSteps = ['aboutTheAdults'];
+    // Set required session data for task list to render
+    sessionMock.namesOfChildren = ['Child'];
 
     await request(app).get(paths.TASK_LIST);
 
@@ -43,10 +47,12 @@ describe('setupHistory', () => {
 
   test("doesn't add invalid pages to the task list", async () => {
     sessionMock.pageHistory = [paths.START];
+    sessionMock.previousPage = undefined;
 
     await request(app).get('/create-error');
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    // previousPage should be set to last page in history so back button works on error pages
     expect(sessionMock.previousPage).toEqual(paths.START);
   });
 
@@ -65,6 +71,7 @@ describe('setupHistory', () => {
     await request(app).get(paths.START);
 
     expect(sessionMock.pageHistory).toEqual([paths.START]);
+    // When at the first page in history, previousPage should be undefined
     expect(sessionMock.previousPage).toBeUndefined();
   });
 
@@ -78,4 +85,33 @@ describe('setupHistory', () => {
 
     expect(sessionMock.pageHistory).toEqual(expectedHistory);
   });
+
+  test('sets previousPage correctly when navigating forward from multiple pages', async () => {
+    sessionMock.pageHistory = [paths.START, paths.NUMBER_OF_CHILDREN];
+    sessionMock.numberOfChildren = 1; // Set required session data to avoid redirect
+
+    await request(app).get(paths.ABOUT_THE_CHILDREN);
+
+    expect(sessionMock.pageHistory).toEqual([paths.START, paths.NUMBER_OF_CHILDREN, paths.ABOUT_THE_CHILDREN]);
+    expect(sessionMock.previousPage).toEqual(paths.NUMBER_OF_CHILDREN);
+  });
+
+  test('does not set previousPage to current page when going back', async () => {
+    sessionMock.pageHistory = [paths.START, paths.NUMBER_OF_CHILDREN, paths.ABOUT_THE_CHILDREN];
+
+    await request(app).get(paths.NUMBER_OF_CHILDREN);
+
+    expect(sessionMock.pageHistory).toEqual([paths.START, paths.NUMBER_OF_CHILDREN]);
+    expect(sessionMock.previousPage).toEqual(paths.START);
+  });
+
+  test('does not set previousPage when non-history page is visited with no history', async () => {
+    sessionMock.pageHistory = undefined;
+
+    await request(app).get(paths.DOWNLOAD_PDF);
+
+    expect(sessionMock.pageHistory).toBeUndefined();
+    expect(sessionMock.previousPage).toEqual(paths.START);
+  });
+
 });

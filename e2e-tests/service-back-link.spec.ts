@@ -277,3 +277,91 @@ test.describe('Service Back Link Navigation - Static Pages', () => {
     });
   }
 });
+
+/**
+ * Tests for service back link navigation when flash messages are displayed.
+ *
+ * These tests verify that the .govuk-back-link works correctly when users see:
+ * - "Your progress was not saved. Please submit this page to continue."
+ * - "You need to complete this page before continuing."
+ *
+ * The setupHistory middleware sets previousPage correctly even after redirects.
+ */
+test.describe('Service Back Link Navigation - Flash Message Redirects', () => {
+  test('should allow service back link when redirected with "complete this page" message', async ({ page }) => {
+    // Start journey and complete only the first step
+    await startJourney(page);
+    await page.getByLabel(/yes/i).first().check();
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    // Now at children-safety-check, try to jump ahead to about-the-children
+    await page.goto('/about-the-children');
+
+    // Should be redirected with flash message
+    const flashMessage = page.locator('.govuk-notification-banner__heading');
+    await expect(flashMessage).toContainText('You need to complete this page before continuing');
+
+    // Verify we were redirected (not on about-the-children)
+    await expect(page).not.toHaveURL(/\/about-the-children/);
+
+    // Use service back link - should go to previous page in history (safety-check)
+    await verifyServiceBackLink(page, /\/safety-check/);
+  });
+
+  test('should allow service back link when redirected from task list sections', async ({ page }) => {
+    await navigateToTaskList(page);
+
+    // Try to jump to a page that requires completing the first question in the section
+    await page.goto('/living-and-visiting/will-overnights-happen');
+
+    // Should be redirected with flash message
+    const flashMessage = page.locator('.govuk-notification-banner__heading');
+    await expect(flashMessage).toContainText('You need to complete this page before continuing');
+
+    // Should be redirected to mostly-live page (the prerequisite)
+    await expect(page).toHaveURL(/\/living-and-visiting\/where-will-the-children-mostly-live/);
+
+    // Use service back link - should go back to task list
+    await verifyServiceBackLink(page, /\/make-a-plan/);
+  });
+
+  test('should allow service back link when redirected within a section flow', async ({ page }) => {
+    await navigateToTaskList(page);
+
+    // Start the decision-making section and complete the first page
+    await page.goto('/decision-making/plan-last-minute-changes');
+    await page.getByRole('checkbox').first().check();
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    // Now on plan-long-term-notice, go back to task list without completing
+    await page.goto('/make-a-plan');
+
+    // Try to jump to the third page in the section (skipping long-term-notice completion)
+    await page.goto('/decision-making/plan-review');
+
+    // Should be redirected with flash message
+    const flashMessage = page.locator('.govuk-notification-banner__heading');
+    await expect(flashMessage).toBeVisible();
+
+    // Should be on plan-long-term-notice (the prerequisite)
+    await expect(page).toHaveURL(/\/decision-making\/plan-long-term-notice/);
+
+    // Use service back link - should go back to task list
+    await verifyServiceBackLink(page, /\/decision-making\/plan-last-minute-changes/);
+  });
+
+  test('should allow service back link after multiple redirects', async ({ page }) => {
+    await completeOnboardingFlow(page);
+
+    // Try to jump ahead
+    await page.goto('/about-the-children');
+
+    // Should be redirected with flash message to number-of-children
+    const flashMessage = page.locator('.govuk-notification-banner__heading');
+    await expect(flashMessage).toContainText('You need to complete this page before continuing');
+    await expect(page).toHaveURL(/\/number-of-children/);
+
+    // Use service back link - should go to court-order-check
+    await verifyServiceBackLink(page, /\/court-order-check/);
+  });
+});

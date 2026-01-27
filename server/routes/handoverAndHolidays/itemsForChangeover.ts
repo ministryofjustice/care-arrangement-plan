@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
@@ -6,14 +7,17 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
+import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const itemsForChangeoverRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER), (request, response) => {
+    const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays');
+
     response.render('pages/handoverAndHolidays/itemsForChangeover', {
       errors: request.flash('errors'),
       title: request.__('handoverAndHolidays.itemsForChangeover.title'),
-      initialItemsForChangeover: request.session.handoverAndHolidays?.itemsForChangeover?.answer,
+      initialItemsForChangeover: handoverAndHolidays?.itemsForChangeover?.answer,
       backLinkHref: getBackUrl(request.session, paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS),
     });
   });
@@ -36,13 +40,14 @@ const itemsForChangeoverRoutes = (router: Router) => {
         [formFields.ITEMS_FOR_CHANGEOVER]: string;
       }>(request, { onlyValidData: false });
 
-      request.session.handoverAndHolidays = {
-        ...request.session.handoverAndHolidays,
+      const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays') || {};
+      setSessionSection(request.session, 'handoverAndHolidays', {
+        ...handoverAndHolidays,
         itemsForChangeover: {
           noDecisionRequired: false,
           answer: whatWillHappen,
         },
-      };
+      });
 
       addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER); 
 
@@ -51,12 +56,13 @@ const itemsForChangeoverRoutes = (router: Router) => {
   );
 
   router.post(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED, (request, response) => {
-    request.session.handoverAndHolidays = {
-      ...request.session.handoverAndHolidays,
+    const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays') || {};
+    setSessionSection(request.session, 'handoverAndHolidays', {
+      ...handoverAndHolidays,
       itemsForChangeover: {
         noDecisionRequired: true,
       },
-    };
+    });
 
     addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
 

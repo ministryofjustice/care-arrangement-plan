@@ -472,3 +472,150 @@ test.describe('Browser Navigation - Static Pages', () => {
     });
   }
 });
+
+/**
+ * Tests for browser back button navigation when flash messages are displayed.
+ *
+ * These tests verify that users can navigate back when they see:
+ * - "Your progress was not saved. Please submit this page to continue."
+ * - "You need to complete this page before continuing."
+ *
+ * The setupHistory middleware ensures the back button works correctly even
+ * when users are redirected with flash messages.
+ */
+test.describe('Browser Navigation - Flash Message Redirects', () => {
+  test('should allow back navigation when redirected with "complete this page" message', async ({ page }) => {
+    // Start journey and complete only the first step
+    await startJourney(page);
+    await page.getByLabel(/yes/i).first().check();
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    // Now at children-safety-check, try to jump ahead to about-the-children
+    await page.goto('/about-the-children');
+
+    // Should be redirected with flash message
+    const flashMessage = page.locator('.govuk-notification-banner__heading');
+    await expect(flashMessage).toContainText('You need to complete this page before continuing');
+
+    // Verify we were redirected (not on about-the-children)
+    await expect(page).not.toHaveURL(/\/about-the-children/);
+
+    // Use browser back button - should work and go to previous page
+    await page.goBack();
+
+    // Should be back at children-safety-check (the page we were on before the redirect)
+    await expect(page).toHaveURL(/\/children-safety-check/);
+
+    // Verify page loaded correctly
+    const heading = page.locator('h1');
+    await expect(heading).toBeVisible();
+  });
+
+  test('should allow back navigation when redirected from task list sections', async ({ page }) => {
+    await navigateToTaskList(page);
+
+    // Try to jump to a page that requires completing the first question in the section
+    await page.goto('/living-and-visiting/will-overnights-happen');
+
+    // Should be redirected with flash message
+    const flashMessage = page.locator('.govuk-notification-banner__heading');
+    await expect(flashMessage).toContainText('You need to complete this page before continuing');
+
+    // Should be redirected to mostly-live page (the prerequisite)
+    await expect(page).toHaveURL(/\/living-and-visiting\/where-will-the-children-mostly-live/);
+
+    // Use browser back button
+    await page.goBack();
+
+    // Should go back to task list
+    await expect(page).toHaveURL(/\/make-a-plan/);
+
+    // Verify page loaded correctly
+    const heading = page.locator('h1');
+    await expect(heading).toBeVisible();
+  });
+
+  test('should allow back navigation when redirected within a section flow', async ({ page }) => {
+    await navigateToTaskList(page);
+
+    // Start the decision-making section and complete the first page
+    await page.goto('/decision-making/plan-last-minute-changes');
+    await page.getByRole('checkbox').first().check();
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    // Now on plan-long-term-notice, go back to task list without completing
+    await page.goto('/make-a-plan');
+
+    // Try to jump to the third page in the section (skipping long-term-notice completion)
+    await page.goto('/decision-making/plan-review');
+
+    // Should be redirected with flash message
+    const flashMessage = page.locator('.govuk-notification-banner__heading');
+    await expect(flashMessage).toBeVisible();
+
+    // Should be on plan-long-term-notice (the prerequisite)
+    await expect(page).toHaveURL(/\/decision-making\/plan-long-term-notice/);
+
+    // Use browser back button
+    await page.goBack();
+
+    // Should go back to task list
+    await expect(page).toHaveURL(/\/make-a-plan/);
+
+    // Verify page loaded correctly
+    const taskListHeading = page.locator('h1');
+    await expect(taskListHeading).toBeVisible();
+  });
+
+  test('should allow multiple back navigations after flash message redirect', async ({ page }) => {
+    // Navigate through several pages
+    await completeOnboardingFlow(page);
+    await fillNumberOfChildren(page, 1);
+    await fillAllChildrenAndContinue(page, ['Alice']);
+
+    // Now at about-the-adults, try to jump to check-your-answers
+    await page.goto('/check-your-answers');
+
+    // Should be redirected with flash message
+    const flashMessage = page.locator('.govuk-notification-banner__heading');
+    await expect(flashMessage).toContainText('You need to complete this page before continuing');
+
+    // Use browser back button multiple times
+    await page.goBack();
+    await expect(page).toHaveURL(/\/about-the-adults/);
+
+    await page.goBack();
+    await expect(page).toHaveURL(/\/about-the-children/);
+
+    // Verify data persisted
+    const childNameInput = page.locator('input[name="child-name0"]');
+    await expect(childNameInput).toHaveValue('Alice');
+  });
+
+  test('should allow forward navigation after using back from flash message page', async ({ page }) => {
+    await completeOnboardingFlow(page);
+
+    // Try to jump ahead
+    await page.goto('/about-the-children');
+
+    // Should be redirected with flash message to number-of-children
+    await expect(page).toHaveURL(/\/number-of-children/);
+
+    // Go back once to remove flash message
+    await page.goBack();
+    
+    // Go back again to see previous page
+    await page.goBack();
+    await expect(page).toHaveURL(/\/court-order-check/);
+
+    // Now go forward - should return to number-of-children
+    await page.goForward();
+    await expect(page).toHaveURL(/\/number-of-children/);
+
+    // Verify we can continue the journey normally
+    await page.getByLabel(/How many children is this for/i).fill('1');
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    await expect(page).toHaveURL(/\/about-the-children/);
+  });
+});

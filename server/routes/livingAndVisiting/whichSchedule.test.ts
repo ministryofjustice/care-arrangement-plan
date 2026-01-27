@@ -12,10 +12,14 @@ beforeEach(() => {
   // Mock completedSteps to satisfy checkFormProgressFromConfig middleware
   sessionMock.completedSteps = ['livingAndVisitingMostlyLive'];
   sessionMock.pageHistory = ['/living-and-visiting/mostly-live'];
+  sessionMock.numberOfChildren = 1;
+  sessionMock.namesOfChildren = ['Child 1'];
 
   sessionMock.livingAndVisiting = {
     mostlyLive: {
-      where: 'split',
+      default: {
+        where: 'split',
+      },
     },
   };
 });
@@ -31,9 +35,10 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
         "Which schedule best meets the children's needs?",
       );
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      expect(
-        dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}`).getAttribute('aria-describedby'),
-      ).not.toContain(`${formFields.WHICH_SCHEDULE}-error`);
+      const textarea = dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}-0`);
+      expect(textarea).not.toBeNull();
+      const ariaDescribedBy = textarea?.getAttribute('aria-describedby') || '';
+      expect(ariaDescribedBy).not.toContain(`${formFields.WHICH_SCHEDULE}-0-error`);
     });
 
     it('should render error flash responses correctly', async () => {
@@ -41,7 +46,7 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
         {
           location: 'body',
           msg: 'Invalid value',
-          path: formFields.WHICH_SCHEDULE,
+          path: `${formFields.WHICH_SCHEDULE}-0`,
           type: 'field',
         },
       ]);
@@ -51,9 +56,9 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
         'There is a problem',
       );
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}`)).toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}-0`)).toHaveAttribute(
         'aria-describedby',
-        expect.stringContaining(`${formFields.WHICH_SCHEDULE}-error`),
+        expect.stringContaining(`${formFields.WHICH_SCHEDULE}-0-error`),
       );
     });
 
@@ -62,14 +67,16 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
 
       sessionMock.livingAndVisiting = {
         whichSchedule: {
-          noDecisionRequired: false,
-          answer: response,
+          default: {
+            noDecisionRequired: false,
+            answer: response,
+          },
         },
       };
 
       const dom = new JSDOM((await request(app).get(paths.LIVING_VISITING_WHICH_SCHEDULE)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}`)).toHaveValue(response);
+      expect(dom.window.document.querySelector(`#${formFields.WHICH_SCHEDULE}-0`)).toHaveValue(response);
     });
   });
 
@@ -84,7 +91,7 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
         {
           location: 'body',
           msg: "Describe which schedule will best meet the children's needs",
-          path: formFields.WHICH_SCHEDULE,
+          path: `${formFields.WHICH_SCHEDULE}-0`,
           type: 'field',
           value: '',
         },
@@ -96,17 +103,21 @@ describe(paths.LIVING_VISITING_WHICH_SCHEDULE, () => {
 
       await request(app)
         .post(paths.LIVING_VISITING_WHICH_SCHEDULE)
-        .send({ [formFields.WHICH_SCHEDULE]: response })
+        .send({ [`${formFields.WHICH_SCHEDULE}-0`]: response })
         .expect(302)
         .expect('location', paths.TASK_LIST);
 
       expect(sessionMock.livingAndVisiting).toEqual({
         mostlyLive: {
-          where: 'split',
+          default: {
+            where: 'split',
+          },
         },
         whichSchedule: {
-          noDecisionRequired: false,
-          answer: response,
+          default: {
+            noDecisionRequired: false,
+            answer: response,
+          },
         },
       });
     });
@@ -122,10 +133,14 @@ describe(`POST ${paths.LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED}`, () => {
 
     expect(sessionMock.livingAndVisiting).toEqual({
       mostlyLive: {
-        where: 'split',
+        default: {
+          where: 'split',
+        },
       },
       whichSchedule: {
-        noDecisionRequired: true,
+        default: {
+          noDecisionRequired: true,
+        },
       },
     });
   });
