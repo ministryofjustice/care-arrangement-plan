@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export async function startJourney(page: Page) {
   // Start from homepage - with USE_AUTH=false this goes directly to safety-check
@@ -90,4 +90,27 @@ export function generateTestChildData(index: number) {
   return {
     firstName: firstNames[index % firstNames.length],
   };
+}
+
+export async function expectErrorSummaryVisible(page: Page, expectedTitle = 'There is a problem') {
+  const errorSummary = page.locator('.govuk-error-summary');
+  await expect(errorSummary).toBeVisible();
+  await expect(page.locator('.govuk-error-summary__title')).toHaveText(expectedTitle);
+}
+
+/**
+ * Verify that a field has error styling and the correct error message
+ */
+export async function expectFieldError(page: Page, fieldId: string, errorMessage: string) {
+  const errorElement = page.locator(`#${fieldId}-error`);
+  await expect(errorElement).toBeVisible();
+  await expect(errorElement).toContainText(errorMessage);
+
+  const input = page.locator(`#${fieldId}`);
+  await expect(input).toHaveClass(/govuk-input--error/);
+}
+
+export async function expectErrorSummaryLinkToField(page: Page, fieldId: string) {
+  const errorLink = page.locator(`.govuk-error-summary__list a[href="#${fieldId}-error"]`);
+  await expect(errorLink).toBeVisible();
 }
