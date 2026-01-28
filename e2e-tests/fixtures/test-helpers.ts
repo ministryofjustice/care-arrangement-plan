@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export async function startJourney(page: Page) {
   // Start from homepage - with USE_AUTH=false this goes directly to safety-check
@@ -81,7 +81,12 @@ export function generateTestChildData(index: number) {
   };
 }
 
-/**
+export async function expectErrorSummaryVisible(page: Page, expectedTitle = 'There is a problem') {
+  const errorSummary = page.locator('.govuk-error-summary');
+  await expect(errorSummary).toBeVisible();
+  await expect(page.locator('.govuk-error-summary__title')).toHaveText(expectedTitle);
+}
+  /**
  * Complete the Living and Visiting section with minimal required data
  */
 export async function completeLivingAndVisitingSection(page: Page) {
