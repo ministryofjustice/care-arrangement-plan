@@ -32,7 +32,54 @@ const setupExitTracking = () => {
     return window.location.pathname;
   }
 
-  
+  /**
+   * Tracks general page exits (tab close, navigation away, etc.)
+   * Uses visibilitychange as the primary method with pagehide as fallback
+   */
+  let hasLoggedPageExit = false;
+
+  function logPageExit(destination) {
+    // Prevent duplicate logging (can happen if multiple events fire)
+    if (hasLoggedPageExit) {
+      return;
+    }
+    hasLoggedPageExit = true;
+
+    const exitPage = getCurrentPagePath();
+    const eventData = { exitPage };
+
+    // Add destination URL if available
+    if (destination) {
+      eventData.destinationUrl = destination;
+    }
+
+    sendAnalyticsEvent('/api/analytics/page-exit', eventData);
+  }
+
+  // Primary method: Track when page visibility changes to hidden
+  // This fires when user switches tabs, minimizes window, or closes tab
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      logPageExit();
+    }
+  });
+
+  // Fallback for older browsers: pagehide event
+  // This fires when navigating away or closing the page
+  window.addEventListener('pagehide', () => {
+    logPageExit();
+  });
+
+  // Track destination URL when navigating away via browser navigation
+  // (back/forward buttons, clicking links, typing new URL)
+  window.addEventListener('beforeunload', () => {
+    // Note: We cannot reliably get the destination URL in beforeunload
+    // The browser restricts this for privacy/security reasons
+    // Destination tracking is handled by link click tracking for internal/external links
+    logPageExit();
+  });
+
+
   // Track quick exit button clicks
   // The GOV.UK Exit This Page component adds a button with class 'govuk-exit-this-page__button'
   // This branch uses Escape key instead of Shift+3 for accessibility

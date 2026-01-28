@@ -62,13 +62,20 @@ const logDownload = (req: Request, downloadType: string) => {
 
 /**
  * Logs a 'link_click' event.
- * This function is called when a user clicks an external link.
+ * This function is called when a user clicks a link (internal or external).
  * @param req - Express request object
- * @param linkUrl - The URL of the external link that was clicked
+ * @param linkUrl - The URL of the link that was clicked
  * @param linkText - Optional text/label of the link
+ * @param linkType - Optional type of link (internal or external)
  * @param currentPage - Optional page path where the link was clicked
  */
-const logLinkClick = (req: Request, linkUrl: string, linkText?: string, currentPage?: string) => {
+const logLinkClick = (
+  req: Request,
+  linkUrl: string,
+  linkText?: string,
+  linkType?: string,
+  currentPage?: string,
+) => {
   // Generate privacy-preserving hashed identifier
   const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
 
@@ -82,6 +89,10 @@ const logLinkClick = (req: Request, linkUrl: string, linkText?: string, currentP
     eventData.link_text = linkText;
   }
 
+  if (linkType) {
+    eventData.link_type = linkType;
+  }
+
   logEvent(UserEvents.LINK_CLICK, eventData);
 };
 
@@ -90,16 +101,21 @@ const logLinkClick = (req: Request, linkUrl: string, linkText?: string, currentP
  * This function is called when a user closes the browser window, tab, or navigates away.
  * @param req - Express request object
  * @param exitPage - The page path from which the user is exiting
+ * @param destinationUrl - Optional destination URL if known
  */
-const logPageExit = (req: Request, exitPage: string) => {
+const logPageExit = (req: Request, exitPage: string, destinationUrl?: string) => {
   // Generate privacy-preserving hashed identifier
   const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
 
-  const eventData = {
+  const eventData: Record<string, string | number> = {
     hashed_user_id: hashedUserId,
     exit_page: exitPage,
     path: req.path,
   };
+
+  if (destinationUrl) {
+    eventData.destination_url = destinationUrl;
+  }
 
   logEvent(UserEvents.PAGE_EXIT, eventData);
 };
