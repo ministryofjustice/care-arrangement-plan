@@ -8,11 +8,11 @@ import { logLinkClick, logPageExit, logQuickExit } from '../services/analyticsSe
  */
 const analyticsRoutes = (router: Router) => {
   /**
-   * POST endpoint for logging external link clicks
-   * Called by client-side JavaScript when a user clicks an external link
+   * POST endpoint for logging link clicks (both internal and external)
+   * Called by client-side JavaScript when a user clicks a link
    */
   router.post('/api/analytics/link-click', (request, response) => {
-    const { url, linkText, currentPage } = request.body;
+    const { url, linkText, linkType, currentPage } = request.body;
 
     // Validate that we have the required data
     if (!url || typeof url !== 'string') {
@@ -20,7 +20,7 @@ const analyticsRoutes = (router: Router) => {
     }
 
     // Log the link click event
-    logLinkClick(request, url, linkText, currentPage);
+    logLinkClick(request, url, linkText, linkType, currentPage);
 
     // Return success response
     response.status(204).send();
@@ -31,7 +31,7 @@ const analyticsRoutes = (router: Router) => {
    * Called by client-side JavaScript when a user closes tab/window or navigates away
    */
   router.post('/api/analytics/page-exit', (request, response) => {
-    const { exitPage } = request.body;
+    const { exitPage, destinationUrl } = request.body;
 
     // Validate that we have the required data
     if (!exitPage || typeof exitPage !== 'string') {
@@ -39,7 +39,7 @@ const analyticsRoutes = (router: Router) => {
     }
 
     // Log the page exit event
-    logPageExit(request, exitPage);
+    logPageExit(request, exitPage, destinationUrl);
 
     // Return success response
     response.status(204).send();

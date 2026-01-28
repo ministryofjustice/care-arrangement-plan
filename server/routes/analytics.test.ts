@@ -35,6 +35,7 @@ describe('POST /api/analytics/link-click', () => {
       }),
       linkData.url,
       linkData.linkText,
+      undefined,
       undefined
     );
   });
@@ -54,6 +55,7 @@ describe('POST /api/analytics/link-click', () => {
         path: '/api/analytics/link-click',
       }),
       linkData.url,
+      undefined,
       undefined,
       undefined
     );
@@ -128,6 +130,7 @@ describe('POST /api/analytics/link-click', () => {
       expect.anything(),
       linkData.url,
       linkData.linkText,
+      undefined,
       undefined
     );
   });
@@ -147,7 +150,52 @@ describe('POST /api/analytics/link-click', () => {
       expect.anything(),
       linkData.url,
       linkData.linkText,
+      undefined,
       undefined
+    );
+  });
+
+  it('logs link click with linkType and currentPage', async () => {
+    const linkData = {
+      url: 'https://www.gov.uk/looking-after-children-divorce',
+      linkText: 'More information and support',
+      linkType: 'external',
+      currentPage: '/share-plan',
+    };
+
+    await request(app)
+      .post('/api/analytics/link-click')
+      .send(linkData)
+      .expect(204);
+
+    expect(mockedLogLinkClick).toHaveBeenCalledWith(
+      expect.anything(),
+      linkData.url,
+      linkData.linkText,
+      linkData.linkType,
+      linkData.currentPage
+    );
+  });
+
+  it('logs internal link click', async () => {
+    const linkData = {
+      url: '/review',
+      linkText: 'Review your plan',
+      linkType: 'internal',
+      currentPage: '/create-plan',
+    };
+
+    await request(app)
+      .post('/api/analytics/link-click')
+      .send(linkData)
+      .expect(204);
+
+    expect(mockedLogLinkClick).toHaveBeenCalledWith(
+      expect.anything(),
+      linkData.url,
+      linkData.linkText,
+      linkData.linkType,
+      linkData.currentPage
     );
   });
 });
@@ -172,7 +220,8 @@ describe('POST /api/analytics/page-exit', () => {
       expect.objectContaining({
         path: '/api/analytics/page-exit',
       }),
-      exitData.exitPage
+      exitData.exitPage,
+      undefined
     );
   });
 
@@ -228,7 +277,26 @@ describe('POST /api/analytics/page-exit', () => {
 
     expect(mockedLogPageExit).toHaveBeenCalledWith(
       expect.anything(),
-      exitData.exitPage
+      exitData.exitPage,
+      undefined
+    );
+  });
+
+  it('logs page exit with destination URL', async () => {
+    const exitData = {
+      exitPage: '/share-plan',
+      destinationUrl: 'https://www.gov.uk',
+    };
+
+    await request(app)
+      .post('/api/analytics/page-exit')
+      .send(exitData)
+      .expect(204);
+
+    expect(mockedLogPageExit).toHaveBeenCalledWith(
+      expect.anything(),
+      exitData.exitPage,
+      exitData.destinationUrl
     );
   });
 });
