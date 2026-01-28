@@ -32,13 +32,13 @@
         {{
           govukButton({
             text: __('sharePlan.downloadPlanButton'),
-            href: paths.CONFIRMATION
+            href: paths.CONFIRMATION + '?format=pdf'
           })
         }}
       </div>
 
       <p class="govuk-body">
-        <a href="{{ paths.DOWNLOAD_HTML }}" class="govuk-link">{{ __('sharePlan.downloadHtml') }}</a>
+        <a href="{{ paths.CONFIRMATION }}?format=html" class="govuk-link">{{ __('sharePlan.downloadHtml') }}</a>
       </p>
     </div>
   </div>

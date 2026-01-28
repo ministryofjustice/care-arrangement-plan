@@ -34,7 +34,7 @@
     (function() {
       'use strict';
 
-      // Auto-trigger PDF download when page loads
+      // Auto-trigger download when page loads
       // Use a unique key per plan attempt to allow multiple plans in the same browser session
       var downloadKey = 'downloadTriggered_' + '{{ planStartTime }}';
 
@@ -42,9 +42,16 @@
       if (!sessionStorage.getItem(downloadKey)) {
         sessionStorage.setItem(downloadKey, 'true');
 
+        // Get the format parameter from URL (defaults to 'pdf' for backward compatibility)
+        var urlParams = new URLSearchParams(window.location.search);
+        var format = urlParams.get('format') || 'pdf';
+
+        // Determine which download URL to use
+        var downloadUrl = format === 'html' ? '{{ paths.DOWNLOAD_HTML }}' : '{{ paths.DOWNLOAD_PDF }}';
+
         // Create a temporary link and trigger download
         var link = document.createElement('a');
-        link.href = '{{ paths.DOWNLOAD_PDF }}';
+        link.href = downloadUrl;
         link.style.display = 'none';
         document.body.appendChild(link);
         link.click();
