@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import { navigateToTaskList, expectErrorSummaryVisible } from './fixtures/test-helpers';
 
-const FIELD_ID = 'special-days';
+const FIELD_ID = 'special-days-0';
 const ERROR_MESSAGE = 'Describe what you propose will happen on special days';
 const SAMPLE_TEXT = 'Birthdays will be spent with the birthday child choosing which parent to be with. Christmas will alternate each year. School holidays will be split equally.';
 
