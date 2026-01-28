@@ -27,24 +27,19 @@ describe('addHandoverAndHolidays', () => {
       secondaryAdultName: 'Parent2',
       handoverAndHolidays: {
         getBetweenHouseholds: {
-          noDecisionRequired: false,
-          how: 'walk',
+          default: { noDecisionRequired: false, how: 'walk' },
         },
         whereHandover: {
-          noDecisionRequired: false,
-          where: ['initialParent'],
+          default: { noDecisionRequired: false, where: ['initialParent'] },
         },
         willChangeDuringSchoolHolidays: {
-          noDecisionRequired: false,
-          willChange: true,
+          default: { noDecisionRequired: false, willChange: true },
         },
         howChangeDuringSchoolHolidays: {
-          noDecisionRequired: false,
-          answer: 'Holiday arrangements description',
+          default: { noDecisionRequired: false, answer: 'Holiday arrangements description' },
         },
         itemsForChangeover: {
-          noDecisionRequired: false,
-          answer: 'School bag, clothes, toys',
+          default: { noDecisionRequired: false, answer: 'School bag, clothes, toys' },
         },
       },
     });
@@ -70,16 +65,16 @@ describe('addHandoverAndHolidays', () => {
       secondaryAdultName: 'Sam',
       handoverAndHolidays: {
         getBetweenHouseholds: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         whereHandover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         willChangeDuringSchoolHolidays: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         itemsForChangeover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
       },
     });
@@ -99,17 +94,16 @@ describe('addHandoverAndHolidays', () => {
       secondaryAdultName: 'Adult2',
       handoverAndHolidays: {
         getBetweenHouseholds: {
-          noDecisionRequired: false,
-          how: 'drive',
+          default: { noDecisionRequired: false, how: 'drive' },
         },
         whereHandover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         willChangeDuringSchoolHolidays: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         itemsForChangeover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
       },
     });
@@ -128,18 +122,16 @@ describe('addHandoverAndHolidays', () => {
       secondaryAdultName: 'Adult2',
       handoverAndHolidays: {
         getBetweenHouseholds: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         whereHandover: {
-          noDecisionRequired: false,
-          where: ['secondaryParent', 'someoneElse'],
-          someoneElse: 'Grandparents house',
+          default: { noDecisionRequired: false, where: ['secondaryParent', 'someoneElse'], someoneElse: 'Grandparents house' },
         },
         willChangeDuringSchoolHolidays: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         itemsForChangeover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
       },
     });
@@ -158,21 +150,19 @@ describe('addHandoverAndHolidays', () => {
       secondaryAdultName: 'Parent2',
       handoverAndHolidays: {
         getBetweenHouseholds: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         whereHandover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         willChangeDuringSchoolHolidays: {
-          noDecisionRequired: false,
-          willChange: true,
+          default: { noDecisionRequired: false, willChange: true },
         },
         howChangeDuringSchoolHolidays: {
-          noDecisionRequired: false,
-          answer: 'Extended stays during summer',
+          default: { noDecisionRequired: false, answer: 'Extended stays during summer' },
         },
         itemsForChangeover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
       },
     });
@@ -191,17 +181,16 @@ describe('addHandoverAndHolidays', () => {
       secondaryAdultName: 'Adult2',
       handoverAndHolidays: {
         getBetweenHouseholds: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         whereHandover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         willChangeDuringSchoolHolidays: {
-          noDecisionRequired: false,
-          willChange: false,
+          default: { noDecisionRequired: false, willChange: false },
         },
         itemsForChangeover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
       },
     });
@@ -220,17 +209,16 @@ describe('addHandoverAndHolidays', () => {
       secondaryAdultName: 'Adult2',
       handoverAndHolidays: {
         getBetweenHouseholds: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         whereHandover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         willChangeDuringSchoolHolidays: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         itemsForChangeover: {
-          noDecisionRequired: false,
-          answer: 'Medicine, favorite teddy, homework',
+          default: { noDecisionRequired: false, answer: 'Medicine, favorite teddy, homework' },
         },
       },
     });
@@ -249,17 +237,16 @@ describe('addHandoverAndHolidays', () => {
       secondaryAdultName: 'Adult2',
       handoverAndHolidays: {
         getBetweenHouseholds: {
-          noDecisionRequired: false,
-          how: 'walk',
+          default: { noDecisionRequired: false, how: 'walk' },
         },
         whereHandover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         willChangeDuringSchoolHolidays: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
         itemsForChangeover: {
-          noDecisionRequired: true,
+          default: { noDecisionRequired: true },
         },
       },
     });

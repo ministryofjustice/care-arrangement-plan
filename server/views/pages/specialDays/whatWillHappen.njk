@@ -1,36 +1,106 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-
-      <form class="form" action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN }}" method="post" novalidate>
+      <form
+        class="form"
+        action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN }}"
+        method="post"
+        novalidate
+        id="per-child-form"
+      >
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        {{
-          govukTextarea({
-            label: {
-              text: title,
-              classes: "govuk-label--l",
-              isPageHeading: true
-            },
-            hint: {
-              text: __('specialDays.whatWillHappen.content')
-            },
-            name: formFields.SPECIAL_DAYS,
-            value: initialWhatWillHappen,
-            errorMessage: errors | findError(formFields.SPECIAL_DAYS)
-          })
-        }}
+
+        <h1 class="govuk-heading-l">{{ title }}</h1>
+        <p class="govuk-hint">{{ __('specialDays.whatWillHappen.content') }}</p>
+
+        {# Default/All children answer #}
+        <div class="per-child-entry default-answer-section" data-entry-index="0">
+          {% if showPerChildOption %}
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2 default-answer-label">For all children:</p>
+          {% endif %}
+          {{
+            govukTextarea({
+              label: {
+                text: "Describe what will happen",
+                classes: "govuk-visually-hidden",
+                isPageHeading: false
+              },
+              name: formFields.SPECIAL_DAYS + "-0",
+              id: formFields.SPECIAL_DAYS + "-0",
+              value: formValues[formFields.SPECIAL_DAYS + "-0"],
+              errorMessage: errors | findError(formFields.SPECIAL_DAYS + "-0")
+            })
+          }}
+        </div>
+
+        {# Container for additional per-child entries #}
+        <div id="additional-children-container">
+          {# Existing per-child entries will be rendered here by JavaScript on page load #}
+        </div>
+
+        {# Button group with proper spacing #}
+        <div class="govuk-button-group govuk-!-margin-top-6">
+          {% if showPerChildOption %}
+            {# Add another child button - gray/secondary style #}
+            <button
+              type="button"
+              class="govuk-button govuk-button--secondary"
+              id="add-another-child-btn"
+              data-number-of-children="{{ numberOfChildren }}"
+              data-child-options="{{ childOptions | dump | escape }}"
+              data-names-of-children="{{ namesOfChildren | dump | escape }}"
+              data-field-base-name="{{ formFields.SPECIAL_DAYS }}"
+            >
+              Add answer for a specific child
+            </button>
+          {% endif %}
+        </div>
 
         {{ govukButton({text: __('continue')}) }}
       </form>
-      <form class="form" action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED }}" method="post" novalidate>
+      <form
+        class="form"
+        action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED }}"
+        method="post"
+        novalidate
+      >
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideSpecialDays') }}</button>
       </form>
     </div>
   </div>
+
+  {% if showPerChildOption %}
+    {# Template for per-child entry - hidden, cloned by JavaScript #}
+    <template id="per-child-entry-template">
+      <div class="per-child-entry govuk-!-margin-top-6 govuk-!-padding-top-6 govuk-!-padding-bottom-2" style="border-top: 2px solid #b1b4b6;">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
+            This answer is for:
+          </label>
+          <select class="govuk-select" id="child-selector-ENTRY_INDEX" name="child-selector-ENTRY_INDEX">
+            <option value="">Select a child</option>
+            {# Options populated by JavaScript #}
+          </select>
+        </div>
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-visually-hidden" for="FIELD_NAME">
+            Describe what will happen for this child
+          </label>
+          <textarea class="govuk-textarea" id="FIELD_NAME" name="FIELD_NAME" rows="5"></textarea>
+        </div>
+        <button type="button" class="govuk-button govuk-button--warning govuk-!-margin-bottom-4 remove-child-entry-btn">
+          Remove
+        </button>
+      </div>
+    </template>
+
+    <script src="/public/perChildAnswers.js"></script>
+  {% endif %}
 {% endblock %}

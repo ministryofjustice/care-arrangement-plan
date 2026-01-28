@@ -1,71 +1,222 @@
 import { Router } from 'express';
-import { body, matchedData, validationResult } from 'express-validator';
+import { body, validationResult } from 'express-validator';
 
 import { whereHandoverField } from '../../@types/fields';
+import { WhereHandoverAnswer } from '../../@types/session';
 import formFields from '../../constants/formFields';
 import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
+import { isPerChildPoCEnabled } from '../../utils/perChildSession';
 import { getBackUrl } from '../../utils/sessionHelpers';
+
+// Helper to get the field name for a specific child index
+const getFieldName = (childIndex: number) => `${formFields.WHERE_HANDOVER}-${childIndex}`;
+
+// Helper to get the someone else field name for a specific child index
+const getSomeoneElseFieldName = (childIndex: number) => `${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-${childIndex}`;
+
+// Helper to get the child selector field name for a specific entry index
+const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
+
+// Helper to safely get a trimmed string from request body
+const safeString = (value: unknown): string => {
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+  return '';
+};
+
+// Helper to safely get an array from request body
+const safeArray = (value: unknown): string[] => {
+  if (Array.isArray(value)) {
+    return value.filter((item): item is string => typeof item === 'string');
+  }
+  if (typeof value === 'string') {
+    return [value];
+  }
+  return [];
+};
 
 const whereHandoverRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER), (request, response) => {
-    const formValues = {
-      [formFields.WHERE_HANDOVER]: request.session.handoverAndHolidays?.whereHandover?.where,
-      [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: request.session.handoverAndHolidays?.whereHandover?.someoneElse,
-      ...request.flash('formValues')?.[0],
-    };
+    const { numberOfChildren, namesOfChildren, handoverAndHolidays } = request.session;
+    const existingAnswers = handoverAndHolidays?.whereHandover;
+
+    // Build form values from existing session data
+    const formValues: Record<string, string | string[]> = {};
+
+    // Track which children have specific answers
+    const childrenWithAnswers: number[] = [];
+
+    if (existingAnswers) {
+      // Set the default answer (shown as "all children" or first entry)
+      if (existingAnswers.default?.where) {
+        formValues[getFieldName(0)] = existingAnswers.default.where;
+      }
+      if (existingAnswers.default?.someoneElse) {
+        formValues[getSomeoneElseFieldName(0)] = existingAnswers.default.someoneElse;
+      }
+
+      // Set per-child answers
+      if (existingAnswers.byChild) {
+        Object.entries(existingAnswers.byChild).forEach(([childIndex, answer]) => {
+          const idx = parseInt(childIndex, 10);
+          if (answer.where) {
+            childrenWithAnswers.push(idx);
+            formValues[getFieldName(idx)] = answer.where;
+            if (answer.someoneElse) {
+              formValues[getSomeoneElseFieldName(idx)] = answer.someoneElse;
+            }
+          }
+        });
+      }
+    }
+
+    // Build list of children for dropdown options
+    const childOptions = namesOfChildren.map((name, index) => ({
+      value: index.toString(),
+      text: name,
+    }));
 
     response.render('pages/handoverAndHolidays/whereHandover', {
       errors: request.flash('errors'),
-      formValues,
+      formValues: { ...formValues, ...request.flash('formValues')?.[0] },
       values: request.session,
       title: request.__('handoverAndHolidays.whereHandover.title'),
       backLinkHref: getBackUrl(request.session, paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS),
+      numberOfChildren,
+      namesOfChildren,
+      childOptions,
+      childrenWithAnswers,
+      showPerChildOption: numberOfChildren > 1 && isPerChildPoCEnabled(request.session),
     });
   });
 
   router.post(
     paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER,
-    body(formFields.WHERE_HANDOVER_SOMEONE_ELSE)
-      .if(body(formFields.WHERE_HANDOVER).equals('someoneElse'))
-      .trim()
-      .notEmpty()
-      .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.arrangementMissingError')),
-    body(formFields.WHERE_HANDOVER)
-      .exists()
-      .toArray()
-      .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.emptyError')),
-    body(formFields.WHERE_HANDOVER)
-      .custom(
-        // This is prevented by JS in the page, but possible for people with JS disabled to submit
-        (whereHandover: whereHandoverField[]) => !(whereHandover.length > 1 && whereHandover.includes('someoneElse')),
-      )
-      .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.multiSelectedError')),
-    (request, response) => {
-      const formData = matchedData<{
-        [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: string;
-        [formFields.WHERE_HANDOVER]: whereHandoverField[];
-      }>(request, { onlyValidData: false });
+    (request, response, next) => {
+      const { numberOfChildren } = request.session;
 
+      // Dynamic validation based on submitted fields
+      const validations: ReturnType<typeof body>[] = [];
+
+      // Always validate the default/first answer
+      validations.push(
+        body(getFieldName(0))
+          .exists()
+          .toArray()
+          .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.emptyError'))
+      );
+
+      // Validate exclusive "someoneElse" for default
+      validations.push(
+        body(getFieldName(0))
+          .custom(
+            (whereHandover: whereHandoverField[]) => !(whereHandover.length > 1 && whereHandover.includes('someoneElse')),
+          )
+          .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.multiSelectedError'))
+      );
+
+      // Validate the someone else field if "someoneElse" is selected for default
+      validations.push(
+        body(getSomeoneElseFieldName(0))
+          .if(body(getFieldName(0)).custom((value: string[]) => value && value.includes('someoneElse')))
+          .trim()
+          .notEmpty()
+          .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.arrangementMissingError'))
+      );
+
+      // Check for per-child entries and validate them
+      for (let i = 1; i <= numberOfChildren; i++) {
+        const fieldName = getFieldName(i);
+        const someoneElseFieldName = getSomeoneElseFieldName(i);
+
+        // Only validate if the field exists in the request
+        if (request.body[fieldName] !== undefined && request.body[fieldName] !== '') {
+          validations.push(
+            body(fieldName)
+              .exists()
+              .toArray()
+              .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.emptyError'))
+          );
+
+          // Validate exclusive "someoneElse" for this child
+          validations.push(
+            body(fieldName)
+              .custom(
+                (whereHandover: whereHandoverField[]) => !(whereHandover.length > 1 && whereHandover.includes('someoneElse')),
+              )
+              .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.multiSelectedError'))
+          );
+
+          // Validate the someone else field if "someoneElse" is selected for this child
+          validations.push(
+            body(someoneElseFieldName)
+              .if(body(fieldName).custom((value: string[]) => value && value.includes('someoneElse')))
+              .trim()
+              .notEmpty()
+              .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.arrangementMissingError'))
+          );
+        }
+      }
+
+      // Run all validations
+      Promise.all(validations.map(validation => validation.run(request)))
+        .then(() => next())
+        .catch(next);
+    },
+    (request, response) => {
       const errors = validationResult(request);
 
       if (!errors.isEmpty()) {
         request.flash('errors', errors.array());
-        request.flash('formValues', formData);
+        request.flash('formValues', request.body);
         return response.redirect(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
       }
 
-      const { [formFields.WHERE_HANDOVER]: whereHandover, [formFields.WHERE_HANDOVER_SOMEONE_ELSE]: someoneElse } =
-        formData;
+      // Process the default answer
+      const defaultWhere = safeArray(request.body[getFieldName(0)]);
+      const defaultSomeoneElse = safeString(request.body[getSomeoneElseFieldName(0)]);
+
+      // Build the per-child answers structure
+      const byChild: Record<number, WhereHandoverAnswer> = {};
+
+      // Check for additional per-child entries
+      // We look for patterns like child-selector-1, child-selector-2, etc.
+      // and their corresponding answer fields
+      const additionalEntries = Object.keys(request.body)
+        .filter(key => key.startsWith('child-selector-'))
+        .map(key => {
+          const entryIndex = parseInt(key.replace('child-selector-', ''), 10);
+          const childIndex = parseInt(request.body[key], 10);
+          const whereFieldName = getFieldName(entryIndex);
+          const someoneElseFieldName = getSomeoneElseFieldName(entryIndex);
+          const where = safeArray(request.body[whereFieldName]);
+          const someoneElse = safeString(request.body[someoneElseFieldName]);
+          return { childIndex, where, someoneElse, entryIndex };
+        })
+        .filter(entry => !isNaN(entry.childIndex) && entry.where.length > 0);
+
+      // Store per-child answers
+      additionalEntries.forEach(entry => {
+        byChild[entry.childIndex] = {
+          noDecisionRequired: false,
+          where: entry.where as whereHandoverField[],
+          someoneElse: entry.where.includes('someoneElse') ? entry.someoneElse : undefined,
+        };
+      });
 
       request.session.handoverAndHolidays = {
         ...request.session.handoverAndHolidays,
         whereHandover: {
-          noDecisionRequired: false,
-          where: whereHandover,
-          someoneElse: whereHandover.includes('someoneElse') ? someoneElse : undefined,
+          default: {
+            noDecisionRequired: false,
+            where: defaultWhere as whereHandoverField[],
+            someoneElse: defaultWhere.includes('someoneElse') ? defaultSomeoneElse : undefined,
+          },
+          ...(Object.keys(byChild).length > 0 ? { byChild } : {}),
         },
       };
 
@@ -79,7 +230,9 @@ const whereHandoverRoutes = (router: Router) => {
     request.session.handoverAndHolidays = {
       ...request.session.handoverAndHolidays,
       whereHandover: {
-        noDecisionRequired: true,
+        default: {
+          noDecisionRequired: true,
+        },
       },
     };
 

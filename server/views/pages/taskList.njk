@@ -1,6 +1,9 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/task-list/macro.njk" import govukTaskList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/tag/macro.njk" import govukTag %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
 {%
   set completeStatus = {
     text: __('taskList.completed')
@@ -25,6 +28,137 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      {# Design Toggle - Only show if more than one child #}
+      {% if showDesignToggle %}
+        <details class="govuk-details govuk-!-margin-bottom-6" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              Change how you answer questions for different children
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            <p class="govuk-body">You have {{ numberOfChildren }} children. Choose how you want to provide answers:</p>
+
+            <form action="{{ paths.TOGGLE_DESIGN_MODE }}" method="post" class="govuk-!-margin-bottom-4">
+              <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+              <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="design-mode-1" name="designMode" type="radio" value="design1" {{ "checked" if designMode == "design1" }}>
+                  <label class="govuk-label govuk-radios__label" for="design-mode-1">
+                    <strong>Design 1: Answer for all, then specify differences</strong>
+                    <span class="govuk-hint govuk-!-margin-top-1 govuk-!-margin-bottom-0">Answer each question once, with the option to add different answers for specific children inline.</span>
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="design-mode-2" name="designMode" type="radio" value="design2" {{ "checked" if designMode == "design2" }}>
+                  <label class="govuk-label govuk-radios__label" for="design-mode-2">
+                    <strong>Design 2: Answer for each child separately</strong>
+                    <span class="govuk-hint govuk-!-margin-top-1 govuk-!-margin-bottom-0">Complete the questions for each child one at a time. You can copy answers between children. Your final plan will include arrangements for all children.</span>
+                  </label>
+                </div>
+              </div>
+
+              <button type="submit" class="govuk-button govuk-button--secondary govuk-!-margin-top-4">
+                Change design mode
+              </button>
+            </form>
+          </div>
+        </details>
+      {% endif %}
+
+      {# Design 2: Child selector and copy functionality #}
+      {% if isDesign2 %}
+        <div class="govuk-!-margin-bottom-6 govuk-!-padding-4" style="background-color: #f3f2f1; border-left: 4px solid #1d70b8;">
+          <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Child-specific arrangements</h2>
+          <p class="govuk-body">Your plan will include specific arrangements for each child. Complete the questions below for each child.</p>
+
+          {# Child plan status table #}
+          {% set tableRows = [] %}
+          {% for child in childPlanStatuses %}
+            {% set statusTag %}
+              {% if child.isComplete %}
+                {{ govukTag({ text: "Complete", classes: "govuk-tag--green" }) }}
+              {% else %}
+                {{ govukTag({ text: "Incomplete", classes: "govuk-tag--grey" }) }}
+              {% endif %}
+            {% endset %}
+
+            {% set childNameCell %}
+              {{ child.childName }}
+              {% if child.copiedFromChildIndex is defined %}
+                <span class="govuk-body-s govuk-!-margin-left-1">(copied from {{ namesOfChildren[child.copiedFromChildIndex] }})</span>
+              {% endif %}
+            {% endset %}
+
+            {% set actionCell %}
+              {% if child.childIndex == currentChildIndex %}
+                {{ govukTag({ text: "Currently editing", classes: "govuk-tag--blue" }) }}
+              {% else %}
+                <form action="{{ paths.SELECT_CHILD }}" method="post" style="display: inline; margin: 0;">
+                  <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+                  <input type="hidden" name="childIndex" value="{{ child.childIndex }}" />
+                  <button type="submit" class="govuk-link govuk-!-font-size-19" style="background: none; border: none; padding: 0; text-decoration: underline; cursor: pointer;">Edit</button>
+                </form>
+              {% endif %}
+            {% endset %}
+
+            {% set tableRows = (tableRows.push([
+              { html: childNameCell },
+              { html: statusTag },
+              { html: actionCell, classes: "govuk-!-text-align-centre" }
+            ]), tableRows) %}
+          {% endfor %}
+
+          {{ govukTable({
+            head: [
+              { text: "Child" },
+              { text: "Status" },
+              { text: "Action", classes: "govuk-!-text-align-centre" }
+            ],
+            rows: tableRows
+          }) }}
+
+          {# Copy from another child #}
+          {% if childrenWithData | length > 0 %}
+            <details class="govuk-details" data-module="govuk-details">
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                  Copy answers from another child
+                </span>
+              </summary>
+              <div class="govuk-details__text">
+                <p class="govuk-body">This will copy all answers from the selected child to {{ currentChildName }}. You can then edit them as needed.</p>
+                <form action="{{ paths.COPY_CHILD_PLAN }}" method="post">
+                  <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+                  <input type="hidden" name="targetChildIndex" value="{{ currentChildIndex }}" />
+                  <div class="govuk-form-group">
+                    <label class="govuk-label" for="source-child">
+                      Copy from:
+                    </label>
+                    <select class="govuk-select" id="source-child" name="sourceChildIndex">
+                      {% for child in childrenWithData %}
+                        {% if child.childIndex != currentChildIndex %}
+                          <option value="{{ child.childIndex }}">
+                            {{ child.childName }}{% if child.isComplete %} (Complete){% endif %}
+                          </option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <button type="submit" class="govuk-button govuk-button--secondary">
+                    Copy answers
+                  </button>
+                </form>
+              </div>
+            </details>
+          {% endif %}
+        </div>
+
+        {# Design 2 heading showing current child #}
+        <h2 class="govuk-heading-m">Answering for {{ currentChildName }}</h2>
+      {% endif %}
 
       <h2 class="govuk-heading-m">{{ __('taskList.whoThePlanIsFor') }}</h2>
       {{
@@ -167,6 +301,15 @@
       {% if showContinue %}
         <div class="govuk-!-margin-top-5">
           {{ govukButton({text: __('continue'), href: paths.CHECK_YOUR_ANSWERS}) }}
+        </div>
+      {% endif %}
+
+      {# Design 2: Show prompt to complete other children #}
+      {% if isDesign2 and not allChildrenComplete %}
+        <div class="govuk-!-margin-top-6">
+          {{ govukInsetText({
+            text: "Remember to complete the arrangements for all your children before continuing."
+          }) }}
         </div>
       {% endif %}
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
@@ -7,11 +8,13 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
+import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { getBackUrl } from '../../utils/sessionHelpers';
 
 const planLastMinuteChangesRoutes = (router: Router) => {
   router.get(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES, checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES), (request, response) => {
-    const planLastMinuteChanges = request.session.decisionMaking?.planLastMinuteChanges;
+    const decisionMaking = getSessionValue<any>(request.session, 'decisionMaking');
+    const planLastMinuteChanges = decisionMaking?.planLastMinuteChanges;
 
     const formValues = {
       [formFields.PLAN_LAST_MINUTE_CHANGES]: planLastMinuteChanges?.options,
@@ -63,26 +66,28 @@ const planLastMinuteChangesRoutes = (router: Router) => {
         [formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT]: describeArrangement,
       } = formData;
 
-      request.session.decisionMaking = {
-        ...request.session.decisionMaking,
+      const decisionMaking = getSessionValue<any>(request.session, 'decisionMaking') || {};
+      setSessionSection(request.session, 'decisionMaking', {
+        ...decisionMaking,
         planLastMinuteChanges: {
           noDecisionRequired: false,
           options,
           anotherArrangementDescription: options.includes('anotherArrangement') ? describeArrangement : undefined,
         },
-      };
+      });
       addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES);
       return response.redirect(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);
     },
   );
 
   router.post(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES_NOT_REQUIRED, (request, response) => {
-    request.session.decisionMaking = {
-      ...request.session.decisionMaking,
+    const decisionMaking = getSessionValue<any>(request.session, 'decisionMaking') || {};
+    setSessionSection(request.session, 'decisionMaking', {
+      ...decisionMaking,
       planLastMinuteChanges: {
         noDecisionRequired: true,
       },
-    };
+    });
 
     addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES);
     return response.redirect(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE);

@@ -16,6 +16,7 @@ const confirmationRoutes = (router: Router) => {
     response.render('pages/confirmation', {
       title: request.__('confirmation.title', { names: childrenNames }),
       otherAdult: secondaryAdultName,
+      planStartTime: request.session.planStartTime || Date.now(),
     });
   });
 };

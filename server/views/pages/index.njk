@@ -45,13 +45,46 @@
         <a href="{{ paths.DOWNLOAD_PAPER_FORM }}">download a template child arrangements plan (PDF, 0.5MB)</a>.
       </p>
 
-      {{
-        govukButton({
-          text: "Start now",
-          isStartButton: true,
-          href: paths.SAFETY_CHECK
-        })
-      }}
+      {% if showUrToggle %}
+        <div class="govuk-inset-text" style="background-color: #f3f2f1; border-left-color: #1d70b8;">
+          <h3 class="govuk-heading-s govuk-!-margin-bottom-2">User Research: Select service version</h3>
+          <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="service-version-current" name="service-version" type="radio" value="current" {{ 'checked' if not usePerChildPoC }}>
+              <label class="govuk-label govuk-radios__label" for="service-version-current">
+                Current service
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="service-version-poc" name="service-version" type="radio" value="poc" {{ 'checked' if usePerChildPoC }}>
+              <label class="govuk-label govuk-radios__label" for="service-version-poc">
+                Plan per child proof of concept
+              </label>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <form method="post" action="{{ paths.START }}">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <input type="hidden" name="serviceVersion" id="serviceVersionInput" value="{{ 'poc' if usePerChildPoC else 'current' }}" />
+        {{
+          govukButton({
+            text: "Start now",
+            isStartButton: true
+          })
+        }}
+      </form>
+
+      {% if showUrToggle %}
+        <script nonce="{{ cspNonce }}">
+          document.querySelectorAll('input[name="service-version"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+              document.getElementById('serviceVersionInput').value = this.value;
+            });
+          });
+        </script>
+      {% endif %}
 
       <h2 class="govuk-heading-m">External help links</h2>
       <p>
