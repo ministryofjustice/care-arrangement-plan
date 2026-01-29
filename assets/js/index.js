@@ -16,6 +16,7 @@ import setupCookieBanner from './cookieBanner';
 import setupExitTracking from './exitTracker';
 import setupLinkTracking from './linkTracker';
 import setupPerChildAnswers from './perChildAnswers';
+import setupStepNavigation from './stepNavigation';
 
 // Disable GOV.UK's default Shift key listener before components initialise
 // This prevents the Shift key shortcut from being set up
@@ -32,3 +33,4 @@ setupAccessibleExitThisPage();
 setupLinkTracking();
 setupExitTracking();
 setupPerChildAnswers();
+setupStepNavigation();
