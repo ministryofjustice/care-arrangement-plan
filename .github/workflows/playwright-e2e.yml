@@ -34,9 +34,14 @@ permissions:
 
 jobs:
   e2e_tests:
-    name: "E2E Tests - ${{ inputs.environment || 'PR' }}"
+    name: "E2E Tests - ${{ inputs.environment || 'PR' }} (Shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})"
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4, 5, 6]
+        shardTotal: [6]
 
     steps:
       - name: 'Checkout repository'
@@ -55,11 +60,11 @@ jobs:
 
       - name: 'Run Playwright E2E Tests (PR - Local)'
         if: github.event_name == 'pull_request'
-        run: npm run e2e
+        run: npm run e2e -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: 'Run Playwright E2E Tests (Against Environment)'
         if: inputs.base_url
-        run: npm run e2e
+        run: npm run e2e -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           BASE_URL: ${{ inputs.base_url }}
 
@@ -67,7 +72,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
         with:
-          name: playwright-report-${{ inputs.environment || 'pr' }}-${{ github.run_number }}
+          name: playwright-report-${{ inputs.environment || 'pr' }}-shard-${{ matrix.shardIndex }}-${{ github.run_number }}
           path: playwright-report/
           retention-days: 30
 
@@ -75,6 +80,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
         with:
-          name: playwright-results-${{ inputs.environment || 'pr' }}-${{ github.run_number }}
+          name: playwright-results-${{ inputs.environment || 'pr' }}-shard-${{ matrix.shardIndex }}-${{ github.run_number }}
           path: playwright-results.xml
           retention-days: 30
