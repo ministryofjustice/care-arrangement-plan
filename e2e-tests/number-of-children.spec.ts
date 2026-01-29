@@ -138,7 +138,7 @@ test.describe('Number of Children Page Validation', () => {
     test('should display error summary link that links to the input field', async ({ page }) => {
       await page.getByRole('button', { name: /continue/i }).click();
 
-      await expectErrorSummaryLinkToField(page, FIELD_ID);
+      await expectErrorSummaryLinkToField(page, `${FIELD_ID}-error`);
     });
 
     test('should scroll to the input field when clicking the error summary link', async ({ page }) => {
