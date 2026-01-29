@@ -54,7 +54,7 @@ test.describe('Decision Making Section', () => {
         await page.getByRole('button', { name: /continue/i }).click();
 
         await expectErrorSummaryVisible(page);
-        await expect(page.locator(`#${LAST_MINUTE_FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.lastMinute.empty);
+        await expect(page.locator(`#${LAST_MINUTE_FIELD_ID}-method-error`)).toContainText(ERROR_MESSAGES.lastMinute.empty);
       });
 
       test('should show error when "another arrangement" is selected without description', async ({ page }) => {
