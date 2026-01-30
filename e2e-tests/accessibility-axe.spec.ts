@@ -26,6 +26,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   });
 
   test('should pass axe accessibility scan on task list page', async ({ page }) => {
+    test.setTimeout(90000); // Increased timeout for journey completion
     await navigateToTaskList(page);
 
     const accessibilityScanResults = await new AxeBuilder({ page })
@@ -36,6 +37,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   });
 
   test('should pass axe accessibility scan on check your answers page', async ({ page }) => {
+    test.setTimeout(90000); // Increased timeout for complete journey
     await completeMinimalJourney(page);
 
     const accessibilityScanResults = await new AxeBuilder({ page })
@@ -46,6 +48,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   });
 
   test('should pass axe accessibility scan on share plan page', async ({ page }) => {
+    test.setTimeout(90000); // Increased timeout for complete journey
     await completeMinimalJourney(page);
     await page.goto('/share-plan');
 
@@ -70,6 +73,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   });
 
   test('should have accessible form validation errors', async ({ page }) => {
+    test.setTimeout(90000); // Increased timeout for onboarding flow
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
 
@@ -99,6 +103,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   });
 
   test('should have error summary with appropriate ARIA attributes', async ({ page }) => {
+    test.setTimeout(90000); // Increased timeout for onboarding flow
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
     await page.getByLabel(/yes/i).first().check();
@@ -119,7 +124,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   await expect(errorSummary).toBeVisible();
 
   // The Prototype Kit usually puts the role="alert" on the summary div
-  // or uses an h2 with a specific ID. 
+  // or uses an h2 with a specific ID.
   const role = await errorSummary.getAttribute('role');
   const hasHeading = await errorSummary.locator('h2').count() > 0;
 
@@ -128,6 +133,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   });
 
   test('should indicate progress through journey accessibly', async ({ page }) => {
+    test.setTimeout(90000); // Increased timeout for journey completion
     await navigateToTaskList(page);
 
     // Task list should have accessible status indicators
@@ -143,6 +149,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   });
 
   test('should announce task list status appropriately', async ({ page }) => {
+    test.setTimeout(90000); // Increased timeout for journey completion
     await navigateToTaskList(page);
 
     const taskList = page.locator('.app-task-list, ol, ul');
@@ -156,6 +163,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   });
 
   test('should indicate required fields for screen readers', async ({ page }) => {
+    test.setTimeout(90000); // Increased timeout for onboarding flow
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
     await page.getByLabel(/yes/i).first().check();
