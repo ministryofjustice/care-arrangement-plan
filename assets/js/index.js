@@ -29,6 +29,12 @@ components.forEach((Component) => {
 setupCookieBanner();
 // Set up our accessible Escape key shortcut after GOV.UK components initialise
 setupAccessibleExitThisPage();
-setupLinkTracking();
-setupExitTracking();
+
+// Only initialize analytics tracking if explicitly enabled
+// This prevents interference with e2e tests where analytics is disabled
+if (window.enableAnalytics) {
+  setupLinkTracking();
+  setupExitTracking();
+}
+
 setupPerChildAnswers();
