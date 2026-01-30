@@ -7,15 +7,10 @@ export async function startJourney(page: Page) {
 }
 
 export async function completeSafetyChecks(page: Page) {
-  const firstYes = page.getByLabel(/yes/i).first();
-  await firstYes.check();
-  await expect(firstYes).toBeChecked();
+  await page.getByLabel(/yes/i).first().check();
   await page.getByRole('button', { name: /continue/i }).click();
 
-  await page.waitForLoadState('networkidle');
-  const secondYes = page.getByLabel(/yes/i).first();
-  await secondYes.check();
-  await expect(secondYes).toBeChecked();
+  await page.getByLabel(/yes/i).first().check();
   await page.getByRole('button', { name: /continue/i }).click();
 }
 
@@ -24,17 +19,11 @@ export async function completeOnboardingFlow(page: Page) {
   await completeSafetyChecks(page);
 
   // do-whats-best page - check the required checkbox (note: uses fancy apostrophe)
-  await page.waitForLoadState('networkidle');
-  const doWhatsBestCheckbox = page.getByRole('checkbox', { name: /I will put my children.s needs first/i });
-  await doWhatsBestCheckbox.check();
-  await expect(doWhatsBestCheckbox).toBeChecked();
+  await page.getByRole('checkbox', { name: /I will put my children.s needs first/i }).check();
   await page.getByRole('button', { name: /continue/i }).click();
 
   // court-order-check
-  await page.waitForLoadState('networkidle');
-  const noRadio = page.getByLabel(/no/i).first();
-  await noRadio.check();
-  await expect(noRadio).toBeChecked();
+  await page.getByLabel(/no/i).first().check();
   await page.getByRole('button', { name: /continue/i }).click();
 }
 
