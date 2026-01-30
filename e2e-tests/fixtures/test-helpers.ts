@@ -86,6 +86,20 @@ export async function expectErrorSummaryVisible(page: Page, expectedTitle = 'The
   await expect(errorSummary).toBeVisible();
   await expect(page.locator('.govuk-error-summary__title')).toHaveText(expectedTitle);
 }
+
+export async function expectFieldError(page: Page, fieldId: string, errorMessage: string) {
+  const errorElement = page.locator(`#${fieldId}-error`);
+  await expect(errorElement).toBeVisible();
+  await expect(errorElement).toContainText(errorMessage);
+
+  const input = page.locator(`#${fieldId}`);
+  await expect(input).toHaveClass(/govuk-input--error/);
+}
+
+export async function expectErrorSummaryLinkToField(page: Page, fieldId: string) {
+  const errorLink = page.locator(`.govuk-error-summary__list a[href="#${fieldId}"]`);
+  await expect(errorLink).toBeVisible();
+}
   /**
  * Complete the Living and Visiting section with minimal required data
  */
