@@ -95,7 +95,6 @@
 
 {% block bodyEnd %}
   <script nonce="{{ cspNonce }}">
-    // Pass analytics configuration to client-side JavaScript
     window.enableAnalytics = {{ analyticsEnabled | default(false) | dump | safe }};
   </script>
   <script type="module" src="{{ '/assets/js/app.js' | assetMap }}"></script>
