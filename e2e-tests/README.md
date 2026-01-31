@@ -18,6 +18,67 @@ npm run e2e:headed
 npm run e2e:debug
 ```
 
+## Performance Tips & Faster Test Runs
+
+Running all e2e tests can take several minutes. Here are strategies to speed up local development:
+
+### Quick Test Scripts
+
+```bash
+# Run tests in parallel using sharding (4x faster)
+npm run e2e:shard
+
+# Skip slow accessibility tests (for quick iterations)
+npm run e2e:quick
+
+# Run only accessibility tests
+npm run e2e:axe
+
+# Run a specific test file
+npx playwright test homepage.spec.ts
+
+# Run tests matching a pattern
+npx playwright test --grep "navigation"
+```
+
+### Using Sharding for Parallel Execution
+
+Sharding splits tests across multiple workers for faster execution:
+
+```bash
+# Run 1/4 of tests (Terminal 1)
+npm run e2e -- --shard=1/4
+
+# Run 2/4 of tests (Terminal 2)
+npm run e2e -- --shard=2/4
+
+# And so on...
+```
+
+### Reusing the Dev Server
+
+To avoid rebuilding before every test run:
+
+1. Start your dev server in one terminal:
+   ```bash
+   npm run start:dev
+   ```
+
+2. Run tests in another terminal (they'll use the existing server):
+   ```bash
+   npm run e2e
+   ```
+
+This skips the build step and starts tests immediately!
+
+### Test Timeouts
+
+Some tests that complete full user journeys have extended timeouts (60s) as they navigate through multiple pages. If a test is timing out:
+
+- Check if the local server is slow
+- Run the specific test in debug mode: `npm run e2e:debug`
+- Consider using `completeMinimalJourney()` helper instead of manual steps
+
 ## Test Files
 
 ### Core Journey Tests

@@ -94,5 +94,8 @@
 {% endblock %}
 
 {% block bodyEnd %}
+  <script nonce="{{ cspNonce }}">
+    window.enableAnalytics = {{ analyticsEnabled | default(false) | dump | safe }};
+  </script>
   <script type="module" src="{{ '/assets/js/app.js' | assetMap }}"></script>
 {% endblock %}
