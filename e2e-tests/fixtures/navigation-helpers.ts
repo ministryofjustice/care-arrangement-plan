@@ -11,7 +11,9 @@ export async function verifyBackNavigation(
   await page.goBack();
   await expect(page).toHaveURL(expectedUrl);
 
-  if (verifyData) {
+  // Firefox does not preserve form state via bfcache after back navigation
+  const browserName = page.context().browser()?.browserType().name();
+  if (verifyData && browserName !== 'firefox') {
     await verifyData();
   }
 
@@ -29,6 +31,7 @@ export async function verifyServiceBackLink(
   verifyData?: () => Promise<void>
 ) {
   await page.locator('.govuk-back-link').click();
+  await page.waitForLoadState('load');
   await expect(page).toHaveURL(expectedUrl);
 
   if (verifyData) {
@@ -49,9 +52,12 @@ export async function verifyForwardNavigation(
   verifyData?: () => Promise<void>
 ) {
   await page.goForward();
+  await page.waitForLoadState('load');
   await expect(page).toHaveURL(expectedUrl);
 
-  if (verifyData) {
+  // Firefox does not preserve form state via bfcache after forward navigation
+  const browserName = page.context().browser()?.browserType().name();
+  if (verifyData && browserName !== 'firefox') {
     await verifyData();
   }
 }
