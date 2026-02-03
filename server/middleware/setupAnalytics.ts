@@ -5,6 +5,10 @@ import cookieNames from '../constants/cookieNames';
 
 export default function setupAnalytics(): RequestHandler {
   return (request, response, next) => {
+    // Set environment-level flag for internal analytics (link clicks, page exits)
+    // This allows internal tracking to work without cookie consent in dev/staging
+    response.locals.analyticsEnvironmentEnabled = config.analytics.enabled;
+
     // If analytics is disabled at environment level, don't enable any analytics
     if (!config.analytics.enabled) {
       response.locals.analyticsEnabled = false;
