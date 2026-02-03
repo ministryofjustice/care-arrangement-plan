@@ -61,6 +61,10 @@ const setupExitTracking = () => {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
       logPageExit();
+    } else if (document.visibilityState === 'visible') {
+      // Reset the flag when user returns to the page (e.g., via Back button)
+      // This allows us to track subsequent exits
+      hasLoggedPageExit = false;
     }
   });
 
