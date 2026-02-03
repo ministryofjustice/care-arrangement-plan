@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 
+import config from '../config';
 import logger from '../logging/logger';
 import { generateHashedIdentifier } from '../utils/hashedIdentifier';
 
@@ -16,6 +17,10 @@ jest.mock('../utils/hashedIdentifier', () => ({
 }));
 
 describe('analyticsService', () => {
+  // Ensure analytics is enabled for tests
+  beforeAll(() => {
+    config.analytics.enabled = true;
+  });
   const mockedLogger = logger as jest.Mocked<typeof logger>;
   const mockedGenerateHashedIdentifier = generateHashedIdentifier as jest.MockedFunction<typeof generateHashedIdentifier>;
 

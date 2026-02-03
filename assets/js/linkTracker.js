@@ -1,4 +1,9 @@
 const setupLinkTracking = () => {
+  // Skip setup if analytics is disabled at environment level
+  if (window.enableAnalytics === false) {
+    return;
+  }
+
   /**
    * Sends a link click event to the server for analytics
    * @param {string} url - The URL of the link that was clicked

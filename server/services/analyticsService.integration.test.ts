@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 
+import config from '../config';
 import logger from '../logging/logger';
 
 import { logPageVisit } from './analyticsService';
@@ -10,6 +11,11 @@ import { logPageVisit } from './analyticsService';
  */
 describe('analyticsService - Integration', () => {
   const mockLogger = jest.spyOn(logger, 'info').mockImplementation();
+
+  // Ensure analytics is enabled for tests
+  beforeAll(() => {
+    config.analytics.enabled = true;
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();

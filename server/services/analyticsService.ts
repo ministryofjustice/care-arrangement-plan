@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 
+import config from '../config';
 import UserEvents from '../constants/userEvents';
 import logger from '../logging/logger';
 import { generateHashedIdentifier } from '../utils/hashedIdentifier';
@@ -10,7 +11,11 @@ import { generateHashedIdentifier } from '../utils/hashedIdentifier';
  * @param data - An object containing event-specific data.
  */
 const logEvent = (eventType: string, data: Record<string, string | number>) => {
-  
+  // Skip logging if analytics is disabled at environment level
+  if (!config.analytics.enabled) {
+    return;
+  }
+
   const logEntry = {
     timestamp: new Date().toISOString(),
     event_type: eventType,

@@ -1,4 +1,9 @@
 const setupExitTracking = () => {
+  // Skip setup if analytics is disabled at environment level
+  if (window.enableAnalytics === false) {
+    return;
+  }
+
   /**
    * Sends an analytics event to the server
    * @param {string} endpoint - The API endpoint to send to
