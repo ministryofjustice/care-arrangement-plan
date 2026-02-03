@@ -64,7 +64,7 @@ test.describe('About the children Page Validation', () => {
 
     test('should display error summary link that links to the input field', async ({ page }) => {
       await fillNumberOfChildrenAndDetails(page, 1, [' '])
-      await expectErrorSummaryLinkToField(page, 'child-name0');
+      await expectErrorSummaryLinkToField(page, 'child-name0-error');
     });
 
     test('should scroll to the input field when clicking the error summary link', async ({ page }) => {
