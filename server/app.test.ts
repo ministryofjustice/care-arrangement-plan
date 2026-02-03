@@ -94,6 +94,7 @@ describe('App', () => {
       const ga4Id = 'test-ga4-id';
 
       beforeEach(() => {
+        config.analytics.enabled = true; // Enable analytics for these tests
         config.analytics.ga4Id = ga4Id;
       });
 
