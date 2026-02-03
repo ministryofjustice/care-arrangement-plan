@@ -48,6 +48,14 @@ export async function fillAllChildrenAndContinue(page: Page, childNames: string[
   await page.getByRole('button', { name: /continue/i }).click();
 }
 
+export async function fillNumberOfChildrenAndDetails(page: Page, count: number, childNames: string[]) {
+      await fillNumberOfChildren(page, count)
+      for (let i = 0; i < childNames.length; i++) {
+        await fillChildDetails(page, childNames[i], i);
+      }
+      await page.getByRole('button', { name: /continue/i }).click();
+}
+
 export async function fillAdultDetails(page: Page, adult1FirstName: string, adult2FirstName: string) {
   // The about-the-adults page only collects first names
   await page.fill('input[name="initial-adult-name"]', adult1FirstName);
