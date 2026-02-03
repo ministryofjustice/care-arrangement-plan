@@ -119,7 +119,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   await expect(errorSummary).toBeVisible();
 
   // The Prototype Kit usually puts the role="alert" on the summary div
-  // or uses an h2 with a specific ID. 
+  // or uses an h2 with a specific ID.
   const role = await errorSummary.getAttribute('role');
   const hasHeading = await errorSummary.locator('h2').count() > 0;
 

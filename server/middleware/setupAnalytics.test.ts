@@ -13,6 +13,8 @@ describe('setupAnalytics', () => {
   beforeEach(() => {
     request = {} as Request;
     response = { locals: {} } as Response;
+    // Reset analytics enabled to true for most tests
+    config.analytics.enabled = true;
   });
 
   it('should set locals.analyticsEnabled to true if consent cookie set to yes', () => {
@@ -72,5 +74,31 @@ describe('setupAnalytics', () => {
 
     expect(response.locals.ga4Id).toBe(ga4Id);
     expect(next).toHaveBeenCalled();
+  });
+
+  describe('when analytics is disabled at environment level', () => {
+    beforeEach(() => {
+      config.analytics.enabled = false;
+    });
+
+    it('should set analyticsEnabled to false regardless of consent cookie', () => {
+      request.cookies = {
+        [cookieNames.ANALYTICS_CONSENT]: encodeURIComponent(JSON.stringify({ acceptAnalytics: 'Yes' })),
+      };
+
+      setupAnalytics()(request, response, next);
+
+      expect(response.locals.analyticsEnabled).toBe(false);
+      expect(next).toHaveBeenCalled();
+    });
+
+    it('should set ga4Id to undefined', () => {
+      config.analytics.ga4Id = 'test-ga4-id';
+
+      setupAnalytics()(request, response, next);
+
+      expect(response.locals.ga4Id).toBeUndefined();
+      expect(next).toHaveBeenCalled();
+    });
   });
 });
