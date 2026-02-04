@@ -8,7 +8,7 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { isPerChildPoCEnabled } from '../../utils/perChildSession';
+import { isDesign2, isPerChildPoCEnabled } from '../../utils/perChildSession';
 import { getBackUrl } from '../../utils/sessionHelpers';
 
 // Helper to get the field name for a specific child index
@@ -90,7 +90,7 @@ const whereHandoverRoutes = (router: Router) => {
       namesOfChildren,
       childOptions,
       childrenWithAnswers,
-      showPerChildOption: numberOfChildren > 1 && isPerChildPoCEnabled(request.session),
+      showPerChildOption: numberOfChildren > 1 && !isDesign2(request.session) && isPerChildPoCEnabled(request.session),
     });
   });
 
@@ -113,6 +113,7 @@ const whereHandoverRoutes = (router: Router) => {
       // Validate exclusive "someoneElse" for default
       validations.push(
         body(getFieldName(0))
+          .toArray()
           .custom(
             (whereHandover: whereHandoverField[]) => !(whereHandover.length > 1 && whereHandover.includes('someoneElse')),
           )
@@ -122,7 +123,7 @@ const whereHandoverRoutes = (router: Router) => {
       // Validate the someone else field if "someoneElse" is selected for default
       validations.push(
         body(getSomeoneElseFieldName(0))
-          .if(body(getFieldName(0)).custom((value: string[]) => value && value.includes('someoneElse')))
+          .if(body(getFieldName(0)).toArray().custom((value: string[]) => value && value.includes('someoneElse')))
           .trim()
           .notEmpty()
           .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.arrangementMissingError'))
@@ -145,6 +146,7 @@ const whereHandoverRoutes = (router: Router) => {
           // Validate exclusive "someoneElse" for this child
           validations.push(
             body(fieldName)
+              .toArray()
               .custom(
                 (whereHandover: whereHandoverField[]) => !(whereHandover.length > 1 && whereHandover.includes('someoneElse')),
               )
@@ -154,7 +156,7 @@ const whereHandoverRoutes = (router: Router) => {
           // Validate the someone else field if "someoneElse" is selected for this child
           validations.push(
             body(someoneElseFieldName)
-              .if(body(fieldName).custom((value: string[]) => value && value.includes('someoneElse')))
+              .if(body(fieldName).toArray().custom((value: string[]) => value && value.includes('someoneElse')))
               .trim()
               .notEmpty()
               .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.arrangementMissingError'))
