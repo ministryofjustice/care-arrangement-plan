@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 
+import config from '../config';
 import logger from '../logging/logger';
 import { generateHashedIdentifier } from '../utils/hashedIdentifier';
 
@@ -16,6 +17,10 @@ jest.mock('../utils/hashedIdentifier', () => ({
 }));
 
 describe('analyticsService', () => {
+  // Ensure analytics is enabled for tests
+  beforeAll(() => {
+    config.analytics.enabled = true;
+  });
   const mockedLogger = logger as jest.Mocked<typeof logger>;
   const mockedGenerateHashedIdentifier = generateHashedIdentifier as jest.MockedFunction<typeof generateHashedIdentifier>;
 
@@ -305,9 +310,10 @@ describe('analyticsService', () => {
 
       const linkUrl = 'https://www.gov.uk/looking-after-children-divorce';
       const linkText = 'More information and support';
+      const linkType = 'external';
       const currentPage = '/share-plan';
 
-      logLinkClick(mockReq, linkUrl, linkText, currentPage);
+      logLinkClick(mockReq, linkUrl, linkText, linkType, currentPage);
 
       expect(mockedGenerateHashedIdentifier).toHaveBeenCalledWith(
         '192.168.1.1',
@@ -321,6 +327,7 @@ describe('analyticsService', () => {
           hashed_user_id: mockHashedId,
           link_url: linkUrl,
           link_text: linkText,
+          link_type: linkType,
           page: currentPage,
         }),
         'link_click event'

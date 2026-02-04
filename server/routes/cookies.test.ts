@@ -22,6 +22,7 @@ describe(paths.COOKIES, () => {
     });
 
     it('should render cookies page when there is a ga4 id', async () => {
+      config.analytics.enabled = true; // Enable analytics for this test
       config.analytics.ga4Id = 'test-ga4-id';
 
       const response = await request(app).get(paths.COOKIES).expect('Content-Type', /html/);
