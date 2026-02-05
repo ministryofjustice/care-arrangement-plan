@@ -56,7 +56,7 @@ jobs:
         run: npm ci --no-audit
 
       - name: 'Install Playwright Browsers'
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps
 
       - name: 'Run Playwright E2E Tests (PR - Local)'
         if: github.event_name == 'pull_request'
