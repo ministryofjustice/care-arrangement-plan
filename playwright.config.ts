@@ -1,11 +1,23 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const allBrowsers = [
+  { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+  { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+  { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+];
+
+// In CI, rotate browser based on run number (synced with workflow)
+const getCIBrowser = () => {
+  const runNumber = parseInt(process.env.GITHUB_RUN_NUMBER || '1', 10);
+  return [allBrowsers[(runNumber - 1) % 3]];
+};
+
 export default defineConfig({
   testDir: './e2e-tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 4 : 4, // Run with 4 workers for faster test execution
+  workers: process.env.CI ? 1 : 4, // Run with 1 worker in CI to prevent server overload
   reporter: [
     ['html', { outputFolder: 'playwright-report' }],
     ['junit', { outputFile: 'playwright-results.xml' }],
@@ -16,12 +28,9 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-  ],
+  // CI: Rotate browser per run (chromium → firefox → webkit)
+  // Local: All browsers
+  projects: process.env.CI ? getCIBrowser() : allBrowsers,
   webServer: {
     command: 'npm run build && ENV_FILE_OPTION="--env-file=.env.test" npm start',
     url: 'http://localhost:8001/health',

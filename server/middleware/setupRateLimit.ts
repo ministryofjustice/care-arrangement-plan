@@ -20,7 +20,7 @@ const setupRateLimit = () => {
 
   const generalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: isTestEnvironment ? 10000 : 250, // Much higher limit for tests to avoid false failures
+    max: isTestEnvironment ? 15000 : 250, // Much higher limit for tests to avoid false failures
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     validate: { trustProxy: true },
