@@ -1,5 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const allBrowsers = [
+  { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+  { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+  { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+];
+
 export default defineConfig({
   testDir: './e2e-tests',
   fullyParallel: true,
@@ -16,20 +22,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-  ],
+  projects: allBrowsers,
   webServer: {
     command: 'npm run build && ENV_FILE_OPTION="--env-file=.env.test" npm start',
     url: 'http://localhost:8001/health',
