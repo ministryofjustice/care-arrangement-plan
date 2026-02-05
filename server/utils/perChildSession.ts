@@ -26,6 +26,15 @@ export function isDesign2(session: SessionLike): boolean {
 }
 
 /**
+ * Check if the session is using inline per-child mode (Design 1)
+ * This is the mode where users can add different answers for different children on the same page
+ * using the "Add answer for a specific child" button
+ */
+export function isAnswerPerChild(session: SessionLike): boolean {
+  return !isDesign2(session);
+}
+
+/**
  * Get the current child index (for Design 2)
  */
 export function getCurrentChildIndex(session: SessionLike): number {

@@ -9,6 +9,21 @@
 
   <p class="govuk-body govuk-!-margin-top-6"><b>{{ __('confirmation.whatYouNeedToDoNext') }}</b> {{ __('confirmation.checkDownloadsFolder', { otherAdult: otherAdult }) }}</p>
 
+      <h2 class="govuk-heading-m govuk-!-margin-top-6">
+        {{ __('sharePlan.ifTheyDoNotRespond', {otherAdult: otherAdult}) }}
+      </h2>
+      <p class="govuk-body">{{ __('sharePlan.tryMediation', {otherAdult: otherAdult}) }}</p>
+
+      <p class="govuk-body">
+        {{ __('sharePlan.aMediatorIs') }}
+      </p>
+
+      <p class="govuk-body">
+        <a href="https://www.gov.uk/looking-after-children-divorce/types-of-court-order" class="govuk-link"
+          >{{ __('sharePlan.ifYouCannotAgree') }}</a
+        >
+      </p>
+
       <h2 class="govuk-heading-m govuk-!-margin-top-6">{{ __('confirmation.helpUsImprove') }}</h2>
       <p class="govuk-body">{{ __('confirmation.appreciateFeedback') }}</p>
 

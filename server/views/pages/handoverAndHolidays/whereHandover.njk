@@ -33,6 +33,7 @@
           {% set anotherHtml0 %}
             {{
               govukTextarea({
+                id: formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0",
                 name: formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0",
                 label: {
                   text: __('handoverAndHolidays.whereHandover.someoneElseName')

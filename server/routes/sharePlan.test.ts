@@ -86,13 +86,4 @@ describe(`GET ${paths.SHARE_PLAN}`, () => {
         expect(response.text).toMatch('Download a PDF or accessible HTML version of this plan and share with Sam.');
       });
   });
-
-  it('should include what to do if the other coparent does not respond', () => {
-    return request(app)
-      .get(paths.SHARE_PLAN)
-      .expect('Content-Type', /html/)
-      .expect((response) => {
-        expect(response.text).toMatch('If Sam does not respond or you can&#39;t make an agreement between yourselves, you could try mediation.');
-      });
-  });
 });
