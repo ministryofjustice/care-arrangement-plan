@@ -29,8 +29,9 @@ components.forEach((Component) => {
 setupCookieBanner();
 setupAccessibleExitThisPage();
 
-// Only initialise analytics tracking if explicitly enabled
-if (window.enableAnalytics) {
+// Initialise internal analytics tracking (link clicks, page exits) unless disabled at environment level
+// This is separate from GA4 which requires user consent via cookies
+if (window.analyticsEnvironmentEnabled !== false) {
   setupLinkTracking();
   setupExitTracking();
 }
