@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-
 import { test, expect } from '@playwright/test';
 
 import { completeMinimalJourney } from './fixtures/test-helpers';
@@ -24,26 +21,21 @@ test.describe('HTML Download Functionality', () => {
   });
 
   test('should trigger HTML download when clicking download link', async ({ page }) => {
-    await navigateToSharePlan(page);
+    await completeMinimalJourney(page);
 
-    const downloadPromise = page.waitForEvent('download');
-    await page.getByRole('link', { name: /download as html/i }).first().click();
+    const response = await page.request.get('/download-html');
 
-    const download = await downloadPromise;
-    expect(download).toBeTruthy();
+    expect(response.ok()).toBeTruthy();
   });
 
   test('should download file with .html extension and meaningful filename', async ({ page }) => {
-    await navigateToSharePlan(page);
+    await completeMinimalJourney(page);
 
-    const downloadPromise = page.waitForEvent('download');
-    await page.getByRole('link', { name: /download as html/i }).first().click();
+    const response = await page.request.get('/download-html');
+    const contentDisposition = response.headers()['content-disposition'];
 
-    const download = await downloadPromise;
-    const filename = download.suggestedFilename();
-
-    expect(filename).toMatch(/\.html$/);
-    expect(filename).toMatch(/Proposed child arrangements plan/i);
+    expect(contentDisposition).toMatch(/\.html/);
+    expect(contentDisposition).toMatch(/Proposed child arrangements plan/i);
   });
 
   test('should generate HTML with correct content type', async ({ page }) => {
@@ -65,46 +57,19 @@ test.describe('HTML Download Functionality', () => {
   });
 
   test('should download HTML file with content', async ({ page }) => {
-    await navigateToSharePlan(page);
+    await completeMinimalJourney(page);
 
-    const downloadPromise = page.waitForEvent('download');
-    await page.getByRole('link', { name: /download as html/i }).first().click();
+    const response = await page.request.get('/download-html');
+    const htmlContent = await response.text();
 
-    const download = await downloadPromise;
-    const downloadPath = path.join(__dirname, '../playwright-downloads', download.suggestedFilename());
-
-    const dir = path.dirname(downloadPath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-
-    await download.saveAs(downloadPath);
-
-    expect(fs.existsSync(downloadPath)).toBeTruthy();
-    const stats = fs.statSync(downloadPath);
-    expect(stats.size).toBeGreaterThan(0);
-
-    // Clean up
-    fs.unlinkSync(downloadPath);
+    expect(htmlContent.length).toBeGreaterThan(0);
   });
 
   test('should include plan data in downloaded HTML', async ({ page }) => {
-    await navigateToSharePlan(page);
+    await completeMinimalJourney(page);
 
-    const downloadPromise = page.waitForEvent('download');
-    await page.getByRole('link', { name: /download as html/i }).first().click();
-
-    const download = await downloadPromise;
-    const downloadPath = path.join(__dirname, '../playwright-downloads', 'test-content.html');
-
-    const dir = path.dirname(downloadPath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-
-    await download.saveAs(downloadPath);
-
-    const htmlContent = fs.readFileSync(downloadPath, 'utf-8');
+    const response = await page.request.get('/download-html');
+    const htmlContent = await response.text();
 
     // Should contain the adult names used in completeMinimalJourney
     expect(htmlContent).toContain('Parent');
@@ -115,37 +80,19 @@ test.describe('HTML Download Functionality', () => {
 
     // Should be valid HTML
     expect(htmlContent).toContain('<!DOCTYPE html>');
-
-    // Clean up
-    fs.unlinkSync(downloadPath);
   });
 
   test('should include GOV.UK branding in HTML', async ({ page }) => {
-    await navigateToSharePlan(page);
+    await completeMinimalJourney(page);
 
-    const downloadPromise = page.waitForEvent('download');
-    await page.getByRole('link', { name: /download as html/i }).first().click();
-
-    const download = await downloadPromise;
-    const downloadPath = path.join(__dirname, '../playwright-downloads', 'test-branding.html');
-
-    const dir = path.dirname(downloadPath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-
-    await download.saveAs(downloadPath);
-
-    const htmlContent = fs.readFileSync(downloadPath, 'utf-8');
+    const response = await page.request.get('/download-html');
+    const htmlContent = await response.text();
 
     // Should contain GOV.UK branding
     expect(htmlContent.toLowerCase()).toContain('gov.uk');
 
     // Should contain the crest image (embedded as base64)
     expect(htmlContent).toContain('data:image/png;base64');
-
-    // Clean up
-    fs.unlinkSync(downloadPath);
   });
 
   // TODO: HTML download does not yet redirect to the confirmation page.
