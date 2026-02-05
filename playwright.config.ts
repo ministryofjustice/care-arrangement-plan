@@ -6,6 +6,12 @@ const allBrowsers = [
   { name: 'webkit', use: { ...devices['Desktop Safari'] } },
 ];
 
+// In CI, rotate browser based on run number (cycles through all 3)
+const getCIBrowser = () => {
+  const runNumber = parseInt(process.env.GITHUB_RUN_NUMBER || '1', 10);
+  return [allBrowsers[(runNumber - 1) % 3]];
+};
+
 export default defineConfig({
   testDir: './e2e-tests',
   fullyParallel: true,
@@ -22,7 +28,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
-  projects: allBrowsers,
+  projects: process.env.CI ? getCIBrowser() : allBrowsers,
   webServer: {
     command: 'npm run build && ENV_FILE_OPTION="--env-file=.env.test" npm start',
     url: 'http://localhost:8001/health',

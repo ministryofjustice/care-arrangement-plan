@@ -55,8 +55,17 @@ jobs:
       - name: 'Install Dependencies'
         run: npm ci --no-audit
 
-      - name: 'Install Playwright Browsers'
-        run: npx playwright install --with-deps
+      - name: 'Determine Browser'
+        id: browser
+        run: |
+          BROWSERS=("chromium" "firefox" "webkit")
+          INDEX=$(( (${{ github.run_number }} - 1) % 3 ))
+          BROWSER=${BROWSERS[$INDEX]}
+          echo "name=$BROWSER" >> $GITHUB_OUTPUT
+          echo "🌐 Running tests with: $BROWSER (run #${{ github.run_number }})"
+
+      - name: 'Install Playwright Browser'
+        run: npx playwright install --with-deps ${{ steps.browser.outputs.name }}
 
       - name: 'Run Playwright E2E Tests (PR - Local)'
         if: github.event_name == 'pull_request'
