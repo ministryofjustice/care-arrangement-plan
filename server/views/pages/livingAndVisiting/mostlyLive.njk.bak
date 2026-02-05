@@ -10,7 +10,7 @@
       {% include "partials/errorSummary.njk" %}
       <form
         class="form"
-        action="{{ paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS }}"
+        action="{{ paths.LIVING_VISITING_MOSTLY_LIVE }}"
         method="post"
         novalidate
         id="per-child-form"
@@ -28,34 +28,42 @@
           {% set describeArrangementHtml0 %}
             {{
               govukTextarea({
-                name: formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT + "-0",
+                name: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT + "-0",
+                id: formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT + "-0",
                 label: {
                   text: __('describeArrangement')
                 },
-                value: formValues[formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT + "-0"],
-                errorMessage: errors | findError(formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT + "-0")
+                value: formValues[formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT + "-0"],
+                errorMessage: errors | findError(formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT + "-0")
               })
             }}
           {% endset -%}
 
           {{
             govukRadios({
-              name: formFields.GET_BETWEEN_HOUSEHOLDS + "-0",
+              name: formFields.MOSTLY_LIVE_WHERE + "-0",
               fieldset: {
                 legend: {
-                  text: "How will the children get between the two households?",
+                  text: "Where will the children mostly live?",
                   classes: "govuk-visually-hidden",
                   isPageHeading: false
                 }
               },
               items: [
                 {
-                  value: "initialCollects",
-                  text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.initialAdultName})
+                  value: "withInitial",
+                  text: __('livingAndVisiting.mostlyLive.with', {adult: values.initialAdultName})
                 },
                 {
-                  value: "secondaryCollects",
-                  text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.secondaryAdultName})
+                  value: "withSecondary",
+                  text: __('livingAndVisiting.mostlyLive.with', {adult: values.secondaryAdultName})
+                },
+                {
+                  value: "split",
+                  text: __('livingAndVisiting.mostlyLive.split', {initialAdult: values.initialAdultName, secondaryAdult: values.secondaryAdultName})
+                },
+                {
+                  divider: __('or')
                 },
                 {
                   value: "other",
@@ -65,8 +73,8 @@
                   }
                 }
               ],
-              value: formValues[formFields.GET_BETWEEN_HOUSEHOLDS + "-0"],
-              errorMessage: errors | findError(formFields.GET_BETWEEN_HOUSEHOLDS + "-0")
+              value: formValues[formFields.MOSTLY_LIVE_WHERE + "-0"],
+              errorMessage: errors | findError(formFields.MOSTLY_LIVE_WHERE + "-0")
             })
           }}
         </div>
@@ -87,7 +95,7 @@
               data-number-of-children="{{ numberOfChildren }}"
               data-child-options="{{ childOptions | dump | escape }}"
               data-names-of-children="{{ namesOfChildren | dump | escape }}"
-              data-field-base-name="{{ formFields.GET_BETWEEN_HOUSEHOLDS }}"
+              data-field-base-name="{{ formFields.MOSTLY_LIVE_WHERE }}"
             >
               Add answer for a specific child
             </button>
@@ -96,15 +104,6 @@
 
         {{ govukButton({text: __('continue')}) }}
       </form>
-      <form
-        class="form"
-        action="{{ paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS_NOT_REQUIRED }}"
-        method="post"
-        novalidate
-      >
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideTransportBetweenHouseholds') }}</button>
-      </form>
     </div>
   </div>
 
@@ -112,38 +111,40 @@
     {# Template for per-child entry - hidden, cloned by JavaScript #}
     <template id="per-child-entry-template">
       <div class="per-child-entry govuk-!-margin-top-6 govuk-!-padding-top-6 govuk-!-padding-bottom-2" style="border-top: 2px solid #b1b4b6;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-          <div class="govuk-form-group" style="flex: 1; margin-bottom: 0; margin-right: 20px;">
-            <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
-              This answer is for:
-            </label>
-            <select class="govuk-select" id="child-selector-ENTRY_INDEX" name="child-selector-ENTRY_INDEX">
-              <option value="">Select a child</option>
-              {# Options populated by JavaScript #}
-            </select>
-          </div>
-          <button type="button" class="govuk-button govuk-button--warning remove-child-entry-btn" style="margin-top: 26px;">
-            Remove
-          </button>
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
+            This answer is for:
+          </label>
+          <select class="govuk-select" id="child-selector-ENTRY_INDEX" name="child-selector-ENTRY_INDEX">
+            <option value="">Select a child</option>
+            {# Options populated by JavaScript #}
+          </select>
         </div>
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-visually-hidden">
-              How will this child get between the two households?
+              Where will this child mostly live?
             </legend>
             <div class="govuk-radios" data-module="govuk-radios">
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="FIELD_NAME-initialCollects" name="FIELD_NAME" type="radio" value="initialCollects" data-aria-controls="conditional-FIELD_NAME-other">
-                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-initialCollects">
-                  {{ __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.initialAdultName}) }}
+                <input class="govuk-radios__input" id="FIELD_NAME-withInitial" name="FIELD_NAME" type="radio" value="withInitial">
+                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-withInitial">
+                  {{ __('livingAndVisiting.mostlyLive.with', {adult: values.initialAdultName}) }}
                 </label>
               </div>
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="FIELD_NAME-secondaryCollects" name="FIELD_NAME" type="radio" value="secondaryCollects" data-aria-controls="conditional-FIELD_NAME-other">
-                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-secondaryCollects">
-                  {{ __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.secondaryAdultName}) }}
+                <input class="govuk-radios__input" id="FIELD_NAME-withSecondary" name="FIELD_NAME" type="radio" value="withSecondary">
+                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-withSecondary">
+                  {{ __('livingAndVisiting.mostlyLive.with', {adult: values.secondaryAdultName}) }}
                 </label>
               </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="FIELD_NAME-split" name="FIELD_NAME" type="radio" value="split">
+                <label class="govuk-label govuk-radios__label" for="FIELD_NAME-split">
+                  {{ __('livingAndVisiting.mostlyLive.split', {initialAdult: values.initialAdultName, secondaryAdult: values.secondaryAdultName}) }}
+                </label>
+              </div>
+              <div class="govuk-radios__divider">{{ __('or') }}</div>
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="FIELD_NAME-other" name="FIELD_NAME" type="radio" value="other" data-aria-controls="conditional-FIELD_NAME-other">
                 <label class="govuk-label govuk-radios__label" for="FIELD_NAME-other">
@@ -161,6 +162,9 @@
             </div>
           </fieldset>
         </div>
+        <button type="button" class="govuk-button govuk-button--warning govuk-!-margin-bottom-4 remove-child-entry-btn">
+          Remove
+        </button>
       </div>
     </template>
   {% endif %}

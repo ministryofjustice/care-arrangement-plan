@@ -50,7 +50,8 @@
     "nunjucks": "3.2.4",
     "on-finished": "^2.4.1",
     "rate-limit-redis": "^4.2.1",
-    "redis": "4.7.0"
+    "redis": "4.7.0",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.0",

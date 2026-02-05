@@ -9,7 +9,7 @@
       {% include "partials/errorSummary.njk" %}
       <form
         class="form"
-        action="{{ paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER }}"
+        action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN }}"
         method="post"
         novalidate
         id="per-child-form"
@@ -17,7 +17,7 @@
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
 
         <h1 class="govuk-heading-l">{{ title }}</h1>
-        <p class="govuk-hint">{{ __('handoverAndHolidays.itemsForChangeover.content') }}</p>
+        <p class="govuk-hint">{{ __('specialDays.whatWillHappen.content') }}</p>
 
         {# Default/All children answer #}
         <div class="per-child-entry default-answer-section" data-entry-index="0">
@@ -27,14 +27,14 @@
           {{
             govukTextarea({
               label: {
-                text: "Describe the items",
+                text: "Describe what will happen",
                 classes: "govuk-visually-hidden",
                 isPageHeading: false
               },
-              name: formFields.ITEMS_FOR_CHANGEOVER + "-0",
-              id: formFields.ITEMS_FOR_CHANGEOVER + "-0",
-              value: formValues[formFields.ITEMS_FOR_CHANGEOVER + "-0"],
-              errorMessage: errors | findError(formFields.ITEMS_FOR_CHANGEOVER + "-0")
+              name: formFields.SPECIAL_DAYS + "-0",
+              id: formFields.SPECIAL_DAYS + "-0",
+              value: formValues[formFields.SPECIAL_DAYS + "-0"],
+              errorMessage: errors | findError(formFields.SPECIAL_DAYS + "-0")
             })
           }}
         </div>
@@ -55,7 +55,7 @@
               data-number-of-children="{{ numberOfChildren }}"
               data-child-options="{{ childOptions | dump | escape }}"
               data-names-of-children="{{ namesOfChildren | dump | escape }}"
-              data-field-base-name="{{ formFields.ITEMS_FOR_CHANGEOVER }}"
+              data-field-base-name="{{ formFields.SPECIAL_DAYS }}"
             >
               Add answer for a specific child
             </button>
@@ -66,12 +66,12 @@
       </form>
       <form
         class="form"
-        action="{{ paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED }}"
+        action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED }}"
         method="post"
         novalidate
       >
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideItemsForChangeover') }}</button>
+        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideSpecialDays') }}</button>
       </form>
     </div>
   </div>
@@ -80,26 +80,24 @@
     {# Template for per-child entry - hidden, cloned by JavaScript #}
     <template id="per-child-entry-template">
       <div class="per-child-entry govuk-!-margin-top-6 govuk-!-padding-top-6 govuk-!-padding-bottom-2" style="border-top: 2px solid #b1b4b6;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-          <div class="govuk-form-group" style="flex: 1; margin-bottom: 0; margin-right: 20px;">
-            <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
-              This answer is for:
-            </label>
-            <select class="govuk-select" id="child-selector-ENTRY_INDEX" name="child-selector-ENTRY_INDEX">
-              <option value="">Select a child</option>
-              {# Options populated by JavaScript #}
-            </select>
-          </div>
-          <button type="button" class="govuk-button govuk-button--warning remove-child-entry-btn" style="margin-top: 26px;">
-            Remove
-          </button>
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
+            This answer is for:
+          </label>
+          <select class="govuk-select" id="child-selector-ENTRY_INDEX" name="child-selector-ENTRY_INDEX">
+            <option value="">Select a child</option>
+            {# Options populated by JavaScript #}
+          </select>
         </div>
         <div class="govuk-form-group">
           <label class="govuk-label govuk-visually-hidden" for="FIELD_NAME">
-            Describe the items for this child
+            Describe what will happen for this child
           </label>
           <textarea class="govuk-textarea" id="FIELD_NAME" name="FIELD_NAME" rows="5"></textarea>
         </div>
+        <button type="button" class="govuk-button govuk-button--warning govuk-!-margin-bottom-4 remove-child-entry-btn">
+          Remove
+        </button>
       </div>
     </template>
 

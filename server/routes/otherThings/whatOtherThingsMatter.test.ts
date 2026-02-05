@@ -49,10 +49,7 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
       const response = 'other things matter';
 
       sessionMock.otherThings = {
-        whatOtherThingsMatter: {
-          noDecisionRequired: false,
-          answer: response,
-        },
+        whatOtherThingsMatter: { default: { noDecisionRequired: false, answer: response, } },
       };
 
       const dom = new JSDOM((await request(app).get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)).text);

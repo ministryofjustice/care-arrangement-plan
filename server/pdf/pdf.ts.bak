@@ -27,7 +27,7 @@ class Pdf {
 
   public currentY = HEADER_HEIGHT;
 
-  private readonly logoData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/the-new-gov-uk-logo.png'), { encoding: 'base64' })}`;
+  private readonly logoData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/govuk-logo-rebrand.png'), { encoding: 'base64' })}`;
 
   constructor(autoPrint: boolean, request: Request) {
     this.request = request;
@@ -70,8 +70,7 @@ class Pdf {
 
   private addHeaderToPage() {
     this.document.setFillColor(29, 112, 184).rect(0, 0, this.document.internal.pageSize.getWidth(), HEADER_HEIGHT, 'F');
-    // Logo aspect ratio is 3:2 (720x480 px)
-    const headerLogoWidth = HEADER_LOGO_HEIGHT * 1.5;
+    const headerLogoWidth = HEADER_LOGO_HEIGHT * 5;
     this.document.addImage(
       this.logoData,
       'PNG',

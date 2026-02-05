@@ -23,7 +23,7 @@
 
 {% block head %}
   <meta name="robots" content="noindex, nofollow" />
-  <link href="{{ '/assets/css/app.css' | assetMap }}" rel="stylesheet" />
+  <link href="{{ '/assets/css/application.css' | assetMap }}" rel="stylesheet" />
   {% if analyticsEnabled and ga4Id != undefined %}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga4Id }}" nonce="{{ cspNonce }}"></script>
     <script nonce="{{ cspNonce }}">
@@ -97,5 +97,5 @@
   <script nonce="{{ cspNonce }}">
     window.enableAnalytics = {{ analyticsEnabled | default(false) | dump | safe }};
   </script>
-  <script type="module" src="{{ '/assets/js/app.js' | assetMap }}"></script>
+  <script type="module" src="{{ '/assets/js/index.js' | assetMap }}"></script>
 {% endblock %}

@@ -16,22 +16,22 @@ class PdfGenerator {
     this.currentPage = 1;
     this.totalPages = 15; // Known from the form
 
-    // Load GOV.UK crest logo
-    const crestPath = path.resolve(process.cwd(), 'assets', 'images', 'crest.png');
-    this.logoData = `data:image/png;base64,${fs.readFileSync(crestPath, { encoding: 'base64' })}`;
+    // Load GOV.UK logo
+    const logoPath = path.resolve(process.cwd(), 'assets', 'images', 'the-new-gov-uk-logo.png');
+    this.logoData = `data:image/png;base64,${fs.readFileSync(logoPath, { encoding: 'base64' })}`;
   }
 
   /**
-   * Add black header bar with GOV.UK crest and title
+   * Add GDS blue header bar with GOV.UK logo and title
    * Matches the TypeScript version in server/pdf/pdf.ts
    */
   addHeader(title) {
-    // Black header bar
-    this.doc.setFillColor(...PdfStyles.COLOR_BLACK);
+    // GDS blue header bar
+    this.doc.setFillColor(29, 112, 184);
     this.doc.rect(0, 0, this.pageWidth, PdfStyles.HEADER_HEIGHT, 'F');
 
-    // Add GOV.UK crest logo
-    const headerLogoWidth = PdfStyles.HEADER_LOGO_HEIGHT * 5;
+    // Add GOV.UK logo (aspect ratio is 3:2, so 720x480 px = 1.5:1)
+    const headerLogoWidth = PdfStyles.HEADER_LOGO_HEIGHT * 1.5;
     this.doc.addImage(
       this.logoData,
       'PNG',

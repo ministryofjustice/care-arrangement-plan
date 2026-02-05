@@ -17,6 +17,9 @@ const getFieldName = (childIndex: number) => `${formFields.WHERE_HANDOVER}-${chi
 // Helper to get the someone else field name for a specific child index
 const getSomeoneElseFieldName = (childIndex: number) => `${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-${childIndex}`;
 
+// Helper to get the other field name for a specific child index
+const getOtherFieldName = (childIndex: number) => `${formFields.WHERE_HANDOVER_OTHER}-${childIndex}`;
+
 // Helper to get the child selector field name for a specific entry index
 const _getChildSelectorFieldName = (entryIndex: number) => `child-selector-${entryIndex}`;
 
@@ -58,6 +61,9 @@ const whereHandoverRoutes = (router: Router) => {
       if (existingAnswers.default?.someoneElse) {
         formValues[getSomeoneElseFieldName(0)] = existingAnswers.default.someoneElse;
       }
+      if (existingAnswers.default?.other) {
+        formValues[getOtherFieldName(0)] = existingAnswers.default.other;
+      }
 
       // Set per-child answers
       if (existingAnswers.byChild) {
@@ -68,6 +74,9 @@ const whereHandoverRoutes = (router: Router) => {
             formValues[getFieldName(idx)] = answer.where;
             if (answer.someoneElse) {
               formValues[getSomeoneElseFieldName(idx)] = answer.someoneElse;
+            }
+            if (answer.other) {
+              formValues[getOtherFieldName(idx)] = answer.other;
             }
           }
         });
@@ -107,6 +116,7 @@ const whereHandoverRoutes = (router: Router) => {
         body(getFieldName(0))
           .exists()
           .toArray()
+          .isLength({ min: 1 })
           .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.emptyError'))
       );
 
@@ -129,10 +139,20 @@ const whereHandoverRoutes = (router: Router) => {
           .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.arrangementMissingError'))
       );
 
+      // Validate the other field if "other" is selected for default
+      validations.push(
+        body(getOtherFieldName(0))
+          .if(body(getFieldName(0)).custom((value: string[]) => value && value.includes('other')))
+          .trim()
+          .notEmpty()
+          .withMessage((_value, { req }) => req.__('Please describe the other location'))
+      );
+
       // Check for per-child entries and validate them
       for (let i = 1; i <= numberOfChildren; i++) {
         const fieldName = getFieldName(i);
         const someoneElseFieldName = getSomeoneElseFieldName(i);
+        const otherFieldName = getOtherFieldName(i);
 
         // Only validate if the field exists in the request
         if (request.body[fieldName] !== undefined && request.body[fieldName] !== '') {
@@ -140,6 +160,7 @@ const whereHandoverRoutes = (router: Router) => {
             body(fieldName)
               .exists()
               .toArray()
+              .isLength({ min: 1 })
               .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.emptyError'))
           );
 
@@ -161,6 +182,15 @@ const whereHandoverRoutes = (router: Router) => {
               .notEmpty()
               .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.arrangementMissingError'))
           );
+
+          // Validate the other field if "other" is selected for this child
+          validations.push(
+            body(otherFieldName)
+              .if(body(fieldName).custom((value: string[]) => value && value.includes('other')))
+              .trim()
+              .notEmpty()
+              .withMessage((_value, { req }) => req.__('Please describe the other location'))
+          );
         }
       }
 
@@ -181,6 +211,7 @@ const whereHandoverRoutes = (router: Router) => {
       // Process the default answer
       const defaultWhere = safeArray(request.body[getFieldName(0)]);
       const defaultSomeoneElse = safeString(request.body[getSomeoneElseFieldName(0)]);
+      const defaultOther = safeString(request.body[getOtherFieldName(0)]);
 
       // Build the per-child answers structure
       const byChild: Record<number, WhereHandoverAnswer> = {};
@@ -195,9 +226,11 @@ const whereHandoverRoutes = (router: Router) => {
           const childIndex = parseInt(request.body[key], 10);
           const whereFieldName = getFieldName(entryIndex);
           const someoneElseFieldName = getSomeoneElseFieldName(entryIndex);
+          const otherFieldName = getOtherFieldName(entryIndex);
           const where = safeArray(request.body[whereFieldName]);
           const someoneElse = safeString(request.body[someoneElseFieldName]);
-          return { childIndex, where, someoneElse, entryIndex };
+          const other = safeString(request.body[otherFieldName]);
+          return { childIndex, where, someoneElse, other, entryIndex };
         })
         .filter(entry => !isNaN(entry.childIndex) && entry.where.length > 0);
 
@@ -207,6 +240,7 @@ const whereHandoverRoutes = (router: Router) => {
           noDecisionRequired: false,
           where: entry.where as whereHandoverField[],
           someoneElse: entry.where.includes('someoneElse') ? entry.someoneElse : undefined,
+          other: entry.where.includes('other') ? entry.other : undefined,
         };
       });
 
@@ -217,6 +251,7 @@ const whereHandoverRoutes = (router: Router) => {
             noDecisionRequired: false,
             where: defaultWhere as whereHandoverField[],
             someoneElse: defaultWhere.includes('someoneElse') ? defaultSomeoneElse : undefined,
+            other: defaultWhere.includes('other') ? defaultOther : undefined,
           },
           ...(Object.keys(byChild).length > 0 ? { byChild } : {}),
         },

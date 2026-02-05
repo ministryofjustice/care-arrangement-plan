@@ -230,20 +230,26 @@ function setupPerChildAnswers() {
           // Update textarea inside conditional if present
           const conditionalTextarea = conditional.querySelector('textarea');
           if (conditionalTextarea) {
-            // For whereHandover, use someone-else field naming
-            const someoneElseFieldName = fieldBaseName.includes('where-handover')
-              ? `${fieldBaseName}-someone-else-${entryIndex}`
-              : `${fieldBaseName}-describe-arrangement-${entryIndex}`;
-
             const oldTextareaId = conditionalTextarea.getAttribute('id');
-            if (oldTextareaId === 'SOMEONE_ELSE_FIELD_NAME' || oldTextareaId === 'DESCRIBE_FIELD_NAME') {
-              conditionalTextarea.setAttribute('id', someoneElseFieldName);
-              conditionalTextarea.setAttribute('name', someoneElseFieldName);
+            let newFieldName;
+
+            // Determine the field name based on the textarea ID
+            if (oldTextareaId === 'SOMEONE_ELSE_FIELD_NAME') {
+              newFieldName = `${fieldBaseName}-someone-else-${entryIndex}`;
+            } else if (oldTextareaId === 'OTHER_FIELD_NAME') {
+              newFieldName = `${fieldBaseName}-other-${entryIndex}`;
+            } else if (oldTextareaId === 'DESCRIBE_FIELD_NAME') {
+              newFieldName = `${fieldBaseName}-describe-arrangement-${entryIndex}`;
+            }
+
+            if (newFieldName) {
+              conditionalTextarea.setAttribute('id', newFieldName);
+              conditionalTextarea.setAttribute('name', newFieldName);
 
               // Update corresponding label
               const textareaLabel = conditional.querySelector(`label[for="${oldTextareaId}"]`);
               if (textareaLabel) {
-                textareaLabel.setAttribute('for', someoneElseFieldName);
+                textareaLabel.setAttribute('for', newFieldName);
               }
             }
           }
@@ -255,6 +261,24 @@ function setupPerChildAnswers() {
       if (checkboxesModule && window.GOVUKFrontend && window.GOVUKFrontend.Checkboxes) {
         new window.GOVUKFrontend.Checkboxes(checkboxesModule).init();
       }
+
+      // Add event listeners to clear conditional textarea when checkbox is unchecked
+      checkboxInputs.forEach(checkbox => {
+        const ariaControls = checkbox.getAttribute('data-aria-controls');
+        if (ariaControls) {
+          checkbox.addEventListener('change', function() {
+            if (!this.checked) {
+              const conditional = entryDiv.querySelector(`#${ariaControls}`);
+              if (conditional) {
+                const textarea = conditional.querySelector('textarea');
+                if (textarea) {
+                  textarea.value = '';
+                }
+              }
+            }
+          });
+        }
+      });
     }
 
     // Add remove button handler
@@ -311,6 +335,27 @@ function setupPerChildAnswers() {
     }
   });
   updateDefaultAnswerSection();
+
+  // Add event listeners to clear conditional textareas in the default section
+  const defaultCheckboxes = defaultAnswerSection?.querySelectorAll('input[type="checkbox"]');
+  if (defaultCheckboxes) {
+    defaultCheckboxes.forEach(checkbox => {
+      const ariaControls = checkbox.getAttribute('data-aria-controls');
+      if (ariaControls) {
+        checkbox.addEventListener('change', function() {
+          if (!this.checked) {
+            const conditional = document.getElementById(ariaControls);
+            if (conditional) {
+              const textarea = conditional.querySelector('textarea');
+              if (textarea) {
+                textarea.value = '';
+              }
+            }
+          }
+        });
+      }
+    });
+  }
 }
 
 export default setupPerChildAnswers;

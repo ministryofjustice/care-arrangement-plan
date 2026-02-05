@@ -6,7 +6,7 @@
 const PdfStyles = {
   // Layout constants (matching TypeScript version)
   HEADER_HEIGHT: 22.4, // mm
-  HEADER_LOGO_HEIGHT: 8, // mm
+  HEADER_LOGO_HEIGHT: 20, // mm
   FOOTER_HEIGHT: 22.4, // mm
   MARGIN_WIDTH: 10, // mm
   PAGE_WIDTH_MM: 210, // A4
@@ -28,6 +28,7 @@ const PdfStyles = {
   COLOR_WHITE: [255, 255, 255],
   COLOR_GRAY: [100, 100, 100],
   COLOR_LIGHT_GRAY: [200, 200, 200],
+  COLOR_GDS_BLUE: [29, 112, 184],
 
   // Font styles
   FONT_NORMAL: 'normal',

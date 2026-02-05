@@ -33,7 +33,6 @@
           {% set anotherHtml0 %}
             {{
               govukTextarea({
-                id: formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0",
                 name: formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0",
                 label: {
                   text: __('handoverAndHolidays.whereHandover.someoneElseName')
@@ -150,19 +149,14 @@
     {# Template for per-child entry - hidden, cloned by JavaScript #}
     <template id="per-child-entry-template">
       <div class="per-child-entry govuk-!-margin-top-6 govuk-!-padding-top-6 govuk-!-padding-bottom-2" style="border-top: 2px solid #b1b4b6;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-          <div class="govuk-form-group" style="flex: 1; margin-bottom: 0; margin-right: 20px;">
-            <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
-              This answer is for:
-            </label>
-            <select class="govuk-select" id="child-selector-ENTRY_INDEX" name="child-selector-ENTRY_INDEX">
-              <option value="">Select a child</option>
-              {# Options populated by JavaScript #}
-            </select>
-          </div>
-          <button type="button" class="govuk-button govuk-button--warning remove-child-entry-btn" style="margin-top: 26px;">
-            Remove
-          </button>
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-!-font-weight-bold" for="child-selector-ENTRY_INDEX">
+            This answer is for:
+          </label>
+          <select class="govuk-select" id="child-selector-ENTRY_INDEX" name="child-selector-ENTRY_INDEX">
+            <option value="">Select a child</option>
+            {# Options populated by JavaScript #}
+          </select>
         </div>
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
@@ -229,6 +223,9 @@
             </div>
           </fieldset>
         </div>
+        <button type="button" class="govuk-button govuk-button--warning govuk-!-margin-bottom-4 remove-child-entry-btn">
+          Remove
+        </button>
       </div>
     </template>
   {% endif %}
