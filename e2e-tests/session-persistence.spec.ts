@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+import { verifyBackNavigation } from './fixtures/navigation-helpers';
+
 test.describe('Session Persistence', () => {
   test('should maintain form data when navigating back', async ({ page }) => {
     // Navigate through flow to number-of-children
@@ -24,10 +26,10 @@ test.describe('Session Persistence', () => {
     await page.getByLabel(/How many children is this for/i).fill('2');
     await page.getByRole('button', { name: /continue/i }).click();
 
-    await page.goBack();
-
-    const input = page.getByLabel(/How many children is this for/i);
-    await expect(input).toHaveValue('2');
+    await verifyBackNavigation(page, /\/number-of-children/, async () => {
+      const input = page.getByLabel(/How many children is this for/i);
+      await expect(input).toHaveValue('2');
+    });
   });
 
   test('should handle cookie banner preferences', async ({ page }) => {

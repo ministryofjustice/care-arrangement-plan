@@ -24,3 +24,46 @@
 .newline-separated-paragraph {
   white-space: pre-line;
 }
+
+// Step-by-step navigation header (Part of) component - matches GOV.UK gem-c-step-nav-header
+.app-step-nav-header {
+  background-color: govuk-colour("light-grey");
+  padding: govuk-spacing(4) govuk-spacing(6);
+  margin-bottom: govuk-spacing(6);
+  border-bottom: 3px solid $govuk-brand-colour;
+}
+
+.app-step-nav-header__part-of {
+  @extend %govuk-body-m;
+  font-weight: bold;
+  margin: 0 0 govuk-spacing(1) 0;
+}
+
+.app-step-nav-header__title {
+  @extend %govuk-heading-m;
+  margin: 0;
+
+  a {
+    color: $govuk-link-colour;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
+    }
+  }
+}
+
+// Related items sidebar styles
+.app-related-items {
+  border-top: 2px solid $govuk-brand-colour;
+  padding-top: govuk-spacing(2);
+
+  .app-related-items__list-item {
+    margin-bottom: govuk-spacing(3);
+  }
+
+  .app-related-items__divider {
+    border-top: 1px solid govuk-colour("mid-grey");
+    margin-top: govuk-spacing(6);
+  }
+}

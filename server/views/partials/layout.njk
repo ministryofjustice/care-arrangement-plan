@@ -95,6 +95,9 @@
 
 {% block bodyEnd %}
   <script nonce="{{ cspNonce }}">
+    // Environment-level flag for internal analytics (link clicks, page exits)
+    window.analyticsEnvironmentEnabled = {{ analyticsEnvironmentEnabled | default(true) | dump | safe }};
+    // User consent flag for GA4 (Google Analytics)
     window.enableAnalytics = {{ analyticsEnabled | default(false) | dump | safe }};
   </script>
   <script type="module" src="{{ '/assets/js/index.js' | assetMap }}"></script>

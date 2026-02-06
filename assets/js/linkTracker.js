@@ -1,6 +1,6 @@
 const setupLinkTracking = () => {
   // Skip setup if analytics is disabled at environment level
-  if (window.enableAnalytics === false) {
+  if (window.analyticsEnvironmentEnabled === false) {
     return;
   }
 

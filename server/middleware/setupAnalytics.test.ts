@@ -25,6 +25,7 @@ describe('setupAnalytics', () => {
     setupAnalytics()(request, response, next);
 
     expect(response.locals.analyticsEnabled).toBe(true);
+    expect(response.locals.analyticsEnvironmentEnabled).toBe(true);
     expect(next).toHaveBeenCalled();
   });
 
@@ -89,6 +90,7 @@ describe('setupAnalytics', () => {
       setupAnalytics()(request, response, next);
 
       expect(response.locals.analyticsEnabled).toBe(false);
+      expect(response.locals.analyticsEnvironmentEnabled).toBe(false);
       expect(next).toHaveBeenCalled();
     });
 
