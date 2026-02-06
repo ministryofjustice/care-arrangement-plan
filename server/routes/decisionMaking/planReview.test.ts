@@ -181,6 +181,34 @@ describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
       });
     });
 
+    it('should set flash when both fields have non-zero values', async () => {
+      await request(app)
+        .post(paths.DECISION_MAKING_PLAN_REVIEW)
+        .send({
+          [formFields.PLAN_REVIEW_MONTHS]: 6,
+          [formFields.PLAN_REVIEW_YEARS]: 1,
+        })
+        .expect(302)
+        .expect('location', paths.DECISION_MAKING_PLAN_REVIEW);
+
+      expect(flashMock).toHaveBeenCalledWith('errors', [
+        {
+          location: 'body',
+          msg: 'Enter months or years, not both',
+          path: formFields.PLAN_REVIEW_MONTHS,
+          type: 'field',
+          value: '6',
+        },
+        {
+          location: 'body',
+          msg: 'Enter months or years, not both',
+          path: formFields.PLAN_REVIEW_YEARS,
+          type: 'field',
+          value: '1',
+        },
+      ]);
+    });
+
     it('should set flash when month not numeric', async () => {
       await request(app)
         .post(paths.DECISION_MAKING_PLAN_REVIEW)
