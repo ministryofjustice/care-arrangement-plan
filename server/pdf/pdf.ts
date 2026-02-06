@@ -8,7 +8,6 @@ import {
   FONT,
   FOOTER_HEIGHT,
   HEADER_HEIGHT,
-  HEADER_LOGO_HEIGHT,
   LINE_HEIGHT_RATIO,
   MAIN_TEXT_SIZE,
   MARGIN_WIDTH,
@@ -69,15 +68,16 @@ class Pdf {
   }
 
   private addHeaderToPage() {
-    this.document.setFillColor(0, 0, 0).rect(0, 0, this.document.internal.pageSize.getWidth(), HEADER_HEIGHT, 'F');
-    const headerLogoWidth = HEADER_LOGO_HEIGHT * 5;
+    this.document.setFillColor(29, 112, 184).rect(0, 0, this.document.internal.pageSize.getWidth(), HEADER_HEIGHT, 'F');
+    const logoHeight = 8;
+    const logoWidth = logoHeight * 5;
     this.document.addImage(
       this.logoData,
       'PNG',
       MARGIN_WIDTH,
-      0.5 * (HEADER_HEIGHT - HEADER_LOGO_HEIGHT),
-      headerLogoWidth,
-      HEADER_LOGO_HEIGHT,
+      0.5 * (HEADER_HEIGHT - logoHeight),
+      logoWidth,
+      logoHeight,
     );
     this.document
       .setFont(FONT, FontStyles.BOLD)
@@ -85,9 +85,9 @@ class Pdf {
       .setTextColor(255, 255, 255)
       .text(
         this.request.__('pdf.name'),
-        headerLogoWidth +
+        logoWidth +
           MARGIN_WIDTH +
-          0.5 * (this.document.internal.pageSize.getWidth() - headerLogoWidth - MARGIN_WIDTH),
+          0.5 * (this.document.internal.pageSize.getWidth() - logoWidth - MARGIN_WIDTH),
         HEADER_HEIGHT * 0.5 + 0.25 * LINE_HEIGHT_RATIO * SECTION_HEADING_SIZE * MM_PER_POINT,
         { align: 'center' },
       )
