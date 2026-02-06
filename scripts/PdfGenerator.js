@@ -15,14 +15,10 @@ class PdfGenerator {
     this.currentY = PdfStyles.HEADER_HEIGHT + 10;
     this.currentPage = 1;
     this.totalPages = 15; // Known from the form
-
-    // Load GOV.UK logo
-    const logoPath = path.resolve(process.cwd(), 'assets', 'images', 'the-new-gov-uk-logo.png');
-    this.logoData = `data:image/png;base64,${fs.readFileSync(logoPath, { encoding: 'base64' })}`;
   }
 
   /**
-   * Add GDS blue header bar with GOV.UK logo and title
+   * Add GDS blue header bar with title
    * Matches the TypeScript version in server/pdf/pdf.ts
    */
   addHeader(title) {
@@ -30,21 +26,9 @@ class PdfGenerator {
     this.doc.setFillColor(29, 112, 184);
     this.doc.rect(0, 0, this.pageWidth, PdfStyles.HEADER_HEIGHT, 'F');
 
-    // Add GOV.UK logo (aspect ratio is 3:2, so 720x480 px = 1.5:1)
-    const headerLogoWidth = PdfStyles.HEADER_LOGO_HEIGHT * 1.5;
-    this.doc.addImage(
-      this.logoData,
-      'PNG',
-      PdfStyles.MARGIN_WIDTH,
-      0.5 * (PdfStyles.HEADER_HEIGHT - PdfStyles.HEADER_LOGO_HEIGHT),
-      headerLogoWidth,
-      PdfStyles.HEADER_LOGO_HEIGHT
-    );
-
-    // Add title text (matching TypeScript calculation)
+    // Add title text centered on page
     const titleSize = PdfStyles.SECTION_HEADING_SIZE;
-    const titleX = headerLogoWidth + PdfStyles.MARGIN_WIDTH +
-                   0.5 * (this.pageWidth - headerLogoWidth - PdfStyles.MARGIN_WIDTH);
+    const titleX = this.pageWidth / 2;
     const titleY = PdfStyles.HEADER_HEIGHT * 0.5 +
                    0.25 * PdfStyles.LINE_HEIGHT_RATIO * titleSize * PdfStyles.MM_PER_POINT;
 

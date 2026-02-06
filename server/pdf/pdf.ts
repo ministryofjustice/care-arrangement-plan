@@ -8,7 +8,6 @@ import {
   FONT,
   FOOTER_HEIGHT,
   HEADER_HEIGHT,
-  HEADER_LOGO_HEIGHT,
   LINE_HEIGHT_RATIO,
   MAIN_TEXT_SIZE,
   MARGIN_WIDTH,
@@ -26,8 +25,6 @@ class Pdf {
   public readonly maxPageWidth: number;
 
   public currentY = HEADER_HEIGHT;
-
-  private readonly logoData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/the-new-gov-uk-logo.png'), { encoding: 'base64' })}`;
 
   constructor(autoPrint: boolean, request: Request) {
     this.request = request;
@@ -70,25 +67,13 @@ class Pdf {
 
   private addHeaderToPage() {
     this.document.setFillColor(29, 112, 184).rect(0, 0, this.document.internal.pageSize.getWidth(), HEADER_HEIGHT, 'F');
-    // Logo aspect ratio is 3:2 (720x480 px)
-    const headerLogoWidth = HEADER_LOGO_HEIGHT * 1.5;
-    this.document.addImage(
-      this.logoData,
-      'PNG',
-      MARGIN_WIDTH,
-      0.5 * (HEADER_HEIGHT - HEADER_LOGO_HEIGHT),
-      headerLogoWidth,
-      HEADER_LOGO_HEIGHT,
-    );
     this.document
       .setFont(FONT, FontStyles.BOLD)
       .setFontSize(SECTION_HEADING_SIZE)
       .setTextColor(255, 255, 255)
       .text(
         this.request.__('pdf.name'),
-        headerLogoWidth +
-          MARGIN_WIDTH +
-          0.5 * (this.document.internal.pageSize.getWidth() - headerLogoWidth - MARGIN_WIDTH),
+        this.document.internal.pageSize.getWidth() / 2,
         HEADER_HEIGHT * 0.5 + 0.25 * LINE_HEIGHT_RATIO * SECTION_HEADING_SIZE * MM_PER_POINT,
         { align: 'center' },
       )
