@@ -26,6 +26,8 @@ class Pdf {
 
   public currentY = HEADER_HEIGHT;
 
+  private readonly crestData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/crest.png'), { encoding: 'base64' })}`;
+
   constructor(autoPrint: boolean, request: Request) {
     this.request = request;
     // @ts-expect-error There is an error into the jsPDF type declaration.
@@ -67,13 +69,25 @@ class Pdf {
 
   private addHeaderToPage() {
     this.document.setFillColor(29, 112, 184).rect(0, 0, this.document.internal.pageSize.getWidth(), HEADER_HEIGHT, 'F');
+    const crestHeight = 8;
+    const crestWidth = crestHeight * 5;
+    this.document.addImage(
+      this.crestData,
+      'PNG',
+      MARGIN_WIDTH,
+      0.5 * (HEADER_HEIGHT - crestHeight),
+      crestWidth,
+      crestHeight,
+    );
     this.document
       .setFont(FONT, FontStyles.BOLD)
       .setFontSize(SECTION_HEADING_SIZE)
       .setTextColor(255, 255, 255)
       .text(
         this.request.__('pdf.name'),
-        this.document.internal.pageSize.getWidth() / 2,
+        crestWidth +
+          MARGIN_WIDTH +
+          0.5 * (this.document.internal.pageSize.getWidth() - crestWidth - MARGIN_WIDTH),
         HEADER_HEIGHT * 0.5 + 0.25 * LINE_HEIGHT_RATIO * SECTION_HEADING_SIZE * MM_PER_POINT,
         { align: 'center' },
       )

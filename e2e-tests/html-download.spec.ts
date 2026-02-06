@@ -91,8 +91,9 @@ test.describe('HTML Download Functionality', () => {
     // Should contain GOV.UK branding
     expect(htmlContent.toLowerCase()).toContain('gov.uk');
 
-    // Should contain the blue header
+    // Should contain the blue header and crest image
     expect(htmlContent).toContain('#1d70b8');
+    expect(htmlContent).toContain('data:image/png;base64');
   });
 
   // TODO: HTML download does not yet redirect to the confirmation page.

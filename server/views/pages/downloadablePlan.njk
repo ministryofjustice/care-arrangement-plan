@@ -42,7 +42,15 @@
       max-width: 960px;
       margin: 0 auto;
       padding: 0 15px;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .crest {
+      height: 30px;
+      width: auto;
+      display: block;
     }
 
     .header h1 {
@@ -378,6 +386,7 @@
 <body>
   <div class="header">
     <div class="header-content">
+      <img src="{{ crestImageData }}" alt="GOV.UK" class="crest">
       <h1>{{ __('pdf.name') }}</h1>
     </div>
   </div>

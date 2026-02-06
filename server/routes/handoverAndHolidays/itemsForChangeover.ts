@@ -56,7 +56,7 @@ const itemsForChangeoverRoutes = (router: Router) => {
     }
 
     // Build list of children for dropdown options
-    const childOptions = namesOfChildren.map((name, index) => ({
+    const childOptions = (namesOfChildren || []).map((name, index) => ({
       value: index.toString(),
       text: name,
     }));
