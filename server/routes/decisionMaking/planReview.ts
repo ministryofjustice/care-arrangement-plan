@@ -34,14 +34,11 @@ const planReviewRoutes = (router: Router) => {
       .custom((value: string, { req }) => value || req.body[otherFromField])
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.bothEmptyError'))
       .bail()
-      .custom((value: string, { req }) => !(value && req.body[otherFromField]))
-      .withMessage((_value, { req }) => req.__('decisionMaking.planReview.bothFilledError'))
-      .bail()
-      .if(body(otherFromField).isEmpty())
+      .if(body(formField).notEmpty())
       .isNumeric()
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.notNumberError'))
       .bail()
-      .if(body(otherFromField).isEmpty())
+      .if(body(formField).notEmpty())
       .isInt({ min: 0 })
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.notIntError'));
 
