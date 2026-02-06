@@ -9,7 +9,7 @@ test.describe('Homepage', () => {
     const heading = page.locator('h1');
     await expect(heading).toBeVisible();
 
-    const startButton = page.getByRole('link', { name: /start now/i });
+    const startButton = page.getByRole('button', { name: /start now/i });
     await expect(startButton).toBeVisible();
   });
 
@@ -29,7 +29,7 @@ test.describe('Homepage', () => {
   test('should navigate to safety check when clicking start button (auth disabled)', async ({ page }) => {
     await page.goto('/');
 
-    const startButton = page.getByRole('link', { name: /start now/i });
+    const startButton = page.getByRole('button', { name: /start now/i });
     await startButton.click();
 
     // When USE_AUTH=false, goes directly to safety check

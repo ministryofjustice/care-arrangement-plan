@@ -122,6 +122,15 @@
             })
           }}
         </form>
+
+        <script nonce="{{ cspNonce }}">
+          // Update hidden input when radio button selection changes
+          document.querySelectorAll('input[name="serviceVersionChoice"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+              document.getElementById('service-version-hidden').value = this.value;
+            });
+          });
+        </script>
       {% else %}
         {{
           govukButton({
