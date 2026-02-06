@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
@@ -19,9 +20,8 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('What items need to go between households?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      expect(
-        dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}`).getAttribute('aria-describedby'),
-      ).not.toContain(`${formFields.ITEMS_FOR_CHANGEOVER}-error`);
+      const ariaDescribedBy = dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}-0`).getAttribute('aria-describedby');
+      expect(ariaDescribedBy === null || !ariaDescribedBy.includes(`${formFields.ITEMS_FOR_CHANGEOVER}-0-error`)).toBe(true);
     });
 
     it('should render error flash responses correctly', async () => {
@@ -29,7 +29,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
         {
           location: 'body',
           msg: 'Invalid value',
-          path: formFields.ITEMS_FOR_CHANGEOVER,
+          path: `${formFields.ITEMS_FOR_CHANGEOVER}-0`,
           type: 'field',
         },
       ]);
@@ -39,9 +39,9 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
         'There is a problem',
       );
-      expect(dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}`)).toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}-0`)).toHaveAttribute(
         'aria-describedby',
-        expect.stringContaining(`${formFields.ITEMS_FOR_CHANGEOVER}-error`),
+        expect.stringContaining(`${formFields.ITEMS_FOR_CHANGEOVER}-0-error`),
       );
     });
 
@@ -50,14 +50,16 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
 
       sessionMock.handoverAndHolidays = {
         itemsForChangeover: {
-          noDecisionRequired: false,
-          answer: response,
-        },
+          default: {
+            noDecisionRequired: false,
+            answer: response,
+          },
+        } as any,
       };
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}`)).toHaveValue(response);
+      expect(dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}-0`)).toHaveValue(response);
     });
   });
 
@@ -72,7 +74,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
         {
           location: 'body',
           msg: 'List which items need to go between households',
-          path: formFields.ITEMS_FOR_CHANGEOVER,
+          path: `${formFields.ITEMS_FOR_CHANGEOVER}-0`,
           type: 'field',
           value: '',
         },
@@ -86,13 +88,13 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
 
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
-        .send({ [formFields.ITEMS_FOR_CHANGEOVER]: answer })
+        .send({ [`${formFields.ITEMS_FOR_CHANGEOVER}-0`]: answer })
         .expect(302)
         .expect('location', paths.TASK_LIST);
 
       expect(sessionMock.handoverAndHolidays).toEqual({
         ...initialHandoverAndHolidays,
-        itemsForChangeover: { noDecisionRequired: false, answer },
+        itemsForChangeover: { default: { noDecisionRequired: false, answer } },
       });
     });
   });
@@ -110,7 +112,7 @@ describe(`POST ${paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED}`, ()
 
     expect(sessionMock.handoverAndHolidays).toEqual({
       ...initialHandoverAndHolidays,
-      itemsForChangeover: { noDecisionRequired: true },
+      itemsForChangeover: { default: { noDecisionRequired: true } },
     });
   });
 });

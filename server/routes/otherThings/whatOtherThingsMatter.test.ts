@@ -19,9 +19,8 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('What other things matter to your children?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      expect(
-        dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`).getAttribute('aria-describedby'),
-      ).not.toContain(`${formFields.WHAT_OTHER_THINGS_MATTER}-error`);
+      const ariaDescribedBy = dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}-0`).getAttribute('aria-describedby');
+      expect(ariaDescribedBy === null || !ariaDescribedBy.includes(`${formFields.WHAT_OTHER_THINGS_MATTER}-0-error`)).toBe(true);
     });
 
     it('should render error flash responses correctly', async () => {
@@ -29,7 +28,7 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
         {
           location: 'body',
           msg: 'Invalid value',
-          path: formFields.WHAT_OTHER_THINGS_MATTER,
+          path: `${formFields.WHAT_OTHER_THINGS_MATTER}-0`,
           type: 'field',
         },
       ]);
@@ -39,9 +38,9 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
         'There is a problem',
       );
-      expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`)).toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}-0`)).toHaveAttribute(
         'aria-describedby',
-        expect.stringContaining(`${formFields.WHAT_OTHER_THINGS_MATTER}-error`),
+        expect.stringContaining(`${formFields.WHAT_OTHER_THINGS_MATTER}-0-error`),
       );
     });
 
@@ -49,15 +48,12 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
       const response = 'other things matter';
 
       sessionMock.otherThings = {
-        whatOtherThingsMatter: {
-          noDecisionRequired: false,
-          answer: response,
-        },
+        whatOtherThingsMatter: { default: { noDecisionRequired: false, answer: response, } },
       };
 
       const dom = new JSDOM((await request(app).get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}`)).toHaveValue(response);
+      expect(dom.window.document.querySelector(`#${formFields.WHAT_OTHER_THINGS_MATTER}-0`)).toHaveValue(response);
     });
   });
 
@@ -72,7 +68,7 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
         {
           location: 'body',
           msg: 'Describe what other things matter to your children',
-          path: formFields.WHAT_OTHER_THINGS_MATTER,
+          path: `${formFields.WHAT_OTHER_THINGS_MATTER}-0`,
           type: 'field',
           value: '',
         },
@@ -84,11 +80,11 @@ describe(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, () => {
 
       await request(app)
         .post(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER)
-        .send({ [formFields.WHAT_OTHER_THINGS_MATTER]: response })
+        .send({ [`${formFields.WHAT_OTHER_THINGS_MATTER}-0`]: response })
         .expect(302)
         .expect('location', paths.TASK_LIST);
 
-      expect(sessionMock.otherThings.whatOtherThingsMatter).toEqual({ noDecisionRequired: false, answer: response });
+      expect(sessionMock.otherThings.whatOtherThingsMatter).toEqual({ default: { noDecisionRequired: false, answer: response } });
     });
   });
 });
@@ -100,6 +96,6 @@ describe(`POST ${paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED}`, () 
       .expect(302)
       .expect('location', paths.TASK_LIST);
 
-    expect(sessionMock.otherThings.whatOtherThingsMatter).toEqual({ noDecisionRequired: true });
+    expect(sessionMock.otherThings.whatOtherThingsMatter).toEqual({ default: { noDecisionRequired: true } });
   });
 });
