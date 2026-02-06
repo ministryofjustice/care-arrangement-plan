@@ -1,403 +1,254 @@
 {% extends "partials/layout.njk" %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/pagination/macro.njk" import govukPagination %}
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
-{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
-{% block pageTitle %}Making child arrangements if you divorce or separate – GOV.UK{% endblock %}
+{% block pageTitle %}Making child arrangements if you divorce or separate – {{ __('serviceName') }} – GOV.UK{% endblock %}
 
 {% block beforeContent %}
   {{ super() }}
-  <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
-    <ol class="govuk-breadcrumbs__list">
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="https://www.gov.uk">Home</a>
-      </li>
-    </ol>
-  </nav>
+  {{
+    govukBreadcrumbs({
+      items: [
+        {
+          text: "Home",
+          href: "https://www.gov.uk/"
+        },
+        {
+          text: "Births, deaths, marriages and care",
+          href: "https://www.gov.uk/browse/births-deaths-marriages"
+        },
+        {
+          text: "Marriage, civil partnership and divorce",
+          href: "https://www.gov.uk/browse/births-deaths-marriages/marriage-divorce"
+        }
+      ]
+    })
+  }}
 {% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <p class="govuk-body-s govuk-!-margin-bottom-2">
-        <span class="govuk-!-font-weight-bold">Part of</span>
-        <a href="#" class="govuk-link">Get a divorce: step by step</a>
-      </p>
-
       <h1 class="govuk-heading-xl">Making child arrangements if you divorce or separate</h1>
 
-      <p class="govuk-body">You can choose how to make arrangements for looking after your children if you separate from your partner.</p>
+      <p class="govuk-body-s govuk-!-margin-bottom-1">Contents</p>
+      <ul class="govuk-list govuk-body-s govuk-!-margin-bottom-8">
+        <li>— <a href="#make-a-written-agreement" class="govuk-link govuk-link--no-underline">Make a written agreement</a></li>
+        <li>— <a href="#if-you-need-help" class="govuk-link govuk-link--no-underline">If you need help to reach an agreement</a></li>
+        <li>— <a href="#legally-binding" class="govuk-link govuk-link--no-underline">Making your agreement legally binding</a></li>
+        <li>— <a href="#help-and-support" class="govuk-link govuk-link--no-underline">Help and support</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 id="make-a-written-agreement" class="govuk-heading-l">Make a written agreement</h2>
+
+      <p class="govuk-body">You do not have to do any official paperwork if you agree about child arrangements.</p>
+
+      <p class="govuk-body">You can write down what you've agreed in a 'child arrangements plan' if you want a record.</p>
+
+      <p class="govuk-body">You can use this service to help you plan and agree on child arrangements. It creates a document which you can share with the other parent to ask for their agreement and suggestions.</p>
+
+      <p class="govuk-body">You can also use the service with the other parent to make a plan together.</p>
 
       {{
         govukInsetText({
-          text: "What you can do is different in Scotland and Northern Ireland."
+          html: 'If you think your ex-partner is a threat to you or your children&#39;s safety, call 999 and ask for the police. Find out how to <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help" class="govuk-link">get help if you&#39;re a victim of domestic abuse</a>.'
         })
       }}
 
-      <p class="govuk-body">You and your ex-partner may be able to avoid going to court if you agree on:</p>
+      <h2 class="govuk-heading-m">What the plan includes</h2>
+
+      <p class="govuk-body">You'll need to provide details about how you plan to look after your children, such as:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>where the children will live</li>
-        <li>how much time they'll spend with each parent</li>
-        <li>how you'll financially support your children</li>
+        <li>where they live</li>
+        <li>when they spend time with each parent</li>
+        <li>when and what other types of contact take place (phone calls, for example)</li>
       </ul>
 
-      <p class="govuk-body">This is called making child arrangements (sometimes known as 'child custody' or 'child contact').</p>
+      <h2 class="govuk-heading-m">Who can use this service</h2>
 
-      <p class="govuk-body">You can agree on child maintenance at the same time or separately.</p>
+      <p class="govuk-body">You can use this service if you either:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>have no child arrangements in place yet</li>
+        <li>want to suggest changes to your existing arrangements</li>
+      </ul>
 
-      {{
-        govukInsetText({
-          text: "This guide is also available in Welsh (Cymraeg)."
-        })
-      }}
+      <h3 class="govuk-heading-s">Who should not use this service</h3>
 
-      <h2 id="if-you-agree" class="govuk-heading-m">If you agree</h2>
+      <p class="govuk-body">You should not use this service if you already have a court order that sets out child arrangements you and your ex-partner must follow. You can <a href="https://www.gov.uk/looking-after-children-divorce/apply-for-court-order" class="govuk-link">change or enforce an order</a> instead.</p>
 
-      <p class="govuk-body">If you and your ex-partner agree on child arrangements, you can make a Parenting Plan. This is a record of what you've agreed.</p>
+      <h2 class="govuk-heading-m">Make your plan</h2>
 
-      <p class="govuk-body">You can also use a legal advisor if you want to make your agreement legally binding.</p>
-
-      <p class="govuk-body">
-        <a href="{{ paths.START }}" class="govuk-link">Make a parenting plan</a> or <a href="{{ paths.DOWNLOAD_PAPER_FORM }}" class="govuk-link">download a template child arrangements plan (PDF, 0.5MB)</a>.
-      </p>
+      <p class="govuk-body">Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.</p>
 
       {% if showUrToggle %}
-        <div class="govuk-inset-text" style="background-color: #f3f2f1; border-left-color: #1d70b8;">
-          <h3 class="govuk-heading-s govuk-!-margin-bottom-2">User Research: Select service version</h3>
-          <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="service-version-current" name="service-version" type="radio" value="current" {{ 'checked' if not usePerChildPoC }}>
-              <label class="govuk-label govuk-radios__label" for="service-version-current">
-                Current service
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="service-version-poc" name="service-version" type="radio" value="poc" {{ 'checked' if usePerChildPoC }}>
-              <label class="govuk-label govuk-radios__label" for="service-version-poc">
-                Plan per child proof of concept
-              </label>
+        <details class="govuk-details govuk-!-margin-bottom-4" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">Switch service version (User Research)</span>
+          </summary>
+          <div class="govuk-details__text">
+            <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="service-version-current" name="serviceVersionChoice" type="radio" value="current" {{ 'checked' if not usePerChildPoC }}>
+                <label class="govuk-label govuk-radios__label" for="service-version-current">
+                  Current service
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="service-version-poc" name="serviceVersionChoice" type="radio" value="poc" {{ 'checked' if usePerChildPoC }}>
+                <label class="govuk-label govuk-radios__label" for="service-version-poc">
+                  Per-child design
+                </label>
+              </div>
             </div>
           </div>
-          <form method="post" action="{{ paths.START }}">
-            <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-            <input type="hidden" name="serviceVersion" id="serviceVersionInput" value="{{ 'poc' if usePerChildPoC else 'current' }}" />
-            {{
-              govukButton({
-                text: "Continue",
-                classes: "govuk-!-margin-top-3"
-              })
-            }}
-          </form>
-          <script nonce="{{ cspNonce }}">
-            document.querySelectorAll('input[name="service-version"]').forEach(function(radio) {
-              radio.addEventListener('change', function() {
-                document.getElementById('serviceVersionInput').value = this.value;
-              });
-            });
-          </script>
-        </div>
+        </details>
       {% endif %}
 
-      <h2 id="get-help-agreeing" class="govuk-heading-m">Get help agreeing without going to court</h2>
+      {% if showUrToggle %}
+        <form method="post" action="{{ paths.START }}" id="start-form">
+          <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+          <input type="hidden" name="serviceVersion" id="service-version-hidden" value="{{ 'poc' if usePerChildPoC else 'current' }}" />
+          {{
+            govukButton({
+              text: "Start now",
+              classes: "govuk-button--start",
+              isStartButton: true
+            })
+          }}
+        </form>
+      {% else %}
+        {{
+          govukButton({
+            text: "Start now",
+            href: paths.SAFETY_CHECK,
+            classes: "govuk-button--start",
+            isStartButton: true
+          })
+        }}
+      {% endif %}
 
-      <p class="govuk-body">You can find out about:</p>
+      <p class="govuk-body">If you want to make changes to the plan, you can use the service again but you'll need to create a new plan.</p>
+
+      <p class="govuk-body">You can also <a href="{{ paths.DOWNLOAD_PAPER_FORM }}" class="govuk-link">download and fill in the child arrangements plan template (PDF, 0.5MB)</a>.</p>
+
+      <h2 id="if-you-need-help" class="govuk-heading-m">If you need help to reach an agreement</h2>
+
+      <p class="govuk-body">A legal adviser can help you make a legally binding agreement or recommend <a href="https://www.gov.uk/looking-after-children-divorce/non-court-dispute-resolution" class="govuk-link">other ways to agree on child arrangements</a> outside of court. They can also tell you how much it costs.</p>
+
+      <p class="govuk-body">If you decide to go to court, you'll usually need to show you've tried <a href="https://www.gov.uk/looking-after-children-divorce/mediation" class="govuk-link">mediation</a> before you apply. You can usually get a voucher to pay for family mediation, regardless of what you earn.</p>
+
+      <h2 id="legally-binding" class="govuk-heading-m">Making your agreement legally binding</h2>
+
+      <p class="govuk-body">You can <a href="https://www.gov.uk/find-a-legal-adviser" class="govuk-link">get a legal adviser</a> to draft a 'consent order' if you want a legally binding agreement.</p>
+
+      <p class="govuk-body">A consent order is a legal document that confirms your agreement.</p>
+
+      <p class="govuk-body">You and your ex-partner both have to sign the draft consent order. You'll also need to get the consent order approved.</p>
+
+      <h3 class="govuk-heading-s">Get your consent order approved</h3>
+
+      <p class="govuk-body">You or your ex-partner need to <a href="https://www.gov.uk/looking-after-children-divorce/apply-for-court-order" class="govuk-link">apply for a court order</a> to get your consent order approved. Your legal adviser can help you with your application.</p>
+
+      <p class="govuk-body">You will not need to show that you've tried mediation.</p>
+
+      <p class="govuk-body">Keep a copy of both the form and the draft consent order.</p>
+
+      <h3 class="govuk-heading-s">After the court gets your paperwork</h3>
+
+      <p class="govuk-body">There's usually no court hearing. A judge will approve your consent order to make it legally binding if they think you've made decisions in your children's interest.</p>
+
+      <p class="govuk-body">If the judge does not think your consent order is in your children's interest they can:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>how to use mediation to agree on child arrangements</li>
-        <li>other ways to agree without going to court</li>
+        <li>change your consent order</li>
+        <li>make a different court order to decide what's best for your children</li>
       </ul>
 
-      <p class="govuk-body">You can also get help and information from:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>
-          <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" class="govuk-link">Citizens Advice</a>
-        </li>
-        <li>
-          <a href="https://www.advicenow.org.uk" target="_blank" rel="noopener noreferrer" class="govuk-link">Advice Now</a>
-        </li>
-        <li>
-          <a href="https://www.cafcass.gov.uk" target="_blank" rel="noopener noreferrer" class="govuk-link">Children and Family Court Advisory and Support Service (Cafcass)</a>
-        </li>
-      </ul>
+      <h2 id="help-and-support" class="govuk-heading-m">Help and support</h2>
 
-      <h2 id="if-you-cannot-agree" class="govuk-heading-m">If you cannot agree on everything</h2>
+      <p class="govuk-body">Get help and information from <a href="https://www.citizensadvice.org.uk/" class="govuk-link">Citizens Advice</a>.</p>
 
-      <p class="govuk-body">You can apply for a court order if you cannot agree after using a mediator or getting help.</p>
+      <p class="govuk-body">Find support and guidance about child abuse and neglect on <a href="https://www.nspcc.org.uk/" class="govuk-link">NSPCC's website</a>.</p>
 
-      <p class="govuk-body">If you decide to go to court, you'll usually need to show you've tried mediation before you apply. You can get a voucher worth up to £500 to pay for family mediation, regardless of what you earn.</p>
+      <p class="govuk-body">Find out how to <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help" class="govuk-link">get help if you're a victim of domestic abuse</a>.</p>
 
-      <p class="govuk-body">It costs £263 to apply for a court order. You may be able to get help paying court fees if you're on benefits or a low income.</p>
-
-      <p class="govuk-body">You may be able to get legal aid to help pay for a legal adviser in court. For example, if you have evidence that you're a victim of domestic abuse.</p>
-
-      {% from "govuk/components/pagination/macro.njk" import govukPagination %}
-      <nav class="govuk-!-margin-top-6" role="navigation" aria-label="Pagination">
+      <nav class="gem-c-pagination" role="navigation" aria-label="Pagination">
         {{
           govukPagination({
+            previous: {
+              labelText: "Making child arrangements",
+              href: "https://www.gov.uk/looking-after-children-divorce"
+            },
             next: {
-              labelText: "If you agree on child arrangements",
-              href: "#if-you-agree"
+              labelText: "Make an agreement through mediation",
+              href: "https://www.gov.uk/looking-after-children-divorce/mediation"
             }
           })
         }}
       </nav>
+
 
     </div>
 
     <div class="govuk-grid-column-one-third">
       <aside class="app-related-items" role="complementary">
         <h2 class="govuk-heading-s" id="subsection-title">
-          Get a divorce: step by step
+          Part of
         </h2>
-        <p class="app-step-nav__controls">
-          <button type="button" class="app-step-nav__button app-step-nav__button--controls js-step-controls-button" aria-expanded="false" aria-controls="step-panel-1 step-panel-2 step-panel-3 step-panel-4 step-panel-5 step-panel-6 step-panel-7">
-            <span class="app-step-nav__chevron app-step-nav__chevron--down js-step-controls-button-icon"></span>
-            <span class="js-step-controls-button-text">Show all steps</span>
-          </button>
-        </p>
-        <nav role="navigation" aria-labelledby="subsection-title" data-module="app-step-nav">
-          <ol class="app-step-nav__steps">
-            <li class="app-step-nav__step js-step" id="step-1">
-              <div class="app-step-nav__header js-toggle-panel" data-position="1">
-                <h3 class="app-step-nav__title">
-                  <span class="app-step-nav__circle app-step-nav__circle--number">
-                    <span class="app-step-nav__circle-inner">
-                      <span class="app-step-nav__circle-background">
-                        <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 1<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
-                      </span>
-                    </span>
-                  </span>
-                  <span class="js-step-title">
-                    <button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-1">
-                      <span class="js-step-title-text">
-                        Get support and advice
-                      </span>
-                      <span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden>Show</span>
-                    </button>
-                  </span>
-                </h3>
-              </div>
-              <div class="app-step-nav__panel js-panel" id="step-panel-1" hidden>
-                <p class="app-step-nav__paragraph">You can get support or counselling to help you through the divorce process.</p>
-                <ul class="app-step-nav__list">
-                  <li class="app-step-nav__list-item">
-                    <a href="https://www.relate.org.uk" target="_blank" rel="noopener noreferrer" class="govuk-link">Get support and advice from Relate</a>
-                  </li>
-                  <li class="app-step-nav__list-item">
-                    <a href="https://www.counselling-directory.org.uk" target="_blank" rel="noopener noreferrer" class="govuk-link">Find a counsellor on Counselling Directory</a>
-                  </li>
-                </ul>
-              </div>
+        <nav role="navigation" aria-labelledby="subsection-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/get-a-divorce">
+                Get a divorce: step by step
+              </a>
             </li>
-            <li class="app-step-nav__step js-step" id="step-2">
-              <div class="app-step-nav__header js-toggle-panel" data-position="2">
-                <h3 class="app-step-nav__title">
-                  <span class="app-step-nav__circle app-step-nav__circle--number">
-                    <span class="app-step-nav__circle-inner">
-                      <span class="app-step-nav__circle-background">
-                        <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 2<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
-                      </span>
-                    </span>
-                  </span>
-                  <span class="js-step-title">
-                    <button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-2">
-                      <span class="js-step-title-text">
-                        Check if you can get divorced
-                      </span>
-                      <span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden>Show</span>
-                    </button>
-                  </span>
-                </h3>
-              </div>
-              <div class="app-step-nav__panel js-panel" id="step-panel-2" hidden>
-                <ul class="app-step-nav__list">
-                  <li class="app-step-nav__list-item">
-                    <a href="https://www.gov.uk/divorce" target="_blank" rel="noopener noreferrer" class="govuk-link">Check if you can get a divorce</a>
-                  </li>
-                  <li class="app-step-nav__list-item">
-                    Get legal advice if you want help with the divorce process
-                  </li>
-                </ul>
-              </div>
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/end-civil-partnership">
+                End a civil partnership: step by step
+              </a>
             </li>
-            <li class="app-step-nav__step js-step app-step-nav__step--active" id="step-3" data-show>
-              <div class="app-step-nav__header js-toggle-panel" data-position="3">
-                <h3 class="app-step-nav__title">
-                  <span class="app-step-nav__circle app-step-nav__circle--number">
-                    <span class="app-step-nav__circle-inner">
-                      <span class="app-step-nav__circle-background">
-                        <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 3<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
-                      </span>
-                    </span>
-                  </span>
-                  <span class="js-step-title">
-                    <button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="true" aria-controls="step-panel-3">
-                      <span class="js-step-title-text">
-                        Make arrangements for children, money and property
-                      </span>
-                      <span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true">Hide</span>
-                    </button>
-                  </span>
-                </h3>
-              </div>
-              <div class="app-step-nav__panel js-panel" id="step-panel-3">
-                <ul class="app-step-nav__list">
-                  <li class="app-step-nav__list-item app-step-nav__list-item--active">
-                    Make arrangements for your children
-                  </li>
-                  <li class="app-step-nav__list-item">
-                    <a href="https://www.gov.uk/money-property-when-relationship-ends" target="_blank" rel="noopener noreferrer" class="govuk-link">Divide your money and property</a>
-                  </li>
-                  <li class="app-step-nav__list-item">
-                    <a href="https://www.gov.uk/your-rights-if-you-live-with-your-partner" target="_blank" rel="noopener noreferrer" class="govuk-link">Check if your divorce will affect whether you can live in your current home</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="app-step-nav__step js-step" id="step-4">
-              <div class="app-step-nav__header js-toggle-panel" data-position="4">
-                <h3 class="app-step-nav__title">
-                  <span class="app-step-nav__circle app-step-nav__circle--number">
-                    <span class="app-step-nav__circle-inner">
-                      <span class="app-step-nav__circle-background">
-                        <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 4<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
-                      </span>
-                    </span>
-                  </span>
-                  <span class="js-step-title">
-                    <button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-4">
-                      <span class="js-step-title-text">
-                        Apply for a divorce
-                      </span>
-                      <span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden>Show</span>
-                    </button>
-                  </span>
-                </h3>
-              </div>
-              <div class="app-step-nav__panel js-panel" id="step-panel-4" hidden>
-                <ul class="app-step-nav__list">
-                  <li class="app-step-nav__list-item">
-                    <a href="https://www.gov.uk/divorce" target="_blank" rel="noopener noreferrer" class="govuk-link">Apply for a divorce online or by post</a> £612
-                  </li>
-                  <li class="app-step-nav__list-item">
-                    <a href="https://www.gov.uk/get-help-with-court-fees" target="_blank" rel="noopener noreferrer" class="govuk-link">Get help with court fees</a>
-                  </li>
-                  <li class="app-step-nav__list-item">
-                    Get legal advice
-                  </li>
-                  <li class="app-step-nav__list-item">
-                    <a href="https://www.gov.uk/divorce-mental-capacity" target="_blank" rel="noopener noreferrer" class="govuk-link">Get help if your husband or wife cannot make decisions for themselves</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="app-step-nav__step js-step" id="step-5">
-              <div class="app-step-nav__header js-toggle-panel" data-position="5">
-                <h3 class="app-step-nav__title">
-                  <span class="app-step-nav__circle app-step-nav__circle--number">
-                    <span class="app-step-nav__circle-inner">
-                      <span class="app-step-nav__circle-background">
-                        <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 5<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
-                      </span>
-                    </span>
-                  </span>
-                  <span class="js-step-title">
-                    <button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-5">
-                      <span class="js-step-title-text">
-                        Apply for a 'conditional order' or 'decree nisi'
-                      </span>
-                      <span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden>Show</span>
-                    </button>
-                  </span>
-                </h3>
-              </div>
-              <div class="app-step-nav__panel js-panel" id="step-panel-5" hidden>
-                <p class="app-step-nav__paragraph">
-                  <a href="https://www.gov.uk/divorce/apply-for-conditional-order" target="_blank" rel="noopener noreferrer" class="govuk-link">Apply for a 'conditional order' or 'decree nisi'</a>
-                </p>
-              </div>
-            </li>
-            <li class="app-step-nav__step js-step" id="step-6">
-              <div class="app-step-nav__header js-toggle-panel" data-position="6">
-                <h3 class="app-step-nav__title">
-                  <span class="app-step-nav__circle app-step-nav__circle--number">
-                    <span class="app-step-nav__circle-inner">
-                      <span class="app-step-nav__circle-background">
-                        <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 6<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
-                      </span>
-                    </span>
-                  </span>
-                  <span class="js-step-title">
-                    <button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-6">
-                      <span class="js-step-title-text">
-                        Finalise your divorce
-                      </span>
-                      <span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden>Show</span>
-                    </button>
-                  </span>
-                </h3>
-              </div>
-              <div class="app-step-nav__panel js-panel" id="step-panel-6" hidden>
-                <p class="app-step-nav__paragraph">
-                  <a href="https://www.gov.uk/divorce/apply-for-decree-absolute" target="_blank" rel="noopener noreferrer" class="govuk-link">Apply for a 'final order' or 'decree absolute'</a>
-                </p>
-              </div>
-            </li>
-            <li class="app-step-nav__step js-step" id="step-7">
-              <div class="app-step-nav__header js-toggle-panel" data-position="7">
-                <h3 class="app-step-nav__title">
-                  <span class="app-step-nav__circle app-step-nav__circle--number">
-                    <span class="app-step-nav__circle-inner">
-                      <span class="app-step-nav__circle-background">
-                        <span class="govuk-visually-hidden govuk-!-display-none-print">Step</span> 7<span class="govuk-visually-hidden govuk-!-display-none-print" aria-hidden="true">:</span>
-                      </span>
-                    </span>
-                  </span>
-                  <span class="js-step-title">
-                    <button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-7">
-                      <span class="js-step-title-text">
-                        Report that your circumstances have changed
-                      </span>
-                      <span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden>Show</span>
-                    </button>
-                  </span>
-                </h3>
-              </div>
-              <div class="app-step-nav__panel js-panel" id="step-panel-7" hidden>
-                <p class="app-step-nav__paragraph">You also have to tell other government organisations that you're getting divorced if:</p>
-                <ul class="app-step-nav__list">
-                  <li class="app-step-nav__list-item">you get benefits</li>
-                  <li class="app-step-nav__list-item">your visa is based on your marriage</li>
-                </ul>
-              </div>
-            </li>
-          </ol>
+          </ul>
         </nav>
-      </aside>
-    </div>
-  </div>
 
-  <div class="govuk-grid-row govuk-!-margin-top-8">
-    <div class="govuk-grid-column-two-thirds">
-      <h2 class="govuk-heading-m">Is this page useful?</h2>
-      {% if feedbackUrl %}
-        <ul class="govuk-list govuk-list--inline">
-          <li>
-            <a href="{{ feedbackUrl }}" class="govuk-link" target="_blank" rel="noopener noreferrer">
-              Yes
-            </a>
-          </li>
-          <li>
-            <a href="{{ feedbackUrl }}" class="govuk-link" target="_blank" rel="noopener noreferrer">
-              No
-            </a>
-          </li>
-          <li>
-            <a href="{{ feedbackUrl }}" class="govuk-link" target="_blank" rel="noopener noreferrer">
-              Report a problem with this page
-            </a>
-          </li>
-        </ul>
-      {% endif %}
+        <h2 class="govuk-heading-s govuk-!-margin-top-6" id="related-content-title">
+          Related content
+        </h2>
+        <nav role="navigation" aria-labelledby="related-content-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/end-civil-partnership">
+                End a civil partnership
+              </a>
+            </li>
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/divorce">
+                Get a divorce
+              </a>
+            </li>
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/money-property-when-relationship-ends">
+                Money and property when you divorce or separate
+              </a>
+            </li>
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/parental-rights-responsibilities">
+                Parental rights and responsibilities
+              </a>
+            </li>
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/represent-yourself-in-court">
+                Represent yourself in court
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </aside>
     </div>
   </div>
 {% endblock %}
