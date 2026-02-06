@@ -1,6 +1,5 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
-{% from "govuk/components/pagination/macro.njk" import govukPagination %}
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
@@ -185,22 +184,6 @@
       <p class="govuk-body">Find support and guidance about child abuse and neglect on <a href="https://www.nspcc.org.uk/" class="govuk-link">NSPCC's website</a>.</p>
 
       <p class="govuk-body">Find out how to <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help" class="govuk-link">get help if you're a victim of domestic abuse</a>.</p>
-
-      <nav class="gem-c-pagination" role="navigation" aria-label="Pagination">
-        {{
-          govukPagination({
-            previous: {
-              labelText: "Making child arrangements",
-              href: "https://www.gov.uk/looking-after-children-divorce"
-            },
-            next: {
-              labelText: "Make an agreement through mediation",
-              href: "https://www.gov.uk/looking-after-children-divorce/mediation"
-            }
-          })
-        }}
-      </nav>
-
 
     </div>
 
