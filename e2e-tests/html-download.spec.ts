@@ -93,9 +93,6 @@ test.describe('HTML Download Functionality', () => {
 
     // Should contain the blue header
     expect(htmlContent).toContain('#1d70b8');
-
-    // Clean up
-    fs.unlinkSync(downloadPath);
   });
 
   // TODO: HTML download does not yet redirect to the confirmation page.
