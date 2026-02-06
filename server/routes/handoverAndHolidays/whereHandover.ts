@@ -146,7 +146,7 @@ const whereHandoverRoutes = (router: Router) => {
           .if(body(getFieldName(0)).custom((value: string[]) => value && value.includes('other')))
           .trim()
           .notEmpty()
-          .withMessage((_value, { req }) => req.__('Please describe the other location'))
+          .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.otherMissingError'))
       );
 
       // Check for per-child entries and validate them
@@ -190,7 +190,7 @@ const whereHandoverRoutes = (router: Router) => {
               .if(body(fieldName).custom((value: string[]) => value && value.includes('other')))
               .trim()
               .notEmpty()
-              .withMessage((_value, { req }) => req.__('Please describe the other location'))
+              .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.otherMissingError'))
           );
         }
       }
