@@ -16,35 +16,36 @@ class PdfGenerator {
     this.currentPage = 1;
     this.totalPages = 15; // Known from the form
 
-    // Load GOV.UK crest logo
-    const crestPath = path.resolve(process.cwd(), 'assets', 'images', 'crest.png');
-    this.logoData = `data:image/png;base64,${fs.readFileSync(crestPath, { encoding: 'base64' })}`;
+    // Load logo
+    const logoPath = path.resolve(process.cwd(), 'assets', 'images', 'crest.png');
+    this.logoData = `data:image/png;base64,${fs.readFileSync(logoPath, { encoding: 'base64' })}`;
   }
 
   /**
-   * Add black header bar with GOV.UK crest and title
+   * Add GDS blue header bar with logo and title
    * Matches the TypeScript version in server/pdf/pdf.ts
    */
   addHeader(title) {
-    // Black header bar
-    this.doc.setFillColor(...PdfStyles.COLOR_BLACK);
+    // GDS blue header bar
+    this.doc.setFillColor(29, 112, 184);
     this.doc.rect(0, 0, this.pageWidth, PdfStyles.HEADER_HEIGHT, 'F');
 
-    // Add GOV.UK crest logo
-    const headerLogoWidth = PdfStyles.HEADER_LOGO_HEIGHT * 5;
+    // Add logo
+    const logoHeight = 8;
+    const logoWidth = logoHeight * 5;
     this.doc.addImage(
       this.logoData,
       'PNG',
       PdfStyles.MARGIN_WIDTH,
-      0.5 * (PdfStyles.HEADER_HEIGHT - PdfStyles.HEADER_LOGO_HEIGHT),
-      headerLogoWidth,
-      PdfStyles.HEADER_LOGO_HEIGHT
+      0.5 * (PdfStyles.HEADER_HEIGHT - logoHeight),
+      logoWidth,
+      logoHeight
     );
 
-    // Add title text (matching TypeScript calculation)
+    // Add title text
     const titleSize = PdfStyles.SECTION_HEADING_SIZE;
-    const titleX = headerLogoWidth + PdfStyles.MARGIN_WIDTH +
-                   0.5 * (this.pageWidth - headerLogoWidth - PdfStyles.MARGIN_WIDTH);
+    const titleX = logoWidth + PdfStyles.MARGIN_WIDTH +
+                   0.5 * (this.pageWidth - logoWidth - PdfStyles.MARGIN_WIDTH);
     const titleY = PdfStyles.HEADER_HEIGHT * 0.5 +
                    0.25 * PdfStyles.LINE_HEIGHT_RATIO * titleSize * PdfStyles.MM_PER_POINT;
 

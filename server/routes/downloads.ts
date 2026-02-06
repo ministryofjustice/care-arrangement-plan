@@ -43,7 +43,10 @@ const downloadRoutes = (router: Router) => {
   router.get(paths.DOWNLOAD_HTML, (request, response) => {
     const htmlContent = createHtmlContent(request);
     const childrenNames = formattedChildrenNames(request);
-    const crestImageData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/crest.png'), { encoding: 'base64' })}`;
+
+    // Load logo image as base64
+    const logoData = fs.readFileSync(getAssetPath('images/crest.png'), { encoding: 'base64' });
+    const logoImageData = `data:image/png;base64,${logoData}`;
 
     response.setHeader('Content-Type', 'text/html; charset=utf-8');
     response.setHeader('Content-Disposition', `attachment; filename=${request.__('pdf.name')}.html`);
@@ -56,7 +59,7 @@ const downloadRoutes = (router: Router) => {
         childrenNames,
       },
       htmlContent,
-      crestImageData,
+      logoImageData,
     });
 
     // Log download event
