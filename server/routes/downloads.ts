@@ -1,12 +1,9 @@
-import fs from 'fs';
-
 import { Router } from 'express';
 
 import paths from '../constants/paths';
 import createHtmlContent from '../html/createHtmlContent';
 import createPdf from '../pdf/createPdf';
 import { logDownload } from '../services/analyticsService';
-import getAssetPath from '../utils/getAssetPath';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
 /**
