@@ -1,120 +1,246 @@
 {% extends "partials/layout.njk" %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
-{% block pageTitle %}{{ __('serviceName') }} – GOV.UK{% endblock %}
+{% block pageTitle %}Making child arrangements if you divorce or separate – {{ __('serviceName') }} – GOV.UK{% endblock %}
 
 {% block beforeContent %}
   {{ super() }}
-  <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
-    <ol class="govuk-breadcrumbs__list">
-      <li class="govuk-breadcrumbs__list-item">Home</li>
-      <li class="govuk-breadcrumbs__list-item">Negotiation tools and services</li>
-      <li class="govuk-breadcrumbs__list-item" aria-current="page">Make or change a child arrangements plan</li>
-    </ol>
-  </nav>
+  {{
+    govukBreadcrumbs({
+      items: [
+        {
+          text: "Home",
+          href: "https://www.gov.uk/"
+        },
+        {
+          text: "Births, deaths, marriages and care",
+          href: "https://www.gov.uk/browse/births-deaths-marriages"
+        },
+        {
+          text: "Marriage, civil partnership and divorce",
+          href: "https://www.gov.uk/browse/births-deaths-marriages/marriage-divorce"
+        }
+      ]
+    })
+  }}
 {% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">{{ __('serviceName') }}</h1>
-      <p>This service helps you work out a plan for your child arrangements with a co-parent or carer to avoid going to court.</p>
-      <p>This service works best if you collaborate with the other parent or carer but it can also be done individually.</p>
-      <p>The service creates a PDF or accessible HTML page containing your proposed plan which you can share with another parent or carer to ask their agreement.
-      </p>
-      <p>Any plan you create using this service is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time. 
-      </p>
-      <h3>Use this service to propose:</h3>
+      <h1 class="govuk-heading-xl">Making child arrangements if you divorce or separate</h1>
+
+      <p class="govuk-body-s govuk-!-margin-bottom-1">Contents</p>
+      <ul class="govuk-list govuk-body-s govuk-!-margin-bottom-8">
+        <li>— <a href="#make-a-written-agreement" class="govuk-link govuk-link--no-underline">Make a written agreement</a></li>
+        <li>— <a href="#if-you-need-help" class="govuk-link govuk-link--no-underline">If you need help to reach an agreement</a></li>
+        <li>— <a href="#legally-binding" class="govuk-link govuk-link--no-underline">Making your agreement legally binding</a></li>
+        <li>— <a href="#help-and-support" class="govuk-link govuk-link--no-underline">Help and support</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 id="make-a-written-agreement" class="govuk-heading-l">Make a written agreement</h2>
+
+      <p class="govuk-body">You do not have to do any official paperwork if you agree about child arrangements.</p>
+
+      <p class="govuk-body">You can write down what you've agreed in a 'child arrangements plan' if you want a record.</p>
+
+      <p class="govuk-body">You can use this service to help you plan and agree on child arrangements. It creates a document which you can share with the other parent to ask for their agreement and suggestions.</p>
+
+      <p class="govuk-body">You can also use the service with the other parent to make a plan together.</p>
+
+      {{
+        govukInsetText({
+          html: 'If you think your ex-partner is a threat to you or your children&#39;s safety, call 999 and ask for the police. Find out how to <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help" class="govuk-link">get help if you&#39;re a victim of domestic abuse</a>.'
+        })
+      }}
+
+      <h2 class="govuk-heading-m">What the plan includes</h2>
+
+      <p class="govuk-body">You'll need to provide details about how you plan to look after your children, such as:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>where your children live</li>
-        <li>when your children spend time with each co-parent or carer</li>
-        <li>handovers, holidays or whatever else is important to your children</li>
+        <li>where they live</li>
+        <li>when they spend time with each parent</li>
+        <li>when and what other types of contact take place (phone calls, for example)</li>
       </ul>
 
-      <h3>This service is useful if:</h3>
+      <h2 class="govuk-heading-m">Who can use this service</h2>
+
+      <p class="govuk-body">You can use this service if you either:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>
-          you are separated or divorced from your co-parent and have no child arrangements in place yet
-        </li>
-        <li>you want to propose changes to your existing arrangements and there is no court order in place</li>
-        <li>you want to avoid court as it can take around ten months to get a court order, depending on your circumstances and where you live</li>
+        <li>have no child arrangements in place yet</li>
+        <li>want to suggest changes to your existing arrangements</li>
       </ul>
-      <p>
-        You can also
-        <a href="{{ paths.DOWNLOAD_PAPER_FORM }}">download a template child arrangements plan (PDF, 0.5MB)</a>.
-      </p>
+
+      <h3 class="govuk-heading-s">Who should not use this service</h3>
+
+      <p class="govuk-body">You should not use this service if you already have a court order that sets out child arrangements you and your ex-partner must follow. You can <a href="https://www.gov.uk/looking-after-children-divorce/apply-for-court-order" class="govuk-link">change or enforce an order</a> instead.</p>
+
+      <h2 class="govuk-heading-m">Make your plan</h2>
+
+      <p class="govuk-body">Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.</p>
 
       {% if showUrToggle %}
-        <div class="govuk-inset-text" style="background-color: #f3f2f1; border-left-color: #1d70b8;">
-          <h3 class="govuk-heading-s govuk-!-margin-bottom-2">User Research: Select service version</h3>
-          <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="service-version-current" name="service-version" type="radio" value="current" {{ 'checked' if not usePerChildPoC }}>
-              <label class="govuk-label govuk-radios__label" for="service-version-current">
-                Current service
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="service-version-poc" name="service-version" type="radio" value="poc" {{ 'checked' if usePerChildPoC }}>
-              <label class="govuk-label govuk-radios__label" for="service-version-poc">
-                Plan per child proof of concept
-              </label>
+        <details class="govuk-details govuk-!-margin-bottom-4" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">Switch service version (User Research)</span>
+          </summary>
+          <div class="govuk-details__text">
+            <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="service-version-current" name="serviceVersionChoice" type="radio" value="current" {{ 'checked' if not usePerChildPoC }}>
+                <label class="govuk-label govuk-radios__label" for="service-version-current">
+                  Current service
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="service-version-poc" name="serviceVersionChoice" type="radio" value="poc" {{ 'checked' if usePerChildPoC }}>
+                <label class="govuk-label govuk-radios__label" for="service-version-poc">
+                  Per-child design
+                </label>
+              </div>
             </div>
           </div>
-        </div>
+        </details>
       {% endif %}
 
-      <form method="post" action="{{ paths.START }}">
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        <input type="hidden" name="serviceVersion" id="serviceVersionInput" value="{{ 'poc' if usePerChildPoC else 'current' }}" />
-        {{
-          govukButton({
-            text: "Start now",
-            isStartButton: true
-          })
-        }}
-      </form>
-
       {% if showUrToggle %}
+        <form method="post" action="{{ paths.START }}" id="start-form">
+          <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+          <input type="hidden" name="serviceVersion" id="service-version-hidden" value="{{ 'poc' if usePerChildPoC else 'current' }}" />
+          {{
+            govukButton({
+              text: "Start now",
+              classes: "govuk-button--start",
+              isStartButton: true
+            })
+          }}
+        </form>
+
         <script nonce="{{ cspNonce }}">
-          document.querySelectorAll('input[name="service-version"]').forEach(function(radio) {
+          // Update hidden input when radio button selection changes
+          document.querySelectorAll('input[name="serviceVersionChoice"]').forEach(function(radio) {
             radio.addEventListener('change', function() {
-              document.getElementById('serviceVersionInput').value = this.value;
+              document.getElementById('service-version-hidden').value = this.value;
             });
           });
         </script>
+      {% else %}
+        {{
+          govukButton({
+            text: "Start now",
+            href: paths.SAFETY_CHECK,
+            classes: "govuk-button--start",
+            isStartButton: true
+          })
+        }}
       {% endif %}
 
-      <h2 class="govuk-heading-m">External help links</h2>
-      <p>
-        If you think the other parent is a threat to you or your children's safety, you should not use this service.
-        <br>
-        <a
-          href="https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements"
-          target="_blank" rel="noopener noreferrer" title="Visit citizens advice"
-        >Find another way to make arrangements (opens in new tab)</a>
-        .
-      </p>
+      <p class="govuk-body">If you want to make changes to the plan, you can use the service again but you'll need to create a new plan.</p>
 
-      <p><a href="https://www.nspcc.org.uk/what-is-child-abuse"
-        target="_blank" rel="noopener noreferrer" title="Visit NSPCC to find out about child abuse and neglect"
-        >Find out more about child abuse and neglect (opens in new tab)</a>.</p>
-      <p>
-        <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse"
-          target="_blank" rel="noopener noreferrer" title="Find out about signs of domestic abuse"
-          >Find out more about signs of domestic abuse (opens in new tab)</a
-        >
-        if you're unsure whether you're a victim.
-      </p>
+      <p class="govuk-body">You can also <a href="{{ paths.DOWNLOAD_PAPER_FORM }}" class="govuk-link">download and fill in the child arrangements plan template (PDF, 0.5MB)</a>.</p>
 
-      <p>
-        <a href="https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf"
-          target="_blank" rel="noopener noreferrer" title="Visit cafass to see tips for parents"
-          >Tips for parents (opens in new tab)</a
-        >
-        from a child's perspective.
-      </p>
+      <h2 id="if-you-need-help" class="govuk-heading-m">If you need help to reach an agreement</h2>
+
+      <p class="govuk-body">A legal adviser can help you make a legally binding agreement or recommend <a href="https://www.gov.uk/looking-after-children-divorce/non-court-dispute-resolution" class="govuk-link">other ways to agree on child arrangements</a> outside of court. They can also tell you how much it costs.</p>
+
+      <p class="govuk-body">If you decide to go to court, you'll usually need to show you've tried <a href="https://www.gov.uk/looking-after-children-divorce/mediation" class="govuk-link">mediation</a> before you apply. You can usually get a voucher to pay for family mediation, regardless of what you earn.</p>
+
+      <h2 id="legally-binding" class="govuk-heading-m">Making your agreement legally binding</h2>
+
+      <p class="govuk-body">You can <a href="https://www.gov.uk/find-a-legal-adviser" class="govuk-link">get a legal adviser</a> to draft a 'consent order' if you want a legally binding agreement.</p>
+
+      <p class="govuk-body">A consent order is a legal document that confirms your agreement.</p>
+
+      <p class="govuk-body">You and your ex-partner both have to sign the draft consent order. You'll also need to get the consent order approved.</p>
+
+      <h3 class="govuk-heading-s">Get your consent order approved</h3>
+
+      <p class="govuk-body">You or your ex-partner need to <a href="https://www.gov.uk/looking-after-children-divorce/apply-for-court-order" class="govuk-link">apply for a court order</a> to get your consent order approved. Your legal adviser can help you with your application.</p>
+
+      <p class="govuk-body">You will not need to show that you've tried mediation.</p>
+
+      <p class="govuk-body">Keep a copy of both the form and the draft consent order.</p>
+
+      <h3 class="govuk-heading-s">After the court gets your paperwork</h3>
+
+      <p class="govuk-body">There's usually no court hearing. A judge will approve your consent order to make it legally binding if they think you've made decisions in your children's interest.</p>
+
+      <p class="govuk-body">If the judge does not think your consent order is in your children's interest they can:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>change your consent order</li>
+        <li>make a different court order to decide what's best for your children</li>
+      </ul>
+
+      <h2 id="help-and-support" class="govuk-heading-m">Help and support</h2>
+
+      <p class="govuk-body">Get help and information from <a href="https://www.citizensadvice.org.uk/" class="govuk-link">Citizens Advice</a>.</p>
+
+      <p class="govuk-body">Find support and guidance about child abuse and neglect on <a href="https://www.nspcc.org.uk/" class="govuk-link">NSPCC's website</a>.</p>
+
+      <p class="govuk-body">Find out how to <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help" class="govuk-link">get help if you're a victim of domestic abuse</a>.</p>
+
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+      <aside class="app-related-items" role="complementary">
+        <h2 class="govuk-heading-s" id="subsection-title">
+          Part of
+        </h2>
+        <nav role="navigation" aria-labelledby="subsection-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/get-a-divorce">
+                Get a divorce: step by step
+              </a>
+            </li>
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/end-civil-partnership">
+                End a civil partnership: step by step
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <h2 class="govuk-heading-s govuk-!-margin-top-6" id="related-content-title">
+          Related content
+        </h2>
+        <nav role="navigation" aria-labelledby="related-content-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/end-civil-partnership">
+                End a civil partnership
+              </a>
+            </li>
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/divorce">
+                Get a divorce
+              </a>
+            </li>
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/money-property-when-relationship-ends">
+                Money and property when you divorce or separate
+              </a>
+            </li>
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/parental-rights-responsibilities">
+                Parental rights and responsibilities
+              </a>
+            </li>
+            <li class="app-related-items__list-item">
+              <a class="govuk-link" href="https://www.gov.uk/represent-yourself-in-court">
+                Represent yourself in court
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </aside>
     </div>
   </div>
 {% endblock %}
