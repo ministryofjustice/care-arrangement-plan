@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
@@ -30,7 +31,7 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
         {
           location: 'body',
           msg: 'Invalid value',
-          path: formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
+          path: `${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}-0`,
           type: 'field',
         },
       ]);
@@ -42,30 +43,30 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
       );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
-        `${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}-error`,
+        expect.stringContaining(`${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}-0-error`),
       );
     });
 
     it('should render field value of yes correctly', async () => {
       sessionMock.handoverAndHolidays = {
-        willChangeDuringSchoolHolidays: { willChange: true, noDecisionRequired: true },
+        willChangeDuringSchoolHolidays: { default: { willChange: true, noDecisionRequired: true } } as any,
       };
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}`)).toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}-0`)).toHaveAttribute(
         'checked',
       );
     });
 
     it('should render field value of no correctly', async () => {
       sessionMock.handoverAndHolidays = {
-        willChangeDuringSchoolHolidays: { willChange: false, noDecisionRequired: true },
+        willChangeDuringSchoolHolidays: { default: { willChange: false, noDecisionRequired: true } } as any,
       };
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}-2`)).toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}-0-2`)).toHaveAttribute(
         'checked',
       );
     });
@@ -82,7 +83,7 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
         {
           location: 'body',
           msg: 'Choose whether the arrangements will change',
-          path: formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
+          path: `${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}-0`,
           type: 'field',
         },
       ]);
@@ -93,12 +94,12 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
 
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
-        .send({ [formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS]: 'No' })
+        .send({ [`${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}-0`]: 'No' })
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
 
       expect(sessionMock.handoverAndHolidays).toEqual({
-        willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: false },
+        willChangeDuringSchoolHolidays: { default: { noDecisionRequired: false, willChange: false } },
       });
     });
 
@@ -108,13 +109,13 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
 
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
-        .send({ [formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS]: 'Yes' })
+        .send({ [`${formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS}-0`]: 'Yes' })
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS);
 
       expect(sessionMock.handoverAndHolidays).toEqual({
         ...initialHandoverAndHolidays,
-        willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
+        willChangeDuringSchoolHolidays: { default: { noDecisionRequired: false, willChange: true } },
       });
     });
   });
@@ -129,6 +130,6 @@ describe(`POST ${paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_
       .expect(302)
       .expect('location', paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
 
-    expect(sessionMock.handoverAndHolidays).toEqual({ willChangeDuringSchoolHolidays: { noDecisionRequired: true } });
+    expect(sessionMock.handoverAndHolidays).toEqual({ willChangeDuringSchoolHolidays: { default: { noDecisionRequired: true } } });
   });
 });

@@ -47,10 +47,11 @@
       gap: 20px;
     }
 
-    .crest {
+    .logo {
       height: 30px;
       width: auto;
       display: block;
+      flex-shrink: 0;
     }
 
     .header h1 {
@@ -59,7 +60,7 @@
       margin: 0;
       padding: 0;
       color: #ffffff;
-      line-height: 1;
+      line-height: 30px;
     }
 
     /* Typography */
@@ -386,7 +387,7 @@
 <body>
   <div class="header">
     <div class="header-content">
-      <img src="{{ crestImageData }}" alt="GOV.UK" class="crest">
+      <img src="{{ logoImageData }}" alt="GOV.UK" class="logo">
       <h1>{{ __('pdf.name') }}</h1>
     </div>
   </div>

@@ -115,6 +115,7 @@ const whereHandoverRoutes = (router: Router) => {
       validations.push(
         body(getFieldName(0))
           .exists()
+          .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.emptyError'))
           .toArray()
           .isLength({ min: 1 })
           .withMessage((_value, { req }) => req.__('handoverAndHolidays.whereHandover.emptyError'))

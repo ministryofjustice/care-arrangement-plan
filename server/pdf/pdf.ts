@@ -26,7 +26,7 @@ class Pdf {
 
   public currentY = HEADER_HEIGHT;
 
-  private readonly crestData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/crest.png'), { encoding: 'base64' })}`;
+  private readonly logoData = `data:image/png;base64,${fs.readFileSync(getAssetPath('images/crest.png'), { encoding: 'base64' })}`;
 
   constructor(autoPrint: boolean, request: Request) {
     this.request = request;
@@ -69,15 +69,15 @@ class Pdf {
 
   private addHeaderToPage() {
     this.document.setFillColor(29, 112, 184).rect(0, 0, this.document.internal.pageSize.getWidth(), HEADER_HEIGHT, 'F');
-    const crestHeight = 8;
-    const crestWidth = crestHeight * 5;
+    const logoHeight = 8;
+    const logoWidth = logoHeight * 5;
     this.document.addImage(
-      this.crestData,
+      this.logoData,
       'PNG',
       MARGIN_WIDTH,
-      0.5 * (HEADER_HEIGHT - crestHeight),
-      crestWidth,
-      crestHeight,
+      0.5 * (HEADER_HEIGHT - logoHeight),
+      logoWidth,
+      logoHeight,
     );
     this.document
       .setFont(FONT, FontStyles.BOLD)
@@ -85,9 +85,9 @@ class Pdf {
       .setTextColor(255, 255, 255)
       .text(
         this.request.__('pdf.name'),
-        crestWidth +
+        logoWidth +
           MARGIN_WIDTH +
-          0.5 * (this.document.internal.pageSize.getWidth() - crestWidth - MARGIN_WIDTH),
+          0.5 * (this.document.internal.pageSize.getWidth() - logoWidth - MARGIN_WIDTH),
         HEADER_HEIGHT * 0.5 + 0.25 * LINE_HEIGHT_RATIO * SECTION_HEADING_SIZE * MM_PER_POINT,
         { align: 'center' },
       )

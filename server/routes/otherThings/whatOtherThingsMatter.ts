@@ -169,7 +169,9 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
     setSessionSection(request.session, 'otherThings', {
       ...otherThings,
       whatOtherThingsMatter: {
-        noDecisionRequired: true,
+        default: {
+          noDecisionRequired: true,
+        },
       },
     });
 
