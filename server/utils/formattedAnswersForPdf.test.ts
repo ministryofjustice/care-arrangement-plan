@@ -101,9 +101,7 @@ const session: Partial<SessionData> = {
     },
   },
   otherThings: {
-    whatOtherThingsMatter: {
-      noDecisionRequired: true,
-    },
+    whatOtherThingsMatter: { default: { noDecisionRequired: true } },
   },
   decisionMaking: {
     planLastMinuteChanges: {
@@ -442,9 +440,7 @@ describe('formattedAnswers', () => {
   describe('otherThings', () => {
     it('should return correctly for no need to decide what will happen', () => {
       sessionMock.otherThings = {
-        whatOtherThingsMatter: {
-          noDecisionRequired: true,
-        },
+        whatOtherThingsMatter: { default: { noDecisionRequired: true } },
       };
 
       return request(app)
@@ -460,8 +456,10 @@ describe('formattedAnswers', () => {
       const answer = 'answer';
       sessionMock.otherThings = {
         whatOtherThingsMatter: {
-          noDecisionRequired: false,
-          answer,
+          default: {
+            noDecisionRequired: false,
+            answer,
+          },
         },
       };
 
