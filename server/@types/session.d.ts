@@ -38,10 +38,29 @@ export type WhereHandoverAnswer = {
   noDecisionRequired: boolean;
   where?: whereHandoverField[];
   someoneElse?: string;
+  other?: string;
+  notApplicable?: boolean; // This question does not apply to this child
+};
+
+export type WillChangeDuringSchoolHolidaysAnswer = {
+  noDecisionRequired: boolean;
+  willChange?: boolean;
+  notApplicable?: boolean; // This question does not apply to this child
+};
+
+export type ItemsForChangeoverAnswer = {
+  noDecisionRequired: boolean;
+  answer?: string;
   notApplicable?: boolean; // This question does not apply to this child
 };
 
 export type WhatWillHappenAnswer = {
+  noDecisionRequired: boolean;
+  answer?: string;
+  notApplicable?: boolean; // This question does not apply to this child
+};
+
+export type WhatOtherThingsMatterAnswer = {
   noDecisionRequired: boolean;
   answer?: string;
   notApplicable?: boolean; // This question does not apply to this child
@@ -121,10 +140,7 @@ export type CAPSession = {
     whatWillHappen?: PerChildAnswer<WhatWillHappenAnswer>;
   };
   otherThings?: {
-    whatOtherThingsMatter?: {
-      noDecisionRequired: boolean;
-      answer?: string;
-    };
+    whatOtherThingsMatter?: PerChildAnswer<WhatOtherThingsMatterAnswer>;
   };
   decisionMaking?: {
     planLastMinuteChanges?: {

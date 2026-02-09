@@ -26,7 +26,6 @@ const ERROR_MESSAGES = {
   },
   planReview: {
     bothEmpty: 'Enter months or years',
-    bothFilled: 'Enter months or years, not both',
     notNumber: 'Your answer must be a number',
     notInt: 'Your answer must be a whole number. For example, 3.',
   },
@@ -278,14 +277,13 @@ test.describe('Decision Making Section', () => {
         await expect(page.locator(`#${MONTHS_FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.planReview.bothEmpty);
       });
 
-      test('should show error when both fields are filled', async ({ page }) => {
+      test('should accept both months and years (e.g., 0 years and 6 months)', async ({ page }) => {
         await navigateToPlanReview(page);
         await page.getByLabel(/months/i).fill('6');
-        await page.getByLabel(/years/i).fill('1');
+        await page.getByLabel(/years/i).fill('0');
         await page.getByRole('button', { name: /continue/i }).click();
 
-        await expectErrorSummaryVisible(page);
-        await expect(page.locator(`#${MONTHS_FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.planReview.bothFilled);
+        await expect(page).toHaveURL(/\/make-a-plan/);
       });
 
       test('should show error for non-numeric months', async ({ page }) => {
