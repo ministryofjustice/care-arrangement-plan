@@ -144,7 +144,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Describe who will manage handover',
+          msg: 'Enter the name of the person who will manage the handover',
           path: `${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`,
           type: 'field',
           value: '',
@@ -172,7 +172,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
         },
         {
           location: 'body',
-          msg: 'Describe who will manage handover',
+          msg: 'Enter the name of the person who will manage the handover',
           path: `${formFields.WHERE_HANDOVER_SOMEONE_ELSE}-0`,
           type: 'field',
           value: '',
