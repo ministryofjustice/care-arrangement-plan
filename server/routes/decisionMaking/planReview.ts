@@ -34,22 +34,16 @@ const planReviewRoutes = (router: Router) => {
       .custom((value: string, { req }) => value || req.body[otherFromField])
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.bothEmptyError'))
       .bail()
-      .if(body(formField).notEmpty())
+      .custom((value: string, { req }) => !(value && req.body[otherFromField]))
+      .withMessage((_value, { req }) => req.__('decisionMaking.planReview.bothFilledError'))
+      .bail()
+      .if(body(otherFromField).isEmpty())
       .isNumeric()
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.notNumberError'))
       .bail()
-      .if(body(formField).notEmpty())
+      .if(body(otherFromField).isEmpty())
       .isInt({ min: 0 })
-      .withMessage((_value, { req }) => req.__('decisionMaking.planReview.notIntError'))
-      .bail()
-      // Both fields cannot have non-zero values (treat 0 as "no answer")
-      .custom((value: string, { req }) => {
-        const thisNum = value ? parseInt(value, 10) : 0;
-        const otherNum = req.body[otherFromField] ? parseInt(req.body[otherFromField], 10) : 0;
-        // If both are valid numbers and both are > 0, fail validation
-        return !(thisNum > 0 && otherNum > 0);
-      })
-      .withMessage((_value, { req }) => req.__('decisionMaking.planReview.bothFilledError'));
+      .withMessage((_value, { req }) => req.__('decisionMaking.planReview.notIntError'));
 
   router.post(
     paths.DECISION_MAKING_PLAN_REVIEW,

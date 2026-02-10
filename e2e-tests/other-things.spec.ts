@@ -9,7 +9,7 @@ import {
   completeDecisionMakingSection,
 } from './fixtures/test-helpers';
 
-const FIELD_ID = 'what-other-things-matter-0';
+const FIELD_ID = 'what-other-things-matter';
 const ERROR_MESSAGE = 'Describe what other things matter to your children';
 const SAMPLE_TEXT =
   'Regular video calls when not together. Consistent bedtimes across both homes. Access to grandparents on both sides.';

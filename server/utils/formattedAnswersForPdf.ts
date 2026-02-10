@@ -507,18 +507,11 @@ export const whatOtherThingsMatter = (request: Request) => {
   const { initialAdultName } = request.session;
   const otherThings = getSessionValue<any>(request.session, 'otherThings');
   if (!otherThings?.whatOtherThingsMatter) return undefined;
-
-  const data = otherThings.whatOtherThingsMatter;
-
-  // Handle new per-child format with default wrapper
-  const noDecisionRequired = data.default?.noDecisionRequired ?? data.noDecisionRequired;
-  const answer = data.default?.answer ?? data.answer;
-
-  return noDecisionRequired
+  return otherThings.whatOtherThingsMatter.noDecisionRequired
     ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
     : request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
-        suggestion: answer,
+        suggestion: otherThings.whatOtherThingsMatter.answer,
       });
 };
 

@@ -229,8 +229,6 @@ export const whereHandover = (request: Request): string | PerChildFormattedAnswe
           return request.__('handoverAndHolidays.whereHandover.atSchool');
         case 'someoneElse':
           return answer.someoneElse;
-        case 'other':
-          return answer.other;
         default:
           return undefined;
       }
@@ -270,26 +268,10 @@ export const whereHandover = (request: Request): string | PerChildFormattedAnswe
 export const willChangeDuringSchoolHolidays = (request: Request) => {
   const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays');
   if (!handoverAndHolidays?.willChangeDuringSchoolHolidays) return undefined;
-
-  const data = handoverAndHolidays.willChangeDuringSchoolHolidays;
-
-  // Handle legacy format (direct answer without default wrapper)
-  if (data.noDecisionRequired !== undefined && data.default === undefined) {
-    return data.noDecisionRequired ? request.__('doNotNeedToDecide') : (data.willChange ? request.__('yes') : request.__('no'));
-  }
-
-  // Handle the "do not need to decide" case
-  if (data.default?.noDecisionRequired) {
+  if (handoverAndHolidays.willChangeDuringSchoolHolidays.noDecisionRequired) {
     return request.__('doNotNeedToDecide');
   }
-
-  // For per-child answers, check if ANY child will have changes
-  const defaultWillChange = data.default?.willChange || false;
-  const anyChildWillChange = data.byChild
-    ? Object.values(data.byChild).some((child: any) => child.willChange)
-    : false;
-
-  return (defaultWillChange || anyChildWillChange) ? request.__('yes') : request.__('no');
+  return handoverAndHolidays.willChangeDuringSchoolHolidays.willChange ? request.__('yes') : request.__('no');
 };
 
 export const howChangeDuringSchoolHolidays = (request: Request): string | PerChildFormattedAnswer | undefined => {
@@ -324,42 +306,12 @@ export const howChangeDuringSchoolHolidays = (request: Request): string | PerChi
   };
 };
 
-export const itemsForChangeover = (request: Request): string | PerChildFormattedAnswer | undefined => {
-  const { namesOfChildren } = request.session;
+export const itemsForChangeover = (request: Request) => {
   const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays');
   if (!handoverAndHolidays?.itemsForChangeover) return undefined;
-
-  const data = handoverAndHolidays.itemsForChangeover;
-
-  // Handle legacy format (direct answer without default wrapper)
-  if (data.noDecisionRequired !== undefined && data.default === undefined) {
-    return data.noDecisionRequired ? request.__('doNotNeedToDecide') : data.answer;
-  }
-
-  // Handle the "do not need to decide" case
-  if (data.default?.noDecisionRequired) {
-    return request.__('doNotNeedToDecide');
-  }
-
-  const defaultAnswer = data.default?.answer || '';
-
-  // If there are no per-child overrides, return just the default answer
-  if (!data.byChild || Object.keys(data.byChild).length === 0) {
-    return defaultAnswer;
-  }
-
-  // Return structured data with per-child answers
-  const perChildAnswers = Object.entries(data.byChild)
-    .filter(([_, answer]: [string, any]) => answer.answer && !answer.noDecisionRequired)
-    .map(([childIndex, answer]: [string, any]) => ({
-      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
-      answer: answer.answer!,
-    }));
-
-  return {
-    defaultAnswer,
-    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
-  };
+  return handoverAndHolidays.itemsForChangeover.noDecisionRequired
+    ? request.__('doNotNeedToDecide')
+    : handoverAndHolidays.itemsForChangeover.answer;
 };
 
 export const whatWillHappen = (request: Request): string | PerChildFormattedAnswer | undefined => {
@@ -400,42 +352,12 @@ export const whatWillHappen = (request: Request): string | PerChildFormattedAnsw
   };
 };
 
-export const whatOtherThingsMatter = (request: Request): string | PerChildFormattedAnswer | undefined => {
-  const { namesOfChildren } = request.session;
+export const whatOtherThingsMatter = (request: Request) => {
   const otherThings = getSessionValue<any>(request.session, 'otherThings');
   if (!otherThings?.whatOtherThingsMatter) return undefined;
-
-  const data = otherThings.whatOtherThingsMatter;
-
-  // Handle legacy format (direct answer without default wrapper)
-  if (data.noDecisionRequired !== undefined && data.default === undefined) {
-    return data.noDecisionRequired ? request.__('doNotNeedToDecide') : data.answer;
-  }
-
-  // Handle the "do not need to decide" case
-  if (data.default?.noDecisionRequired) {
-    return request.__('doNotNeedToDecide');
-  }
-
-  const defaultAnswer = data.default?.answer || '';
-
-  // If there are no per-child overrides, return just the default answer
-  if (!data.byChild || Object.keys(data.byChild).length === 0) {
-    return defaultAnswer;
-  }
-
-  // Return structured data with per-child answers
-  const perChildAnswers = Object.entries(data.byChild)
-    .filter(([_, answer]: [string, any]) => answer.answer && !answer.noDecisionRequired)
-    .map(([childIndex, answer]: [string, any]) => ({
-      childName: namesOfChildren[parseInt(childIndex, 10)] || `Child ${parseInt(childIndex, 10) + 1}`,
-      answer: answer.answer!,
-    }));
-
-  return {
-    defaultAnswer,
-    perChildAnswers: perChildAnswers.length > 0 ? perChildAnswers : undefined,
-  };
+  return otherThings.whatOtherThingsMatter.noDecisionRequired
+    ? request.__('doNotNeedToDecide')
+    : otherThings.whatOtherThingsMatter.answer;
 };
 
 export const planLastMinuteChanges = (request: Request) => {
