@@ -333,8 +333,7 @@
       "someoneElse": "Someone else will manage handover, such as a grandparent",
       "someoneElseName": "Name of the person who will manage handover",
       "emptyError": "Select where handover takes place",
-      "arrangementMissingError": "Enter the name of the person who will manage the handover",
-      "otherMissingError": "Enter details of the handover arrangement",
+      "arrangementMissingError": "Describe who will manage handover",
       "multiSelectedError": "Describe what other arrangement you are proposing"
     },
     "willChangeDuringSchoolHolidays": {

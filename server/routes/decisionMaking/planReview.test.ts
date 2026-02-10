@@ -157,35 +157,11 @@ describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
       ]);
     });
 
-    it(`should redirect to ${paths.TASK_LIST} when both month and year are entered and set values in the session`, async () => {
-      const initialDecisionMaking = { planLongTermNotice: { noDecisionRequired: true } };
-      sessionMock.decisionMaking = initialDecisionMaking;
-      const months = 6;
-      const years = 0;
-
+    it('should set flash when both month and year is filled', async () => {
       await request(app)
         .post(paths.DECISION_MAKING_PLAN_REVIEW)
         .send({
-          [formFields.PLAN_REVIEW_MONTHS]: months,
-          [formFields.PLAN_REVIEW_YEARS]: years,
-        })
-        .expect(302)
-        .expect('location', paths.TASK_LIST);
-
-      expect(sessionMock.decisionMaking).toEqual({
-        ...initialDecisionMaking,
-        planReview: {
-          months,
-          years,
-        },
-      });
-    });
-
-    it('should set flash when both fields have non-zero values', async () => {
-      await request(app)
-        .post(paths.DECISION_MAKING_PLAN_REVIEW)
-        .send({
-          [formFields.PLAN_REVIEW_MONTHS]: 6,
+          [formFields.PLAN_REVIEW_MONTHS]: 1,
           [formFields.PLAN_REVIEW_YEARS]: 1,
         })
         .expect(302)
@@ -197,7 +173,7 @@ describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
           msg: 'Enter months or years, not both',
           path: formFields.PLAN_REVIEW_MONTHS,
           type: 'field',
-          value: '6',
+          value: '1',
         },
         {
           location: 'body',

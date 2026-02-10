@@ -46,7 +46,10 @@ const session: Partial<SessionData> = {
     },
   },
   otherThings: {
-    whatOtherThingsMatter: { default: { noDecisionRequired: false, answer: 'whatOtherThingsMatterAnswer', } },
+    whatOtherThingsMatter: {
+      noDecisionRequired: false,
+      answer: 'whatOtherThingsMatterAnswer',
+    },
   },
   decisionMaking: {
     planLastMinuteChanges: {
