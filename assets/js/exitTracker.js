@@ -58,7 +58,7 @@ const setupExitTracking = () => {
       eventData.destinationUrl = destination;
     }
 
-    sendAnalyticsEvent('/api/analytics/page-exit', eventData);
+    // sendAnalyticsEvent('/api/analytics/page-exit', eventData);
   }
 
   // Primary method: Track when page visibility changes to hidden
@@ -75,9 +75,9 @@ const setupExitTracking = () => {
 
   // Fallback for older browsers: pagehide event
   // This fires when navigating away or closing the page
-  // window.addEventListener('pagehide', () => {
-  //   logPageExit();
-  // });
+  window.addEventListener('pagehide', () => {
+    logPageExit();
+  });
 
   // Track destination URL when navigating away via browser navigation
   // (back/forward buttons, clicking links, typing new URL)
