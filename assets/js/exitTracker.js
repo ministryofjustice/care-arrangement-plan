@@ -58,20 +58,20 @@ const setupExitTracking = () => {
       eventData.destinationUrl = destination;
     }
 
-    sendAnalyticsEvent('/api/analytics/page-exit', eventData);
+    // sendAnalyticsEvent('/api/analytics/page-exit', eventData);
   }
 
   // Primary method: Track when page visibility changes to hidden
   // This fires when user switches tabs, minimizes window, or closes tab
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') {
-      logPageExit();
-    } else if (document.visibilityState === 'visible') {
-      // Reset the flag when user returns to the page (e.g., via Back button)
-      // This allows us to track subsequent exits
-      hasLoggedPageExit = false;
-    }
-  });
+  // document.addEventListener('visibilitychange', () => {
+  //   if (document.visibilityState === 'hidden') {
+  //     logPageExit();
+  //   } else if (document.visibilityState === 'visible') {
+  //     // Reset the flag when user returns to the page (e.g., via Back button)
+  //     // This allows us to track subsequent exits
+  //     hasLoggedPageExit = false;
+  //   }
+  // });
 
   // Fallback for older browsers: pagehide event
   // This fires when navigating away or closing the page
@@ -81,12 +81,12 @@ const setupExitTracking = () => {
 
   // Track destination URL when navigating away via browser navigation
   // (back/forward buttons, clicking links, typing new URL)
-  window.addEventListener('beforeunload', () => {
-    // Note: We cannot reliably get the destination URL in beforeunload
-    // The browser restricts this for privacy/security reasons
-    // Destination tracking is handled by link click tracking for internal/external links
-    logPageExit();
-  });
+  // window.addEventListener('beforeunload', () => {
+  //   // Note: We cannot reliably get the destination URL in beforeunload
+  //   // The browser restricts this for privacy/security reasons
+  //   // Destination tracking is handled by link click tracking for internal/external links
+  //   logPageExit();
+  // });
 
 
   // Track quick exit button clicks
