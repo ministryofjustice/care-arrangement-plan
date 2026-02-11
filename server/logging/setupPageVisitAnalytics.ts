@@ -11,7 +11,8 @@ const EXCLUDED_PATTERNS = [
   /^\/js/,
   /^\/fonts/,
   /^\/css/,
-  /^\/rebrand/
+  /^\/rebrand/,
+  /^\/download/
 ];
 
 
