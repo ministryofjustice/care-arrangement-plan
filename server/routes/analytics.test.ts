@@ -2,6 +2,7 @@ import request from 'supertest';
 
 import * as analyticsService from '../services/analyticsService';
 import testAppSetup from '../test-utils/testAppSetup';
+import { sessionMock } from '../test-utils/testMocks';
 
 const app = testAppSetup();
 
@@ -10,6 +11,20 @@ jest.mock('../services/analyticsService');
 const mockedLogLinkClick = analyticsService.logLinkClick as jest.MockedFunction<typeof analyticsService.logLinkClick>;
 const mockedLogPageExit = analyticsService.logPageExit as jest.MockedFunction<typeof analyticsService.logPageExit>;
 const mockedLogQuickExit = analyticsService.logQuickExit as jest.MockedFunction<typeof analyticsService.logQuickExit>;
+
+describe('analytics session safety', () => {
+  it('does not save the session on analytics requests', async () => {
+    const saveMock = jest.fn();
+    sessionMock.save = saveMock;
+
+    await request(app)
+      .post('/api/analytics/page-exit')
+      .send({ exitPage: '/safety-check' })
+      .expect(204);
+
+    expect(saveMock).not.toHaveBeenCalled();
+  });
+});
 
 describe('POST /api/analytics/link-click', () => {
 

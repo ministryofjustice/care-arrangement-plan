@@ -1,12 +1,31 @@
-import { Router } from 'express';
+import { Request, Response, NextFunction, Router } from 'express';
 
 import { logLinkClick, logPageExit, logQuickExit } from '../services/analyticsService';
+
+/**
+ * Prevents analytics requests from saving the session back to Redis.
+ * Without this, `resave: true` causes analytics beacons (fired during
+ * beforeunload/visibilitychange) to race with form-submission POSTs,
+ * potentially overwriting freshly-written completedSteps data in Redis.
+ * See PR #194 for prior history of this bug.
+ */
+function skipSessionSave(req: Request, _res: Response, next: NextFunction) {
+  if (req.session) {
+    req.session.save = ((cb?: (err?: unknown) => void) => {
+      if (cb) cb();
+      return req.session;
+    }) as typeof req.session.save;
+  }
+  next();
+}
 
 /**
  * Routes for analytics events
  * Handles client-side analytics tracking
  */
 const analyticsRoutes = (router: Router) => {
+  router.use('/api/analytics', skipSessionSave);
+
   /**
    * POST endpoint for logging link clicks (both internal and external)
    * Called by client-side JavaScript when a user clicks a link
