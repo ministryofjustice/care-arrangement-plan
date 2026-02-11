@@ -47,6 +47,8 @@ const setupExitTracking = () => {
     const link = event.target.closest('a[href]');
     if (link && link.hostname === window.location.hostname) {
       isInternalNavigation = true;
+      // Required for after download links have been selected
+      setTimeout(() => { isInternalNavigation = false; }, 0);
     }
 
     const exitButton = event.target.closest('.govuk-exit-this-page__button');
