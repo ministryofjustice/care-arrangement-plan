@@ -30,6 +30,12 @@ describe('setupPageVisitAnalytics Middleware', () => {
     expect(analyticsService.logPageVisit).not.toHaveBeenCalled();
   });
 
+  it('should NOT log requests to excluded patterns like /rebrand/', async () => {
+    await request(app).get('/rebrand/images/favicon.svg').expect(404);
+
+    expect(analyticsService.logPageVisit).not.toHaveBeenCalled();
+  });
+
   it('should NOT log non-GET requests or requests with a 4xx/5xx status code', async () => {
     await request(app).post(paths.SAFETY_CHECK).send({ [formFields.SAFETY_CHECK]: 'Yes' }).expect(302);
     await request(app).get('/not-found').expect(404);
