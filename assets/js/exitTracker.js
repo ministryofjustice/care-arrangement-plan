@@ -6,6 +6,7 @@ const setupExitTracking = () => {
   let hasLoggedPageExit = false;
   let isFormSubmitting = false;
   let isInternalNavigation = false;
+  let isDownloading = false;
 
   function sendAnalyticsEvent(endpoint, data) {
     if (navigator.sendBeacon) {
@@ -22,7 +23,7 @@ const setupExitTracking = () => {
   }
 
   function logPageExit(destination) {
-    if (hasLoggedPageExit || isFormSubmitting || isInternalNavigation) {
+    if (hasLoggedPageExit || isFormSubmitting || isInternalNavigation || isDownloading) {
       return;
     }
     hasLoggedPageExit = true;
@@ -45,10 +46,20 @@ const setupExitTracking = () => {
 
   document.addEventListener('click', (event) => {
     const link = event.target.closest('a[href]');
-    if (link && link.hostname === window.location.hostname) {
+    const isNavigatingAway = link
+      && link.hostname === window.location.hostname
+      && !link.hasAttribute('download')
+      && link.target !== '_blank'
+      && !link.pathname.startsWith('/download')
+      && link.pathname !== window.location.pathname;
+
+    if (isNavigatingAway) {
       isInternalNavigation = true;
-      // Required for after download links have been selected
-      setTimeout(() => { isInternalNavigation = false; }, 0);
+    }
+
+    if (link && (link.hasAttribute('download') || link.pathname.startsWith('/download'))) {
+      isDownloading = true;
+      setTimeout(() => { isDownloading = false; }, 1000);
     }
 
     const exitButton = event.target.closest('.govuk-exit-this-page__button');
