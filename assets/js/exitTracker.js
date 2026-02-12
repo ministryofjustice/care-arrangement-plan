@@ -7,6 +7,7 @@ const setupExitTracking = () => {
   let isFormSubmitting = false;
   let isInternalNavigation = false;
   let isDownloading = false;
+  let isExternalNavigation = false;
 
   function sendAnalyticsEvent(endpoint, data) {
     if (navigator.sendBeacon) {
@@ -57,7 +58,17 @@ const setupExitTracking = () => {
       isInternalNavigation = true;
     }
 
-    if (link && (link.hasAttribute('download') || link.pathname.startsWith('/download'))) {
+    if (link && link.hostname !== window.location.hostname) {
+      isExternalNavigation = true;
+    }
+
+    const staysOnPage = link && (
+      link.hasAttribute('download')
+      || link.pathname.startsWith('/download')
+      || link.target === '_blank'
+    );
+
+    if (staysOnPage) {
       isDownloading = true;
       setTimeout(() => { isDownloading = false; }, 1000);
     }
@@ -68,20 +79,10 @@ const setupExitTracking = () => {
     }
   });
 
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') {
+  window.addEventListener('pagehide', (event) => {
+    if (!event.persisted || isExternalNavigation) {
       logPageExit();
-    } else if (document.visibilityState === 'visible') {
-      hasLoggedPageExit = false;
     }
-  });
-
-  window.addEventListener('pagehide', () => {
-    logPageExit();
-  });
-
-  window.addEventListener('beforeunload', () => {
-    logPageExit();
   });
 
   document.addEventListener('keydown', (event) => {
