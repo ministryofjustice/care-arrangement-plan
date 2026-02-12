@@ -108,6 +108,18 @@ export async function expectErrorSummaryLinkToField(page: Page, fieldId: string)
   const errorLink = page.locator(`.govuk-error-summary__list a[href="#${fieldId}"]`);
   await expect(errorLink).toBeVisible();
 }
+
+export async function fillLivingAndVisitingSectionAndContinue(page: Page, url: RegExp, heading: string, choiceLabels: string[]) {
+  await expect(page).toHaveURL(url);
+  await expect(page.locator('h1')).toContainText(heading);
+  for (const label of choiceLabels) {
+    await page.getByLabel(label).check();
+  }
+  if (!choiceLabels.includes('Another arrangement')) {
+    await page.getByRole('button', { name: /continue/i }).click();
+  }
+}
+
   /**
  * Complete the Living and Visiting section with minimal required data
  */
