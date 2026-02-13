@@ -3,6 +3,16 @@ import crypto from 'crypto';
 import { generateHashedIdentifier, getDailySalt } from './hashedIdentifier';
 
 describe('hashedIdentifier', () => {
+  const originalEnv = process.env.HASH_SECRET;
+
+  beforeAll(() => {
+    process.env.HASH_SECRET = 'test-secret-key';
+  });
+
+  afterAll(() => {
+    process.env.HASH_SECRET = originalEnv;
+  });
+
   describe('getDailySalt', () => {
     it('generates a date-based salt string', () => {
       const salt = getDailySalt();

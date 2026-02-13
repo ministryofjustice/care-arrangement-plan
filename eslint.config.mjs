@@ -10,7 +10,7 @@ import { config as tslintConfig, configs as tslintConfigs } from 'typescript-esl
 
 export default tslintConfig(
   {
-    ignores: ['dist/**', 'scripts/**', 'server/__tests__/scripts/**', 'playwright-report/**'],
+    ignores: ['dist/**', 'scripts/**', 'server/__tests__/scripts/**', 'playwright-report/**', 'test-results/**'],
   },
   eslint.configs.recommended,
   tslintConfigs.recommended,

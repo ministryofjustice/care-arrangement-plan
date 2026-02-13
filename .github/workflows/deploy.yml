@@ -31,6 +31,7 @@ jobs:
           IMAGE_TAG: 'node-${{ github.sha }}'
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           BETA_ACCESS_PASSWORDS: ${{ secrets.BETA_ACCESS_PASSWORDS }}
+          HASH_SECRET: ${{ secrets.HASH_SECRET }}
           BUILD_NUMBER: ${{ github.run_number }}/${{ github.run_attempt }}
           GIT_REF: ${{ github.sha }}
           GIT_BRANCH: ${{ github.ref_name }}

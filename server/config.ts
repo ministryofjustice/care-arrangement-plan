@@ -48,6 +48,7 @@ const config = {
   analytics: {
     ga4Id: process.env.GA4_ID,
     enabled: process.env.ENABLE_ANALYTICS !== 'false', // Defaults to true unless explicitly disabled
+    hashSecret: process.env.HASH_SECRET,
   },
   cache: getCacheConfig(),
   session: {
