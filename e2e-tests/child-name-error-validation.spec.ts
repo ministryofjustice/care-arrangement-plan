@@ -39,20 +39,20 @@ test.describe('About the children Page Validation', () => {
 
   test.describe('Multiple Children Input Validation', () => {
     test('should show error that matches child input', async ({ page }) => {
-        await fillNumberOfChildrenAndDetails(page, 6, ['', '', '', '', '', ''])
-        await expect(page.locator(`#${ERROR_ID.child1}`)).toContainText("Enter a first name");
-        await expect(page.locator(`#${ERROR_ID.child2}`)).toContainText("Enter a first name");
-        await expect(page.locator(`#${ERROR_ID.child3}`)).toContainText("Enter a first name");
-        await expect(page.locator(`#${ERROR_ID.child4}`)).toContainText("Enter a first name");
-        await expect(page.locator(`#${ERROR_ID.child5}`)).toContainText("Enter a first name");
-        await expect(page.locator(`#${ERROR_ID.child6}`)).toContainText("Enter a first name");
+      await fillNumberOfChildrenAndDetails(page, 6, ['', '', '', '', '', ''])
+      await expect(page.locator(`#${ERROR_ID.child1}`)).toContainText("Enter a first name");
+      await expect(page.locator(`#${ERROR_ID.child2}`)).toContainText("Enter a first name");
+      await expect(page.locator(`#${ERROR_ID.child3}`)).toContainText("Enter a first name");
+      await expect(page.locator(`#${ERROR_ID.child4}`)).toContainText("Enter a first name");
+      await expect(page.locator(`#${ERROR_ID.child5}`)).toContainText("Enter a first name");
+      await expect(page.locator(`#${ERROR_ID.child6}`)).toContainText("Enter a first name");
     });
 });
 
   test.describe('Incomplete Inputs Valdiation', () => {
     test('should throw an error when not all have children have an input', async ({ page }) => {
-       await fillNumberOfChildrenAndDetails(page, 2, ['Alice', ''])
-       await expect(page.locator(`#${ERROR_ID.child2}`)).toContainText("Enter a first name");
+      await fillNumberOfChildrenAndDetails(page, 2, ['Alice', ''])
+      await expect(page.locator(`#${ERROR_ID.child2}`)).toContainText("Enter a first name");
     });
  });   
 
