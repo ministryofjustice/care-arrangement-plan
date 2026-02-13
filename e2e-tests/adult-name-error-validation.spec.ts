@@ -23,19 +23,19 @@ test.describe('About the adults Page Validation', () => {
     });
 
     test('An error should be shown for a whitespace input', async ({ page }) => {
-          await fillAdultDetails(page, '', '')
-          await expect(page.locator('#initial-adult-name-error')).toContainText("Enter your first name or the name of the person you represent");
-          await expect(page.locator('#secondary-adult-name-error')).toContainText("Enter the name of the other parent or carer");
+      await fillAdultDetails(page, '', '')
+      await expect(page.locator('#initial-adult-name-error')).toContainText("Enter your first name or the name of the person you represent");
+      await expect(page.locator('#secondary-adult-name-error')).toContainText("Enter the name of the other parent or carer");
     });
 
     test('An error should be shown when one adults name is missing', async ({ page }) => {
-          await fillAdultDetails(page, 'adult1', '')
-          await expect(page.locator('#secondary-adult-name-error')).toContainText("Enter the name of the other parent or carer");
+      await fillAdultDetails(page, 'adult1', '')
+      await expect(page.locator('#secondary-adult-name-error')).toContainText("Enter the name of the other parent or carer");
     });
 
     test('An error should be shown when adult names are the same', async ({ page }) => {
-          await fillAdultDetails(page, 'adult1', 'adult1')
-          await expect(page.locator('#secondary-adult-name-error')).toContainText("Enter a way to tell the adults apart");
+      await fillAdultDetails(page, 'adult1', 'adult1')
+      await expect(page.locator('#secondary-adult-name-error')).toContainText("Enter a way to tell the adults apart");
     });
 });
 
@@ -50,7 +50,6 @@ test.describe('Error Summary Display', () => {
       await expectErrorSummaryLinkToField(page, 'initial-adult-name-error')
       const errorLink = page.locator(`.govuk-error-summary__list a[href="#secondary-adult-name-error"]`).filter({ hasText: 'Enter the name of the other parent or carer' });
       await expect(errorLink).toBeVisible();
-
     });
 
     test('should scroll to the input field when clicking the error summary link', async ({ page }) => {

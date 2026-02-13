@@ -120,6 +120,27 @@ export async function fillLivingAndVisitingSectionAndContinue(page: Page, url: R
   }
 }
 
+export async function fillHandoversAndHolidaySectionAndContinue(page: Page, url: RegExp, heading: string, choiceLabels: string[] = []) {
+  await expect(page).toHaveURL(url);
+  await expect(page.locator('h1')).toContainText(heading);
+  for (const label of choiceLabels) {
+    await page.getByLabel(label).check();
+  }
+  if (choiceLabels.length > 0) { 
+    await page.getByRole('button', { name: /continue/i }).click(); 
+  }
+}
+
+export async function checkDataPersistsAndContinue(page: Page, choiceLabels: string[] = [], textArea: boolean = false, textAreaValue: string = '') {
+  for (const label of choiceLabels) {
+      await expect(page.getByLabel(label)).toBeChecked();
+  }
+  if (textArea) {
+     await expect(page.locator('textarea:visible')).toHaveValue(textAreaValue);
+  }
+  await page.getByRole('button', { name: /continue/i }).click();
+}
+
   /**
  * Complete the Living and Visiting section with minimal required data
  */

@@ -1,17 +1,6 @@
-import { test, expect, Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
  
-import { navigateToTaskList, fillLivingAndVisitingSectionAndContinue} from './fixtures/test-helpers';
-
-//Form Persistence Check
-async function isOptionCheckedContinue(page: Page, choiceLabels: string[], textArea: boolean = false, textAreaValue: string = '') {
-  for (const label of choiceLabels) {
-      await expect(page.getByLabel(label)).toBeChecked();
-  }
-  if (textArea) {
-     await expect(page.locator('textarea:visible')).toHaveValue(textAreaValue);
-  }
-  await page.getByRole('button', { name: /continue/i }).click();
-}
+import { navigateToTaskList, fillLivingAndVisitingSectionAndContinue, checkDataPersistsAndContinue} from './fixtures/test-helpers';
  
 test.describe('Mostly Lives Page', () => {
   test.beforeEach(async ({ page }) => {
@@ -33,11 +22,11 @@ test.describe('Mostly Lives Page', () => {
       await expect(completedStatus).toHaveText(/Completed/i);
 
       await page.getByRole('link', { name: /where will the children mostly live/i }).click();
-      await isOptionCheckedContinue(page, ['With Parent'])
-      await isOptionCheckedContinue(page, ['Yes'])
-      await isOptionCheckedContinue(page, ['Tuesday', 'Wednesday'])
-      await isOptionCheckedContinue(page, ['Yes'])
-      await isOptionCheckedContinue(page, ['Monday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+      await checkDataPersistsAndContinue(page, ['With Parent'])
+      await checkDataPersistsAndContinue(page, ['Yes'])
+      await checkDataPersistsAndContinue(page, ['Tuesday', 'Wednesday'])
+      await checkDataPersistsAndContinue(page, ['Yes'])
+      await checkDataPersistsAndContinue(page, ['Monday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
     });
   });
  
@@ -56,11 +45,11 @@ test.describe('Mostly Lives Page', () => {
       await expect(page.locator('#livingAndVisiting-taskList-1-status')).toHaveText(/Completed/i)
 
       await page.getByRole('link', { name: /where will the children mostly live/i }).click();
-      await isOptionCheckedContinue(page, ['With Parent'])
-      await isOptionCheckedContinue(page, ['Yes'])
-      await isOptionCheckedContinue(page, ['Another arrangement'], true, 'The children will stay overnight with the mother of Parent during the week, and with Guardian on weekends.')
-      await isOptionCheckedContinue(page, ['Yes'])
-      await isOptionCheckedContinue(page, ['Another arrangement'], true, 'Guardian can only do daytime visits on weekends where Parent is away')
+      await checkDataPersistsAndContinue(page, ['With Parent'])
+      await checkDataPersistsAndContinue(page, ['Yes'])
+      await checkDataPersistsAndContinue(page, ['Another arrangement'], true, 'The children will stay overnight with the mother of Parent during the week, and with Guardian on weekends.')
+      await checkDataPersistsAndContinue(page, ['Yes'])
+      await checkDataPersistsAndContinue(page, ['Another arrangement'], true, 'Guardian can only do daytime visits on weekends where Parent is away')
     });
   });
  
@@ -73,9 +62,9 @@ test.describe('Mostly Lives Page', () => {
       await expect(page.locator('#livingAndVisiting-taskList-1-status')).toHaveText(/Completed/i)
 
       await page.getByRole('link', { name: /where will the children mostly live/i }).click();
-      await isOptionCheckedContinue(page, ['With Parent'])
-      await isOptionCheckedContinue(page, ['No'])
-      await isOptionCheckedContinue(page, ['No'])
+      await checkDataPersistsAndContinue(page, ['With Parent'])
+      await checkDataPersistsAndContinue(page, ['No'])
+      await checkDataPersistsAndContinue(page, ['No'])
     });
   });
 
@@ -91,11 +80,11 @@ test.describe('Mostly Lives Page', () => {
       await expect(completedStatus).toHaveText(/Completed/i);
 
       await page.getByRole('link', { name: /where will the children mostly live/i }).click();
-      await isOptionCheckedContinue(page, ['With Guardian'])
-      await isOptionCheckedContinue(page, ['Yes'])
-      await isOptionCheckedContinue(page, ['Monday', 'Tuesday', 'Wednesday'])
-      await isOptionCheckedContinue(page, ['Yes'])
-      await isOptionCheckedContinue(page, ['Thursday', 'Friday', 'Saturday', 'Sunday'])
+      await checkDataPersistsAndContinue(page, ['With Guardian'])
+      await checkDataPersistsAndContinue(page, ['Yes'])
+      await checkDataPersistsAndContinue(page, ['Monday', 'Tuesday', 'Wednesday'])
+      await checkDataPersistsAndContinue(page, ['Yes'])
+      await checkDataPersistsAndContinue(page, ['Thursday', 'Friday', 'Saturday', 'Sunday'])
     });
   });
  
@@ -114,11 +103,11 @@ test.describe('Mostly Lives Page', () => {
       await expect(page.locator('#livingAndVisiting-taskList-1-status')).toHaveText(/Completed/i)
 
       await page.getByRole('link', { name: /where will the children mostly live/i }).click();
-      await isOptionCheckedContinue(page, ['With Guardian'])
-      await isOptionCheckedContinue(page, ['Yes'])
-      await isOptionCheckedContinue(page, ['Another arrangement'], true, 'The children will stay overnight with the mother of Guardian during the week, and with Parent on weekends.')
-      await isOptionCheckedContinue(page, ['Yes'])
-      await isOptionCheckedContinue(page, ['Another arrangement'], true, 'Parent can only do daytime visits on weekends where Guardian is away')
+      await checkDataPersistsAndContinue(page, ['With Guardian'])
+      await checkDataPersistsAndContinue(page, ['Yes'])
+      await checkDataPersistsAndContinue(page, ['Another arrangement'], true, 'The children will stay overnight with the mother of Guardian during the week, and with Parent on weekends.')
+      await checkDataPersistsAndContinue(page, ['Yes'])
+      await checkDataPersistsAndContinue(page, ['Another arrangement'], true, 'Parent can only do daytime visits on weekends where Guardian is away')
     });
   });
  
@@ -131,9 +120,9 @@ test.describe('Mostly Lives Page', () => {
       await expect(page.locator('#livingAndVisiting-taskList-1-status')).toHaveText(/Completed/i)
 
       await page.getByRole('link', { name: /where will the children mostly live/i }).click();
-      await isOptionCheckedContinue(page, ['With Guardian'])
-      await isOptionCheckedContinue(page, ['No'])
-      await isOptionCheckedContinue(page, ['No'])
+      await checkDataPersistsAndContinue(page, ['With Guardian'])
+      await checkDataPersistsAndContinue(page, ['No'])
+      await checkDataPersistsAndContinue(page, ['No'])
     });
   });
 
@@ -148,7 +137,7 @@ test.describe('Mostly Lives Page', () => {
       await expect(page.locator('#livingAndVisiting-taskList-1-status')).toHaveText(/Completed/i)
 
       await page.getByRole('link', { name: /where will the children mostly live/i }).click();
-      await isOptionCheckedContinue(page, ['They will split time between Parent and Guardian'])
+      await checkDataPersistsAndContinue(page, ['They will split time between Parent and Guardian'])
       await page.waitForSelector('textarea.govuk-textarea', { state: 'attached' }); 
       await expect(page.locator('textarea.govuk-textarea')).toHaveValue( 'Alternating weeks, The children will spend one week in one household and the next week in the other.' );
     });
@@ -163,7 +152,7 @@ test.describe('Mostly Lives Page', () => {
       await expect(page.locator('#livingAndVisiting-taskList-1-status')).toHaveText(/Completed/i)
 
       await page.getByRole('link', { name: /where will the children mostly live/i }).click();
-      await isOptionCheckedContinue(page, ['Another Arrangement'], true, 'The children will live in foster care, with occasional visits by parents')
+      await checkDataPersistsAndContinue(page, ['Another Arrangement'], true, 'The children will live in foster care, with occasional visits by parents')
     });
   });
 });
