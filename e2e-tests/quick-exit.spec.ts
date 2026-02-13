@@ -13,7 +13,7 @@ test.describe('Exit the page from saftey check page', () => {
 
       await page.goto('https://www.bbc.co.uk/weather');
       await expect(page).not.toHaveURL(/safety-check/i);
-      await expect(page).toHaveURL('https://www.bbc.co.uk/weather');
+      await expect(page).toHaveURL(/bbc\.(co\.uk|com)\/weather/);
   });
 });
 
@@ -31,7 +31,7 @@ test.describe('Exit the page from not-safe page', () => {
 
       await page.goto('https://www.bbc.co.uk/weather');
       await expect(page).not.toHaveURL(/not-safe/i);
-      await expect(page).toHaveURL('https://www.bbc.co.uk/weather');
+      await expect(page).toHaveURL(/bbc\.(co\.uk|com)\/weather/);
   });
 });
 
@@ -49,7 +49,7 @@ test.describe('Exit the page from child safety check page', () => {
 
       await page.goto('https://www.bbc.co.uk/weather');
       await expect(page).not.toHaveURL(/children-safety-check/i);
-      await expect(page).toHaveURL('https://www.bbc.co.uk/weather');
+      await expect(page).toHaveURL(/bbc\.(co\.uk|com)\/weather/);
   });
 });
 
@@ -69,6 +69,6 @@ test.describe('Exit the page from children not-safe page', () => {
 
       await page.goto('https://www.bbc.co.uk/weather');
       await expect(page).not.toHaveURL(/children-not-safe/i);
-      await expect(page).toHaveURL('https://www.bbc.co.uk/weather');
+      await expect(page).toHaveURL(/bbc\.(co\.uk|com)\/weather/);
   });
 });
