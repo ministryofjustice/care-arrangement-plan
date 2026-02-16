@@ -4,8 +4,8 @@ import request from 'supertest';
 import config from './config';
 import cookieNames from './constants/cookieNames';
 import paths from './constants/paths';
-import en from './locales/en.json';
 import cy from './locales/cy.json';
+import en from './locales/en.json';
 import testAppSetup from './test-utils/testAppSetup';
 import { mockNow, sessionMock } from './test-utils/testMocks';
 
