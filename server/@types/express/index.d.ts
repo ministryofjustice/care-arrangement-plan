@@ -6,6 +6,7 @@ export declare module 'express-session' {
     nowInMinutes: number;
     pageHistory: string[];
     previousPage: string;
+    lang: string;
   }
 }
 
