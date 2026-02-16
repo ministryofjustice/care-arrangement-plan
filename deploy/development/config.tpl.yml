@@ -10,7 +10,7 @@ data:
   WEB_SESSION_TIMEOUT_IN_MINUTES: '120'
   CACHE_ENABLED: 'true'
   CACHE_TLS_ENABLED: 'true'
-  INCLUDE_WELSH_LANGUAGE: 'false'
+  INCLUDE_WELSH_LANGUAGE: 'true'
   USE_AUTH: 'true'
   CONTACT_EMAIL: 'childarrangements@justice.gov.uk'
   FEEDBACK_URL: 'https://www.smartsurvey.co.uk/s/EFO5FJ/'

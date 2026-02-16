@@ -4,8 +4,10 @@ import request from 'supertest';
 import config from './config';
 import cookieNames from './constants/cookieNames';
 import paths from './constants/paths';
+import en from './locales/en.json';
+import cy from './locales/cy.json';
 import testAppSetup from './test-utils/testAppSetup';
-import { mockNow } from './test-utils/testMocks';
+import { mockNow, sessionMock } from './test-utils/testMocks';
 
 const app = testAppSetup();
 
@@ -165,6 +167,80 @@ describe('App', () => {
 
     it.each(pathsWithNoAuthentication)('should not redirect to password page for %s when not authenticated', (path) => {
       return request(app).get(path).expect(200);
+    });
+  });
+
+  describe('Language persistence via session', () => {
+    beforeEach(() => {
+      config.includeWelshLanguage = true;
+      // Reset session lang between tests
+      delete sessionMock.lang;
+    });
+
+    it('should store the language in session when lang query parameter is used', async () => {
+      const testApp = testAppSetup();
+
+      await request(testApp)
+        .get(`${paths.START}?lang=cy`)
+        .expect((response) => {
+          expect(response.text).toContain(homepageLanguageStrings.cy);
+        });
+
+      expect(sessionMock.lang).toBe('cy');
+    });
+
+    it('should use session language on subsequent requests without lang parameter', async () => {
+      sessionMock.lang = 'cy';
+      const testApp = testAppSetup();
+
+      await request(testApp)
+        .get(paths.START)
+        .expect((response) => {
+          expect(response.text).toContain(homepageLanguageStrings.cy);
+        });
+    });
+
+    it('should not store an invalid language in session', async () => {
+      const testApp = testAppSetup();
+
+      await request(testApp)
+        .get(`${paths.START}?lang=fr`)
+        .expect((response) => {
+          expect(response.text).toContain(homepageLanguageStrings.en);
+        });
+
+      expect(sessionMock.lang).toBeUndefined();
+    });
+  });
+
+  describe('Translation completeness', () => {
+    const getKeys = (obj: Record<string, unknown>, prefix = ''): string[] => {
+      return Object.entries(obj).flatMap(([key, value]) => {
+        const fullKey = prefix ? `${prefix}.${key}` : key;
+        if (value && typeof value === 'object' && !Array.isArray(value)) {
+          return getKeys(value as Record<string, unknown>, fullKey);
+        }
+        return fullKey;
+      });
+    };
+
+    const enKeys = getKeys(en);
+    const cyKeys = getKeys(cy);
+
+    it('should have Welsh translations for all English keys', () => {
+      const missingInCy = enKeys.filter((key) => !cyKeys.includes(key));
+      if (missingInCy.length > 0) {
+        console.warn(`Missing Welsh translations (${missingInCy.length}):\n${missingInCy.join('\n')}`);
+      }
+      // This is a warning test — it logs missing keys but doesn't fail
+      // Uncomment the line below to enforce completeness:
+      expect(missingInCy).toEqual([]);
+      expect(true).toBe(true);
+    });
+
+    it('should not have Welsh keys that do not exist in English', () => {
+      const extraInCy = cyKeys.filter((key) => !enKeys.includes(key));
+      expect(extraInCy).toEqual([]);
     });
   });
 

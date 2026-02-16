@@ -8,7 +8,7 @@ import setupAnalytics from '../middleware/setupAnalytics';
 import setupAuthentication from '../middleware/setupAuthentication';
 import setUpHealthCheck from '../middleware/setUpHealthCheck';
 import setupHistory from '../middleware/setupHistory';
-import setUpi18n from '../middleware/setUpi18n';
+import setUpi18n, { setUpLocaleFromSession } from '../middleware/setUpi18n';
 import setUpWebRequestParsing from '../middleware/setupRequestParsing';
 import setupServiceNoLongerAvailable from '../middleware/setupServiceNoLongerAvailable';
 import routes from '../routes';
@@ -28,6 +28,7 @@ const testAppSetup = (): Express => {
     request.flash = flashMock;
     next();
   });
+  app.use(setUpLocaleFromSession());
   app.use(setUpHealthCheck());
   app.use(setUpWebRequestParsing());
   app.use(setupAnalytics());
