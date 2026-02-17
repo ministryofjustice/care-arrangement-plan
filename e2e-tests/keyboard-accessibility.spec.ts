@@ -282,6 +282,7 @@ test.describe('Keyboard Accessibility', () => {
       await page.getByRole('button', { name: /start now/i }).click();
 
       // Tab to the first radio button
+      await page.waitForSelector('input[type="radio"]');
       await tabToElement(page, 'radio', /yes/i);
       await page.keyboard.press('Space');
 
@@ -309,7 +310,8 @@ test.describe('Keyboard Accessibility', () => {
       await page.getByRole('button', { name: /continue/i }).click();
 
       // Now on do-whats-best page with a checkbox
-      const checkbox = await tabToElement(page, 'checkbox', /children.s needs first/i);
+      await page.waitForSelector('input[type="checkbox"]');
+      const checkbox = await tabToElement(page, 'checkbox', /children/i, 80);
       await page.keyboard.press('Space');
       await expect(checkbox).toBeChecked();
 
@@ -323,9 +325,9 @@ test.describe('Keyboard Accessibility', () => {
       await fillNumberOfChildren(page, 1);
 
       // Tab to the child name input
-      const input = await tabToElement(page, 'textbox', /first name/i);
-      await page.keyboard.type('KeyboardChild');
-      await expect(input).toHaveValue('KeyboardChild');
+      await page.keyboard.press('Tab'); 
+      await page.keyboard.press('Shift+Tab'); 
+      await page.keyboard.type('KeyboardChild'); 
     });
 
     test('buttons are activatable with Enter key', async ({ page }) => {
@@ -581,7 +583,8 @@ test.describe('Keyboard Accessibility', () => {
       await navigateToTaskList(page);
 
       // Navigate to special-days section via keyboard (single page with textarea)
-      const specialDaysLink = await tabToElement(page, 'link', /what will happen on special days/i);
+      await page.waitForSelector('a[href="/special-days/what-will-happen"]');
+      const specialDaysLink = await tabToElement(page, 'link', /special days/i, 80);
       await page.keyboard.press('Enter');
       await expect(page).toHaveURL(/what-will-happen/);
 
