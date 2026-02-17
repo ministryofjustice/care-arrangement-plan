@@ -85,9 +85,15 @@
 
       <p class="govuk-body">Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.</p>
         
-        {{ govukInsetText({
-          html: 'This service is also available in <a href="?lang=cy" class="govuk-link govuk-link--no-underline">Welsh (Cymraeg)</a>'
-        }) }}
+        {% if getLocale() == 'cy' %}
+          {{ govukInsetText({
+            html: 'Mae\'r gwasanaeth hwn hefyd ar gael yn <a href="?lang=en" class="govuk-link govuk-link--no-underline">Saesneg (English)</a>'
+          }) }}
+        {% else %}
+          {{ govukInsetText({
+            html: 'This service is also available in <a href="?lang=cy" class="govuk-link govuk-link--no-underline">Welsh (Cymraeg)</a>'
+          }) }}
+        {% endif %}
 
       {% if showUrToggle %}
         <details class="govuk-details govuk-!-margin-bottom-4" data-module="govuk-details">
