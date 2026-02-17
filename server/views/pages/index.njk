@@ -84,6 +84,10 @@
       <h2 class="govuk-heading-m">Make your plan</h2>
 
       <p class="govuk-body">Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.</p>
+        
+        {{ govukInsetText({
+          html: 'This service is also available in <a href="?lang=cy" class="govuk-link govuk-link--no-underline">Welsh (Cymraeg)</a>'
+        }) }}
 
       {% if showUrToggle %}
         <details class="govuk-details govuk-!-margin-bottom-4" data-module="govuk-details">
