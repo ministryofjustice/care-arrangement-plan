@@ -42,6 +42,26 @@ describe('App', () => {
             expect(response.text).toContain(homepageLanguageStrings[language]);
           });
       });
+
+      it('should show a link to switch to Welsh when the language is English', () => {
+        return request(testAppSetup())
+          .get(`${paths.START}?lang=en`)
+          .expect((response) => {
+            expect(response.text).toContain('?lang=cy');
+            expect(response.text).toContain('Welsh (Cymraeg)');
+            expect(response.text).not.toContain('?lang=en');
+          });
+      });
+
+      it('should show a link to switch to English when the language is Welsh', () => {
+        return request(testAppSetup())
+          .get(`${paths.START}?lang=cy`)
+          .expect((response) => {
+            expect(response.text).toContain('?lang=en');
+            expect(response.text).toContain('Saesneg (English)');
+            expect(response.text).not.toContain('?lang=cy');
+          });
+      });
     });
 
     describe('when welsh is disabled', () => {

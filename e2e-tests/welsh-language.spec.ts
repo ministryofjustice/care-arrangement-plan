@@ -47,12 +47,22 @@ test.describe('Welsh language support', () => {
     await expect(page.locator('h1')).toContainText('Telerau ac amodau');
   });
 
-  test('should switch back to English with ?lang=en', async ({ page }) => {
+  test('should show a link to switch back to English when in Welsh', async ({ page }) => {
     await page.goto('/?lang=cy');
     await expect(page.locator('html')).toHaveAttribute('lang', 'cy');
 
-    await page.goto('/?lang=en');
+    const englishLink = page.getByRole('link', { name: /Saesneg \(English\)/i });
+    await expect(englishLink).toBeVisible();
+    await englishLink.click();
+
+    await expect(page).toHaveURL(/\?lang=en/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page).toHaveTitle(/Propose a child arrangements plan/);
+  });
+
+  test('should not show the Welsh link when already in Welsh', async ({ page }) => {
+    await page.goto('/?lang=cy');
+
+    const welshLink = page.getByRole('link', { name: /Welsh \(Cymraeg\)/i });
+    await expect(welshLink).not.toBeVisible();
   });
 });
