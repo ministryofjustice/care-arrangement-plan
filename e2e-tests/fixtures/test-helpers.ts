@@ -1,4 +1,70 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Page, Route } from '@playwright/test';
+
+const SERVICE_ERROR_MESSAGE = 'Sorry, there is a problem with the service';
+
+const SERVICE_ERROR_HTML = `<h1>${SERVICE_ERROR_MESSAGE}</h1><p>You can try reloading the page or <a href="/">start again</a>.</p>`;
+
+/**
+ * Intercept POST requests matching a URL pattern and return an error status code.
+ * GET requests are passed through so pages still load normally.
+ */
+export async function interceptPostWithError(page: Page, urlPattern: string, status: number = 500) {
+  await page.route(urlPattern, (route: Route) => {
+    if (route.request().method() === 'POST') {
+      return route.fulfill({
+        status,
+        contentType: 'text/html',
+        body: SERVICE_ERROR_HTML,
+      });
+    }
+    return route.continue();
+  });
+}
+
+/**
+ * Intercept POST requests matching a URL pattern and abort with a network failure.
+ * @param reason - 'timedout', 'connectionrefused', 'connectionreset', etc.
+ */
+export async function interceptPostWithNetworkError(page: Page, urlPattern: string, reason: string = 'timedout') {
+  await page.route(urlPattern, (route: Route) => {
+    if (route.request().method() === 'POST') {
+      return route.abort(reason);
+    }
+    return route.continue();
+  });
+}
+
+/**
+ * Intercept POST requests and fail only the first N attempts, then let subsequent requests through.
+ */
+export async function interceptPostWithTransientError(
+  page: Page,
+  urlPattern: string,
+  { status = 500, failCount = 1 }: { status?: number; failCount?: number } = {},
+) {
+  let requestCount = 0;
+  await page.route(urlPattern, (route: Route) => {
+    if (route.request().method() === 'POST') {
+      requestCount++;
+      if (requestCount <= failCount) {
+        return route.fulfill({
+          status,
+          contentType: 'text/html',
+          body: SERVICE_ERROR_HTML,
+        });
+      }
+      return route.continue();
+    }
+    return route.continue();
+  });
+}
+
+/**
+ * Assert the generic service error page is displayed.
+ */
+export async function expectServiceErrorPage(page: Page) {
+  await expect(page.locator('h1')).toContainText(SERVICE_ERROR_MESSAGE);
+}
 
 export async function startJourney(page: Page) {
   // Start from homepage - with USE_AUTH=false this goes directly to safety-check
