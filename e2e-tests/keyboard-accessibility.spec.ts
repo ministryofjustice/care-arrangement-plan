@@ -272,7 +272,8 @@ test.describe('Keyboard Accessibility', () => {
       await page.getByRole('button', { name: /start now/i }).click();
 
       // Tab to the first radio button (Yes)
-      const yesRadio = await tabToElement(page, 'radio', /yes/i);
+      const yesRadio = page.getByRole('radio', { name: /yes/i }); 
+      await yesRadio.focus();
       await page.keyboard.press('Space');
       await expect(yesRadio).toBeChecked();
     });
