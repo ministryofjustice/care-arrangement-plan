@@ -367,7 +367,7 @@ test.describe('Keyboard Accessibility', () => {
       await page.goto('/');
 
       // Tab to the Start now button
-      const button = await tabToElement(page, 'button', /start now/i);
+      const _button = await tabToElement(page, 'button', /start now/i);
       await page.keyboard.press('Enter');
 
       // Should have navigated to the next page
@@ -544,7 +544,7 @@ test.describe('Keyboard Accessibility', () => {
       await expect(page).toHaveURL(/\/court-order-check/);
 
       // Court order check - select No
-      const courtYes = await tabToElement(page, 'radio', /yes/i);
+      const _courtYes = await tabToElement(page, 'radio', /yes/i);
       await page.keyboard.press('ArrowDown');
       await page.keyboard.press('Space'); 
       await tabToElement(page, 'button', /continue/i);
@@ -595,7 +595,7 @@ test.describe('Keyboard Accessibility', () => {
       await expect(page).toHaveURL(/\/make-a-plan/);
 
       // Tab to the first task list link and activate it
-      const taskLink = await tabToElement(page, 'link', /where will the children mostly live/i);
+      const _taskLink = await tabToElement(page, 'link', /where will the children mostly live/i);
       await expectFocusVisible(page);
       await page.keyboard.press('Enter');
 
@@ -617,7 +617,7 @@ test.describe('Keyboard Accessibility', () => {
 
       // Navigate to special-days section via keyboard (single page with textarea)
       await page.waitForSelector('a[href="/special-days/what-will-happen"]');
-      const specialDaysLink = await tabToElement(page, 'link', /special days/i, 80);
+      const _specialDaysLink = await tabToElement(page, 'link', /special days/i, 80);
       await page.keyboard.press('Enter');
       await expect(page).toHaveURL(/what-will-happen/);
 
