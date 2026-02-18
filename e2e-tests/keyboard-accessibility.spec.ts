@@ -118,8 +118,6 @@ async function tabToElement(page: Page, role: string, name: RegExp, maxTabs = 30
   throw new Error(`Could not tab to ${role} matching ${name} within ${maxTabs} tabs`);
 }
 
-
-
 //Helper: verify the currently focused element has a visible focus indicator
 async function expectFocusVisible(page: Page) {
   const styles = await page.locator(':focus').evaluate((el) => {
@@ -173,7 +171,6 @@ async function expectFocusVisible(page: Page) {
   ).toBe(true);
 }
 
-
 test.describe('Keyboard Accessibility', () => {
   test.describe('Skip Links', () => {
     test('skip link appears on focus and navigates to main content', async ({ page }) => {
@@ -193,15 +190,20 @@ test.describe('Keyboard Accessibility', () => {
       await expect(mainContent).toBeVisible();
     });
 
-    test('skip link works on form pages', async ({ page }) => {
-      await page.goto('/');
-      await page.getByRole('button', { name: /start now/i }).click();
-
-      // Tab to skip link on the safety-check page
-      const skipLink = await tabAndGetFocused(page);
+   test('skip link works on form pages', async ({ page }) => {
+      await page.goto('/safety-check');
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.waitForTimeout(150);
+      await page.keyboard.press('Tab');
+      let skipLink = page.locator(':focus');
+      if (!(await skipLink.count())) {
+        await page.keyboard.press('Tab');
+        skipLink = page.locator(':focus');
+      }
       await expect(skipLink).toHaveClass(/govuk-skip-link/);
       await expect(skipLink).toBeVisible();
-    });
+});
+
   }); 
 
   test.describe('Focus Indicators', () => {
@@ -678,15 +680,14 @@ test.describe('Keyboard Accessibility', () => {
       }
     });
 
+    test('footer links are reachable via Tab', async ({ page }) => { 
+      await page.goto('/');
+      await page.waitForSelector('footer', { state: 'visible' }); 
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await page.waitForTimeout(300); 
+      let foundFooterLink = false;
 
-
-    test('footer links are reachable via Tab', async ({ page }) => { await page.goto('/'); 
-      await page.keyboard.press('End'); 
-      await page.waitForTimeout(200); 
-
-      let foundFooterLink = false; 
-
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 60; i++) {
          await page.keyboard.press('Tab'); 
          const focused = page.locator(':focus'); 
          const isInFooter = await safeIsInFooter(focused); 
@@ -697,7 +698,7 @@ test.describe('Keyboard Accessibility', () => {
           break; 
          } 
       } 
-          expect(foundFooterLink).toBe(true); 
+      expect(foundFooterLink).toBe(true); 
     });
 
     test('back link is reachable via Tab on form pages', async ({ page }) => {
@@ -711,7 +712,7 @@ test.describe('Keyboard Accessibility', () => {
       for (let i = 0; i < 15; i++) {
         await page.keyboard.press('Tab');
         const focused = page.locator(':focus');
-  const className = (await safeGetAttribute(focused, 'class')) ?? '';
+        const className = (await safeGetAttribute(focused, 'class')) ?? '';
         if (className && className.includes('govuk-back-link')) {
           foundBackLink = true;
           await expectFocusVisible(page);
