@@ -1,4 +1,50 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Page, Route } from '@playwright/test';
+
+const SERVICE_ERROR_MESSAGE = 'Sorry, there is a problem with the service';
+
+const SERVICE_ERROR_HTML = `<h1>${SERVICE_ERROR_MESSAGE}</h1><p>You can try reloading the page or <a href="/">start again</a>.</p>`;
+
+export async function interceptPostWithError(page: Page, urlPattern: string, status: number = 500) {
+  await page.route(urlPattern, (route: Route) => {
+    if (route.request().method() === 'POST') {
+      return route.fulfill({
+        status,
+        contentType: 'text/html',
+        body: SERVICE_ERROR_HTML,
+      });
+    }
+    return route.continue();
+  });
+}
+
+/**
+ * Intercept POST requests and fail only the first N attempts, then let subsequent requests through.
+ */
+export async function interceptPostWithTransientError(
+  page: Page,
+  urlPattern: string,
+  { status = 500, failCount = 1 }: { status?: number; failCount?: number } = {},
+) {
+  let requestCount = 0;
+  await page.route(urlPattern, (route: Route) => {
+    if (route.request().method() === 'POST') {
+      requestCount++;
+      if (requestCount <= failCount) {
+        return route.fulfill({
+          status,
+          contentType: 'text/html',
+          body: SERVICE_ERROR_HTML,
+        });
+      }
+      return route.continue();
+    }
+    return route.continue();
+  });
+}
+
+export async function expectServiceErrorPage(page: Page) {
+  await expect(page.locator('h1')).toContainText(SERVICE_ERROR_MESSAGE);
+}
 
 export async function startJourney(page: Page) {
   // Start from homepage - with USE_AUTH=false this goes directly to safety-check
