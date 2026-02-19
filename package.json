@@ -23,7 +23,8 @@
     "e2e:debug": "playwright test --debug",
     "e2e:shard": "playwright test --shard=1/4",
     "e2e:quick": "playwright test --grep-invert=\"Axe Core Scanning\"",
-    "e2e:axe": "playwright test accessibility-axe.spec.ts"
+    "e2e:axe": "playwright test accessibility-axe.spec.ts",
+    "prepare": "husky"
   },
   "engines": {
     "node": "^22",
