@@ -31,7 +31,7 @@ if [ -n "$MISSING" ]; then
   echo "   Run 'npm run e2e' to test across all browsers."
   echo ""
 else
-  echo "✅ Playwright tests run across all browsers. Nice one!"
+  echo "✅ Playwright tests run across all browsers"
 fi
 
 # Never block the commit
