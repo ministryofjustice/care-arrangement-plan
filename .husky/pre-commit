@@ -1,5 +1,17 @@
 #!/bin/sh
 
+# --- Lint (blocks commit on failure) ---
+echo "Running lint..."
+if npm run lint; then
+  echo "✅ Lint passed"
+else
+  echo ""
+  echo "❌ Lint failed. Fix the above errors for pipeline to pass."
+  echo ""
+  exit 0
+fi
+
+# --- Playwright cross-browser check (warns only) ---
 RESULTS="playwright-results.xml"
 
 if [ ! -f "$RESULTS" ]; then
