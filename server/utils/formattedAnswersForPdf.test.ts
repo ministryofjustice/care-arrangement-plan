@@ -372,6 +372,28 @@ describe('formattedAnswers', () => {
       [
         {
           getBetweenHouseholds: {
+            default: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
+          },
+          whereHandover: {
+            default: {
+              noDecisionRequired: false,
+              where: ['neutral', 'other'] as whereHandoverField[],
+              other: 'the park near school',
+            },
+          },
+          willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: false },
+          itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
+        },
+        {
+          getBetweenHouseholds: `${session.initialAdultName} suggested that ${session.initialAdultName} collects the children.`,
+          whereHandover: `${session.initialAdultName} suggested that handover takes place at a neutral location and the park near school`,
+          willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that these arrangements do not change during school holidays.`,
+          itemsForChangeover: `${session.initialAdultName} suggested:\n"itemsForChangeover arrangement"`,
+        },
+      ],
+      [
+        {
+          getBetweenHouseholds: {
             default: { noDecisionRequired: false, how: 'secondaryCollects' as getBetweenHouseholdsField },
           },
           whereHandover: {
