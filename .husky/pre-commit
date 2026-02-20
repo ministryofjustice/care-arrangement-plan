@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# --- Lint (warns only) ---
+echo "Running lint..."
+if npm run lint; then
+  echo "✅ Lint passed"
+else
+  echo ""
+  echo "❌ Lint failed. Fix the above errors for pipeline to pass."
+  echo ""
+fi
+
+# --- Playwright cross-browser check (warns only) ---
+RESULTS="playwright-results.xml"
+
+if [ ! -f "$RESULTS" ]; then
+  echo ""
+  echo "⚠️  No Playwright test results found."
+  echo "   Remember to run 'npm run e2e' before pushing."
+  echo ""
+  exit 0
+fi
+
+MISSING=""
+
+if ! grep -q 'hostname="chromium"' "$RESULTS"; then
+  MISSING="$MISSING chromium"
+fi
+
+if ! grep -q 'hostname="firefox"' "$RESULTS"; then
+  MISSING="$MISSING firefox"
+fi
+
+if ! grep -q 'hostname="webkit"' "$RESULTS"; then
+  MISSING="$MISSING webkit"
+fi
+
+if [ -n "$MISSING" ]; then
+  echo ""
+  echo "⚠️  Playwright tests not run on all browsers."
+  echo "   Missing:$MISSING"
+  echo "   Run 'npm run e2e' to test across all browsers."
+  echo ""
+else
+  echo "✅ Playwright tests run across all browsers"
+fi
+
+exit 0
