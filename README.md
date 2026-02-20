@@ -85,9 +85,6 @@ file, where this is the case, but if you are modifying things you will need to e
 These include PDF snapshot tests. To update the tests, run them with the environment variable `UPDATE_PDF_SNAPSHOTS=true`,
 or run `npm run test:update-pdf-snapshots`
 
-We also have integration tests using [Cypress](https://www.cypress.io/). To run these, start the app server then run
-either `npm run int-test` for headless mode, or `npm run int-test-ui` to use the Cypress UI.
-
 ## Static Checks
 
 To run the TypeScript compiler use `npm run typecheck`.
@@ -97,6 +94,25 @@ We use ESLint for linting. To run the check use `npm run lint`. `npm run lint:fi
 We use Prettier to ensure consistent styling. Run `npm run prettier` to check for issues, and `npm run prettier:fix` to fix them.
 
 It is recommended to use your IDE to run ESLint and Prettier on save, to ensure files are formatted correctly.
+
+## E2E Tests
+
+We use [Playwright](https://playwright.dev/) for end-to-end tests. See the [Playwright quickstart guide](e2e-tests/PLAYWRIGHT_QUICKSTART.md) for a full walkthrough. To run them:
+
+```shell
+npm run e2e
+```
+
+Locally, tests run across all three browsers (Chromium, Firefox, WebKit). In CI, only Chromium is used for stability.
+
+### Pre-commit hooks
+
+[Husky](https://typicode.github.io/husky/) runs two checks before each commit:
+
+- **Lint** — runs `npm run lint` and warns if there are issues
+- **Playwright cross-browser check** — warns if `playwright-results.xml` is missing or does not include results for all three browsers
+
+Neither check blocks the commit. The Playwright results file is automatically deleted after each commit, so you will be reminded to re-run the tests before your next commit.
 
 ## Pipeline
 

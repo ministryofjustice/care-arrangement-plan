@@ -1,0 +1,13 @@
+#!/bin/sh
+
+REPORT="playwright-report"
+RESULTS="playwright-results.xml"
+
+# Clean up report so the loop starts fresh
+if [ -d "$REPORT" ]; then
+  rm -rf "$REPORT"
+fi
+
+if [ -f "$RESULTS" ]; then
+  rm -f "$RESULTS"
+fi
