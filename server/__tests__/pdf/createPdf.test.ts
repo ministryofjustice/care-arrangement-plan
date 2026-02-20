@@ -61,6 +61,7 @@ const validatePdfResponse = (response: request.Response, minSize: number) => {
 
 describe('createPdf', () => {
   beforeEach(() => {
+    jest.useRealTimers();
     // Clear sessionMock before each test
     Object.keys(sessionMock).forEach((key: keyof CAPSession) => delete sessionMock[key]);
   });
