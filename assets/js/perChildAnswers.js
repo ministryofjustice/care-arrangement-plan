@@ -230,20 +230,20 @@ function setupPerChildAnswers() {
           // Update textarea inside conditional if present
           const conditionalTextarea = conditional.querySelector('textarea');
           if (conditionalTextarea) {
-            // For whereHandover, use other field naming
-            const otherFieldName = fieldBaseName.includes('where-handover')
-              ? `${fieldBaseName}-other-${entryIndex}`
+            // For whereHandover, use someone-else field naming
+            const someoneElseFieldName = fieldBaseName.includes('where-handover')
+              ? `${fieldBaseName}-someone-else-${entryIndex}`
               : `${fieldBaseName}-describe-arrangement-${entryIndex}`;
 
             const oldTextareaId = conditionalTextarea.getAttribute('id');
-            if (oldTextareaId === 'OTHER_FIELD_NAME' || oldTextareaId === 'DESCRIBE_FIELD_NAME') {
-              conditionalTextarea.setAttribute('id', otherFieldName);
-              conditionalTextarea.setAttribute('name', otherFieldName);
+            if (oldTextareaId === 'SOMEONE_ELSE_FIELD_NAME' || oldTextareaId === 'DESCRIBE_FIELD_NAME') {
+              conditionalTextarea.setAttribute('id', someoneElseFieldName);
+              conditionalTextarea.setAttribute('name', someoneElseFieldName);
 
               // Update corresponding label
               const textareaLabel = conditional.querySelector(`label[for="${oldTextareaId}"]`);
               if (textareaLabel) {
-                textareaLabel.setAttribute('for', otherFieldName);
+                textareaLabel.setAttribute('for', someoneElseFieldName);
               }
             }
           }

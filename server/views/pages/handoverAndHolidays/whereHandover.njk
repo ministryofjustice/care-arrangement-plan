@@ -173,17 +173,17 @@
                 </label>
               </div>
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="FIELD_NAME-other" name="FIELD_NAME" type="checkbox" value="other" data-aria-controls="conditional-FIELD_NAME-other">
-                <label class="govuk-label govuk-checkboxes__label" for="FIELD_NAME-other">
-                  {{ __('handoverAndHolidays.whereHandover.other') }}
+                <input class="govuk-checkboxes__input" id="FIELD_NAME-someoneElse" name="FIELD_NAME" type="checkbox" value="someoneElse" data-aria-controls="conditional-FIELD_NAME-someoneElse" data-behaviour="exclusive">
+                <label class="govuk-label govuk-checkboxes__label" for="FIELD_NAME-someoneElse">
+                  {{ __('handoverAndHolidays.whereHandover.someoneElse') }}
                 </label>
               </div>
-              <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-FIELD_NAME-other">
+              <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-FIELD_NAME-someoneElse">
                 <div class="govuk-form-group">
-                  <label class="govuk-label" for="OTHER_FIELD_NAME">
-                    {{ __('handoverAndHolidays.whereHandover.otherLabel') }}
+                  <label class="govuk-label" for="SOMEONE_ELSE_FIELD_NAME">
+                    {{ __('handoverAndHolidays.whereHandover.someoneElseName') }}
                   </label>
-                  <textarea class="govuk-textarea" id="OTHER_FIELD_NAME" name="OTHER_FIELD_NAME" rows="5"></textarea>
+                  <textarea class="govuk-textarea" id="SOMEONE_ELSE_FIELD_NAME" name="SOMEONE_ELSE_FIELD_NAME" rows="5"></textarea>
                 </div>
               </div>
             </div>

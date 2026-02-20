@@ -332,6 +332,8 @@
       "atSchool": "At school",
       "other": "Other",
       "otherLabel": "Describe where handover will take place",
+      "someoneElse": "Someone else will manage handover, such as a grandparent",
+      "someoneElseName": "Name of the person who will manage handover",
       "emptyError": "Select where handover takes place",
       "otherMissingError": "Describe where handover will take place"
     },
