@@ -351,8 +351,8 @@ describe('formattedAnswers', () => {
           whereHandover: {
             default: {
               noDecisionRequired: false,
-              where: ['someoneElse'] as whereHandoverField[],
-              someoneElse: 'Grandma',
+              where: ['other'] as whereHandoverField[],
+              other: 'Grandma',
             },
           },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
@@ -364,6 +364,28 @@ describe('formattedAnswers', () => {
           whereHandover: 'Grandma',
           willChangeDuringSchoolHolidays: 'Yes',
           howChangeDuringSchoolHolidays: 'howChangeDuringSchoolHolidays answer',
+          itemsForChangeover: 'itemsForChangeover arrangement',
+        },
+      ],
+      [
+        {
+          getBetweenHouseholds: {
+            default: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
+          },
+          whereHandover: {
+            default: {
+              noDecisionRequired: false,
+              where: ['neutral', 'other'] as whereHandoverField[],
+              other: 'the park near school',
+            },
+          },
+          willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: false },
+          itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
+        },
+        {
+          getBetweenHouseholds: `${session.initialAdultName} collects the children`,
+          whereHandover: `Neutral location, the park near school`,
+          willChangeDuringSchoolHolidays: 'No',
           itemsForChangeover: 'itemsForChangeover arrangement',
         },
       ],

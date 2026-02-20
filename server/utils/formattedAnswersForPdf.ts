@@ -299,13 +299,6 @@ export const whereHandover = (request: Request): string | PerChildFormattedAnswe
       return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
     }
 
-    if (answer.someoneElse) {
-      return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedSomeoneElse', {
-        senderName: initialAdultName,
-        someoneElse: answer.someoneElse,
-      });
-    }
-
     if (!answer.where) return undefined;
 
     const getAnswerForWhereHandoverWhere = (where: whereHandoverField) => {
@@ -318,6 +311,8 @@ export const whereHandover = (request: Request): string | PerChildFormattedAnswe
           return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.home', { adult: secondaryAdultName });
         case 'school':
           return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.school');
+        case 'other':
+          return answer.other;
         default:
           return undefined;
       }

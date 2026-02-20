@@ -125,7 +125,7 @@ describe('addHandoverAndHolidays', () => {
           default: { noDecisionRequired: true },
         },
         whereHandover: {
-          default: { noDecisionRequired: false, where: ['secondaryParent', 'someoneElse'], someoneElse: 'Grandparents house' },
+          default: { noDecisionRequired: false, where: ['secondaryHome', 'other'], other: 'Grandparents house' },
         },
         willChangeDuringSchoolHolidays: {
           default: { noDecisionRequired: true },

@@ -353,8 +353,8 @@ describe('formattedAnswers', () => {
           whereHandover: {
             default: {
               noDecisionRequired: false,
-              where: ['someoneElse'] as whereHandoverField[],
-              someoneElse: 'Grandma',
+              where: ['other'] as whereHandoverField[],
+              other: 'Grandma',
             },
           },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
@@ -363,9 +363,31 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.initialAdultName} suggested:\n"getBetweenHouseholds arrangement"`,
-          whereHandover: `${session.initialAdultName} suggested that someone else will manage handover. ${session.initialAdultName} suggested:\n"Grandma"`,
+          whereHandover: `${session.initialAdultName} suggested that handover takes place at Grandma`,
           willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that these arrangements should change during school holidays.`,
           howChangeDuringSchoolHolidays: `${session.initialAdultName} suggested:\n"howChangeDuringSchoolHolidays answer"`,
+          itemsForChangeover: `${session.initialAdultName} suggested:\n"itemsForChangeover arrangement"`,
+        },
+      ],
+      [
+        {
+          getBetweenHouseholds: {
+            default: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
+          },
+          whereHandover: {
+            default: {
+              noDecisionRequired: false,
+              where: ['neutral', 'other'] as whereHandoverField[],
+              other: 'the park near school',
+            },
+          },
+          willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: false },
+          itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
+        },
+        {
+          getBetweenHouseholds: `${session.initialAdultName} suggested that ${session.initialAdultName} collects the children.`,
+          whereHandover: `${session.initialAdultName} suggested that handover takes place at a neutral location and the park near school`,
+          willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that these arrangements do not change during school holidays.`,
           itemsForChangeover: `${session.initialAdultName} suggested:\n"itemsForChangeover arrangement"`,
         },
       ],

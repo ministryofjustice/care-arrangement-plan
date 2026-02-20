@@ -49,7 +49,7 @@ describe('addHandoverAndHolidays', () => {
             describeArrangement: 'getBetweenHouseholds arrangement',
           },
         },
-        whereHandover: { default: { noDecisionRequired: false, where: ['someoneElse'], someoneElse: 'Grandma' } },
+        whereHandover: { default: { noDecisionRequired: false, where: ['neutral', 'other'], other: 'Grandma' } },
         willChangeDuringSchoolHolidays: { default: { noDecisionRequired: false, willChange: true } },
         howChangeDuringSchoolHolidays: { default: { noDecisionRequired: false, answer: 'howChangeDuringSchoolHolidays answer' } },
         itemsForChangeover: { default: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' } },
