@@ -25,6 +25,7 @@ const numberOfChildrenRoutes = (router: Router) => {
 
   router.post(
     paths.NUMBER_OF_CHILDREN,
+    checkFormProgressFromConfig(FORM_STEPS.NUMBER_OF_CHILDREN),
     body(formFields.NUMBER_OF_CHILDREN)
       .trim()
       .isInt()

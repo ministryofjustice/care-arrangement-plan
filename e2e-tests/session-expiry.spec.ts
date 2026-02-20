@@ -11,9 +11,7 @@ test.describe('Session Expiry', () => {
     await expect(page).toHaveURL('/');
   });
 
-   // Currently this test causes an unhandled error because the server doesn't handle the missing session data gracefully. 
-   // This is something we should fix, but in the meantime we want to make sure it doesn't cause our tests to fail.
-   test.skip('should not cause an unhandled error when submitting a form after session expires', async ({ page }) => {
+  test('should not cause an unhandled error when submitting a form after session expires', async ({ page }) => {
 
    await completeOnboardingFlow(page);
    await expect(page).toHaveURL(/\/number-of-children/);
@@ -25,7 +23,6 @@ test.describe('Session Expiry', () => {
    const responsePromise = page.waitForResponse((r) => r.url().includes('number-of-children'));
    await page.getByRole('button', { name: /continue/i }).click();
    const response = await responsePromise;
-    // Ideally the server should redirect to start (302), not error
     expect(response.status()).not.toBe(500);
    });
 
