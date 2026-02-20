@@ -33,13 +33,13 @@
           {% set anotherHtml0 %}
             {{
               govukTextarea({
-                id: formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0",
-                name: formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0",
+                id: formFields.WHERE_HANDOVER_OTHER + "-0",
+                name: formFields.WHERE_HANDOVER_OTHER + "-0",
                 label: {
-                  text: __('handoverAndHolidays.whereHandover.someoneElseName')
+                  text: __('handoverAndHolidays.whereHandover.otherLabel')
                 },
-                value: formValues[formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0"],
-                errorMessage: errors | findError(formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0")
+                value: formValues[formFields.WHERE_HANDOVER_OTHER + "-0"],
+                errorMessage: errors | findError(formFields.WHERE_HANDOVER_OTHER + "-0")
               })
             }}
           {% endset -%}
@@ -75,9 +75,8 @@
                   text: __('handoverAndHolidays.whereHandover.atSchool')
                 },
                 {
-                  value: "someoneElse",
-                  text: __('handoverAndHolidays.whereHandover.someoneElse'),
-                  behaviour: "exclusive",
+                  value: "other",
+                  text: __('handoverAndHolidays.whereHandover.other'),
                   conditional: {
                     html: anotherHtml0
                   }
@@ -174,17 +173,17 @@
                 </label>
               </div>
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="FIELD_NAME-someoneElse" name="FIELD_NAME" type="checkbox" value="someoneElse" data-aria-controls="conditional-FIELD_NAME-someoneElse" data-behaviour="exclusive">
-                <label class="govuk-label govuk-checkboxes__label" for="FIELD_NAME-someoneElse">
-                  {{ __('handoverAndHolidays.whereHandover.someoneElse') }}
+                <input class="govuk-checkboxes__input" id="FIELD_NAME-other" name="FIELD_NAME" type="checkbox" value="other" data-aria-controls="conditional-FIELD_NAME-other">
+                <label class="govuk-label govuk-checkboxes__label" for="FIELD_NAME-other">
+                  {{ __('handoverAndHolidays.whereHandover.other') }}
                 </label>
               </div>
-              <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-FIELD_NAME-someoneElse">
+              <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-FIELD_NAME-other">
                 <div class="govuk-form-group">
-                  <label class="govuk-label" for="SOMEONE_ELSE_FIELD_NAME">
-                    {{ __('handoverAndHolidays.whereHandover.someoneElseName') }}
+                  <label class="govuk-label" for="OTHER_FIELD_NAME">
+                    {{ __('handoverAndHolidays.whereHandover.otherLabel') }}
                   </label>
-                  <textarea class="govuk-textarea" id="SOMEONE_ELSE_FIELD_NAME" name="SOMEONE_ELSE_FIELD_NAME" rows="5"></textarea>
+                  <textarea class="govuk-textarea" id="OTHER_FIELD_NAME" name="OTHER_FIELD_NAME" rows="5"></textarea>
                 </div>
               </div>
             </div>

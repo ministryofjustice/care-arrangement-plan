@@ -351,8 +351,8 @@ describe('formattedAnswers', () => {
           whereHandover: {
             default: {
               noDecisionRequired: false,
-              where: ['someoneElse'] as whereHandoverField[],
-              someoneElse: 'Grandma',
+              where: ['other'] as whereHandoverField[],
+              other: 'Grandma',
             },
           },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
