@@ -78,6 +78,7 @@ class Pdf {
       0.5 * (HEADER_HEIGHT - logoHeight),
       logoWidth,
       logoHeight,
+      'crest',
     );
     this.document
       .setFont(FONT, FontStyles.BOLD)

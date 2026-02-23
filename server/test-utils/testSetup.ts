@@ -32,6 +32,5 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  jest.useRealTimers();
   jest.clearAllMocks();
 });

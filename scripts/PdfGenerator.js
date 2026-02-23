@@ -39,7 +39,8 @@ class PdfGenerator {
       PdfStyles.MARGIN_WIDTH,
       0.5 * (PdfStyles.HEADER_HEIGHT - logoHeight),
       logoWidth,
-      logoHeight
+      logoHeight,
+      'crest'
     );
 
     // Add title text
