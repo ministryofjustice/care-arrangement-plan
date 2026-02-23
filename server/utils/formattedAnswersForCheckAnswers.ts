@@ -227,8 +227,8 @@ export const whereHandover = (request: Request): string | PerChildFormattedAnswe
           return request.__('handoverAndHolidays.whereHandover.atHome', { adult: secondaryAdultName });
         case 'school':
           return request.__('handoverAndHolidays.whereHandover.atSchool');
-        case 'someoneElse':
-          return answer.someoneElse;
+        case 'other':
+          return answer.other;
         default:
           return undefined;
       }

@@ -37,7 +37,7 @@ export type GetBetweenHouseholdsAnswer = {
 export type WhereHandoverAnswer = {
   noDecisionRequired: boolean;
   where?: whereHandoverField[];
-  someoneElse?: string;
+  other?: string;
   notApplicable?: boolean; // This question does not apply to this child
 };
 

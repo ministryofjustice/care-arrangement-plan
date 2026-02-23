@@ -69,8 +69,8 @@ class Pdf {
 
   private addHeaderToPage() {
     this.document.setFillColor(29, 112, 184).rect(0, 0, this.document.internal.pageSize.getWidth(), HEADER_HEIGHT, 'F');
-    const logoHeight = 8;
-    const logoWidth = logoHeight * 5;
+    const logoHeight = 7;
+    const logoWidth = logoHeight * 5.4;
     this.document.addImage(
       this.logoData,
       'PNG',
@@ -78,6 +78,7 @@ class Pdf {
       0.5 * (HEADER_HEIGHT - logoHeight),
       logoWidth,
       logoHeight,
+      'crest',
     );
     this.document
       .setFont(FONT, FontStyles.BOLD)
