@@ -33,13 +33,13 @@
           {% set anotherHtml0 %}
             {{
               govukTextarea({
-                id: formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0",
-                name: formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0",
+                id: formFields.WHERE_HANDOVER_OTHER + "-0",
+                name: formFields.WHERE_HANDOVER_OTHER + "-0",
                 label: {
-                  text: __('handoverAndHolidays.whereHandover.someoneElseName')
+                  text: __('handoverAndHolidays.whereHandover.otherLabel')
                 },
-                value: formValues[formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0"],
-                errorMessage: errors | findError(formFields.WHERE_HANDOVER_SOMEONE_ELSE + "-0")
+                value: formValues[formFields.WHERE_HANDOVER_OTHER + "-0"],
+                errorMessage: errors | findError(formFields.WHERE_HANDOVER_OTHER + "-0")
               })
             }}
           {% endset -%}
@@ -75,9 +75,8 @@
                   text: __('handoverAndHolidays.whereHandover.atSchool')
                 },
                 {
-                  value: "someoneElse",
-                  text: __('handoverAndHolidays.whereHandover.someoneElse'),
-                  behaviour: "exclusive",
+                  value: "other",
+                  text: __('handoverAndHolidays.whereHandover.other'),
                   conditional: {
                     html: anotherHtml0
                   }
