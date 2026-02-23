@@ -20,6 +20,7 @@ const courtOrderCheckRoutes = (router: Router) => {
 
   router.post(
     paths.COURT_ORDER_CHECK,
+    checkFormProgressFromConfig(FORM_STEPS.COURT_ORDER_CHECK),
     body(formFields.COURT_ORDER_CHECK)
       .exists()
       .withMessage((_value, { req }) => req.__('courtOrderCheck.error')),

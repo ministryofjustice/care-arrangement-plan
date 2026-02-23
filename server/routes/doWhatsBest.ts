@@ -19,6 +19,7 @@ const doWhatsBestRoutes = (router: Router) => {
 
   router.post(
     paths.DO_WHATS_BEST,
+    checkFormProgressFromConfig(FORM_STEPS.DO_WHATS_BEST),
     body(formFields.DO_WHATS_BEST)
       .exists()
       .withMessage((_value, { req }) => req.__('doWhatsBest.error')),

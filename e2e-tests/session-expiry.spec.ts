@@ -23,7 +23,9 @@ test.describe('Session Expiry', () => {
    const responsePromise = page.waitForResponse((r) => r.url().includes('number-of-children'));
    await page.getByRole('button', { name: /continue/i }).click();
    const response = await responsePromise;
-    expect(response.status()).not.toBe(500);
+    expect(response.status()).toBe(302);
+    await expect(page).toHaveURL('/');
+  
    });
 
   test('should allow user to start a new journey after session expires', async ({ page }) => {

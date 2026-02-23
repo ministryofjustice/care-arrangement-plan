@@ -35,7 +35,7 @@ const aboutTheChildrenRoutes = (router: Router) => {
     });
   });
 
-  router.post(paths.ABOUT_THE_CHILDREN, (request, response) => {
+  router.post(paths.ABOUT_THE_CHILDREN, checkFormProgressFromConfig(FORM_STEPS.ABOUT_THE_CHILDREN), (request, response) => {
     const { numberOfChildren } = request.session;
 
     const errors: ValidationError[] = [];

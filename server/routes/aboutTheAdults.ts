@@ -26,6 +26,7 @@ const aboutTheAdultsRoutes = (router: Router) => {
 
   router.post(
     paths.ABOUT_THE_ADULTS,
+    checkFormProgressFromConfig(FORM_STEPS.ABOUT_THE_ADULTS),
     body(formFields.INITIAL_ADULT_NAME)
       .trim()
       .notEmpty()

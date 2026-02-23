@@ -24,6 +24,7 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
 
   router.post(
     paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER,
+    checkFormProgressFromConfig(FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER),
     body(formFields.WHAT_OTHER_THINGS_MATTER)
       .trim()
       .notEmpty()
@@ -55,7 +56,7 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED, (request, response) => {
+  router.post(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER), (request, response) => {
     const otherThings = getSessionValue<any>(request.session, 'otherThings') || {};
     setSessionSection(request.session, 'otherThings', {
       ...otherThings,

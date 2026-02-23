@@ -82,6 +82,7 @@ const whichScheduleRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_WHICH_SCHEDULE,
+    checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE),
     (request, response, next) => {
       const { numberOfChildren } = request.session;
 
@@ -167,7 +168,7 @@ const whichScheduleRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED, (request, response) => {
+  router.post(paths.LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_SCHEDULE), (request, response) => {
     const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting') || {};
     setSessionSection(request.session, 'livingAndVisiting', {
       ...livingAndVisiting,

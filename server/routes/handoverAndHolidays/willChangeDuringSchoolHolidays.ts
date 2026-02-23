@@ -30,6 +30,7 @@ const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
 
   router.post(
     paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
+    checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS),
     body(formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS)
       .exists()
       .withMessage((_value, { req }) => req.__('handoverAndHolidays.willChangeDuringSchoolHolidays.error')),
@@ -71,7 +72,7 @@ const willChangeDuringSchoolHolidaysRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED, (request, response) => {
+  router.post(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS), (request, response) => {
     const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays') || {};
     delete handoverAndHolidays.howChangeDuringSchoolHolidays;
     setSessionSection(request.session, 'handoverAndHolidays', {

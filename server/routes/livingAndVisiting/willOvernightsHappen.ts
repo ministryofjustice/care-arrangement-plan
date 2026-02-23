@@ -32,6 +32,7 @@ const willOvernightsHappenRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN,
+    checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN),
     body(formFields.WILL_OVERNIGHTS_HAPPEN)
       .exists()
       .withMessage((_value, { req }) => req.__('livingAndVisiting.willOvernightsHappen.error')),

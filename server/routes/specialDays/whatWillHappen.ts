@@ -74,6 +74,7 @@ const whatWillHappenRoutes = (router: Router) => {
 
   router.post(
     paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN,
+    checkFormProgressFromConfig(FORM_STEPS.SPECIAL_DAYS_WHAT_WILL_HAPPEN),
     (request, response, next) => {
       const { numberOfChildren } = request.session;
 
@@ -161,7 +162,7 @@ const whatWillHappenRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED, (request, response) => {
+  router.post(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.SPECIAL_DAYS_WHAT_WILL_HAPPEN), (request, response) => {
     request.session.specialDays = {
       ...request.session.specialDays,
       whatWillHappen: {

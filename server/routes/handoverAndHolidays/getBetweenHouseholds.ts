@@ -85,6 +85,7 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
 
   router.post(
     paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS,
+    checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS),
     (request, response, next) => {
       const { numberOfChildren } = request.session;
 
@@ -195,7 +196,7 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS_NOT_REQUIRED, (request, response) => {
+  router.post(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS), (request, response) => {
     request.session.handoverAndHolidays = {
       ...request.session.handoverAndHolidays,
       getBetweenHouseholds: {
