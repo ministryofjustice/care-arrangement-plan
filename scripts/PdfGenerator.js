@@ -31,21 +31,21 @@ class PdfGenerator {
     this.doc.rect(0, 0, this.pageWidth, PdfStyles.HEADER_HEIGHT, 'F');
 
     // Add logo
-    const logoHeight = 8;
-    const logoWidth = logoHeight * 5;
+    const logoHeight = 7;
+    const logoWidth = logoHeight * 5.4;
     this.doc.addImage(
       this.logoData,
       'PNG',
       PdfStyles.MARGIN_WIDTH,
       0.5 * (PdfStyles.HEADER_HEIGHT - logoHeight),
       logoWidth,
-      logoHeight
+      logoHeight,
+      'crest'
     );
 
     // Add title text
     const titleSize = PdfStyles.SECTION_HEADING_SIZE;
-    const titleX = logoWidth + PdfStyles.MARGIN_WIDTH +
-                   0.5 * (this.pageWidth - logoWidth - PdfStyles.MARGIN_WIDTH);
+    const titleX = this.pageWidth / 2;
     const titleY = PdfStyles.HEADER_HEIGHT * 0.5 +
                    0.25 * PdfStyles.LINE_HEIGHT_RATIO * titleSize * PdfStyles.MM_PER_POINT;
 
