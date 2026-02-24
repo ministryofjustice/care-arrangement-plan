@@ -32,6 +32,7 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN,
+    checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN),
     body(formFields.WILL_DAYTIME_VISITS_HAPPEN)
       .exists()
       .withMessage((_value, { req }) => req.__('livingAndVisiting.willDaytimeVisitsHappen.error')),

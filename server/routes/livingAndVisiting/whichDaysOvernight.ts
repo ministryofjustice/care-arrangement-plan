@@ -37,6 +37,7 @@ const whichDaysOvernightRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT,
+    checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_DAYS_OVERNIGHT),
     body(formFields.WHICH_DAYS_OVERNIGHT_DESCRIBE_ARRANGEMENT)
       .if(body(formFields.WHICH_DAYS_OVERNIGHT).equals('other'))
       .trim()
@@ -87,7 +88,7 @@ const whichDaysOvernightRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT_NOT_REQUIRED, (request, response) => {
+  router.post(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_DAYS_OVERNIGHT), (request, response) => {
     const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting') || {};
     setSessionSection(request.session, 'livingAndVisiting', {
       ...livingAndVisiting,

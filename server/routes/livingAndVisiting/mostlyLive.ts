@@ -92,6 +92,7 @@ const mostlyLiveRoutes = (router: Router) => {
 
   router.post(
     paths.LIVING_VISITING_MOSTLY_LIVE,
+    checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_MOSTLY_LIVE),
     (request, response, next) => {
       const { numberOfChildren } = request.session;
 

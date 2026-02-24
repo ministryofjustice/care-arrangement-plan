@@ -28,6 +28,7 @@ const safetyCheckRoutes = (router: Router) => {
 
   router.post(
     paths.CHILDREN_SAFETY_CHECK,
+    checkFormProgressFromConfig(FORM_STEPS.CHILDREN_SAFETY_CHECK),
     body(formFields.CHILDREN_SAFETY_CHECK)
       .exists()
       .withMessage((_value, { req }) => req.__('childrenSafetyCheck.error')),

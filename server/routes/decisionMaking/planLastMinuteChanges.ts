@@ -31,6 +31,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
 
   router.post(
     paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES,
+    checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES),
     body(formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT)
       .if(body(formFields.PLAN_LAST_MINUTE_CHANGES).equals('anotherArrangement'))
       .trim()
@@ -80,7 +81,7 @@ const planLastMinuteChangesRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES_NOT_REQUIRED, (request, response) => {
+  router.post(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES), (request, response) => {
     const decisionMaking = getSessionValue<any>(request.session, 'decisionMaking') || {};
     setSessionSection(request.session, 'decisionMaking', {
       ...decisionMaking,

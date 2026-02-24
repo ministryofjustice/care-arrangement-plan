@@ -47,6 +47,7 @@ const planReviewRoutes = (router: Router) => {
 
   router.post(
     paths.DECISION_MAKING_PLAN_REVIEW,
+    checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_REVIEW),
     getMonthYearValidation(formFields.PLAN_REVIEW_MONTHS, formFields.PLAN_REVIEW_YEARS),
     getMonthYearValidation(formFields.PLAN_REVIEW_YEARS, formFields.PLAN_REVIEW_MONTHS),
 

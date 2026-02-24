@@ -24,6 +24,7 @@ const itemsForChangeoverRoutes = (router: Router) => {
 
   router.post(
     paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER,
+    checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER),
     body(formFields.ITEMS_FOR_CHANGEOVER)
       .trim()
       .notEmpty()
@@ -55,7 +56,7 @@ const itemsForChangeoverRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED, (request, response) => {
+  router.post(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER), (request, response) => {
     const handoverAndHolidays = getSessionValue<any>(request.session, 'handoverAndHolidays') || {};
     setSessionSection(request.session, 'handoverAndHolidays', {
       ...handoverAndHolidays,

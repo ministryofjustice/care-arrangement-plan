@@ -31,6 +31,7 @@ const planLongTermNoticeRoutes = (router: Router) => {
 
   router.post(
     paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE,
+    checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_LONG_TERM_NOTICE),
     body(formFields.PLAN_LONG_TERM_NOTICE)
       .notEmpty()
       .withMessage((_value, { req }) => req.__('decisionMaking.planLongTermNotice.selectOneOptionError')),
@@ -73,7 +74,7 @@ const planLongTermNoticeRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE_CHANGES_NOT_REQUIRED, (request, response) => {
+  router.post(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE_CHANGES_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_LONG_TERM_NOTICE), (request, response) => {
     const decisionMaking = getSessionValue<any>(request.session, 'decisionMaking') || {};
     setSessionSection(request.session, 'decisionMaking', {
       ...decisionMaking,

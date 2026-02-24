@@ -93,6 +93,7 @@ const whereHandoverRoutes = (router: Router) => {
 
   router.post(
     paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER,
+    checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER),
     (request, _response, next) => {
       const { numberOfChildren } = request.session;
 
@@ -205,7 +206,7 @@ const whereHandoverRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED, (request, response) => {
+  router.post(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER), (request, response) => {
     request.session.handoverAndHolidays = {
       ...request.session.handoverAndHolidays,
       whereHandover: {

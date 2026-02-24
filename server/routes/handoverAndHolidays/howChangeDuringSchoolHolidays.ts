@@ -77,6 +77,7 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
 
   router.post(
     paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS,
+    checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS),
     (request, response, next) => {
       const { numberOfChildren } = request.session;
 
@@ -164,7 +165,7 @@ const howChangeDuringSchoolHolidaysRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED, (request, response) => {
+  router.post(paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS), (request, response) => {
     request.session.handoverAndHolidays = {
       ...request.session.handoverAndHolidays,
       howChangeDuringSchoolHolidays: {
