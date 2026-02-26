@@ -107,15 +107,17 @@ class Pdf {
     const pageWidth = this.document.internal.pageSize.getWidth();
     const pageHeight = this.document.internal.pageSize.getHeight();
     const footerY = pageHeight - MARGIN_WIDTH;
+    const lineH = MAIN_TEXT_SIZE * LINE_HEIGHT_RATIO * MM_PER_POINT;
 
-    // Draw left-aligned version and timestamp
+    // Draw left-aligned version on first line, timestamp on second line
     const now = new Date();
     const datePart = now.toLocaleDateString('en-GB');
     const timePart = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
     this.document
       .setFont(FONT, FontStyles.NORMAL)
       .setFontSize(MAIN_TEXT_SIZE)
-      .text(`v${packageVersion} · ${datePart} ${timePart}`, MARGIN_WIDTH, footerY, { align: 'left' });
+      .text(`v${packageVersion}`, MARGIN_WIDTH, footerY - lineH, { align: 'left' })
+      .text(`${datePart} ${timePart}`, MARGIN_WIDTH, footerY, { align: 'left' });
 
     // Draw centered, bold extra text if present
     if (extraFooterText) {
