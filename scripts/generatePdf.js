@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const PdfGenerator = require('./PdfGenerator');
+const { version } = require('../package.json');
 
 /**
  * Standalone script to generate a blank, GDS-styled PDF.
@@ -17,7 +18,7 @@ const generatePdf = () => {
     const { jsPDF } = require('jspdf');
 
     // Create PDF generator
-    const pdf = new PdfGenerator(jsPDF);
+    const pdf = new PdfGenerator(jsPDF, version);
 
     // ===== PAGE 1: Introduction =====
     pdf.addHeader('Proposed child arrangements plan');

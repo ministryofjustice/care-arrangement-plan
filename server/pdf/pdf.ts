@@ -3,6 +3,8 @@ import fs from 'fs';
 import { Request } from 'express';
 import { jsPDF } from 'jspdf';
 
+import { version as packageVersion } from '../../package.json';
+
 import {Paragraph, Text} from '../@types/pdf';
 import {
   FONT,
@@ -106,6 +108,15 @@ class Pdf {
     const pageWidth = this.document.internal.pageSize.getWidth();
     const pageHeight = this.document.internal.pageSize.getHeight();
     const footerY = pageHeight - MARGIN_WIDTH;
+
+    // Draw left-aligned version and timestamp
+    const now = new Date();
+    const datePart = now.toLocaleDateString('en-GB');
+    const timePart = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    this.document
+      .setFont(FONT, FontStyles.NORMAL)
+      .setFontSize(MAIN_TEXT_SIZE)
+      .text(`v${packageVersion} · ${datePart} ${timePart}`, MARGIN_WIDTH, footerY, { align: 'left' });
 
     // Draw centered, bold extra text if present
     if (extraFooterText) {

@@ -95,6 +95,15 @@ test.describe('HTML Download Functionality', () => {
     expect(htmlContent).toContain('data:image/png;base64');
   });
 
+  test('should include version number in downloaded HTML', async ({ page }) => {
+    await completeMinimalJourney(page);
+
+    const response = await page.request.get('/download-html');
+    const htmlContent = await response.text();
+
+    expect(htmlContent).toMatch(/v\d+\.\d+\.\d+/);
+  });
+
   // TODO: HTML download does not yet redirect to the confirmation page.
   // Once that bug is fixed, add a test to verify the HTML download link
   // is also available on the confirmation page (similar to PDF behaviour).

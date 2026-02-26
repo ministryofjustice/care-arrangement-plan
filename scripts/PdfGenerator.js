@@ -7,8 +7,9 @@ const PdfStyles = require('./pdfStyles');
  * Handles the creation of GDS-styled PDF documents
  */
 class PdfGenerator {
-  constructor(JsPDF) {
+  constructor(JsPDF, version = '') {
     this.JsPDF = JsPDF;
+    this.version = version;
     this.doc = new JsPDF({ lineHeight: PdfStyles.LINE_HEIGHT_RATIO });
     this.pageWidth = this.doc.internal.pageSize.getWidth();
     this.pageHeight = this.doc.internal.pageSize.getHeight();
@@ -63,6 +64,13 @@ class PdfGenerator {
    */
   addFooter(pageNumber = this.currentPage) {
     const footerY = this.pageHeight - PdfStyles.MARGIN_WIDTH;
+
+    // Left side: Version number
+    if (this.version) {
+      this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
+      this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
+      this.doc.text(`v${this.version}`, PdfStyles.MARGIN_WIDTH, footerY, { align: 'left' });
+    }
 
     // Center: Bold message
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
