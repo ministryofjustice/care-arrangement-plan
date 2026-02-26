@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
@@ -9,12 +8,11 @@ import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
 import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils';
-import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { parentNotMostlyLivedWith, getBackUrl } from '../../utils/sessionHelpers';
 
 const willOvernightsHappenRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN), (request, response) => {
-    const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting');
+    const { livingAndVisiting } = request.session;
 
     response.render('pages/livingAndVisiting/willOvernightsHappen', {
       errors: request.flash('errors'),
@@ -24,7 +22,7 @@ const willOvernightsHappenRoutes = (router: Router) => {
       backLinkHref: getBackUrl(request.session, paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN),
       formValues: {
         [formFields.WILL_OVERNIGHTS_HAPPEN]: convertBooleanValueToRadioButtonValue(
-          livingAndVisiting?.overnightVisits?.willHappen,
+          livingAndVisiting.overnightVisits?.willHappen,
         ),
       },
     });
@@ -50,14 +48,13 @@ const willOvernightsHappenRoutes = (router: Router) => {
 
       const willOvernightsHappen = formData[formFields.WILL_OVERNIGHTS_HAPPEN] === 'Yes';
 
-      const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting') || {};
-      if (livingAndVisiting?.overnightVisits?.willHappen !== willOvernightsHappen) {
-        setSessionSection(request.session, 'livingAndVisiting', {
-          ...livingAndVisiting,
+      if (request.session.livingAndVisiting?.overnightVisits?.willHappen !== willOvernightsHappen) {
+        request.session.livingAndVisiting = {
+          ...request.session.livingAndVisiting,
           overnightVisits: {
             willHappen: willOvernightsHappen,
           },
-        });
+        };
       }
 
       addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN);

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
@@ -7,13 +6,11 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const planReviewRoutes = (router: Router) => {
   router.get(paths.DECISION_MAKING_PLAN_REVIEW, checkFormProgressFromConfig(FORM_STEPS.DECISION_MAKING_PLAN_REVIEW), (request, response) => {
-    const decisionMaking = getSessionValue<any>(request.session, 'decisionMaking');
-    const planReview = decisionMaking?.planReview;
+    const planReview = request.session.decisionMaking?.planReview;
 
     const formValues = {
       [formFields.PLAN_REVIEW_MONTHS]: planReview?.months,
@@ -67,14 +64,13 @@ const planReviewRoutes = (router: Router) => {
 
       const { [formFields.PLAN_REVIEW_MONTHS]: months, [formFields.PLAN_REVIEW_YEARS]: years } = formData;
 
-      const decisionMaking = getSessionValue<any>(request.session, 'decisionMaking') || {};
-      setSessionSection(request.session, 'decisionMaking', {
-        ...decisionMaking,
+      request.session.decisionMaking = {
+        ...request.session.decisionMaking,
         planReview: {
           months: months ? parseInt(months) : undefined,
           years: years ? parseInt(years) : undefined,
         },
-      });
+      };
 
       addCompletedStep(request, FORM_STEPS.DECISION_MAKING_PLAN_REVIEW);
       return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));

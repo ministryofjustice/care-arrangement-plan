@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
@@ -9,15 +8,13 @@ import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
 import { convertWhichDaysFieldToSessionValue, convertWhichDaysSessionValueToField } from '../../utils/formValueUtils';
-import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const whichDaysDaytimeVisitsRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS), (request, response) => {
-    const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting');
-    const daytimeVisits = livingAndVisiting?.daytimeVisits;
+    const { daytimeVisits } = request.session.livingAndVisiting;
 
-    const [previousDays, previousDescribeArrangement] = convertWhichDaysSessionValueToField(daytimeVisits?.whichDays);
+    const [previousDays, previousDescribeArrangement] = convertWhichDaysSessionValueToField(daytimeVisits.whichDays);
 
     const formValues = {
       [formFields.WHICH_DAYS_DAYTIME_VISITS]: previousDays,
@@ -70,14 +67,13 @@ const whichDaysDaytimeVisitsRoutes = (router: Router) => {
         [formFields.WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT]: describeArrangement,
       } = formData;
 
-      const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting') || {};
-      setSessionSection(request.session, 'livingAndVisiting', {
-        ...livingAndVisiting,
+      request.session.livingAndVisiting = {
+        ...request.session.livingAndVisiting,
         daytimeVisits: {
-          ...livingAndVisiting.daytimeVisits,
+          ...request.session.livingAndVisiting.daytimeVisits,
           whichDays: convertWhichDaysFieldToSessionValue(whichDays, describeArrangement),
         },
-      });
+      };
 
       addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS);
 
@@ -85,17 +81,16 @@ const whichDaysDaytimeVisitsRoutes = (router: Router) => {
     },
   );
 
-  router.post(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS), (request, response) => {
-    const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting') || {};
-    setSessionSection(request.session, 'livingAndVisiting', {
-      ...livingAndVisiting,
+  router.post(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_NOT_REQUIRED, (request, response) => {
+    request.session.livingAndVisiting = {
+      ...request.session.livingAndVisiting,
       daytimeVisits: {
         willHappen: true,
         whichDays: {
           noDecisionRequired: true,
         },
       },
-    });
+    };
 
     addCompletedStep(request, FORM_STEPS.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS);
 

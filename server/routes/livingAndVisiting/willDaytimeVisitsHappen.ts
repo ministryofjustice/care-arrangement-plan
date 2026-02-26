@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
@@ -9,12 +8,11 @@ import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
 import { convertBooleanValueToRadioButtonValue } from '../../utils/formValueUtils';
-import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { parentNotMostlyLivedWith, getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const willDaytimeVisitsHappenRoutes = (router: Router) => {
   router.get(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, checkFormProgressFromConfig(FORM_STEPS.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN), (request, response) => {
-    const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting');
+    const { livingAndVisiting } = request.session;
 
     response.render('pages/livingAndVisiting/willDaytimeVisitsHappen', {
       errors: request.flash('errors'),
@@ -24,7 +22,7 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
       backLinkHref: getBackUrl(request.session, paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN),
       formValues: {
         [formFields.WILL_DAYTIME_VISITS_HAPPEN]: convertBooleanValueToRadioButtonValue(
-          livingAndVisiting?.daytimeVisits?.willHappen,
+          livingAndVisiting.daytimeVisits?.willHappen,
         ),
       },
     });
@@ -50,14 +48,13 @@ const willDaytimeVisitsHappenRoutes = (router: Router) => {
 
       const willDaytimeVisitsHappen = formData[formFields.WILL_DAYTIME_VISITS_HAPPEN] === 'Yes';
 
-      const livingAndVisiting = getSessionValue<any>(request.session, 'livingAndVisiting') || {};
-      if (livingAndVisiting?.daytimeVisits?.willHappen !== willDaytimeVisitsHappen) {
-        setSessionSection(request.session, 'livingAndVisiting', {
-          ...livingAndVisiting,
+      if (request.session.livingAndVisiting?.daytimeVisits?.willHappen !== willDaytimeVisitsHappen) {
+        request.session.livingAndVisiting = {
+          ...request.session.livingAndVisiting,
           daytimeVisits: {
             willHappen: willDaytimeVisitsHappen,
           },
-        });
+        };
       }
 
       if (willDaytimeVisitsHappen) {
