@@ -7,8 +7,8 @@ import request from 'supertest';
 import { version as packageVersion } from '../../package.json';
 import paths from '../constants/paths';
 import createPdf from '../pdf/createPdf';
-import { mockNow } from '../test-utils/testMocks';
 import testAppSetup from '../test-utils/testAppSetup';
+import { mockNow } from '../test-utils/testMocks';
 
 const app = testAppSetup();
 

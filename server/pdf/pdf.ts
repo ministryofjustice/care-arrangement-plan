@@ -4,7 +4,6 @@ import { Request } from 'express';
 import { jsPDF } from 'jspdf';
 
 import { version as packageVersion } from '../../package.json';
-
 import {Paragraph, Text} from '../@types/pdf';
 import {
   FONT,
