@@ -3,13 +3,13 @@ import fs from 'fs';
 import { Request } from 'express';
 import { jsPDF } from 'jspdf';
 
+import { version as packageVersion } from '../../package.json';
 import {Paragraph, Text} from '../@types/pdf';
 import {
   FONT,
   FOOTER_HEIGHT,
   HEADER_HEIGHT,
   LINE_HEIGHT_RATIO,
-  MAIN_TEXT_SIZE,
   MARGIN_WIDTH,
   MM_PER_POINT,
   SECTION_HEADING_SIZE,
@@ -107,15 +107,24 @@ class Pdf {
     const pageHeight = this.document.internal.pageSize.getHeight();
     const footerY = pageHeight - MARGIN_WIDTH;
 
+    // Draw left-aligned version and timestamp
+    const now = new Date();
+    const datePart = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' });
+    const timePart = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    this.document
+      .setFont(FONT, FontStyles.NORMAL)
+      .setFontSize(10)
+      .text(`v${packageVersion} · ${datePart} ${timePart}`, MARGIN_WIDTH, footerY, { align: 'left' });
+
     // Draw centered, bold extra text if present
     if (extraFooterText) {
-      this.document.setFont(FONT, FontStyles.BOLD).setFontSize(MAIN_TEXT_SIZE).text(extraFooterText, pageWidth / 2, footerY, { align: 'center' });
+      this.document.setFont(FONT, FontStyles.BOLD).setFontSize(10).text(extraFooterText, pageWidth / 2, footerY, { align: 'center' });
     }
 
     // Draw right-aligned page count on the same baseline (normal weight)
     this.document
       .setFont(FONT, FontStyles.NORMAL)
-      .setFontSize(MAIN_TEXT_SIZE)
+      .setFontSize(10)
       .text(pageCountText, pageWidth - MARGIN_WIDTH, footerY, { align: 'right' });
   }
 

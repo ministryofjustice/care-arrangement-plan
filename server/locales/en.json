@@ -605,7 +605,7 @@
   },
   "pdf": {
     "name": "Proposed child arrangements plan",
-    "everyPageReminder": "Make sure you have received every page of this document",
+    "everyPageReminder": "Check you have every page of this document",
     "pageCount": "Page {{ currentPage }} of {{ totalPages }}"
   }
 }

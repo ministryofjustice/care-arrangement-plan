@@ -2,6 +2,7 @@ import fs from 'fs';
 
 import { Router } from 'express';
 
+import { version as packageVersion } from '../../package.json';
 import paths from '../constants/paths';
 import createHtmlContent from '../html/createHtmlContent';
 import createPdf from '../pdf/createPdf';
@@ -60,6 +61,8 @@ const downloadRoutes = (router: Router) => {
       },
       htmlContent,
       logoImageData,
+      appVersion: `v${packageVersion}`,
+      generatedAt: new Date().toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
     });
 
     // Log download event
