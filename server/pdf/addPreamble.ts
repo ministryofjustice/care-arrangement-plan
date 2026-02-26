@@ -18,12 +18,6 @@ const addPreamble = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.whatWeAreTelling.whatYouNeedToDo'),
-      size: QUESTION_TITLE_SIZE,
-      style: FontStyles.BOLD,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-    {
       text: request.__('sharePlan.whatWeAreTelling.initialIsAsking', {
         senderName: request.session.initialAdultName,
         childrenNames: formattedChildrenNames(request),
@@ -59,23 +53,29 @@ const addPreamble = (pdf: Pdf) => {
         style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
-      {
-        text: request.__('sharePlan.whatWeAreTelling.insteadYouCan', {
-          senderName: request.session.initialAdultName,
-        }),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
     ],
     bulletText: [
       request.__('sharePlan.whatWeAreTelling.suggestChanges', {
         senderName: request.session.initialAdultName,
       }),
       request.__('sharePlan.whatWeAreTelling.startYourOwn'),
-      request.__('sharePlan.whatWeAreTelling.makeCustom'),
     ],
   }).addComponentToDocument();
+
+    new TextComponent(pdf, [
+    {
+        text: request.__('sharePlan.whatWeAreTelling.stopIfAnyConcern'),
+        size: QUESTION_TITLE_SIZE,
+        style: FontStyles.BOLD,
+        bottomPadding: PARAGRAPH_SPACE,
+    },
+    {
+      text: request.__('sharePlan.whatWeAreTelling.cannotAnswerQuestions'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+  ]).addComponentToDocument();
 
 
    new BulletListComponent(pdf, {
@@ -84,13 +84,18 @@ const addPreamble = (pdf: Pdf) => {
       size: QUESTION_TITLE_SIZE,
       style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
-    }], 
-
-    bulletText: [
-      request.__('sharePlan.whatWeAreTelling.avoidCourt', {
+    }, {
+        text:      request.__('sharePlan.whatWeAreTelling.avoidCourt', {
         senderName: request.session.initialAdultName,
         childrenNames: formattedChildrenNames(request),
       }),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+    }
+  ], 
+
+    bulletText: [
       request.__('sharePlan.whatWeAreTelling.takesAround'),
       request.__('sharePlan.whatWeAreTelling.bestOutcome'),
       request.__('sharePlan.whatWeAreTelling.judgeMakeDecisions'),
