@@ -76,7 +76,7 @@ class PdfGenerator {
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
     this.doc.text(
-      'Make sure you have every page of this document',
+      'Check you have every page of this document',
       this.pageWidth / 2,
       footerY,
       { align: 'center' }
