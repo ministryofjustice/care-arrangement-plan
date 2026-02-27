@@ -16,7 +16,7 @@ describe(paths.COURT_ORDER_CHECK, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
-        'Do you already have a court order in place about your child arrangements?',
+        'Is there a court order in place relating to you, the other parent or the children?',
       );
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).not.toContain(
@@ -53,7 +53,7 @@ describe(paths.COURT_ORDER_CHECK, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Select whether you have a court order in place currently',
+          msg: 'Select whether you have a court order in place',
           path: formFields.COURT_ORDER_CHECK,
           type: 'field',
         },

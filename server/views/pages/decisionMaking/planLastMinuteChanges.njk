@@ -70,17 +70,8 @@
               errorMessage: errors | findError(formFields.PLAN_LAST_MINUTE_CHANGES)
           })
         }}
+        <div class="govuk-!-margin-bottom-2"><button type="submit" formaction="{{ paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES_NOT_REQUIRED }}" class="govuk-link link-styled-button">{{ __('doNotNeedToDecideLastMinuteChanges') }}</button></div>
         {{ govukButton({text: __('continue')}) }}
-      </form>
-
-      <form
-        class="form"
-        action="{{ paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES_NOT_REQUIRED }}"
-        method="post"
-        novalidate
-      >
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideLastMinuteChanges') }}</button>
       </form>
     </div>
   </div>
