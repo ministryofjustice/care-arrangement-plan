@@ -394,7 +394,7 @@
 
   <div class="container">
     <!-- Main Title -->
-    <h1 style="font-size: 22pt; font-weight: bold; margin-bottom: 5pt;">{{ __('sharePlan.whatWeAreTelling.proposedPlan', {childrenNames: values.childrenNames}) }}</h1>
+    <h1 style="font-size: 22pt; font-weight: bold; margin-bottom: 5pt;">{{ __('sharePlan.whatWeAreTelling.proposedPlan', {senderName: values.initialAdultName}) }}</h1>
 
     <!-- Preamble Section -->
     <section id="preamble" aria-labelledby="preamble-heading">
@@ -403,10 +403,8 @@
 
       <p>{{ __('sharePlan.whatWeAreTelling.pleaseReadThrough', {senderName: values.initialAdultName}) }}</p>
 
-      <h3>{{ __('sharePlan.whatWeAreTelling.thePlanYouveBeenSent') }}</h3>
-
-      <p>{{ __('sharePlan.whatWeAreTelling.doNotNeedToAccept', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</p>
-
+      <p>{{ __('sharePlan.whatWeAreTelling.NotLegallyBinding', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</p>
+<p>{{ __('sharePlan.whatWeAreTelling.ifYouDontAgree', {senderName: values.initialAdultName}) }}</p>
       <ul>
         <li>{{ __('sharePlan.whatWeAreTelling.suggestChanges', {senderName: values.initialAdultName}) }}</li>
         <li>{{ __('sharePlan.whatWeAreTelling.startYourOwn') }}</li>
