@@ -94,16 +94,8 @@
           {% endif %}
         </div>
 
+        <div class="govuk-!-margin-bottom-2"><button type="submit" formaction="{{ paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS_NOT_REQUIRED }}" class="govuk-link link-styled-button">{{ __('doNotNeedToDecideTransportBetweenHouseholds') }}</button></div>
         {{ govukButton({text: __('continue')}) }}
-      </form>
-      <form
-        class="form"
-        action="{{ paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS_NOT_REQUIRED }}"
-        method="post"
-        novalidate
-      >
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideTransportBetweenHouseholds') }}</button>
       </form>
     </div>
   </div>

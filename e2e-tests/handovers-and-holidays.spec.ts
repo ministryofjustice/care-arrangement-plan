@@ -89,10 +89,10 @@ test.describe('Handovers and holidays section', () => {
       await page.getByLabel(/Another arrangement/).check();
       await fillTextAreaAndContinue(page, "Grandmother collects the children")
       await page.locator('.govuk-back-link').click();
-      await page.getByRole('button', { name: /We do not need to decide how the children get between households/i }).click();
-      await page.getByRole('button', { name: /We do not need to decide where handover takes place/i }).click();
-      await page.getByRole('button', { name: /We do not need to decide how arrangements change during school holidays/i }).click();
-      await page.getByRole('button', { name: /We do not need to decide what items need to go between households/i }).click();
+      await page.getByRole('button', { name: /Skip this question/i }).click();
+      await page.getByRole('button', { name: /Skip this question/i }).click();
+      await page.getByRole('button', { name: /Skip this question/i }).click();
+      await page.getByRole('button', { name: /Skip this question/i }).click();
       await expect(page).toHaveURL(/\/make-a-plan/);
       await checkIfTaskStatusIsCompleted(page)
     });

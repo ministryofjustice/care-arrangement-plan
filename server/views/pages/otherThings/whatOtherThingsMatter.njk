@@ -34,17 +34,8 @@
             errorMessage: errors | findError(formFields.WHAT_OTHER_THINGS_MATTER)
           })
         }}
-
+        <div class="govuk-!-margin-bottom-2"><button type="submit" formaction="{{ paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED }}" class="govuk-link link-styled-button">{{ __('doNotNeedToDecideOtherThings') }}</button></div>
         {{ govukButton({text: __('continue')}) }}
-      </form>
-      <form
-        class="form"
-        action="{{ paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED }}"
-        method="post"
-        novalidate
-      >
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideOtherThings') }}</button>
       </form>
     </div>
   </div>

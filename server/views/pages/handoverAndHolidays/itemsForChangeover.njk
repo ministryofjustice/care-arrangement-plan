@@ -23,16 +23,8 @@
             errorMessage: errors | findError(formFields.ITEMS_FOR_CHANGEOVER)
           })
         }}
+        <div class="govuk-!-margin-bottom-2"><button type="submit" formaction="{{ paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED }}" class="govuk-link link-styled-button">{{ __('doNotNeedToDecideItemsForChangeover') }}</button></div>
         {{ govukButton({text: __('continue')}) }}
-      </form>
-      <form
-        class="form"
-        action="{{ paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED }}"
-        method="post"
-        novalidate
-      >
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideItemsForChangeover') }}</button>
       </form>
     </div>
   </div>

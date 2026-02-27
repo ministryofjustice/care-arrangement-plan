@@ -15,7 +15,7 @@ describe(paths.SAFETY_CHECK, () => {
 
       const dom = new JSDOM(response.text);
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Safety check');
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Your safety');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
     });
