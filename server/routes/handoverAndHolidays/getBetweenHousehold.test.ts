@@ -12,8 +12,6 @@ const app = testAppSetup();
 const session: Partial<SessionData> = {
   initialAdultName: 'Sarah',
   secondaryAdultName: 'Steph',
-  numberOfChildren: 1,
-  namesOfChildren: ['Child 1'],
 };
 
 beforeEach(() => {
@@ -35,15 +33,14 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
-      // govukRadios generates IDs: {name}, {name}-2, {name}-3 for subsequent items
-      expect(dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}-0"]`)).toHaveTextContent(
+      expect(dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}"]`)).toHaveTextContent(
         `${session.initialAdultName} collects the children`,
       );
       expect(
-        dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}-0-2"]`),
+        dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}-2"]`),
       ).toHaveTextContent(`${session.secondaryAdultName} collects the children`);
       expect(
-        dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`),
+        dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}`),
       ).not.toHaveAttribute('aria-describedby');
     });
 
@@ -54,13 +51,13 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
         {
           location: 'body',
           msg: primaryError,
-          path: `${formFields.GET_BETWEEN_HOUSEHOLDS}-0`,
+          path: formFields.GET_BETWEEN_HOUSEHOLDS,
           type: 'field',
         },
         {
           location: 'body',
           msg: secondaryError,
-          path: `${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`,
+          path: formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT,
           type: 'field',
         },
       ]);
@@ -72,16 +69,16 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
-        `${formFields.GET_BETWEEN_HOUSEHOLDS}-0-error`,
+        `${formFields.GET_BETWEEN_HOUSEHOLDS}-error`,
       );
-      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-0-error`)).toHaveTextContent(
+      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-error`)).toHaveTextContent(
         primaryError,
       );
       expect(
-        dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`),
-      ).toHaveAttribute('aria-describedby', `${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0-error`);
+        dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}`),
+      ).toHaveAttribute('aria-describedby', `${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-error`);
       expect(
-        dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0-error`),
+        dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-error`),
       ).toHaveTextContent(secondaryError);
     });
 
@@ -89,27 +86,24 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       const arrangement = 'arrangement';
       Object.assign(flashFormValues, [
         {
-          [`${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`]: arrangement,
-          [`${formFields.GET_BETWEEN_HOUSEHOLDS}-0`]: 'other',
+          [formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT]: arrangement,
+          [formFields.GET_BETWEEN_HOUSEHOLDS]: 'other',
         },
       ]);
 
       sessionMock.handoverAndHolidays = {
         getBetweenHouseholds: {
-          default: {
-            noDecisionRequired: false,
-            how: 'secondaryCollects',
-            describeArrangement: 'wrong arrangement',
-          },
+          noDecisionRequired: false,
+          how: 'secondaryCollects',
+          describeArrangement: 'wrong arrangement',
         },
       };
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)).text);
 
-      // "other" is the 3rd item, so ID is {name}-3
-      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-0-3`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-3`)).toBeChecked();
       expect(
-        dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`),
+        dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}`),
       ).toHaveValue(arrangement);
     });
 
@@ -118,20 +112,17 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
 
       sessionMock.handoverAndHolidays = {
         getBetweenHouseholds: {
-          default: {
-            noDecisionRequired: false,
-            how: 'other',
-            describeArrangement: arrangement,
-          },
+          noDecisionRequired: false,
+          how: 'other',
+          describeArrangement: arrangement,
         },
       };
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)).text);
 
-      // "other" is the 3rd item, so ID is {name}-3
-      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-0-3`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-3`)).toBeChecked();
       expect(
-        dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`),
+        dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}`),
       ).toHaveValue(arrangement);
     });
   });
@@ -147,7 +138,7 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
         {
           location: 'body',
           msg: 'Select who will be responsible for getting the children',
-          path: `${formFields.GET_BETWEEN_HOUSEHOLDS}-0`,
+          path: formFields.GET_BETWEEN_HOUSEHOLDS,
           type: 'field',
         },
       ]);
@@ -156,7 +147,7 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
     it('should reload page and set flash when the radio button is other, but arrangements are not described', async () => {
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)
-        .send({ [`${formFields.GET_BETWEEN_HOUSEHOLDS}-0`]: 'other' })
+        .send({ [formFields.GET_BETWEEN_HOUSEHOLDS]: 'other' })
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS);
 
@@ -164,7 +155,7 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
         {
           location: 'body',
           msg: 'Describe how the children will get between households',
-          path: `${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`,
+          path: formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT,
           type: 'field',
           value: '',
         },
@@ -174,24 +165,22 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
     it('should redirect to where handover page if the page is correctly filled', async () => {
       const how = 'other';
       const describeArrangement = 'arrangement';
-      const initialHandoverAndHolidays = { whereHandover: { default: { noDecisionRequired: true } } };
+      const initialHandoverAndHolidays = { whereHandover: { noDecisionRequired: true } };
 
       sessionMock.handoverAndHolidays = initialHandoverAndHolidays;
 
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)
         .send({
-          [`${formFields.GET_BETWEEN_HOUSEHOLDS}-0`]: how,
-          [`${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}-0`]: describeArrangement,
+          [formFields.GET_BETWEEN_HOUSEHOLDS]: how,
+          [formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT]: describeArrangement,
         })
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
 
       expect(sessionMock.handoverAndHolidays).toEqual({
         ...initialHandoverAndHolidays,
-        getBetweenHouseholds: {
-          default: { noDecisionRequired: false, how, describeArrangement },
-        },
+        getBetweenHouseholds: { noDecisionRequired: false, how, describeArrangement },
       });
     });
   });
@@ -199,7 +188,7 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
 
 describe(`POST ${paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS_NOT_REQUIRED}`, () => {
   it('should redirect to where handover page when the answer is entered and set getBetweenHouseholds', async () => {
-    const initialHandoverAndHolidays = { whereHandover: { default: { noDecisionRequired: true } } };
+    const initialHandoverAndHolidays = { whereHandover: { noDecisionRequired: true } };
 
     sessionMock.handoverAndHolidays = initialHandoverAndHolidays;
 
@@ -210,9 +199,7 @@ describe(`POST ${paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS_NOT_REQUIRED}`, 
 
     expect(sessionMock.handoverAndHolidays).toEqual({
       ...initialHandoverAndHolidays,
-      getBetweenHouseholds: {
-        default: { noDecisionRequired: true },
-      },
+      getBetweenHouseholds: { noDecisionRequired: true },
     });
   });
 });

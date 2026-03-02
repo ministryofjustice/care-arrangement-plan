@@ -11,9 +11,7 @@ const app = testAppSetup();
 beforeEach(() => {
   sessionMock.livingAndVisiting = {
     mostlyLive: {
-      default: {
-        where: 'split',
-      },
+      where: 'split',
     },
     daytimeVisits: {
       willHappen: true,
@@ -223,9 +221,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
 
       expect(sessionMock.livingAndVisiting).toEqual({
         mostlyLive: {
-          default: {
-            where: 'split',
-          },
+          where: 'split',
         },
         daytimeVisits: {
           willHappen: true,
@@ -248,9 +244,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
 
       expect(sessionMock.livingAndVisiting).toEqual({
         mostlyLive: {
-          default: {
-            where: 'split',
-          },
+          where: 'split',
         },
         daytimeVisits: {
           willHappen: true,
@@ -272,9 +266,7 @@ describe(`POST ${paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS_NOT_REQUIRED}`,
 
     expect(sessionMock.livingAndVisiting).toEqual({
       mostlyLive: {
-        default: {
-          where: 'split',
-        },
+        where: 'split',
       },
       daytimeVisits: {
         willHappen: true,

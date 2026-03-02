@@ -9,11 +9,6 @@ import { flashMock, flashMockErrors, sessionMock } from '../../test-utils/testMo
 const app = testAppSetup();
 
 describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
-  beforeEach(() => {
-    sessionMock.namesOfChildren = ['James', 'Rachel', 'Jack'];
-    sessionMock.numberOfChildren = 3;
-  });
-
   describe('GET', () => {
     it('should render what will happen on special days page', async () => {
       const response = await request(app).get(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN).expect('Content-Type', /html/);
@@ -22,10 +17,9 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('What will happen on special days?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      const field = dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}-0`);
-      expect(field).not.toBeNull();
-      const ariaDescribedBy = field?.getAttribute('aria-describedby');
-      expect(ariaDescribedBy || '').not.toContain(`${formFields.SPECIAL_DAYS}-0-error`);
+      expect(
+        dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}`).getAttribute('aria-describedby'),
+      ).not.toContain(`${formFields.SPECIAL_DAYS}-error`);
     });
 
     it('should render error flash responses correctly', async () => {
@@ -33,7 +27,7 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
         {
           location: 'body',
           msg: 'Invalid value',
-          path: `${formFields.SPECIAL_DAYS}-0`,
+          path: formFields.SPECIAL_DAYS,
           type: 'field',
         },
       ]);
@@ -43,9 +37,9 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
         'There is a problem',
       );
-      expect(dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}-0`)).toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}`)).toHaveAttribute(
         'aria-describedby',
-        expect.stringContaining(`${formFields.SPECIAL_DAYS}-0-error`),
+        expect.stringContaining(`${formFields.SPECIAL_DAYS}-error`),
       );
     });
 
@@ -54,16 +48,14 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
 
       sessionMock.specialDays = {
         whatWillHappen: {
-          default: {
-            noDecisionRequired: false,
-            answer: response,
-          },
+          noDecisionRequired: false,
+          answer: response,
         },
       };
 
       const dom = new JSDOM((await request(app).get(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}-0`)).toHaveValue(response);
+      expect(dom.window.document.querySelector(`#${formFields.SPECIAL_DAYS}`)).toHaveValue(response);
     });
   });
 
@@ -78,7 +70,7 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
         {
           location: 'body',
           msg: 'Describe what you propose will happen on special days',
-          path: `${formFields.SPECIAL_DAYS}-0`,
+          path: formFields.SPECIAL_DAYS,
           type: 'field',
           value: '',
         },
@@ -90,11 +82,11 @@ describe(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN, () => {
 
       await request(app)
         .post(paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN)
-        .send({ [`${formFields.SPECIAL_DAYS}-0`]: response })
+        .send({ [formFields.SPECIAL_DAYS]: response })
         .expect(302)
         .expect('location', paths.TASK_LIST);
 
-      expect(sessionMock.specialDays.whatWillHappen).toEqual({ default: { noDecisionRequired: false, answer: response } });
+      expect(sessionMock.specialDays.whatWillHappen).toEqual({ noDecisionRequired: false, answer: response });
     });
   });
 });
@@ -106,6 +98,6 @@ describe(`POST ${paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN_NOT_REQUIRED}`, () => {
       .expect(302)
       .expect('location', paths.TASK_LIST);
 
-    expect(sessionMock.specialDays.whatWillHappen).toEqual({ default: { noDecisionRequired: true } });
+    expect(sessionMock.specialDays.whatWillHappen).toEqual({ noDecisionRequired: true });
   });
 });

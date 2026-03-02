@@ -13,22 +13,16 @@ const session: Partial<SessionData> = {
   secondaryAdultName: 'Sam',
   livingAndVisiting: {
     mostlyLive: {
-      default: {
-        where: 'other',
-        describeArrangement: 'livingAndVisitingArrangement',
-      },
+      where: 'other',
+      describeArrangement: 'livingAndVisitingArrangement',
     },
   },
   handoverAndHolidays: {
     getBetweenHouseholds: {
-      default: {
-        noDecisionRequired: true,
-      },
+      noDecisionRequired: true,
     },
     whereHandover: {
-      default: {
-        noDecisionRequired: true,
-      },
+      noDecisionRequired: true,
     },
     willChangeDuringSchoolHolidays: {
       noDecisionRequired: true,
@@ -39,10 +33,8 @@ const session: Partial<SessionData> = {
   },
   specialDays: {
     whatWillHappen: {
-      default: {
-        noDecisionRequired: false,
-        answer: 'whatWillHappenAnswer',
-      },
+      noDecisionRequired: false,
+      answer: 'whatWillHappenAnswer',
     },
   },
   otherThings: {
@@ -86,4 +78,5 @@ describe(`GET ${paths.SHARE_PLAN}`, () => {
         expect(response.text).toMatch('Download a PDF or accessible HTML version of this plan and share with Sam.');
       });
   });
+
 });

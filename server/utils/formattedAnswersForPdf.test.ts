@@ -77,14 +77,10 @@ const session: Partial<SessionData> = {
   livingAndVisiting: {},
   handoverAndHolidays: {
     getBetweenHouseholds: {
-      default: {
-        noDecisionRequired: true,
-      },
+      noDecisionRequired: true,
     },
     whereHandover: {
-      default: {
-        noDecisionRequired: true,
-      },
+      noDecisionRequired: true,
     },
     willChangeDuringSchoolHolidays: {
       noDecisionRequired: true,
@@ -95,9 +91,7 @@ const session: Partial<SessionData> = {
   },
   specialDays: {
     whatWillHappen: {
-      default: {
-        noDecisionRequired: true,
-      },
+      noDecisionRequired: true,
     },
   },
   otherThings: {
@@ -136,10 +130,8 @@ describe('formattedAnswers', () => {
       const arrangement = 'arrangement';
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          default: {
-            where: 'other',
-            describeArrangement: arrangement,
-          },
+          where: 'other',
+          describeArrangement: arrangement,
         },
       };
 
@@ -156,15 +148,11 @@ describe('formattedAnswers', () => {
       const arrangement = 'arrangement';
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          default: {
-            where: 'split',
-          },
+          where: 'split',
         },
         whichSchedule: {
-          default: {
-            noDecisionRequired: false,
-            answer: arrangement,
-          },
+          noDecisionRequired: false,
+          answer: arrangement,
         },
       };
 
@@ -183,14 +171,10 @@ describe('formattedAnswers', () => {
       sessionMock.numberOfChildren = 1;
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          default: {
-            where: 'split',
-          },
+          where: 'split',
         },
         whichSchedule: {
-          default: {
-            noDecisionRequired: true,
-          },
+          noDecisionRequired: true,
         },
       };
 
@@ -207,9 +191,7 @@ describe('formattedAnswers', () => {
     it('should return correctly for with adult with no overnights', () => {
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          default: {
-            where: 'withInitial',
-          },
+          where: 'withInitial',
         },
         overnightVisits: {
           willHappen: false,
@@ -237,9 +219,7 @@ describe('formattedAnswers', () => {
     it('should return correctly for with adult with no daytime visits', () => {
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          default: {
-            where: 'withInitial',
-          },
+          where: 'withInitial',
         },
         overnightVisits: {
           willHappen: true,
@@ -268,9 +248,7 @@ describe('formattedAnswers', () => {
       const arrangement = 'arrangement';
       sessionMock.livingAndVisiting = {
         mostlyLive: {
-          default: {
-            where: 'withSecondary',
-          },
+          where: 'withSecondary',
         },
         overnightVisits: {
           willHappen: true,
@@ -304,12 +282,8 @@ describe('formattedAnswers', () => {
     it.each([
       [
         {
-          getBetweenHouseholds: {
-            default: { noDecisionRequired: true },
-          },
-          whereHandover: {
-            default: { noDecisionRequired: true },
-          },
+          getBetweenHouseholds: { noDecisionRequired: true },
+          whereHandover: { noDecisionRequired: true },
           willChangeDuringSchoolHolidays: { noDecisionRequired: true },
           itemsForChangeover: { noDecisionRequired: true },
         },
@@ -322,14 +296,10 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: {
-            default: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
-          },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
           whereHandover: {
-            default: {
-              noDecisionRequired: false,
-              where: ['neutral', 'initialHome', 'school'] as whereHandoverField[],
-            },
+            noDecisionRequired: false,
+            where: ['neutral', 'initialHome', 'school'] as whereHandoverField[],
           },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: false },
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
@@ -344,21 +314,17 @@ describe('formattedAnswers', () => {
       [
         {
           getBetweenHouseholds: {
-            default: {
-              noDecisionRequired: false,
-              how: 'other' as getBetweenHouseholdsField,
-              describeArrangement: 'getBetweenHouseholds arrangement',
-            },
+            noDecisionRequired: false,
+            how: 'other' as getBetweenHouseholdsField,
+            describeArrangement: 'getBetweenHouseholds arrangement',
           },
           whereHandover: {
-            default: {
-              noDecisionRequired: false,
-              where: ['other'] as whereHandoverField[],
-              other: 'Grandma',
-            },
+            noDecisionRequired: false,
+            where: ['other'] as whereHandoverField[],
+            other: 'Grandma',
           },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
-          howChangeDuringSchoolHolidays: { default: { noDecisionRequired: false, answer: 'howChangeDuringSchoolHolidays answer' } },
+          howChangeDuringSchoolHolidays: { noDecisionRequired: false, answer: 'howChangeDuringSchoolHolidays answer' },
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
         },
         {
@@ -371,15 +337,11 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: {
-            default: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
-          },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
           whereHandover: {
-            default: {
-              noDecisionRequired: false,
-              where: ['neutral', 'other'] as whereHandoverField[],
-              other: 'the park near school',
-            },
+            noDecisionRequired: false,
+            where: ['neutral', 'other'] as whereHandoverField[],
+            other: 'the park near school',
           },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: false },
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
@@ -393,14 +355,10 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: {
-            default: { noDecisionRequired: false, how: 'secondaryCollects' as getBetweenHouseholdsField },
-          },
-          whereHandover: {
-            default: { noDecisionRequired: false, where: ['secondaryHome'] as whereHandoverField[] },
-          },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'secondaryCollects' as getBetweenHouseholdsField },
+          whereHandover: { noDecisionRequired: false, where: ['secondaryHome'] as whereHandoverField[] },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
-          howChangeDuringSchoolHolidays: { default: { noDecisionRequired: true } },
+          howChangeDuringSchoolHolidays: { noDecisionRequired: true },
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
         },
         {
@@ -426,9 +384,7 @@ describe('formattedAnswers', () => {
     it('should return correctly for no need to decide what will happen', () => {
       sessionMock.specialDays = {
         whatWillHappen: {
-          default: {
-            noDecisionRequired: true,
-          },
+          noDecisionRequired: true,
         },
       };
 
@@ -444,10 +400,8 @@ describe('formattedAnswers', () => {
       const answer = 'answer';
       sessionMock.specialDays = {
         whatWillHappen: {
-          default: {
-            noDecisionRequired: false,
-            answer,
-          },
+          noDecisionRequired: false,
+          answer,
         },
       };
 

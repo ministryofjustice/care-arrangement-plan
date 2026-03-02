@@ -12,22 +12,16 @@ const session: Partial<SessionData> = {
   namesOfChildren: ['James', 'Rachel', 'Jack'],
   livingAndVisiting: {
     mostlyLive: {
-      default: {
-        where: 'other',
-        describeArrangement: 'arrangement',
-      },
+      where: 'other',
+      describeArrangement: 'arrangement',
     },
   },
   handoverAndHolidays: {
     getBetweenHouseholds: {
-      default: {
-        noDecisionRequired: true,
-      },
+      noDecisionRequired: true,
     },
     whereHandover: {
-      default: {
-        noDecisionRequired: true,
-      },
+      noDecisionRequired: true,
     },
     willChangeDuringSchoolHolidays: {
       noDecisionRequired: true,
@@ -38,9 +32,7 @@ const session: Partial<SessionData> = {
   },
   specialDays: {
     whatWillHappen: {
-      default: {
-        noDecisionRequired: true,
-      },
+      noDecisionRequired: true,
     },
   },
   otherThings: {
