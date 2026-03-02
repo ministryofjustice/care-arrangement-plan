@@ -4,6 +4,7 @@ import request from 'supertest';
 
 import { CAPSession } from '../../@types/session';
 import paths from '../../constants/paths';
+import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
 import testAppSetup from '../../test-utils/testAppSetup';
 import { sessionMock } from '../../test-utils/testMocks';
 
@@ -120,6 +121,7 @@ describe('createPdf', () => {
 
     // Validate PDF structure and ensure it's a reasonably sized document
     validatePdfResponse(response, 100000); // Should be at least 100KB
+    validateResponseAgainstSnapshot(response.body, 'test-assets/fullTestOutput.pdf');
   });
 
   test('returns the for a long string', async () => {
@@ -193,5 +195,6 @@ describe('createPdf', () => {
 
     // Validate PDF structure and ensure it's significantly larger due to long strings
     validatePdfResponse(response, 500000); // Should be at least 500KB with all the long strings
+    validateResponseAgainstSnapshot(response.body, 'test-assets/fullTestOutput-longAnswers.pdf');
   });
 });
