@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> has suggested a child arrangements plan – Propose a child arrangements plan – GOV.UK</title>
+  <!--
+    This accessible HTML export includes:
+    - Proper semantic heading structure (h1, h2, h3)
+    - Interactive hyperlinks
+    - Yes/No radio buttons for each "Do you agree?" question
+    - Text areas for notes and suggestions
+    - ARIA labels for screen reader compatibility
+  -->
+  <style>
+    /* GOV.UK Transport font fallback stack */
+    body {
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.5;
+      color: #0b0c0c;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Header */
+    .header {
+      background-color: #1d70b8;
+      color: #ffffff;
+      padding: 20px 0;
+      margin: -20px -20px 30px -20px;
+    }
+
+    .header-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      height: 30px;
+      width: auto;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .header h1 {
+      font-size: 30px;
+      font-weight: 700;
+      margin: 0;
+      padding: 0;
+      color: #ffffff;
+      line-height: 30px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 36px;
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    h4 {
+      font-size: 19px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0 0 20px 0;
+    }
+
+    /* Links */
+    a {
+      color: #1d70b8;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #003078;
+    }
+
+    a:visited {
+      color: #4c2c92;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin: 0 0 20px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    /* Text box component */
+    .text-box {
+      border: 2px solid #0b0c0c;
+      padding: 15px;
+      margin: 20px 0;
+      background-color: #f3f2f1;
+    }
+
+    .text-box h3,
+    .text-box h4 {
+      margin-top: 0;
+    }
+
+    .text-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Do you agree component */
+    .do-you-agree {
+      margin: 30px 0;
+      padding: 20px;
+      background-color: #f3f2f1;
+      border-left: 5px solid #1d70b8;
+    }
+
+    /* GDS Form group */
+    .govuk-form-group {
+      margin-bottom: 20px;
+    }
+
+    /* GDS Label */
+    .govuk-label {
+      display: block;
+      font-weight: 400;
+      margin-bottom: 5px;
+      color: #0b0c0c;
+    }
+
+    /* GDS Textarea */
+    .govuk-textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 5px;
+      border: 2px solid #0b0c0c;
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.25;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    .govuk-textarea:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 2px;
+    }
+
+    /* Legacy class support */
+    .user-input-area {
+      width: 100%;
+      min-height: 80px;
+      padding: 5px;
+      border: 2px solid #0b0c0c;
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.25;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    .user-input-area:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 2px;
+    }
+
+    /* GDS Fieldset */
+    .govuk-fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      min-width: 0;
+    }
+
+    .govuk-fieldset__legend {
+      display: block;
+      font-weight: 400;
+      margin-bottom: 10px;
+      color: #0b0c0c;
+    }
+
+    .govuk-fieldset__legend--s {
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    /* GDS Checkboxes */
+    .govuk-checkboxes {
+      margin-bottom: 0;
+    }
+
+    .govuk-checkboxes__item {
+      display: block;
+      position: relative;
+      min-height: 40px;
+      margin-bottom: 10px;
+      padding-left: 40px;
+      clear: left;
+    }
+
+    .govuk-checkboxes__input {
+      cursor: pointer;
+      position: absolute;
+      z-index: 1;
+      top: -2px;
+      left: -2px;
+      width: 44px;
+      height: 44px;
+      margin: 0;
+      opacity: 0;
+    }
+
+    .govuk-checkboxes__label {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 8px 15px 5px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .govuk-checkboxes__label::before {
+      content: "";
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      border: 2px solid currentcolor;
+      background: transparent;
+    }
+
+    .govuk-checkboxes__label::after {
+      box-sizing: border-box;
+      content: "";
+      position: absolute;
+      top: 11px;
+      left: 9px;
+      width: 23px;
+      height: 12px;
+      transform: rotate(-45deg);
+      border: solid;
+      border-width: 0 0 5px 5px;
+      border-top-color: transparent;
+      opacity: 0;
+      background: transparent;
+    }
+
+    .govuk-checkboxes__input:checked + .govuk-checkboxes__label::after {
+      opacity: 1;
+    }
+
+    .govuk-checkboxes__input:focus + .govuk-checkboxes__label::before {
+      border-width: 4px;
+      outline: 3px solid transparent;
+      outline-offset: 1px;
+      box-shadow: 0 0 0 3px #ffdd00;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__item {
+      min-height: 0;
+      margin-bottom: 0;
+      padding-left: 34px;
+      float: left;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__input {
+      left: -5px;
+      width: 34px;
+      height: 34px;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__label {
+      padding: 6px 30px 5px 5px;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__label::before {
+      width: 24px;
+      height: 24px;
+      top: 6px;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__label::after {
+      width: 13.5px;
+      height: 7px;
+      top: 14px;
+      left: 5.5px;
+      border-width: 0 0 3px 3px;
+    }
+
+    /* Answer sections */
+    .answer-section {
+      margin: 30px 0;
+    }
+
+    .answer-section .question {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .answer-section .answer {
+      margin-bottom: 20px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .answer-section .hint {
+      color: #505a5f;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .answer-section .disagreement {
+      font-style: italic;
+      color: #505a5f;
+      margin-top: 10px;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        margin: 0 0 30px 0;
+      }
+
+      .no-print {
+        display: none;
+      }
+
+      a {
+        color: #1d70b8;
+        text-decoration: underline;
+      }
+
+      h2 {
+        page-break-after: avoid;
+      }
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid #b1b4b6;
+      text-align: center;
+      font-size: 16px;
+      color: #505a5f;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <img src="data:image/png;base64,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" alt="GOV.UK" class="logo">
+      <h1>Proposed child arrangements plan</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Main Title -->
+    <h1 style="font-size: 22pt; font-weight: bold; margin-bottom: 5pt;">Bob has suggested a child arrangements plan</h1>
+
+    <!-- Preamble Section -->
+    <section id="preamble" aria-labelledby="preamble-heading">
+      <p>Bob used the Child Arrangements Plan service (<a href="https://propose-child-arrangements-plan.service.gov.uk/">https://propose-child-arrangements-plan.service.gov.uk/</a>) on GOV.UK to suggest a plan for how you both might look after James, Rachel and Jack.</p>
+
+<p>You can read their suggested plan and use it to collaborate to create child arrangements which you both agree on.</p>
+
+<p>This plan is not legally binding and you do not have to do what it says.</p>
+
+<p>If you don’t agree, you can:</p>
+<ul>
+  <li>use this form to suggest changes to Bob&#39;s proposed child arrangements plan</li>
+  <li>start your own proposed child arrangements plan on GOV.UK or find a similar service</li>
+  <li>make a written agreement of your own without using any service or template</li>
+</ul>
+
+<h3>Your safety</h3>
+<p>You should only respond to the suggested plan if:</p>
+<ul>
+  <li>you’re confident that you and your ex-partner can make decisions together without putting yourself or the children in danger</li>
+  <li>you do not feel pressured or intimidated into responding</li>
+</ul>
+<p><strong>If you have any concerns about safety, stop now.</strong></p>
+<p>If you have any feedback or safety concerns about this service, you can email childarrangementsafety@justice.gov.uk.</p>
+<p>We cannot answer any questions about child arrangement plans that have already been created.</p>
+
+<h3>How making a child arrangements plan can help</h3>
+<p>You may find that collaborating with Bob on a child arrangements plan:</p>
+<ul>
+  <li>is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it’s urgent)</li>
+  <li>leads to a better outcome for your children, which you and your ex-partner are in control of</li>
+</ul>
+<p>Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.</p>
+
+<h3>Tips to help you and your children</h3>
+<p>Your child arrangements plan should:</p>
+<ul>
+  <li>put the child’s welfare first</li>
+  <li>reflect the wishes, feelings and needs of the child</li>
+  <li>consider any harm the child has suffered or any risk of harm</li>
+</ul>
+
+<h3>If there is a court order in place</h3>
+<p>Do not continue if there’s a court order in place relating to you, the other parent, or the children.</p>
+<p>For example, a:</p>
+<ul>
+  <li>child arrangements order</li>
+  <li>specific issue order</li>
+  <li>prohibited steps order</li>
+  <li>protective order such as a non-molestation order, occupation order or a domestic abuse protection order</li>
+  <li>any other order restricting contact between you and the other parent or the children </li>
+</ul>
+<p>To change or enforce an existing child arrangements order, visit <a href="https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order">https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order</a>.</p>
+
+<h3>Get more information</h3>
+<p>Use GOV.UK to find more information, for example:</p>
+<ul>
+  <li>making child arrangements - <a href="https://www.gov.uk/looking-after-children-divorce">https://www.gov.uk/looking-after-children-divorce</a></li>
+  <li>getting a legal separation - <a href="https://www.gov.uk/legal-separation">https://www.gov.uk/legal-separation</a></li>
+  <li>getting a divorce - <a href="https://www.gov.uk/get-a-divorce">https://www.gov.uk/get-a-divorce</a></li>
+</ul>
+
+<h3>If you want legal advice</h3>
+<p>You can find a legal adviser: <a href="https://www.gov.uk/find-legal-advice/find-legal-adviser">https://www.gov.uk/find-legal-advice/find-legal-adviser</a>.</p>
+
+<h3>Getting help with domestic abuse</h3>
+<p>To find out more about signs and effects of child abuse and neglect, visit <a href="https://www.nspcc.org.uk/what-is-child-abuse">https://www.nspcc.org.uk/what-is-child-abuse</a>.</p>
+<p>If you’re unsure whether you’re a victim of domestic abuse, visit <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse">https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse</a>.</p>
+
+<h3>This plan is not suitable for you if there has been:</h3>
+<ul>
+  <li>any form of domestic abuse or violence, even if the abuse was not directed at the children</li>
+  <li>child abduction or attempted child abduction</li>
+  <li>child abuse or neglect</li>
+  <li>misuse of drugs, alcohol or other substances</li>
+  <li>any other safety or welfare concerns that place anyone at significant risk of harm</li>
+</ul>
+
+<h3>Feedback and support</h3>
+<p>To  ask for help using this service, or suggest improvements, you can email <a href="mailto:childarrangements@justice.gov.uk">childarrangements@justice.gov.uk</a>.</p>
+<p>We cannot answer any questions about child arrangement plans that have already been created.</p>
+
+    </section>
+
+    <!-- About The Proposal -->
+    <section id="about-proposal" aria-labelledby="about-proposal-heading">
+      <h2 id="about-proposal-heading">About this child arrangements proposal</h2>
+
+      <p>Bob said:</p>
+      <ul>
+        <li>there is no court order in place at this time</li>
+        <li>
+          
+            this is a proposed child arrangements plan for 3 children, James, Rachel and Jack
+          
+        </li>
+        <li>this agreement is between Bob and Sam, who are the adults who will care for James, Rachel and Jack</li>
+      </ul>
+
+      <div class="do-you-agree">
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Do you and Bob agree about the children’s names, your names, and whether there is a court order in place?
+            </legend>
+            <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="question-about-proposal-yes" name="question-about-proposal" type="checkbox" value="yes">
+                <label class="govuk-label govuk-checkboxes__label" for="question-about-proposal-yes">
+                  Yes
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="question-about-proposal-no" name="question-about-proposal" type="checkbox" value="no">
+                <label class="govuk-label govuk-checkboxes__label" for="question-about-proposal-no">
+                  No
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="text-box">
+        <p>We do not store these names or share any of this information with other government departments.</p>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="notes-about-proposal">
+            If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to <a href="https://www.gov.uk/looking-after-children-divorce">https://www.gov.uk/looking-after-children-divorce</a>.
+          </label>
+          <textarea class="govuk-textarea user-input-area" id="notes-about-proposal" name="notes-about-proposal" rows="5"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Answers rendered inline -->
+    <section id="living-visiting" aria-labelledby="living-visiting-heading">
+<div class="answer-section">
+  <h2>Living and visiting</h2>
+  <h3 class="question">Where will the children spend most of their time?</h3>
+  <p class="answer">Bob suggested:
+&quot;livingAndVisitingArrangement&quot;</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-1-yes" name="question-1" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-1-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-1-no" name="question-1" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-1-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-1">
+        If you do not agree, suggest where the children will spend most of their time
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-1" name="notes-1" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+<div class="text-box">
+  <h4>End of section</h4>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="textbox-1">
+      You can use this space to write your agreed answer for the living and visiting section
+    </label>
+    <textarea class="govuk-textarea user-input-area" id="textbox-1" name="textbox-1" rows="5"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="handover-holidays" aria-labelledby="handover-holidays-heading">
+<div class="answer-section">
+  <h3 class="question">Will these arrangements change during school holidays?</h3>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-2-yes" name="question-2" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-2-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-2-no" name="question-2" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-2-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-2">
+        If you do not agree, suggest whether the arrangements should change during the holidays
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-2" name="notes-2" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">What items need to go between households?</h3>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-3-yes" name="question-3" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-3-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-3-no" name="question-3" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-3-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-3">
+        If you do not agree, suggest which items need to go between households
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-3" name="notes-3" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+<div class="text-box">
+  <h4>End of section</h4>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="textbox-2">
+      You can use this space to write your agreed answer for the handovers and holidays section
+    </label>
+    <textarea class="govuk-textarea user-input-area" id="textbox-2" name="textbox-2" rows="5"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="special-days" aria-labelledby="special-days-heading">
+<div class="answer-section">
+  <h2>Special days</h2>
+  <h3 class="question">What will happen on special days?</h3>
+  <p class="hint">Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.</p>
+  <p class="answer">Bob suggested:
+&quot;whatWillHappenAnswer&quot;</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-4-yes" name="question-4" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-4-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-4-no" name="question-4" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-4-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-4">
+        If you do not agree, suggest what will happen on special days
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-4" name="notes-4" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+<div class="text-box">
+  <h4>End of section</h4>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="textbox-3">
+      You can use this space to write your agreed answer for the special days section
+    </label>
+    <textarea class="govuk-textarea user-input-area" id="textbox-3" name="textbox-3" rows="5"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="other-things" aria-labelledby="other-things-heading">
+<div class="answer-section">
+  <h2>Other things</h2>
+  <h3>What other things matter to your children?</h3>
+  <p>You may want to agree things such as:</p>
+  <ul>
+    <li>religious practices, diet, and standard rules across both households</li>
+    <li>extra-curricular activities, such as swimming lessons</li>
+    <li>access to other friends and family</li>
+    <li>other types of contact, such as video calls</li>
+  </ul>
+  <p class="answer">Bob suggested:
+&quot;whatOtherThingsMatterAnswer&quot;</p>
+  <div class="do-you-agree">
+    <p>Do you agree?</p>
+    <div class="do-you-agree-options">
+      <label>
+        <input type="radio" name="question-5" value="yes">
+        <span>Yes</span>
+      </label>
+      <label>
+        <input type="radio" name="question-5" value="no">
+        <span>No</span>
+      </label>
+    </div>
+  </div>
+  <div class="text-box">
+    <p>If you do not agree, suggest what other things matter to your children</p>
+    <textarea class="user-input-area" id="notes-5" aria-label="If you do not agree, suggest what other things matter to your children"></textarea>
+  </div>
+</div>
+<div class="text-box">
+  <h4>End of section</h4>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="textbox-4">
+      You can use this space to write your agreed answer for the other things section
+    </label>
+    <textarea class="govuk-textarea user-input-area" id="textbox-4" name="textbox-4" rows="5"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="decision-making" aria-labelledby="decision-making-heading">
+<div class="answer-section">
+  <h2>Decision making</h2>
+  <h3 class="question">How should last-minute changes be communicated?</h3>
+  <p class="hint">There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.</p>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-6-yes" name="question-6" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-6-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-6-no" name="question-6" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-6-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-6">
+        If you do not agree, suggest how last minute changes should be communicated
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-6" name="notes-6" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">How much notice should you give to change long-term arrangements?</h3>
+  <p class="hint">Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.</p>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-7-yes" name="question-7" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-7-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-7-no" name="question-7" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-7-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-7">
+        If you do not agree, suggest how much notice you should give each other
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-7" name="notes-7" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">When will the children’s needs change?</h3>
+  <p class="hint">Children&#039;s needs change as they grow. When should you review this agreement to check it is still what&#039;s best for the children?</p>
+  <p class="answer">Bob suggested that you should review this arrangement in 1 month&#039;s time.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-8-yes" name="question-8" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-8-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-8-no" name="question-8" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-8-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-8">
+        If you do not agree, suggest when should you review this agreement
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-8" name="notes-8" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+<div class="text-box">
+  <h4>End of section</h4>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="textbox-5">
+      You can use this space to write your agreed answer for the decision making section
+    </label>
+    <textarea class="govuk-textarea user-input-area" id="textbox-5" name="textbox-5" rows="5"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="what-happens-now" aria-labelledby="what-happens-now-heading">
+  <h2 id="what-happens-now-heading">What you need to do now</h2>
+  <p>Now send this proposed child arrangements plan back to Bob. You should try to create a written record of what you have both agreed.</p>
+  <p>Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.</p>
+  <h3 id="what-happens-now-heading">If you can&#039;t agree</h3>
+  <p>If you are unable to reach agreement about your child arrangements, you can try mediation or another way of agreeing outside of court.</p>
+  <p>A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.</p>
+  <p><a href="https://www.gov.uk/looking-after-children-divorce">More information and support is available at https://www.gov.uk/looking-after-children-divorce.</a></p>
+  <h3 id="what-happens-now-heading">Get paid to give your feedback</h3>
+  <p>With your help we can improve this service and understand how you use your plan.</p>
+  <p><b><a href="https://test.com">Sign up and receive an incentive when you take part in further research</a></b></p>
+</section>
+
+
+    <div class="footer">
+      <p>Generated with Propose a child arrangements plan on GOV.UK</p>
+      <p>This document is accessible and can be opened in any web browser.</p>
+      <p>v0.0.5 · 1 January 2025 at 00:00</p>
+    </div>
+  </div>
+</body>
+</html>
