@@ -197,7 +197,7 @@ test.describe('Check Your Answers Summary Page', () => {
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Complete remaining sections
-    await page.getByRole('link', { name: /Where will the children mostly live?/i }).click();
+    await page.getByRole('link', { name: /Where will the children spend most of their time/i }).click();
     await page.getByLabel(/With Parent/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
@@ -205,7 +205,7 @@ test.describe('Check Your Answers Summary Page', () => {
     await page.goto('/make-a-plan');
 
     // Complete all sections quickly
-    await page.getByRole('link', { name: /Where will the children mostly live?/i }).click();
+    await page.getByRole('link', { name: /Where will the children spend most of their time/i }).click();
     await page.getByLabel(/With Parent/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     if (page.url().includes('which-schedule')) {
@@ -246,7 +246,7 @@ test.describe('Check Your Answers Summary Page', () => {
     await page.goto('/make-a-plan');
 
        // Complete all sections quickly
-    await page.getByRole('link', { name: /Where will the children mostly live?/i }).click();
+    await page.getByRole('link', { name: /Where will the children spend most of their time/i }).click();
     await page.getByLabel(/With Parent/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     if (page.url().includes('which-schedule')) {
