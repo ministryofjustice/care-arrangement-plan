@@ -283,7 +283,7 @@
   },
   "livingAndVisiting": {
     "mostlyLive": {
-      "title": "Where will the children spend most of their time?",
+      "title": "Where will the children mostly live?",
       "with": "With {{{ adult }}}",
       "split": "They will split time between {{{ initialAdult }}} and {{{ secondaryAdult }}}",
       "emptyError": "Choose where the children will mostly live",
