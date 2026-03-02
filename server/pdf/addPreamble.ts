@@ -216,8 +216,8 @@ const addPreamble = (pdf: Pdf) => {
       },
         {
         text: request.__('sharePlan.whatWeAreTelling.moreInfo'),
-        size: QUESTION_TITLE_SIZE,
-        style: FontStyles.BOLD,
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
