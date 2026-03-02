@@ -4,9 +4,9 @@ import request from 'supertest';
 
 import { CAPSession } from '../../@types/session';
 import paths from '../../constants/paths';
+import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
 import testAppSetup from '../../test-utils/testAppSetup';
 import { sessionMock } from '../../test-utils/testMocks';
-import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
 
 jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../../assets/${fileName}`));
 
