@@ -52,7 +52,7 @@ const downloadRoutes = (router: Router) => {
     response.setHeader('Content-Type', 'text/html; charset=utf-8');
     response.setHeader('Content-Disposition', `attachment; filename=${request.__('pdf.name')}.html`);
 
-    response.render('pages/downloadablePlan', {
+    response.render('htmlExport/htmlExport', {
       values: {
         initialAdultName: request.session.initialAdultName,
         secondaryAdultName: request.session.secondaryAdultName,
