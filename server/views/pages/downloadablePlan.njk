@@ -398,56 +398,7 @@
 
     <!-- Preamble Section -->
     <section id="preamble" aria-labelledby="preamble-heading">
-
-      <p>{{ __('sharePlan.whatWeAreTelling.initialIsAsking', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</p>
-
-      <p>{{ __('sharePlan.whatWeAreTelling.pleaseReadThrough', {senderName: values.initialAdultName}) }}</p>
-
-      <p>{{ __('sharePlan.whatWeAreTelling.NotLegallyBinding', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</p>
-<p>{{ __('sharePlan.whatWeAreTelling.ifYouDontAgree', {senderName: values.initialAdultName}) }}</p>
-      <ul>
-        <li>{{ __('sharePlan.whatWeAreTelling.suggestChanges', {senderName: values.initialAdultName}) }}</li>
-        <li>{{ __('sharePlan.whatWeAreTelling.startYourOwn') }}</li>
-      </ul>
-
-      <h3>{{ __('sharePlan.whatWeAreTelling.benefitsHeading') }}</h3>
-     
-      <p>{{ __('sharePlan.whatWeAreTelling.avoidCourt', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) }}</p>
-      <ul>
-        <li>{{ __('sharePlan.whatWeAreTelling.takesAround') }}</li>
-        <li>{{ __('sharePlan.whatWeAreTelling.bestOutcome') }}</li>
-        <li>{{ __('sharePlan.whatWeAreTelling.judgeMakeDecisions') }}</li>
-      </ul>
-
-      <h3>{{ __('sharePlan.whatWeAreTelling.topTips') }}</h3>
-      <p>{{ __('sharePlan.whatWeAreTelling.childrensInput') }}</p>
-
-      <h3>{{ __('sharePlan.whatWeAreTelling.moreInfoHeading') }}</h3>
-      <p>{{ __('sharePlan.whatWeAreTelling.moreInfo') }}</p>
-      <ul>
-        <li>{{ __('sharePlan.whatWeAreTelling.separatingOrDivorcing') | customUrlize | safe }}</li>
-        <li>{{ __('sharePlan.whatWeAreTelling.makingChildArrangements') | customUrlize | safe }}</li>
-      </ul>
-
-      <h3>{{ __('sharePlan.whatWeAreTelling.safetyCheckHeading') }}</h3>
-      <p>{{ __('sharePlan.whatWeAreTelling.safetyCheck') }}</p>
-      <p><b>{{ __('sharePlan.whatWeAreTelling.doNotContinueIf') }}</b></p>
-      <ul>
-        <li>{{ __('childrenSafetyCheck.domesticAbuse') }}</li>
-        <li>{{ __('childrenSafetyCheck.childAbduction') }}</li>
-        <li>{{ __('childrenSafetyCheck.childAbuse') }}</li>
-        <li>{{ __('childrenSafetyCheck.drugsOrAlcohol') }}</li>
-        <li>{{ __('childrenSafetyCheck.otherConcerns') }}</li>
-      </ul>
-      <p><strong>{{ __('sharePlan.whatWeAreTelling.stopIfAnyConcern') | customUrlize | safe }}</strong></p>
-      <p>{{ __('sharePlan.whatWeAreTelling.findAnotherWay') | customUrlize | safe }}</p>
-
-      <h3>{{ __('sharePlan.whatWeAreTelling.gettingHelpHeading') }}</h3>
-      <p>{{ __('sharePlan.whatWeAreTelling.gettingHelp') | customUrlize | safe }}</p>
-      <p>{{ __('sharePlan.whatWeAreTelling.unsureVictim') | customUrlize | safe }}</p>
-
-      <h3>{{ __('sharePlan.whatWeAreTelling.courtOrderHeading') }}</h3>
-      <p>{{ __('sharePlan.whatWeAreTelling.ifCourtOrderInIsPlace') | customUrlize | safe }}</p>
+      {% include 'partials/sharePlan/whatWeAreTelling.njk' %}
     </section>
 
     <!-- About The Proposal -->
