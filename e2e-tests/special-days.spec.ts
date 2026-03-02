@@ -79,7 +79,7 @@ test.describe('Special Days Page', () => {
   test.describe('Do Not Need To Decide Option', () => {
     test('should allow skipping with "do not need to decide" option', async ({ page }) => {
       await page.getByRole('link', { name: /special days/i }).click();
-      await page.getByRole('button', { name: /do not need to decide/i }).click();
+      await page.getByRole('button', { name: /skip this question/i }).click();
 
       await expect(page).toHaveURL(/\/make-a-plan/);
     });
@@ -136,7 +136,7 @@ test.describe('Special Days Page', () => {
 
     test('should show completed status after selecting "do not need to decide"', async ({ page }) => {
       await page.getByRole('link', { name: /special days/i }).click();
-      await page.getByRole('button', { name: /do not need to decide/i }).click();
+      await page.getByRole('button', { name: /skip this question/i }).click();
 
       await expect(page).toHaveURL(/\/make-a-plan/);
 

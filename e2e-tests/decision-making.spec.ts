@@ -121,7 +121,7 @@ test.describe('Decision Making Section', () => {
     test.describe('Do Not Need To Decide', () => {
       test('should allow skipping with "do not need to decide"', async ({ page }) => {
         await page.getByRole('link', { name: /how should last-minute changes/i }).click();
-        await page.getByRole('button', { name: /do not need to decide/i }).click();
+        await page.getByRole('button', { name: /skip this question/i }).click();
 
         await expect(page).toHaveURL(/\/decision-making\/plan-long-term-notice/);
       });
@@ -226,7 +226,7 @@ test.describe('Decision Making Section', () => {
     test.describe('Do Not Need To Decide', () => {
       test('should allow skipping with "do not need to decide"', async ({ page }) => {
         await navigateToLongTermNotice(page);
-        await page.getByRole('button', { name: /do not need to decide/i }).click();
+        await page.getByRole('button', { name: /skip this question/i }).click();
 
         await expect(page).toHaveURL(/\/decision-making\/plan-review/);
       });
