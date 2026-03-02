@@ -7,17 +7,38 @@ This directory contains organised unit tests for the Care Arrangement Plan serve
 ```
 server/__tests__/
 ├── html/           # HTML document generation tests
+│   ├── createHtml.test.ts        # End-to-end HTML export preview (saves to test-assets/)
 │   ├── createHtmlContent.test.ts
 │   ├── addLivingAndVisiting.test.ts
 │   ├── addHandoverAndHolidays.test.ts
 │   └── addDecisionMaking.test.ts
 └── pdf/            # PDF document generation tests
-    ├── createPdf.test.ts
+    ├── createPdf.test.ts         # End-to-end PDF snapshot test (saves to test-assets/)
     ├── addAboutTheProposal.test.ts
     ├── addLivingAndVisiting.test.ts
     ├── addHandoverAndHolidays.test.ts
     └── addDecisionMaking.test.ts
 ```
+
+## Previewing the HTML export
+
+To see what the HTML download looks like without going through the service journey, run:
+
+```bash
+npm run test:save-html-preview
+```
+
+This generates `test-assets/fullTestOutput.html` which you can open directly in any browser. Re-run the command after making changes to `server/views/htmlExport/` or `server/locales/en.json` to see the updated output.
+
+## Previewing the PDF
+
+To see what the PDF download looks like without going through the service journey, run:
+
+```bash
+npm run test:update-pdf-snapshots
+```
+
+This generates `test-assets/fullTestOutput.pdf` which you can open in any PDF viewer. Re-run the command after making changes to `server/pdf/` or `server/locales/en.json` to see the updated output.
 
 ## HTML Tests
 
@@ -53,7 +74,7 @@ npm test -- server/__tests__/pdf
 If you intentionally change the PDF generation logic, update the snapshots:
 
 ```bash
-UPDATE_PDF_SNAPSHOTS=1 npm test -- server/__tests__/pdf
+npm run test:update-pdf-snapshots
 ```
 
 ## Test Utilities
