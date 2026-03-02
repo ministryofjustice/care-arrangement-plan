@@ -33,7 +33,7 @@ test.describe('Mostly Lives Page', () => {
   test.beforeEach(async ({ page }) => {
     await navigateToTaskList(page);
     await expect(page).toHaveURL(/\/make-a-plan/);
-    await page.getByRole('link', { name: /where will the children mostly live/i }).click();
+    await page.getByRole('link', { name: /where will the children spend most of their time/i }).click();
   });
  
   // Playwright usually uses error ID's to locate error messages, but here errors are inside visually hidden elements, so ID does not work and getByText is used instead.

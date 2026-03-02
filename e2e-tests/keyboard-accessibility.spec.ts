@@ -380,7 +380,7 @@ test.describe('Keyboard Accessibility', () => {
       await navigateToTaskList(page);
 
       // Navigate to a page with a select dropdown (mostly-live page)
-      await page.getByRole('link', { name: /where will the children mostly live/i }).click();
+      await page.getByRole('link', { name: /where will the children spend most of their time/i }).click();
       await expect(page).toHaveURL(/mostly-live/);
 
       // Check if there's a select element on this page
@@ -597,7 +597,7 @@ test.describe('Keyboard Accessibility', () => {
       await expect(page).toHaveURL(/\/make-a-plan/);
 
       // Tab to the first task list link and activate it
-      const _taskLink = await tabToElement(page, 'link', /where will the children mostly live/i);
+      const _taskLink = await tabToElement(page, 'link', /where will the children spend most of their time/i);
       await expectFocusVisible(page);
       await page.keyboard.press('Enter');
 
