@@ -450,7 +450,7 @@
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
     "whatWeAreTelling": {
       "proposedPlan": "{{{ senderName }}} has suggested a child arrangements plan",
-      "initialIsAsking": "{{{ senderName }}} used the Child Arrangements Plan service (https://propose-child-arrangements-plan.service.gov.uk/) on GOV.UK to suggest a plan for how you both might look after {{{ childrenNames }}}.",
+      "senderHasUsedThe": "{{{ senderName }}} used the Child Arrangements Plan service (https://propose-child-arrangements-plan.service.gov.uk/) on GOV.UK to suggest a plan for how you both might look after {{{ childrenNames }}}.",
       "pleaseReadThrough": "You can read their suggested plan and use it to collaborate to create child arrangements which you both agree on.",
       "notLegallyBinding": "This plan is not legally binding and you do not have to do what it says.",
       "ifYouDontAgree": "If you don’t agree, you can:",
@@ -475,7 +475,8 @@
       "wishes": "reflect the wishes, feelings and needs of the child",
       "considerAnyHarm":"consider any harm the child has suffered or any risk of harm",
       "ifThereIsCourt": "If there is a court order in place",
-      "doNotContinue": "Do not continue if there’s a court order in place relating to you, the other parent, or the children. For example, a:",
+      "doNotContinue": "Do not continue if there’s a court order in place relating to you, the other parent, or the children.",
+      "forExample": "For example, a:",
       "childArrangementsOrder": "child arrangements order",
       "specificIssueOrder": "specific issue order",
       "prohibitedStepsOrder": "prohibited steps order",
@@ -483,7 +484,7 @@
       "anyOther": "any other order restricting contact between you and the other parent or the children ",
       "toChange": "To change or enforce an existing child arrangements order, visit https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order.",
       "moreInfoHeading": "Get more information",
-      "moreInfo": "GOV.UK to find more information, for example:",
+      "moreInfo": "Use GOV.UK to find more information, for example:",
       "makingChildArrangements": "making child arrangements - https://www.gov.uk/looking-after-children-divorce",
       "legalSeparation": "getting a legal separation - https://www.gov.uk/legal-separation",
       "divorce": "getting a divorce - https://www.gov.uk/get-a-divorce",
@@ -500,7 +501,7 @@
       "anyOtherSafety": "any other safety or welfare concerns that place anyone at significant risk of harm",
       "feedbackHeading": "Feedback and support",
       "toAskForHelp": "To  ask for help using this service, or suggest improvements, you can email childarrangements@justice.gov.uk.",
-      "weCannot": "We cannot answer any questions about child arrangement plans that have already been created.",
+      "weCannot": "We cannot answer any questions about child arrangement plans that have already been created."
     },
     "yourProposedPlan": {
       "aboutThePlan": "About this child arrangements proposal",

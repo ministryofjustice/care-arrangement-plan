@@ -18,7 +18,7 @@ const addPreamble = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.whatWeAreTelling.initialIsAsking', {
+      text: request.__('sharePlan.whatWeAreTelling.senderHasUsedThe', {
         senderName: request.session.initialAdultName,
         childrenNames: formattedChildrenNames(request),
       }),
@@ -46,8 +46,8 @@ const addPreamble = (pdf: Pdf) => {
     initialText: [
       {
       text: request.__('sharePlan.whatWeAreTelling.ifYouDontAgree'),
-      size: QUESTION_TITLE_SIZE,
-      style: FontStyles.BOLD,
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
       },
     ],
@@ -73,8 +73,8 @@ const addPreamble = (pdf: Pdf) => {
    new BulletListComponent(pdf, {
     initialText: [    {
       text: request.__('sharePlan.whatWeAreTelling.shouldOnlyRespond'),
-      size: QUESTION_TITLE_SIZE,
-      style: FontStyles.BOLD,
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ], 
@@ -121,15 +121,15 @@ const addPreamble = (pdf: Pdf) => {
       text: request.__('sharePlan.whatWeAreTelling.mightFind', {
         senderName: request.session.initialAdultName,
       }),
-      size: QUESTION_TITLE_SIZE,
-      style: FontStyles.BOLD,
+      size:  MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
   ], 
 
     bulletText: [
       request.__('sharePlan.whatWeAreTelling.takesAround'),
-      request.__('sharePlan.whatWeAreTelling.bestOutcome"'),
+      request.__('sharePlan.whatWeAreTelling.bestOutcome'),
     ],
   }).addComponentToDocument();
 
@@ -139,21 +139,74 @@ const addPreamble = (pdf: Pdf) => {
     {
         text: request.__('sharePlan.whatWeAreTelling.goingToCourt'),
         size: MAIN_TEXT_SIZE,
-        style: FontStyles.BOLD,
-        bottomPadding: PARAGRAPH_SPACE,
-    },
-  ]).addComponentToDocument();
-
-  new TextComponent(pdf, [
-    {
-        text: request.__('sharePlan.whatWeAreTelling.topTips'),
-        size: QUESTION_TITLE_SIZE,
-        style: FontStyles.BOLD,
+        style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument();
 
   new BulletListComponent(pdf, {
+    initialText: [
+      {
+        text: request.__('sharePlan.whatWeAreTelling.topTips'),
+        size: QUESTION_TITLE_SIZE,
+        style: FontStyles.BOLD,
+        bottomPadding: PARAGRAPH_SPACE,
+      },
+        {
+        text: request.__('sharePlan.whatWeAreTelling.planShould'),
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+      },
+    ],
+    bulletText: [
+      request.__('sharePlan.whatWeAreTelling.welfare'),
+      request.__('sharePlan.whatWeAreTelling.wishes'),
+      request.__('sharePlan.whatWeAreTelling.considerAnyHarm'),
+    ],
+  }).addComponentToDocument();
+
+  new BulletListComponent(pdf, {
+    initialText: [
+      {
+        text: request.__('sharePlan.whatWeAreTelling.ifThereIsCourt'),
+        size: QUESTION_TITLE_SIZE,
+        style: FontStyles.BOLD,
+        bottomPadding: PARAGRAPH_SPACE,
+      },
+      {
+        text: request.__('sharePlan.whatWeAreTelling.doNotContinue'),
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+      },
+      {
+        text: request.__('sharePlan.whatWeAreTelling.forExample'),
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+      },
+    ],
+    bulletText: [
+      request.__('sharePlan.whatWeAreTelling.childArrangementsOrder'),
+      request.__('sharePlan.whatWeAreTelling.specificIssueOrder'),
+      request.__('sharePlan.whatWeAreTelling.prohibitedStepsOrder'),
+      request.__('sharePlan.whatWeAreTelling.protectiveOrder'),
+      request.__('sharePlan.whatWeAreTelling.anyOther'),
+    ],
+    finalText: [
+      {
+        text: request.__('sharePlan.whatWeAreTelling.toChange'),
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+        urlize: true,
+      }
+    ],
+  }).addComponentToDocument();
+
+
+    new BulletListComponent(pdf, {
     initialText: [
       {
         text: request.__('sharePlan.whatWeAreTelling.moreInfoHeading'),
@@ -161,103 +214,101 @@ const addPreamble = (pdf: Pdf) => {
         style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
-      {
+        {
         text: request.__('sharePlan.whatWeAreTelling.moreInfo'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
-    ],
-    bulletText: [
-      request.__('sharePlan.whatWeAreTelling.separatingOrDivorcing'),
-      request.__('sharePlan.whatWeAreTelling.makingChildArrangements'),
-    ],
-  }).addComponentToDocument();
-
-  new BulletListComponent(pdf, {
-    initialText: [
-      {
-        text: request.__('sharePlan.whatWeAreTelling.safetyCheckHeading'),
         size: QUESTION_TITLE_SIZE,
         style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
-      {
-        text: request.__('sharePlan.whatWeAreTelling.safetyCheck'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
-      {
-        text: request.__('sharePlan.whatWeAreTelling.doNotContinueIf'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.BOLD,
-        bottomPadding: PARAGRAPH_SPACE,
-      },
     ],
     bulletText: [
-      request.__('childrenSafetyCheck.domesticAbuse'),
-      request.__('childrenSafetyCheck.childAbduction'),
-      request.__('childrenSafetyCheck.childAbuse'),
-      request.__('childrenSafetyCheck.drugsOrAlcohol'),
-      request.__('childrenSafetyCheck.otherConcerns'),
-    ],
-    finalText: [
-      {
-        text: request.__('sharePlan.whatWeAreTelling.stopIfAnyConcern'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.BOLD,
-        bottomPadding: PARAGRAPH_SPACE,
-        urlize: true,
-      },
-      {
-        text: request.__('sharePlan.whatWeAreTelling.findAnotherWay'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-        urlize: true,
-      },
+      request.__('sharePlan.whatWeAreTelling.makingChildArrangements'),
+      request.__('sharePlan.whatWeAreTelling.legalSeparation'),
+      request.__('sharePlan.whatWeAreTelling.divorce'),
     ],
   }).addComponentToDocument();
 
   new TextComponent(pdf, [
     {
-      text: request.__('sharePlan.whatWeAreTelling.gettingHelpHeading'),
+      text: request.__('sharePlan.whatWeAreTelling.legalAdviceHeading'),
       size: QUESTION_TITLE_SIZE,
       style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.whatWeAreTelling.gettingHelp'),
+      text: request.__('sharePlan.whatWeAreTelling.findLegalAdviser'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
       urlize: true,
     },
-    {
-        text: request.__('sharePlan.whatWeAreTelling.unsureVictim'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-        urlize: true,
-      },
   ]).addComponentToDocument();
 
   new TextComponent(pdf, [
     {
-      text: request.__('sharePlan.whatWeAreTelling.courtOrderHeading'),
+      text: request.__('sharePlan.whatWeAreTelling.domesticAbuseHeading'),
       size: QUESTION_TITLE_SIZE,
       style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.whatWeAreTelling.ifCourtOrderInIsPlace'),
+      text: request.__('sharePlan.whatWeAreTelling.signsAndEffects'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+      urlize: true,
+    },
+        {
+      text: request.__('sharePlan.whatWeAreTelling.unsureVictim'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
       urlize: true,
     },
   ]).addComponentToDocument();
+
+    new BulletListComponent(pdf, {
+    initialText: [
+      {
+        text: request.__('sharePlan.whatWeAreTelling.notSuitableHeading'),
+        size: QUESTION_TITLE_SIZE,
+        style: FontStyles.BOLD,
+        bottomPadding: PARAGRAPH_SPACE,
+      },
+    ],
+    bulletText: [
+      request.__('sharePlan.whatWeAreTelling.anyForm'),
+      request.__('sharePlan.whatWeAreTelling.childAbduction'),
+      request.__('sharePlan.whatWeAreTelling.childAbuse'),
+      request.__('sharePlan.whatWeAreTelling.drugsOrAlcohol'),
+      request.__('sharePlan.whatWeAreTelling.anyOtherSafety'),
+    ],
+  }).addComponentToDocument();
+
+    new TextComponent(pdf, [
+    {
+      text: request.__('sharePlan.whatWeAreTelling.feedbackHeading'),
+      size: QUESTION_TITLE_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+    {
+      text: request.__('sharePlan.whatWeAreTelling.toAskForHelp'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+      urlize: true,
+    },
+    {
+      text: request.__('sharePlan.whatWeAreTelling.weCannot'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+      urlize: true,
+    },
+  ]).addComponentToDocument();
+
+  
 };
 
 export default addPreamble;
