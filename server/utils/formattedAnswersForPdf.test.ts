@@ -226,7 +226,7 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.livingAndVisiting).toEqual({
-            mostlyLive: `${session.initialAdultName} suggested that the children mostly live with ${session.initialAdultName}.`,
+            mostlyLive: `${session.initialAdultName} suggested that the children spend most of their time with ${session.initialAdultName}.`,
             willOvernightsHappen: `${session.initialAdultName} suggested that overnights do not happen at this time.`,
             willDaytimeVisitsHappen: `${session.initialAdultName} suggested that the children do daytime visits to ${session.secondaryAdultName}'s home.`,
             whichDaysDaytimeVisits: `${session.initialAdultName} suggested that this does not need to be decided.`,
@@ -256,7 +256,7 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.livingAndVisiting).toEqual({
-            mostlyLive: `${session.initialAdultName} suggested that the children mostly live with ${session.initialAdultName}.`,
+            mostlyLive: `${session.initialAdultName} suggested that the children spend most of their time with ${session.initialAdultName}.`,
             willOvernightsHappen: `${session.initialAdultName} suggested that the children stay overnight at ${session.secondaryAdultName}'s home.`,
             whichDaysOvernight: `${session.initialAdultName} suggested that overnight visits happen on Monday, Wednesday and Friday.`,
             willDaytimeVisitsHappen: `${session.initialAdultName} suggested that daytime visits do not happen at this time.`,
@@ -290,7 +290,7 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.livingAndVisiting).toEqual({
-            mostlyLive: `${session.initialAdultName} suggested that the children mostly live with ${session.secondaryAdultName}.`,
+            mostlyLive: `${session.initialAdultName} suggested that the children spend most of their time with ${session.secondaryAdultName}.`,
             willOvernightsHappen: `${session.initialAdultName} suggested that the children stay overnight at ${session.initialAdultName}'s home.`,
             whichDaysOvernight: `${session.initialAdultName} suggested:\n"arrangement"`,
             willDaytimeVisitsHappen: `${session.initialAdultName} suggested that the children do daytime visits to ${session.initialAdultName}'s home.`,

@@ -518,7 +518,7 @@
       "doNotStoreNames": "We do not store these names or share any of this information with other government departments.",
       "doNotAgreeOnBasics": "If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to https://www.gov.uk/looking-after-children-divorce.",
       "livingAndVisiting": {
-        "suggestedLiveWith": "{{{ senderName }}}  suggested that the children mostly live spend most of their time with {{{ adult }}}.",
+        "suggestedLiveWith": "{{{ senderName }}} suggested that the children spend most of their time with {{{ adult }}}.",
         "suggestedLiveWithChild": "{{{ senderName }}} suggested that {{{ childName }}} mostly lives with {{{ adult }}}.",
         "suggestedLiveWithOtherChildren": "{{{ senderName }}} suggested that the other children mostly live with {{{ adult }}}.",
         "suggestedSplit": "{{{ senderName }}} said the children will split their time between {{{ otherAdult }}}'s home and {{{ senderName }}}'s home.",
