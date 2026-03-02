@@ -135,7 +135,7 @@ describe(paths.LIVING_VISITING_MOSTLY_LIVE, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Choose where the children will mostly live',
+          msg: 'Choose where the children will spend most of their time',
           path: formFields.MOSTLY_LIVE_WHERE,
           type: 'field',
         },
