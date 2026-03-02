@@ -82,8 +82,7 @@ We use [Jest](https://jestjs.io/) for unit tests. To run them run `npm run test`
 **Note**: The integration tests assume the authentication is switched in the config. The default setups use the `.env.test`
 file, where this is the case, but if you are modifying things you will need to ensure this is still used.
 
-These include PDF snapshot tests. To update the tests, run them with the environment variable `UPDATE_PDF_SNAPSHOTS=true`,
-or run `npm run test:update-pdf-snapshots`
+For full details on running tests and previewing PDF and HTML export output without going through the service journey, see the [tests README](./server/__tests__/README.md).
 
 ## Static Checks
 
