@@ -26,104 +26,109 @@ const generatePdf = () => {
     pdf.addSpacing(4); // Add extra spacing above main heading
     pdf.addMainHeading('Propose a child arrangements plan');
 
-    pdf.addBodyText('This form helps two people collaborate to work out their child arrangements without having to go to court.', { spacing: 3 });
-    pdf.addBodyText('Any plan you create using this service is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time. ')
+    pdf.addBodyText('Use this form from the Child Arrangements Plan service ( https://propose-child-arrangements-plan.service.gov.uk/ ) on GOV.UK to collaborate to create child arrangements which you both agree on, without having to go to court.', { spacing: 3 });
+    pdf.addBodyText('Any plan you create using this service is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.');
 
     pdf.addSubsectionHeading('How to use this form');
     pdf.addNumberedList([
       '1. Fill out the form saying what arrangements you would like',
       '2. Let the other parent or carer add their response',
-      '3. Make compromises until you reach agreement',
+      '3. Collaborate until you reach agreement',
     ]);
     pdf.addSpacing(8);
 
-    pdf.addSubsectionHeading('Other ways to work out child arrangements');
-    pdf.addBodyText('If you don\'t want to use this form you can instead:', { spacing: 2 });
+    pdf.addSubsectionHeading('Your safety');
+    pdf.addBodyText('You should only use this form if:', { spacing: 2 });
     pdf.addBulletList([
-      '• use the online version of this service on GOV.UK',
-      '• find a similar service, such as the CAFCASS parenting plan or the Scottish Government\'s parenting plan',
-      '• make a written plan of your own without using any service or template',
-      '• get the help of a mediator',
+      '• you\'re confident that you and your ex-partner can make decisions together without putting yourself or the children in danger',
+      '• both of you do not feel pressured or intimidated into responding',
     ]);
-    pdf.addSpacing(8);
-
-    pdf.addSubsectionHeading('The benefits of getting a written agreement in place');
-    pdf.addBodyText('If you the other parent or carer can work together to make written child arrangements, you’re more likely to avoid court. It usually takes around 10 months to get a court order, depending on where you live and your situation.', { spacing: 2 });
-    pdf.addBodyText('You’re also more likely to get an arrangement that works for you.', { spacing: 2 });
-    pdf.addBodyText('That\'s because people who go to court can often find they don’t keep their ability to make decisions on their children’s wellbeing.', { spacing: 2 })
-    pdf.addSpacing(8);
-
-    pdf.addSubsectionHeading('Top tips for you and your children');
-    pdf.addBulletList([
-      '• One of the main reasons people end up in court is that they are not willing to compromise to reach agreement. It may help you avoid court if you can work together to find a compromise that\'s best for your children.',
-      '• Get your children\'s input into the arrangements you are making so that they feel included and their needs are met.',
-      '• Remember to always put your children\'s needs and feelings first.',
-      '• It may not be in the children\'s best interests to split time exactly between households.',
-    ]);
+    pdf.addSpacing(3);
+    pdf.addBodyText('If you have any concerns about safety, stop now.', { bold: true, spacing: 2 });
+    pdf.addBodyText('If you have any feedback or safety concerns about this service, you can email childarrangementsafety@justice.gov.uk.', { spacing: 2 });
+    pdf.addBodyText('We cannot answer any questions about child arrangement plans that have already been created.');
 
     pdf.addFooter(1);
 
-    // ===== PAGE 2: More information and safety =====
+    // ===== PAGE 2: Other ways, benefits, top tips =====
     pdf.addPage();
 
-    pdf.addSectionHeading('More information about divorce and separation');
-    pdf.addBodyText('Check GOV.UK to find what support is available. You can search for topics including:', { spacing: 2 });
+    pdf.addSubsectionHeading('How making a child arrangements plan can help');
+    pdf.addBodyText('You may find that collaborating with the other parent or carer on a child arrangements plan:', { spacing: 2 });
     pdf.addBulletList([
-      '• what you need to do if separating or divorcing',
-      '• making child arrangements',
-    ]);
-    pdf.addSpacing(8);
-
-    pdf.addSectionHeading('Safety check');
-    pdf.addBodyText('To make child arrangements you need to be able to state your needs and views without feeling intimidated. The other parent or carer must not be a threat to you or to your children\'s safety.', { spacing: 5 });
-    pdf.addBodyText('Do not continue with this process if there has been:', { spacing: 2 });
-    pdf.addBulletList([
-      '• any form of domestic abuse, even if the abuse was not directed at the children',
-      '• actual or attempted child abduction',
-      '• misuse of drugs, alcohol or other substances',
-      '• any other safety or welfare concerns that place anyone at significant risk of harm',
+      '• is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it\'s urgent)',
+      '• leads to a better outcome for your children, which you and your ex-partner are in control of',
     ]);
     pdf.addSpacing(3);
-
-    pdf.addBodyText('If you have any concerns about safety, stop now. Find another way to make arrangements by visiting', { spacing: 0 });
-    pdf.addBodyText('https://helpwithchildarrangements.service.justice.gov.uk', { bold: true });
-    
+    pdf.addBodyText('Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.', { spacing: 2 });
     pdf.addSpacing(8);
-    pdf.addSubsectionHeading('Getting help with domestic abuse');
-    pdf.addBodyText('To find out more about what is child abuse and neglect, visit ', { spacing: 0});
-    pdf.addBodyText(' https://www.nspcc.org.uk/what-is-child-abuse', { bold: true })
-    pdf.addBodyText('If you\'re unsure whether you\'re a victim of domestic abuse, visit ', { spacing: 0 });
-    pdf.addBodyText('https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.', { bold: true });
+
+    pdf.addSubsectionHeading('Top tips for you and your children');
+    pdf.addBodyText('Your child arrangements plan should:', { spacing: 2 });
+    pdf.addBulletList([
+      '• put the child\'s welfare first',
+      '• reflect the wishes, feelings and needs of the child',
+      '• consider any harm the child has suffered or any risk of harm',
+    ]);
 
     pdf.addFooter(2);
 
-    // ===== PAGE 3: Court orders =====
+    // ===== PAGE 3: More information and safety (was page 2) =====
     pdf.addPage();
 
     pdf.addSubsectionHeading('If there is a court order in place');
-    pdf.addBodyText('If you have an order in place that sets out restrictions on contact with your children or ex-partner, you should find a different way to make your child arrangements.', { spacing: 4 });
-    pdf.addSpacing(4);
-
-    pdf.addQuestionHeading('This type of order may include:');
+    pdf.addBodyText('Do not continue if there\'s a court order in place relating to you, the other parent, or the children.', { spacing: 2 });
+    pdf.addBodyText('For example, a:', { spacing: 2 });
     pdf.addBulletList([
-      '• a prohibited steps order',
-      '• a specific issue order',
-      '• a non-molestation order',
-      '• a no contact order',
+      '• child arrangements order',
+      '• specific issue order',
+      '• prohibited steps order',
+      '• protective order such as a non-molestation order, occupation order or a domestic abuse protection order',
+      '• any other order restricting contact between you and the other parent or the children',
     ]);
-    pdf.addSpacing(3);
+    pdf.addSpacing(2);
+    pdf.addBodyText('To change or enforce an existing child arrangements order, visit https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order', { spacing: 0 });
+    pdf.addSpacing(8);
 
-    pdf.addBodyText('Check any legal documents sent to you by a court to see whether you have any of these types of restrictions.', { spacing: 3 });
-    pdf.addBodyText('If you have one of these types of order, stop now. You will need to find a different way to agree your child arrangements.', { spacing: 6 });
-    
-    pdf.addSpacing(4);
-    pdf.addSubsectionHeading('If you do not have any restrictions on contact');
-    pdf.addBodyText('If you do not have any restrictions on contact with your children or ex-partner, you can use this service.', { spacing: 3 });
-    pdf.addBodyText('You can use this service to change child arrangements given to you by a court, so long as the other parent or carer agrees with the changes. You do not need to go back to court to change your arrangements. However, a court can only enforce the child arrangements that are in your court order.');
+    pdf.addSubsectionHeading('Get more information');
+    pdf.addBodyText('Use GOV.UK to find more information, for example:', { spacing: 2 });
+    pdf.addBulletList([
+      '• making child arrangements: https://www.gov.uk/looking-after-children-divorce',
+      '• getting a legal separation: https://www.gov.uk/legal-separation',
+      '• getting a divorce: https://www.gov.uk/get-a-divorce',
+    ]);
+    pdf.addSpacing(8);
+
+    pdf.addSubsectionHeading('If you want legal advice');
+    pdf.addBodyText('You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser.', { spacing: 0 });
+    pdf.addSpacing(8);
+
+    pdf.addSubsectionHeading('Getting help with domestic abuse');
+    pdf.addBodyText('To find out more about signs and effects of child abuse and neglect, visit \nhttps://www.nspcc.org.uk/what-is-child-abuse.', { spacing: 2 });
+    pdf.addBodyText('If you\'re unsure whether you\'re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.', { spacing: 0 });
 
     pdf.addFooter(3);
 
-    // ===== PAGE 4: About this proposal =====
+    // ===== PAGE 4: Safety continuation =====
+    pdf.addPage();
+
+    pdf.addSubsectionHeading('This plan is not suitable for you if there has been:');
+    pdf.addBulletList([
+      '• any form of domestic abuse or violence, even if the abuse was not directed at the children',
+      '• child abduction or attempted child abduction',
+      '• child abuse or neglect',
+      '• misuse of drugs, alcohol or other substances',
+      '• any other safety or welfare concerns that place anyone at significant risk of harm',
+    ]);
+    pdf.addSpacing(8);
+
+    pdf.addSubsectionHeading('Feedback and support');
+    pdf.addBodyText('To ask for help using this service, or suggest improvements, you can email  childarrangements@justice.gov.uk', { spacing: 2 });
+    pdf.addBodyText('We cannot answer any questions about child arrangement plans that have already been created.');
+
+    pdf.addFooter(4);
+
+    // ===== PAGE 5: About this proposal (was page 4) =====
     pdf.addPage();
 
     pdf.addSectionHeading('About this child arrangements proposal');
@@ -138,13 +143,13 @@ const generatePdf = () => {
     pdf.addSpacing(4);
     pdf.addInputBox(10, 'First name of the other parent or carer', null, false);
 
-    pdf.addFooter(4);
+    pdf.addFooter(5);
 
-    // ===== PAGE 5: Living and visiting =====
+    // ===== PAGE 6: Living and visiting (was page 5) =====
     pdf.addPage();
 
     pdf.addSectionHeading('Living and visiting');
-    pdf.addQuestionHeading('Where will the children mostly live?');
+    pdf.addQuestionHeading('Where will the children spend most of their time?');
     pdf.addBodyText('Options include:', { spacing: 5 });
     pdf.addBulletList([
       '• The children will mostly live with you',
@@ -153,7 +158,7 @@ const generatePdf = () => {
     ]);
     pdf.addSpacing(3);
 
-    pdf.addTip('Tip: An exact split of time between two households does not always suit child\'s best interests.', { spacing: 0 });
+    pdf.addTip('Tip: An exact split of time between two households does not always suit children\'s best interests.', { spacing: 0 });
     pdf.addSpacing(4);
 
     pdf.addParentBoxInstruction();
@@ -161,9 +166,9 @@ const generatePdf = () => {
     pdf.addSpacing(4);;
     pdf.addCompromiseBox(90);
 
-    pdf.addFooter(5);
+    pdf.addFooter(6);
 
-    // ===== PAGE 6: Schedule =====
+    // ===== PAGE 7: Schedule (was page 6) =====
     pdf.addPage();
 
     pdf.addQuestionHeading('Which schedule best meets the children\'s needs?');
@@ -179,7 +184,7 @@ const generatePdf = () => {
 
       pdf.doc.setFont('Helvetica', 'bold');
       pdf.doc.setFontSize(10);
-      pdf.doc.text('Here are some common schedules that can benefit children.', col1X, boxY);
+      pdf.doc.text('Here are some common schedules that can work well for children.', col1X, boxY);
       boxY += 6; // Increased from 4 to 6 for more space
 
       // Column 1
@@ -222,9 +227,9 @@ const generatePdf = () => {
     pdf.addSpacing(6);
     pdf.addCompromiseBox(50);
 
-    pdf.addFooter(6);
+    pdf.addFooter(7);
 
-    // ===== PAGE 7: Handovers =====
+    // ===== PAGE 8: Handovers (was page 7) =====
     pdf.addPage();
 
     pdf.addSectionHeading('Handovers and holidays');
@@ -235,22 +240,22 @@ const generatePdf = () => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(110);
 
-    pdf.addFooter(7);
+    pdf.addFooter(8);
 
-    // ===== PAGE 8: Handover location =====
+    // ===== PAGE 9: Handover location (was page 8) =====
     pdf.addPage();
 
     pdf.addQuestionHeading('Where does handover take place?');
-    pdf.addBodyText('It may be easier for children if the handover takes place at a neutral location such as a park or railway station.', { spacing: 5 });
+    pdf.addBodyText('It may be easier for children if the handover takes place at a neutral location such as a park or railway station which you\'re confident you\'ll both feel safe in.', { spacing: 5 });
 
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60);
     pdf.addSpacing(8);
     pdf.addCompromiseBox(110);
 
-    pdf.addFooter(8);
+    pdf.addFooter(9);
 
-    // ===== PAGE 9: School holidays =====
+    // ===== PAGE 10: School holidays (was page 9) =====
     pdf.addPage();
 
     pdf.addQuestionHeading('How will the arrangements be different in school holidays?');
@@ -261,9 +266,9 @@ const generatePdf = () => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(110);
 
-    pdf.addFooter(9);
+    pdf.addFooter(10);
 
-    // ===== PAGE 10: Items between households =====
+    // ===== PAGE 11: Items between households (was page 10) =====
     pdf.addPage();
 
     pdf.addQuestionHeading('What items need to go between households?');
@@ -274,23 +279,23 @@ const generatePdf = () => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(110);
 
-    pdf.addFooter(10);
+    pdf.addFooter(11);
 
-    // ===== PAGE 11: Special days =====
+    // ===== PAGE 12: Special days (was page 11) =====
     pdf.addPage();
 
     pdf.addSectionHeading('Special days');
     pdf.addQuestionHeading('What will happen on special days?');
-    pdf.addBodyText('Keep your children\'s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother\'s Day and Father\'s Day, and birthdays.', { spacing: 5 });
+    pdf.addBodyText('Keep your children\'s needs and best interests at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother\'s Day and Father\'s Day, and birthdays.', { spacing: 5 });
 
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60); // Reduced from 90
     pdf.addSpacing(8);
     pdf.addCompromiseBox(90); // Reduced from 110
 
-    pdf.addFooter(11);
+    pdf.addFooter(12);
 
-    // ===== PAGE 12: Other things =====
+    // ===== PAGE 13: Other things (was page 12) =====
     pdf.addPage();
 
     pdf.addSectionHeading('Other things');
@@ -309,9 +314,9 @@ const generatePdf = () => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(90);
 
-    pdf.addFooter(12);
+    pdf.addFooter(13);
 
-    // ===== PAGE 13: Decision making =====
+    // ===== PAGE 14: Decision making (was page 13) =====
     pdf.addPage();
 
     pdf.addSectionHeading('Decision making');
@@ -319,7 +324,7 @@ const generatePdf = () => {
     pdf.addBodyText('There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.', { spacing: 5 });
     pdf.addBodyText('Options could include:', { spacing: 5 });
     pdf.addBulletList([
-      '• By test message',
+      '• By text message',
       '• With a phone call',
       '• By email',
       '• Using a parenting app',
@@ -331,36 +336,36 @@ const generatePdf = () => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(90);
 
-    pdf.addFooter(13);
+    pdf.addFooter(14);
 
-    // ===== PAGE 14: When children's needs change =====
+    // ===== PAGE 15: When children's needs change (was page 14) =====
     pdf.addPage();
 
     pdf.addQuestionHeading('When will the children\'s needs change?');
-    pdf.addBodyText('You can also review these arrangements at an earlier time if they no longer meet your children\'s needs.', { spacing: 5 });
     pdf.addBodyText('Children\'s needs change as they grow. When should you review this agreement to check it is still what\'s best for the children?', { spacing: 5 });
+    pdf.addBodyText('You can also review these arrangements at an earlier time if they no longer meet your children\'s needs.', { spacing: 5 });
 
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60); // Reduced from 90
     pdf.addSpacing(8);
     pdf.addCompromiseBox(90); // Reduced from 110
 
-    pdf.addFooter(14);
+    pdf.addFooter(15);
 
-    // ===== PAGE 15: What happens now =====
+    // ===== PAGE 16: What happens now (was page 15) =====
     pdf.addPage();
 
     pdf.addSectionHeading('What you need to do now');
     pdf.addBodyText('Now give this proposed child arrangements plan to the other parent or carer so they can add their response.', { spacing: 2 });
     pdf.addBodyText('When they have added their response, you can collaborate to reach a shared agreement.')
     pdf.addQuestionHeading('If you can\'t agree');
-    pdf.addBodyText('If you are unable to reach an agreement about your child arrangements, you can try mediation.',{ spacing: 2 });
-    pdf.addBodyText('A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both sides and take a neutral approach.',{ spacing: 2 });
-    pdf.addBodyText('More information and support is available by visiting https://www.gov.uk/looking-after-children-divorce')
-    pdf.addQuestionHeading('Get paid to give your feedback');
-    pdf.addBodyText('With your help we can continually improve this service and understand how you use your plan.', { spacing: 2 });
+    pdf.addBodyText('If you are unable to reach agreement about your child arrangements, you can try mediation or another way of agreeing outside of court.',{ spacing: 2 });
+    pdf.addBodyText('A mediator is a professional who will work with you to help you make decisions based on your child\u2019s best interests. They listen to both of you and take a neutral approach.',{ spacing: 2 });
+    pdf.addBodyText('More information and support is available at: https://www.gov.uk/looking-after-children-divorce')
+    pdf.addQuestionHeading('Help us improve this service');
+    pdf.addBodyText('With your help we can improve this service for others.', { spacing: 2 });
     pdf.addBodyText('Email childarrangements@justice.gov.uk to express an interest in taking part in research and receive an incentive.');
-    pdf.addFooter(15);
+    pdf.addFooter(16);
 
     // Set document title for PDF metadata
     pdf.setProperties({

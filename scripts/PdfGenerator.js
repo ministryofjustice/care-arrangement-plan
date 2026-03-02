@@ -15,7 +15,7 @@ class PdfGenerator {
     this.pageHeight = this.doc.internal.pageSize.getHeight();
     this.currentY = PdfStyles.HEADER_HEIGHT + 10;
     this.currentPage = 1;
-    this.totalPages = 15; // Known from the form
+    this.totalPages = 16; // Known from the form
 
     // Load logo
     const logoPath = path.resolve(process.cwd(), 'assets', 'images', 'crest.png');
@@ -152,6 +152,7 @@ class PdfGenerator {
 
   /**
    * Add body text (normal weight) with optional clickable links
+   * URLs and email addresses are automatically rendered in bold
    */
   addBodyText(text, options = {}) {
     const {
@@ -162,43 +163,55 @@ class PdfGenerator {
       bold = false
     } = options;
 
-    this.doc.setFont(PdfStyles.FONT_FAMILY, bold ? PdfStyles.FONT_BOLD : PdfStyles.FONT_NORMAL);
+    const fontStyle = bold ? PdfStyles.FONT_BOLD : PdfStyles.FONT_NORMAL;
+    this.doc.setFont(PdfStyles.FONT_FAMILY, fontStyle);
     this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
     this.doc.setTextColor(...(gray ? PdfStyles.COLOR_GRAY : PdfStyles.COLOR_BLACK));
 
     const x = PdfStyles.MARGIN_WIDTH + indent;
     const maxWidth = wrap ? this.pageWidth - 2 * PdfStyles.MARGIN_WIDTH - indent : null;
 
+    const linkPattern = /https?:\/\/[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+    const linkSplitPattern = /(https?:\/\/[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/;
+
     if (wrap) {
       const lines = this.doc.splitTextToSize(text, maxWidth);
-
-      // Check if text contains URLs
-      const urlRegex = /(https?:\/\/[^\s]+)/g;
-      const hasLinks = urlRegex.test(text);
+      const hasLinks = linkPattern.test(text);
 
       if (hasLinks) {
-        // Extract URLs from original text
-        const urls = text.match(urlRegex) || [];
+        // Collect all http URLs in order for textWithLink
+        const allUrls = [];
+        const urlOnlyRegex = /https?:\/\/[^\s]+/g;
+        let urlMatch;
+        while ((urlMatch = urlOnlyRegex.exec(text)) !== null) {
+          allUrls.push(urlMatch[0]);
+        }
         let urlIndex = 0;
 
         lines.forEach(line => {
-          // Check if this line contains a URL
-          const lineUrls = line.match(urlRegex);
-          if (lineUrls) {
-            // Split line by URL and add clickable links
+          if (linkPattern.test(line)) {
             let currentX = x;
-            const parts = line.split(urlRegex);
+            const parts = line.split(linkSplitPattern);
 
             parts.forEach((part) => {
-              if (urlRegex.test(part) && urls[urlIndex]) {
-                // This is a URL - make it clickable
-                this.doc.textWithLink(part, currentX, this.currentY, { url: urls[urlIndex] });
-                urlIndex++;
-              } else if (part) {
-                // Regular text
+              if (!part) return;
+              const isUrl = /^https?:\/\//.test(part);
+              const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part);
+
+              if (isUrl) {
+                this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
+                this.doc.textWithLink(part, currentX, this.currentY, { url: allUrls[urlIndex++] || part });
+                currentX += this.doc.getTextWidth(part);
+                this.doc.setFont(PdfStyles.FONT_FAMILY, fontStyle);
+              } else if (isEmail) {
+                this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
                 this.doc.text(part, currentX, this.currentY);
+                currentX += this.doc.getTextWidth(part);
+                this.doc.setFont(PdfStyles.FONT_FAMILY, fontStyle);
+              } else {
+                this.doc.text(part, currentX, this.currentY);
+                currentX += this.doc.getTextWidth(part);
               }
-              currentX += this.doc.getTextWidth(part);
             });
           } else {
             this.doc.text(line, x, this.currentY);
@@ -224,18 +237,59 @@ class PdfGenerator {
 
   /**
    * Add bulleted list
+   * URLs and email addresses are automatically rendered in bold
    */
   addBulletList(items, options = {}) {
     const { indent = 0, itemSpacing = 8 } = options;
+
+    const linkPattern = /https?:\/\/[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+    const linkSplitPattern = /(https?:\/\/[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/;
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
     this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
 
     items.forEach(item => {
       const lines = this.doc.splitTextToSize(item, this.pageWidth - 2 * PdfStyles.MARGIN_WIDTH - indent - 2);
+
+      // Collect all http URLs in order for textWithLink
+      const allUrls = [];
+      const urlOnlyRegex = /https?:\/\/[^\s]+/g;
+      let urlMatch;
+      while ((urlMatch = urlOnlyRegex.exec(item)) !== null) {
+        allUrls.push(urlMatch[0]);
+      }
+      let urlIndex = 0;
+
       lines.forEach((line, idx) => {
         const x = PdfStyles.MARGIN_WIDTH + indent + (idx === 0 ? 0 : 2);
-        this.doc.text(line, x, this.currentY);
+
+        if (linkPattern.test(line)) {
+          let currentX = x;
+          const parts = line.split(linkSplitPattern);
+
+          parts.forEach((part) => {
+            if (!part) return;
+            const isUrl = /^https?:\/\//.test(part);
+            const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part);
+
+            if (isUrl) {
+              this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
+              this.doc.textWithLink(part, currentX, this.currentY, { url: allUrls[urlIndex++] || part });
+              currentX += this.doc.getTextWidth(part);
+              this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
+            } else if (isEmail) {
+              this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
+              this.doc.text(part, currentX, this.currentY);
+              currentX += this.doc.getTextWidth(part);
+              this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
+            } else {
+              this.doc.text(part, currentX, this.currentY);
+              currentX += this.doc.getTextWidth(part);
+            }
+          });
+        } else {
+          this.doc.text(line, x, this.currentY);
+        }
         this.currentY += 4;
       });
       this.currentY += (itemSpacing - 4);
@@ -290,7 +344,7 @@ class PdfGenerator {
    * Add compromise box
    */
   addCompromiseBox(height = 80) {
-    this.addBodyText('Tell us your agreed compromise for this question.', { spacing: 2 }); // Reduced spacing to bring text closer to box
+    this.addBodyText('Enter your agreed answer to this question.', { spacing: 2 }); // Reduced spacing to bring text closer to box
 
     // Check if box will overflow into footer
     const maxY = this.pageHeight - PdfStyles.FOOTER_HEIGHT - 5;
