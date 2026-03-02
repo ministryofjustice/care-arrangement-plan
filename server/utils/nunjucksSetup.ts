@@ -45,6 +45,7 @@ const nunjucksSetup = (app: express.Express): void => {
   njkEnv.addGlobal('paths', paths);
   njkEnv.addGlobal('formFields', formFields);
   njkEnv.addGlobal('cookieNames', cookieNames);
+  njkEnv.addGlobal('includeWelshLanguage', config.includeWelshLanguage);
   njkEnv.addGlobal('__', i18n.__);
   njkEnv.addGlobal('getLocale', () => i18n.getLocale);
   njkEnv.addFilter('findError', findError);
