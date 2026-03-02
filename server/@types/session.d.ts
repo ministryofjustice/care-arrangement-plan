@@ -12,88 +12,22 @@ export type WhichDays = {
   noDecisionRequired?: boolean;
 };
 
-// Per-child answer structure for questions that can have different answers for each child
-export type PerChildAnswer<T> = {
-  // Default answer that applies to all children unless overridden
-  default: T;
-  // Optional per-child overrides, keyed by child index (0, 1, 2, etc.)
-  byChild?: Record<number, T>;
-};
-
-// Answer type for howChangeDuringSchoolHolidays
-export type HowChangeDuringSchoolHolidaysAnswer = {
-  noDecisionRequired: boolean;
-  answer?: string;
-  notApplicable?: boolean; // This question does not apply to this child
-};
-
-export type GetBetweenHouseholdsAnswer = {
-  noDecisionRequired: boolean;
-  how?: getBetweenHouseholdsField;
-  describeArrangement?: string;
-  notApplicable?: boolean; // This question does not apply to this child
-};
-
-export type WhereHandoverAnswer = {
-  noDecisionRequired: boolean;
-  where?: whereHandoverField[];
-  other?: string;
-  notApplicable?: boolean; // This question does not apply to this child
-};
-
-export type WhatWillHappenAnswer = {
-  noDecisionRequired: boolean;
-  answer?: string;
-  notApplicable?: boolean; // This question does not apply to this child
-};
-
-export type WhichScheduleAnswer = {
-  noDecisionRequired: boolean;
-  answer?: string;
-};
-
-export type MostlyLiveAnswer = {
-  where: whereMostlyLive;
-  describeArrangement?: string;
-};
-
-// Design mode for per-child answers
-export type PerChildDesignMode = 'design1' | 'design2';
-
-// Design 2: Per-child plan structure - a complete plan for each child
-export type ChildPlan = {
-  childIndex: number;
-  childName: string;
-  isComplete: boolean;
-  copiedFromChildIndex?: number; // If this plan was copied from another child
-  livingAndVisiting?: CAPSession['livingAndVisiting'];
-  handoverAndHolidays?: Omit<NonNullable<CAPSession['handoverAndHolidays']>, 'howChangeDuringSchoolHolidays'> & {
-    howChangeDuringSchoolHolidays?: HowChangeDuringSchoolHolidaysAnswer;
-  };
-  specialDays?: CAPSession['specialDays'];
-  otherThings?: CAPSession['otherThings'];
-  decisionMaking?: CAPSession['decisionMaking'];
-};
-
 export type CAPSession = {
   completedSteps?: string[];
+  planStartTime?: number;
   numberOfChildren: number;
   namesOfChildren: string[];
   initialAdultName: string;
   secondaryAdultName: string;
-  // UR toggle: enable per-child PoC features (default false for current service)
-  usePerChildPoC?: boolean;
-  // Unique identifier for each plan attempt (timestamp when user clicks "Start now")
-  planStartTime?: number;
-  // Design mode toggle: 'design1' = inline per-child (default), 'design2' = task list level
-  perChildDesignMode?: PerChildDesignMode;
-  // Design 2 specific: which child's plan is currently being edited
-  currentChildIndex?: number;
-  // Design 2 specific: per-child plans
-  childPlans?: ChildPlan[];
   livingAndVisiting?: {
-    mostlyLive?: PerChildAnswer<MostlyLiveAnswer>;
-    whichSchedule?: PerChildAnswer<WhichScheduleAnswer>;
+    mostlyLive?: {
+      where: whereMostlyLive;
+      describeArrangement?: string;
+    };
+    whichSchedule?: {
+      noDecisionRequired: boolean;
+      answer?: string;
+    };
     overnightVisits?: {
       willHappen: boolean;
       whichDays?: WhichDays;
@@ -104,21 +38,34 @@ export type CAPSession = {
     };
   };
   handoverAndHolidays?: {
-    getBetweenHouseholds?: PerChildAnswer<GetBetweenHouseholdsAnswer>;
-    whereHandover?: PerChildAnswer<WhereHandoverAnswer>;
+    getBetweenHouseholds?: {
+      noDecisionRequired: boolean;
+      how?: getBetweenHouseholdsField;
+      describeArrangement?: string;
+    };
+    whereHandover?: {
+      noDecisionRequired: boolean;
+      where?: whereHandoverField[];
+      other?: string;
+    };
     willChangeDuringSchoolHolidays?: {
       noDecisionRequired: boolean;
       willChange?: boolean;
     };
-    // Updated to support per-child answers
-    howChangeDuringSchoolHolidays?: PerChildAnswer<HowChangeDuringSchoolHolidaysAnswer>;
+    howChangeDuringSchoolHolidays?: {
+      noDecisionRequired: boolean;
+      answer?: string;
+    };
     itemsForChangeover?: {
       noDecisionRequired: boolean;
       answer?: string;
     };
   };
   specialDays?: {
-    whatWillHappen?: PerChildAnswer<WhatWillHappenAnswer>;
+    whatWillHappen?: {
+      noDecisionRequired: boolean;
+      answer?: string;
+    };
   };
   otherThings?: {
     whatOtherThingsMatter?: {

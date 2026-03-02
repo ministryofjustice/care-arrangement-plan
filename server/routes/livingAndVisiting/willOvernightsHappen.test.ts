@@ -16,9 +16,7 @@ const session: Partial<SessionData> = {
   secondaryAdultName: 'Steph',
   livingAndVisiting: {
     mostlyLive: {
-      default: {
-        where: 'withInitial',
-      },
+      where: 'withInitial',
     },
   },
 };
@@ -48,7 +46,7 @@ describe(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN, () => {
     });
 
     it('should render the will overnights happen page for the initial adult', () => {
-      sessionMock.livingAndVisiting.mostlyLive.default.where = 'withSecondary';
+      sessionMock.livingAndVisiting.mostlyLive.where = 'withSecondary';
 
       return request(app)
         .get(paths.LIVING_VISITING_WILL_OVERNIGHTS_HAPPEN)

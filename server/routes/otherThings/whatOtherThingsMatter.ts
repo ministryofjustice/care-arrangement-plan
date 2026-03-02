@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
@@ -7,17 +6,14 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { getSessionValue, setSessionSection } from '../../utils/perChildSession';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const whatOtherThingsMatterRoutes = (router: Router) => {
   router.get(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER, checkFormProgressFromConfig(FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER), (request, response) => {
-    const otherThings = getSessionValue<any>(request.session, 'otherThings');
-
     response.render('pages/otherThings/whatOtherThingsMatter', {
       errors: request.flash('errors'),
       title: request.__('otherThings.whatOtherThingsMatter.title'),
-      initialWhatOtherThingsMatter: otherThings?.whatOtherThingsMatter?.answer,
+      initialWhatOtherThingsMatter: request.session.otherThings?.whatOtherThingsMatter?.answer,
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });
   });
@@ -41,29 +37,27 @@ const whatOtherThingsMatterRoutes = (router: Router) => {
         [formFields.WHAT_OTHER_THINGS_MATTER]: string;
       }>(request, { onlyValidData: false });
 
-      const otherThings = getSessionValue<any>(request.session, 'otherThings') || {};
-      setSessionSection(request.session, 'otherThings', {
-        ...otherThings,
+      request.session.otherThings = {
+        ...request.session.otherThings,
         whatOtherThingsMatter: {
           noDecisionRequired: false,
           answer: whatOtherThingsMatter,
         },
-      });
+      };
 
       addCompletedStep(request, FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER);
-      
+
       return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
     },
   );
 
   router.post(paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER_NOT_REQUIRED, checkFormProgressFromConfig(FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER), (request, response) => {
-    const otherThings = getSessionValue<any>(request.session, 'otherThings') || {};
-    setSessionSection(request.session, 'otherThings', {
-      ...otherThings,
+    request.session.otherThings = {
+      ...request.session.otherThings,
       whatOtherThingsMatter: {
         noDecisionRequired: true,
       },
-    });
+    };
 
     addCompletedStep(request, FORM_STEPS.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER);
 

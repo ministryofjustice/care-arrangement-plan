@@ -97,61 +97,14 @@
           {% endif %}
         {% endif %}
 
-      {% if showUrToggle %}
-        <details class="govuk-details govuk-!-margin-bottom-4" data-module="govuk-details">
-          <summary class="govuk-details__summary">
-            <span class="govuk-details__summary-text">Switch service version (User Research)</span>
-          </summary>
-          <div class="govuk-details__text">
-            <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="service-version-current" name="serviceVersionChoice" type="radio" value="current" {{ 'checked' if not usePerChildPoC }}>
-                <label class="govuk-label govuk-radios__label" for="service-version-current">
-                  Current service
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="service-version-poc" name="serviceVersionChoice" type="radio" value="poc" {{ 'checked' if usePerChildPoC }}>
-                <label class="govuk-label govuk-radios__label" for="service-version-poc">
-                  Per-child design
-                </label>
-              </div>
-            </div>
-          </div>
-        </details>
-      {% endif %}
-
-      {% if showUrToggle %}
-        <form method="post" action="{{ paths.START }}" id="start-form">
-          <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-          <input type="hidden" name="serviceVersion" id="service-version-hidden" value="{{ 'poc' if usePerChildPoC else 'current' }}" />
-          {{
-            govukButton({
-              text: "Start now",
-              classes: "govuk-button--start",
-              isStartButton: true
-            })
-          }}
-        </form>
-
-        <script nonce="{{ cspNonce }}">
-          // Update hidden input when radio button selection changes
-          document.querySelectorAll('input[name="serviceVersionChoice"]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-              document.getElementById('service-version-hidden').value = this.value;
-            });
-          });
-        </script>
-      {% else %}
-        {{
-          govukButton({
-            text: "Start now",
-            href: paths.SAFETY_CHECK,
-            classes: "govuk-button--start",
-            isStartButton: true
-          })
-        }}
-      {% endif %}
+      {{
+        govukButton({
+          text: "Start now",
+          href: paths.SAFETY_CHECK,
+          classes: "govuk-button--start",
+          isStartButton: true
+        })
+      }}
 
       <p class="govuk-body">If you want to make changes to the plan, you can use the service again but you'll need to create a new plan.</p>
 
