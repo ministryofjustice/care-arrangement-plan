@@ -390,7 +390,7 @@ test.describe('Decision Making Section', () => {
     });
 
     test('should show plan review as "cannot start" before long term notice is complete', async ({ page }) => {
-      const planReviewRow = page.locator('li').filter({ hasText: /when will the children/i });
+      const planReviewRow = page.locator('li').filter({ hasText: /when would you like to review/i });
       await expect(planReviewRow).toContainText(/cannot start/i);
     });
 
@@ -417,7 +417,7 @@ test.describe('Decision Making Section', () => {
       const longTermRow = page.locator('li').filter({ hasText: /how much notice/i });
       await expect(longTermRow).toContainText(/completed/i);
 
-      const planReviewRow = page.locator('li').filter({ hasText: /when will the children/i });
+      const planReviewRow = page.locator('li').filter({ hasText: /when would you like to review/i });
       await expect(planReviewRow).toContainText(/completed/i);
     });
   });
