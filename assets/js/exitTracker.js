@@ -79,6 +79,12 @@ const setupExitTracking = () => {
     }
   });
 
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      logPageExit();
+    }
+  });
+
   window.addEventListener('pagehide', (event) => {
     if (!event.persisted || isExternalNavigation) {
       logPageExit();
