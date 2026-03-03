@@ -195,9 +195,9 @@ export async function completeLivingAndVisitingSection(page: Page) {
   await page.goto('/make-a-plan');
 
   // Click the first task in Living and Visiting section
-  await page.getByRole('link', { name: /where will the children mostly live/i }).click();
+  await page.getByRole('link', { name: /Where will the children spend most of their time/i }).click();
 
-  // Where will the children mostly live - select first option (With Parent)
+  // Where will the children spend most of their time - select first option (With Parent)
   await page.getByLabel(/with parent/i).check();
   await page.getByRole('button', { name: /continue/i }).click();
 

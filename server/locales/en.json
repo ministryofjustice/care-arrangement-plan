@@ -5,17 +5,17 @@
   "continue": "Continue",
   "back": "Back",
   "doNotNeedToDecide": "We do not need to decide this",
-  "doNotNeedToDecideSchedule": "We do not need to decide which schedule best meets the children's needs",
-  "doNotNeedToDecideOvernightDays": "We do not need to decide which days overnights happen",
-  "doNotNeedToDecideDaytimeVisitDays": "We do not need to decide which days daytime visits happen",
-  "doNotNeedToDecideTransportBetweenHouseholds": "We do not need to decide how the children get between households",
-  "doNotNeedToDecideHandoverLocation": "We do not need to decide where handover takes place",
-  "doNotNeedToDecideSchoolHolidayArrangements": "We do not need to decide how arrangements change during school holidays",
-  "doNotNeedToDecideItemsForChangeover": "We do not need to decide what items need to go between households",
-  "doNotNeedToDecideSpecialDays": "We do not need to decide what will happen on special days",
-  "doNotNeedToDecideOtherThings": "We do not need to decide what other things matter to the children",
-  "doNotNeedToDecideLastMinuteChanges": "We do not need to decide how last-minute changes should be communicated",
-  "doNotNeedToDecideLongTermNotice": "We do not need to decide how much notice to give for long-term changes",
+  "doNotNeedToDecideSchedule": "Skip this question",
+  "doNotNeedToDecideOvernightDays": "Skip this question",
+  "doNotNeedToDecideDaytimeVisitDays": "Skip this question",
+  "doNotNeedToDecideTransportBetweenHouseholds": "Skip this question",
+  "doNotNeedToDecideHandoverLocation": "Skip this question",
+  "doNotNeedToDecideSchoolHolidayArrangements": "Skip this question",
+  "doNotNeedToDecideItemsForChangeover": "Skip this question",
+  "doNotNeedToDecideSpecialDays": "Skip this question",
+  "doNotNeedToDecideOtherThings": "Skip this question",
+  "doNotNeedToDecideLastMinuteChanges": "Skip this question",
+  "doNotNeedToDecideLongTermNotice": "Skip this question",
   "anotherArrangement": "Another arrangement",
   "or": "or",
   "aItem": "a {{ item }}",
@@ -184,8 +184,8 @@
     "restrictionsOnUse": "If you have a court order in place that restricts contact with the other parent or child, such as a no contact order, non-molestation order, or any other legal restriction, you must not use this service to contact them. Doing so could be a breach of the order and may have legal consequences. If you are unsure whether a legal order affects your ability to use this service, seek legal advice before proceeding."
   },
   "safetyCheck": {
-    "title": "Safety check",
-    "workWithPartner": "This service asks you to work with the other parent to agree a plan for your children. You need to be able to state your needs and views without feeling intimidated.",
+    "title": "Your safety",
+    "workWithPartner": "Are you confident that you and your ex-partner can make decisions together without putting yourself or the children in danger, and that you haven’t been pressured or intimidated into using this service?",
     "safeAndConfident": "Do you feel safe and confident?",
     "error": "Select whether you feel safe and confident or not"
   },
@@ -223,14 +223,14 @@
   },
   "doWhatsBest": {
     "title": "What’s best for the children?",
-    "content": "<p>Your child arrangements plan should reflect what is best for the children. You must consider their wants and needs when making these arrangements.</p><p>Remember, the aim is to make sure your children are as happy as they can be.</p><p><a href=\"https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf\">Tips for parents</a> from a child's perspective.</p>",
+    "content": "<p><a href=\"https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf\">Tips for parents</a> from a child's perspective.</p>",
     "childrensNeedsFirst": "I will put my children’s needs first",
     "error": "You must select the box to continue"
   },
   "courtOrderCheck": {
-    "title": "Do you already have a court order in place about your child arrangements?",
-    "subText": "This could include a prohibited steps, specific issue or consent order.",
-    "error": "Select whether you have a court order in place currently"
+    "title": "Is there a court order in place relating to you, the other parent or the children?",
+    "subText": "<p>For example, a:</p><ul class=\"govuk-list govuk-list--bullet\"><li>child arrangements order</li><li>specific issue order</li><li>prohibited steps order</li><li>protective order such as a non-molestation order, occupation order or a domestic abuse protection order</li><li>any other order restricting contact between you and the other parent or the children</li></ul>",
+    "error": "Select whether you have a court order in place"
   },
   "existingCourtOrder": {
     "title": "Do not continue",
@@ -283,16 +283,16 @@
   },
   "livingAndVisiting": {
     "mostlyLive": {
-      "title": "Where will the children mostly live?",
+      "title": "Where will the children spend most of their time?",
       "with": "With {{{ adult }}}",
       "split": "They will split time between {{{ initialAdult }}} and {{{ secondaryAdult }}}",
-      "emptyError": "Choose where the children will mostly live",
+      "emptyError": "Choose where the children will spend most of their time",
       "arrangementMissingError": "Describe the living arrangement you are proposing"
     },
     "whichSchedule": {
       "title": "Which schedule best meets the children's needs?",
       "getIdeas": "Get scheduling ideas",
-      "commonSchedules": "<p>Here are some common schedules that can benefit children.</p><p><b>Alternating weeks</b><br/>The children will spend one week in one household and the next week in the other.</p><p><b>2-2-3 schedule</b><br/>Children spend two days in one household, two days in the other, then back to the first house for 3 days including the weekend.</p><p><b>4-4-3 schedule</b><br/>Children spend three days in one household then four days in the other. The next week they switch.</p><p><b>2-2-5-5 schedule</b><br/>Children spend two days in one household, then two days in the other. After that they spend five days in one household, then five days in the other.</p>",
+      "commonSchedules": "<p>Here are some common schedules that can work well for children.</p><p><b>Alternating weeks</b><br/>The children will spend one week in one household and the next week in the other.</p><p><b>2-2-3 schedule</b><br/>Children spend two days in one household, two days in the other, then back to the first house for 3 days including the weekend.</p><p><b>4-4-3 schedule</b><br/>Children spend three days in one household then four days in the other. The next week they switch.</p><p><b>2-2-5-5 schedule</b><br/>Children spend two days in one household, then two days in the other. After that they spend five days in one household, then five days in the other.</p>",
       "exactSplitWarning": "An exact split of time between two households does not always suit children’s best interests.",
       "error": "Describe which schedule will best meet the children's needs"
     },
@@ -355,7 +355,7 @@
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",
-      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.",
+      "content": "Keep your children’s needs and best interests at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.",
       "error": "Describe what you propose will happen on special days"
     }
   },
@@ -418,7 +418,7 @@
       "text": "Change",
       "children": "the children",
       "users": "the users",
-      "whereWillTheChildrenLive": "where the children will mostly live",
+      "whereWillTheChildrenLive": "where the children will spend most of their time",
       "whichSchedule": "which schedule best meets the children's needs",
       "willOvernightsHappen": "if the children will stay overnight with {{{ adult }}}",
       "whichDaysOvernight": "which days overnights will happen",
@@ -445,7 +445,7 @@
     "downloadPlanButton": "Download plan as PDF",
     "downloadHtml": "Download as HTML (accessible)",
     "ifTheyDoNotRespond": "If there's no response",
-    "tryMediation": "If {{{ otherAdult }}} does not respond or you can't make an agreement between yourselves, you could try mediation.",
+    "tryMediation": "If {{{ otherAdult }}} does not respond or you can't make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
     "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both sides and take a neutral approach.",
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
     "whatWeAreTelling": {

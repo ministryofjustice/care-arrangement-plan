@@ -35,11 +35,8 @@
             errorMessage: errors | findError(formFields.WHICH_SCHEDULE)
           })
         }}
+        <div class="govuk-!-margin-bottom-2"><button type="submit" formaction="{{ paths.LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED }}" class="govuk-link link-styled-button">{{ __('doNotNeedToDecideSchedule') }}</button></div>
         {{ govukButton({text: __('continue')}) }}
-      </form>
-      <form class="form" action="{{ paths.LIVING_VISITING_WHICH_SCHEDULE_NOT_REQUIRED }}" method="post" novalidate>
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideSchedule') }}</button>
       </form>
     </div>
   </div>

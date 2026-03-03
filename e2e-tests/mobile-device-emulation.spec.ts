@@ -59,7 +59,7 @@ for (const device of mobileDevices) {
       // make-a-plan (Task List)
       await expect(page).toHaveURL(/\/make-a-plan/);
       await assertNoHorizontalScroll(page);
-      await page.getByRole('link', { name: /where will the children mostly live/i }).tap();
+      await page.getByRole('link', { name: /where will the children spend most of their time/i }).tap();
 
       // where-will-the-children-mostly-live
       await page.getByLabel(/With Parent/i).check();

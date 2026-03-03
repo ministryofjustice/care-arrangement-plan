@@ -69,11 +69,8 @@
             errorMessage: errors | findError(formFields.WHERE_HANDOVER)
           })
         }}
+        <div class="govuk-!-margin-bottom-2"><button type="submit" formaction="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED }}" class="govuk-link link-styled-button">{{ __('doNotNeedToDecideHandoverLocation') }}</button></div>
         {{ govukButton({text: __('continue')}) }}
-      </form>
-      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER_NOT_REQUIRED }}" method="post" novalidate>
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
-        <button class="govuk-link link-styled-button">{{ __('doNotNeedToDecideHandoverLocation') }}</button>
       </form>
     </div>
   </div>
