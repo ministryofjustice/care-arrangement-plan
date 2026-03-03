@@ -15,7 +15,7 @@ describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
 
       const dom = new JSDOM(response.text);
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('When will the children’s needs change?');
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent('When would you like to review this plan?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(`#${formFields.PLAN_REVIEW_MONTHS}`)).not.toHaveAttribute(
         'aria-describedby',
