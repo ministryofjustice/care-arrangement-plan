@@ -12,6 +12,8 @@
       {% include "partials/errorSummary.njk" %}
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
+      <p class="govuk-body">{{ __('safetyCheck.workWithPartner') }}</p>
+
       <form class="form" action="{{ paths.SAFETY_CHECK }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
