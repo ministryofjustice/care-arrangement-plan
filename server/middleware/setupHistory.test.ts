@@ -14,13 +14,14 @@ describe('setupHistory', () => {
     expect(sessionMock.previousPage).toBeUndefined();
   });
 
-  test('adds page to history when it starts with a value', async () => {
+  test('resets history when visiting start page even if history has a value', async () => {
     sessionMock.pageHistory = [paths.NUMBER_OF_CHILDREN];
 
     await request(app).get(paths.START);
 
-    expect(sessionMock.pageHistory).toEqual([paths.NUMBER_OF_CHILDREN, paths.START]);
-    expect(sessionMock.previousPage).toEqual(paths.NUMBER_OF_CHILDREN);
+    // GET / clears session data (including pageHistory), so any pre-existing history is reset
+    expect(sessionMock.pageHistory).toEqual([paths.START]);
+    expect(sessionMock.previousPage).toBeUndefined();
   });
 
   test('does not add page to history if it was the most recent page', async () => {
