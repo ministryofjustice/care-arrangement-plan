@@ -265,7 +265,7 @@ test.describe('Decision Making Section', () => {
       test('should flow from long term notice to plan review', async ({ page }) => {
         await navigateToPlanReview(page);
 
-        await expect(page.locator('h1')).toContainText("When will the children’s needs change?");
+        await expect(page.locator('h1')).toContainText("When would you like to review this plan?");
       });
     });
 
