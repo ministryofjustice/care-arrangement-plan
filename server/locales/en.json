@@ -223,7 +223,7 @@
   },
   "doWhatsBest": {
     "title": "What’s best for the children?",
-    "content": "<p><a href=\"https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf\">Tips for parents</a> from a child's perspective.</p>",
+    "content": "<p>Your child arrangements plan should:</p><ul class=\"govuk-list govuk-list--bullet\"><li>put the child's welfare first</li><li>reflect the wishes, feelings and needs of the child</li><li>consider any harm the child has suffered or any risk of harm</li></ul><p><a href=\"https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf\">Tips for parents</a> from a child's perspective.</p>",
     "childrensNeedsFirst": "I will put my children’s needs first",
     "error": "You must select the box to continue"
   },
@@ -446,7 +446,7 @@
     "downloadHtml": "Download as HTML (accessible)",
     "ifTheyDoNotRespond": "If there's no response",
     "tryMediation": "If {{{ otherAdult }}} does not respond or you can't make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
-    "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both sides and take a neutral approach.",
+    "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.",
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
     "whatWeAreTelling": {
       "proposedPlan": "{{{ senderName }}} has suggested a child arrangements plan",
