@@ -199,15 +199,11 @@ class PdfGenerator {
               const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part);
 
               if (isUrl) {
-                this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
                 this.doc.textWithLink(part, currentX, this.currentY, { url: allUrls[urlIndex++] || part });
                 currentX += this.doc.getTextWidth(part);
-                this.doc.setFont(PdfStyles.FONT_FAMILY, fontStyle);
               } else if (isEmail) {
-                this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
                 this.doc.text(part, currentX, this.currentY);
                 currentX += this.doc.getTextWidth(part);
-                this.doc.setFont(PdfStyles.FONT_FAMILY, fontStyle);
               } else {
                 this.doc.text(part, currentX, this.currentY);
                 currentX += this.doc.getTextWidth(part);
@@ -273,15 +269,11 @@ class PdfGenerator {
             const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part);
 
             if (isUrl) {
-              this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
               this.doc.textWithLink(part, currentX, this.currentY, { url: allUrls[urlIndex++] || part });
               currentX += this.doc.getTextWidth(part);
-              this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
             } else if (isEmail) {
-              this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
               this.doc.text(part, currentX, this.currentY);
               currentX += this.doc.getTextWidth(part);
-              this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
             } else {
               this.doc.text(part, currentX, this.currentY);
               currentX += this.doc.getTextWidth(part);

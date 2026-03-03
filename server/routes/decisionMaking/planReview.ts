@@ -25,20 +25,22 @@ const planReviewRoutes = (router: Router) => {
     });
   });
 
+  const hasSignificantValue = (val: string) => Boolean(val) && parseInt(val, 10) !== 0;
+
   const getMonthYearValidation = (formField: formFields, otherFromField: formFields) =>
     body(formField)
       .trim()
-      .custom((value: string, { req }) => value || req.body[otherFromField])
+      .custom((value: string, { req }) => hasSignificantValue(value) || hasSignificantValue(req.body[otherFromField]))
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.bothEmptyError'))
       .bail()
-      .custom((value: string, { req }) => !(value && req.body[otherFromField]))
+      .custom((value: string, { req }) => !(hasSignificantValue(value) && hasSignificantValue(req.body[otherFromField])))
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.bothFilledError'))
       .bail()
-      .if(body(otherFromField).isEmpty())
+      .if((_value, { req }) => !hasSignificantValue(req.body[otherFromField]))
       .isNumeric()
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.notNumberError'))
       .bail()
-      .if(body(otherFromField).isEmpty())
+      .if((_value, { req }) => !hasSignificantValue(req.body[otherFromField]))
       .isInt({ min: 0 })
       .withMessage((_value, { req }) => req.__('decisionMaking.planReview.notIntError'));
 
@@ -67,8 +69,8 @@ const planReviewRoutes = (router: Router) => {
       request.session.decisionMaking = {
         ...request.session.decisionMaking,
         planReview: {
-          months: months ? parseInt(months) : undefined,
-          years: years ? parseInt(years) : undefined,
+          months: hasSignificantValue(months) ? parseInt(months, 10) : undefined,
+          years: hasSignificantValue(years) ? parseInt(years, 10) : undefined,
         },
       };
 

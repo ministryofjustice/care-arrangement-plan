@@ -362,9 +362,6 @@ const generatePdf = () => {
     pdf.addBodyText('If you are unable to reach agreement about your child arrangements, you can try mediation or another way of agreeing outside of court.',{ spacing: 2 });
     pdf.addBodyText('A mediator is a professional who will work with you to help you make decisions based on your child\u2019s best interests. They listen to both of you and take a neutral approach.',{ spacing: 2 });
     pdf.addBodyText('More information and support is available at: https://www.gov.uk/looking-after-children-divorce')
-    pdf.addQuestionHeading('Help us improve this service');
-    pdf.addBodyText('With your help we can improve this service for others.', { spacing: 2 });
-    pdf.addBodyText('Email childarrangements@justice.gov.uk to express an interest in taking part in research and receive an incentive.');
     pdf.addFooter(16);
 
     // Set document title for PDF metadata

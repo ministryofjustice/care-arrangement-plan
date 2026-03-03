@@ -225,6 +225,78 @@ describe(paths.DECISION_MAKING_PLAN_REVIEW, () => {
       ]);
     });
 
+    it('should treat 0 as empty and pass when only the other field has a value (months=5, years=0)', async () => {
+      const initialDecisionMaking = { planLongTermNotice: { noDecisionRequired: true } };
+      sessionMock.decisionMaking = initialDecisionMaking;
+
+      await request(app)
+        .post(paths.DECISION_MAKING_PLAN_REVIEW)
+        .send({
+          [formFields.PLAN_REVIEW_MONTHS]: 5,
+          [formFields.PLAN_REVIEW_YEARS]: 0,
+        })
+        .expect(302)
+        .expect('location', paths.TASK_LIST);
+
+      expect(sessionMock.decisionMaking).toEqual({
+        ...initialDecisionMaking,
+        planReview: {
+          months: 5,
+          years: undefined,
+        },
+      });
+    });
+
+    it('should treat 0 as empty and pass when only the other field has a value (months=0, years=5)', async () => {
+      const initialDecisionMaking = { planLongTermNotice: { noDecisionRequired: true } };
+      sessionMock.decisionMaking = initialDecisionMaking;
+
+      await request(app)
+        .post(paths.DECISION_MAKING_PLAN_REVIEW)
+        .send({
+          [formFields.PLAN_REVIEW_MONTHS]: 0,
+          [formFields.PLAN_REVIEW_YEARS]: 5,
+        })
+        .expect(302)
+        .expect('location', paths.TASK_LIST);
+
+      expect(sessionMock.decisionMaking).toEqual({
+        ...initialDecisionMaking,
+        planReview: {
+          months: undefined,
+          years: 5,
+        },
+      });
+    });
+
+    it('should error when both fields are 0', async () => {
+      await request(app)
+        .post(paths.DECISION_MAKING_PLAN_REVIEW)
+        .send({
+          [formFields.PLAN_REVIEW_MONTHS]: 0,
+          [formFields.PLAN_REVIEW_YEARS]: 0,
+        })
+        .expect(302)
+        .expect('location', paths.DECISION_MAKING_PLAN_REVIEW);
+
+      expect(flashMock).toHaveBeenCalledWith('errors', [
+        {
+          location: 'body',
+          msg: 'Enter months or years',
+          path: formFields.PLAN_REVIEW_MONTHS,
+          type: 'field',
+          value: '0',
+        },
+        {
+          location: 'body',
+          msg: 'Enter months or years',
+          path: formFields.PLAN_REVIEW_YEARS,
+          type: 'field',
+          value: '0',
+        },
+      ]);
+    });
+
     it(`should redirect to ${paths.TASK_LIST} when the month is entered and set values in the session`, async () => {
       const initialDecisionMaking = { planLongTermNotice: { noDecisionRequired: true } };
       sessionMock.decisionMaking = initialDecisionMaking;
