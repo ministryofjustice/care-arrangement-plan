@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Request, Router } from 'express';
 
 import config from '../config';
 import FORM_STEPS from '../constants/formSteps';
@@ -26,16 +26,36 @@ import sharePlanRoutes from './sharePlan';
 import specialDaysRoutes from './specialDays';
 import taskListRoutes from './taskList';
 
+function clearSessionData(request: Request): void {
+  delete request.session.numberOfChildren;
+  delete request.session.namesOfChildren;
+  delete request.session.initialAdultName;
+  delete request.session.secondaryAdultName;
+  delete request.session.livingAndVisiting;
+  delete request.session.handoverAndHolidays;
+  delete request.session.specialDays;
+  delete request.session.otherThings;
+  delete request.session.decisionMaking;
+  delete request.session.pageHistory;
+  delete request.session.completedSteps;
+  request.session.planStartTime = Date.now();
+}
 
 const routes = (): Router => {
   const router = Router();
 
-  router.get(paths.START, (_request, response) => {
+  router.get(paths.START, (request, response) => {
+    clearSessionData(request);
     if (config.isLiveService) {
       return response.redirect(paths.SAFETY_CHECK);
     }
-    addCompletedStep(_request, FORM_STEPS.START);
+    addCompletedStep(request, FORM_STEPS.START);
     response.render('pages/index');
+  });
+
+  router.post(paths.START, (request, response) => {
+    clearSessionData(request);
+    response.redirect(paths.SAFETY_CHECK);
   });
 
   analyticsRoutes(router);

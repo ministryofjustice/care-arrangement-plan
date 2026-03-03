@@ -96,14 +96,16 @@
           {% endif %}
         {% endif %}
 
-      {{
-        govukButton({
-          text: "Start now",
-          href: paths.SAFETY_CHECK,
-          classes: "govuk-button--start",
-          isStartButton: true
-        })
-      }}
+      <form action="{{ paths.START }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        {{
+          govukButton({
+            text: "Start now",
+            classes: "govuk-button--start",
+            isStartButton: true
+          })
+        }}
+      </form>
 
       <p class="govuk-body">If you want to make changes to the plan, you can use the service again but you'll need to create a new plan.</p>
 
