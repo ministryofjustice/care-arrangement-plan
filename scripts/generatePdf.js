@@ -344,7 +344,6 @@ const generatePdf = () => {
     pdf.addQuestionHeading('When would you like to review this plan?');
     pdf.addBodyText('Children\'s needs change as they grow. When should you review this agreement to check it is still what\'s best for the children?', { spacing: 5 });
     pdf.addBodyText('You can also review these arrangements at an earlier time if they no longer meet your children\'s needs.', { spacing: 5 });
-
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60); // Reduced from 90
     pdf.addSpacing(8);
