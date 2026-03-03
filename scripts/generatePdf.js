@@ -45,7 +45,7 @@ const generatePdf = () => {
     ]);
     pdf.addSpacing(3);
     pdf.addBodyText('If you have any concerns about safety, stop now.', { bold: true, spacing: 2 });
-    pdf.addBodyText('If you have any feedback or safety concerns about this service, you can email childarrangementsafety@justice.gov.uk.', { spacing: 2 });
+    pdf.addBodyText('If you have any feedback or safety concerns about this service, you can email childarrangementssafety@justice.gov.uk.', { spacing: 2 });
     pdf.addBodyText('We cannot answer any questions about child arrangement plans that have already been created.');
 
     pdf.addFooter(1);
