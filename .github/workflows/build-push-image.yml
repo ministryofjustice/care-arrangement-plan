@@ -27,7 +27,7 @@ jobs:
           aws-region: ${{ vars.ECR_REGION }}
 
       - name: 'Log into ECR'
-        uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076
+        uses: aws-actions/amazon-ecr-login@fe725d47d3009d901b44f3df285a6dc9d438e63a
         id: ecr-login
 
       - name: 'Build & Push to ECR'
