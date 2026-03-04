@@ -70,7 +70,7 @@ jobs:
 
       - name: 'Upload Playwright Report'
         if: always()
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
           name: playwright-report-${{ inputs.environment || 'pr' }}-shard-${{ matrix.shardIndex }}-${{ github.run_number }}
           path: playwright-report/
@@ -78,7 +78,7 @@ jobs:
 
       - name: 'Upload Test Results'
         if: always()
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
           name: playwright-results-${{ inputs.environment || 'pr' }}-shard-${{ matrix.shardIndex }}-${{ github.run_number }}
           path: playwright-results.xml
