@@ -54,16 +54,6 @@
 
       <p class="govuk-body">You can also use the service with the other parent to make a plan together.</p>
 
-      <h2 class="govuk-heading-m">Your safety</h2>
-
-      <p class="govuk-body">You should only use this service if:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>you're confident that you and your ex-partner can make decisions together without putting yourself or the children in danger</li>
-        <li>you do not feel pressured or intimidated into using it</li>
-      </ul>
-
-      <p class="govuk-body">If you think you or your children are at immediate risk of harm, call 999 and ask for the police. Find out <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help" class="govuk-link">how to get help if you're experiencing domestic abuse</a>.</p>
-
       <h2 class="govuk-heading-m">What the plan includes</h2>
 
       <p class="govuk-body">You'll need to suggest details about how you plan to look after your children, such as:</p>
@@ -80,10 +70,18 @@
         <li>want to suggest changes to your existing arrangements</li>
       </ul>
 
+      {{ govukInsetText({
+        html: 'You should not use this service if you already have a court order that sets out child arrangements you and your ex-partner must follow. You can <a href="https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order" class="govuk-link">change or enforce an order</a> instead.'
+      }) }}
+
       <h2 class="govuk-heading-m">Make your plan</h2>
 
       <p class="govuk-body">Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.</p>
-        
+
+      {{ govukInsetText({
+        html: 'Do not use this service if you feel pressured or intimidated into using it. If you or your children are at immediate risk of harm, call 999 and ask for the police. Find out <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help" class="govuk-link">how to get help if you\'re experiencing domestic abuse</a>.'
+      }) }}
+
         {% if includeWelshLanguage %}
           {% if getLocale() == 'cy' %}
             {{ govukInsetText({
@@ -139,7 +137,7 @@
 
       <p class="govuk-body">There's usually no court hearing. A judge will approve your consent order to make it legally binding – but only if they think the arrangements reflect what is best for the children.</p>
 
-      <p class="govuk-body">If the judge does not agree with what is in your draft consent order they can: say that there should be a court hearing, or more evidence provided, to help decide what order should be made.</p>
+      <p class="govuk-body">If the judge does not agree with what is in your draft consent order they can say that there should be a court hearing, or more evidence provided, to help decide what order should be made.</p>
 
       <h2 id="help-and-support" class="govuk-heading-m">Help and support</h2>
 
