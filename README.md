@@ -166,6 +166,27 @@ For documentation on the project architecture, see [here](./architecture-docs/RE
 
 For documentation on our infrastructure, see [here](./deploy/README.md)
 
+## Local Development Shortcuts
+
+### Seeding the session
+
+To avoid clicking through the entire service to test a later page, you can seed the session with pre-filled data using the dev seed route (only available when `NODE_ENV` is not `production`):
+
+```
+http://localhost:8001/dev/seed?redirect=/check-your-answers
+```
+
+The `redirect` query parameter accepts any valid path in the service. If omitted, it defaults to the task list (`/make-a-plan`). Some examples:
+
+```
+http://localhost:8001/dev/seed?redirect=/make-a-plan
+http://localhost:8001/dev/seed?redirect=/check-your-answers
+http://localhost:8001/dev/seed?redirect=/decision-making/plan-review
+http://localhost:8001/dev/seed?redirect=/share-plan
+```
+
+The seed populates the session with two children (Alex and Jamie) and two adults (Sarah and Tom), with all tasks completed.
+
 ## Common Tasks
 
 ### Adding a new question
