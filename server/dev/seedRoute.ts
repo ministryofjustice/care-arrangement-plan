@@ -13,8 +13,7 @@ const devSeedRoutes = (router: Router) => {
     request.session.pageHistory = [paths.START];
 
     const redirect = request.query.redirect as string;
-    const allowedPaths = new Set<string>(Object.values(paths));
-    const target = allowedPaths.has(redirect) ? redirect : paths.TASK_LIST;
+    const target = (Object.values(paths) as string[]).find(p => p === redirect) ?? paths.TASK_LIST;
 
     response.redirect(target);
   });
