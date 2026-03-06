@@ -7,7 +7,7 @@ on a per-environment basis.
 - [Dev](https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/care-arrangement-plan-dev)
 - [Prod](https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/care-arrangement-plan-prod)
 
-The just defines the infrastructure for the express app. This includes:
+This defines the infrastructure for the express app. This includes:
 
 - [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) - defining web access to the app
 - [Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) - provisioning the required
@@ -50,10 +50,10 @@ Action could include:
 
 # High5xxRate
 This alert fires when, over a 3 minute period, 5% of responses are 5xx errors.
-This could indicate an issue with the codebase throwing a php error. Or, an issue with failing infrastructure like RDS orElastiCache triggering a php error.
+This could indicate an issue with the codebase throwing a server error, or failing infrastructure like ElastiCache.
 Action could include:
-- Reviewing logs for a php error message.
-- Reviewing recent deployments, looking for a php bug.
+- Reviewing logs for error messages.
+- Reviewing recent deployments, looking for a bug.
 - Checking the health of infrastructure.
 
 # ElastiCacheCPUUtilizationHigh

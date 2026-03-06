@@ -1,7 +1,7 @@
 <div align="center">
 
 
-# <img alt="MoJ logo" src="https://moj-logos.s3.eu-west-2.amazonaws.com/moj-uk-logo.png" width="200"><br>Intranet
+# <img alt="MoJ logo" src="https://moj-logos.s3.eu-west-2.amazonaws.com/moj-uk-logo.png" width="200"><br>Care Arrangement Plan
 
 [![Standards Icon]][Standards Link]
 [![License Icon]][License Link]
@@ -18,17 +18,6 @@ This is a Node.js app (v22) running on [Express](https://expressjs.com/) with
 [GOV.UK Frontend](https://design-system.service.gov.uk/). [ESBuild](https://esbuild.github.io/) is used for bundling.
 
 This app is heavily inspired from MoJ's [hmpps-template-typescript](https://github.com/ministryofjustice/hmpps-template-typescript).
-
-## Preview testing
-
-The service is undergoing private preview testing. This is currently set to end on 30th April 2025. To change this date,
-the environment variable `PREVIEW_END` must be changed. After this date, all requests to the service will return a page
-explaining that the preview has ended.
-
-To move the service into an open beta, the following changes should be made
-
-- Remove the password page and authentication middleware
-- Remove the service no longer available middleware
 
 ## Installation
 
@@ -75,6 +64,27 @@ With the app running, run tests locally in Docker, with the command
 docker compose exec -e NODE_ENV=test app npm run test
 ```
 
+## Project Structure
+
+The main app code lives in the `server` directory, where it is separated into folders based on functionality. Tests should
+be at the same level as the file they test, and names `<<file>>.test.ts`.
+
+E2E tests are in the `e2e-tests` directory. Test files should have the name `<<file>>.spec.ts`.
+
+## Language Support
+
+The app has support for English and Welsh. All text should be added to `server/locales`, instead of being added directly
+to the Nunjucks template. If you have added an item `home.title` to the locales files, you can access it from the template:
+
+```html
+<h1>{{ __('home.title') }}</h1>
+```
+
+If there is no Welsh translation, the English value will be used as a fallback.
+
+The Welsh support can be toggled on/off using the `INCLUDE_WELSH_LANGUAGE` environment variable, allowing us to do
+releases before full Welsh translation is complete.
+
 ## Tests
 
 We use [Jest](https://jestjs.io/) for unit tests. To run them run `npm run test`.
@@ -96,7 +106,7 @@ It is recommended to use your IDE to run ESLint and Prettier on save, to ensure 
 
 ## E2E Tests
 
-We use [Playwright](https://playwright.dev/) for end-to-end tests. See the [Playwright quickstart guide](e2e-tests/PLAYWRIGHT_QUICKSTART.md) for a full walkthrough. To run them:
+We use [Playwright](https://playwright.dev/) for end-to-end tests. See the [Playwright quickstart guide](e2e-tests/PLAYWRIGHT_QUICKSTART.md) for a first-time walkthrough, or the [E2E tests README](e2e-tests/README.md) for full reference. To run them:
 
 ```shell
 npm run e2e
@@ -120,27 +130,6 @@ The second runs on merges to the `main` branch, and runs these tests, then relea
 There is a manual step in this pipeline to release to production.
 
 Secrets used in the deployment pipeline are stored as GitHub Actions secrets, and are saved per-environment.
-
-## Project Structure
-
-The main app code lives in the `server` directory, where it is separated into folders based on functionality. Tests should
-be at the same level as the file they test, and names `<<file>>.test.ts`.
-
-Integration tests are in the `integration-tests` directory. Test files should have the name `<<file>>.cy.ts`.
-
-## Language Support
-
-The app has support for English and Welsh. All text should be added to `server/locales`, instead of being added directly
-to the Nunjucks template. If you have added an item `home.title` to the locales files, you can access it from the template:
-
-```html
-<h1>{{ __('home.title') }}</h1>
-```
-
-If there is no Welsh translation, the English value will be used as a fallback.
-
-The Welsh support can be toggled on/off using the `INCLUDE_WELSH_LANGUAGE` environment variable, allowing us to do
-releases before full Welsh translation is complete.
 
 ## Analytics
 
@@ -166,27 +155,23 @@ For documentation on the project architecture, see [here](./architecture-docs/RE
 
 For documentation on our infrastructure, see [here](./deploy/README.md)
 
-## Common Tasks
+## Contributing
 
-### Adding a new question
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidance on adding new questions and other common development tasks.
 
-There are a few steps to adding a new question
+## Preview testing
 
-- Decide the data structure for the answers, and add it to the [`CAPSession` type](./server/@types/session.d.ts)
-- Create the pages and routes for the question
-- Add the question to the task list
-- Add the completion check to the question to the conditional that displays the "Continue" button on the task list
-- Add the question's answers to the "Check your answers page" - this should be as close as possible to exactly what the
-  user has entered
-- Add the question's answers to the "Share plan" page - this should exactly match what will be displayed in the
-  outputted PDF
-- Add the question's answers to the PDF
+The service underwent private preview testing, which ended on 30th April 2025. The `PREVIEW_END` environment variable
+controls this date. After this date, all requests to the service return a page explaining that the preview has ended.
+
+To move the service into an open beta, the following changes should be made:
+
+- Remove the password page and authentication middleware
+- Remove the service no longer available middleware
 
 ## TODO
 
 - Sonar/some SAST tool
-- Add alerts
-- Add more Cypress tests
 
 ## Known issues
 
@@ -195,13 +180,7 @@ There are a few steps to adding a new question
   > your answers page, not back into the full question flow
 - Some characters are missed in the PDF
   > Some characters such as Ǝ are not printed in the pdf, as the GDS transport font does not support them
-- Prevent users from starting midway through the journey
-  > We should prevent users from joining the service without a valid session.
-  >
-  > This should happen by redirecting them if they access any page other than the first without a valid session cookie.
-  >
-  > We should also consider use cases where the user has started the journey, but access a page they shouldn’t be able
-  > to yet (e.g children’s names before number of children)
+
 - PDF does not have heading structures
   > The exported pdf has not been rendered using accessible heading structures.
 
