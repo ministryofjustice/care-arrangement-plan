@@ -18,6 +18,10 @@ npm run e2e:headed
 npm run e2e:debug
 ```
 
+## Playwright, Visual Studio Code Extension
+
+By installing this extension, tests can be run within visual studio code, and test blocks can be run individually instead of a whole file.
+
 ## Performance Tips & Faster Test Runs
 
 Running all e2e tests can take several minutes. Here are strategies to speed up local development:
@@ -60,6 +64,7 @@ npm run e2e -- --shard=2/4
 To avoid rebuilding before every test run:
 
 1. Start your dev server in one terminal:
+
    ```bash
    npm run start:dev
    ```
