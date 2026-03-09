@@ -3,6 +3,7 @@ import { Request, Router } from 'express';
 import config from '../config';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
+import devSeedRoutes from '../dev/seedRoute';
 import addCompletedStep from '../utils/addCompletedStep';
 
 import aboutTheAdultsRoutes from './aboutTheAdults';
@@ -78,6 +79,10 @@ const routes = (): Router => {
   decisionMakingRoutes(router);
   downloadRoutes(router);
   accessibilityStatementRoutes(router);
+
+  if (!config.production) {
+    devSeedRoutes(router);
+  }
 
   return router;
 };

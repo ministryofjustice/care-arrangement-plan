@@ -19,6 +19,29 @@ This is a Node.js app (v22) running on [Express](https://expressjs.com/) with
 
 This app is heavily inspired from MoJ's [hmpps-template-typescript](https://github.com/ministryofjustice/hmpps-template-typescript).
 
+## Contents
+
+- [Installation](#installation)
+- [Running](#running)
+  - [Running with a cache](#running-with-a-cache)
+  - [Running in Docker](#running-in-docker)
+- [Project Structure](#project-structure)
+- [Language Support](#language-support)
+- [Tests](#tests)
+- [Static Checks](#static-checks)
+- [E2E Tests](#e2e-tests)
+  - [Pre-commit hooks](#pre-commit-hooks)
+- [Pipeline](#pipeline)
+- [Analytics](#analytics)
+- [Architecture](#architecture)
+- [Infrastructure](#infrastructure)
+- [Local Development Shortcuts](#local-development-shortcuts)
+  - [Seeding the session](#seeding-the-session)
+- [Contributing](#contributing)
+- [Preview testing](#preview-testing)
+- [TODO](#todo)
+- [Known issues](#known-issues)
+
 ## Installation
 
 Install Node 22. It is recommended to use a versioning manager such as [nvm](https://github.com/nvm-sh/nvm).
@@ -154,6 +177,27 @@ For documentation on the project architecture, see [here](./architecture-docs/RE
 ## Infrastructure
 
 For documentation on our infrastructure, see [here](./deploy/README.md)
+
+## Local Development Shortcuts
+
+### Seeding the session
+
+To avoid clicking through the entire service to test a later page, you can seed the session with pre-filled data using the dev seed route (only available when `NODE_ENV` is not `production`):
+
+```
+http://localhost:8001/dev/seed?redirect=/check-your-answers
+```
+
+The `redirect` query parameter accepts any valid path in the service. If omitted, it defaults to the task list (`/make-a-plan`). Some examples:
+
+```
+http://localhost:8001/dev/seed?redirect=/make-a-plan
+http://localhost:8001/dev/seed?redirect=/check-your-answers
+http://localhost:8001/dev/seed?redirect=/decision-making/plan-review
+http://localhost:8001/dev/seed?redirect=/share-plan
+```
+
+The seed populates the session with two children (Alex and Jamie) and two adults (Sarah and Tom), with all tasks completed.
 
 ## Contributing
 
