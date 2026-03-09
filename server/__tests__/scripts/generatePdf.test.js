@@ -37,8 +37,8 @@ describe('PDF Generator Integration Tests', () => {
       generatePdf();
       const stats = fs.statSync(sourceOutputPath);
 
-      // PDF should be larger than 50KB (contains content)
-      expect(stats.size).toBeGreaterThan(50000);
+      // PDF should be larger than 40KB (contains content)
+      expect(stats.size).toBeGreaterThan(40000);
 
       // PDF should be smaller than 5MB (not bloated)
       expect(stats.size).toBeLessThan(5000000);

@@ -23,9 +23,6 @@ const generatePdf = () => {
     // ===== PAGE 1: Introduction =====
     pdf.addHeader('Proposed child arrangements plan');
 
-    pdf.addSpacing(4); // Add extra spacing above main heading
-    pdf.addMainHeading('Propose a child arrangements plan');
-
     pdf.addBodyText('Use this form from the Child Arrangements Plan service ( https://propose-child-arrangements-plan.service.gov.uk/ ) on GOV.UK to collaborate to create child arrangements which you both agree on, without having to go to court.', { spacing: 3 });
     pdf.addBodyText('Any plan you create using this service is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.');
 

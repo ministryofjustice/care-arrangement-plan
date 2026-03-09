@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 const PdfStyles = require('./pdfStyles');
 
 /**
@@ -17,46 +15,19 @@ class PdfGenerator {
     this.currentPage = 1;
     this.totalPages = 16; // Known from the form
 
-    // Load logo
-    const logoPath = path.resolve(process.cwd(), 'assets', 'images', 'crest.png');
-    this.logoData = `data:image/png;base64,${fs.readFileSync(logoPath, { encoding: 'base64' })}`;
   }
 
   /**
-   * Add GDS blue header bar with logo and title
-   * Matches the TypeScript version in server/pdf/pdf.ts
+   * Add header with title
    */
   addHeader(title) {
-    // GDS blue header bar
-    this.doc.setFillColor(29, 112, 184);
-    this.doc.rect(0, 0, this.pageWidth, PdfStyles.HEADER_HEIGHT, 'F');
-
-    // Add logo
-    const logoHeight = 7;
-    const logoWidth = logoHeight * 5.4;
-    this.doc.addImage(
-      this.logoData,
-      'PNG',
-      PdfStyles.MARGIN_WIDTH,
-      0.5 * (PdfStyles.HEADER_HEIGHT - logoHeight),
-      logoWidth,
-      logoHeight,
-      'crest'
-    );
-
-    // Add title text
     const titleSize = PdfStyles.SECTION_HEADING_SIZE;
-    const titleX = this.pageWidth / 2;
     const titleY = PdfStyles.HEADER_HEIGHT * 0.5 +
                    0.25 * PdfStyles.LINE_HEIGHT_RATIO * titleSize * PdfStyles.MM_PER_POINT;
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(titleSize);
-    this.doc.setTextColor(...PdfStyles.COLOR_WHITE);
-    this.doc.text(title, titleX, titleY, { align: 'center' });
-
-    // Reset text color
-    this.doc.setTextColor(...PdfStyles.COLOR_BLACK);
+    this.doc.text(title, PdfStyles.MARGIN_WIDTH, titleY, { align: 'left' });
   }
 
   /**
@@ -96,7 +67,7 @@ class PdfGenerator {
   /**
    * Add a new page with header
    */
-  addPage(headerTitle = 'Proposed child arrangements') {
+  addPage(headerTitle = 'Proposed child arrangements plan') {
     this.doc.addPage();
     this.currentPage++;
     this.currentY = PdfStyles.HEADER_HEIGHT + 10;

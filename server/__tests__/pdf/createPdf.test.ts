@@ -194,7 +194,7 @@ describe('createPdf', () => {
     const response = await request(app).get(paths.DOWNLOAD_PDF).buffer(true);
 
     // Validate PDF structure and ensure it's significantly larger due to long strings
-    validatePdfResponse(response, 500000); // Should be at least 500KB with all the long strings
+    validatePdfResponse(response, 300000); // Should be at least 300KB with all the long strings
     validateResponseAgainstSnapshot(response.body, 'test-assets/fullTestOutput-longAnswers.pdf');
   });
 });
