@@ -11,7 +11,7 @@ test.describe('Mostly Lives Page', () => {
   });
  
   test.describe('Child mostly lives with Adult 1 and visits/stays with Adult 2', () => {
-    test('Fill fields unitll section is complete', async ({ page }) => {
+    test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Parent'])
       await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Guardian?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-overnight/, 'On which days will overnights happen?', ['Tuesday', 'Wednesday'])
@@ -31,7 +31,7 @@ test.describe('Mostly Lives Page', () => {
   });
  
    test.describe('Child mostly lives with Adult 1 and has other arrangements with Adult 2', () => {
-    test('Fill fields unitll section is complete', async ({ page }) => {
+    test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Parent'])
       await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Guardian?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-overnight/, 'On which days will overnights happen?', ['Another arrangement'])
@@ -54,7 +54,7 @@ test.describe('Mostly Lives Page', () => {
   });
  
   test.describe('Child mostly lives with Adult 1 and does not visit or stay with Adult 2', () => {
-    test('Fill fields unitll section is complete', async ({ page }) => {
+    test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Parent'])
       await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Guardian?', ['No'])
       await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Guardian?', ['No'])
@@ -69,7 +69,7 @@ test.describe('Mostly Lives Page', () => {
   });
 
   test.describe('Child mostly lives with Adult 2 and visits/stays with Adult 1', () => {
-    test('Fill fields unitll section is complete', async ({ page }) => {
+    test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Guardian'])
       await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Parent?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-overnight/, 'On which days will overnights happen?', ['Monday', 'Tuesday', 'Wednesday'])
@@ -89,7 +89,7 @@ test.describe('Mostly Lives Page', () => {
   });
  
    test.describe('Child mostly lives with Adult 2 and has other arrangements with Adult 1', () => {
-    test('Fill fields unitll section is complete', async ({ page }) => {
+    test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Guardian'])
       await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Parent?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-overnight/, 'On which days will overnights happen?', ['Another arrangement'])
@@ -112,7 +112,7 @@ test.describe('Mostly Lives Page', () => {
   });
  
   test.describe('Child mostly lives with Adult 2 and does not visit or stay with Adult 1', () => {
-    test('Fill fields unitll section is complete', async ({ page }) => {
+    test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Guardian'])
       await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Parent?', ['No'])
       await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Parent?', ['No'])
@@ -127,7 +127,7 @@ test.describe('Mostly Lives Page', () => {
   });
 
   test.describe('Child splits time between living with Adult 1 and Adult 2', () => {
-    test('Fill fields unitll section is complete', async ({ page }) => {
+    test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['They will split time between Parent and Guardian'])
       await expect(page).toHaveURL(/which-schedule-is-best/);
       await expect(page.locator('h1')).toContainText("Which schedule best meets the children's needs?");
@@ -144,7 +144,7 @@ test.describe('Mostly Lives Page', () => {
   });
 
   test.describe('Another Arrangement is made for the child', () => {
-    test('Fill fields unitll section is complete', async ({ page }) => {
+    test('Fill fields until section is complete', async ({ page }) => {
       await page.getByLabel(/Another arrangement/i).check();  
       await page.getByLabel('Describe the arrangement').fill('The children will live in foster care, with occasional visits by parents');
       await page.getByRole('button', { name: /continue/i }).click();

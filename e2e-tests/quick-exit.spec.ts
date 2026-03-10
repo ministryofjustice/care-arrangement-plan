@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import { startJourney } from './fixtures/test-helpers';
 
-test.describe('Exit the page from saftey check page', () => {
+test.describe('Exit the page from safety check page', () => {
   test('Page should navigate to BBC Weather when "Exit this page" is clicked, and not have the URL I navigated from.', async ({ page }) => {
       await startJourney(page)
       await expect(page).toHaveURL(/safety-check/i);
@@ -18,7 +18,7 @@ test.describe('Exit the page from saftey check page', () => {
 });
 
 test.describe('Exit the page from not-safe page', () => {
-  test('When I choose no to the saftey check, then I should see the not-safe page and be able to exit the page to BBC Weather, and not see the URL I navigated from', async ({ page }) => {
+  test('When I choose no to the safety check, then I should see the not-safe page and be able to exit the page to BBC Weather, and not see the URL I navigated from', async ({ page }) => {
       await startJourney(page)
       await expect(page).toHaveURL(/safety-check/i);
       await page.getByLabel(/no/i).first().check();
@@ -54,7 +54,7 @@ test.describe('Exit the page from child safety check page', () => {
 });
 
 test.describe('Exit the page from children not-safe page', () => {
-  test('When I choose no to the child saftey check, then I should see the children-not-safe page and be able to exit the page to BBC Weather, and not see the URL I navigated from.', async ({ page }) => {
+  test('When I choose no to the child safety check, then I should see the children-not-safe page and be able to exit the page to BBC Weather, and not see the URL I navigated from.', async ({ page }) => {
       await startJourney(page)
       await expect(page).toHaveURL(/safety-check/i);
       await page.getByLabel(/yes/i).first().check();

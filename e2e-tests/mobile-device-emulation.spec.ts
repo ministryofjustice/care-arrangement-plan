@@ -23,7 +23,7 @@ for (const device of mobileDevices) {
     const { defaultBrowserType: _dbt, isMobile: _im, ...deviceConfig } = device.config;
     test.use(deviceConfig);
 
-    test('Multiple Mobile Devices of differnet viewports can navigate through the service', async ({ page }) => {
+    test('Multiple Mobile Devices of different view-ports can navigate through the service', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).tap();
 
@@ -31,7 +31,7 @@ for (const device of mobileDevices) {
       await page.getByLabel(/yes/i).first().check();
       await page.getByRole('button', { name: /continue/i }).tap();
 
-      // children-saftey-check
+      // children-safety-check
       await page.getByLabel(/yes/i).first().check();
       await page.getByRole('button', { name: /continue/i }).tap();
 
