@@ -90,9 +90,6 @@ test.describe('HTML Download Functionality', () => {
 
     // Should contain GOV.UK branding
     expect(htmlContent.toLowerCase()).toContain('gov.uk');
-
-    // Should contain the crest image (embedded as base64)
-    expect(htmlContent).toContain('data:image/png;base64');
   });
 
   test('should include version number in downloaded HTML', async ({ page }) => {
