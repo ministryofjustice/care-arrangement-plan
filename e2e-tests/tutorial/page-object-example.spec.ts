@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-import { SafetyCheckPage } from './fixtures/page-objects';
-import { navigateToTaskList } from './fixtures/test-helpers';
+import { SafetyCheckPage } from '../fixtures/page-objects'
+import { navigateToTaskList } from '../fixtures/test-helpers';
 
 test.describe('User Journey with Page Objects', () => {
   test('should complete safety check using page objects', async ({ page }) => {
