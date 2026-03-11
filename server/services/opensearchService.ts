@@ -23,4 +23,4 @@ const sendToOpenSearch = (event: Record<string, string | number>): void => {
   });
 };
 
-export { sendToOpenSearch };
+export default sendToOpenSearch;

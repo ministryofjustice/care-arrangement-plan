@@ -4,7 +4,8 @@ import config from '../config';
 import UserEvents from '../constants/userEvents';
 import logger from '../logging/logger';
 import { generateHashedIdentifier } from '../utils/hashedIdentifier';
-import { sendToOpenSearch } from './opensearchService';
+
+import sendToOpenSearch  from './opensearchService';
 
 /**
  * A generic event logging function that forms the base for all analytics events.
