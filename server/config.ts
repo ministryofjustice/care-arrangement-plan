@@ -50,6 +50,9 @@ const config = {
     enabled: process.env.ENABLE_ANALYTICS !== 'false', // Defaults to true unless explicitly disabled
     hashSecret: process.env.HASH_SECRET,
   },
+  opensearch: {
+    proxyUrl: process.env.OPENSEARCH_PROXY_URL,
+  },
   cache: getCacheConfig(),
   session: {
     secret: getStringConfigValue('SESSION_SECRET'),
