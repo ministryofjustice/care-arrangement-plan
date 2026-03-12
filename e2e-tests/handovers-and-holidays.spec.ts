@@ -21,8 +21,8 @@ test.describe('Handovers and holidays section', () => {
     // navigateToTaskList causes Adult 1 to be named Parent and Adult 2 to be Guardian, so they are mentioned throughout the test.
   });
  
-  test.describe('Adult 1 collects the children, handovers take place between adults, arrangments change in school holidays, and items go between households', () => {
-    test('Fill fields unitll section is complete', async ({ page }) => {
+  test.describe('Adult 1 collects the children, handovers take place between adults, arrangements change in school holidays, and items go between households', () => {
+    test('Fill fields until section is complete', async ({ page }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
       await fillHandoversAndHolidaySectionAndContinue(page, /get-between-households/, 'How will the children get between households?', ['Parent collects the children'])
       await fillHandoversAndHolidaySectionAndContinue(page, /where-handover/, 'Where does handover take place?', ['Neutral location', "At Parent's home", "At Guardian's home", 'At school'])
@@ -43,7 +43,7 @@ test.describe('Handovers and holidays section', () => {
     });
   });
 
-  test.describe('Adult 2 collects the children, handovers take place at another (other) location, arrangments do not change in school holidays, and items go between households', () => {
+  test.describe('Adult 2 collects the children, handovers take place at another (other) location, arrangements do not change in school holidays, and items go between households', () => {
     test('Fill fields until section is complete', async ({ page }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
       await fillHandoversAndHolidaySectionAndContinue(page, /get-between-households/, 'How will the children get between households?', ['Guardian collects the children'])
@@ -82,8 +82,8 @@ test.describe('Handovers and holidays section', () => {
     });
   });
 
-   test.describe('Another arrangement is made for collecting the children, then both Adults decide that no decsion needs to be made, for collecting the children, for handovers, for arrangments in school holidays, and what items go between households', () => {
-    test('Fill fields unitll section is complete', async ({ page }) => {
+   test.describe('Another arrangement is made for collecting the children, then both Adults decide that no decision needs to be made, for collecting the children, for handovers, for arrangements in school holidays, and what items go between households', () => {
+    test('Fill fields until section is complete', async ({ page }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
       await fillHandoversAndHolidaySectionAndContinue(page, /get-between-households/, 'How will the children get between households?')
       await page.getByLabel(/Another arrangement/).check();
@@ -100,7 +100,7 @@ test.describe('Handovers and holidays section', () => {
 
 
 // Playwright usually uses error ID's to locate error messages, but here errors are inside visually hidden elements, so ID does not work and getByText is used instead.
-// Two non essential error tests are not included here, testing wether an error messsage is inside a form group, and wether it has the right aria attribute, this is because ID has to be used for these tests.
+// Two non essential error tests are not included here, testing wether an error message is inside a form group, and wether it has the right aria attribute, this is because ID has to be used for these tests.
   test.describe('An error should be shown if no options are chosen and another arrangement is not specified on the get between households page', () => {
     test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({ page }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
@@ -139,7 +139,7 @@ test.describe('Handovers and holidays section', () => {
     });
   });
 
-  test.describe('An error should be shown if no options are chosen on the will arrangemetns change in shchool holidays page', () => {
+  test.describe('An error should be shown if no options are chosen on the will arrangements change in school holidays page', () => {
     test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({ page }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
       await page.getByLabel(/Parent collects the children/).check();
@@ -149,12 +149,12 @@ test.describe('Handovers and holidays section', () => {
       await page.getByRole('button', { name: /continue/i }).click();
       await expect( page.getByText("Choose whether the arrangements will change").nth(0) ).toBeVisible()
       await expectErrorSummaryVisible(page);
-      await page.getByText("oose whether the arrangements will change").nth(0).click();
+      await page.getByText("choose whether the arrangements will change").nth(0).click();
       await expect( page.getByRole('heading', { name: 'Will these arrangements change during school holidays?' }) ).toBeInViewport();
     });
   });
 
-  test.describe('An error should be shown when a differnet ararangement for collection in school holidays is not given', () => {
+  test.describe('An error should be shown when a different arrangement for collection in school holidays is not given', () => {
     test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({ page }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
       await page.getByLabel(/Parent collects the children/).check();

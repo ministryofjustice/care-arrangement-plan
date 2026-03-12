@@ -72,8 +72,8 @@ test.describe('Field Error Display', () => {
 
     test('should apply error styling to the form group', async ({ page }) => {
       await fillAdultDetails(page, '', '')
-      const formGroupInitalAdult = page.locator('.govuk-form-group').nth(0);
-      await expect(formGroupInitalAdult).toHaveClass(/govuk-form-group--error/);
+      const formGroupinitialAdult = page.locator('.govuk-form-group').nth(0);
+      await expect(formGroupinitialAdult).toHaveClass(/govuk-form-group--error/);
       const formGroupSecondaryAdult = page.locator('.govuk-form-group').nth(1);
       await expect(formGroupSecondaryAdult).toHaveClass(/govuk-form-group--error/);
     });

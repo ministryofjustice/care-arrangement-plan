@@ -49,7 +49,7 @@ test.describe('About the children Page Validation', () => {
     });
 });
 
-  test.describe('Incomplete Inputs Valdiation', () => {
+  test.describe('Incomplete Inputs validation', () => {
     test('should throw an error when not all have children have an input', async ({ page }) => {
       await fillNumberOfChildrenAndDetails(page, 2, ['Alice', ''])
       await expect(page.locator(`#${ERROR_ID.child2}`)).toContainText("Enter a first name");

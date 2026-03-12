@@ -23,7 +23,7 @@ async function chooseAnotherArrangementAndContinue(page: Page) {
   await page.getByRole('button', { name: /continue/i }).click();
 }
 
-async function fillToWhichScehduleIsBestPageAndContinue(page: Page) {
+async function fillToWhichScheduleIsBestPageAndContinue(page: Page) {
   await page.getByLabel('They will split time between Parent and Guardian').check();
   await page.getByRole('button', { name: /continue/i }).click();
   await page.getByRole('button', { name: /continue/i }).click();
@@ -37,9 +37,9 @@ test.describe('Mostly Lives Page', () => {
   });
  
   // Playwright usually uses error ID's to locate error messages, but here errors are inside visually hidden elements, so ID does not work and getByText is used instead.
-  // Two non essential error tests are not included here, testing wether an error messsage is inside a form group, and wether it has the right aria attribute, this is because ID has to be used for these tests.
+  // Two non essential error tests are not included here, testing wether an error message is inside a form group, and wether it has the right aria attribute, this is because ID has to be used for these tests.
   test.describe('Child mostly lives with Adult 1 and has other arrangements with Adult 2: Error Validation', () => {
-    test('An error should be shown for when Another Arrangment is left blank on the mostly lives page, the days overnight page, and the daytime visits page, and when options are left blank on these pages. ', async ({ page }) => {
+    test('An error should be shown for when Another arrangement is left blank on the mostly lives page, the days overnight page, and the daytime visits page, and when options are left blank on these pages. ', async ({ page }) => {
       await chooseAnotherArrangementAndContinue(page)
       await expect( page.getByText("Describe the living arrangement you are proposing").nth(0) ).toBeVisible()
       
@@ -73,7 +73,7 @@ test.describe('Mostly Lives Page', () => {
       await expectErrorSummaryVisible(page);
     });
 
-    test('should scroll to the textbox or feildset when clicking the error summary link', async ({ page }) => {
+    test('should scroll to the textbox or fieldset when clicking the error summary link', async ({ page }) => {
       await chooseAnotherArrangementAndContinue(page)
       await page.getByText("Describe the living arrangement you are proposing").nth(0).click();
       await expect( page.getByRole('textbox', { name: "Describe the arrangement" }) ).toBeInViewport();
@@ -97,18 +97,18 @@ test.describe('Mostly Lives Page', () => {
    });
 
   test.describe('Child splits time between Adult 1 and Adult 2: Error Validation', () => {
-    test('An error should be shown for an empty text area, about which shecdule is best for the child', async ({ page }) => {
-      await fillToWhichScehduleIsBestPageAndContinue(page)
+    test('An error should be shown for an empty text area, about which schedule is best for the child', async ({ page }) => {
+      await fillToWhichScheduleIsBestPageAndContinue(page)
       await expect( page.getByText("Describe which schedule will best meet the children's needs").nth(0) ).toBeVisible()
     });
 
     test('should display error summary at the top of the page', async ({ page }) => {
-       await fillToWhichScehduleIsBestPageAndContinue(page)
+       await fillToWhichScheduleIsBestPageAndContinue(page)
        await expectErrorSummaryVisible(page);
     });
 
     test('should display error summary link that links to the textbox field', async ({ page }) => {
-      await fillToWhichScehduleIsBestPageAndContinue(page)
+      await fillToWhichScheduleIsBestPageAndContinue(page)
       await page.getByText("Describe which schedule will best meet the children's needs").nth(0).click();
       await expect(page.getByRole('textbox')).toBeInViewport();
     });

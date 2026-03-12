@@ -10,7 +10,7 @@ async function tabAndGetFocused(page: Page) {
   return page.locator(':focus');
 }
 
-// Safe helpers to avoid inline .catch arrow functionsx which trigger lint rules
+// Safe helpers to avoid inline .catch arrow functions which trigger lint rules
 async function safeEvaluate<T = string>(locator: Locator, fn: (el: HTMLElement) => T, fallback: T): Promise<T> {
   try {
     return (await locator.evaluate(fn)) as T;
