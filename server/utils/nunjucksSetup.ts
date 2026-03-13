@@ -36,6 +36,7 @@ const nunjucksSetup = (app: express.Express): void => {
   });
 
   njkEnv.addFilter('assetMap', (url: string) => assetManifest[url] || url);
+  njkEnv.addGlobal('govukRebrand', true);
   njkEnv.addGlobal('feedbackUrl', config.feedbackUrl);
   njkEnv.addGlobal('contactEmail', config.contactEmail);
   njkEnv.addGlobal(
