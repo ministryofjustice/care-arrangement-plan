@@ -5,6 +5,8 @@ import UserEvents from '../constants/userEvents';
 import logger from '../logging/logger';
 import { generateHashedIdentifier } from '../utils/hashedIdentifier';
 
+import sendToOpenSearch  from './opensearchService';
+
 /**
  * A generic event logging function that forms the base for all analytics events.
  * @param eventType - The type of the event (e.g., 'page_visit').
@@ -22,6 +24,7 @@ const logEvent = (eventType: string, data: Record<string, string | number>) => {
     ...data,
   };
   logger.info(logEntry, `${eventType} event`);
+  sendToOpenSearch(logEntry);
 };
 
 /**
