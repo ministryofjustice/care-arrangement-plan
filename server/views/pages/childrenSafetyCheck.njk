@@ -7,6 +7,10 @@
 
   {{ govukExitThisPage() }}
 
+  <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+    {{ __('childrenSafetyCheck.escapeKeyAnnouncement') }}
+  </div>
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
