@@ -28,7 +28,7 @@ describe('analyticsService - Integration', () => {
   it('generates consistent hashed_user_id for same IP + User-Agent', () => {
     const mockReq = {
       method: 'GET',
-      path: '/task-list',
+      path: '/safety-check',
       ip: '192.168.1.1', // Dummy IP from RFC 1918 private address range
       get: jest.fn().mockReturnValue('Mozilla/5.0 (Test Browser)'),
     } as unknown as Request;
@@ -65,14 +65,14 @@ describe('analyticsService - Integration', () => {
 
     const mockReq1 = {
       method: 'GET',
-      path: '/task-list',
+      path: '/safety-check',
       ip: '192.168.1.1', // Dummy IP from RFC 1918 private address range
       get: jest.fn().mockReturnValue(userAgent),
     } as unknown as Request;
 
     const mockReq2 = {
       method: 'GET',
-      path: '/task-list',
+      path: '/safety-check',
       ip: '192.168.1.2', // Dummy IP from RFC 1918 private address range
       get: jest.fn().mockReturnValue(userAgent),
     } as unknown as Request;
@@ -129,7 +129,7 @@ describe('analyticsService - Integration', () => {
 
     const mockReq = {
       method: 'GET',
-      path: '/task-list',
+      path: '/safety-check',
       ip: secretIP,
       get: jest.fn().mockReturnValue(userAgent),
     } as unknown as Request;
