@@ -21,6 +21,7 @@ spec:
         app: ${KUBE_NAMESPACE}
     spec:
       terminationGracePeriodSeconds: 35
+      serviceAccountName: cd-serviceaccount
       containers:
         - name: node
           image: ${ECR_URL}:${IMAGE_TAG}
@@ -71,6 +72,11 @@ spec:
                 secretKeyRef:
                   name: elasticache-redis
                   key: auth_token
+            - name: OPENSEARCH_PROXY_URL
+              valueFrom:
+                secretKeyRef:
+                  name: care-arrangement-plan-opensearch-proxy-url
+                  key: proxy_url
           envFrom:
             - configMapRef:
                 name: ${KUBE_NAMESPACE}-config

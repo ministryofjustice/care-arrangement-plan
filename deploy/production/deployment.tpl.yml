@@ -72,6 +72,11 @@ spec:
                 secretKeyRef:
                   name: elasticache-redis
                   key: auth_token
+            - name: OPENSEARCH_PROXY_URL
+              valueFrom:
+                secretKeyRef:
+                  name: care-arrangement-plan-opensearch-proxy-url
+                  key: proxy_url
           envFrom:
             - configMapRef:
                 name: ${KUBE_NAMESPACE}-config
