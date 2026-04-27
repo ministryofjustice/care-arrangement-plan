@@ -36,7 +36,7 @@ describe('analyticsService', () => {
 
       const mockReq = {
         method: 'GET',
-        path: '/task-list',
+        path: '/safety-check',
         ip: '192.168.1.1',
         get: jest.fn().mockReturnValue('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'),
       } as unknown as Request;
@@ -60,7 +60,7 @@ describe('analyticsService', () => {
           timestamp: expect.any(String),
           event_type: 'page_visit',
           hashed_user_id: mockHashedId,
-          path: '/task-list',
+          path: '/safety-check',
           method: 'GET',
           status_code: 200,
         }),
@@ -135,7 +135,7 @@ describe('analyticsService', () => {
       mockedGenerateHashedIdentifier.mockReturnValueOnce('hash1111111111');
       const mockReq1 = {
         method: 'GET',
-        path: '/task-list',
+        path: '/safety-check',
         ip: '192.168.1.1',
         get: jest.fn().mockReturnValue(userAgent),
       } as unknown as Request;
@@ -147,7 +147,7 @@ describe('analyticsService', () => {
       mockedGenerateHashedIdentifier.mockReturnValueOnce('hash2222222222');
       const mockReq2 = {
         method: 'GET',
-        path: '/task-list',
+        path: '/safety-check',
         ip: '192.168.1.2',
         get: jest.fn().mockReturnValue(userAgent),
       } as unknown as Request;
@@ -177,7 +177,7 @@ describe('analyticsService', () => {
 
       const mockReq = {
         method: 'GET',
-        path: '/task-list',
+        path: '/safety-check',
         ip: '192.168.1.1',
         get: jest.fn().mockReturnValue('Mozilla/5.0'),
       } as unknown as Request;
@@ -408,7 +408,7 @@ describe('analyticsService', () => {
         get: jest.fn().mockReturnValue(undefined),
       } as unknown as Request;
 
-      logLinkClick(mockReq, 'https://www.gov.uk/link', undefined, '/task-list');
+      logLinkClick(mockReq, 'https://www.gov.uk/link', undefined, '/safety-check');
 
       expect(mockedGenerateHashedIdentifier).toHaveBeenCalledWith(
         '10.0.0.5',
@@ -465,7 +465,7 @@ describe('analyticsService', () => {
         get: jest.fn().mockReturnValue('Mozilla/5.0'),
       } as unknown as Request;
 
-      logPageExit(mockReq, '/task-list');
+      logPageExit(mockReq, '/safety-check');
       logPageExit(mockReq, '/confirmation');
 
       expect(mockedLogger.info).toHaveBeenCalledTimes(2);
@@ -473,7 +473,7 @@ describe('analyticsService', () => {
       expect(mockedLogger.info).toHaveBeenNthCalledWith(
         1,
         expect.objectContaining({
-          exit_page: '/task-list',
+          exit_page: '/safety-check',
         }),
         'page_exit event'
       );

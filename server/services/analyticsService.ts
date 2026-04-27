@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 
 import config from '../config';
+import paths from '../constants/paths';
 import UserEvents from '../constants/userEvents';
 import logger from '../logging/logger';
 import { generateHashedIdentifier } from '../utils/hashedIdentifier';
 
-import sendToOpenSearch  from './opensearchService';
+import sendToOpenSearch from './opensearchService';
 
 /**
  * A generic event logging function that forms the base for all analytics events.
@@ -39,14 +40,16 @@ const logPageVisit = (req: Request, res: Response) => {
   // This rotates every 24 hours for GDPR compliance while allowing deduplication
   const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
 
-  const eventData = {
-    hashed_user_id: hashedUserId,
-    path: path,
-    method: method,
-    status_code: statusCode,
-  };
+  if (path !== paths.PASSWORD && Object.values(paths).includes(path as paths)) {
+    const eventData = {
+      hashed_user_id: hashedUserId,
+      path: path,
+      method: method,
+      status_code: statusCode,
+    };
 
-  logEvent(UserEvents.PAGE_VISIT, eventData);
+    logEvent(UserEvents.PAGE_VISIT, eventData);
+  } 
 };
 
 /**
@@ -147,4 +150,4 @@ const logQuickExit = (req: Request, exitPage: string) => {
   logEvent(UserEvents.QUICK_EXIT, eventData);
 };
 
-export { logEvent, logPageVisit, logDownload, logLinkClick, logPageExit, logQuickExit };
+export { logDownload, logEvent, logLinkClick, logPageExit, logPageVisit, logQuickExit };
