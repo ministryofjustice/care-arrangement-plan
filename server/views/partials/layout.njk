@@ -1,5 +1,6 @@
 {% extends "govuk/template.njk" %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 {% set htmlLang = getLocale() %}
 {% set mainClasses = "app-container govuk-body" %}
 
@@ -42,6 +43,14 @@
 {% endblock %}
 
 {% block beforeContent %}
+  {{
+    govukPhaseBanner({
+      tag: {
+        text: "Beta"
+      },
+      html: __('phaseBannerText')
+    })
+  }}
   {% include "partials/notificationBanner.njk" %}
   {% if backLinkHref %}
     <div role="navigation">{{ govukBackLink({text: __('back'), href: backLinkHref}) }}</div>
