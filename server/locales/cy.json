@@ -22,7 +22,7 @@
     "continueTitle": "Os ydych am barhau",
     "escapeKeyAnnouncement": "Os oes angen i chi adael y dudalen hon yn gyflym, gwasgwch y botwm Escape ar eich bysellfwrdd."
   },
-  "phaseBannerText": "Mae hwn yn wasanaeth newydd. Helpwch ni i'w wella a <a href={{ feedbackUrl }} target=\"_blank\" rel=\"noopener noreferrer\">rhowch eich adborth (yn agor mewn tab newydd)</a>.",
+  "phaseBannerText": "Mae hwn yn wasanaeth newydd.",
   "accessibilityStatement": {
     "title": "Datganiad hygyrchedd",
     "appliesTo": "Mae'r datganiad hygyrchedd hwn yn berthnasol i'r gwasanaeth Cynnig cynllun trefniadau plant.",

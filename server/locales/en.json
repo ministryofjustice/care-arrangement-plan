@@ -31,7 +31,7 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
-  "phaseBannerText": "This is a new service. Help us improve it and <a href={{ feedbackUrl }} target=\"_blank\" rel=\"noopener noreferrer\">give your feedback (opens in new tab)</a>.",
+  "phaseBannerText": "This is a new service.",
   "footer": {
     "accessibility": "Accessibility",
     "contact": "Contact",
