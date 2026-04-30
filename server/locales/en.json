@@ -560,9 +560,6 @@
       "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation or another way of agreeing outside of court.",
       "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.",
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
-      "helpUsImproveHeading": "Get paid to give your feedback",
-      "helpUsImprove": "With your help we can improve this service and understand how you use your plan.",
-      "surveyLink":"Sign up and receive an incentive when you take part in further research {{{ feedbackUrl }}}",
       "doNotAgree": {
         "livingAndVisiting": {
           "mostlyLive": "If you do not agree, suggest where the children will spend most of their time",
@@ -604,9 +601,6 @@
     "downloadedYourPlanTitle": "You have downloaded your plan",
     "whatYouNeedToDoNext": "What you need to do next:",
     "checkDownloadsFolder": "Check your downloads folder for a PDF or accessible HTML page of your plan and share with {{{ otherAdult }}} who will get a chance to collaborate.",
-    "helpUsImprove": "Get paid to give your feedback",
-    "appreciateFeedback": "With your help we can improve this service and understand how you use your plan.",
-    "whatDidYouThink": "Sign up and receive an incentive when you take part in further research",
     "cantFindPlan": "Can't find your plan?",
     "checkDownloads": "Check your downloads folder. If not then please download again.",
     "downloadPdf": "Download as a PDF (0.5 MB)",

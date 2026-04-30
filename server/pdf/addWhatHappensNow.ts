@@ -1,4 +1,3 @@
-import config from '../config';
 import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
 
 import TextComponent from './components/text';
@@ -48,27 +47,6 @@ const addWhatHappensNow = (pdf: Pdf) => {
       text: request.__('sharePlan.yourProposedPlan.moreInfoAndSupport'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-      urlize: true,
-    },
-    {
-      text: request.__('sharePlan.yourProposedPlan.helpUsImproveHeading'),
-      size: QUESTION_TITLE_SIZE,
-      style: FontStyles.BOLD,
-      bottomPadding: PARAGRAPH_SPACE,
-      urlize: true,
-    },
-    {
-      text: request.__('sharePlan.yourProposedPlan.helpUsImprove'),
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-      urlize: true,
-    },
-    {
-      text: request.__('sharePlan.yourProposedPlan.surveyLink', { feedbackUrl: config.feedbackUrl }),
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
       urlize: true,
     },
