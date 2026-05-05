@@ -31,7 +31,7 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
-  "phaseBannerText": "This is a new service.",
+  "phaseBannerText": "This is a new service - your <a href=\"{{ feedbackUrl }}\" class=\"govuk-link--no-visited-state\">feedback</a> will help us to improve it.",
   "footer": {
     "accessibility": "Accessibility",
     "contact": "Contact",
