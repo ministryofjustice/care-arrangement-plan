@@ -42,7 +42,7 @@
 
       // Auto-trigger download when page loads
       // Use a unique key per plan attempt to allow multiple plans in the same browser session
-      var downloadKey = 'downloadTriggered_' + '{{ planStartTime }}';
+      var downloadKey = 'downloadTriggered';
 
       // Check if this is the first visit to this page (not a refresh or back navigation)
       if (!sessionStorage.getItem(downloadKey)) {

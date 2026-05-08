@@ -47,4 +47,11 @@
       </form>
     </div>
   </div>
+
+  <script nonce="{{ cspNonce }}">
+    var downloadKey = 'downloadTriggered';
+    if (sessionStorage.getItem(downloadKey)) {
+      sessionStorage.removeItem(downloadKey);
+    }
+  </script>
 {% endblock %}
