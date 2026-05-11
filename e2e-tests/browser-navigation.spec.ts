@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import { verifyBackNavigation, verifyForwardNavigation } from './fixtures/navigation-helpers';
+import { verifyBackNavigation, verifyForwardNavigation, verifyHomeNavigation } from './fixtures/navigation-helpers';
 import { taskListSections, staticPages } from './fixtures/test-data';
 import {
   startJourney,
@@ -454,7 +454,7 @@ test.describe('Browser Navigation - Static Pages', () => {
 
       await expect(page).toHaveURL(new RegExp(staticPage.path));
 
-      await verifyBackNavigation(page, '/');
+      await verifyHomeNavigation(page, '/');
     });
   }
 });

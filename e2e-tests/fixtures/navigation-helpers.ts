@@ -61,3 +61,25 @@ export async function verifyForwardNavigation(
     await verifyData();
   }
 }
+
+/**
+ * Verifies back navigation using browser back button and optionally checks data persistence
+ */
+export async function verifyHomeNavigation(
+  page: Page,
+  expectedUrl: string | RegExp,
+  verifyData?: () => Promise<void>
+) {
+  await page.goBack();
+  await expect(page).toHaveURL(expectedUrl);
+
+  // Firefox does not preserve form state via bfcache after back navigation
+  const browserName = page.context().browser()?.browserType().name();
+  if (verifyData && browserName !== 'firefox') {
+    await verifyData();
+  }
+
+  // Verify page loaded without errors
+  const heading = page.getByRole('heading', { name: /Making child arrangements if you divorce or separate/i });
+  await expect(heading).toBeVisible();
+}
