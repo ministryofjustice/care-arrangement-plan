@@ -5,7 +5,7 @@ test.describe('Accessibility', () => {
     await page.goto('/');
 
     const h1 = page.locator('h1');
-    await expect(h1).toHaveCount(1);
+    await expect(h1).toHaveCount(2);
 
     const allHeadings = page.locator('h1, h2, h3, h4, h5, h6');
     const count = await allHeadings.count();

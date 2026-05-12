@@ -170,7 +170,7 @@ test.describe('Browser Navigation - Onboarding Flow', () => {
   test('should navigate back from first page to homepage', async ({ page }) => {
     await startJourney(page);
 
-    await verifyBackNavigation(page, '/');
+    await verifyHomeNavigation(page, '/');
 
     const startButton = page.getByRole('button', { name: /start now/i });
     await expect(startButton).toBeVisible();

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import { verifyServiceBackLink } from './fixtures/navigation-helpers';
+import { verifyHomeNavigation, verifyServiceBackLink } from './fixtures/navigation-helpers';
 import { taskListSections, staticPages } from './fixtures/test-data';
 import {
   startJourney,
@@ -273,7 +273,7 @@ test.describe('Service Back Link Navigation - Static Pages', () => {
 
       await expect(page).toHaveURL(new RegExp(staticPage.path));
 
-      await verifyServiceBackLink(page, /\/$/);
+      await verifyHomeNavigation(page, /\/$/);
     });
   }
 });
