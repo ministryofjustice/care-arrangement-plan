@@ -6,7 +6,7 @@ test.describe('Homepage', () => {
 
     await expect(page).toHaveTitle(/Propose a child arrangements plan/);
 
-    const heading = page.locator('h1');
+    const heading = page.getByRole('heading', { name: /Making child arrangements if you divorce or separate/i });
     await expect(heading).toBeVisible();
 
     const startButton = page.getByRole('button', { name: /start now/i });
