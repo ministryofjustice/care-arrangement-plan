@@ -19,6 +19,18 @@ test.describe('Cookies Page', () => {
     await expect(sessionRow).toContainText('session');
   });
 
+  test('should display OpenSearch surveys details on the cookies page', async ({ page }) => {
+    await page.goto('/cookies');
+
+    await expect(page.getByRole('heading', { name: /Surveys \(optional\)/i })).toBeVisible();
+    await expect(page.getByText('govuk_taken[NameOfSurvey]')).toBeVisible();
+    await expect(page.getByText('govuk_surveySeen[NameOfSurvey]')).toBeVisible();
+    await expect(page.getByRole('link', { name: /SmartSurvey/i })).toHaveAttribute(
+      'href',
+      'https://www.smartsurvey.co.uk/company/how-we-use-cookies'
+    );
+  });
+
   test('should have working back link', async ({ page }) => {
     const backLink = page.locator('.govuk-back-link');
     if ((await backLink.count()) > 0) {

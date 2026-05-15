@@ -32,6 +32,17 @@ describe(paths.COOKIES, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('Cookies');
       expect(dom.window.document.querySelector('fieldset')).not.toBeNull();
     });
+
+    it('should render OpenSearch analytics survey details when there is a ga4 id', async () => {
+      const response = await request(app).get(paths.COOKIES).expect('Content-Type', /html/);
+      const dom = new JSDOM(response.text);
+
+      const surveyHeading = Array.from(dom.window.document.querySelectorAll('h3')).find((heading) => heading.textContent?.trim() === 'Surveys (optional)');
+      expect(surveyHeading).not.toBeNull();
+      expect(response.text).toContain('govuk_taken[NameOfSurvey]');
+      expect(response.text).toContain('govuk_surveySeen[NameOfSurvey]');
+      expect(response.text).toContain('https://www.smartsurvey.co.uk/company/how-we-use-cookies');
+    });
   });
 
   describe('POST', () => {
