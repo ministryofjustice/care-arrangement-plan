@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe.only('Cookies Page', () => {
+test.describe('Cookies Page', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/cookies');
   });
