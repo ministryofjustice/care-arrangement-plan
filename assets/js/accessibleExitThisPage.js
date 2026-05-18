@@ -85,6 +85,21 @@ const setupAccessibleExitThisPage = () => {
         return;
       }
 
+      // Require three rapid Escape presses to prevent accidental triggers
+      const currentTime = new Date().getTime();
+      if (currentTime - lastEscapeTime > 500) {
+        escapePressCount = 1;
+      } else {
+        escapePressCount += 1;
+      }
+
+      lastEscapeTime = currentTime;
+
+      if (escapePressCount < 3) {
+        return;
+      }
+
+      escapePressCount = 0;
       const exitUrl = button.getAttribute('href');
 
       event.preventDefault();
@@ -108,6 +123,8 @@ const setupAccessibleExitThisPage = () => {
   };
 
   // Use keydown event (same as GOV.UK uses keyup for Shift)
+  let lastEscapeTime = 0;
+  let escapePressCount = 0;
   document.addEventListener('keydown', handleEscapeKey, true);
   document.body.dataset.accessibleExitThisPageKeypress = 'true';
 };
