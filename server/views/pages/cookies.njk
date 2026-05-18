@@ -82,6 +82,45 @@
           })
         }}
 
+        <h3 class="govuk-heading-m">{{ __('cookies.opensearchAnalytics.title') }}</h3>
+        <p class="govuk-body">{{ __('cookies.opensearchAnalytics.content.collectData') }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ __('cookies.opensearchAnalytics.content.collectDataItems.pageViews') }}</li>
+          <li>{{ __('cookies.opensearchAnalytics.content.collectDataItems.linkInteractions') }}</li>
+          <li>{{ __('cookies.opensearchAnalytics.content.collectDataItems.pageCompletions') }}</li>
+          <li>{{ __('cookies.opensearchAnalytics.content.collectDataItems.pageAndQuickExits') }}</li>
+          <li>{{ __('cookies.opensearchAnalytics.content.collectDataItems.fileDownloads') }}</li>
+        </ul>
+        <p class="govuk-body">{{ __('cookies.opensearchAnalytics.content.doesNotUseCookies') }}</p>
+        <p class="govuk-body">{{ __('cookies.opensearchAnalytics.content.monitor') }}</p>
+
+        <h3 class="govuk-heading-m">{{ __('cookies.opensearchAnalytics.content.surveys.title') }}</h3>
+        <p class="govuk-body">{{ __('cookies.opensearchAnalytics.content.surveys.intro') }}</p>
+
+        {{
+          govukTable({
+            head: [
+              { text: __('cookies.opensearchAnalytics.content.surveys.table.headerRow.name') },
+              { text: __('cookies.opensearchAnalytics.content.surveys.table.headerRow.purpose') },
+              { text: __('cookies.opensearchAnalytics.content.surveys.table.headerRow.expires') }
+            ],
+            rows: [
+              [
+                { text: __('cookies.opensearchAnalytics.content.surveys.table.valueRowOne.name') },
+                { text: __('cookies.opensearchAnalytics.content.surveys.table.valueRowOne.purpose') },
+                { text: __('cookies.opensearchAnalytics.content.surveys.table.valueRowOne.expires') }
+              ],
+              [
+                { text: __('cookies.opensearchAnalytics.content.surveys.table.valueRowTwo.name') },
+                { text: __('cookies.opensearchAnalytics.content.surveys.table.valueRowTwo.purpose') },
+                { text: __('cookies.opensearchAnalytics.content.surveys.table.valueRowTwo.expires') }
+              ]
+            ]
+          })
+        }}
+
+        <p class="govuk-body">{{ __('cookies.opensearchAnalytics.content.surveys.smartSurvey') | safe }}</p>
+
         <form class="form" action="{{ paths.COOKIES }}" method="post" novalidate>
           <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
 

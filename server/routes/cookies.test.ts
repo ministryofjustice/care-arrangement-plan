@@ -32,6 +32,17 @@ describe(paths.COOKIES, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('Cookies');
       expect(dom.window.document.querySelector('fieldset')).not.toBeNull();
     });
+
+    it('should render OpenSearch analytics survey details when there is a ga4 id', async () => {
+      const response = await request(app).get(paths.COOKIES).expect('Content-Type', /html/);
+      const dom = new JSDOM(response.text);
+
+      const surveyHeading = Array.from(dom.window.document.querySelectorAll('h3')).find((heading) => heading.textContent?.trim() === 'Surveys (optional)');
+      expect(surveyHeading).not.toBeNull();
+      expect(response.text).toContain('govuk_taken[NameOfSurvey]');
+      expect(response.text).toContain('govuk_surveySeen[NameOfSurvey]');
+      expect(response.text).toContain('https://www.smartsurvey.co.uk/company/how-we-use-cookies');
+    });
   });
 
   describe('POST', () => {
@@ -60,9 +71,46 @@ describe(paths.COOKIES, () => {
           expect(response.header['set-cookie']).toEqual([
             `cookie_policy=${encodeURIComponent(JSON.stringify({ acceptAnalytics: 'No' }))}; Max-Age=31536000; Path=/; Expires=Thu, 01 Jan 2026 00:00:00 GMT; SameSite=Lax`,
             '_ga=; Domain=127.0.0.1; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT',
-            `_ga_${config.analytics.ga4Id}=; Domain=127.0.0.1; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT`,
+            `_ga_${config.analytics.ga4Id.replace('G-', '')}=; Domain=127.0.0.1; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT`,
           ]);
         });
+    });
+
+    it('should set secure cookie when useHttps is enabled', async () => {
+      config.analytics.ga4Id = 'test-ga4-id';
+      config.useHttps = true;
+
+      await request(app)
+        .post(paths.COOKIES)
+        .send({ [formFields.ACCEPT_OPTIONAL_COOKIES]: 'Yes' })
+        .expect((response) => {
+          const cookieHeader = response.header['set-cookie'][0];
+          expect(cookieHeader).toContain('Secure');
+        });
+
+      config.useHttps = false;
+    });
+
+    it('should not clear analytics cookies when accepting analytics', async () => {
+      config.analytics.ga4Id = 'test-ga4-id';
+
+      await request(app)
+        .post(paths.COOKIES)
+        .send({ [formFields.ACCEPT_OPTIONAL_COOKIES]: 'Yes' })
+        .expect((response) => {
+          const cookieHeader = response.header['set-cookie'][0];
+          expect(cookieHeader).not.toContain('_ga=');
+        });
+    });
+
+    it('should include back link in page content', async () => {
+      const response = await request(app).get(paths.COOKIES).expect('Content-Type', /html/);
+
+      const dom = new JSDOM(response.text);
+      const backLink = dom.window.document.querySelector('a.govuk-back-link');
+
+      expect(backLink).not.toBeNull();
+      expect(backLink?.getAttribute('href')).toBe(paths.START);
     });
   });
 });

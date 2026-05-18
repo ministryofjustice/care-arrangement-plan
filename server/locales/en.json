@@ -144,13 +144,50 @@
     "sessionExpiry": "After 120 minutes of inactivity or when you close your browser",
     "cookiesMessage": "<h4 class=\"govuk-heading-s\">Cookies message</h4><p>You may see a banner when you visit Propose a child arrangements plan inviting you to accept or reject optional cookies. We’ll set a cookies so that your computer knows you’ve seen it and not to show it again, and also to store your settings.</p>",
     "consentPurpose": "Saves your cookie consent settings",
-    "consentExpiry": "After 1 year",
+    "consentExpiry": "1 year",
     "optionalCookies": "Analytics cookies (optional)",
-    "aboutOptionalCookies": "<h4 class=\"govuk-heading-s\">Measuring service usage (Google Analytics)</h4><p>We use Google Analytics software to collect information about how you use Propose a child arrangements plan. We do this to help make sure the service is meeting the needs of its users and to help us make improvements</p><p>Google Analytics stores information about:</p><ul class=\"govuk-list govuk-list--bullet\"><li>the pages you visit</li><li>how long you spend on each page</li><li>how you got to the service</li><li>what you click on while you’re visiting the service</li></ul><p>We don't collect or store your personal information (for example your name or address) so this information can't be used to identify who you are.</p><p>Google Analytics sets the following cookies:</p>",
+    "aboutOptionalCookies": "<h4 class=\"govuk-heading-s\">Measuring service usage (Google Analytics)</h4><p>We use Google Analytics software to collect information about how you use Propose a child arrangements plan. We do this to help make sure the service meets the needs of its users and to help us make improvements</p><p>Google Analytics stores information about:</p><ul class=\"govuk-list govuk-list--bullet\"><li>the pages you visit</li><li>how long you spend on each page</li><li>how you got to the service</li><li>what you click on while you’re visiting the service</li></ul><p>We don't collect or store your personal information (for example your name or address) so this information can't be used to identify who you are.</p><p>Google Analytics sets the following cookies:</p>",
     "acceptOptionalCookies": "Do you want to accept analytics cookies?",
     "_gaCookiePurpose": "Checks if you’ve visited the service before. This helps us count how many people visit our site.",
-    "gaCookiesExpiry": "After 2 years",
+    "gaCookiesExpiry": "3 years",
     "_ga_IdCookiePurpose": "Used by Google Analytics to find and track an individual session with your device.",
+    "opensearchAnalytics": {
+      "title": "OpenSearch analytics",
+      "content": {
+        "collectData": "We also use OpenSearch to collect  data about how the service is used, such as:",
+        "collectDataItems": {
+          "pageViews": "page views",
+          "linkInteractions": "link interactions",
+          "pageCompletions": "page completions",
+          "pageAndQuickExits": "page and quick exits",
+          "fileDownloads": "file downloads"
+        },
+        "doesNotUseCookies": "OpenSearch analytics does not use cookies or store information on your device.",
+        "monitor": "This data is used only by the Ministry of Justice to monitor and improve the service.",
+        "surveys": {
+          "title": "Surveys (optional)",
+          "intro": "We will sometimes ask users to take part in a survey, for example our performance survey. If you take part, or dismiss the survey, we’ll save a cookie that lets us know you’ve seen the message so that we do not show it to you again.",
+          "table": {
+            "headerRow": {
+              "name": "Name",
+              "purpose": "Purpose",
+              "expires": "Expires"
+            },
+            "valueRowOne": {
+              "name": "govuk_taken[NameOfSurvey]",
+              "purpose": "Remembers whether you have taken the survey or dismissed it",
+              "expires": "4 months"
+            },
+            "valueRowTwo": {
+              "name": "govuk_surveySeen[NameOfSurvey]",
+              "purpose": "Remembers how many times you have seen the survey message",
+              "expires": "2 years"
+            }
+          },
+          "smartSurvey": "We use SmartSurvey to collect responses to the survey. If you take part, SmartSurvey <a href=\"https://www.smartsurvey.co.uk/company/how-we-use-cookies\">will save extra cookies</a> to track your progress on their website."
+        }
+      }
+    },
     "saveCookieSettings": "Save cookie settings"
   },
   "privacyNotice": {
