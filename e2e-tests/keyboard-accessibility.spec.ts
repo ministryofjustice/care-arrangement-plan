@@ -456,7 +456,9 @@ test.describe('Keyboard Accessibility', () => {
       await page.getByRole('button', { name: /start now/i }).click();
       await expect(page).toHaveURL(/\/safety-check/);
 
-      // Press Escape (should not be in an input field)
+      // Press Escape three times quickly (should not be in an input field)
+      await page.keyboard.press('Escape');
+      await page.keyboard.press('Escape');
       await page.keyboard.press('Escape');
 
       // Should redirect to BBC Weather
@@ -470,6 +472,8 @@ test.describe('Keyboard Accessibility', () => {
       await expect(page).toHaveURL(/\/children-safety-check/);
 
       await page.keyboard.press('Escape');
+      await page.keyboard.press('Escape');
+      await page.keyboard.press('Escape');
       await page.waitForURL(/bbc.*weather/, { timeout: 10000 });
     });
 
@@ -480,7 +484,9 @@ test.describe('Keyboard Accessibility', () => {
       const input = page.getByLabel(/How many children is this for/i);
       await input.focus();
 
-      // Press Escape while focused in the input
+      // Press Escape three times quickly while focused in the input
+      await page.keyboard.press('Escape');
+      await page.keyboard.press('Escape');
       await page.keyboard.press('Escape');
 
       // Should NOT redirect - still on the same page
