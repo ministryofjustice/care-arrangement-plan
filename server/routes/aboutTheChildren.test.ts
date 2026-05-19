@@ -111,7 +111,7 @@ describe(paths.ABOUT_THE_CHILDREN, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Enter a first name',
+          msg: 'Enter first name for the second child',
           path: `${formFields.CHILD_NAME}1`,
           type: 'field',
         },
