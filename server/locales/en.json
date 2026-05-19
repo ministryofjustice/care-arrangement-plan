@@ -323,6 +323,7 @@
       "title": "Where will the children spend most of their time?",
       "with": "With {{{ adult }}}",
       "split": "They will split time between {{{ initialAdult }}} and {{{ secondaryAdult }}}",
+      "anotherArrangement": "Another arrangement<span class=\"govuk-visually-hidden\">Selecting this will reveal an additional input</span>",
       "emptyError": "Choose where the children will spend most of their time",
       "arrangementMissingError": "Describe the living arrangement you are proposing"
     },
