@@ -462,7 +462,7 @@ test.describe('Decision Making Section', () => {
 
       await expectErrorSummaryVisible(page);
 
-      const errorLink = page.locator(`.govuk-error-summary__list a[href="#${LAST_MINUTE_FIELD_ID}"]`);
+      const errorLink = page.locator(`.govuk-error-summary__list a[href="#${LAST_MINUTE_FIELD_ID}-method"]`);
       await expect(errorLink).toBeVisible();
     });
   });
