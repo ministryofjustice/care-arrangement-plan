@@ -47,8 +47,8 @@ test.describe('Error Summary Display', () => {
 
     test('should display error summary link that links to the input field', async ({ page }) => {
       await fillAdultDetails(page, '', '')
-      await expectErrorSummaryLinkToField(page, 'initial-adult-name-error')
-      const errorLink = page.locator(`.govuk-error-summary__list a[href="#secondary-adult-name-error"]`).filter({ hasText: 'Enter the name of the other parent or carer' });
+      await expectErrorSummaryLinkToField(page, 'initial-adult-name')
+      const errorLink = page.locator(`.govuk-error-summary__list a[href="#secondary-adult-name"]`).filter({ hasText: 'Enter the name of the other parent or carer' });
       await expect(errorLink).toBeVisible();
     });
 

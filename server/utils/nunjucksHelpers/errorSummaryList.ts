@@ -5,7 +5,7 @@ const errorSummaryList = (errors: FieldValidationError[] = []) => {
   return errors.map((error) => {
     return {
       text: error.msg,
-      href: error.path ? `#${error.path}-error` : undefined,
+      href: error.path ? `#${error.path}` : undefined,
     };
   });
 };
