@@ -52,7 +52,7 @@ test.describe('Multiple Children Input Validation', () => {
 test.describe('Incomplete Inputs validation', () => {
   test('should throw an error when not all have children have an input', async ({ page }) => {
     await fillNumberOfChildrenAndDetails(page, 2, ['Alice', ''])
-    await expect(page.locator(`#${ERROR_ID.child2}`)).toContainText("Enter a first name");
+    await expect(page.locator(`#${ERROR_ID.child2}`)).toContainText("Enter first name for the second child");
   });
 });   
 
@@ -77,7 +77,7 @@ test.describe('Error Summary Display', () => {
 test.describe('Field Error Display', () => {
   test('should display error message next to the input field with correct styling', async ({ page }) => {
     await fillNumberOfChildrenAndDetails(page, 1, [' '])
-    await expectFieldError(page, 'child-name0', "Enter a first name");
+    await expectFieldError(page, 'child-name0', "Enter first name for the first child");
   });
 
   test('should apply error styling to the form group', async ({ page }) => {
