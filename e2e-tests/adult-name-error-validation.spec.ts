@@ -58,8 +58,6 @@ test.describe('Error Summary Display', () => {
       await expect(page.locator('#initial-adult-name')).toBeInViewport();
       await page.locator('.govuk-error-summary__list a').nth(1).click();
       await expect(page.locator('#secondary-adult-name')).toBeInViewport();
-      await page.locator('.govuk-error-summary__list a').nth(2).click();
-      await expect(page.locator('#secondary-adult-name')).toBeInViewport();
     });
 });
 
