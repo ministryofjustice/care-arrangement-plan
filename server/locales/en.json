@@ -246,7 +246,8 @@
     "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm",
     "stopNow": "If you have any concerns about safety, stop now.",
     "questionTitle": "Are the children safe?",
-    "error": "Select whether the children are safe or not"
+    "error": "Select whether the children are safe or not",
+    "escapeKeyAnnouncement": "To exit this service quickly, press escape three times."
   },
   "childrenNotSafe": {
     "title": "Getting help",
