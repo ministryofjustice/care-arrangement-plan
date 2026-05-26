@@ -246,7 +246,8 @@
     "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm",
     "stopNow": "If you have any concerns about safety, stop now.",
     "questionTitle": "Are the children safe?",
-    "error": "Select whether the children are safe or not"
+    "error": "Select whether the children are safe or not",
+    "escapeKeyAnnouncement": "To exit this service quickly, press escape three times."
   },
   "childrenNotSafe": {
     "title": "Getting help",
@@ -293,7 +294,12 @@
     "multipleFirstName3": "First name of the fourth child",
     "multipleFirstName4": "First name of the fifth child",
     "multipleFirstName5": "First name of the sixth child",
-    "error": "Enter a first name"
+    "child-name0Error": "Enter first name for the first child",
+    "child-name1Error": "Enter first name for the second child",
+    "child-name2Error": "Enter first name for the third child",
+    "child-name3Error": "Enter first name for the fourth child",
+    "child-name4Error": "Enter first name for the fifth child",
+    "child-name5Error": "Enter first name for the sixth child"
   },
   "aboutTheAdults": {
     "title": "About the adults who will care for the children",
@@ -323,6 +329,7 @@
       "title": "Where will the children spend most of their time?",
       "with": "With {{{ adult }}}",
       "split": "They will split time between {{{ initialAdult }}} and {{{ secondaryAdult }}}",
+      "anotherArrangement": "Another arrangement<span class=\"govuk-visually-hidden\">Selecting this will reveal an additional input</span>",
       "emptyError": "Choose where the children will spend most of their time",
       "arrangementMissingError": "Describe the living arrangement you are proposing"
     },

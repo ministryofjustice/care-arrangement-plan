@@ -120,6 +120,29 @@ describe(paths.ABOUT_THE_ADULTS, () => {
       });
     });
 
+    it('should reload page and set flash when the initial adult name is missing', async () => {
+      const secondaryName = 'secondaryName';
+      await request(app)
+        .post(paths.ABOUT_THE_ADULTS)
+        .send({ [formFields.SECONDARY_ADULT_NAME]: secondaryName })
+        .expect(302)
+        .expect('location', paths.ABOUT_THE_ADULTS);
+
+      expect(flashMock).toHaveBeenCalledWith('errors', [
+        {
+          location: 'body',
+          msg: 'Enter your first name or the name of the person you represent',
+          path: formFields.INITIAL_ADULT_NAME,
+          type: 'field',
+          value: '',
+        },
+      ]);
+      expect(flashMock).toHaveBeenCalledWith('formValues', {
+        [formFields.INITIAL_ADULT_NAME]: '',
+        [formFields.SECONDARY_ADULT_NAME]: secondaryName,
+      });
+    });
+
     it('should reload page and set flash when the adults have the same name', async () => {
       const initialName = 'initialName';
       await request(app)

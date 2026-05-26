@@ -47,7 +47,7 @@ const aboutTheChildrenRoutes = (router: Router) => {
       if (!value) {
         errors.push({
           location: 'body',
-          msg: request.__('aboutTheChildren.error'),
+          msg: request.__('aboutTheChildren.' + fieldName + 'Error'),
           path: fieldName,
           type: 'field',
         });

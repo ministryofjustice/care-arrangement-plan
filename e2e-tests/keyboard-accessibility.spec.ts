@@ -430,7 +430,7 @@ test.describe('Keyboard Accessibility', () => {
         const targetId = href.replace('#', '');
         const inputId = targetId.replace('-error', '');
         const targetInput = page.locator(`#${inputId}`);
-        await expect(targetInput).not.toBeFocused();
+        await expect(targetInput).toBeFocused();
         break;
       }
      }

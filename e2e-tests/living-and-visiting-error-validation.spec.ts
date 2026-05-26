@@ -63,7 +63,7 @@ test.describe('Mostly Lives Page', () => {
       await fillToWhichDaysOvernight(page)   
       await page.getByRole('button', { name: /continue/i }).click();
       await expectErrorSummaryVisible(page);
-      chooseAnotherArrangementAndContinue(page)
+      await chooseAnotherArrangementAndContinue(page)
       await expectErrorSummaryVisible(page);
 
       await fillToWillDaytimeVisitsHappen(page)   
@@ -82,13 +82,13 @@ test.describe('Mostly Lives Page', () => {
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByText("Select which days overnights will happen on").nth(0).click();
       await expect( page.getByRole('heading', { name: 'On which days will overnights happen?' }) ).toBeInViewport();
-      chooseAnotherArrangementAndContinue(page)
+      await chooseAnotherArrangementAndContinue(page)
       await page.getByText("Describe when the children will stay overnight").nth(0).click();
       await expect( page.getByRole('textbox', { name: "Describe the arrangement" }) ).toBeInViewport();
 
       await fillToWillDaytimeVisitsHappen(page)
       await page.getByRole('button', { name: /continue/i }).click();
-      await page.getByText(" Select when daytime visits will happen").nth(0).click();
+      await page.getByText("Select when daytime visits will happen").nth(0).click();
       await expect( page.getByRole('heading', { name: 'On which days will daytime visits happen?' }) ).toBeInViewport();
       await chooseAnotherArrangementAndContinue(page)
       await page.getByText("Describe when daytime visits will happen").nth(0).click();

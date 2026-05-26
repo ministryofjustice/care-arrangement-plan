@@ -152,7 +152,7 @@ test.describe('Special Days Page', () => {
 
       await expectErrorSummaryVisible(page);
 
-      const errorLink = page.locator(`.govuk-error-summary__list a[href="#${FIELD_ID}-error"]`);
+      const errorLink = page.locator(`.govuk-error-summary__list a[href="#${FIELD_ID}"]`);
       await expect(errorLink).toBeVisible();
     });
 

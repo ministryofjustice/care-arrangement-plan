@@ -30,13 +30,26 @@ const aboutTheAdultsRoutes = (router: Router) => {
     body(formFields.INITIAL_ADULT_NAME)
       .trim()
       .notEmpty()
-      .withMessage((_value, { req }) => req.__('aboutTheAdults.initialError')),
+      .withMessage((_value, { req }) => req.__('aboutTheAdults.initialError'))
+      .bail(),
     body(formFields.SECONDARY_ADULT_NAME)
       .trim()
       .notEmpty()
-      .withMessage((_value, { req }) => req.__('aboutTheAdults.secondaryError')),
+      .withMessage((_value, { req }) => req.__('aboutTheAdults.secondaryError'))
+      .bail(),
     body(formFields.SECONDARY_ADULT_NAME)
-      .custom((value: string, { req }) => value !== req.body[formFields.INITIAL_ADULT_NAME])
+      .custom((value: string, { req }) => {
+        const initialAdultName = typeof req.body[formFields.INITIAL_ADULT_NAME] === 'string'
+          ? req.body[formFields.INITIAL_ADULT_NAME].trim()
+          : '';
+        const secondaryAdultName = typeof value === 'string' ? value.trim() : '';
+
+        if (!initialAdultName || !secondaryAdultName) {
+          return true;
+        }
+
+        return secondaryAdultName !== initialAdultName;
+      })
       .withMessage((_value, { req }) => req.__('aboutTheAdults.sameNameError')),
     (request, response) => {
       const formData = matchedData<{
