@@ -4,6 +4,12 @@
 {% set htmlLang = getLocale() %}
 {% set mainClasses = "app-container govuk-body" %}
 
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: 'https://www.gov.uk/'
+  }) }}
+{% endblock %}
+
 {% block pageTitle %}
   {% if errors | length %}
     Error:
