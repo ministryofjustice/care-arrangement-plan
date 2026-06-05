@@ -58,6 +58,13 @@
       "title": "Too many requests have been made",
       "info": "The page has been reloaded too many times in a short period.",
       "tryReloading": "Please wait a period of 15 minutes, then try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
+    },
+    "timeOut": {
+      "title": "Sorry, you'll have to start again",
+      "yourSession": "Your session automatically ends if you don’t use the service for 120 minutes.",
+      "personalInformation": "We haven’t saved any personal information.",
+      "startAgain": "You need to start your child arrangement plan again.",
+      "startAgainButton": "Start again"
     }
   },
   "cookieBanner": {

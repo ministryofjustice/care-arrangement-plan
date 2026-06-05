@@ -44,6 +44,9 @@ const testAppSetup = (): Express => {
   testRouter.get('/create-error', (_request, _response, next) => {
     next(new Error('An error happened!'));
   });
+  testRouter.get('/create-timeout', (_request, _response, next) => {
+    next(createError(403));
+  });
   app.use(testRouter);
 
   app.use((_request, _response, next) => next(createError(404)));

@@ -25,10 +25,16 @@ export default function createErrorHandler() {
       logger.error(`Error handling request for '${request.originalUrl}'`, error);
     }
 
-    response.locals.status = status;
-    response.locals.stack = error.stack;
+    response.locals.status = production ? undefined : status;
+    response.locals.stack = production ? undefined : error.stack;
 
     response.status(status);
+
+    if (status === 403) {
+      return response.render('pages/errors/timeOut', {
+        title: request.__('errors.timeOut.title'),
+      });
+    }
 
     return status === 404
       ? response.render('pages/errors/notFound', { title: request.__('errors.notFound.title') })

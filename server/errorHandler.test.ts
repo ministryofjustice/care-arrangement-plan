@@ -20,6 +20,21 @@ describe('errorHandler', () => {
     });
   });
 
+  describe('timeOut', () => {
+    it('should render content with stack in dev mode', async () => {
+      await request(testAppSetup())
+        .get('/create-timeout')
+        .expect(403)
+        .expect('Content-Type', /html/)
+        .expect((res) => {
+          expect(res.text).toContain('Your session automatically ends if you don’t use the service for 120 minutes.');
+        });
+
+      // Note: After security improvements, error may be logged multiple times
+      expect(loggerMocks.error).toHaveBeenCalled();
+    });
+  });
+
   describe('genericError', () => {
     it('should render content without stack in production mode', async () => {
       config.production = true;
