@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> has suggested a child arrangements plan – Propose a child arrangements plan – GOV.UK</title>
+  <!--
+    This accessible HTML export includes:
+    - Proper semantic heading structure (h1, h2, h3)
+    - Interactive hyperlinks
+    - Yes/No radio buttons for each "Do you agree?" question
+    - Text areas for notes and suggestions
+    - ARIA labels for screen reader compatibility
+  -->
+  <style>
+    /* GOV.UK Transport font fallback stack */
+    body {
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.5;
+      color: #0b0c0c;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Header */
+    .header {
+      padding: 20px 0;
+      margin: -20px -20px 30px -20px;
+    }
+
+    .header-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .header h1 {
+      font-size: 30px;
+      font-weight: 700;
+      margin: 0;
+      padding: 0;
+      color: #0b0c0c;
+      line-height: 30px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 36px;
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    h4 {
+      font-size: 19px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0 0 20px 0;
+    }
+
+    /* Links */
+    a {
+      color: #1d70b8;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #003078;
+    }
+
+    a:visited {
+      color: #4c2c92;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin: 0 0 20px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    /* Text box component */
+    .text-box {
+      border: 2px solid #0b0c0c;
+      padding: 15px;
+      margin: 20px 0;
+      background-color: #f3f2f1;
+    }
+
+    .text-box h3,
+    .text-box h4 {
+      margin-top: 0;
+    }
+
+    .text-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Do you agree component */
+    .do-you-agree {
+      margin: 30px 0;
+      padding: 20px;
+      background-color: #f3f2f1;
+      border-left: 5px solid #1d70b8;
+    }
+
+    /* GDS Form group */
+    .govuk-form-group {
+      margin-bottom: 20px;
+    }
+
+    /* GDS Label */
+    .govuk-label {
+      display: block;
+      font-weight: 400;
+      margin-bottom: 5px;
+      color: #0b0c0c;
+    }
+
+    /* GDS Textarea */
+    .govuk-textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 5px;
+      border: 2px solid #0b0c0c;
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.25;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    .govuk-textarea:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 2px;
+    }
+
+    /* Legacy class support */
+    .user-input-area {
+      width: 100%;
+      min-height: 80px;
+      padding: 5px;
+      border: 2px solid #0b0c0c;
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.25;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    .user-input-area:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 2px;
+    }
+
+    /* GDS Fieldset */
+    .govuk-fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      min-width: 0;
+    }
+
+    .govuk-fieldset__legend {
+      display: block;
+      font-weight: 400;
+      margin-bottom: 10px;
+      color: #0b0c0c;
+    }
+
+    .govuk-fieldset__legend--s {
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    /* GDS Checkboxes */
+    .govuk-checkboxes {
+      margin-bottom: 0;
+    }
+
+    .govuk-checkboxes__item {
+      display: block;
+      position: relative;
+      min-height: 40px;
+      margin-bottom: 10px;
+      padding-left: 40px;
+      clear: left;
+    }
+
+    .govuk-checkboxes__input {
+      cursor: pointer;
+      position: absolute;
+      z-index: 1;
+      top: -2px;
+      left: -2px;
+      width: 44px;
+      height: 44px;
+      margin: 0;
+      opacity: 0;
+    }
+
+    .govuk-checkboxes__label {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 8px 15px 5px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .govuk-checkboxes__label::before {
+      content: "";
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      border: 2px solid currentcolor;
+      background: transparent;
+    }
+
+    .govuk-checkboxes__label::after {
+      box-sizing: border-box;
+      content: "";
+      position: absolute;
+      top: 11px;
+      left: 9px;
+      width: 23px;
+      height: 12px;
+      transform: rotate(-45deg);
+      border: solid;
+      border-width: 0 0 5px 5px;
+      border-top-color: transparent;
+      opacity: 0;
+      background: transparent;
+    }
+
+    .govuk-checkboxes__input:checked + .govuk-checkboxes__label::after {
+      opacity: 1;
+    }
+
+    .govuk-checkboxes__input:focus + .govuk-checkboxes__label::before {
+      border-width: 4px;
+      outline: 3px solid transparent;
+      outline-offset: 1px;
+      box-shadow: 0 0 0 3px #ffdd00;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__item {
+      min-height: 0;
+      margin-bottom: 0;
+      padding-left: 34px;
+      float: left;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__input {
+      left: -5px;
+      width: 34px;
+      height: 34px;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__label {
+      padding: 6px 30px 5px 5px;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__label::before {
+      width: 24px;
+      height: 24px;
+      top: 6px;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__label::after {
+      width: 13.5px;
+      height: 7px;
+      top: 14px;
+      left: 5.5px;
+      border-width: 0 0 3px 3px;
+    }
+
+    /* Answer sections */
+    .answer-section {
+      margin: 30px 0;
+    }
+
+    .answer-section .question {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .answer-section .answer {
+      margin-bottom: 20px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .answer-section .hint {
+      color: #505a5f;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .answer-section .disagreement {
+      font-style: italic;
+      color: #505a5f;
+      margin-top: 10px;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        margin: 0 0 30px 0;
+      }
+
+      .no-print {
+        display: none;
+      }
+
+      a {
+        color: #1d70b8;
+        text-decoration: underline;
+      }
+
+      h2 {
+        page-break-after: avoid;
+      }
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid #b1b4b6;
+      text-align: center;
+      font-size: 16px;
+      color: #505a5f;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <h1>Proposed child arrangements plan</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Main Title -->
+    <h2 style="font-size: 22pt; font-weight: bold; margin-bottom: 5pt;">Bob has suggested a child arrangements plan</h2>
+
+    <!-- Preamble Section -->
+    <section id="preamble" aria-labelledby="preamble-heading">
+      <p>Bob used the Child Arrangements Plan service (<a href="https://propose-child-arrangements-plan.service.gov.uk/">https://propose-child-arrangements-plan.service.gov.uk/</a>) on GOV.UK to suggest a plan for how you both might look after James, Rachel and Jack.</p>
+
+<p>You can read their suggested plan and use it to collaborate to create child arrangements which you both agree on.</p>
+
+<p>This plan is not legally binding and you do not have to do what it says.</p>
+
+<p>If you don’t agree, you can:</p>
+<ul>
+  <li>use this form to suggest changes to Bob&#39;s proposed child arrangements plan</li>
+  <li>start your own proposed child arrangements plan on GOV.UK or find a similar service</li>
+  <li>make a written agreement of your own without using any service or template</li>
+</ul>
+
+<h3>Your safety</h3>
+<p>You should only respond to the suggested plan if:</p>
+<ul>
+  <li>you’re confident that you and your ex-partner can make decisions together without putting yourself or the children in danger</li>
+  <li>you do not feel pressured or intimidated into responding</li>
+</ul>
+<h4>If you have any concerns about safety, stop now.</h4>
+<p>If you have any feedback or safety concerns about this service, you can email childarrangementssafety@justice.gov.uk.</p>
+<p>We cannot answer any questions about child arrangement plans that have already been created.</p>
+
+<h3>How making a child arrangements plan can help</h3>
+<p>You may find that collaborating with Bob on a child arrangements plan:</p>
+<ul>
+  <li>is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it’s urgent)</li>
+  <li>leads to a better outcome for your children, which you and your ex-partner are in control of</li>
+</ul>
+<p>Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.</p>
+
+<h3>Tips to help you and your children</h3>
+<p>Your child arrangements plan should:</p>
+<ul>
+  <li>put the child’s welfare first</li>
+  <li>reflect the wishes, feelings and needs of the child</li>
+  <li>consider any harm the child has suffered or any risk of harm</li>
+</ul>
+
+<h3>If there is a court order in place</h3>
+<p>Do not continue if there’s a court order in place relating to you, the other parent, or the children.</p>
+<p>For example, a:</p>
+<ul>
+  <li>child arrangements order</li>
+  <li>specific issue order</li>
+  <li>prohibited steps order</li>
+  <li>protective order such as a non-molestation order, occupation order or a domestic abuse protection order</li>
+  <li>any other order restricting contact between you and the other parent or the children </li>
+</ul>
+<p>To change or enforce an existing child arrangements order, visit <a href="https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order">https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order</a>.</p>
+
+<h3>Get more information</h3>
+<p>Use GOV.UK to find more information, for example:</p>
+<ul>
+  <li>making child arrangements - <a href="https://www.gov.uk/looking-after-children-divorce">https://www.gov.uk/looking-after-children-divorce</a></li>
+  <li>getting a legal separation - <a href="https://www.gov.uk/legal-separation">https://www.gov.uk/legal-separation</a></li>
+  <li>getting a divorce - <a href="https://www.gov.uk/get-a-divorce">https://www.gov.uk/get-a-divorce</a></li>
+</ul>
+
+<h3>If you want legal advice</h3>
+<p>You can find a legal adviser: <a href="https://www.gov.uk/find-legal-advice/find-legal-adviser">https://www.gov.uk/find-legal-advice/find-legal-adviser</a>.</p>
+
+<h3>Getting help with domestic abuse</h3>
+<p>To find out more about signs and effects of child abuse and neglect, visit <a href="https://www.nspcc.org.uk/what-is-child-abuse">https://www.nspcc.org.uk/what-is-child-abuse</a>.</p>
+<p>If you’re unsure whether you’re a victim of domestic abuse, visit <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse">https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse</a>.</p>
+
+<h3>This plan is not suitable for you if there has been:</h3>
+<ul>
+  <li>any form of domestic abuse or violence, even if the abuse was not directed at the children</li>
+  <li>child abduction or attempted child abduction</li>
+  <li>child abuse or neglect</li>
+  <li>misuse of drugs, alcohol or other substances</li>
+  <li>any other safety or welfare concerns that place anyone at significant risk of harm</li>
+</ul>
+
+<h3>Feedback and support</h3>
+<p>To ask for help using this service, or suggest improvements, you can email <a href="mailto:childarrangements@justice.gov.uk">childarrangements@justice.gov.uk</a>.</p>
+<p>We cannot answer any questions about child arrangement plans that have already been created.</p>
+
+    </section>
+
+    <!-- About The Proposal -->
+    <section id="about-proposal" aria-labelledby="about-proposal-heading">
+      <h2 id="about-proposal-heading">About this child arrangements proposal</h2>
+
+      <p>Bob said:</p>
+      <ul>
+        <li>there is no court order in place at this time</li>
+        <li>
+          
+            this is a proposed child arrangements plan for 3 children, James, Rachel and Jack
+          
+        </li>
+        <li>this agreement is between Bob and Sam, who are the adults who will care for James, Rachel and Jack</li>
+      </ul>
+
+      <div class="do-you-agree">
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Do you and Bob agree about the children’s names, your names, and whether there is a court order in place?
+            </legend>
+            <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="question-about-proposal-yes" name="question-about-proposal" type="checkbox" value="yes">
+                <label class="govuk-label govuk-checkboxes__label" for="question-about-proposal-yes">
+                  Yes
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="question-about-proposal-no" name="question-about-proposal" type="checkbox" value="no">
+                <label class="govuk-label govuk-checkboxes__label" for="question-about-proposal-no">
+                  No
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="text-box">
+        <p>We do not store these names or share any of this information with other government departments.</p>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="notes-about-proposal">
+            If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to <a href="https://www.gov.uk/looking-after-children-divorce">https://www.gov.uk/looking-after-children-divorce</a>.
+          </label>
+          <textarea class="govuk-textarea user-input-area" id="notes-about-proposal" name="notes-about-proposal" rows="5"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Answers rendered inline -->
+    <section id="living-visiting" aria-labelledby="living-visiting-heading">
+<div class="answer-section">
+  <h2>Living and visiting</h2>
+  <h3 class="question">Where will the children spend most of their time?</h3>
+  <p class="answer">Bob suggested:
+&quot;livingAndVisitingArrangement&quot;</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-1-yes" name="question-1" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-1-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-1-no" name="question-1" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-1-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-1">
+        If you do not agree, suggest where the children will spend most of their time
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-1" name="notes-1" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+<div class="text-box">
+  <h4>End of section</h4>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="textbox-1">
+      You can use this space to write your agreed answer for the living and visiting section
+    </label>
+    <textarea class="govuk-textarea user-input-area" id="textbox-1" name="textbox-1" rows="5"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="handover-holidays" aria-labelledby="handover-holidays-heading">
+<div class="answer-section">
+  <h2>Handovers and holidays</h2>
+  <h3 class="question">How will the children get between households?</h3>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-2-yes" name="question-2" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-2-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-2-no" name="question-2" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-2-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-2">
+        If you do not agree, suggest how the children get between households
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-2" name="notes-2" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">Where does handover take place?</h3>
+  <p class="hint">It may be easier for children if the handover takes place at a neutral location which you’re confident you’ll both feel safe in.</p>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-3-yes" name="question-3" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-3-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-3-no" name="question-3" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-3-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-3">
+        If you do not agree, suggest where handover takes place
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-3" name="notes-3" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">Will these arrangements change during school holidays?</h3>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-4-yes" name="question-4" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-4-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-4-no" name="question-4" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-4-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-4">
+        If you do not agree, suggest whether the arrangements should change during the holidays
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-4" name="notes-4" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">What items need to go between households?</h3>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-5-yes" name="question-5" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-5-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-5-no" name="question-5" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-5-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-5">
+        If you do not agree, suggest which items need to go between households
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-5" name="notes-5" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+<div class="text-box">
+  <h4>End of section</h4>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="textbox-2">
+      You can use this space to write your agreed answer for the handovers and holidays section
+    </label>
+    <textarea class="govuk-textarea user-input-area" id="textbox-2" name="textbox-2" rows="5"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="special-days" aria-labelledby="special-days-heading">
+<div class="answer-section">
+  <h2>Special days</h2>
+  <h3 class="question">What will happen on special days?</h3>
+  <p class="hint">Keep your children’s needs and best interests at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.</p>
+  <p class="answer">Bob suggested:
+&quot;whatWillHappenAnswer&quot;</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-6-yes" name="question-6" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-6-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-6-no" name="question-6" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-6-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-6">
+        If you do not agree, suggest what will happen on special days
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-6" name="notes-6" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+<div class="text-box">
+  <h4>End of section</h4>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="textbox-3">
+      You can use this space to write your agreed answer for the special days section
+    </label>
+    <textarea class="govuk-textarea user-input-area" id="textbox-3" name="textbox-3" rows="5"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="other-things" aria-labelledby="other-things-heading">
+<div class="answer-section">
+  <h2>Other things</h2>
+  <h3>What other things matter to your children?</h3>
+  <p>You may want to agree things such as:</p>
+  <ul>
+    <li>religious practices, diet, and standard rules across both households</li>
+    <li>extra-curricular activities, such as swimming lessons</li>
+    <li>access to other friends and family</li>
+    <li>other types of contact, such as video calls</li>
+  </ul>
+  <p class="answer">Bob suggested:
+&quot;whatOtherThingsMatterAnswer&quot;</p>
+  <div class="do-you-agree">
+    <p>Do you agree?</p>
+    <div class="do-you-agree-options">
+      <label>
+        <input type="radio" name="question-7" value="yes">
+        <span>Yes</span>
+      </label>
+      <label>
+        <input type="radio" name="question-7" value="no">
+        <span>No</span>
+      </label>
+    </div>
+  </div>
+  <div class="text-box">
+    <p>If you do not agree, suggest what other things matter to your children</p>
+    <textarea class="user-input-area" id="notes-7" aria-label="If you do not agree, suggest what other things matter to your children"></textarea>
+  </div>
+</div>
+<div class="text-box">
+  <h4>End of section</h4>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="textbox-4">
+      You can use this space to write your agreed answer for the other things section
+    </label>
+    <textarea class="govuk-textarea user-input-area" id="textbox-4" name="textbox-4" rows="5"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="decision-making" aria-labelledby="decision-making-heading">
+<div class="answer-section">
+  <h2>Decision making</h2>
+  <h3 class="question">How should last-minute changes be communicated?</h3>
+  <p class="hint">There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.</p>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-8-yes" name="question-8" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-8-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-8-no" name="question-8" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-8-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-8">
+        If you do not agree, suggest how last minute changes should be communicated
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-8" name="notes-8" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">How much notice should you give to change long-term arrangements?</h3>
+  <p class="hint">Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.</p>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-9-yes" name="question-9" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-9-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-9-no" name="question-9" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-9-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-9">
+        If you do not agree, suggest how much notice you should give each other
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-9" name="notes-9" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">When would you like to review this plan?</h3>
+  <p class="hint">Children&#039;s needs change as they grow. When should you review this agreement to check it is still what&#039;s best for the children?</p>
+  <p class="answer">Bob suggested that you should review this arrangement in 1 month&#039;s time.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-10-yes" name="question-10" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-10-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-10-no" name="question-10" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-10-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-10">
+        If you do not agree, suggest when should you review this agreement
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-10" name="notes-10" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+<div class="text-box">
+  <h4>End of section</h4>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="textbox-5">
+      You can use this space to write your agreed answer for the decision making section
+    </label>
+    <textarea class="govuk-textarea user-input-area" id="textbox-5" name="textbox-5" rows="5"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="what-happens-now" aria-labelledby="what-happens-now-heading">
+  <h2 id="what-happens-now-heading">What you need to do now</h2>
+  <p>Now send this proposed child arrangements plan back to Bob. You should try to create a written record of what you have both agreed.</p>
+  <p>Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.</p>
+  <h3 id="what-happens-now-heading">If you can&#039;t agree</h3>
+  <p>If you are unable to reach agreement about your child arrangements, you can try mediation or another way of agreeing outside of court.</p>
+  <p>A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.</p>
+  <p><a href="https://www.gov.uk/looking-after-children-divorce">More information and support is available at https://www.gov.uk/looking-after-children-divorce.</a></p>
+</section>
+
+
+    <div class="footer">
+      <p>Generated with Propose a child arrangements plan on GOV.UK</p>
+      <p>This document is accessible and can be opened in any web browser.</p>
+      <p>v0.0.5 · 1 January 2025 at 00:00</p>
+    </div>
+  </div>
+</body>
+</html>
