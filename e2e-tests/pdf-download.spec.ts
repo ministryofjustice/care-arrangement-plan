@@ -83,4 +83,15 @@ test.describe('PDF Download Functionality', () => {
     // Check for GOV.UK branding elements
     expect(pdfString.toLowerCase()).toContain('gov.uk');
   });
+
+  test('should include paid feedback sign-up link in downloaded PDF', async ({ page }) => {
+    await completeMinimalJourney(page);
+
+    const response = await page.request.get('/download-pdf');
+    const pdfString = (await response.body()).toString('latin1');
+
+    // PDF body text is encoded, but the urlized sign-up link is embedded as plain text
+    expect(pdfString).toContain('smartsurvey.co.uk');
+    expect(pdfString).toContain('EFO5FJ');
+  });
 });

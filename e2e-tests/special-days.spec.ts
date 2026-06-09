@@ -19,6 +19,12 @@ test.describe('Special Days Page', () => {
       await expect(page).toHaveURL(/\/special-days\/what-will-happen/);
       await expect(page.locator('h1')).toContainText('What will happen on special days?');
     });
+
+    test('should display updated guidance about children\'s feelings', async ({ page }) => {
+      await page.getByRole('link', { name: /special days/i }).click();
+
+      await expect(page.getByText(/children.s feelings at the centre of your plans/i)).toBeVisible();
+    });
   });
 
   test.describe('Empty Submission Validation', () => {
