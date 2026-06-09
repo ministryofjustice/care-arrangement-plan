@@ -5,6 +5,7 @@ import addDecisionMaking from './addDecisionMaking';
 import addHandoverAndHolidays from './addHandoverAndHolidays';
 import addLivingAndVisiting from './addLivingAndVisiting';
 import addOtherThings from './addOtherThings';
+import addPaidFeedback from './addPaidFeedback';
 import addSpecialDays from './addSpecialDays';
 import addWhatHappensNow from './addWhatHappensNow';
 
@@ -22,6 +23,7 @@ const createHtmlContent = (request: Request): string => {
   html += addOtherThings(request);
   html += addDecisionMaking(request);
   html += addWhatHappensNow(request);
+  html += addPaidFeedback(request);
 
   return html;
 };
