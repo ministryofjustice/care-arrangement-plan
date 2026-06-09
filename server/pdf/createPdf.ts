@@ -5,6 +5,7 @@ import addDecisionMaking from './addDecisionMaking';
 import addHandoverAndHolidays from './addHandoverAndHolidays';
 import addLivingAndVisiting from './addLivingAndVisiting';
 import addOtherThings from './addOtherThings';
+import addPaidFeedback from './addPaidFeedback';
 import addPreamble from './addPreamble';
 import addSpecialDays from './addSpecialDays';
 import addWhatHappensNow from './addWhatHappensNow';
@@ -23,6 +24,7 @@ const createPdf = (autoPrint: boolean, request: Request) => {
   addOtherThings(pdf);
   addDecisionMaking(pdf);
   addWhatHappensNow(pdf);
+  addPaidFeedback(pdf);
 
   pdf.addFooterToEveryPage();
 

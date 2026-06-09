@@ -408,7 +408,7 @@
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",
-      "content": "Keep your children’s needs and best interests at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.",
+      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.",
       "error": "Describe what you propose will happen on special days"
     }
   },
@@ -638,7 +638,7 @@
         "decisionMaking": {
           "planLastMinuteChanges": "If you do not agree, suggest how last minute changes should be communicated",
           "planLongTermNotice": "If you do not agree, suggest how much notice you should give each other",
-          "planReview": "If you do not agree, suggest when should you review this agreement"
+          "planReview": "If you do not agree, suggest when you should review this agreement"
         }
       },
       "compromise": {
@@ -662,6 +662,12 @@
   "pdf": {
     "name": "Proposed child arrangements plan",
     "everyPageReminder": "Check you have every page of this document",
-    "pageCount": "Page {{ currentPage }} of {{ totalPages }}"
+    "pageCount": "Page {{ currentPage }} of {{ totalPages }}",
+    "paidFeedback": {
+      "title": "Get paid to give yourfeedback",
+      "helpToImprove": "With your help we can improve this service and understand how you use your plan.",
+      "signUp": "Sign up and receive an incentive when you take part in further research ",
+      "signUpLink": "https://www.smartsurvey.co.uk/s/EFO5FJ/"
+    }
   }
 }

@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 
 import { completeMinimalJourney } from './fixtures/test-helpers';
 
+const PAID_FEEDBACK_SIGN_UP_LINK = 'https://www.smartsurvey.co.uk/s/EFO5FJ/';
+
 async function navigateToSharePlan(page: import('@playwright/test').Page) {
   await completeMinimalJourney(page);
 
@@ -99,6 +101,25 @@ test.describe('HTML Download Functionality', () => {
     const htmlContent = await response.text();
 
     expect(htmlContent).toMatch(/v\d+\.\d+\.\d+/);
+  });
+
+  test('should include paid feedback section in downloaded HTML', async ({ page }) => {
+    await completeMinimalJourney(page);
+
+    const htmlContent = await (await page.request.get('/download-html')).text();
+
+    expect(htmlContent).toContain('id="paid-feedback"');
+    expect(htmlContent).toContain('id="paid-feedback-heading"');
+    expect(htmlContent).toMatch(/get paid to give yourfeedback/i);
+    expect(htmlContent).toMatch(/improve this service and understand how you use your plan/i);
+    expect(htmlContent).toMatch(/sign up and receive an incentive/i);
+    expect(htmlContent).toContain(PAID_FEEDBACK_SIGN_UP_LINK);
+    expect(htmlContent).toContain(`href="${PAID_FEEDBACK_SIGN_UP_LINK}"`);
+
+    const whatHappensNowIndex = htmlContent.indexOf('id="what-happens-now"');
+    const paidFeedbackIndex = htmlContent.indexOf('id="paid-feedback"');
+    expect(whatHappensNowIndex).toBeGreaterThan(-1);
+    expect(paidFeedbackIndex).toBeGreaterThan(whatHappensNowIndex);
   });
 
   // TODO: HTML download does not yet redirect to the confirmation page.

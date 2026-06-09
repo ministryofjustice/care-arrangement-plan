@@ -152,7 +152,8 @@ describe('createHtmlContent', () => {
       'id="special-days"',
       'id="other-things"',
       'id="decision-making"',
-      'id="what-happens-now"'
+      'id="what-happens-now"',
+      'id="paid-feedback"',
     );
   });
 
@@ -288,6 +289,45 @@ describe('createHtmlContent', () => {
     validateHtmlStructure(html);
     // Should still contain living-visiting and what-happens-now sections at minimum
     expectHtmlToContain(html, 'id="living-visiting"', 'id="what-happens-now"');
+  });
+
+  test('includes paid feedback section after what happens now', () => {
+    Object.assign(sessionMock, {
+      numberOfChildren: 1,
+      namesOfChildren: ['James'],
+      initialAdultName: 'Bob',
+      secondaryAdultName: 'Sam',
+      livingAndVisiting: {
+        mostlyLive: {
+          where: 'withInitial',
+        },
+      },
+      handoverAndHolidays: {
+        getBetweenHouseholds: { noDecisionRequired: true },
+        whereHandover: { noDecisionRequired: true },
+        willChangeDuringSchoolHolidays: { noDecisionRequired: true },
+        itemsForChangeover: { noDecisionRequired: true },
+      },
+      specialDays: {
+        whatWillHappen: { noDecisionRequired: true },
+      },
+      otherThings: {
+        whatOtherThingsMatter: { noDecisionRequired: true },
+      },
+      decisionMaking: {
+        planLastMinuteChanges: { noDecisionRequired: true },
+        planLongTermNotice: { noDecisionRequired: true },
+        planReview: { months: 1 },
+      },
+    });
+
+    const html = createHtmlContent(mockRequest as Request);
+    const whatHappensNowIndex = html.indexOf('id="what-happens-now"');
+    const paidFeedbackIndex = html.indexOf('id="paid-feedback"');
+
+    expect(whatHappensNowIndex).toBeGreaterThan(-1);
+    expect(paidFeedbackIndex).toBeGreaterThan(whatHappensNowIndex);
+    expectHtmlToContain(html, 'pdf.paidFeedback.title');
   });
 
   test('resets counters between calls', () => {
