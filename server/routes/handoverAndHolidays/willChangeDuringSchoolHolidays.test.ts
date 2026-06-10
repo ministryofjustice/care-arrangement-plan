@@ -81,7 +81,8 @@ describe(paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Choose whether the arrangements will change',
+          msg: 'Select whether the arrangements will change during school holidays',
+          value: undefined,
           path: formFields.WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
           type: 'field',
         },

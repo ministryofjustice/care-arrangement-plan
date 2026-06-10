@@ -164,9 +164,10 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Select when daytime visits will happen',
+          msg: 'Select which days the children will visit in the daytime',
           path: formFields.WHICH_DAYS_DAYTIME_VISITS,
           type: 'field',
+          value: undefined,
         },
       ]);
     });
@@ -181,7 +182,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_DAYTIME_VISITS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Describe when daytime visits will happen',
+          msg: 'Enter details of the daytime visiting arrangements',
           path: formFields.WHICH_DAYS_DAYTIME_VISITS_DESCRIBE_ARRANGEMENT,
           type: 'field',
           value: '',

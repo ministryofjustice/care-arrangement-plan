@@ -137,9 +137,10 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Select who will be responsible for getting the children',
+          msg: 'Select how the children will get between households',
           path: formFields.GET_BETWEEN_HOUSEHOLDS,
           type: 'field',
+          value: undefined,
         },
       ]);
     });

@@ -49,9 +49,10 @@ describe(paths.DO_WHATS_BEST, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'You must select the box to continue',
+          msg: 'Select the box to continue',
           path: formFields.DO_WHATS_BEST,
           type: 'field',
+          value: undefined,
         },
       ]);
     });
