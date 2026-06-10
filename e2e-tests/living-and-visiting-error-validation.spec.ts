@@ -45,15 +45,15 @@ test.describe('Mostly Lives Page', () => {
       
       await fillToWhichDaysOvernight(page)
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("Select which days overnights will happen on").nth(0) ).toBeVisible()
+      await expect( page.getByText("Select which days the children will stay overnight").nth(0) ).toBeVisible()
       await chooseAnotherArrangementAndContinue(page)
-      await expect( page.getByText("Describe when the children will stay overnight").nth(0) ).toBeVisible()
+      await expect( page.getByText("Enter details of the overnight arrangements").nth(0) ).toBeVisible()
 
       await fillToWillDaytimeVisitsHappen(page)
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("Select when daytime visits will happen").nth(0) ).toBeVisible()
+      await expect( page.getByText("Select which days the children will visit in the daytime").nth(0) ).toBeVisible()
       await chooseAnotherArrangementAndContinue(page)
-      await expect( page.getByText("Describe when daytime visits will happen").nth(0) ).toBeVisible()
+      await expect( page.getByText("Enter details of the daytime visiting arrangements").nth(0) ).toBeVisible()
     });
   
     test('should display error summary at the top of the page', async ({ page }) => {
@@ -80,18 +80,18 @@ test.describe('Mostly Lives Page', () => {
 
       await fillToWhichDaysOvernight(page) 
       await page.getByRole('button', { name: /continue/i }).click();
-      await page.getByText("Select which days overnights will happen on").nth(0).click();
+      await page.getByText("Select which days the children will stay overnight").nth(0).click();
       await expect( page.getByRole('heading', { name: 'On which days will overnights happen?' }) ).toBeInViewport();
       await chooseAnotherArrangementAndContinue(page)
-      await page.getByText("Describe when the children will stay overnight").nth(0).click();
+      await page.getByText("Enter details of the overnight arrangements").nth(0).click();
       await expect( page.getByRole('textbox', { name: "Describe the arrangement" }) ).toBeInViewport();
 
       await fillToWillDaytimeVisitsHappen(page)
       await page.getByRole('button', { name: /continue/i }).click();
-      await page.getByText("Select when daytime visits will happen").nth(0).click();
+      await page.getByText("Select which days the children will visit in the daytime").nth(0).click();
       await expect( page.getByRole('heading', { name: 'On which days will daytime visits happen?' }) ).toBeInViewport();
       await chooseAnotherArrangementAndContinue(page)
-      await page.getByText("Describe when daytime visits will happen").nth(0).click();
+      await page.getByText("Enter details of the daytime visiting arrangements").nth(0).click();
       await expect( page.getByRole('textbox', { name: "Describe the arrangement" }) ).toBeInViewport();
     });
    });

@@ -105,9 +105,9 @@ test.describe('Handovers and holidays section', () => {
     test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({ page }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("Select who will be responsible for getting the children").nth(0) ).toBeVisible()
+      await expect( page.getByText("Select how the children will get between households").nth(0) ).toBeVisible()
       await expectErrorSummaryVisible(page);
-      await page.getByText("Select who will be responsible for getting the children").nth(0).click();
+      await page.getByText("Select how the children will get between households").nth(0).click();
       await expect( page.getByRole('heading', { name: 'How will the children get between households?' }) ).toBeInViewport();
 
       await page.getByText('Another arrangement').click();
@@ -147,9 +147,9 @@ test.describe('Handovers and holidays section', () => {
       await page.getByLabel(/Neutral location/).check();
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("Choose whether the arrangements will change").nth(0) ).toBeVisible()
+      await expect( page.getByText("Select whether the arrangements will change during school holidays").nth(0) ).toBeVisible()
       await expectErrorSummaryVisible(page);
-      await page.getByText("choose whether the arrangements will change").nth(0).click();
+      await page.getByText("select whether the arrangements will change during school holidays").nth(0).click();
       await expect( page.getByRole('heading', { name: 'Will these arrangements change during school holidays?' }) ).toBeInViewport();
     });
   });
