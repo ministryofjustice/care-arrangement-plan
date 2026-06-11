@@ -3,6 +3,7 @@ import { Request, Router } from 'express';
 import config from '../config';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
+import devErrorRoutes from '../dev/errorRoutes';
 import devSeedRoutes from '../dev/seedRoute';
 import addCompletedStep from '../utils/addCompletedStep';
 
@@ -82,6 +83,7 @@ const routes = (): Router => {
 
   if (!config.production) {
     devSeedRoutes(router);
+    devErrorRoutes(router);
   }
 
   return router;
