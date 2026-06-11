@@ -4,6 +4,8 @@
   "no": "No",
   "continue": "Continue",
   "back": "Back",
+  "exitThisPage": "<span class=\"govuk-visually-hidden\">To exit this service quickly, press escape three times.</span>",
+  "exitThisPageButtonText": "Exit this page",
   "doNotNeedToDecide": "We do not need to decide this",
   "doNotNeedToDecideSchedule": "Skip this question",
   "doNotNeedToDecideOvernightDays": "Skip this question",
