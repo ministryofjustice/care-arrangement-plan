@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import { completeMinimalJourney } from './fixtures/test-helpers';
 
-const PAID_FEEDBACK_SIGN_UP_LINK = 'https://www.smartsurvey.co.uk/s/EFO5FJ/';
+const PAID_FEEDBACK_SIGN_UP_LINK = 'https://www.smartsurvey.co.uk/t/BDP7V3/';
 
 async function navigateToSharePlan(page: import('@playwright/test').Page) {
   await completeMinimalJourney(page);
