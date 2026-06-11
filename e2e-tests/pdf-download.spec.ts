@@ -92,6 +92,6 @@ test.describe('PDF Download Functionality', () => {
 
     // PDF body text is encoded, but the urlized sign-up link is embedded as plain text
     expect(pdfString).toContain('smartsurvey.co.uk');
-    expect(pdfString).toContain('EFO5FJ');
+    expect(pdfString).toContain('BDP7V3');
   });
 });
