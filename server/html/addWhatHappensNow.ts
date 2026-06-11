@@ -11,10 +11,11 @@ const escapeHtmlText = (text: string): string => {
 
 const addWhatHappensNow = (request: Request): string => {
   let html = '<section id="what-happens-now" aria-labelledby="what-happens-now-heading">\n';
-  html += `  <h2 id="what-happens-now-heading">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.whatHappensNowHeading'))}</h2>\n`;
+  html += `  <h2 id="what-happens-now-heading">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.nextSteps'))}</h2>\n`;
+  html += `  <h3 id="what-to-do-next">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.whatToDoNext'))}</h3>\n`;
   html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.nowSendPlan', { senderName: request.session.initialAdultName }))}</p>\n`;
   html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.notLegallyBinding'))}</p>\n`;
-  html += `  <h3 id="what-happens-now-heading">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.cantAgreeHeading'))}</h3>\n`;
+  html += `  <h3 id="what-happens-now-heading">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.noResponseHeading'))}</h3>\n`;
   html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.unableToAgree'))}</p>\n`;
   html += `  <p>${escapeHtmlText(request.__('sharePlan.yourProposedPlan.aMediatorIs'))}</p>\n`;
   html += `  <p><a href="https://www.gov.uk/looking-after-children-divorce">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.moreInfoAndSupport'))}</a></p>\n`;

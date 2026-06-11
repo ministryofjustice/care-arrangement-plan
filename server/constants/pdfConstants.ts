@@ -7,4 +7,6 @@ export const MM_PER_POINT = 0.352778;
 export const FONT = 'transport';
 export const SECTION_HEADING_SIZE = 22;
 export const QUESTION_TITLE_SIZE = 14;
+export const ADDITIONAL_SUB_HEADING_SIZE = 20;
+export const SUB_HEADING_SIZE = 18;
 export const MAIN_TEXT_SIZE = 12;
