@@ -549,7 +549,7 @@
       "unsureVictim": "If you’re unsure whether you’re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
       "notSuitableHeading": "This plan is not suitable for you if there has been:",
       "anyForm": "any form of domestic abuse or violence, even if the abuse was not directed at the children",
-      "childAbduction": "child abduction or attempted child abduction",
+      "childAbduction": "actual or attempted child abduction",
       "childAbuse": "child abuse or neglect",
       "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
       "anyOtherSafety": "any other safety or welfare concerns that place anyone at significant risk of harm",
@@ -611,7 +611,7 @@
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{{ senderName }}}. You should try to create a written record of what you have both agreed.",
       "notLegallyBinding": "Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",
       "cantAgreeHeading": "If you can't agree",
-      "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation or another way of agreeing outside of court.",
+      "unableToAgree": "If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
       "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.",
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
       "doNotAgree": {
