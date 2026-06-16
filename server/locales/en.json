@@ -6,6 +6,7 @@
   "continue": "Continue",
   "exitThisPage": "<span class=\"govuk-visually-hidden\">To exit this service quickly, press escape three times.</span>",
   "exitThisPageButtonText": "Exit this page",
+  "error": "Error",
   "doNotNeedToDecide": "We do not need to decide this",
   "doNotNeedToDecideSchedule": "Skip this question",
   "doNotNeedToDecideOvernightDays": "Skip this question",
@@ -233,7 +234,9 @@
     "title": "Your safety",
     "workWithPartner": "Are you confident that you and your ex-partner can make decisions together without putting yourself or the children in danger, and that you haven’t been pressured or intimidated into using this service?",
     "safeAndConfident": "Do you feel safe and confident?",
-    "error": "Select whether you feel safe and confident or not"
+    "error": "Select whether you feel safe and confident or not",
+    "yes": "Yes",
+    "no": "No"
   },
   "notSafe": {
     "title": "Finding the right route for you",

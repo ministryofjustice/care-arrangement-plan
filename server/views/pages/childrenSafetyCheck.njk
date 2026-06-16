@@ -23,7 +23,7 @@
         <li>{{ __('childrenSafetyCheck.otherConcerns') }}</li>
       </ul>
 
-      <form class="form" action="{{ paths.CHILDREN_SAFETY_CHECK }}" method="post" novalidate>
+      <form class="form" action="{{ paths.CHILDREN_SAFETY_CHECK }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukRadios({

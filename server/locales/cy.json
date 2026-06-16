@@ -4,8 +4,9 @@
   "no": "Nac ydyn",
   "back": "Yn ôl",
   "continue": "Parhau",
-  "exitThisPage": "<span class=\"govuk-visually-hidden\">To exit this service quickly, press escape three times.</span>",
-  "exitThisPageButtonText": "Exit this page",
+  "exitThisPage": "<span class=\"govuk-visually-hidden\">I adael y gwasanaeth hwn yn gyflym, pwyswch escape dair gwaith.</span>",
+  "exitThisPageButtonText": "Gadael y dudalen hon",
+  "error": "Gwall",
   "doNotNeedToDecide": "We do not need to decide this",
   "doNotNeedToDecideSchedule": "Skip this question",
   "doNotNeedToDecideOvernightDays": "Skip this question",
@@ -43,7 +44,7 @@
     "termsAndConditions": "Terms and conditions"
   },
   "errorSummary": {
-    "title": "There is a problem"
+    "title": "Mae yna broblem"
   },
   "errors": {
     "notFound": {
@@ -233,7 +234,9 @@
     "title": "Eich diogelwch",
     "workWithPartner": "Ydych chi'n hyderus y gallwch chi a'ch cyn-bartner wneud penderfyniadau gyda'ch gilydd heb roi chi'ch hun na'r plant mewn perygl, ac nad ydych chi wedi cael eich rhoi dan bwysau na'ch bygwth i ddefnyddio'r gwasanaeth hwn?",
     "safeAndConfident": "Ydych chi'n teimlo'n ddiogel ac yn hyderus?",
-    "error": "Dewiswch a ydych chi'n teimlo'n ddiogel ac yn hyderus ai peidio"
+    "error": "Dewiswch a ydych chi'n teimlo'n ddiogel ac yn hyderus ai peidio",
+    "yes": "Ydw",
+    "no": "Nac ydw"
   },
   "notSafe": {
     "title": "Dod o hyd i'r llwybr cywir i chi",

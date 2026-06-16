@@ -11,7 +11,7 @@
 
       <p>{{ __('about.notStoreInfo') }}</p>
 
-      <form class="form" action="{{ paths.ABOUT_THE_CHILDREN }}" method="post" novalidate>
+      <form class="form" action="{{ paths.ABOUT_THE_CHILDREN }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {% for i in range(numberOfChildren) %}
           {% set fieldName = formFields.CHILD_NAME + i %}

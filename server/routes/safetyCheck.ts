@@ -26,11 +26,12 @@ const safetyCheckRoutes = (router: Router) => {
 
   router.post(
     paths.SAFETY_CHECK,
-    body(formFields.SAFETY_CHECK)
+    body('safetyCheck')
       .exists()
       .withMessage((_value, { req }) => req.__('safetyCheck.error')),
     (request, response) => {
       const errors = validationResult(request);
+      console.log('Errors:', errors.array()); // Log the errors for debugging
       if (!errors.isEmpty()) {
         request.flash('errors', errors.array());
         return response.redirect(paths.SAFETY_CHECK);
