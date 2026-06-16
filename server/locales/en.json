@@ -666,7 +666,7 @@
     "everyPageReminder": "Check you have every page of this document",
     "pageCount": "Page {{ currentPage }} of {{ totalPages }}",
     "paidFeedback": {
-      "title": "Get paid to give yourfeedback",
+      "title": "Get paid to give your feedback",
       "helpToImprove": "With your help we can improve this service and understand how you use your plan.",
       "signUp": "Sign up and receive an incentive when you take part in further research ",
       "signUpLink": "https://www.smartsurvey.co.uk/t/BDP7V3/"
