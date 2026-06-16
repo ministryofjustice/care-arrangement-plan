@@ -110,7 +110,7 @@ test.describe('HTML Download Functionality', () => {
 
     expect(htmlContent).toContain('id="paid-feedback"');
     expect(htmlContent).toContain('id="paid-feedback-heading"');
-    expect(htmlContent).toMatch(/get paid to give yourfeedback/i);
+    expect(htmlContent).toMatch(/get paid to give your feedback/i);
     expect(htmlContent).toMatch(/improve this service and understand how you use your plan/i);
     expect(htmlContent).toMatch(/sign up and receive an incentive/i);
     expect(htmlContent).toContain(PAID_FEEDBACK_SIGN_UP_LINK);
