@@ -156,9 +156,10 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Select which days overnights will happen on',
+          msg: 'Select which days the children will stay overnight',
           path: formFields.WHICH_DAYS_OVERNIGHT,
           type: 'field',
+          value: undefined,
         },
       ]);
     });
@@ -173,7 +174,7 @@ describe(paths.LIVING_VISITING_WHICH_DAYS_OVERNIGHT, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Describe when the children will stay overnight',
+          msg: 'Enter details of the overnight arrangements',
           path: formFields.WHICH_DAYS_OVERNIGHT_DESCRIBE_ARRANGEMENT,
           type: 'field',
           value: '',

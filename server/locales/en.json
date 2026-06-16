@@ -242,7 +242,7 @@
     "warningIconFallback": "Warning",
     "content": "<p><a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">Find out how to recognise domestic abuse</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">Get help and advice on making child arrangements when there's been domestic abuse</a>.</p>",
     "continueTitle": "If you want to continue",
-    "continue": "If you feel confident that you can carry on without any danger to yourself or the children, continue using the service.",
+    "continue": "If you feel confident that you can discuss things without feeling intimidated, continue using the service.",
     "escapeKeyAnnouncement": "To exit this service quickly, press escape three times."
   },
   "childrenSafetyCheck": {
@@ -263,8 +263,8 @@
     "intro": "<p>It may not be appropriate to make child arrangements if there's any risk of harm to the children.</p>",
     "warningText": "If you are in immediate danger, call 999 and ask for the police.",
     "warningIconFallback": "Warning",
-    "content": "<p><a href=\"https://www.nspcc.org.uk/keeping-children-safe/types-of-abuse/domestic-abuse/?ac=221274\">Get advice on How to Protect Children From Domestic Abuse | NSPCC </a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">Citizens Advice has advice on making child arrangements when there's been domestic abuse</a>.</p>",
-    "continue": "If you feel confident that you can carry on without any danger to yourself or the children, continue using the service.",
+    "content": "<p><a href=\"https://www.nspcc.org.uk/keeping-children-safe/types-of-abuse/domestic-abuse/?ac=221274\">Get advice on how to protect children from domestic abuse | NSPCC </a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">Citizens Advice has advice on making child arrangements when there's been domestic abuse</a>.</p>",
+    "continue": "If you feel confident that making child arrangements will not put children at risk, continue using the service.",
     "continueTitle": "If you want to continue",
     "escapeKeyAnnouncement": "To exit this service quickly, press escape three times."
   },
@@ -272,7 +272,7 @@
     "title": "What’s best for the children?",
     "content": "<p>Your child arrangements plan should:</p><ul class=\"govuk-list govuk-list--bullet\"><li>put the child's welfare first</li><li>reflect the wishes, feelings and needs of the child</li><li>consider any harm the child has suffered or any risk of harm</li></ul><p><a href=\"https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf\">Tips for parents</a> from a child's perspective.</p>",
     "childrensNeedsFirst": "I will put my children’s needs first",
-    "error": "You must select the box to continue"
+    "error": "Select the box to continue"
   },
   "courtOrderCheck": {
     "title": "Is there a court order in place relating to you, the other parent or the children?",
@@ -288,7 +288,8 @@
     "title": "How many children is this for?",
     "emptyError": "Enter how many children this agreement is for",
     "tooFewError": "Your agreement must be for at least 1 child",
-    "tooManyError": "Your agreement cannot be for more than 6 children"
+    "tooManyError": "Your agreement cannot be for more than 6 children",
+    "notANumberError": "Enter numbers only"
   },
   "about": {
     "notStoreInfo": "We do not store this information or share it with other government departments."
@@ -351,22 +352,22 @@
     },
     "willOvernightsHappen": {
       "title": "Will the children stay overnight with {{{ adult }}}?",
-      "error": "Choose whether the children will do overnight stays"
+      "error": "Select whether the children will stay overnight"
     },
     "whichDaysOvernight": {
       "title": "On which days will overnights happen?",
-      "emptyError": "Select which days overnights will happen on",
-      "arrangementMissingError": "Describe when the children will stay overnight",
+      "emptyError": "Select which days the children will stay overnight",
+      "arrangementMissingError": "Enter details of the overnight arrangements",
       "multiSelectedError": "Describe what other arrangement you are proposing"
     },
     "willDaytimeVisitsHappen": {
       "title": "Will the children do daytime visits with {{{ adult }}}?",
-      "error": "Choose whether the children will do daytime visits"
+      "error": "Select whether the children will have daytime visits"
     },
     "whichDaysDaytimeVisits": {
       "title": "On which days will daytime visits happen?",
-      "emptyError": "Select when daytime visits will happen",
-      "arrangementMissingError": "Describe when daytime visits will happen",
+      "emptyError": "Select which days the children will visit in the daytime",
+      "arrangementMissingError": "Enter details of the daytime visiting arrangements",
       "multiSelectedError": "Describe what other arrangement you are proposing"
     }
   },
@@ -374,7 +375,7 @@
     "getBetweenHouseholds": {
       "title": "How will the children get between households?",
       "collectsTheChildren": "{{{ adult }}} collects the children",
-      "emptyError": "Select who will be responsible for getting the children",
+      "emptyError": "Select how the children will get between households",
       "arrangementMissingError": "Describe how the children will get between households"
     },
     "whereHandover": {
@@ -392,7 +393,7 @@
     },
     "willChangeDuringSchoolHolidays": {
       "title": "Will these arrangements change during school holidays?",
-      "error": "Choose whether the arrangements will change"
+      "error": "Select whether the arrangements will change during school holidays"
     },
     "howChangeDuringSchoolHolidays": {
       "title": "How will the arrangements be different in school holidays?",
@@ -408,7 +409,7 @@
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",
-      "content": "Keep your children’s needs and best interests at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.",
+      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.",
       "error": "Describe what you propose will happen on special days"
     }
   },
@@ -440,7 +441,7 @@
       "title": "How much notice should you give to change long-term arrangements?",
       "weeks": "{{ number }} weeks",
       "sometimesYouNeedToPlanAhead": "Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.",
-      "selectOneOptionError": "Select at least one option",
+      "selectOneOptionError": "Select how much notice is needed for changes to long-term arrangements",
       "descriptionEmptyError": "Describe what is the other arrangement you are proposing"
     },
     "planReview": {
@@ -548,7 +549,7 @@
       "unsureVictim": "If you’re unsure whether you’re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
       "notSuitableHeading": "This plan is not suitable for you if there has been:",
       "anyForm": "any form of domestic abuse or violence, even if the abuse was not directed at the children",
-      "childAbduction": "child abduction or attempted child abduction",
+      "childAbduction": "actual or attempted child abduction",
       "childAbuse": "child abuse or neglect",
       "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
       "anyOtherSafety": "any other safety or welfare concerns that place anyone at significant risk of harm",
@@ -606,11 +607,12 @@
           "suggestedYearsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} years' time."
         }
       },
-      "whatHappensNowHeading": "What you need to do now",
+      "nextSteps": "Next steps",
+      "whatToDoNext": "What to do next",
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{{ senderName }}}. You should try to create a written record of what you have both agreed.",
       "notLegallyBinding": "Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",
-      "cantAgreeHeading": "If you can't agree",
-      "unableToAgree": "If you are unable to reach agreement about your child arrangements, you can try mediation or another way of agreeing outside of court.",
+      "noResponseHeading": "If there’s no response",
+      "unableToAgree": "If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
       "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.",
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
       "doNotAgree": {
@@ -638,7 +640,7 @@
         "decisionMaking": {
           "planLastMinuteChanges": "If you do not agree, suggest how last minute changes should be communicated",
           "planLongTermNotice": "If you do not agree, suggest how much notice you should give each other",
-          "planReview": "If you do not agree, suggest when should you review this agreement"
+          "planReview": "If you do not agree, suggest when you should review this agreement"
         }
       },
       "compromise": {
@@ -662,6 +664,12 @@
   "pdf": {
     "name": "Proposed child arrangements plan",
     "everyPageReminder": "Check you have every page of this document",
-    "pageCount": "Page {{ currentPage }} of {{ totalPages }}"
+    "pageCount": "Page {{ currentPage }} of {{ totalPages }}",
+    "paidFeedback": {
+      "title": "Get paid to give your feedback",
+      "helpToImprove": "With your help we can improve this service and understand how you use your plan.",
+      "signUp": "Sign up and receive an incentive when you take part in further research ",
+      "signUpLink": "https://www.smartsurvey.co.uk/t/BDP7V3/"
+    }
   }
 }

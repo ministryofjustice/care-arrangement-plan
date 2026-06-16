@@ -152,7 +152,7 @@ describe(paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Select at least one option',
+          msg: 'Select how much notice is needed for changes to long-term arrangements',
           path: formFields.PLAN_LONG_TERM_NOTICE,
           type: 'field',
           value: undefined,

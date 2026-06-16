@@ -1,4 +1,10 @@
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+import {
+    ADDITIONAL_SUB_HEADING_SIZE,
+    MAIN_TEXT_SIZE,
+    PARAGRAPH_SPACE,
+    SECTION_HEADING_SIZE,
+    SUB_HEADING_SIZE
+} from '../constants/pdfConstants';
 
 import TextComponent from './components/text';
 import FontStyles from './fontStyles';
@@ -8,8 +14,14 @@ const addWhatHappensNow = (pdf: Pdf) => {
   const request = pdf.request;
   new TextComponent(pdf, [
     {
-      text: request.__('sharePlan.yourProposedPlan.whatHappensNowHeading'),
+      text: request.__('sharePlan.yourProposedPlan.nextSteps'),
       size: SECTION_HEADING_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+    {
+      text: request.__('sharePlan.yourProposedPlan.whatToDoNext'),
+      size: SUB_HEADING_SIZE,
       style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
@@ -26,8 +38,8 @@ const addWhatHappensNow = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.yourProposedPlan.cantAgreeHeading'),
-      size: QUESTION_TITLE_SIZE,
+      text: request.__('sharePlan.yourProposedPlan.noResponseHeading'),
+      size: ADDITIONAL_SUB_HEADING_SIZE,
       style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },

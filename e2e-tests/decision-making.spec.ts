@@ -21,7 +21,7 @@ const ERROR_MESSAGES = {
     exclusiveViolation: 'Describe what other arrangement you are proposing',
   },
   longTerm: {
-    empty: 'Select at least one option',
+    empty: 'Select how much notice is needed for changes to long-term arrangements',
     descriptionEmpty: 'Describe what is the other arrangement you are proposing',
   },
   planReview: {
