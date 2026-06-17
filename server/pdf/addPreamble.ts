@@ -1,4 +1,4 @@
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE, SUB_HEADING_SIZE } from '../constants/pdfConstants';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
 import BulletListComponent from './components/bulletList';
@@ -27,6 +27,12 @@ const addPreamble = (pdf: Pdf) => {
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
+      text: request.__('sharePlan.whatWeAreTelling.howToRespond'),
+      size: SUB_HEADING_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+    {
       text: request.__('sharePlan.whatWeAreTelling.pleaseReadThrough', {
         senderName: request.session.initialAdultName
       }),
@@ -34,7 +40,7 @@ const addPreamble = (pdf: Pdf) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-        {
+    {
       text: request.__('sharePlan.whatWeAreTelling.notLegallyBinding'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,

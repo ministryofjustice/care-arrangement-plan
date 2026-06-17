@@ -2,7 +2,7 @@ import { Request } from 'express';
 
 const addPaidFeedback = (request: Request): string => {
   return `<section id="paid-feedback" aria-labelledby="paid-feedback-heading">
-    <h2 id="paid-feedback-heading">${request.__('pdf.paidFeedback.title')}</h2>
+    <h3 id="paid-feedback-heading">${request.__('pdf.paidFeedback.title')}</h3>
     <p>${request.__('pdf.paidFeedback.helpToImprove')}</p>
     <p>
       <b>
