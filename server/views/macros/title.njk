@@ -1,0 +1,9 @@
+{% macro getTitle(id, errors) %}
+  {% if errors | findError(id) %}
+    {% set pageTitle = __("error") + ": " + __(id + ".title") %}
+  {% else %}
+    {% set pageTitle = __(id + ".title") %}
+  {% endif %}
+
+  {{ pageTitle }} – {{ __("serviceName") }} – GOV.UK
+{% endmacro %}

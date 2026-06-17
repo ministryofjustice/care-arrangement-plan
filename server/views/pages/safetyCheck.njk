@@ -1,9 +1,13 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{ getTitle(formFields.SAFETY_CHECK, errors) }}
+{% endblock %}
 
 {% block content %}
-
   {% include "partials/exitThisPage.njk" %}
   <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
     {{ __('exitThisPage') | safe }}
@@ -16,7 +20,7 @@
 
       <p class="govuk-body">{{ __('safetyCheck.workWithPartner') }}</p>
 
-      <form class="form" action="{{ paths.SAFETY_CHECK }}" method="post" novalidate>
+      <form class="form" action="{{ paths.SAFETY_CHECK }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukRadios({

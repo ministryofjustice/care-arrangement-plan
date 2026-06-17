@@ -2,10 +2,11 @@
   "serviceName": "Propose a child arrangements plan",
   "yes": "Yes",
   "no": "No",
-  "continue": "Continue",
   "back": "Back",
+  "continue": "Continue",
   "exitThisPage": "<span class=\"govuk-visually-hidden\">To exit this service quickly, press escape three times.</span>",
   "exitThisPageButtonText": "Exit this page",
+  "error": "Error",
   "doNotNeedToDecide": "We do not need to decide this",
   "doNotNeedToDecideSchedule": "Skip this question",
   "doNotNeedToDecideOvernightDays": "Skip this question",
@@ -24,6 +25,7 @@
   "aAndB": "{{{ itemA }}} and {{{ itemB }}}",
   "describeArrangement": "Describe the arrangement",
   "selectAllThatApply": "Select all that apply",
+  "phaseBannerText": "This is a new service - your <a href=\"{{ feedbackUrl }}\" class=\"govuk-link--no-visited-state\">feedback</a> will help us to improve it.",
   "days": {
     "monday": "Monday",
     "tuesday": "Tuesday",
@@ -33,7 +35,6 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
-  "phaseBannerText": "This is a new service - your <a href=\"{{ feedbackUrl }}\" class=\"govuk-link--no-visited-state\">feedback</a> will help us to improve it.",
   "footer": {
     "accessibility": "Accessibility",
     "contact": "Contact",
@@ -230,7 +231,9 @@
     "title": "Your safety",
     "workWithPartner": "Are you confident that you and your ex-partner can make decisions together without putting yourself or the children in danger, and that you haven’t been pressured or intimidated into using this service?",
     "safeAndConfident": "Do you feel safe and confident?",
-    "error": "Select whether you feel safe and confident or not"
+    "error": "Select whether you feel safe and confident or not",
+    "yes": "Yes",
+    "no": "No"
   },
   "notSafe": {
     "title": "Finding the right route for you",
@@ -239,8 +242,7 @@
     "warningIconFallback": "Warning",
     "content": "<p><a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">Find out how to recognise domestic abuse</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">Get help and advice on making child arrangements when there's been domestic abuse</a>.</p>",
     "continueTitle": "If you want to continue",
-    "continue": "If you feel confident that you can discuss things without feeling intimidated, continue using the service.",
-    "escapeKeyAnnouncement": "To exit this service quickly, press escape three times."
+    "continue": "If you feel confident that you can discuss things without feeling intimidated, continue using the service."
   },
   "childrenSafetyCheck": {
     "title": "Children’s safety",
@@ -252,8 +254,7 @@
     "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm",
     "stopNow": "If you have any concerns about safety, stop now.",
     "questionTitle": "Are the children safe?",
-    "error": "Select whether the children are safe or not",
-    "escapeKeyAnnouncement": "To exit this service quickly, press escape three times."
+    "error": "Select whether the children are safe or not"
   },
   "childrenNotSafe": {
     "title": "Getting help",
@@ -262,8 +263,7 @@
     "warningIconFallback": "Warning",
     "content": "<p><a href=\"https://www.nspcc.org.uk/keeping-children-safe/types-of-abuse/domestic-abuse/?ac=221274\">Get advice on how to protect children from domestic abuse | NSPCC </a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">Citizens Advice has advice on making child arrangements when there's been domestic abuse</a>.</p>",
     "continue": "If you feel confident that making child arrangements will not put children at risk, continue using the service.",
-    "continueTitle": "If you want to continue",
-    "escapeKeyAnnouncement": "To exit this service quickly, press escape three times."
+    "continueTitle": "If you want to continue"
   },
   "doWhatsBest": {
     "title": "What’s best for the children?",

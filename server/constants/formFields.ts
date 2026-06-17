@@ -1,7 +1,7 @@
 enum formFields {
   ACCEPT_OPTIONAL_COOKIES = 'accept-optional-cookies',
-  SAFETY_CHECK = 'safety-check',
-  CHILDREN_SAFETY_CHECK = 'children-safety-check',
+  SAFETY_CHECK = 'safetyCheck',
+  CHILDREN_SAFETY_CHECK = 'childrenSafetyCheck',
   DO_WHATS_BEST = 'do-whats-best',
   COURT_ORDER_CHECK = 'court-order-check',
   NUMBER_OF_CHILDREN = 'number-of-children',
