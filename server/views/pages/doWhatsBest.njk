@@ -1,6 +1,11 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{ getTitle(formFields.DO_WHATS_BEST, errors) }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -10,7 +15,7 @@
 
       {{ __('doWhatsBest.content') | safe }}
 
-      <form class="form" action="{{ paths.DO_WHATS_BEST }}" method="post" novalidate>
+      <form class="form" action="{{ paths.DO_WHATS_BEST }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukCheckboxes({

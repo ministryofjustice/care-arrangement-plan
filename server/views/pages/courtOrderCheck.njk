@@ -1,12 +1,17 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{ getTitle(formFields.COURT_ORDER_CHECK, errors) }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-      <form class="form" action="{{ paths.COURT_ORDER_CHECK }}" method="post" novalidate>
+      <form class="form" action="{{ paths.COURT_ORDER_CHECK }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukRadios({
@@ -24,11 +29,11 @@
             items: [
               {
                 value: "Yes",
-                text: __('yes')
+                text: __('courtOrderCheck.yes')
               },
               {
                 value: "No",
-                text: __('no')
+                text: __('courtOrderCheck.no')
               }
             ],
             errorMessage: errors | findError(formFields.COURT_ORDER_CHECK)

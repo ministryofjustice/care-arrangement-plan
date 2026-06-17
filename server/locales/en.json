@@ -274,7 +274,9 @@
   "courtOrderCheck": {
     "title": "Is there a court order in place relating to you, the other parent or the children?",
     "subText": "<p>For example, a:</p><ul class=\"govuk-list govuk-list--bullet\"><li>child arrangements order</li><li>specific issue order</li><li>prohibited steps order</li><li>protective order such as a non-molestation order, occupation order or a domestic abuse protection order</li><li>any other order restricting contact between you and the other parent or the children</li></ul>",
-    "error": "Select whether you have a court order in place"
+    "error": "Select whether you have a court order in place",
+    "yes": "Yes",
+    "no": "No"
   },
   "existingCourtOrder": {
     "title": "Do not continue",

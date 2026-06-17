@@ -277,7 +277,9 @@
   "courtOrderCheck": {
     "title": "A oes gorchymyn llys ar waith sy'n ymwneud â chi, y rhiant arall neu'r plant?",
     "subText": "<p>Er enghraifft:</p><ul class=\"govuk-list govuk-list--bullet\"><li>gorchymyn trefniadau plant</li><li>gorchymyn mater penodol</li><li>gorchymyn camau gwaharddedig</li><li>gorchymyn amddiffynnol fel gorchymyn rhag molestu, gorchymyn anheddu neu orchymyn diogelu rhag cam-drin domestig</li><li>unrhyw orchymyn arall sy'n cyfyngu ar gyswllt rhyngoch chi a'r rhiant arall neu'r plant</li></ul>",
-    "error": "Dewiswch p'un a oes gennych chi orchymyn llys ar waith"
+    "error": "Dewiswch p'un a oes gennych chi orchymyn llys ar waith",
+    "yes": "Oes",
+    "no": "Nac oes"
   },
   "existingCourtOrder": {
     "title": "Peidiwch â pharhau",
