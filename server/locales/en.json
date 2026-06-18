@@ -433,7 +433,7 @@
       "phone": "With a phone call",
       "email": "By email",
       "app": "Using a parenting app",
-      "emptyError": "Select a method for how you both communicate changes",
+      "emptyError": "Select how last-minute changes should be communicated",
       "descriptionEmptyError": "Describe how you will communicate changes",
       "selectOneOptionError": "Describe what other arrangement you are proposing"
     },

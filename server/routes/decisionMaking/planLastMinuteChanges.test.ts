@@ -162,7 +162,7 @@ describe(paths.DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Select a method for how you both communicate changes',
+          msg: 'Select how last-minute changes should be communicated',
           path: formFields.PLAN_LAST_MINUTE_CHANGES,
           type: 'field',
           value: undefined,

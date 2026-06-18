@@ -16,7 +16,7 @@ const YEARS_FIELD_ID = 'plan-review-years';
 
 const ERROR_MESSAGES = {
   lastMinute: {
-    empty: 'Select a method for how you both communicate changes',
+    empty: 'Select how last-minute changes should be communicated',
     descriptionEmpty: 'Describe how you will communicate changes',
     exclusiveViolation: 'Describe what other arrangement you are proposing',
   },
