@@ -1,4 +1,7 @@
 {% macro getTitle(id, errors) %}
+  {% set pageTitleId %}
+    {%  %}
+  {% endset %}
   {% if errors | findError(id) %}
     {% set pageTitle = __("error") + ": " + __(id + ".title") %}
   {% else %}

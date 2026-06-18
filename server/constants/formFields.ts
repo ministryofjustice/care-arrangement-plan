@@ -4,7 +4,7 @@ enum formFields {
   CHILDREN_SAFETY_CHECK = 'childrenSafetyCheck',
   DO_WHATS_BEST = 'doWhatsBest',
   COURT_ORDER_CHECK = 'courtOrderCheck',
-  NUMBER_OF_CHILDREN = 'number-of-children',
+  NUMBER_OF_CHILDREN = 'numberOfChildren',
   PASSWORD = 'password',
   CHILD_NAME = 'child-name',
   INITIAL_ADULT_NAME = 'initial-adult-name',
