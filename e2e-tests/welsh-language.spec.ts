@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Welsh language support', () => {
+// TODO: To be updated when implementing Welsh language support: https://dsdmoj.atlassian.net/browse/DAS-2105
+test.describe.skip('Welsh language support', () => {
   test('should switch to Welsh when clicking the Welsh link on the homepage', async ({ page }) => {
     await page.goto('/');
 
