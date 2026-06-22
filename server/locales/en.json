@@ -502,6 +502,7 @@
     "whatWeAreTelling": {
       "proposedPlan": "{{{ senderName }}} has suggested a child arrangements plan",
       "senderHasUsedThe": "{{{ senderName }}} used the Child Arrangements Plan service (https://propose-child-arrangements-plan.service.gov.uk/) on GOV.UK to suggest a plan for how you both might look after {{{ childrenNames }}}.",
+      "howToRespond": "How to respond to this plan",
       "pleaseReadThrough": "You can read their suggested plan and use it to collaborate to create child arrangements which you both agree on.",
       "notLegallyBinding": "This plan is not legally binding and you do not have to do what it says.",
       "ifYouDontAgree": "If you don’t agree, you can:",

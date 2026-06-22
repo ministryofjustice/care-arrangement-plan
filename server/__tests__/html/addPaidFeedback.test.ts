@@ -21,7 +21,7 @@ describe('addPaidFeedback', () => {
       html,
       '<section id="paid-feedback"',
       'aria-labelledby="paid-feedback-heading"',
-      '<h2 id="paid-feedback-heading">',
+      '<h3 id="paid-feedback-heading">',
       '</section>',
     );
   });

@@ -1,7 +1,7 @@
 import {
+  ADDITIONAL_SUB_HEADING_SIZE,
   MAIN_TEXT_SIZE,
-  PARAGRAPH_SPACE,
-  SECTION_HEADING_SIZE
+  PARAGRAPH_SPACE
 } from '../constants/pdfConstants';
 
 import TextComponent from './components/text';
@@ -13,7 +13,7 @@ const addPaidFeedback = (pdf: Pdf) => {
   new TextComponent(pdf, [
     {
       text: request.__('pdf.paidFeedback.title'),
-      size: SECTION_HEADING_SIZE,
+      size: ADDITIONAL_SUB_HEADING_SIZE,
       style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
