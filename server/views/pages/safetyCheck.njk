@@ -4,7 +4,13 @@
 {% from "macros/title.njk" import getTitle with context %}
 
 {% block pageTitle %}
-  {{ getTitle(formFields.SAFETY_CHECK, errors) }}
+  {{
+    getTitle(
+      errors,
+      'safetyCheck',
+      [formFields.SAFETY_CHECK]
+    )
+  }}
 {% endblock %}
 
 {% block content %}

@@ -4,7 +4,13 @@
 {% from "macros/title.njk" import getTitle with context %}
 
 {% block pageTitle %}
-  {{ getTitle(formFields.COURT_ORDER_CHECK, errors) }}
+  {{
+    getTitle(
+      errors,
+      'courtOrderCheck',
+      [formFields.COURT_ORDER_CHECK]
+    )
+  }}
 {% endblock %}
 
 {% block content %}
@@ -18,7 +24,7 @@
             name: formFields.COURT_ORDER_CHECK,
             fieldset: {
               legend: {
-                text: title,
+                text: __('courtOrderCheck.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

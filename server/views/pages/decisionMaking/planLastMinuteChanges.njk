@@ -3,6 +3,20 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      'decisionMaking.planLastMinuteChanges',
+      [
+        formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT,
+        formFields.PLAN_LAST_MINUTE_CHANGES
+      ]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">

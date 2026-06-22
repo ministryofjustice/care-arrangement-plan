@@ -2,6 +2,17 @@
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      'livingAndVisiting.whichDaysOvernight',
+      [formFields.WHICH_DAYS_OVERNIGHT]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -27,7 +38,7 @@
             name: formFields.WHICH_DAYS_OVERNIGHT,
             fieldset: {
               legend: {
-                text: title,
+                text: __('livingAndVisiting.whichDaysOvernight.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

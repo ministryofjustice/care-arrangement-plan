@@ -4,7 +4,13 @@
 {% from "macros/title.njk" import getTitle with context %}
 
 {% block pageTitle %}
-  {{ getTitle(titles.WHAT_OTHER_THINGS_MATTER, errors) }}
+  {{
+    getTitle(
+      errors,
+      'otherThings.whatOtherThingsMatter',
+      [formFields.WHAT_OTHER_THINGS_MATTER]
+    )
+  }}
 {% endblock %}
 
 {% block content %}

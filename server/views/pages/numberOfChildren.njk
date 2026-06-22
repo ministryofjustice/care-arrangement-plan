@@ -4,7 +4,13 @@
 {% from "macros/title.njk" import getTitle with context %}
 
 {% block pageTitle %}
-  {{ getTitle(formFields.NUMBER_OF_CHILDREN, errors) }}
+  {{
+    getTitle(
+      errors,
+      'numberOfChildren',
+      [formFields.NUMBER_OF_CHILDREN]
+    )
+  }}
 {% endblock %}
 
 {% block content %}

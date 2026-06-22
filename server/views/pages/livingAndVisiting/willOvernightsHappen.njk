@@ -1,6 +1,17 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      'livingAndVisiting.willOvernightsHappen',
+      [formFields.WILL_OVERNIGHTS_HAPPEN]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -13,7 +24,7 @@
             name: formFields.WILL_OVERNIGHTS_HAPPEN,
             fieldset: {
               legend: {
-                text: title,
+                text: __('livingAndVisiting.willOvernightsHappen.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

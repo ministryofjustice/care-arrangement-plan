@@ -1,8 +1,16 @@
-{% macro getTitle(id, errors) %}
-  {% if errors | findError(id) %}
-    {% set pageTitle = __("error") + ": " + __(id + ".title") %}
+{% macro getTitle(errors, titleId, fieldIds) %}
+  {% set hasError = false %}
+
+  {% for id in fieldIds %}
+    {% if errors | findError(id) %}
+      {% set hasError = true %}
+    {% endif %}
+  {% endfor %}
+
+  {% if hasError %}
+    {% set pageTitle = __("error") + ": " + __(titleId + ".title") %}
   {% else %}
-    {% set pageTitle = __(id + ".title") %}
+    {% set pageTitle = __(titleId + ".title") %}
   {% endif %}
 
   {{ pageTitle }} – {{ __("serviceName") }} – GOV.UK

@@ -6,7 +6,16 @@
 {% from "macros/title.njk" import getTitle with context %}
 
 {% block pageTitle %}
-  {{ getTitle(formFields.PLAN_LONG_TERM_NOTICE, errors) }}
+  {{
+    getTitle(
+      errors,
+      'decisionMaking.planReview',
+      [
+        formFields.PLAN_REVIEW_MONTHS,
+        formFields.PLAN_REVIEW_YEARS
+      ]
+    )
+  }}
 {% endblock %}
 
 {% block content %}

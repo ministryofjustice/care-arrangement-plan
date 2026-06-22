@@ -5,7 +5,9 @@
 {% from "macros/title.njk" import getTitle with context %}
 
 {% block pageTitle %}
-  {{ getTitle('notSafe', null) }}
+  {{
+    getTitle(null, 'notSafe')
+  }}
 {% endblock %}
 
 {% block content %}

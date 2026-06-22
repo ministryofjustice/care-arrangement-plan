@@ -2,6 +2,17 @@
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      'livingAndVisiting.mostlyLive',
+      [formFields.MOSTLY_LIVE_WHERE, formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">

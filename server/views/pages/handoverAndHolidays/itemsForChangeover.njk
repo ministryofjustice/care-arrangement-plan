@@ -1,6 +1,17 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      'handoverAndHolidays.itemsForChangeover',
+      [formFields.ITEMS_FOR_CHANGEOVER]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">

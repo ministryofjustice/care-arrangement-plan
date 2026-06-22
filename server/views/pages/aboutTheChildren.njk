@@ -4,7 +4,13 @@
 {% from "macros/title.njk" import getTitle with context %}
 
 {% block pageTitle %}
-  {{ getTitle('aboutTheChildren', errors) }}
+  {{
+    getTitle(
+      errors,
+      'aboutTheChildren',
+      [formFields.CHILD_NAME]
+    )
+  }}
 {% endblock %}
 
 {% block content %}
@@ -23,7 +29,7 @@
 
       <p>{{ __('about.notStoreInfo') }}</p>
 
-      <form class="form" action="{{ paths.ABOUT_THE_CHILDREN }}" method="post" novalidate>
+      <form class="form" action="{{ paths.ABOUT_THE_CHILDREN }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {% for i in range(numberOfChildren) %}
           {% set fieldName = formFields.CHILD_NAME + i %}

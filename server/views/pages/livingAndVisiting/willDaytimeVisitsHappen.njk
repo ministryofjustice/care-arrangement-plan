@@ -1,6 +1,17 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      'livingAndVisiting.willDaytimeVisitsHappen',
+      [formFields.WILL_DAYTIME_VISITS_HAPPEN]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -13,7 +24,7 @@
             name: formFields.WILL_DAYTIME_VISITS_HAPPEN,
             fieldset: {
               legend: {
-                text: title,
+                text: __('livingAndVisiting.willDaytimeVisitsHappen.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }
