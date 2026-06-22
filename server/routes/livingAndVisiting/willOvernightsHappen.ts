@@ -19,6 +19,7 @@ const willOvernightsHappenRoutes = (router: Router) => {
       title: request.__('livingAndVisiting.willOvernightsHappen.title', {
         adult: parentNotMostlyLivedWith(request.session),
       }),
+      adult: parentNotMostlyLivedWith(request.session),
       backLinkHref: getBackUrl(request.session, paths.LIVING_VISITING_MOSTLY_LIVE),
       formValues: {
         [formFields.WILL_OVERNIGHTS_HAPPEN]: convertBooleanValueToRadioButtonValue(
