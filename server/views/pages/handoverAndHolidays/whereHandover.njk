@@ -7,7 +7,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER }}" method="post" novalidate>
+      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {% set hintHtml %}
           <p>{{ __('handoverAndHolidays.whereHandover.explainer') }}</p>
@@ -32,7 +32,7 @@
             name: formFields.WHERE_HANDOVER,
             fieldset: {
               legend: {
-                text: title,
+                text: __('handoverAndHolidays.whereHandover.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

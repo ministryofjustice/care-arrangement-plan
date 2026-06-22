@@ -1,6 +1,12 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/task-list/macro.njk" import govukTaskList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{ getTitle('taskList', errors) }}
+{% endblock %}
+
 {%
   set completeStatus = {
     text: __('taskList.completed')
@@ -24,7 +30,7 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <h1 class="govuk-heading-l">{{ __('taskList.title') }}</h1>
 
       <h2 class="govuk-heading-m">{{ __('taskList.whoThePlanIsFor') }}</h2>
       {{

@@ -9,7 +9,7 @@
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
 
-      <form class="form" action="plan-last-minute-changes" method="post" novalidate>
+      <form class="form" action="plan-last-minute-changes?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {% set hintHtml %}
           <p>{{ __('decisionMaking.planLastMinuteChanges.howChangesCommunicatedAdditionalDescription') }}</p>
@@ -22,7 +22,7 @@
               name: formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT,
               value: formValues[formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT],
               label: {
-                text:__('decisionMaking.planLastMinuteChanges.anotherDescriptionLabel')
+                text: __('decisionMaking.planLastMinuteChanges.anotherDescriptionLabel')
               },
               errorMessage: errors | findError(formFields.PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT)
             })
@@ -34,7 +34,7 @@
             name: formFields.PLAN_LAST_MINUTE_CHANGES,
             fieldset: {
               legend: {
-                text: title,
+                text: __('decisionMaking.planLastMinuteChanges.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

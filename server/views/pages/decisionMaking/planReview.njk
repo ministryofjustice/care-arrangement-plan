@@ -3,18 +3,23 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{ getTitle(formFields.PLAN_LONG_TERM_NOTICE, errors) }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
 
-      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <h1 class="govuk-heading-l">{{ __('decisionMaking.planReview.title') }}</h1>
 
       <p>{{ __('decisionMaking.planReview.childrensNeedsChange') }}</p>
       <p>{{ __('decisionMaking.planReview.youCanAlsoReview') }}</p>
       
-      <form class="form" action="{{ paths.DECISION_MAKING_PLAN_REVIEW }}" method="post">
+      <form class="form" action="{{ paths.DECISION_MAKING_PLAN_REVIEW }}?lang={{ getLocale() }}" method="post">
         <div class="govuk-date-input" id="months-review">
           <div class="govuk-date-input__item">
             <div class="govuk-form-group">

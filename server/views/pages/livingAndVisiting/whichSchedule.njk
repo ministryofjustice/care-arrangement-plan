@@ -18,12 +18,12 @@
         <p>{{ __('livingAndVisiting.whichSchedule.exactSplitWarning') }}</p>
       {% endset %}
 
-      <form class="form" action="{{ paths.LIVING_VISITING_WHICH_SCHEDULE }}" method="post" novalidate>
+      <form class="form" action="{{ paths.LIVING_VISITING_WHICH_SCHEDULE }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukTextarea({
             label: {
-              text: title,
+              text: __('livingAndVisiting.whichSchedule.title'),
               classes: "govuk-label--l",
               isPageHeading: true
             },

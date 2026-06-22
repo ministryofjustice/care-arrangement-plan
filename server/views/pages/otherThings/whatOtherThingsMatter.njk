@@ -1,6 +1,11 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{ getTitle(titles.WHAT_OTHER_THINGS_MATTER, errors) }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -17,12 +22,12 @@
         </ul>
       {% endset %}
 
-      <form class="form" action="{{ paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER }}" method="post" novalidate>
+      <form class="form" action="{{ paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukTextarea({
             label: {
-              text: title,
+              text: __('otherThings.whatOtherThingsMatter.title'),
               classes: "govuk-label--l",
               isPageHeading: true
             },

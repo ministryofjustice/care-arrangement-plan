@@ -7,7 +7,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS }}" method="post" novalidate>
+      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
 
         {% set describeArrangementHtml %}
@@ -28,7 +28,7 @@
             name: formFields.GET_BETWEEN_HOUSEHOLDS,
             fieldset: {
               legend: {
-                text: title,
+                text: __('handoverAndHolidays.getBetweenHouseholds.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

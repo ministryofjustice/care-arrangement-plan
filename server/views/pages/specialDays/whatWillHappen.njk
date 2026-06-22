@@ -1,18 +1,23 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{ getTitle('aboutTheAdults', errors) }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
 
-      <form class="form" action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN }}" method="post" novalidate>
+      <form class="form" action="{{ paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukTextarea({
             label: {
-              text: title,
+              text: __('specialDays.whatWillHappen.title'),
               classes: "govuk-label--l",
               isPageHeading: true
             },

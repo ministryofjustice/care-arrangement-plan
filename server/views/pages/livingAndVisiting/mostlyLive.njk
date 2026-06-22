@@ -7,7 +7,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-      <form class="form" action="{{ paths.LIVING_VISITING_MOSTLY_LIVE }}" method="post" novalidate>
+      <form class="form" action="{{ paths.LIVING_VISITING_MOSTLY_LIVE }}?lang={{ getLocale() }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
 
         {% set describeArrangementHtml %}
@@ -28,7 +28,7 @@
             name: formFields.MOSTLY_LIVE_WHERE,
             fieldset: {
               legend: {
-                text: title,
+                text: __('livingAndVisiting.mostlyLive.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }
