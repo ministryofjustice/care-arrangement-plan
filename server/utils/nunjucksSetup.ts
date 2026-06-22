@@ -9,6 +9,7 @@ import config from '../config';
 import cookieNames from '../constants/cookieNames';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
+import titleIds from '../constants/titleIds';
 import logger from '../logging/logger';
 
 import getAssetPath from './getAssetPath';
@@ -45,6 +46,7 @@ const nunjucksSetup = (app: express.Express): void => {
   );
   njkEnv.addGlobal('paths', paths);
   njkEnv.addGlobal('formFields', formFields);
+  njkEnv.addGlobal('titleIds', titleIds);
   njkEnv.addGlobal('cookieNames', cookieNames);
   njkEnv.addGlobal('includeWelshLanguage', config.includeWelshLanguage);
   njkEnv.addGlobal('__', i18n.__);
