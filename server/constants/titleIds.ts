@@ -1,7 +1,8 @@
 enum titleIds {
   SAFETY_CHECK = 'safetyCheck',
   ABOUT_THE_ADULTS = 'aboutTheAdults',
-  ABOUT_THE_CHILDREN = 'aboutTheChildren',
+  ABOUT_THE_CHILDREN_SINGLE = 'aboutTheChildren.singleTitle',
+  ABOUT_THE_CHILDREN_MULTIPLE = 'aboutTheChildren.multipleTitle',
   CHILDREN_NOT_SAFE = 'childrenNotSafe',
   CHILDREN_SAFETY_CHECK = 'childrenSafetyCheck',
   COURT_ORDER_CHECK = 'courtOrderCheck',
