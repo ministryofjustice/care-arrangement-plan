@@ -7,8 +7,9 @@
   {{
     getTitle(
       errors,
-      titleIds.WILL_OVERNIGHTS_HAPPEN,
-      [formFields.WILL_OVERNIGHTS_HAPPEN]
+      null,
+      [formFields.WILL_OVERNIGHTS_HAPPEN],
+      title
     )
   }}
 {% endblock %}
@@ -24,7 +25,7 @@
             name: formFields.WILL_OVERNIGHTS_HAPPEN,
             fieldset: {
               legend: {
-                text: __('livingAndVisiting.willOvernightsHappen.title'),
+                text: title,
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

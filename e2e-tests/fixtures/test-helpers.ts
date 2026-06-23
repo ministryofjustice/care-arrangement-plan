@@ -4,7 +4,11 @@ const SERVICE_ERROR_MESSAGE = 'Sorry, there is a problem with the service';
 
 const SERVICE_ERROR_HTML = `<h1>${SERVICE_ERROR_MESSAGE}</h1><p>You can try reloading the page or <a href="/">start again</a>.</p>`;
 
-export async function interceptPostWithError(page: Page, urlPattern: string, status: number = 500) {
+export async function interceptPostWithError(
+  page: Page,
+  urlPattern: string | RegExp,
+  status: number = 500,
+) {
   await page.route(urlPattern, (route: Route) => {
     if (route.request().method() === 'POST') {
       return route.fulfill({
@@ -22,7 +26,7 @@ export async function interceptPostWithError(page: Page, urlPattern: string, sta
  */
 export async function interceptPostWithTransientError(
   page: Page,
-  urlPattern: string,
+  urlPattern: string | RegExp,
   { status = 500, failCount = 1 }: { status?: number; failCount?: number } = {},
 ) {
   let requestCount = 0;

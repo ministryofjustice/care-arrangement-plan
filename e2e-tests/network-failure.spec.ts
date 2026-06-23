@@ -14,7 +14,7 @@ test.describe('Server Error Response Handling', () => {
       await expect(page).toHaveURL(/\/number-of-children/);
 
       await page.getByLabel(/How many children is this for/i).fill('2');
-      await interceptPostWithError(page, '**/number-of-children', 500);
+      await interceptPostWithError(page, /\/number-of-children/, 500);
       await page.getByRole('button', { name: /continue/i }).click();
 
       await expectServiceErrorPage(page);
@@ -25,7 +25,7 @@ test.describe('Server Error Response Handling', () => {
       await expect(page).toHaveURL(/\/number-of-children/);
 
       await page.getByLabel(/How many children is this for/i).fill('1');
-      await interceptPostWithError(page, '**/number-of-children', 503);
+      await interceptPostWithError(page, /\/number-of-children/, 503);
       await page.getByRole('button', { name: /continue/i }).click();
 
       await expectServiceErrorPage(page);
@@ -36,7 +36,7 @@ test.describe('Server Error Response Handling', () => {
       await expect(page).toHaveURL(/\/number-of-children/);
 
       await page.getByLabel(/How many children is this for/i).fill('2');
-      await interceptPostWithError(page, '**/number-of-children', 500);
+      await interceptPostWithError(page, /\/number-of-children/, 500);
       await page.getByRole('button', { name: /continue/i }).click();
 
       await expectServiceErrorPage(page);
@@ -52,7 +52,7 @@ test.describe('Server Error Response Handling', () => {
       await expect(page).toHaveURL(/\/number-of-children/);
 
       await page.getByLabel(/How many children is this for/i).fill('2');
-      await interceptPostWithTransientError(page, '**/number-of-children', { status: 500, failCount: 1 });
+      await interceptPostWithTransientError(page, /\/number-of-children/, { status: 500, failCount: 1 });
 
       await page.getByRole('button', { name: /continue/i }).click();
       await expectServiceErrorPage(page);
