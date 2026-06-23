@@ -82,57 +82,54 @@
     "rejectedAnalyticsCookies": "You’ve rejected analytics cookies. You can <a href={{ cookiesUrl }} >change your cookie settings</a> at any time."
   },
   "accessibilityStatement": {
-    "title": "Datganiad hygyrchedd",
-    "appliesTo": "Mae'r datganiad hygyrchedd hwn yn berthnasol i'r gwasanaeth Cynnig cynllun trefniadau plant.",
-    "usableToAsManyAsPossible": "Y Weinyddiaeth Gyfiawnder sy'n gyfrifol am y wefan hon. Rydym eisiau i gymaint o bobl â phosibl allu defnyddio'r wefan hon. Er enghraifft, golyga hyn y dylech allu:",
-    "changeColours": "newid y lliwiau, y lefelau cyferbyniad a'r ffontiau gan ddefnyddio gosodiadau'r porwr neu'r ddyfais",
-    "zoomIn": "gwneud y testun hyd at 400% yn fwy heb iddo ddiflannu oddi ar y sgrin",
-    "speechRecognition": "mynd drwy'r rhan fwyaf o'r wefan gan ddefnyddio bysellfwrdd neu feddalwedd adnabod llais",
-    "screenReader": "gwrando ar y rhan fwyaf o'r wefan gan ddefnyddio darllenydd sgrin (gan gynnwys fersiynau diweddaraf JAWS, NVDA a VoiceOver)",
-    "simpleToUnderstand": "Rydym hefyd wedi gwneud testun y wefan mor syml â phosibl i'w ddeall.",
-    "abilityNet": "Mae gan Ability Net gyngor ynghylch gwneud eich dyfais yn haws i'w defnyddio os oes gennych anabledd.",
-    "htmlVersion": "Mae yna hefyd fersiwn HTML o'r datganiad hwn.",
-    "this": "Mae hwn yn cynnwys:",
-    "interactive": "hyperddolenni rhyngweithiol, y gellir clicio arnynt",
-    "offline": "gellir agor mewn unrhyw borwr gwe all-lein",
-    "screenReaderSupport": "gweithio gyda darllenwyr sgrîn",
-    "howAccessible": "Pa mor hygyrch yw'r wefan hon",
-    "notFullyAccessible": "Nid yw'r datganiad hygyrchedd yn gwbl hygyrch:",
-    "knownIssues": [
-      "Gall defnyddiwr darllenydd sgrin ei chael hi'n anodd gyda rhai o'r dolenni",
-      "Bydd defnyddwyr darllenydd sgrin yn ei chael yn anodd cael mynediad i'r PDF wedi'i allgludo",
-      "gall defnyddwyr darllenydd sgrin ei chael yn anodd rhyngweithio gyda rhai o'r botymau ar y dudalen"
-    ],
-    "feedbackContact": "Adborth a gwybodaeth gyswllt",
-    "reportProblems": "Os byddwch yn cael unrhyw broblemau nad ydynt wedi'u cynnwys ar y dudalen hon, neu'n credu nad ydym yn bodloni'r gofynion o ran hygyrchedd, cysylltwch gyda: {{ contactEmail }}",
-    "alternativeFormats": "Os ydych angen gwybodaeth sydd ar y wefan hon mewn fformat arall megis ar ffurf PDF hygyrch, print bras, fformat hawdd ei ddeall, recordiad sain neu braille:",
-    "email": "E-bostiwch {{{ contactEmail }}}",
-    "responseTime": "Byddwn yn ystyried eich cais ac yn ymateb o fewn 5 diwrnod gwaith.",
-    "enforcementProcedure": "Y Weithdrefn Orfodi",
-    "equalityCommission": "Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy'n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018 (y 'rheoliadau hygyrchedd'). Os nad ydych chi'n fodlon gyda'r ffordd rydym yn ymateb i'ch cwyn, cysylltwch â'r Gwasanaeth Cynghori a Chymorth Cydraddoldeb (EASS)",
-    "technicalInfo": "Gwybodaeth dechnegol am hygyrchedd y wefan hon",
-    "commitment": "Mae'r Weinyddiaeth Gyfiawnder wedi ymrwymo i sicrhau bod ei wefan yn hygyrch, a hynny yn unol â Rheoliadau Hygyrchedd Cyrff y Sector Gyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018.",
-    "complianceStatus": "Statws cydymffurfiaeth",
-    "wcagStandard": "Mae'r wefan hon yn cydymffurfio'n llawn â'r Canllawiau Hygyrchedd Cynnwys Gwe fersiwn 2.2 safon AA.",
-    "partialCompliance": "Mae'r wefan hon yn cydymffurfio'n rhannol â safon AA Canllawiau Hygyrchedd Cynnwys Gwe fersiwn 2.2",
-    "nonCompliances": "a hynny oherwydd yr enghreifftiau o beidio â chydymffurfio a restrir isod.",
-    "nonAccessibleContent": "Cynnwys anhygyrch",
-    "nonCompliance": "The website does not comply for the following reasons:",
-    "nonAccessibleReason": "Mae'r cynnwys a restrir isod yn anhygyrch am y rhesymau canlynol.",
-    "nonComplianceHeading": "Anghydymffurfio â'r rheoliadau hygyrchedd",
-    "doesNotComply": "Nid yw'r wefan yn cydymffurfio am y rhesymau canlynol:",
-    "nonComplianceReasons": [
-      "Mae rhai o'r dolenni wedi eu harddangos fel URLs crai heb unrhyw destun hygyrch. 2.4.4 pwrpas dolen (mewn cyd-destun).",
-      "Nid yw'r PDFs wedi'u hallgludo yn hygyrch. 1.3.1 gwybodaeth a pherthnasoedd.",
-      "Rhai botymau â diffyg testun hygyrch. 2.4.4 diben (mewn cyd-destun).",
-      "Mae rhai botymau yn cynnwys datgeliad amodol na chaniateir ar gyfer y math hwn o fotwm. 4.1.2 enw, rôl, gwerth"
-    ],
-    "fixTimeline": "Rydym yn bwriadu datrys y materion hyn yn gynnar yn 2026.",
-    "replacePdf": "Mae'r tim yn bwriadu disodli'r PDF gyda chynnwys hygyrch",
-    "statementPrep": "Paratoi'r datganiad hygyrchedd hwn",
-    "statementDate": "Cafodd y datganiad hwn ei baratoi ar 14 Hydref 2025. Fe'i ddiweddarwyd diwethaf ar 14 Hydref 2025.",
-    "testingDetails": "Cynhaliwyd y prawf gan aelod o dîm hygyrchedd digidol y Weinyddiaeth Gyfiawnder ym mis Mawrth 2025. Cafodd y tudalennau a ymwelwyd â nhw fwyaf eu profi yn defnyddio adnoddau profi awtomataidd gan ein tîm gwefan.",
-    "futureAudit": "Caiff archwiliad pellach o'r wefan ei drefnu ar gyfer safon AA 2.2 WCAG yn gynnar yn 2026"
+    "title": "Accessibility statement",
+    "content": {
+      "appliesTo": "This accessibility statement applies to the 'Propose a child arrangements plan' service.",
+      "runBy": "This website is run by the Ministry of Justice (MoJ). We want as many people as possible to be able to use this website. For example, that means you should be able to:",
+      "abilities": {
+        "changeColours": "change colours, contrast levels and fonts using browser or device settings",
+        "zoomIn": "zoom in up to 400% without the text spilling off the screen",
+        "navigate": "navigate most of the website using a keyboard or speech recognition software",
+        "listen": "listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)"
+      },
+      "simpleText": "We've also made the website text as simple as possible to understand.",
+      "abilityNet": "<a href=\"https://mcmw.abilitynet.org.uk/\" class=\"govuk-link\">AbilityNet</a> has advice on making your device easier to use if you have a disability.",
+      "feedback": {
+        "title": "Feedback and contact information",
+        "contact": "If you find any problems not listed on this page or think we're not meeting accessibility requirements, email <a href=\"mailto:childarrangements@justice.gov.uk\" class=\"govuk-link\">childarrangements@justice.gov.uk</a>."
+      },
+      "enforcement": {
+        "title": "Enforcement procedure",
+        "responsible": "The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the 'accessibility regulations').",
+        "complaint": "If you're not happy with how we respond to your complaint, contact the <a href=\"https://www.equalityadvisoryservice.com/\" class=\"govuk-link\">Equality Advisory and Support Service (EASS)</a>."
+      },
+      "technical": {
+        "title": "Technical information about this website's accessibility",
+        "commitment": "The Ministry of Justice (MoJ) is committed to making its website accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018."
+      },
+      "compliance": {
+        "title": "Compliance status",
+        "tested": "We have tested this service with assistive technologies including screen readers and voice-to-text technology.",
+        "wcag": "The service has had an external WCAG accessibility audit by User Vision on 5th June.",
+        "compliant": "The service is fully compliant and meets most of the requirements of the Web Content Accessibility Guidelines (WCAG) 2.2 AA standard."
+      },
+      "nonAccessibleContent": {
+        "title": "Non-accessible content",
+        "subtitle": "Non-compliance with current GDS implementation",
+        "content": {
+          "screenReader": "Screen reader users may experience the following issues with the ‘Exit this page’ button, which allows you to leave the service quickly.",
+          "list": {
+            "itemOne": "The button can be activated by clicking the Escape key three times. As the Escape key is a common shortcut for exiting modals, the button may accidentally be activated."
+          },
+          "deviatesFromGDS": "This deviates from by GDS approach to use the Shift key. In user testing the ‘Exit this page’ button was accidentally activated, as it’s a common navigation shortcut. We are working with GDS to improve this experience with user feedback."
+        }
+      },
+      "preparation": {
+        "title": "Preparation of this accessibility statement",
+        "preparedOn": "This statement was prepared on 16 June 2026. It was last reviewed on 17 June 2026.",
+        "lastTested": "This service was last tested in Summer 2026 against the WCAG 2.2 AA standard, by User Vision on 5 June 2026."
+      }
+    }
   },
   "contactUs": {
     "title": "Cysylltu â ni",
@@ -507,6 +504,7 @@
     "whatWeAreTelling": {
       "proposedPlan": "{{{ senderName }}} has suggested a child arrangements plan",
       "senderHasUsedThe": "{{{ senderName }}} used the Child Arrangements Plan service (https://propose-child-arrangements-plan.service.gov.uk/) on GOV.UK to suggest a plan for how you both might look after {{{ childrenNames }}}.",
+      "howToRespond": "How to respond to this plan",
       "pleaseReadThrough": "You can read their suggested plan and use it to collaborate to create child arrangements which you both agree on.",
       "notLegallyBinding": "This plan is not legally binding and you do not have to do what it says.",
       "ifYouDontAgree": "If you don’t agree, you can:",
