@@ -7,7 +7,7 @@ import paths from './constants/paths';
 import cy from './locales/cy.json';
 import en from './locales/en.json';
 import testAppSetup from './test-utils/testAppSetup';
-import { mockNow, sessionMock } from './test-utils/testMocks';
+import { mockNow, flashMock, sessionMock } from './test-utils/testMocks';
 
 const app = testAppSetup();
 
@@ -195,6 +195,7 @@ describe('App', () => {
       config.includeWelshLanguage = true;
       // Reset session lang between tests
       delete sessionMock.lang;
+      flashMock.mockClear();
     });
 
     it('should store the language in session when lang query parameter is used', async () => {
@@ -218,6 +219,49 @@ describe('App', () => {
         .expect((response) => {
           expect(response.text).toContain(homepageLanguageStrings.cy);
         });
+    });
+
+    it('should persist detected locale to session on first visit without lang parameter', async () => {
+      const testApp = testAppSetup();
+
+      await request(testApp)
+        .get(paths.START)
+        .set('Accept-Language', 'cy')
+        .expect((response) => {
+          expect(response.text).toContain(homepageLanguageStrings.cy);
+        });
+
+      expect(sessionMock.lang).toBe('cy');
+    });
+
+    it('should not include lang query parameter in form actions', async () => {
+      sessionMock.lang = 'cy';
+      const testApp = testAppSetup();
+
+      await request(testApp)
+        .get(paths.SAFETY_CHECK)
+        .expect((response) => {
+          expect(response.text).toContain('Eich diogelwch');
+          expect(response.text).not.toContain('?lang=');
+        });
+    });
+
+    it('should preserve session language on POST without lang query parameter', async () => {
+      const testApp = testAppSetup();
+      const agent = request.agent(testApp);
+
+      await agent.get(`${paths.START}?lang=cy`);
+
+      await agent
+        .post(paths.SAFETY_CHECK)
+        .expect(302)
+        .expect('location', paths.SAFETY_CHECK);
+
+      expect(flashMock).toHaveBeenCalledWith('errors', [
+        expect.objectContaining({
+          msg: 'Dewiswch a ydych chi\'n teimlo\'n ddiogel ac yn hyderus ai peidio',
+        }),
+      ]);
     });
 
     it('should not store an invalid language in session', async () => {

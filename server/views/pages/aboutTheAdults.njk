@@ -25,7 +25,7 @@
 
       <p>{{ __('about.notStoreInfo') }}</p>
 
-      <form class="form" action="{{ paths.ABOUT_THE_ADULTS }}?lang={{ getLocale() }}" method="post" novalidate>
+      <form class="form" action="{{ paths.ABOUT_THE_ADULTS }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukInput({

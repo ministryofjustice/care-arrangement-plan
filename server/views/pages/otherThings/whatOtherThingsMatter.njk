@@ -28,7 +28,7 @@
         </ul>
       {% endset %}
 
-      <form class="form" action="{{ paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER }}?lang={{ getLocale() }}" method="post" novalidate>
+      <form class="form" action="{{ paths.OTHER_THINGS_WHAT_OTHER_THINGS_MATTER }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukTextarea({

@@ -17,7 +17,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-      <form class="form" action="{{ paths.COURT_ORDER_CHECK }}?lang={{ getLocale() }}" method="post" novalidate>
+      <form class="form" action="{{ paths.COURT_ORDER_CHECK }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukRadios({

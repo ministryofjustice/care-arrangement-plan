@@ -21,7 +21,7 @@
 
       {{ __('doWhatsBest.content') | safe }}
 
-      <form class="form" action="{{ paths.DO_WHATS_BEST }}?lang={{ getLocale() }}" method="post" novalidate>
+      <form class="form" action="{{ paths.DO_WHATS_BEST }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukCheckboxes({

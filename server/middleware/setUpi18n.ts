@@ -30,12 +30,14 @@ export const setUpLocaleFromSession = (): Router => {
   const router = Router();
 
   router.use((req, res, next) => {
-    const lang = req.query.lang as string;
+    const lang = req.query.lang as string | undefined;
     if (lang && i18n.getLocales().includes(lang)) {
       req.session.lang = lang;
-      res.setLocale(lang);
+      req.setLocale(lang);
     } else if (req.session?.lang) {
-      res.setLocale(req.session.lang);
+      req.setLocale(req.session.lang);
+    } else if (!lang) {
+      req.session.lang = req.getLocale();
     }
     next();
   });

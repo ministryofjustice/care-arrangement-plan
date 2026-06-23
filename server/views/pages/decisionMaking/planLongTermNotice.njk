@@ -21,7 +21,7 @@
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
 
-      <form class="form" action="{{ paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE }}?lang={{ getLocale() }}" method="post" novalidate>
+      <form class="form" action="{{ paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
 
         {% set anotherHtml %}
