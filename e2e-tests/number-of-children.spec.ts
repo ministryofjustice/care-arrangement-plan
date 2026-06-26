@@ -11,6 +11,7 @@ const FIELD_ID = 'number-of-children';
 
 const ERROR_MESSAGES = {
   empty: 'Enter how many children this agreement is for',
+  notANumber: 'Enter numbers only',
   tooFew: 'Your agreement must be for at least 1 child',
   tooMany: 'Your agreement cannot be for more than 6 children',
 };
@@ -44,7 +45,7 @@ test.describe('Number of Children Page Validation', () => {
       await page.getByRole('button', { name: /continue/i }).click();
 
       await expectErrorSummaryVisible(page);
-      await expect(page.locator(`#${FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.empty);
+      await expect(page.locator(`#${FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.notANumber);
     });
 
     test('should show error for special characters', async ({ page }) => {
@@ -52,7 +53,7 @@ test.describe('Number of Children Page Validation', () => {
       await page.getByRole('button', { name: /continue/i }).click();
 
       await expectErrorSummaryVisible(page);
-      await expect(page.locator(`#${FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.empty);
+      await expect(page.locator(`#${FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.notANumber);
     });
 
     test('should show error for mixed alphanumeric', async ({ page }) => {
@@ -60,7 +61,7 @@ test.describe('Number of Children Page Validation', () => {
       await page.getByRole('button', { name: /continue/i }).click();
 
       await expectErrorSummaryVisible(page);
-      await expect(page.locator(`#${FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.empty);
+      await expect(page.locator(`#${FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.notANumber);
     });
 
     test('should show error for decimal number', async ({ page }) => {
@@ -68,7 +69,7 @@ test.describe('Number of Children Page Validation', () => {
       await page.getByRole('button', { name: /continue/i }).click();
 
       await expectErrorSummaryVisible(page);
-      await expect(page.locator(`#${FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.empty);
+      await expect(page.locator(`#${FIELD_ID}-error`)).toContainText(ERROR_MESSAGES.notANumber);
     });
   });
 

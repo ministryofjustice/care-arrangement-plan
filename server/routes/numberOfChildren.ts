@@ -28,8 +28,11 @@ const numberOfChildrenRoutes = (router: Router) => {
     checkFormProgressFromConfig(FORM_STEPS.NUMBER_OF_CHILDREN),
     body(formFields.NUMBER_OF_CHILDREN)
       .trim()
-      .isInt()
+      .notEmpty()
       .withMessage((_value, { req }) => req.__('numberOfChildren.emptyError'))
+      .bail()
+      .isInt()
+      .withMessage((_value, { req }) => req.__('numberOfChildren.notANumberError'))
       .bail()
       .isInt({ min: 1 })
       .withMessage((_value, { req }) => req.__('numberOfChildren.tooFewError'))
