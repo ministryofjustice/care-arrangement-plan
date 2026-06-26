@@ -590,7 +590,7 @@
         "school": "school",
         "suggestedSomeoneElse": "{{{ senderName }}} suggested that someone else will manage handover. {{{ senderName }}} suggested:\n\"{{{ someoneElse }}}\"",
         "suggestedChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements should change during school holidays.",
-        "suggestedNoChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements do not change during school holidays."
+        "suggestedNoChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements should not change during school holidays."
       },
       "decisionMaking": {
         "planLastMinuteChanges": {

@@ -307,7 +307,7 @@ describe('formattedAnswers', () => {
         {
           getBetweenHouseholds: `${session.initialAdultName} suggested that ${session.initialAdultName} collects the children.`,
           whereHandover: `${session.initialAdultName} suggested that handover takes place at a neutral location, ${session.initialAdultName}'s home and school`,
-          willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that these arrangements do not change during school holidays.`,
+          willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that these arrangements should not change during school holidays.`,
           itemsForChangeover: `${session.initialAdultName} suggested:\n"itemsForChangeover arrangement"`,
         },
       ],
@@ -349,7 +349,7 @@ describe('formattedAnswers', () => {
         {
           getBetweenHouseholds: `${session.initialAdultName} suggested that ${session.initialAdultName} collects the children.`,
           whereHandover: `${session.initialAdultName} suggested that handover takes place at a neutral location and the park near school`,
-          willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that these arrangements do not change during school holidays.`,
+          willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that these arrangements should not change during school holidays.`,
           itemsForChangeover: `${session.initialAdultName} suggested:\n"itemsForChangeover arrangement"`,
         },
       ],
