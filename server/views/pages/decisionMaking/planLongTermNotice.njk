@@ -4,6 +4,17 @@
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      titleIds.PLAN_LONG_TERM_NOTICE,
+      [formFields.PLAN_LONG_TERM_NOTICE]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -32,7 +43,7 @@
             value: formValues[formFields.PLAN_LONG_TERM_NOTICE],
             fieldset: {
               legend: {
-                text: title,
+                text: __('decisionMaking.planLongTermNotice.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

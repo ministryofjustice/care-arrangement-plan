@@ -1,6 +1,17 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      titleIds.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS,
+      [formFields.HOW_CHANGE_DURING_SCHOOL_HOLIDAYS]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -16,7 +27,7 @@
         {{
           govukTextarea({
             label: {
-              text: title,
+              text: __('handoverAndHolidays.howChangeDuringSchoolHolidays.title'),
               classes: "govuk-label--l",
               isPageHeading: true
             },

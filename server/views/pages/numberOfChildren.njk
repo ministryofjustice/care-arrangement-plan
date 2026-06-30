@@ -1,8 +1,24 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      titleIds.NUMBER_OF_CHILDREN,
+      [formFields.NUMBER_OF_CHILDREN]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
+  {% include "partials/exitThisPage.njk" %}
+  <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+    {{ __('exitThisPage') | safe }}
+  </div>
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
@@ -12,7 +28,7 @@
           govukInput({
             name: formFields.NUMBER_OF_CHILDREN,
             label: {
-              text: title,
+              text: __('numberOfChildren.title'),
               classes: "govuk-label--l",
               isPageHeading: true
             },

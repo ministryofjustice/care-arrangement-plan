@@ -1,0 +1,22 @@
+{% macro getTitle(errors, titleId, fieldIds, value) %}
+  {% set hasError = false %}
+
+  {% for id in fieldIds %}
+    {% if errors | findError(id) %}
+      {% set hasError = true %}
+    {% endif %}
+  {% endfor %}
+
+  {% if hasError %}
+    {% set pageTitle = __("error") + ": " %}
+  {% else %}
+    {% set pageTitle = "" %}
+  {% endif %}
+
+  {% if value %}
+    {{ pageTitle }} {{ value }} – {{ __("serviceName") }} – GOV.UK
+  {% else %}
+    {{ pageTitle }} {{ __(titleId + ".title") }} – {{ __("serviceName") }} – GOV.UK
+  {% endif %}
+
+{% endmacro %}

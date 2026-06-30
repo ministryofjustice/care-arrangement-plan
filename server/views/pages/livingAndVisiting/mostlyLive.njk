@@ -2,6 +2,20 @@
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      titleIds.MOSTLY_LIVE,
+      [
+        formFields.MOSTLY_LIVE_WHERE,
+        formFields.MOSTLY_LIVE_DESCRIBE_ARRANGEMENT
+      ]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -28,7 +42,7 @@
             name: formFields.MOSTLY_LIVE_WHERE,
             fieldset: {
               legend: {
-                text: title,
+                text: __('livingAndVisiting.mostlyLive.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

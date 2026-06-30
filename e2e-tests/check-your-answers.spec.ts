@@ -1,6 +1,17 @@
 import { test, expect } from '@playwright/test';
 
-import { completeMinimalJourney } from './fixtures/test-helpers';
+import {
+  completeDecisionMakingSection,
+  completeHandoverAndHolidaysSection,
+  completeLivingAndVisitingSection,
+  completeMinimalJourney,
+  completeOnboardingFlow,
+  completeOtherThingsSection,
+  completeSpecialDaysSection,
+  fillAdultDetails,
+  fillAllChildrenAndContinue,
+  fillNumberOfChildren,
+} from './fixtures/test-helpers';
 
 test.describe('Check Your Answers Summary Page', () => {
   test('should display all completed sections with correct data', async ({ page }) => {
@@ -163,107 +174,22 @@ test.describe('Check Your Answers Summary Page', () => {
   });
 
   test('should handle multiple children scenario', async ({ page }) => {
-    // Complete onboarding with 3 children
-    await page.goto('/');
-    await page.getByRole('button', { name: /start now/i }).click();
+    await completeOnboardingFlow(page);
+    await fillNumberOfChildren(page, 3);
+    await fillAllChildrenAndContinue(page, ['Emma', 'Oliver', 'Sophia']);
+    await fillAdultDetails(page, 'Parent', 'Guardian');
 
-    // Complete safety checks
-    await page.getByLabel(/yes/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/yes/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
+    await completeLivingAndVisitingSection(page);
+    await completeHandoverAndHolidaysSection(page);
+    await completeSpecialDaysSection(page);
+    await completeOtherThingsSection(page);
+    await completeDecisionMakingSection(page);
 
-    // do-whats-best
-    await page.getByRole('checkbox', { name: /I will put my children.s needs first/i }).check();
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // court-order-check
-    await page.getByLabel(/no/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Number of children
-    await page.getByLabel(/How many children is this for/i).fill('3');
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Fill all children names
-    await page.fill('input[name="child-name0"]', 'Emma');
-    await page.fill('input[name="child-name1"]', 'Oliver');
-    await page.fill('input[name="child-name2"]', 'Sophia');
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Fill adults
-    await page.fill('input[name="initial-adult-name"]', 'Parent');
-    await page.fill('input[name="secondary-adult-name"]', 'Guardian');
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Complete remaining sections
-    await page.getByRole('link', { name: /Where will the children spend most of their time/i }).click();
-    await page.getByLabel(/With Parent/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Navigate to check your answers (after completing minimal sections)
     await page.goto('/make-a-plan');
-
-    // Complete all sections quickly
-    await page.getByRole('link', { name: /Where will the children spend most of their time/i }).click();
-    await page.getByLabel(/With Parent/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    if (page.url().includes('which-schedule')) {
-      await page.getByLabel(/week about/i).check();
-      await page.getByRole('button', { name: /continue/i }).click();
-    }
-
-    // Complete other sections
-    await page.goto('/handover-and-holidays/get-between-households');
-    await page.getByLabel(/Parent collects the children/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/At School/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/yes/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    await page.fill('textarea', 'Holiday arrangements');
-    await page.getByRole('button', { name: /continue/i }).click();
-    await page.fill('textarea', 'Items list');
     await page.getByRole('button', { name: /continue/i }).click();
 
-    await page.goto('/special-days/what-will-happen');
-    await page.fill('textarea', 'Special days plan');
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    await page.goto('/other-things/what-other-things-matter');
-    await page.fill('textarea', 'Other important matters');
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    await page.goto('/decision-making/plan-last-minute-changes');
-    await page.getByLabel(/With a phone call/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/2 Weeks/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/months/i).fill('6');   
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Now go to check your answers
-    await page.goto('/make-a-plan');
-
-       // Complete all sections quickly
-    await page.getByRole('link', { name: /Where will the children spend most of their time/i }).click();
-    await page.getByLabel(/With Parent/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    if (page.url().includes('which-schedule')) {
-      await page.getByLabel(/week about/i).check();
-      await page.getByRole('button', { name: /continue/i }).click();
-    }
-
-    await page.getByLabel(/yes/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/Monday/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/no/i).first().check();
-
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Verify all three children are displayed
-    await expect(page.getByText(/Emma.*Oliver.*Sophia/)).toBeVisible();
+    await expect(page).toHaveURL(/\/check-your-answers/);
+    await expect(page.getByText('Emma, Oliver and Sophia')).toBeVisible();
   });
 
   test('should not show optional fields that were not completed', async ({ page }) => {

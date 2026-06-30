@@ -2,6 +2,17 @@
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      titleIds.WHERE_HANDOVER,
+      [formFields.WHERE_HANDOVER]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -32,7 +43,7 @@
             name: formFields.WHERE_HANDOVER,
             fieldset: {
               legend: {
-                text: title,
+                text: __('handoverAndHolidays.whereHandover.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

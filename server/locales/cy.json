@@ -1,28 +1,86 @@
 {
   "serviceName": "Cynnig cynllun trefniant plentyn",
+  "yes": "Ydyn",
+  "no": "Nac ydyn",
   "back": "Yn ôl",
   "continue": "Parhau",
-  "notSafe": {
-    "title": "Dod o hyd i'r llwybr cywir i chi",
-    "warningText": "Os ydych mewn perygl uniongyrchol, ffoniwch 999 a gofynnwch am yr heddlu.",
-    "warningIconFallback": "Rhybudd",
-    "content": "<p><a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">Darganfyddwch sut i adnabod cam-drin domestig</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements\">Cael cymorth a chyngor ar wneud trefniadau plant pan fu cam-drin domestig</a>.</p>",
-    "continue": "Os ydych chi'n teimlo'n hyderus y gallwch barhau heb unrhyw berygl i chi'ch hun na'r plant, parhewch i ddefnyddio'r gwasanaeth.",
-    "intro": "<p>Efallai na fydd y gwasanaeth hwn yn iawn i chi os ydych wedi profi cam-drin domestig.</p>",
-    "continueTitle": "Os ydych am barhau",
-    "escapeKeyAnnouncement": "Os oes angen i chi adael y dudalen hon yn gyflym, gwasgwch y botwm Escape ar eich bysellfwrdd."
-  },
-  "childrenNotSafe": {
-    "title": "Cael cymorth",
-    "warningText": "Os ydych mewn perygl uniongyrchol, ffoniwch 999 a gofynnwch am yr heddlu.",
-    "warningIconFallback": "Rhybudd",
-    "content": "<p><a href=\"https://www.nspcc.org.uk/keeping-children-safe/types-of-abuse/domestic-abuse/?ac=221274\">Cael cyngor ar Sut i Amddiffyn Plant Rhag Cam-drin Domestig | NSPCC</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">Mae gan Cyngor ar Bopeth gyngor ar wneud trefniadau plant pan fu cam-drin domestig</a>.</p>",
-    "continue": "Os ydych chi'n teimlo'n hyderus y gallwch barhau heb unrhyw berygl i chi'ch hun na'r plant, parhewch i ddefnyddio'r gwasanaeth.",
-    "intro": "<p>Efallai na fydd yn briodol gwneud trefniadau plant os oes unrhyw risg o niwed i'r plant.</p>",
-    "continueTitle": "Os ydych am barhau",
-    "escapeKeyAnnouncement": "Os oes angen i chi adael y dudalen hon yn gyflym, gwasgwch y botwm Escape ar eich bysellfwrdd."
-  },
+  "exitThisPage": "<span class=\"govuk-visually-hidden\">I adael y gwasanaeth hwn yn gyflym, pwyswch escape dair gwaith.</span>",
+  "exitThisPageButtonText": "Gadael y dudalen hon",
+  "error": "Gwall",
+  "doNotNeedToDecide": "We do not need to decide this",
+  "doNotNeedToDecideSchedule": "Hepgor y cwestiwn hwn",
+  "doNotNeedToDecideOvernightDays": "Hepgor y cwestiwn hwn",
+  "doNotNeedToDecideDaytimeVisitDays": "Hepgor y cwestiwn hwn",
+  "doNotNeedToDecideTransportBetweenHouseholds": "Hepgor y cwestiwn hwn",
+  "doNotNeedToDecideHandoverLocation": "Hepgor y cwestiwn hwn",
+  "doNotNeedToDecideSchoolHolidayArrangements": "Hepgor y cwestiwn hwn",
+  "doNotNeedToDecideItemsForChangeover": "Hepgor y cwestiwn hwn",
+  "doNotNeedToDecideSpecialDays": "Hepgor y cwestiwn hwn",
+  "doNotNeedToDecideOtherThings": "Hepgor y cwestiwn hwn",
+  "doNotNeedToDecideLastMinuteChanges": "Hepgor y cwestiwn hwn",
+  "doNotNeedToDecideLongTermNotice": "Hepgor y cwestiwn hwn",
+  "anotherArrangement": "Trefniant arall",
+  "or": "Neu",
+  "aItem": "a {{ item }}",
+  "aAndB": "{{{ itemA }}} and {{{ itemB }}}",
+  "describeArrangement": "Disgrifiwch y trefniant",
+  "selectAllThatApply": "Dewiswch bob un sy'n berthnasol",
   "phaseBannerText": "Mae hwn yn wasanaeth newydd.",
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "footer": {
+    "accessibility": "Accessibility",
+    "contact": "Contact",
+    "cookies": "Cookies",
+    "feedback": "Feedback",
+    "privacy": "Privacy",
+    "termsAndConditions": "Terms and conditions"
+  },
+  "errorSummary": {
+    "title": "Mae yna broblem"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page not found",
+      "check": "Please check the web address is correct.",
+      "startAgain": "Start again"
+    },
+    "generic": {
+      "title": "Sorry, there is a problem with the service",
+      "errorLogged": "The error has been logged.",
+      "tryReloading": "You can try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
+    },
+    "rateLimit": {
+      "title": "Too many requests have been made",
+      "info": "The page has been reloaded too many times in a short period.",
+      "tryReloading": "Please wait a period of 15 minutes, then try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
+    },
+    "timeOut": {
+      "title": "Sorry, you'll have to start again",
+      "yourSession": "Your session automatically ends if you don’t use the service for 120 minutes.",
+      "personalInformation": "We haven’t saved any personal information.",
+      "startAgain": "You need to start your child arrangement plan again.",
+      "startAgainButton": "Start again"
+    }
+  },
+  "cookieBanner": {
+    "title": "Cookies on Propose a child arrangements plan",
+    "acceptCookies": "Accept analytics cookies",
+    "rejectCookies": "Reject analytics cookies",
+    "viewCookies": "View cookies",
+    "hideCookieMessage": "Hide cookie message",
+    "useEssentialCookies": "We use some essential cookies to make this service work.",
+    "useAnalyticsCookies": "We’d also like to use analytics cookies so we can understand how you use the service and make improvements.",
+    "acceptedAnalyticsCookies": "You’ve accepted analytics cookies. You can <a href={{ cookiesUrl }} >change your cookie settings</a> at any time.",
+    "rejectedAnalyticsCookies": "You’ve rejected analytics cookies. You can <a href={{ cookiesUrl }} >change your cookie settings</a> at any time."
+  },
   "accessibilityStatement": {
     "title": "Accessibility statement",
     "content": {
@@ -79,12 +137,73 @@
     "onlyUseForFeedback": "Dim ond i roi adborth ar y gwasanaeth digidol y dylid defnyddio'r cyfeiriad e-bost hwn.",
     "cannotAnswerQuestions": "Ni allwn ateb unrhyw gwestiynau am gynlluniau trefniadau plant sydd wedi eu creu'n barod."
   },
+  "cookies": {
+    "title": "Cookies",
+    "name": "Name",
+    "purpose": "Purpose",
+    "expires": "Expires",
+    "aboutCookies": "<p>Propose a child arrangements plan puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the service.</p><p>Cookies are used to:</p><ul class=\"govuk-list govuk-list--bullet\"><li>remember your progress</li><li>measure how you use the service so it can be updated and improved based on your needs</li></ul><p>Propose a child arrangements plan cookies aren't used to identify you personally.</p><p>You'll normally see a message before we store a cookie on your computer.</p><p>Find out more about <a href=\"https://www.aboutcookies.org/\">how to manage cookies</a>.</p>",
+    "howCookiesAreUsed": "How cookies are used in this service",
+    "essentialCookies": "Essential cookies",
+    "essentialCookiesUse": "Essential cookies are needed for the service to work. We do not need to ask for permission to use them.",
+    "rememberingProgress": "<h4 class=\"govuk-heading-s\">Remembering your progress</h4><p>We will store cookies to remember your application progress in this computer and to expire your session after 120 minutes of inactivity or when you close your browser.</p>",
+    "sessionPurpose": "Saves your current progress in this computer and tracks inactivity periods",
+    "sessionExpiry": "After 120 minutes of inactivity or when you close your browser",
+    "cookiesMessage": "<h4 class=\"govuk-heading-s\">Cookies message</h4><p>You may see a banner when you visit Propose a child arrangements plan inviting you to accept or reject optional cookies. We’ll set a cookies so that your computer knows you’ve seen it and not to show it again, and also to store your settings.</p>",
+    "consentPurpose": "Saves your cookie consent settings",
+    "consentExpiry": "1 year",
+    "optionalCookies": "Analytics cookies (optional)",
+    "aboutOptionalCookies": "<h4 class=\"govuk-heading-s\">Measuring service usage (Google Analytics)</h4><p>We use Google Analytics software to collect information about how you use Propose a child arrangements plan. We do this to help make sure the service meets the needs of its users and to help us make improvements</p><p>Google Analytics stores information about:</p><ul class=\"govuk-list govuk-list--bullet\"><li>the pages you visit</li><li>how long you spend on each page</li><li>how you got to the service</li><li>what you click on while you’re visiting the service</li></ul><p>We don't collect or store your personal information (for example your name or address) so this information can't be used to identify who you are.</p><p>Google Analytics sets the following cookies:</p>",
+    "acceptOptionalCookies": "Do you want to accept analytics cookies?",
+    "_gaCookiePurpose": "Checks if you’ve visited the service before. This helps us count how many people visit our site.",
+    "gaCookiesExpiry": "3 years",
+    "_ga_IdCookiePurpose": "Used by Google Analytics to find and track an individual session with your device.",
+    "opensearchAnalytics": {
+      "title": "OpenSearch analytics",
+      "content": {
+        "collectData": "We also use OpenSearch to collect  data about how the service is used, such as:",
+        "collectDataItems": {
+          "pageViews": "page views",
+          "linkInteractions": "link interactions",
+          "pageCompletions": "page completions",
+          "pageAndQuickExits": "page and quick exits",
+          "fileDownloads": "file downloads"
+        },
+        "doesNotUseCookies": "OpenSearch analytics does not use cookies or store information on your device.",
+        "monitor": "This data is used only by the Ministry of Justice to monitor and improve the service.",
+        "surveys": {
+          "title": "Surveys (optional)",
+          "intro": "We will sometimes ask users to take part in a survey, for example our performance survey. If you take part, or dismiss the survey, we’ll save a cookie that lets us know you’ve seen the message so that we do not show it to you again.",
+          "table": {
+            "headerRow": {
+              "name": "Name",
+              "purpose": "Purpose",
+              "expires": "Expires"
+            },
+            "valueRowOne": {
+              "name": "govuk_taken[NameOfSurvey]",
+              "purpose": "Remembers whether you have taken the survey or dismissed it",
+              "expires": "4 months"
+            },
+            "valueRowTwo": {
+              "name": "govuk_surveySeen[NameOfSurvey]",
+              "purpose": "Remembers how many times you have seen the survey message",
+              "expires": "2 years"
+            }
+          },
+          "smartSurvey": "We use SmartSurvey to collect responses to the survey. If you take part, SmartSurvey <a href=\"https://www.smartsurvey.co.uk/company/how-we-use-cookies\">will save extra cookies</a> to track your progress on their website."
+        }
+      }
+    },
+    "saveCookieSettings": "Save cookie settings"
+  },
   "privacyNotice": {
     "title": "Hysbysiad Preifatrwydd",
     "committedToSecurity": "Mae'r Weinyddiaeth Gyfiawnder (MoJ) wedi ymrwymo i ddiogelu a chadw eich gwybodaeth bersonol yn saff.",
     "describeHowAndWhy": "Mae'r hysbysiad hwn yn disgrifio sut a phryd y defnyddir gwybodaeth o'r fath gennym. Mae'r hysbysiad preifatrwydd hwn yn disgrifio sut rydym yn casglu ac yn defnyddio gwybodaeth bersonol yn ystod ac ar ôl eich perthynas â ni, yn unol â chyfraith diogelu data. Caiff yr hysbysiad hwn ei ddiweddaru'n rheolaidd.",
     "typesOfPersonalData": "<h2 class=\"govuk-heading-m\">Math o ddata personol rydym yn ei brosesu</h2><p>Ar hyn o bryd rydym yn casglu ac yn defnyddio'r wybodaeth ganlynol:</p><ul class=\"govuk-list govuk-list--bullet\"><li>enw cyntaf y ddau riant neu ofalwyr</li><li>enwau cyntaf pob plentyn</li></ul><p>Rydym yn casglu a phrosesu gwybodaeth sy'n ymwneud â chynllunio trefniadau plant i'ch helpu i greu cynllun trefniadau plant wedi'i addasu. Fodd bynnag, nid ydym yn casglu gwybodaeth sy'n eich adnabod yn bersonol (PII), fel enwau, cyfeiriadau neu fanylion cyswllt.</p><p>Gan nad ydym yn casglu gwybodaeth y gellir ei defnyddio i'ch adnabod chi, nid yw llawer o hawliau diogelu data yn berthnasol. Rydym yn eich annog i beidio cynnwys y math hyn o fanylion yn eich cynllun. Cyn belled nad ydych yn rhoi gwybodaeth na ofynnir amdani yn y gwasanaeth, nid ydym yn casglu digon o wybodaeth i wybod pwy ydych chi.</p><p>Gall y mathau o wybodaeth a gesglir gennym nad yw'n eich adnabod yn bersonol gynnwys:</p><ul class=\"govuk-list govuk-list--bullet\"><li>manylion cyffredinol am drefniadau plant, fel trefniadau a ffefrir a lleoliadau casglu</li><li>cyswllt a ffefrir gennych</li><li>rhyngweithiad defnyddwyr gyda'n platfform, gan gynnwys ymddygiad llywio a defnydd nodwedd, i wella ein gwasanaeth</li></ul>",
     "howWeGetPersonalData": "<h2 class=\"govuk-heading-m\">Sut rydym yn cael eich data personol a pham ei fod gennym</h2><p>Mae'r rhan fwyaf o'r wybodaeth bersonol rydym yn ei phrosesu yn cael ei darparu'n uniongyrchol gennych chi. Mae'r wybodaeth a ddarperir gennych yn cael ei defnyddio i lunio cynllun trefniadau plant y gallwch lawrlwytho a rhannu gyda'ch cyd-riant. Mae'r wybodaeth a ddarperir gennych yn caniatáu i ni drefnu'r cynllun yn seiliedig ar eich anghenion penodol, gan sicrhau ei fod yn adlewyrchu'r trefniadau a fwriedir gennych i'ch plant.</p><p>Mae casglu'r data hwn yn hanfodol i:</p><ul class=\"govuk-list govuk-list--bullet\"><li>bersonoli'r cynllun ar gyfer eich sefyllfa rhianta</li><li>sicrhau bod dogfen y cynllun wedi'i lawrlwytho a lunir gennych yn cynnwys yr holl fanylion sydd eu hangen arnoch i gefnogi eich trefniadau cyd-rianta</li><li>darparu fersiwn o'r cynllun i chi y gellir ei lawrlwytho er mwyn gallu cyfeirio ato a'i rannu</li></ul><p>Rydym ond yn casglu'r wybodaeth sy'n ofynnol i greu eich cynllun trefniadau plant ac nid ydym yn ei defnyddio at unrhyw ddiben arall heb eich caniatâd.</p><p>Nid ydym yn rhannu'r wybodaeth a ddarperir gennych gydag unrhyw sefydliad nac adran arall o'r llywodraeth. Defnyddir y manylion a roddir gennych i greu eich cynllun trefniadau plant ar gyfer creu eich dogfen cynllun wedi'i bersonoli i chi yn unig.</p><p>O dan Reoliad Diogelu Data Cyffredinol y DU (GDPR y DU), y seiliau cyfreithlon yr ydym yn dibynnu arnynt ar gyfer prosesu'r wybodaeth hon yw eich caniatâd chi. Gallwch dynnu eich caniatâd yn ôl ar unrhyw adeg. Y ffordd haws o wneud hyn yw dileu'r cwcis porwr. Mae yna wybodaeth am sut i wneud hyn <a href=\"https://www.aboutcookies.org/how-to-manage-and-delete-cookies\">yma</a>.</p><p>Os ydych eisiau gofyn i ni ddileu eich data cwcis, cysylltwch â ni.</p>",
+    "internationalTransfers": "<h2 class=\"govuk-heading-m\">International data transfers</h2><p>There are no international transfers.</p>",
     "howWeStorePersonalData": "<h2 class=\"govuk-heading-m\">Sut rydym yn storio eich data personol</h2><p>Personal data is stored only while you create your plan and for up to 30 days afterwards.</p>",
     "howToComplain": "<h2 class=\"govuk-heading-m\">Sut i gwyno</h2><p>Os oes gennych unrhyw bryderon am ein defnydd o'ch data personol, gallwch gysylltu â swyddog diogelu data'r MoJ:</p><div class=\"govuk-inset-text\">Data Protection Officer<br />Ministry of Justice<br />10th Floor, Post Point 10.31<br />102 Petty France<br />London<br />SW1H 9AJ <br /><br /><a href=\"mailto:dpo@justice.gov.uk\">dpo@justice.gov.uk</a></div><p>Gallwch hefyd gwyno i'r ICO os ydych yn anhapus gyda sut rydym wedi defnyddio eich data.</p><div class=\"govuk-inset-text\">Swyddfa'r Comisiynydd Gwybodaeth<br />Wycliffe House<br />Water Lane<br />Wilmslow<br />Swydd Gaer<br />SK9 5AF<br /><br />Rhifau llinellau cymorth: 0303 123 1113<br />Gwefan ICO:<a href=\"https://www.ico.org.uk\">https://www.ico.org.uk</a></div>",
     "preparedDate": "Cafodd y datganiad hwn ei baratoi ar 7 Ionawr 2026."
@@ -107,5 +226,450 @@
     "misuse": "Ni ddylech ddynwared unrhyw berson arall, darparu gwybodaeth ffug neu gamarweiniol na defnyddio'r gwasanaeth hwn ar ran rhywun arall heb eu caniatâd.",
     "restrictionsOnUseHeading": "Cyfyngu ar ddefnyddio",
     "restrictionsOnUse": "Os oes gennych orchymyn llys mewn lle sy'n cyfyngu eich cysylltiad gyda'r rhiant arall neu'r plentyn, fel gorchymyn dim cyswllt, gorchymyn rhag molestu neu unrhyw gyfyngiad cyfreithiol arall, ni ddylech ddefnyddio'r gwasanaeth hwn i gysylltu â nhw. Gall gwneud hynny dorri'r gorchymyn a gall olygu canlyniadau cyfreithiol. Os ydych yn ansicr pa un a yw unrhyw orchymyn llys neu gyfyngiad cyfreithiol arall yn effeithio ar eich gallu i ddefnyddio'r gwasanaeth hwn, dylech ofyn am gyngor cyfreithiol cyn parhau."
+  },
+  "safetyCheck": {
+    "title": "Eich diogelwch",
+    "workWithPartner": "Ydych chi'n hyderus y gallwch chi a'ch cyn-bartner wneud penderfyniadau gyda'ch gilydd heb roi chi'ch hun na'r plant mewn perygl, ac nad ydych chi wedi cael eich rhoi dan bwysau na'ch bygwth i ddefnyddio'r gwasanaeth hwn?",
+    "safeAndConfident": "Ydych chi'n teimlo'n ddiogel ac yn hyderus?",
+    "error": "Dewiswch a ydych chi'n teimlo'n ddiogel ac yn hyderus ai peidio",
+    "yes": "Ydw",
+    "no": "Nac ydw"
+  },
+  "notSafe": {
+    "title": "Dod o hyd i'r llwybr cywir i chi",
+    "intro": "<p>Efallai nad yw'r gwasanaeth hwn yn addas i chi os ydych chi wedi profi cam-drin domestig.</p>",
+    "warningText": "Os ydych mewn perygl uniongyrchol, ffoniwch 999 a gofynnwch am yr heddlu.",
+    "warningIconFallback": "Warning",
+    "content": "<p><a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help.cy#adnabod-camdrin-domestig\">Rhagor o wybodaeth am sut i adnabod cam-drin domestig</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/cymraeg/Teulu/making-agreements-about-your-children/gwneud-trefniadau-plant/\">Cael cymorth a chyngor ar wneud trefniadau plant pan fydd cam-drin domestig wedi digwydd</a>.</p>",
+    "continueTitle": "Os ydych eisiau parhau",
+    "continue": "Os ydych chi'n teimlo'n hyderus y gallwch chi drafod pethau heb deimlo dan fygythiad, parhewch i ddefnyddio'r gwasanaeth."
+  },
+  "childrenSafetyCheck": {
+    "title": "Diogelwch plant",
+    "childrenMayBeAtRisk": "Gall plant fod mewn perygl os bu:",
+    "domesticAbuse": "unrhyw fath o gam-drin neu drais domestig, hyd yn oed os nad oedd y cam-drin wedi'i gyfeirio at y plant",
+    "childAbduction": "herwgipio plentyn neu ymgais i'w herwgipio",
+    "childAbuse": "cam-drin neu esgeuluso plant",
+    "drugsOrAlcohol": "camddefnyddio cyffuriau, alcohol neu sylweddau eraill",
+    "otherConcerns": "unrhyw bryderon diogelwch neu lesiant eraill sy'n rhoi unrhyw un mewn perygl sylweddol o niwed",
+    "stopNow": "If you have any concerns about safety, stop now.",
+    "questionTitle": "A yw’r plant yn ddiogel?",
+    "error": "Dewiswch a yw'r plant yn ddiogel ai peidio"
+  },
+  "childrenNotSafe": {
+    "title": "Cael cymorth",
+    "intro": "<p>Efallai na fydd yn briodol gwneud trefniadau plant os oes unrhyw risg o niwed i'r plant.</p>",
+    "warningText": "Os ydych mewn perygl uniongyrchol, ffoniwch 999 a gofynnwch am yr heddlu.",
+    "warningIconFallback": "Warning",
+    "content": "<p><a href=\"https://www.nspcc.org.uk/keeping-children-safe/types-of-abuse/domestic-abuse/?ac=221274\">Cyngor ar sut i amddiffyn plant rhag cam-drin domestig | NSPCC</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/cymraeg/Teulu/making-agreements-about-your-children/gwneud-trefniadau-plant/\">Mae gan Cyngor ar Bopeth gyngor ar wneud trefniadau plant pan fydd cam-drin domestig wedi digwydd</a>.</p>",
+    "continue": "Os ydych chi'n teimlo'n hyderus na fydd gwneud trefniadau ar gyfer plant yn peryglu plant, parhewch i ddefnyddio'r gwasanaeth.",
+    "continueTitle": "Os ydych chi eisiau parhau"
+  },
+  "doWhatsBest": {
+    "title": "Beth sydd orau i'r plant?",
+    "content": "<p>Dylai eich cynllun trefniadau plant:</p><ul class=\"govuk-list govuk-list--bullet\"><li>roi lles y plentyn yn gyntaf</li><li>adlewyrchu dymuniadau, teimladau ac anghenion y plentyn</li><li>ystyried unrhyw niwed y mae'r plentyn wedi'i ddioddef neu unrhyw risg o niwed</li></ul><p><a href=\"https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf\">Awgrymiadau i rieni</a> o safbwynt plentyn.</p>",
+    "childrensNeedsFirst": "Byddaf yn rhoi anghenion fy mhlant yn gyntaf",
+    "error": "Dewiswch y blwch i barhau"
+  },
+  "courtOrderCheck": {
+    "title": "A oes gorchymyn llys ar waith sy'n ymwneud â chi, y rhiant arall neu'r plant?",
+    "subText": "<p>Er enghraifft:</p><ul class=\"govuk-list govuk-list--bullet\"><li>gorchymyn trefniadau plant</li><li>gorchymyn mater penodol</li><li>gorchymyn camau gwaharddedig</li><li>gorchymyn amddiffynnol fel gorchymyn rhag molestu, gorchymyn anheddu neu orchymyn diogelu rhag cam-drin domestig</li><li>unrhyw orchymyn arall sy'n cyfyngu ar gyswllt rhyngoch chi a'r rhiant arall neu'r plant</li></ul>",
+    "error": "Dewiswch p'un a oes gennych chi orchymyn llys ar waith",
+    "yes": "Oes",
+    "no": "Nac oes"
+  },
+  "existingCourtOrder": {
+    "title": "Peidiwch â pharhau",
+    "doNotUse": "Peidiwch â defnyddio'r gwasanaeth hwn os oes gennych orchymyn llys ar waith.",
+    "getHelpChangingCourtOrder": "Ceisiwch gymorth ar <a href=\"https://www.gov.uk/trefniadau-plant-ysgariad/newid-neu-orfodi-gorchymyn\">newid neu orfodi gorchymyn llys</a>."
+  },
+  "numberOfChildren": {
+    "title": "Ar gyfer faint o blant y mae hwn?",
+    "emptyError": "Nodwch faint o blant y mae'r cytundeb hwn ar eu cyfer",
+    "tooFewError": "Your agreement must be for at least 1 child",
+    "tooManyError": "Your agreement cannot be for more than 6 children",
+    "notANumberError": "Defnyddiwch rifau’n unig"
+  },
+  "about": {
+    "notStoreInfo": "Nid ydym yn cadw'r wybodaeth hon nac yn ei rhannu ag adrannau eraill y llywodraeth."
+  },
+  "aboutTheChildren": {
+    "singleTitle": "Ynglŷn â'r plentyn",
+    "multipleTitle": "Ynglŷn â'r plant",
+    "singleFirstName": "Enw cyntaf y plentyn cyntaf",
+    "multipleFirstName0": "Enw cyntaf yr ail blentyn",
+    "multipleFirstName1": "Enw cyntaf y trydydd plentyn",
+    "multipleFirstName2": "Enw cyntaf y pedwerydd plentyn",
+    "multipleFirstName3": "Enw cyntaf y pumed plentyn",
+    "multipleFirstName4": "Enw cyntaf y chweched plentyn",
+    "multipleFirstName5": "Enw cyntaf y seithfed plentyn",
+    "child-name0Error": "Enter first name for the first child",
+    "child-name1Error": "Enter first name for the second child",
+    "child-name2Error": "Enter first name for the third child",
+    "child-name3Error": "Enter first name for the fourth child",
+    "child-name4Error": "Enter first name for the fifth child",
+    "child-name5Error": "Enter first name for the sixth child"
+  },
+  "aboutTheAdults": {
+    "title": "Ynglŷn â'r oedolion a fydd yn gofalu am y plant",
+    "initialParentFirstName": "Eich enw cyntaf",
+    "initialParentFirstNameHint": "Os ydych chi'n ateb y cwestiynau hyn ar ran rhywun arall, nodwch eu henw cyntaf",
+    "secondaryParentFirstName": "Enw cyntaf y rhiant neu'r gofalwr arall",
+    "initialError": "Enter your first name or the name of the person you represent",
+    "secondaryError": "Enter the name of the other parent or carer",
+    "sameNameError": "Enter a way to tell the adults apart"
+  },
+  "taskList": {
+    "title": "Cynllun trefniadau plant ar gyfer {{{ names }}}",
+    "completed": "Wedi'i gwblhau",
+    "incomplete": "Heb ei gwblhau",
+    "cannotStart": "Methu dechrau eto",
+    "whoThePlanIsFor": "Ar gyfer pwy y mae'r cynllun",
+    "theChildren": "The children",
+    "whoIsUsing": "Pwy sy'n defnyddio’r gwasanaeth hwn?",
+    "livingAndVisiting": "Byw ac ymweld",
+    "handoverAndHolidays": "Handovers and holidays",
+    "specialDays": "Dyddiau arbennig",
+    "otherThings": "Pethau eraill",
+    "decisionMaking": "Gwneud penderfyniadau"
+  },
+  "livingAndVisiting": {
+    "mostlyLive": {
+      "title": "Ble fydd y plant yn treulio'r rhan fwyaf o'u hamser?",
+      "with": "Gyda {{{ adult }}}",
+      "split": "Byddant yn rhannu eu hamser rhwng {{{ initialAdult }}} a {{{ secondaryAdult }}}",
+      "anotherArrangement": "Trefniant arall<span class=\"govuk-visually-hidden\">Selecting this will reveal an additional input</span>",
+      "emptyError": "Choose where the children will spend most of their time",
+      "arrangementMissingError": "Describe the living arrangement you are proposing"
+    },
+    "whichSchedule": {
+      "title": "Pa amserlen sy'n gweddu orau i anghenion y plant?",
+      "getIdeas": "Awgrymiadau amserlen",
+      "commonSchedules": "<p>Dyma rai amserlenni cyffredin a all weithio'n dda i blant.</p><p><b>Bob yn ail wythnos</b><br/>Bydd y plant yn treulio un wythnos mewn un cartref a'r wythnos nesaf yn y llall.</p><p><b>Amserlen 2-2-3</b><br/>Bydd y plant yn treulio dau ddiwrnod mewn un cartref, dau ddiwrnod yn y llall, yna'n ôl i'r cartref cyntaf am 3 diwrnod gan gynnwys y penwythnos.</p><p><b>Amserlen 4-4-3</b><br/>Bydd y plant yn treulio tri diwrnod mewn un cartref ac yna pedwar diwrnod yn y llall. Yr wythnos wedyn bydd fel arall.</p><p><b>Amserlen 2-2-5-5</b><br/>Bydd y plant yn treulio dau ddiwrnod mewn un cartref, yna dau ddiwrnod yn y llall. Ar ôl hynny byddant yn treulio pum diwrnod mewn un cartref, yna pum diwrnod yn y llall.</p>",
+      "exactSplitWarning": "Nid yw rhannu amser yn gyfartal rhwng dau gartref bob amser yn addas i fudd gorau plant.",
+      "error": "Describe which schedule will best meet the children's needs"
+    },
+    "willOvernightsHappen": {
+      "title": "A fydd y plant yn aros dros nos gyda {{{ adult }}}?",
+      "error": "Dewiswch p'un a fydd y plant yn aros dros nos"
+    },
+    "whichDaysOvernight": {
+      "title": "Ar pa ddyddiau fydd aros dros nos yn digwydd?",
+      "emptyError": "Dewiswch pa ddyddiau fydd y plant yn aros dros nos",
+      "arrangementMissingError": "Nodwch fanylion y trefniadau dros nos",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
+    },
+    "willDaytimeVisitsHappen": {
+      "title": "A fydd y plant yn ymweld â {{{ adult }}} yn ystod y dydd?",
+      "error": "Dewiswch p'un a fydd y plant yn cael ymweliadau yn ystod y dydd"
+    },
+    "whichDaysDaytimeVisits": {
+      "title": "Ar pa ddyddiau fydd ymweliadau yn ystod y dydd yn digwydd?",
+      "emptyError": "Dewiswch pa ddyddiau fydd y plant yn ymweld yn ystod y dydd",
+      "arrangementMissingError": "Nodwch fanylion y trefniadau ymweld yn ystod y dydd",
+      "multiSelectedError": "Describe what other arrangement you are proposing"
+    }
+  },
+  "handoverAndHolidays": {
+    "getBetweenHouseholds": {
+      "title": "Sut fydd y plant yn mynd o un cartref i'r llall?",
+      "collectsTheChildren": "Bydd {{{ adult }}} yn casglu'r plant",
+      "emptyError": "Dewiswch sut fydd y plant yn mynd o un cartref i'r llall?",
+      "arrangementMissingError": "Disgrifiwch sut fydd y plant yn mynd o un cartref i'r llall?"
+    },
+    "whereHandover": {
+      "title": "Ble mae'r trosglwyddo'n digwydd?",
+      "explainer": "Efallai y bydd yn haws i'r plant os bydd y trosglwyddo'n digwydd mewn lleoliad niwtral lle rydych chi'n hyderus y byddwch chi'ch dau yn teimlo'n ddiogel.",
+      "neutralLocation": "Lleoliad niwtral",
+      "atHome": "Yn nhŷ {{{ adult }}}",
+      "atSchool": "Yn yr ysgol",
+      "other": "Other",
+      "otherLabel": "Describe where handover will take place",
+      "someoneElse": "Someone else will manage handover, such as a grandparent",
+      "someoneElseName": "Name of the person who will manage handover",
+      "emptyError": "Dewiswch ble mae'r trosglwyddo'n digwydd",
+      "otherMissingError": "Describe where handover will take place"
+    },
+    "willChangeDuringSchoolHolidays": {
+      "title": "A fydd y trefniadau hyn yn newid yn ystod gwyliau'r ysgol?",
+      "error": "Dewiswch p'un a fydd y trefniadau'n newid yn ystod gwyliau'r ysgol"
+    },
+    "howChangeDuringSchoolHolidays": {
+      "title": "Sut fydd y trefniadau'n newid yn ystod gwyliau'r ysgol?",
+      "content": "Mae gwyliau ysgol yn cynnwys hanner tymor, gwyliau banc a diwrnodau HMS.",
+      "error": "Disgrifiwch y trefniant rydych chi'n cynnig"
+    },
+    "itemsForChangeover": {
+      "title": "Pa eitemau sydd angen mynd o un cartref i'r llall?",
+      "content": "Mae eitemau'n cynnwys dillad, cit chwaraeon, offer ysgol, teganau a dyfeisiau electronig, meddyginiaethau ac eitemau gofal personol fel brwsys dannedd.",
+      "error": "Rhestrwch pa eitemau sydd angen mynd o un cartref i'r llall?"
+    }
+  },
+  "specialDays": {
+    "whatWillHappen": {
+      "title": "Beth fydd yn digwydd ar ddyddiau arbennig?",
+      "content": "Cadwch anghenion a buddiannau gorau eich plant wrth wraidd eich cynlluniau ar gyfer gwyliau a digwyddiadau pwysig. Er enghraifft, dathliadau'r Flwyddyn Newydd, Sul y Mamau a Sul y Tadau, a phenblwyddi.",
+      "error": "Disgrifiwch beth rydych chi'n ei gynnig fydd yn digwydd ar ddiwrnodau arbennig"
+    }
+  },
+  "otherThings": {
+    "whatOtherThingsMatter": {
+      "title": "Pa bethau eraill sy'n bwysig i'ch plant?",
+      "thingsToAgree": "Efallai yr hoffech chi gytuno ar bethau fel:",
+      "religionDietAndRules": "arferion crefyddol, diet, a rheolau safonol ar draws y ddau gartref",
+      "extraCurriculars": "gweithgareddau allgyrsiol, fel gwersi nofio",
+      "friendsAndFamily": "mynediad at ffrindiau a theulu eraill",
+      "otherContact": "mathau eraill o gyswllt, fel galwadau fideo",
+      "error": "Disgrifiwch pa bethau eraill sy'n bwysig i'ch plant?"
+    }
+  },
+  "decisionMaking": {
+    "planLastMinuteChanges": {
+      "title": "Sut dylid cyfathrebu newidiadau munud olaf?",
+      "anotherDescriptionLabel": "Disgrifiwch y trefniant",
+      "howChangesCommunicatedAdditionalDescription": "Bydd adegau pan fydd angen newid cynlluniau, fel os bydd un rhiant yn sâl yn ddi-rybudd ac yn methu casglu plentyn o'r ysgol.",
+      "text": "Trwy neges destun",
+      "phone": "Galwad ffôn",
+      "email": "Trwy e-bost",
+      "app": "Defnyddio ap rhianta",
+      "emptyError": "Select a method for how you both communicate changes",
+      "descriptionEmptyError": "Describe how you will communicate changes",
+      "selectOneOptionError": "Describe what other arrangement you are proposing"
+    },
+    "planLongTermNotice": {
+      "title": "Faint o rybudd dylech roi i newid trefniadau hirdymor?",
+      "weeks": "{{ number }} wythnos",
+      "sometimesYouNeedToPlanAhead": "Weithiau efallai y bydd angen i chi gynllunio ymhell ymlaen llaw. Er enghraifft, os ydych chi eisiau cynllunio gwyliau yn ystod amser nad ydych chi fel arfer yn ei dreulio gyda'r plant.",
+      "selectOneOptionError": "Dewiswch faint o rybudd sydd ei angen ar gyfer gwneud newidiadau i drefniadau hirdymor",
+      "descriptionEmptyError": "Describe what is the other arrangement you are proposing"
+    },
+    "planReview": {
+      "title": "Pryd hoffech chi adolygu'r cynllun hwn?",
+      "childrensNeedsChange": "Mae anghenion plant yn newid wrth iddynt dyfu. Pryd dylech chi adolygu'r cytundeb hwn i wirio ei fod yn dal i fod yr hyn sydd orau i'r plant?",
+      "youCanAlsoReview":"Gallwch hefyd adolygu'r trefniadau hyn yn gynharach os nad ydynt bellach yn diwallu anghenion eich plant.",
+      "months": "Mis",
+      "years": "Blwyddyn",
+      "bothEmptyError": "Nodwch fisoedd neu flynyddoedd",
+      "bothFilledError": "Enter months or years, not both",
+      "notNumberError": "Your answer must be a number",
+      "notIntError": "Your answer must be a whole number. For example, 3."
+    }
+  },
+  "checkYourAnswers": {
+    "title": "Cynllun trefniadau plant ar gyfer",
+    "livingAndVisiting": {
+      "whichDaysOvernight": "The children will stay overnight with {{{ adult }}} on {{ days }}",
+      "whichDaysDaytimeVisits": "The children will have daytime visits with {{{ adult }}} on {{ days }}"
+    },
+    "decisionMaking": {
+      "monthsSingular": "1 month",
+      "yearsSingular": "1 year",
+      "monthsPlural": "{{ number }} months",
+      "yearsPlural": "{{ number }} years"
+    },
+    "change": {
+      "text": "Change",
+      "children": "the children",
+      "users": "the users",
+      "whereWillTheChildrenLive": "where the children will spend most of their time",
+      "whichSchedule": "which schedule best meets the children's needs",
+      "willOvernightsHappen": "if the children will stay overnight with {{{ adult }}}",
+      "whichDaysOvernight": "which days overnights will happen",
+      "willDaytimeVisitsHappen": "if the children will do daytime visits with {{{ adult }}}?",
+      "whichDaysDaytimeVisits": "which days daytime visits will happen",
+      "getBetweenHouseholds": "who is responsible for collecting the children",
+      "whereHandover": "where the handover takes place",
+      "willChangeDuringSchoolHolidays": "if the arrangements will change during school holidays",
+      "howChangeDuringSchoolHolidays": "how the arrangements will change during school holidays",
+      "itemsForChangeover": "what items need to go between households",
+      "whatWillHappen": "what will happen on special days",
+      "whatOtherThingsMatter": "what other things matter to your children",
+      "planLastMinuteChanges": "how last-minute changes should be communicated",
+      "planLongTermNotice": "how much notice you should give to change long-term arrangements",
+      "planReview": "when the children’s needs will change"
+    }
+  },
+  "sharePlan": {
+    "nextSteps": "Y camau nesaf",
+    "title": "Rydych chi wedi creu cynllun trefniadau plant arfaethedig",
+    "whatToDoNext": "What to do next",
+    "sendToSecondary": "Lawrlwythwch fersiwn PDF neu HTML hygyrch o'r cynllun hwn a'i rannu gyda {{{ otherAdult }}}.",
+    "collaborate": "Gallwch gydweithredu â {{{ otherAdult }}} i greu fersiwn rydych chi'ch dau yn cytuno ag o.",
+    "downloadPlanButton": "Lawrlwytho'r cynllun fel PDF",
+    "downloadHtml": "Lawrlwytho fel HTML (hygyrch)",
+    "ifTheyDoNotRespond": "If there's no response",
+    "tryMediation": "If {{{ otherAdult }}} does not respond or you can't make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
+    "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.",
+    "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
+    "whatWeAreTelling": {
+      "proposedPlan": "{{{ senderName }}} has suggested a child arrangements plan",
+      "senderHasUsedThe": "{{{ senderName }}} used the Child Arrangements Plan service (https://propose-child-arrangements-plan.service.gov.uk/) on GOV.UK to suggest a plan for how you both might look after {{{ childrenNames }}}.",
+      "howToRespond": "How to respond to this plan",
+      "pleaseReadThrough": "You can read their suggested plan and use it to collaborate to create child arrangements which you both agree on.",
+      "notLegallyBinding": "This plan is not legally binding and you do not have to do what it says.",
+      "ifYouDontAgree": "If you don’t agree, you can:",
+      "useThisForm": "use this form to suggest changes to {{{ senderName }}}'s proposed child arrangements plan",
+      "startYourOwn": "start your own proposed child arrangements plan on GOV.UK or find a similar service",
+      "makeAWrittenAgreement": "make a written agreement of your own without using any service or template",
+      "yourSafety": "Your safety",
+      "shouldOnlyRespond": "You should only respond to the suggested plan if:",
+      "confident": "you’re confident that you and your ex-partner can make decisions together without putting yourself or the children in danger",
+      "doNotFeelPressured": "you do not feel pressured or intimidated into responding",
+      "stopIfAnyConcern": "If you have any concerns about safety, stop now.",
+      "feedbackOrSafetyConcerns": "If you have any feedback or safety concerns about this service, you can email childarrangementssafety@justice.gov.uk.",
+      "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created.",
+      "benefitsHeading": "How making a child arrangements plan can help",
+      "mightFind": "You may find that collaborating with {{{ senderName }}} on a child arrangements plan:",
+      "takesAround": "is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it’s urgent)",
+      "bestOutcome": "leads to a better outcome for your children, which you and your ex-partner are in control of",
+      "goingToCourt": "Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.",
+      "topTips": "Tips to help you and your children",
+      "planShould":"Your child arrangements plan should:",
+      "welfare":"put the child’s welfare first",
+      "wishes": "reflect the wishes, feelings and needs of the child",
+      "considerAnyHarm":"consider any harm the child has suffered or any risk of harm",
+      "ifThereIsCourt": "If there is a court order in place",
+      "doNotContinue": "Do not continue if there’s a court order in place relating to you, the other parent, or the children.",
+      "forExample": "For example, a:",
+      "childArrangementsOrder": "child arrangements order",
+      "specificIssueOrder": "specific issue order",
+      "prohibitedStepsOrder": "prohibited steps order",
+      "protectiveOrder": "protective order such as a non-molestation order, occupation order or a domestic abuse protection order",
+      "anyOther": "any other order restricting contact between you and the other parent or the children ",
+      "toChange": "To change or enforce an existing child arrangements order, visit https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order.",
+      "moreInfoHeading": "Get more information",
+      "moreInfo": "Use GOV.UK to find more information, for example:",
+      "makingChildArrangements": "making child arrangements - https://www.gov.uk/looking-after-children-divorce",
+      "legalSeparation": "getting a legal separation - https://www.gov.uk/legal-separation",
+      "divorce": "getting a divorce - https://www.gov.uk/get-a-divorce",
+      "legalAdviceHeading": "If you want legal advice",
+      "findLegalAdviser" : "You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser.",
+      "domesticAbuseHeading": "Getting help with domestic abuse",
+      "signsAndEffects": "To find out more about signs and effects of child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse.",
+      "unsureVictim": "If you’re unsure whether you’re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
+      "notSuitableHeading": "This plan is not suitable for you if there has been:",
+      "anyForm": "any form of domestic abuse or violence, even if the abuse was not directed at the children",
+      "childAbduction": "actual or attempted child abduction",
+      "childAbuse": "child abuse or neglect",
+      "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
+      "anyOtherSafety": "any other safety or welfare concerns that place anyone at significant risk of harm",
+      "feedbackHeading": "Feedback and support",
+      "toAskForHelp": "To ask for help using this service, or suggest improvements, you can email childarrangements@justice.gov.uk.",
+      "weCannot": "We cannot answer any questions about child arrangement plans that have already been created."
+    },
+    "yourProposedPlan": {
+      "aboutThePlan": "About this child arrangements proposal",
+      "senderSaid": "{{{ senderName }}} said:",
+      "senderSuggested": "{{{ senderName }}} suggested:\n\"{{{ suggestion }}}\"",
+      "senderSuggestedDoNotDecide": "{{{ senderName }}} suggested that this does not need to be decided.",
+      "doYouAgree": "Do you agree?",
+      "endOfSection": "End of section",
+      "noCourtOrder": "there is no court order in place at this time",
+      "forOneChild": "this is a proposed child arrangements plan for 1 child, {{{ childName }}}",
+      "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{{ childrenNames }}}",
+      "agreementBetween": "this agreement is between {{{ senderName }}} and {{{ otherAdultName }}}, who are the adults who will care for {{{ childrenNames }}}",
+      "doYouAgreeOnBasics": "Do you and {{{ senderName }}} agree about the children’s names, your names, and whether there is a court order in place?",
+      "doNotStoreNames": "We do not store these names or share any of this information with other government departments.",
+      "doNotAgreeOnBasics": "If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to https://www.gov.uk/looking-after-children-divorce.",
+      "livingAndVisiting": {
+        "suggestedLiveWith": "{{{ senderName }}} suggested that the children spend most of their time with {{{ adult }}}.",
+        "suggestedLiveWithChild": "{{{ senderName }}} suggested that {{{ childName }}} mostly lives with {{{ adult }}}.",
+        "suggestedLiveWithOtherChildren": "{{{ senderName }}} suggested that the other children mostly live with {{{ adult }}}.",
+        "suggestedSplit": "{{{ senderName }}} said the children will split their time between {{{ otherAdult }}}'s home and {{{ senderName }}}'s home.",
+        "suggestedStayOvernight": "{{{ senderName }}} suggested that the children stay overnight at {{{ adult }}}'s home.",
+        "suggestedNoOvernights": "{{{ senderName }}} suggested that overnights do not happen at this time.",
+        "suggestedOvernightDays": "{{{ senderName }}} suggested that overnight visits happen on {{ days }}.",
+        "suggestedDaytimeVisits": "{{{ senderName }}} suggested that the children do daytime visits to {{{ adult }}}'s home.",
+        "suggestedNoDaytimeVisits": "{{{ senderName }}} suggested that daytime visits do not happen at this time.",
+        "suggestedDaytimeVisitDays": "{{{ senderName }}} suggested that daytime visits happen on {{ days }}."
+      },
+      "handoverAndHolidays": {
+        "suggestedCollects": "{{{ senderName }}} suggested that {{{ adult }}} collects the children.",
+        "suggestedHandover": "{{{ senderName }}} suggested that handover takes place at {{{ location }}}",
+        "neutralLocation": "a neutral location",
+        "home": "{{{ adult }}}'s home",
+        "school": "school",
+        "suggestedSomeoneElse": "{{{ senderName }}} suggested that someone else will manage handover. {{{ senderName }}} suggested:\n\"{{{ someoneElse }}}\"",
+        "suggestedChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements should change during school holidays.",
+        "suggestedNoChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements do not change during school holidays."
+      },
+      "decisionMaking": {
+        "planLastMinuteChanges": {
+          "howChangesCommunicated": "{{{ senderName }}} suggested that last-minute changes should be communicated {{ methods }}."
+        },
+        "planLongTermNotice": {
+          "howChangesCommunicated": "{{{ senderName }}} suggested that you should both give each other {{ numberOfWeeks }} weeks' notice to change long-term arrangements."
+        },
+        "planReview": {
+          "suggestedMonthsSingular": "{{{ senderName }}} suggested that you should review this arrangement in 1 month's time.",
+          "suggestedYearsSingular": "{{{ senderName }}} suggested that you should review this arrangement in 1 year's time.",
+          "suggestedMonthsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} months' time.",
+          "suggestedYearsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} years' time."
+        }
+      },
+      "nextSteps": "Next steps",
+      "whatToDoNext": "What to do next",
+      "nowSendPlan": "Now send this proposed child arrangements plan back to {{{ senderName }}}. You should try to create a written record of what you have both agreed.",
+      "notLegallyBinding": "Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",
+      "noResponseHeading": "If there’s no response",
+      "unableToAgree": "If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
+      "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.",
+      "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
+      "doNotAgree": {
+        "livingAndVisiting": {
+          "mostlyLive": "If you do not agree, suggest where the children will spend most of their time",
+          "whichSchedule": "If you do not agree, suggest a schedule",
+          "willOvernightsHappen": "If you do not agree, suggest whether the children will stay overnight with {{{ adult }}}",
+          "whichDaysOvernight": "If you do not agree, suggest when the children will stay overnight with {{{ adult }}}",
+          "willDaytimeVisitsHappen": "If you do not agree, suggest whether the children will do daytime visits",
+          "whichDaysDaytimeVisits": "If you do not agree, suggest when the children will do daytime visits"
+        },
+        "handoverAndHolidays": {
+          "getBetweenHouseholds": "If you do not agree, suggest how the children get between households",
+          "whereHandover": "If you do not agree, suggest where handover takes place",
+          "willChangeDuringSchoolHolidays": "If you do not agree, suggest whether the arrangements should change during the holidays",
+          "howChangeDuringSchoolHolidays": "If you do not agree, suggest how the arrangements should change during the holidays",
+          "itemsForChangeover": "If you do not agree, suggest which items need to go between households"
+        },
+        "specialDays": {
+          "whatWillHappen": "If you do not agree, suggest what will happen on special days"
+        },
+        "otherThings": {
+          "whatOtherThingsMatter": "If you do not agree, suggest what other things matter to your children"
+        },
+        "decisionMaking": {
+          "planLastMinuteChanges": "If you do not agree, suggest how last minute changes should be communicated",
+          "planLongTermNotice": "If you do not agree, suggest how much notice you should give each other",
+          "planReview": "If you do not agree, suggest when you should review this agreement"
+        }
+      },
+      "compromise": {
+        "livingAndVisiting": "You can use this space to write your agreed answer for the living and visiting section",
+        "handoverAndHolidays": "You can use this space to write your agreed answer for the handovers and holidays section",
+        "specialDays": "You can use this space to write your agreed answer for the special days section",
+        "otherThings": "You can use this space to write your agreed answer for the other things section",
+        "decisionMaking": "You can use this space to write your agreed answer for the decision making section"
+      }
+    }
+  },
+  "confirmation": {
+    "downloadedYourPlanTitle": "Rydych wedi lawrlwytho eich cynllun",
+    "whatYouNeedToDoNext": "Beth sydd angen i chi wneud nesaf:",
+    "checkDownloadsFolder": "Chwiliwch yn eich ffolder lawrlwythiadau (downloads) am PDF neu dudalen HTML hygyrch o'ch cynllun a rhannwch ef gyda {{{ otherAdult }}} a fydd yn cael cyfle i gydweithredu.",
+    "cantFindPlan": "Methu dod o hyd i'ch cynllun?",
+    "checkDownloads": "Gwiriwch eich ffolder lawrlwythiadau. Os nad yw yno, lawrlwythwch ef eto.",
+    "downloadPdf": "Lawrlwytho'r cynllun fel PDF (0.5 MB)",
+    "downloadHtml": "Lawrlwytho fel HTML (hygyrch)"
+  },
+  "pdf": {
+    "name": "Proposed child arrangements plan",
+    "everyPageReminder": "Check you have every page of this document",
+    "pageCount": "Page {{ currentPage }} of {{ totalPages }}",
+    "paidFeedback": {
+      "title": "Get paid to give yourfeedback",
+      "helpToImprove": "With your help we can improve this service and understand how you use your plan.",
+      "signUp": "Sign up and receive an incentive when you take part in further research ",
+      "signUpLink": "https://www.smartsurvey.co.uk/t/BDP7V3/"
+    }
   }
 }

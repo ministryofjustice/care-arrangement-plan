@@ -1,6 +1,17 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      titleIds.COURT_ORDER_CHECK,
+      [formFields.COURT_ORDER_CHECK]
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -13,7 +24,7 @@
             name: formFields.COURT_ORDER_CHECK,
             fieldset: {
               legend: {
-                text: title,
+                text: __('courtOrderCheck.title'),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }
@@ -24,11 +35,11 @@
             items: [
               {
                 value: "Yes",
-                text: __('yes')
+                text: __('courtOrderCheck.yes')
               },
               {
                 value: "No",
-                text: __('no')
+                text: __('courtOrderCheck.no')
               }
             ],
             errorMessage: errors | findError(formFields.COURT_ORDER_CHECK)

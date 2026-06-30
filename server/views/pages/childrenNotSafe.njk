@@ -2,18 +2,26 @@
 {% from "govuk/components/exit-this-page/macro.njk" import govukExitThisPage %}
 {% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      null,
+      titleIds.CHILDREN_NOT_SAFE
+    )
+  }}
+{% endblock %}
 
 {% block content %}
-
-  {{ govukExitThisPage() }}
-
+  {% include "partials/exitThisPage.njk" %}
   <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
-    {{ __('childrenNotSafe.escapeKeyAnnouncement') }}
+    {{ __('exitThisPage') | safe }}
   </div>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <h1 class="govuk-heading-l">{{ __('childrenNotSafe.title') }}</h1>
 
       {{ __('childrenNotSafe.intro') | safe }}
 

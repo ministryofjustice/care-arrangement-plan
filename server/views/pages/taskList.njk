@@ -1,6 +1,19 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/task-list/macro.njk" import govukTaskList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      null,
+      null,
+      null,
+      title
+    )
+  }}
+{% endblock %}
+
 {%
   set completeStatus = {
     text: __('taskList.completed')
