@@ -654,7 +654,7 @@
     }
   },
   "confirmation": {
-    "downloadedYourPlanTitle": "You have downloaded your plan",
+    "title": "You have downloaded your plan",
     "whatYouNeedToDoNext": "What you need to do next:",
     "checkDownloadsFolder": "Check your downloads folder for a PDF or accessible HTML page of your plan and share with {{{ otherAdult }}} who will get a chance to collaborate.",
     "cantFindPlan": "Can't find your plan?",

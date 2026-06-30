@@ -1,11 +1,23 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/panel/macro.njk" import govukPanel %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      null,
+      null,
+      null,
+      __('confirmation.title')
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop">
 
-    <h1 class="govuk-heading-l">{{ __('confirmation.downloadedYourPlanTitle') }}</h1>
+    <h1 class="govuk-heading-l">{{ __('confirmation.title') }}</h1>
 
   <p class="govuk-body govuk-!-margin-top-6"><b>{{ __('confirmation.whatYouNeedToDoNext') }}</b> {{ __('confirmation.checkDownloadsFolder', { otherAdult: otherAdult }) }}</p>
 
