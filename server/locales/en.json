@@ -526,6 +526,7 @@
       "welfare":"put the child’s welfare first",
       "wishes": "reflect the wishes, feelings and needs of the child",
       "considerAnyHarm":"consider any harm the child has suffered or any risk of harm",
+      "everyPage": "Check you have every page of this document",
       "ifThereIsCourt": "If there is a court order in place",
       "doNotContinue": "Do not continue if there’s a court order in place relating to you, the other parent, or the children.",
       "forExample": "For example, a:",
@@ -589,7 +590,7 @@
         "school": "school",
         "suggestedSomeoneElse": "{{{ senderName }}} suggested that someone else will manage handover. {{{ senderName }}} suggested:\n\"{{{ someoneElse }}}\"",
         "suggestedChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements should change during school holidays.",
-        "suggestedNoChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements do not change during school holidays."
+        "suggestedNoChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements should not change during school holidays."
       },
       "decisionMaking": {
         "planLastMinuteChanges": {

@@ -62,11 +62,11 @@ describe(paths.NUMBER_OF_CHILDREN, () => {
   describe('POST', () => {
     it.each([
       ['', 'Enter how many children this agreement is for'],
-      ['abc', 'Enter how many children this agreement is for'],
+      ['abc', 'Enter numbers only'],
       ['7', 'Your agreement cannot be for more than 6 children'],
-      ['6!', 'Enter how many children this agreement is for'],
+      ['6!', 'Enter numbers only'],
       ['0', 'Your agreement must be for at least 1 child'],
-      ['four', 'Enter how many children this agreement is for'],
+      ['four', 'Enter numbers only'],
     ])("should reload page and set flash when the number of children is '%s'", async (numberOfChildren, error) => {
       await request(app)
         .post(paths.NUMBER_OF_CHILDREN)
