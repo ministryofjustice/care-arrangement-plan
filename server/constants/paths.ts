@@ -52,6 +52,7 @@ enum paths {
   DOWNLOAD_HTML = '/download-html',
   PRINT_PDF = '/print-pdf',
   DOWNLOAD_PAPER_FORM = '/download-paper-form',
+  SESSION_TIMED_OUT = '/session-timed-out',
 }
 
 export default paths;

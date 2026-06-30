@@ -25,6 +25,9 @@
 
 {% block head %}
   <meta name="robots" content="noindex, nofollow" />
+  {% if sessionTimeoutSeconds %}
+    <meta id="session-timeout-refresh" http-equiv="refresh" content="{{ sessionTimeoutSeconds }};url={{ sessionTimeoutPath }}">
+  {% endif %}
   <link href="{{ '/assets/css/app.css' | assetMap }}" rel="stylesheet" />
   {% if analyticsEnabled and ga4Id != undefined %}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga4Id }}" nonce="{{ cspNonce }}"></script>
@@ -97,6 +100,12 @@
 {% endblock %}
 
 {% block bodyEnd %}
+  {% if sessionTimeoutMs %}
+    <script nonce="{{ cspNonce }}">
+      document.body.dataset.sessionTimeoutMs = '{{ sessionTimeoutMs }}';
+      document.body.dataset.sessionTimeoutPath = '{{ sessionTimeoutPath }}';
+    </script>
+  {% endif %}
   <script nonce="{{ cspNonce }}">
     // Environment-level flag for internal analytics (link clicks, page exits)
     window.analyticsEnvironmentEnabled = {{ analyticsEnvironmentEnabled | default(true) | dump | safe }};

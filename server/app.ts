@@ -15,7 +15,7 @@ import setUpi18n, { setUpLocaleFromSession } from './middleware/setUpi18n';
 import setupRateLimit from './middleware/setupRateLimit';
 import setUpWebRequestParsing from './middleware/setupRequestParsing';
 import setupRobotsTxt from './middleware/setupRobotsTxt';
-// import setupServiceNoLongerAvailable from './middleware/setupServiceNoLongerAvailable';
+import setupSessionTimeout from './middleware/setupSessionTimeout';
 import setUpStaticResources from './middleware/setUpStaticResources';
 import setUpWebSecurity from './middleware/setUpWebSecurity';
 import setUpWebSession from './middleware/setUpWebSession';
@@ -39,6 +39,7 @@ const createApp = (): express.Application => {
   app.use(setUpWebSecurity());
   app.use(setupRateLimit());
   app.use(setUpWebSession());
+  app.use(setupSessionTimeout());
   app.use(setUpLocaleFromSession());
   app.use(setUpWebRequestParsing());
   app.use(setupPageVisitAnalytics());
