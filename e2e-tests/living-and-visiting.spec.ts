@@ -13,9 +13,9 @@ test.describe('Mostly Lives Page', () => {
   test.describe('Child mostly lives with Adult 1 and visits/stays with Adult 2', () => {
     test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Parent'])
-      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Guardian?', ['Yes'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Parent?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-overnight/, 'On which days will overnights happen?', ['Tuesday', 'Wednesday'])
-      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Guardian?', ['Yes'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Parent?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-daytime-visits/, 'On which days will daytime visits happen?', ['Monday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
       await expect(page).toHaveURL(/\/make-a-plan/);
       const completedStatus = page.locator('#livingAndVisiting-taskList-1-status');
@@ -33,11 +33,11 @@ test.describe('Mostly Lives Page', () => {
    test.describe('Child mostly lives with Adult 1 and has other arrangements with Adult 2', () => {
     test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Parent'])
-      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Guardian?', ['Yes'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Parent?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-overnight/, 'On which days will overnights happen?', ['Another arrangement'])
       await page.getByLabel('Describe the arrangement').fill('The children will stay overnight with the mother of Parent during the week, and with Guardian on weekends.');
       await page.getByRole('button', { name: /continue/i }).click();
-      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Guardian?', ['Yes'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Parent?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-daytime-visits/, 'On which days will daytime visits happen?', ['Another arrangement'])
       await page.getByLabel('Describe the arrangement').fill('Guardian can only do daytime visits on weekends where Parent is away');
       await page.getByRole('button', { name: /continue/i }).click();
@@ -56,8 +56,8 @@ test.describe('Mostly Lives Page', () => {
   test.describe('Child mostly lives with Adult 1 and does not visit or stay with Adult 2', () => {
     test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Parent'])
-      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Guardian?', ['No'])
-      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Guardian?', ['No'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Parent?', ['No'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Parent?', ['No'])
       await expect(page).toHaveURL(/\/make-a-plan/);
       await expect(page.locator('#livingAndVisiting-taskList-1-status')).toHaveText(/Completed/i)
 
@@ -71,9 +71,9 @@ test.describe('Mostly Lives Page', () => {
   test.describe('Child mostly lives with Adult 2 and visits/stays with Adult 1', () => {
     test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Guardian'])
-      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Parent?', ['Yes'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Guardian?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-overnight/, 'On which days will overnights happen?', ['Monday', 'Tuesday', 'Wednesday'])
-      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Parent?', ['Yes'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Guardian?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-daytime-visits/, 'On which days will daytime visits happen?', ['Thursday', 'Friday', 'Saturday', 'Sunday'])
       await expect(page).toHaveURL(/\/make-a-plan/);
       const completedStatus = page.locator('#livingAndVisiting-taskList-1-status');
@@ -91,11 +91,11 @@ test.describe('Mostly Lives Page', () => {
    test.describe('Child mostly lives with Adult 2 and has other arrangements with Adult 1', () => {
     test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Guardian'])
-      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Parent?', ['Yes'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Guardian?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-overnight/, 'On which days will overnights happen?', ['Another arrangement'])
       await page.getByLabel('Describe the arrangement').fill('The children will stay overnight with the mother of Guardian during the week, and with Parent on weekends.');
       await page.getByRole('button', { name: /continue/i }).click();
-      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Parent?', ['Yes'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Guardian?', ['Yes'])
       await fillLivingAndVisitingSectionAndContinue(page, /which-days-daytime-visits/, 'On which days will daytime visits happen?', ['Another arrangement'])
       await page.getByLabel('Describe the arrangement').fill('Parent can only do daytime visits on weekends where Guardian is away');
       await page.getByRole('button', { name: /continue/i }).click();
@@ -114,8 +114,8 @@ test.describe('Mostly Lives Page', () => {
   test.describe('Child mostly lives with Adult 2 and does not visit or stay with Adult 1', () => {
     test('Fill fields until section is complete', async ({ page }) => {
       await fillLivingAndVisitingSectionAndContinue(page, /where-will-the-children-mostly-live/, 'Where will the children spend most of their time?', ['With Guardian'])
-      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Parent?', ['No'])
-      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Parent?', ['No'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-overnights-happen/, 'Will the children stay overnight with Guardian?', ['No'])
+      await fillLivingAndVisitingSectionAndContinue(page, /will-daytime-visits-happen/, 'Will the children do daytime visits with Guardian?', ['No'])
       await expect(page).toHaveURL(/\/make-a-plan/);
       await expect(page.locator('#livingAndVisiting-taskList-1-status')).toHaveText(/Completed/i)
 

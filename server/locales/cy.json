@@ -653,7 +653,7 @@
     }
   },
   "confirmation": {
-    "downloadedYourPlanTitle": "Rydych wedi lawrlwytho eich cynllun",
+    "title": "Rydych wedi lawrlwytho eich cynllun",
     "whatYouNeedToDoNext": "Beth sydd angen i chi wneud nesaf:",
     "checkDownloadsFolder": "Chwiliwch yn eich ffolder lawrlwythiadau (downloads) am PDF neu dudalen HTML hygyrch o'ch cynllun a rhannwch ef gyda {{{ otherAdult }}} a fydd yn cael cyfle i gydweithredu.",
     "cantFindPlan": "Methu dod o hyd i'ch cynllun?",

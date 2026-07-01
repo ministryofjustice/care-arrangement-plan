@@ -236,7 +236,7 @@ describe('formattedAnswers', () => {
           expect(response.body.livingAndVisiting).toEqual({
             mostlyLive: `With ${session.initialAdultName}`,
             willOvernightsHappen: 'Yes',
-            whichDaysOvernight: `The children will stay overnight with ${session.secondaryAdultName} on Monday, Wednesday and Friday`,
+            whichDaysOvernight: `The children will stay overnight with ${session.initialAdultName} on Monday, Wednesday and Friday`,
             willDaytimeVisitsHappen: 'No',
           });
         });
@@ -270,7 +270,7 @@ describe('formattedAnswers', () => {
             willOvernightsHappen: 'Yes',
             whichDaysOvernight: arrangement,
             willDaytimeVisitsHappen: 'Yes',
-            whichDaysDaytimeVisits: `The children will have daytime visits with ${session.initialAdultName} on a Saturday`,
+            whichDaysDaytimeVisits: `The children will have daytime visits with ${session.secondaryAdultName} on a Saturday`,
           });
         });
     });
