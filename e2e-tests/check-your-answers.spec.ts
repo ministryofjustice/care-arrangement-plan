@@ -46,7 +46,7 @@ test.describe('Check Your Answers Summary Page', () => {
     await expect(page.getByText(/Parent.*Guardian/)).toBeVisible();
 
     // Verify living and visiting data
-    await expect(page.getByText(/with Guardian on a Monday/i)).toBeVisible();
+    await expect(page.getByText(/with Parent on a Monday/i)).toBeVisible();
 
     // Verify handover and holidays data
     await expect(page.getByText('Parent collects the children')).toBeVisible();
