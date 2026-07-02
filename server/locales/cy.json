@@ -2,6 +2,7 @@
   "serviceName": "Cynnig cynllun trefniant plentyn",
   "yes": "Ydyn",
   "no": "Nac ydyn",
+  "notSure": "I'm not sure",
   "back": "Yn ôl",
   "continue": "Parhau",
   "exitThisPage": "<span class=\"govuk-visually-hidden\">I adael y gwasanaeth hwn yn gyflym, pwyswch escape dair gwaith.</span>",
@@ -228,42 +229,104 @@
     "restrictionsOnUse": "Os oes gennych orchymyn llys mewn lle sy'n cyfyngu eich cysylltiad gyda'r rhiant arall neu'r plentyn, fel gorchymyn dim cyswllt, gorchymyn rhag molestu neu unrhyw gyfyngiad cyfreithiol arall, ni ddylech ddefnyddio'r gwasanaeth hwn i gysylltu â nhw. Gall gwneud hynny dorri'r gorchymyn a gall olygu canlyniadau cyfreithiol. Os ydych yn ansicr pa un a yw unrhyw orchymyn llys neu gyfyngiad cyfreithiol arall yn effeithio ar eich gallu i ddefnyddio'r gwasanaeth hwn, dylech ofyn am gyngor cyfreithiol cyn parhau."
   },
   "safetyCheck": {
-    "title": "Eich diogelwch",
-    "workWithPartner": "Ydych chi'n hyderus y gallwch chi a'ch cyn-bartner wneud penderfyniadau gyda'ch gilydd heb roi chi'ch hun na'r plant mewn perygl, ac nad ydych chi wedi cael eich rhoi dan bwysau na'ch bygwth i ddefnyddio'r gwasanaeth hwn?",
-    "safeAndConfident": "Ydych chi'n teimlo'n ddiogel ac yn hyderus?",
-    "error": "Dewiswch a ydych chi'n teimlo'n ddiogel ac yn hyderus ai peidio",
-    "yes": "Ydw",
-    "no": "Nac ydw"
+    "title": "Have you experienced abuse from your ex-partner?",
+    "rightInformation": "We ask this so we can give you the right information and resources for your situation. Your answer will not be saved or shared with anyone",
+    "intro": "There may have been domestic abuse in the relationship if you have experienced any of the following:",
+    "bullets": {
+      "violence": "Abuse or violence, including physical, emotional and sexual",
+      "financial": "Financial or economic abuse",
+      "coercive": "Coercive control and psychological abuse (threats, humiliation, intimidation, degradation, isolation and control)",
+      "harassment": "Harassment and stalking"
+    },
+    "formHeading": "Select whether you have experienced abuse from your ex-partner",
+    "answerYes": "Answer 'Yes' if you have experienced any of the above, whether or not you have reported your experience to the police.",
+    "error": "Select whether you have experienced abuse from your ex-partner"
   },
   "notSafe": {
-    "title": "Dod o hyd i'r llwybr cywir i chi",
-    "intro": "<p>Efallai nad yw'r gwasanaeth hwn yn addas i chi os ydych chi wedi profi cam-drin domestig.</p>",
-    "warningText": "Os ydych mewn perygl uniongyrchol, ffoniwch 999 a gofynnwch am yr heddlu.",
-    "warningIconFallback": "Warning",
-    "content": "<p><a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help.cy#adnabod-camdrin-domestig\">Rhagor o wybodaeth am sut i adnabod cam-drin domestig</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/cymraeg/Teulu/making-agreements-about-your-children/gwneud-trefniadau-plant/\">Cael cymorth a chyngor ar wneud trefniadau plant pan fydd cam-drin domestig wedi digwydd</a>.</p>",
-    "continueTitle": "Os ydych eisiau parhau",
-    "continue": "Os ydych chi'n teimlo'n hyderus y gallwch chi drafod pethau heb deimlo dan fygythiad, parhewch i ddefnyddio'r gwasanaeth."
+    "title": "Getting help if you have experienced abuse",
+    "content": {
+      "warningText": "If you are in immediate danger, call 999 and ask for the police.",
+      "continueDescription": "If you feel confident that you can carry on without any danger to yourself or the children, you can continue using the service.",
+      "description": "You may have been in an abusive relationship. Domestic abuse or violence is a crime. Domestic abuse does not only mean physical violence – it includes emotional, sexual, psychological and financial abuse, as well as harassment and stalking.",
+      "descriptionSupport": "It is important to remember that there is help and support available to you.",
+      "wantToContinue": {
+        "title": "If you want to continue using this service",
+        "description": "If you feel confident that you can carry on without any danger to yourself or the children, you can continue using the service."
+      },
+      "getHelpProtecting": {
+        "title": "Get help protecting yourself and your children",
+        "content": {
+          "abusiveRelationship": "You may have been in an abusive relationship. Domestic abuse or violence is a crime. You can find out how to <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">recognise domestic abuse</a>.",
+          "domesticAbuse": "If you have experienced any kind of domestic abuse, you can <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#get-a-court-order-to-protect-you-or-your-child\">get a court order to protect you or your child</a>.",
+          "citizensAdvice": "Citizens Advice has <a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">advice on making child arrangements when there's been domestic abuse</a>.",
+          "findOut": "Find out <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help\">how to get help with domestic abuse</a>.",
+          "specificHelp": "If you want to access help specifically to cater to your background and needs or want support and help for specific types of abuse there are several organisations that can help - see <a href=\"https://www.gov.uk/government/publications/domestic-abuse-get-help-for-specific-needs-or-situations/domestic-abuse-specialist-sources-of-support\">Domestic abuse: specialist sources of support</a>."
+        }
+      },
+      "helpAndSupport": {
+        "title": "Help and support",
+        "description": "<p class=\"govuk-body\">There is free, confidential support available to help you and your family.",
+        "table": {
+          "rowOne": {
+            "heading": "<a href=\"https://www.nationaldahelpline.org.uk/\">Refuge National Domestic Abuse Helpline</a>",
+            "data": "<p class=\"govuk-body\">Free, confidential advice, 24 hours a day if you need help understanding your options, finding a refuge space or other specialist services.<p class=\"govuk-body\"><p class=\"govuk-body\">Telephone: <a href=\"tel:0808 2000 247\">0808 2000 247</a></p>"
+          },
+          "rowTwo": {
+            "heading": "<a href=\"https://www.rightsofwomen.org.uk/get-advice/family-law/\">Rights of Women</a>",
+            "data": "<p class=\"govuk-body\">Family law advice from a charity dedicated to providing free and confidential legal advice to women experiencing all forms of violence in England and Wales.</p><p class=\"govuk-body\">Telephone: <a href=\"tel:020 7251 6577\">020 7251 6577</a></p>"
+          },
+          "rowThree": {
+            "heading": "<a href=\"https://mensadviceline.org.uk/\">Men's Advice Line</a>",
+            "data": "<p class=\"govuk-body\">A supportive helpline for all male victims of domestic abuse and those supporting them.</p><p class=\"govuk-body\">Telephone: <a href=\"tel:0808 801 0327\">0808 801 0327</a></p>"
+          }
+        }
+      }
+    }
   },
   "childrenSafetyCheck": {
-    "title": "Diogelwch plant",
-    "childrenMayBeAtRisk": "Gall plant fod mewn perygl os bu:",
-    "domesticAbuse": "unrhyw fath o gam-drin neu drais domestig, hyd yn oed os nad oedd y cam-drin wedi'i gyfeirio at y plant",
-    "childAbduction": "herwgipio plentyn neu ymgais i'w herwgipio",
-    "childAbuse": "cam-drin neu esgeuluso plant",
-    "drugsOrAlcohol": "camddefnyddio cyffuriau, alcohol neu sylweddau eraill",
-    "otherConcerns": "unrhyw bryderon diogelwch neu lesiant eraill sy'n rhoi unrhyw un mewn perygl sylweddol o niwed",
-    "stopNow": "If you have any concerns about safety, stop now.",
-    "questionTitle": "A yw’r plant yn ddiogel?",
-    "error": "Dewiswch a yw'r plant yn ddiogel ai peidio"
+    "title": "Have the children ever been at risk?",
+    "rightInformation": "We ask this so we can give you the right information and resources for your situation. Your answer will not be saved or shared with anyone",
+    "intro": "Children may be at risk if there has been:",
+    "bullets": {
+      "domesticAbuse": "any form of domestic abuse or violence, even if the abuse was not directed at the children",
+      "abduction": "actual or attempted child abduction",
+      "abuseNeglect": "child abuse or neglect",
+      "substances": "misuse of drugs, alcohol or other substances",
+      "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm"
+    },
+    "formHeading": "Select whether the children have ever been at risk",
+    "error": "Select whether the children have ever been at risk"
   },
   "childrenNotSafe": {
-    "title": "Cael cymorth",
-    "intro": "<p>Efallai na fydd yn briodol gwneud trefniadau plant os oes unrhyw risg o niwed i'r plant.</p>",
-    "warningText": "Os ydych mewn perygl uniongyrchol, ffoniwch 999 a gofynnwch am yr heddlu.",
-    "warningIconFallback": "Warning",
-    "content": "<p><a href=\"https://www.nspcc.org.uk/keeping-children-safe/types-of-abuse/domestic-abuse/?ac=221274\">Cyngor ar sut i amddiffyn plant rhag cam-drin domestig | NSPCC</a>.</p><p><a href=\"https://www.citizensadvice.org.uk/cymraeg/Teulu/making-agreements-about-your-children/gwneud-trefniadau-plant/\">Mae gan Cyngor ar Bopeth gyngor ar wneud trefniadau plant pan fydd cam-drin domestig wedi digwydd</a>.</p>",
-    "continue": "Os ydych chi'n teimlo'n hyderus na fydd gwneud trefniadau ar gyfer plant yn peryglu plant, parhewch i ddefnyddio'r gwasanaeth.",
-    "continueTitle": "Os ydych chi eisiau parhau"
+    "title": "Getting help if your children are not safe",
+    "content": {
+      "warningText": "If a child is in immediate danger, call 999 and ask for the police.",
+      "continueDescription": "If you feel confident that you can carry on without any danger to yourself or the children, you can continue using the service.",
+      "getHelpProtecting": {
+        "title": "Get help protecting your children",
+        "importantToRemember": "It is important to remember that there is help and support available to you if your children are unsafe.",
+        "experiencedAbuse": "If you have experienced any kind of domestic abuse, you can <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#get-a-court-order-to-protect-you-or-your-child\">get a court order to protect you or your child</a>.",
+        "findOut": "You can find out <a href=\"https://www.gov.uk/guidance/international-parental-child-abduction\">what to do if you believe a child could be taken or has been taken abroad without your permission</a>."
+      },
+      "helpAndSupport": {
+        "title": "Help and support",
+        "description": "There is free, confidential support available to help you and your family.",
+        "table": {
+          "rowOne": {
+            "heading": "<a href=\"https://www.nationaldahelpline.org.uk/\">Refuge National Domestic Abuse Helpline</a>",
+            "data": "<p class=\"govuk-body\">Free, confidential advice, 24 hours a day, if you need help understanding your options, finding a refuge space or other specialist services.</p><p class=\"govuk-body\">Telephone: <a href=\"tel:0808 2000 247\">0808 2000 247</a></p>"
+          },
+          "rowTwo": {
+            "heading": "<a href=\"https://www.rightsofwomen.org.uk/get-advice/family-law/\">Rights of Women</a>",
+            "data": "<p class=\"govuk-body\">Family law advice from a charity dedicated to providing free and confidential legal advice to women experiencing all forms of violence in England and Wales.</p><p class=\"govuk-body\">Telephone: <a href=\"tel:020 7251 6577\">020 7251 6577</a></p>"
+          },
+          "rowThree": {
+            "heading": "<a href=\"https://www.reunite.org/\">Reunite International Child Abduction Centre</a>",
+            "data": "<p class=\"govuk-body\">An independent charity that provides advice and support on the issues surrounding the international movement of children.</p><p class=\"govuk-body\">Telephone: <a href=\"tel:0116 2556 234\">0116 2556 234</a></p>"
+          }
+        }
+      }
+    }
   },
   "doWhatsBest": {
     "title": "Beth sydd orau i'r plant?",

@@ -44,7 +44,7 @@ const safetyCheckRoutes = (router: Router) => {
       }>(request);
 
       addCompletedStep(request, FORM_STEPS.CHILDREN_SAFETY_CHECK);
-      return isSafe === 'Yes' ? response.redirect(paths.DO_WHATS_BEST) : response.redirect(paths.CHILDREN_NOT_SAFE);
+      return isSafe === 'No' ? response.redirect(paths.DO_WHATS_BEST) : response.redirect(paths.CHILDREN_NOT_SAFE);
     },
   );
 };

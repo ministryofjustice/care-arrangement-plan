@@ -13,6 +13,28 @@
   }}
 {% endblock %}
 
+{% set legendText %}
+  {{ __("childrenSafetyCheck.title") | safe }}
+{% endset %}
+
+{% set additionalText %}
+  <div class="govuk-hint">
+    {{ __("childrenSafetyCheck.rightInformation") }}
+  </div>
+  <div id="child-safety-additional-text">
+    <p class="govuk-body">{{ __("childrenSafetyCheck.intro") }}</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>{{ __("childrenSafetyCheck.bullets.domesticAbuse") }}</li>
+      <li>{{ __("childrenSafetyCheck.bullets.abduction") }}</li>
+      <li>{{ __("childrenSafetyCheck.bullets.abuseNeglect") }}</li>
+      <li>{{ __("childrenSafetyCheck.bullets.substances") }}</li>
+      <li>{{ __("childrenSafetyCheck.bullets.otherConcerns") }}</li>
+    </ul>
+  </div>
+  <h2 class="govuk-heading-m">{{ __("childrenSafetyCheck.formHeading") }}</h2>
+{% endset %}
+
 {% block content %}
   {% include "partials/exitThisPage.njk" %}
   <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
@@ -22,16 +44,6 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-      <h1 class="govuk-heading-l">{{ __('childrenSafetyCheck.title') }}</h1>
-
-      <p>{{ __('childrenSafetyCheck.childrenMayBeAtRisk') }}</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>{{ __('childrenSafetyCheck.domesticAbuse') }}</li>
-        <li>{{ __('childrenSafetyCheck.childAbduction') }}</li>
-        <li>{{ __('childrenSafetyCheck.childAbuse') }}</li>
-        <li>{{ __('childrenSafetyCheck.drugsOrAlcohol') }}</li>
-        <li>{{ __('childrenSafetyCheck.otherConcerns') }}</li>
-      </ul>
 
       <form class="form" action="{{ paths.CHILDREN_SAFETY_CHECK }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
@@ -40,10 +52,13 @@
             name: formFields.CHILDREN_SAFETY_CHECK,
             fieldset: {
               legend: {
-                text: __('childrenSafetyCheck.questionTitle'),
-                isPageHeading: false,
-                classes: "govuk-fieldset__legend--m"
+                text: legendText,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
               }
+            },
+            hint: {
+              html: additionalText
             },
             items: [
               {
@@ -53,6 +68,10 @@
               {
                 value: "No",
                 text: __('no')
+              },
+              {
+                value: "notSure",
+                text: __('notSure')
               }
             ],
             errorMessage: errors | findError(formFields.CHILDREN_SAFETY_CHECK)

@@ -42,7 +42,7 @@ const safetyCheckRoutes = (router: Router) => {
 
       addCompletedStep(request, FORM_STEPS.SAFETY_CHECK);
 
-      return isSafe === 'Yes' ? response.redirect(paths.CHILDREN_SAFETY_CHECK) : response.redirect(paths.NOT_SAFE);
+      return isSafe === 'No' ? response.redirect(paths.CHILDREN_SAFETY_CHECK) : response.redirect(paths.NOT_SAFE);
     },
   );
 };

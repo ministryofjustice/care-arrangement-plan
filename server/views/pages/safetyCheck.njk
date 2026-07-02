@@ -13,6 +13,29 @@
   }}
 {% endblock %}
 
+{% set legendText %}
+  {{ __("safetyCheck.title") }}
+{% endset %}
+
+{% set additionalText %}
+  <div class="govuk-hint">
+    {{ __("safetyCheck.rightInformation") }}
+  </div>
+  <div id="safety-check-additional-text">
+    <p class="govuk-body">
+      {{ __("safetyCheck.intro") }}
+    </p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>{{ __("safetyCheck.bullets.violence") }}</li>
+      <li>{{ __("safetyCheck.bullets.financial") }}</li>
+      <li>{{ __("safetyCheck.bullets.coercive") }}</li>
+      <li>{{ __("safetyCheck.bullets.harassment") }}</li>
+    </ul>
+    <h2 class="govuk-heading-m">{{ __("safetyCheck.formHeading") }}</h2>
+  </div>
+{% endset %}
+
 {% block content %}
   {% include "partials/exitThisPage.njk" %}
   <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
@@ -22,21 +45,22 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% include "partials/errorSummary.njk" %}
-      <h1 class="govuk-heading-l">{{ __('safetyCheck.title') }}</h1>
-
-      <p class="govuk-body">{{ __('safetyCheck.workWithPartner') }}</p>
 
       <form class="form" action="{{ paths.SAFETY_CHECK }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {{
           govukRadios({
             name: formFields.SAFETY_CHECK,
+            describedBy: "safety-check-additional-text",
             fieldset: {
               legend: {
-                text: __('safetyCheck.safeAndConfident'),
-                isPageHeading: false,
-                classes: "govuk-fieldset__legend--m"
+                text: legendText,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
               }
+            },
+            hint: {
+              html: additionalText
             },
             items: [
               {
@@ -46,12 +70,18 @@
               {
                 value: "No",
                 text: __('no')
+              },
+              {
+                value: "Not sure",
+                text: __('notSure')
               }
             ],
             errorMessage: errors | findError(formFields.SAFETY_CHECK)
           })
         }}
-        {{ govukButton({text: __('continue')}) }}
+        {{ govukButton({
+          text: __('continue')
+        }) }}
       </form>
     </div>
   </div>
