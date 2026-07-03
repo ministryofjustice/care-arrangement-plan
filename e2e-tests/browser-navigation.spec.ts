@@ -15,7 +15,7 @@ test.describe('Browser Navigation - Onboarding Flow', () => {
   test('should navigate back from children-safety-check to safety-check', async ({ page, browserName }) => {
     await startJourney(page);
 
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     await expect(page).toHaveURL(/\/children-safety-check/);
 
@@ -23,8 +23,8 @@ test.describe('Browser Navigation - Onboarding Flow', () => {
       page,
       /\/safety-check/,
       async () => {
-        const yesRadio = page.getByLabel(/yes/i).first();
-        await expect(yesRadio).toBeChecked();
+        const noRadio = page.getByLabel(/no/i).first();
+        await expect(noRadio).toBeChecked();
       }
     );
 
@@ -32,7 +32,7 @@ test.describe('Browser Navigation - Onboarding Flow', () => {
     // don't occur with normal human-speed clicking. Reload to reset form state.
     if (browserName === 'firefox') {
       await page.reload();
-      await page.getByLabel(/yes/i).first().click();
+      await page.getByLabel(/no/i).first().click();
     }
 
     // Verify we can proceed forward
@@ -48,8 +48,8 @@ test.describe('Browser Navigation - Onboarding Flow', () => {
       page,
       /\/children-safety-check/,
       async () => {
-        const yesRadio = page.getByLabel(/yes/i).first();
-        await expect(yesRadio).toBeChecked();
+        const noRadio = page.getByLabel(/no/i).first();
+        await expect(noRadio).toBeChecked();
       }
     );
 
@@ -204,7 +204,7 @@ test.describe('Browser Navigation - Alternative Paths', () => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
 
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     await page.getByLabel(/no/i).first().check();
@@ -300,10 +300,10 @@ test.describe('Browser Navigation - Complex Scenarios', () => {
         await expect(page.getByRole('checkbox', { name: /I will put my children.s needs first/i })).toBeChecked();
       }},
       { url: /\/children-safety-check/, checks: async () => {
-        await expect(page.getByLabel(/yes/i).first()).toBeChecked();
+        await expect(page.getByLabel(/no/i).first()).toBeChecked();
       }},
       { url: /\/safety-check/, checks: async () => {
-        await expect(page.getByLabel(/yes/i).first()).toBeChecked();
+        await expect(page.getByLabel(/no/i).first()).toBeChecked();
       }},
     ];
 

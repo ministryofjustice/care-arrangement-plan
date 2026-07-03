@@ -57,10 +57,10 @@ export async function startJourney(page: Page) {
 }
 
 export async function completeSafetyChecks(page: Page) {
-  await page.getByLabel(/yes/i).first().check();
+  await page.getByLabel(/no/i).first().check();
   await page.getByRole('button', { name: /continue/i }).click();
 
-  await page.getByLabel(/yes/i).first().check();
+  await page.getByLabel(/no/i).first().check();
   await page.getByRole('button', { name: /continue/i }).click();
 }
 

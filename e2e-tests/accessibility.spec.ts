@@ -17,7 +17,7 @@ test.describe('Accessibility', () => {
     await startJourney(page);
 
     await expect(page).toHaveURL(/\/safety-check/);
-    await expect(page.getByRole('heading', { level: 1, name: /your safety/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /Have you experienced abuse from your ex-partner?/i })).toBeVisible();
     await expect(page.locator('h1')).toHaveCount(1);
   });
 
@@ -32,7 +32,7 @@ test.describe('Accessibility', () => {
     await expect(yesRadio).toHaveAttribute('type', 'radio');
     await expect(noRadio).toHaveAttribute('type', 'radio');
 
-    await expect(page.getByRole('group', { name: /do you feel safe and confident/i })).toBeVisible();
+    await expect(page.getByText(/Select whether you have experienced abuse from your ex-partner/i)).toBeVisible();
   });
 
   test('should have skip to main content link', async ({ page }) => {
