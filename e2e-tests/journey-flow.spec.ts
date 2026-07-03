@@ -9,12 +9,12 @@ test.describe('User Journey Flow', () => {
     // With USE_AUTH=false, goes directly to safety-check
     await expect(page).toHaveURL(/\/safety-check/);
 
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     await expect(page).toHaveURL(/\/children-safety-check/);
 
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     await expect(page).toHaveURL(/\/do-whats-best/);
@@ -25,7 +25,7 @@ test.describe('User Journey Flow', () => {
 
     await page.getByRole('button', { name: /start now/i }).click();
 
-    await page.getByLabel(/no/i).first().check();
+    await page.getByLabel(/yes/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     await expect(page).toHaveURL(/\/not-safe/);
@@ -37,9 +37,9 @@ test.describe('User Journey Flow', () => {
     await page.getByRole('button', { name: /start now/i }).click();
 
     // Complete safety checks
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Continue through do-whats-best - check the required checkbox
@@ -65,9 +65,9 @@ test.describe('User Journey Flow', () => {
     await page.getByRole('button', { name: /start now/i }).click();
 
     // Complete safety checks
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Continue through do-whats-best - check the required checkbox

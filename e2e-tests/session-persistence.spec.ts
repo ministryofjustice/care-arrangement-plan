@@ -9,9 +9,9 @@ test.describe('Session Persistence', () => {
     await page.getByRole('button', { name: /start now/i }).click();
 
     // Complete safety checks
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Continue through do-whats-best - check the required checkbox

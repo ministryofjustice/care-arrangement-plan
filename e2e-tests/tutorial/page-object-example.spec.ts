@@ -11,7 +11,7 @@ test.describe('User Journey with Page Objects', () => {
     await expect(page).toHaveURL(/\/safety-check/);
 
     const safetyCheckPage = new SafetyCheckPage(page);
-    await safetyCheckPage.selectYes();
+    await safetyCheckPage.selectNo();
     await safetyCheckPage.submit();
 
     await expect(page).toHaveURL(/\/children-safety-check/);

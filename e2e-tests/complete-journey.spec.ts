@@ -9,7 +9,7 @@ test.describe('Complete-journey', () => {
 
     // Safety-check
     await expect(page).toHaveURL(/safety-check/);
-    await page.getByLabel(/no/i).first().check();
+    await page.getByLabel(/yes/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Not-safe
@@ -18,7 +18,7 @@ test.describe('Complete-journey', () => {
 
     // Children-safety-check
     await expect(page).toHaveURL(/children-safety-check/);
-    await page.getByLabel(/no/i).first().check();
+    await page.getByLabel(/yes/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Children-not-safe

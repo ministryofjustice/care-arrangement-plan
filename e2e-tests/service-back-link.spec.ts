@@ -27,7 +27,7 @@ test.describe('Service Back Link Navigation - Onboarding Flow', () => {
   test('should navigate back from children-safety-check to safety-check', async ({ page }) => {
     await startJourney(page);
 
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Click back - radio button selection won't be pre-filled (see TODO above)
@@ -42,7 +42,7 @@ test.describe('Service Back Link Navigation - Onboarding Flow', () => {
     // This is the current behavior - users would need to re-select their answer
 
     // Verify we can proceed forward
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     await expect(page).toHaveURL(/\/children-safety-check/);
   });
@@ -60,7 +60,7 @@ test.describe('Service Back Link Navigation - Onboarding Flow', () => {
     await expect(heading).toBeVisible();
 
     // Re-select and proceed forward
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     await expect(page).toHaveURL(/\/do-whats-best/);
   });
@@ -156,7 +156,7 @@ test.describe('Service Back Link Navigation - Alternative Paths', () => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
 
-    await page.getByLabel(/no/i).first().check();
+    await page.getByLabel(/yes/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Click back - radio button won't be pre-filled
@@ -168,7 +168,7 @@ test.describe('Service Back Link Navigation - Alternative Paths', () => {
     await expect(heading).toBeVisible();
 
     // Change answer and verify different path
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     await expect(page).toHaveURL(/\/children-safety-check/);
   });
@@ -177,10 +177,10 @@ test.describe('Service Back Link Navigation - Alternative Paths', () => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
 
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
-    await page.getByLabel(/no/i).first().check();
+    await page.getByLabel(/yes/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Click back - radio button won't be pre-filled
@@ -291,7 +291,7 @@ test.describe('Service Back Link Navigation - Flash Message Redirects', () => {
   test('should allow service back link when redirected with "complete this page" message', async ({ page }) => {
     // Start journey and complete only the first step
     await startJourney(page);
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Now at children-safety-check, try to jump ahead to about-the-children

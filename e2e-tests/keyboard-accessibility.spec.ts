@@ -339,9 +339,9 @@ test.describe('Keyboard Accessibility', () => {
       await startJourney(page);
 
       // Complete safety checks to reach do-whats-best
-      await page.getByLabel(/yes/i).first().check();
+      await page.getByLabel(/no/i).first().check();
       await page.getByRole('button', { name: /continue/i }).click();
-      await page.getByLabel(/yes/i).first().check();
+      await page.getByLabel(/no/i).first().check();
       await page.getByRole('button', { name: /continue/i }).click();
 
       // Now on do-whats-best page with a checkbox
@@ -467,7 +467,7 @@ test.describe('Keyboard Accessibility', () => {
 
     test('Escape key triggers quick exit on children-safety-check page', async ({ page }) => {
       await startJourney(page);
-      await page.getByLabel(/yes/i).first().check();
+      await page.getByLabel(/no/i).first().check();
       await page.getByRole('button', { name: /continue/i }).click();
       await expect(page).toHaveURL(/\/children-safety-check/);
 
@@ -530,15 +530,17 @@ test.describe('Keyboard Accessibility', () => {
       await page.keyboard.press('Enter');
       await expect(page).toHaveURL(/\/safety-check/);
 
-      // Safety check - select Yes radio with keyboard
+      // Safety check - select No radio with keyboard
       await tabToElement(page, 'radio', /yes/i);
+      await page.keyboard.press('ArrowDown');
       await page.keyboard.press('Space');
       await tabToElement(page, 'button', /continue/i);
       await page.keyboard.press('Enter');
       await expect(page).toHaveURL(/\/children-safety-check/);
 
-      // Children safety check - select Yes
+      // Children safety check - select No
       await tabToElement(page, 'radio', /yes/i);
+      await page.keyboard.press('ArrowDown');
       await page.keyboard.press('Space');
       await tabToElement(page, 'button', /continue/i);
       await page.keyboard.press('Enter');
@@ -709,7 +711,7 @@ test.describe('Keyboard Accessibility', () => {
 
     test('back link is reachable via Tab on form pages', async ({ page }) => {
       await startJourney(page);
-      await page.getByLabel(/yes/i).first().check();
+      await page.getByLabel(/no/i).first().check();
       await page.getByRole('button', { name: /continue/i }).click();
       await expect(page).toHaveURL(/\/children-safety-check/);
 
