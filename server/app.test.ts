@@ -221,7 +221,7 @@ describe('App', () => {
         });
     });
 
-    xit('should persist detected locale to session on first visit without lang parameter', async () => {
+    it('should persist detected locale to session on first visit without lang parameter', async () => {
       const testApp = testAppSetup();
 
       await request(testApp)
@@ -234,7 +234,7 @@ describe('App', () => {
       expect(sessionMock.lang).toBe('cy');
     });
 
-    xit('should not include lang query parameter in form actions', async () => {
+    it('should not include lang query parameter in form actions', async () => {
       sessionMock.lang = 'cy';
       const testApp = testAppSetup();
 
@@ -246,7 +246,7 @@ describe('App', () => {
         });
     });
 
-    xit('should preserve session language on POST without lang query parameter', async () => {
+    it('should preserve session language on POST without lang query parameter', async () => {
       const testApp = testAppSetup();
       const agent = request.agent(testApp);
 

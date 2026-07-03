@@ -229,7 +229,7 @@
     "restrictionsOnUse": "Os oes gennych orchymyn llys mewn lle sy'n cyfyngu eich cysylltiad gyda'r rhiant arall neu'r plentyn, fel gorchymyn dim cyswllt, gorchymyn rhag molestu neu unrhyw gyfyngiad cyfreithiol arall, ni ddylech ddefnyddio'r gwasanaeth hwn i gysylltu â nhw. Gall gwneud hynny dorri'r gorchymyn a gall olygu canlyniadau cyfreithiol. Os ydych yn ansicr pa un a yw unrhyw orchymyn llys neu gyfyngiad cyfreithiol arall yn effeithio ar eich gallu i ddefnyddio'r gwasanaeth hwn, dylech ofyn am gyngor cyfreithiol cyn parhau."
   },
   "safetyCheck": {
-    "title": "Have you experienced abuse from your ex-partner?",
+    "title": "Eich diogelwch",
     "rightInformation": "We ask this so we can give you the right information and resources for your situation. Your answer will not be saved or shared with anyone",
     "intro": "There may have been domestic abuse in the relationship if you have experienced any of the following:",
     "bullets": {
@@ -240,7 +240,7 @@
     },
     "formHeading": "Select whether you have experienced abuse from your ex-partner",
     "answerYes": "Answer 'Yes' if you have experienced any of the above, whether or not you have reported your experience to the police.",
-    "error": "Select whether you have experienced abuse from your ex-partner"
+    "error": "Dewiswch a ydych chi'n teimlo'n ddiogel ac yn hyderus ai peidio"
   },
   "notSafe": {
     "title": "Getting help if you have experienced abuse",

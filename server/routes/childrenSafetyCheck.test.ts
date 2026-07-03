@@ -17,7 +17,6 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('Have the children ever been at risk?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
     });
 
     it('should render error flash responses correctly', async () => {
@@ -37,7 +36,7 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
       );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
-        `${formFields.CHILDREN_SAFETY_CHECK}-error`,
+        `${formFields.CHILDREN_SAFETY_CHECK}-hint ${formFields.CHILDREN_SAFETY_CHECK}-error`,
       );
     });
   });

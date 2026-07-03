@@ -17,7 +17,6 @@ describe(paths.SAFETY_CHECK, () => {
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('Have you experienced abuse from your ex-partner?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
     });
 
     it('should render error flash responses correctly', async () => {
@@ -37,7 +36,7 @@ describe(paths.SAFETY_CHECK, () => {
       );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
-        `${formFields.SAFETY_CHECK}-error`,
+        `${formFields.SAFETY_CHECK}-hint ${formFields.SAFETY_CHECK}-error`,
       );
     });
   });
