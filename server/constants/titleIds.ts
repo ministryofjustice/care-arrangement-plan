@@ -26,6 +26,7 @@ enum titleIds {
   WILL_OVERNIGHTS_HAPPEN = 'livingAndVisiting.willOvernightsHappen',
   WHAT_OTHER_THINGS_MATTER = 'otherThings.whatOtherThingsMatter',
   SPECIAL_DAYS = 'specialDays.whatWillHappen',
+  CONFIRMATION = 'confirmation',
 }
 
 export default titleIds;

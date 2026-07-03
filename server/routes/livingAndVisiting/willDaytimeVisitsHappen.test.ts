@@ -38,7 +38,7 @@ describe(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, () => {
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent(
-        `Will the children do daytime visits with ${session.secondaryAdultName}?`,
+        `Will the children do daytime visits with ${session.initialAdultName}?`,
       );
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
@@ -52,7 +52,7 @@ describe(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN, () => {
         .get(paths.LIVING_VISITING_WILL_DAYTIME_VISITS_HAPPEN)
         .expect('Content-Type', /html/)
         .expect((response) => {
-          expect(response.text).toContain(`Will the children do daytime visits with ${session.initialAdultName}?`);
+          expect(response.text).toContain(`Will the children do daytime visits with ${session.secondaryAdultName}?`);
         });
     });
 
