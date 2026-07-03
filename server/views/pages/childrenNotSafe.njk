@@ -23,6 +23,10 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ __('childrenNotSafe.title') }}</h1>
 
+      <p class="govuk-body">
+        {{ __("childrenNotSafe.content.mayNotBeAppropriate") }}
+      </p>
+
       {{ govukWarningText({
         text: __('childrenNotSafe.content.warningText'),
         iconFallbackText: __('childrenNotSafe.warningIconFallback')
