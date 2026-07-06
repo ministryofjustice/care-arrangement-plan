@@ -68,7 +68,7 @@ describe(paths.SAFETY_CHECK, () => {
         .post(paths.SAFETY_CHECK)
         .send({ [formFields.SAFETY_CHECK]: 'No' })
         .expect(302)
-        .expect('location', paths.CHILDREN_SAFETY_CHECK);
+        .expect('location', paths.DO_WHATS_BEST);
     });
 
     it('should redirect to not safe page if the answer is I\'m not sure', () => {

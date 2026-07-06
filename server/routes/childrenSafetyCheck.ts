@@ -5,16 +5,14 @@ import { yesOrNo } from '../@types/fields';
 import formFields from '../constants/formFields';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
-import checkFormProgressFromConfig  from '../middleware/checkFormProgressFromConfig';
+import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../utils/addCompletedStep';
-import { getBackUrl } from '../utils/sessionHelpers';
 
 const safetyCheckRoutes = (router: Router) => {
   router.get(paths.CHILDREN_SAFETY_CHECK, checkFormProgressFromConfig(FORM_STEPS.CHILDREN_SAFETY_CHECK), (request, response) => {
     response.render('pages/childrenSafetyCheck', {
       errors: request.flash('errors'),
       title: request.__('childrenSafetyCheck.title'),
-      backLinkHref: getBackUrl(request.session, paths.START),
     });
   });
 

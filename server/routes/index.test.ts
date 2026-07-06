@@ -24,7 +24,7 @@ describe(`GET ${paths.START}`, () => {
       await request(app)
         .get(paths.START)
         .expect(302)
-        .expect('Location', paths.SAFETY_CHECK);
+        .expect('Location', paths.CHILDREN_SAFETY_CHECK);
     } finally {
       Object.defineProperty(config, 'isLiveService', { value: originalIsLiveService, writable: true });
     }

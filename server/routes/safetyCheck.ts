@@ -13,6 +13,7 @@ const safetyCheckRoutes = (router: Router) => {
     response.render('pages/safetyCheck', {
       errors: request.flash('errors'),
       title: request.__('safetyCheck.title'),
+      backLinkHref: paths.CHILDREN_SAFETY_CHECK,
     });
   });
 

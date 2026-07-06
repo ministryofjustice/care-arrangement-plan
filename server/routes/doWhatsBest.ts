@@ -13,7 +13,7 @@ const doWhatsBestRoutes = (router: Router) => {
     response.render('pages/doWhatsBest', {
       errors: request.flash('errors'),
       title: request.__('doWhatsBest.title'),
-      backLinkHref: getBackUrl(request.session, paths.CHILDREN_SAFETY_CHECK),
+      backLinkHref: getBackUrl(request.session, paths.SAFETY_CHECK),
     });
   });
 

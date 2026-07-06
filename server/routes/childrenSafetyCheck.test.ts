@@ -68,7 +68,7 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
         .post(paths.CHILDREN_SAFETY_CHECK)
         .send({ [formFields.CHILDREN_SAFETY_CHECK]: 'No' })
         .expect(302)
-        .expect('location', paths.DO_WHATS_BEST);
+        .expect('location', paths.SAFETY_CHECK);
     });
 
     it('should redirect to children not safe if the answer is I\'m not sure', () => {
