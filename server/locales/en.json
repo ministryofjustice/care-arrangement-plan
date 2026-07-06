@@ -96,7 +96,7 @@
       "abilityNet": "<a href=\"https://mcmw.abilitynet.org.uk/\" class=\"govuk-link\">AbilityNet</a> has advice on making your device easier to use if you have a disability.",
       "feedback": {
         "title": "Feedback and contact information",
-        "contact": "If you find any problems not listed on this page or think we're not meeting accessibility requirements, email <a href=\"mailto:childarrangements@justice.gov.uk\" class=\"govuk-link\">childarrangements@justice.gov.uk</a>."
+        "contact": "If you find any problems not listed on this page or think we're not meeting accessibility requirements, email <a href=\"mailto:feedback@propose-child-arrangements-plan.service.gov.uk\" class=\"govuk-link\">feedback@propose-child-arrangements-plan.service.gov.uk</a>."
       },
       "enforcement": {
         "title": "Enforcement procedure",
@@ -516,7 +516,7 @@
       "confident": "you’re confident that you and your ex-partner can make decisions together without putting yourself or the children in danger",
       "doNotFeelPressured": "you do not feel pressured or intimidated into responding",
       "stopIfAnyConcern": "If you have any concerns about safety, stop now.",
-      "feedbackOrSafetyConcerns": "If you have any feedback or safety concerns about this service, you can email childarrangementssafety@justice.gov.uk.",
+      "feedbackOrSafetyConcerns": "If you have any feedback or safety concerns about this service, you can email safety@propose-child-arrangements-plan.service.gov.uk.",
       "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created.",
       "benefitsHeading": "How making a child arrangements plan can help",
       "mightFind": "You may find that collaborating with {{{ senderName }}} on a child arrangements plan:",
@@ -555,7 +555,7 @@
       "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
       "anyOtherSafety": "any other safety or welfare concerns that place anyone at significant risk of harm",
       "feedbackHeading": "Feedback and support",
-      "toAskForHelp": "To ask for help using this service, or suggest improvements, you can email childarrangements@justice.gov.uk.",
+      "toAskForHelp": "To ask for help using this service, or suggest improvements, you can email feedback@propose-child-arrangements-plan.service.gov.uk.",
       "weCannot": "We cannot answer any questions about child arrangement plans that have already been created."
     },
     "yourProposedPlan": {

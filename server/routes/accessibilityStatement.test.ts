@@ -77,7 +77,7 @@ describe(paths.ACCESSIBILITY_STATEMENT, () => {
     it('should include contact and external links', async () => {
       const { response } = await getPageDom();
 
-      expect(response.text).toContain('href="mailto:childarrangements@justice.gov.uk"');
+      expect(response.text).toContain('href="mailto:feedback@propose-child-arrangements-plan.service.gov.uk"');
       expect(response.text).toContain('https://mcmw.abilitynet.org.uk/');
       expect(response.text).toContain('https://www.equalityadvisoryservice.com/');
     });
