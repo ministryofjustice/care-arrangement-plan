@@ -26,10 +26,10 @@ test.describe('Session timeout error (403)', () => {
     await expect(startAgainButton).toHaveAttribute('href', '/safety-check');
   });
 
-  test('should navigate to safety check when start again is clicked', async ({ page }) => {
+  test('should navigate to the start page when start again is clicked', async ({ page }) => {
     await page.goto('/dev/create-timeout');
 
     await page.getByRole('button', { name: /^Start again$/i }).click();
-    await expect(page).toHaveURL(/\/safety-check/);
+    await expect(page).toHaveURL('/');
   });
 });

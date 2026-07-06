@@ -2,7 +2,7 @@
 
 import { test, expect, Page, Locator } from '@playwright/test';
 
-import {startJourney, navigateToTaskList, completeOnboardingFlow, fillNumberOfChildren} from './fixtures/test-helpers';
+import {startJourney, goToSafetyCheck, navigateToTaskList, completeOnboardingFlow, fillNumberOfChildren} from './fixtures/test-helpers';
 
 // Helper: press Tab and return the newly focused element's locator
 async function tabAndGetFocused(page: Page) {
@@ -272,7 +272,7 @@ test.describe('Keyboard Accessibility', () => {
     test('tab order is logical on a radio button form page', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).click();
-      await expect(page).toHaveURL(/\/safety-check/);
+      await expect(page).toHaveURL(/\/children-safety-check/);
       await page.locator('h1').focus();
 
       const focusedElements: string[] = [];
@@ -373,7 +373,7 @@ test.describe('Keyboard Accessibility', () => {
       await page.keyboard.press('Enter');
 
       // Should have navigated to the next page
-      await expect(page).toHaveURL(/\/safety-check/);
+      await expect(page).toHaveURL(/\/children-safety-check/);
     });
 
     test('dropdowns are navigable with arrow keys', async ({ page }) => {
@@ -454,7 +454,7 @@ test.describe('Keyboard Accessibility', () => {
     test('Escape key triggers quick exit on safety-check page', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).click();
-      await expect(page).toHaveURL(/\/safety-check/);
+      await goToSafetyCheck(page);
 
       // Press Escape three times quickly (should not be in an input field)
       await page.keyboard.press('Escape');
@@ -467,8 +467,6 @@ test.describe('Keyboard Accessibility', () => {
 
     test('Escape key triggers quick exit on children-safety-check page', async ({ page }) => {
       await startJourney(page);
-      await page.getByLabel(/no/i).first().check();
-      await page.getByRole('button', { name: /continue/i }).click();
       await expect(page).toHaveURL(/\/children-safety-check/);
 
       await page.keyboard.press('Escape');
@@ -496,7 +494,7 @@ test.describe('Keyboard Accessibility', () => {
     test('Exit This Page button is reachable via Tab', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).click();
-      await expect(page).toHaveURL(/\/safety-check/);
+      await expect(page).toHaveURL(/\/children-safety-check/);
 
       // Tab through to find the Exit This Page button
       for (let i = 0; i < 20; i++) {
@@ -528,17 +526,17 @@ test.describe('Keyboard Accessibility', () => {
       // Tab to Start Now button and press Enter
       await tabToElement(page, 'button', /start now/i);
       await page.keyboard.press('Enter');
-      await expect(page).toHaveURL(/\/safety-check/);
+      await expect(page).toHaveURL(/\/children-safety-check/);
 
-      // Safety check - select No radio with keyboard
+      // Children safety check - select No
       await tabToElement(page, 'radio', /yes/i);
       await page.keyboard.press('ArrowDown');
       await page.keyboard.press('Space');
       await tabToElement(page, 'button', /continue/i);
       await page.keyboard.press('Enter');
-      await expect(page).toHaveURL(/\/children-safety-check/);
+      await expect(page).toHaveURL(/\/safety-check/);
 
-      // Children safety check - select No
+      // Safety check - select No
       await tabToElement(page, 'radio', /yes/i);
       await page.keyboard.press('ArrowDown');
       await page.keyboard.press('Space');
@@ -711,9 +709,7 @@ test.describe('Keyboard Accessibility', () => {
 
     test('back link is reachable via Tab on form pages', async ({ page }) => {
       await startJourney(page);
-      await page.getByLabel(/no/i).first().check();
-      await page.getByRole('button', { name: /continue/i }).click();
-      await expect(page).toHaveURL(/\/children-safety-check/);
+      await goToSafetyCheck(page);
 
       // Tab through to find back link
       let foundBackLink = false;
@@ -727,7 +723,7 @@ test.describe('Keyboard Accessibility', () => {
 
           // Pressing Enter should navigate back
           await page.keyboard.press('Enter');
-          await expect(page).toHaveURL(/\/safety-check/);
+          await expect(page).toHaveURL(/\/children-safety-check/);
           break;
         }
       }

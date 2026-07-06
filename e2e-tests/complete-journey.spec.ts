@@ -7,15 +7,6 @@ test.describe('Complete-journey', () => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
 
-    // Safety-check
-    await expect(page).toHaveURL(/safety-check/);
-    await page.getByLabel(/yes/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Not-safe
-    await expect(page).toHaveURL(/not-safe/);
-    await page.getByRole('button', { name: /continue/i }).click();
-
     // Children-safety-check
     await expect(page).toHaveURL(/children-safety-check/);
     await page.getByLabel(/yes/i).first().check();
@@ -23,6 +14,15 @@ test.describe('Complete-journey', () => {
 
     // Children-not-safe
     await expect(page).toHaveURL(/children-not-safe/);
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    // Safety-check
+    await expect(page).toHaveURL(/safety-check/);
+    await page.getByLabel(/yes/i).first().check();
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    // Not-safe
+    await expect(page).toHaveURL(/not-safe/);
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Do-whats-best

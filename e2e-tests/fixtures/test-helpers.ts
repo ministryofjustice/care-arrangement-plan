@@ -51,14 +51,19 @@ export async function expectServiceErrorPage(page: Page) {
 }
 
 export async function startJourney(page: Page) {
-  // Start from homepage - with USE_AUTH=false this goes directly to safety-check
+  // Start from homepage - goes to children-safety-check first
   await page.goto('/');
   await page.getByRole('button', { name: /start now/i }).click();
 }
 
-export async function completeSafetyChecks(page: Page) {
+export async function goToSafetyCheck(page: Page) {
   await page.getByLabel(/no/i).first().check();
   await page.getByRole('button', { name: /continue/i }).click();
+  await expect(page).toHaveURL(/\/safety-check/);
+}
+
+export async function completeSafetyChecks(page: Page) {
+  await goToSafetyCheck(page);
 
   await page.getByLabel(/no/i).first().check();
   await page.getByRole('button', { name: /continue/i }).click();

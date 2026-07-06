@@ -8,13 +8,13 @@ test.describe('User Journey with Page Objects', () => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
 
-    await expect(page).toHaveURL(/\/safety-check/);
+    await expect(page).toHaveURL(/\/children-safety-check/);
 
     const safetyCheckPage = new SafetyCheckPage(page);
     await safetyCheckPage.selectNo();
     await safetyCheckPage.submit();
 
-    await expect(page).toHaveURL(/\/children-safety-check/);
+    await expect(page).toHaveURL(/\/safety-check/);
   });
 
   test('should navigate to task list using helper', async ({ page }) => {
