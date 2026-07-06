@@ -13,25 +13,25 @@ const TASK_FLOW_MAP : TaskFlowMapType = {
     path: paths.START,
     dependsOn: [],
   },
-  [FORM_STEPS.SAFETY_CHECK]: {
-    path: paths.SAFETY_CHECK,
-    dependsOn: [],
-  },
-  [FORM_STEPS.NOT_SAFE]: {
-    path: paths.NOT_SAFE,
-    dependsOn: [FORM_STEPS.SAFETY_CHECK],
-  },
   [FORM_STEPS.CHILDREN_SAFETY_CHECK]: {
     path: paths.CHILDREN_SAFETY_CHECK,
-    dependsOn: [FORM_STEPS.SAFETY_CHECK],
+    dependsOn: [],
   },
   [FORM_STEPS.CHILDREN_NOT_SAFE]: {
     path: paths.CHILDREN_NOT_SAFE,
     dependsOn: [FORM_STEPS.CHILDREN_SAFETY_CHECK],
   },
+  [FORM_STEPS.SAFETY_CHECK]: {
+    path: paths.SAFETY_CHECK,
+    dependsOn: [FORM_STEPS.CHILDREN_SAFETY_CHECK],
+  },
+  [FORM_STEPS.NOT_SAFE]: {
+    path: paths.NOT_SAFE,
+    dependsOn: [FORM_STEPS.SAFETY_CHECK],
+  },
   [FORM_STEPS.DO_WHATS_BEST]: {
     path: paths.DO_WHATS_BEST,
-    dependsOn: [FORM_STEPS.CHILDREN_SAFETY_CHECK],
+    dependsOn: [FORM_STEPS.SAFETY_CHECK],
   },
   [FORM_STEPS.COURT_ORDER_CHECK]: {
     path: paths.COURT_ORDER_CHECK,

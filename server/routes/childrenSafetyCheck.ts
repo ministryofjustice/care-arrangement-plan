@@ -14,7 +14,7 @@ const safetyCheckRoutes = (router: Router) => {
     response.render('pages/childrenSafetyCheck', {
       errors: request.flash('errors'),
       title: request.__('childrenSafetyCheck.title'),
-      backLinkHref: getBackUrl(request.session, paths.SAFETY_CHECK),
+      backLinkHref: getBackUrl(request.session, paths.START),
     });
   });
 
@@ -44,7 +44,7 @@ const safetyCheckRoutes = (router: Router) => {
       }>(request);
 
       addCompletedStep(request, FORM_STEPS.CHILDREN_SAFETY_CHECK);
-      return isSafe === 'No' ? response.redirect(paths.DO_WHATS_BEST) : response.redirect(paths.CHILDREN_NOT_SAFE);
+      return isSafe === 'No' ? response.redirect(paths.SAFETY_CHECK) : response.redirect(paths.CHILDREN_NOT_SAFE);
     },
   );
 };
