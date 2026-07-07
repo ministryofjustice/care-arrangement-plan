@@ -12,6 +12,6 @@ data:
   CACHE_TLS_ENABLED: 'true'
   INCLUDE_WELSH_LANGUAGE: 'true'
   USE_AUTH: 'true'
-  CONTACT_EMAIL: 'childarrangements@justice.gov.uk'
+  CONTACT_EMAIL: 'feedback@propose-child-arrangements-plan.service.gov.uk'
   FEEDBACK_URL: 'https://www.gov.uk/done/propose-child-arrangements-plan'
   PREVIEW_END: '2026-03-31T23:59:59'
