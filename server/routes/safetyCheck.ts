@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
-import { yesOrNo } from '../@types/fields';
+import { yesOrNoOrNotSure } from '../@types/fields';
 import formFields from '../constants/formFields';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
-import checkFormProgressFromConfig  from '../middleware/checkFormProgressFromConfig';
+import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../utils/addCompletedStep';
 
 const safetyCheckRoutes = (router: Router) => {
@@ -13,6 +13,7 @@ const safetyCheckRoutes = (router: Router) => {
     response.render('pages/safetyCheck', {
       errors: request.flash('errors'),
       title: request.__('safetyCheck.title'),
+      backLinkHref: paths.CHILDREN_SAFETY_CHECK,
     });
   });
 
@@ -37,12 +38,12 @@ const safetyCheckRoutes = (router: Router) => {
       }
 
       const { [formFields.SAFETY_CHECK]: isSafe } = matchedData<{
-        [formFields.SAFETY_CHECK]: yesOrNo;
+        [formFields.SAFETY_CHECK]: yesOrNoOrNotSure;
       }>(request);
 
       addCompletedStep(request, FORM_STEPS.SAFETY_CHECK);
 
-      return isSafe === 'Yes' ? response.redirect(paths.CHILDREN_SAFETY_CHECK) : response.redirect(paths.NOT_SAFE);
+      return isSafe === 'No' ? response.redirect(paths.DO_WHATS_BEST) : response.redirect(paths.NOT_SAFE);
     },
   );
 };

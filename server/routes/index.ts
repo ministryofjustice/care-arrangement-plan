@@ -49,7 +49,7 @@ const routes = (): Router => {
   router.get(paths.START, (request, response) => {
     clearSessionData(request);
     if (config.isLiveService) {
-      return response.redirect(paths.SAFETY_CHECK);
+      return response.redirect(paths.CHILDREN_SAFETY_CHECK);
     }
     addCompletedStep(request, FORM_STEPS.START);
     response.render('pages/index');
@@ -57,7 +57,7 @@ const routes = (): Router => {
 
   router.post(paths.START, (request, response) => {
     clearSessionData(request);
-    response.redirect(paths.SAFETY_CHECK);
+    response.redirect(paths.CHILDREN_SAFETY_CHECK);
   });
 
   analyticsRoutes(router);

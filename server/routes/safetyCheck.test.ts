@@ -15,9 +15,8 @@ describe(paths.SAFETY_CHECK, () => {
 
       const dom = new JSDOM(response.text);
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Your safety');
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Have you experienced abuse from your ex-partner?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
     });
 
     it('should render error flash responses correctly', async () => {
@@ -37,7 +36,7 @@ describe(paths.SAFETY_CHECK, () => {
       );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
-        `${formFields.SAFETY_CHECK}-error`,
+        `${formFields.SAFETY_CHECK}-hint ${formFields.SAFETY_CHECK}-error`,
       );
     });
   });
@@ -49,25 +48,33 @@ describe(paths.SAFETY_CHECK, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Select whether you feel safe and confident or not',
+          msg: 'Select whether you have experienced abuse from your ex-partner',
           path: formFields.SAFETY_CHECK,
           type: 'field',
         },
       ]);
     });
 
-    it('should redirect to children safety check page if the answer is yes', () => {
+    it('should redirect to not safe page if the answer is yes', () => {
       return request(app)
         .post(paths.SAFETY_CHECK)
         .send({ [formFields.SAFETY_CHECK]: 'Yes' })
         .expect(302)
-        .expect('location', paths.CHILDREN_SAFETY_CHECK);
+        .expect('location', paths.NOT_SAFE);
     });
 
-    it('should redirect to not safe page if the answer is no', () => {
+    it('should redirect to children safety check page if the answer is no', () => {
       return request(app)
         .post(paths.SAFETY_CHECK)
         .send({ [formFields.SAFETY_CHECK]: 'No' })
+        .expect(302)
+        .expect('location', paths.DO_WHATS_BEST);
+    });
+
+    it('should redirect to not safe page if the answer is I\'m not sure', () => {
+      return request(app)
+        .post(paths.SAFETY_CHECK)
+        .send({ [formFields.SAFETY_CHECK]: 'notSure' })
         .expect(302)
         .expect('location', paths.NOT_SAFE);
     });
@@ -80,7 +87,7 @@ describe(`GET ${paths.NOT_SAFE}`, () => {
       .get(paths.NOT_SAFE)
       .expect('Content-Type', /html/)
       .expect((response) => {
-        expect(response.text).toContain('Finding the right route for you');
+        expect(response.text).toContain('Getting help if you have experienced abuse');
       });
   });
 });

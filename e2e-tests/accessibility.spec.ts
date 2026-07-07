@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import { startJourney } from './fixtures/test-helpers';
+import { goToSafetyCheck, startJourney } from './fixtures/test-helpers';
 
 test.describe('Accessibility', () => {
   test('should have proper heading structure on homepage', async ({ page }) => {
@@ -15,14 +15,16 @@ test.describe('Accessibility', () => {
 
   test('should have a single page heading on safety check', async ({ page }) => {
     await startJourney(page);
+    await goToSafetyCheck(page);
 
     await expect(page).toHaveURL(/\/safety-check/);
-    await expect(page.getByRole('heading', { level: 1, name: /your safety/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /Have you experienced abuse from your ex-partner?/i })).toBeVisible();
     await expect(page.locator('h1')).toHaveCount(1);
   });
 
   test('should have accessible form labels on safety check', async ({ page }) => {
     await startJourney(page);
+    await goToSafetyCheck(page);
 
     const yesRadio = page.getByLabel(/yes/i).first();
     const noRadio = page.getByLabel(/no/i).first();
@@ -32,7 +34,7 @@ test.describe('Accessibility', () => {
     await expect(yesRadio).toHaveAttribute('type', 'radio');
     await expect(noRadio).toHaveAttribute('type', 'radio');
 
-    await expect(page.getByRole('group', { name: /do you feel safe and confident/i })).toBeVisible();
+    await expect(page.getByText(/Select whether you have experienced abuse from your ex-partner/i)).toBeVisible();
   });
 
   test('should have skip to main content link', async ({ page }) => {
@@ -65,12 +67,14 @@ test.describe('Accessibility', () => {
 
   test('should expose exit this page control on safety check', async ({ page }) => {
     await startJourney(page);
+    await goToSafetyCheck(page);
 
     await expect(page.getByRole('button', { name: /exit this page/i })).toBeVisible();
   });
 
   test('should announce escape key shortcut to screen readers on safety check', async ({ page }) => {
     await startJourney(page);
+    await goToSafetyCheck(page);
 
     const liveRegion = page.locator('[role="status"][aria-live="polite"]');
     await expect(liveRegion).toBeVisible();

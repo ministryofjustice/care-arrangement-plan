@@ -15,9 +15,8 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
 
       const dom = new JSDOM(response.text);
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Children’s safety');
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Have the children ever been at risk?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
-      expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
     });
 
     it('should render error flash responses correctly', async () => {
@@ -37,7 +36,7 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
       );
       expect(dom.window.document.querySelector('fieldset')).toHaveAttribute(
         'aria-describedby',
-        `${formFields.CHILDREN_SAFETY_CHECK}-error`,
+        `${formFields.CHILDREN_SAFETY_CHECK}-hint ${formFields.CHILDREN_SAFETY_CHECK}-error`,
       );
     });
   });
@@ -49,25 +48,33 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
       expect(flashMock).toHaveBeenCalledWith('errors', [
         {
           location: 'body',
-          msg: 'Select whether the children are safe or not',
+          msg: 'Select whether the children have ever been at risk',
           path: formFields.CHILDREN_SAFETY_CHECK,
           type: 'field',
         },
       ]);
     });
 
-    it('should redirect to do whats best page if the answer is yes', () => {
+    it('should redirect to children not safe if the answer is yes', () => {
       return request(app)
         .post(paths.CHILDREN_SAFETY_CHECK)
         .send({ [formFields.CHILDREN_SAFETY_CHECK]: 'Yes' })
         .expect(302)
-        .expect('location', paths.DO_WHATS_BEST);
+        .expect('location', paths.CHILDREN_NOT_SAFE);
     });
 
-    it('should redirect to children not sage page if the answer is no', () => {
+    it('should redirect to do whats best page page if the answer is no', () => {
       return request(app)
         .post(paths.CHILDREN_SAFETY_CHECK)
         .send({ [formFields.CHILDREN_SAFETY_CHECK]: 'No' })
+        .expect(302)
+        .expect('location', paths.SAFETY_CHECK);
+    });
+
+    it('should redirect to children not safe if the answer is I\'m not sure', () => {
+      return request(app)
+        .post(paths.CHILDREN_SAFETY_CHECK)
+        .send({ [formFields.CHILDREN_SAFETY_CHECK]: 'notSure' })
         .expect(302)
         .expect('location', paths.CHILDREN_NOT_SAFE);
     });

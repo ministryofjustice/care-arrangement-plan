@@ -34,7 +34,7 @@ test.describe('Session Expiry', () => {
     await page.context().clearCookies();
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
-    await expect(page).toHaveURL(/\/safety-check/);
+    await expect(page).toHaveURL(/\/children-safety-check/);
   });
 
   test('should redirect deep-linked task list page to start after session expires', async ({ page }) => {

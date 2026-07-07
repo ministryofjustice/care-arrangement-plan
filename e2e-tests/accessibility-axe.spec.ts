@@ -74,9 +74,9 @@ test.describe('Accessibility - Axe Core Scanning', () => {
     await page.getByRole('button', { name: /start now/i }).click();
 
     // Navigate to a form page
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     await page.getByRole('checkbox', { name: /I will put my children.s needs first/i }).check();
     await page.getByRole('button', { name: /continue/i }).click();
@@ -101,9 +101,9 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   test('should have error summary with appropriate ARIA attributes', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     await page.getByRole('checkbox', { name: /I will put my children.s needs first/i }).check();
     await page.getByRole('button', { name: /continue/i }).click();
@@ -158,9 +158,9 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   test('should indicate required fields for screen readers', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     await page.getByRole('checkbox', { name: /I will put my children.s needs first/i }).check();
     await page.getByRole('button', { name: /continue/i }).click();
@@ -264,14 +264,14 @@ test.describe('Accessibility - Axe Core Scanning', () => {
     let scanResults = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
     expect(scanResults.violations).toEqual([]);
 
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Children safety check page
     scanResults = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
     expect(scanResults.violations).toEqual([]);
 
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Do what's best page

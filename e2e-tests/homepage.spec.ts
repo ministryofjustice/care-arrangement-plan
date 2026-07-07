@@ -32,7 +32,7 @@ test.describe('Homepage', () => {
     const startButton = page.getByRole('button', { name: /start now/i });
     await startButton.click();
 
-    // When USE_AUTH=false, goes directly to safety check
-    await expect(page).toHaveURL(/\/safety-check/);
+    // When USE_AUTH=false, goes directly to children safety check
+    await expect(page).toHaveURL(/\/children-safety-check/);
   });
 });

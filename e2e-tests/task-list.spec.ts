@@ -4,10 +4,10 @@ test.describe('Task List', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
-    // With USE_AUTH=false, goes directly to safety-check
-    await page.getByLabel(/yes/i).first().check();
+    // With USE_AUTH=false, goes directly to children-safety-check
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
   });
 

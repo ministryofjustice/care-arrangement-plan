@@ -4,6 +4,7 @@ import { verifyBackNavigation, verifyForwardNavigation, verifyHomeNavigation } f
 import { taskListSections, staticPages } from './fixtures/test-data';
 import {
   startJourney,
+  goToSafetyCheck,
   completeSafetyChecks,
   completeOnboardingFlow,
   fillNumberOfChildren,
@@ -12,19 +13,16 @@ import {
 } from './fixtures/test-helpers';
 
 test.describe('Browser Navigation - Onboarding Flow', () => {
-  test('should navigate back from children-safety-check to safety-check', async ({ page, browserName }) => {
+  test('should navigate back from safety-check to children-safety-check', async ({ page, browserName }) => {
     await startJourney(page);
-
-    await page.getByLabel(/yes/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-    await expect(page).toHaveURL(/\/children-safety-check/);
+    await goToSafetyCheck(page);
 
     await verifyBackNavigation(
       page,
-      /\/safety-check/,
+      /\/children-safety-check/,
       async () => {
-        const yesRadio = page.getByLabel(/yes/i).first();
-        await expect(yesRadio).toBeChecked();
+        const noRadio = page.getByLabel(/no/i).first();
+        await expect(noRadio).toBeChecked();
       }
     );
 
@@ -32,24 +30,24 @@ test.describe('Browser Navigation - Onboarding Flow', () => {
     // don't occur with normal human-speed clicking. Reload to reset form state.
     if (browserName === 'firefox') {
       await page.reload();
-      await page.getByLabel(/yes/i).first().click();
+      await page.getByLabel(/no/i).first().click();
     }
 
     // Verify we can proceed forward
     await page.getByRole('button', { name: /continue/i }).click();
-    await expect(page).toHaveURL(/\/children-safety-check/);
+    await expect(page).toHaveURL(/\/safety-check/);
   });
 
-  test('should navigate back from do-whats-best to children-safety-check', async ({ page, browserName }) => {
+  test('should navigate back from do-whats-best to safety-check', async ({ page, browserName }) => {
     await startJourney(page);
     await completeSafetyChecks(page);
 
     await verifyBackNavigation(
       page,
-      /\/children-safety-check/,
+      /\/safety-check/,
       async () => {
-        const yesRadio = page.getByLabel(/yes/i).first();
-        await expect(yesRadio).toBeChecked();
+        const noRadio = page.getByLabel(/no/i).first();
+        await expect(noRadio).toBeChecked();
       }
     );
 
@@ -182,22 +180,24 @@ test.describe('Browser Navigation - Alternative Paths', () => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
 
-    await page.getByLabel(/no/i).first().check();
+    await goToSafetyCheck(page);
+
+    await page.getByLabel(/yes/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     await verifyBackNavigation(
       page,
       /\/safety-check/,
       async () => {
-        const noRadio = page.getByLabel(/no/i).first();
-        await expect(noRadio).toBeChecked();
+        const yesRadio = page.getByLabel(/yes/i).first();
+        await expect(yesRadio).toBeChecked();
       }
     );
 
     // Change answer and verify different path
-    await page.getByLabel(/yes/i).first().check();
+    await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
-    await expect(page).toHaveURL(/\/children-safety-check/);
+    await expect(page).toHaveURL(/\/do-whats-best/);
   });
 
   test('should navigate back from children-not-safe page', async ({ page }) => {
@@ -207,15 +207,12 @@ test.describe('Browser Navigation - Alternative Paths', () => {
     await page.getByLabel(/yes/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
 
-    await page.getByLabel(/no/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
-
     await verifyBackNavigation(
       page,
       /\/children-safety-check/,
       async () => {
-        const noRadio = page.getByLabel(/no/i).first();
-        await expect(noRadio).toBeChecked();
+        const yesRadio = page.getByLabel(/yes/i).first();
+        await expect(yesRadio).toBeChecked();
       }
     );
   });
@@ -299,11 +296,11 @@ test.describe('Browser Navigation - Complex Scenarios', () => {
       { url: /\/do-whats-best/, checks: async () => {
         await expect(page.getByRole('checkbox', { name: /I will put my children.s needs first/i })).toBeChecked();
       }},
-      { url: /\/children-safety-check/, checks: async () => {
-        await expect(page.getByLabel(/yes/i).first()).toBeChecked();
-      }},
       { url: /\/safety-check/, checks: async () => {
-        await expect(page.getByLabel(/yes/i).first()).toBeChecked();
+        await expect(page.getByLabel(/no/i).first()).toBeChecked();
+      }},
+      { url: /\/children-safety-check/, checks: async () => {
+        await expect(page.getByLabel(/no/i).first()).toBeChecked();
       }},
     ];
 
@@ -365,9 +362,11 @@ test.describe('Browser Navigation - Complex Scenarios', () => {
     // Navigate back step by step and verify each page
     await verifyBackNavigation(page, /\/court-order-check/);
     await verifyBackNavigation(page, /\/do-whats-best/);
+    await verifyBackNavigation(page, /\/safety-check/);
     await verifyBackNavigation(page, /\/children-safety-check/);
 
     // Navigate forward step by step and verify each page
+    await verifyForwardNavigation(page, /\/safety-check/);
     await verifyForwardNavigation(page, /\/do-whats-best/);
     await verifyForwardNavigation(page, /\/court-order-check/);
     await verifyForwardNavigation(page, /\/number-of-children/);
@@ -473,10 +472,9 @@ test.describe('Browser Navigation - Flash Message Redirects', () => {
   test('should allow back navigation when redirected with "complete this page" message', async ({ page }) => {
     // Start journey and complete only the first step
     await startJourney(page);
-    await page.getByLabel(/yes/i).first().check();
-    await page.getByRole('button', { name: /continue/i }).click();
+    await goToSafetyCheck(page);
 
-    // Now at children-safety-check, try to jump ahead to about-the-children
+    // Now at safety-check, try to jump ahead to about-the-children
     await page.goto('/about-the-children');
 
     // Should be redirected with flash message

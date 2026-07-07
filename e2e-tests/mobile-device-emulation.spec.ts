@@ -27,12 +27,12 @@ for (const device of mobileDevices) {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).tap();
 
-      // safety-check
-      await page.getByLabel(/yes/i).first().check();
+      // children-safety-check
+      await page.getByLabel(/no/i).first().check();
       await page.getByRole('button', { name: /continue/i }).tap();
 
-      // children-safety-check
-      await page.getByLabel(/yes/i).first().check();
+      // safety-check
+      await page.getByLabel(/no/i).first().check();
       await page.getByRole('button', { name: /continue/i }).tap();
 
       // do-whats-best

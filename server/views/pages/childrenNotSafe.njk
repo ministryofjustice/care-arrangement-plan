@@ -23,22 +23,77 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ __('childrenNotSafe.title') }}</h1>
 
-      {{ __('childrenNotSafe.intro') | safe }}
+      <p class="govuk-body">
+        {{ __("childrenNotSafe.content.mayNotBeAppropriate") }}
+      </p>
 
       {{ govukWarningText({
-        text: __('childrenNotSafe.warningText'),
+        text: __('childrenNotSafe.content.warningText'),
         iconFallbackText: __('childrenNotSafe.warningIconFallback')
       }) }}
 
-      {{ __('childrenNotSafe.content') | safe }}
+      <p class="govuk-body">
+        {{ __("childrenNotSafe.content.continueDescription") }}
+      </p>
 
-      <h2 class="govuk-heading-m">{{ __('childrenNotSafe.continueTitle') }}</h2>
+      {{ govukButton({
+        text: __("continue"),
+        href: paths.SAFETY_CHECK,
+        classes: "govuk-button--primary"
+      }) }}
 
-      <p>{{ __('childrenNotSafe.continue') }}</p>
+      <h2 class="govuk-heading-m">
+        {{ __("childrenNotSafe.content.getHelpProtecting.title") }}
+      </h2>
+      <p class="govuk-body">
+        {{ __("childrenNotSafe.content.getHelpProtecting.importantToRemember") }}
+      </p>
+      <p class="govuk-body">
+        {{ __("childrenNotSafe.content.getHelpProtecting.experiencedAbuse") | safe }}
+      </p>
+      <p class="govuk-body">
+        {{ __("childrenNotSafe.content.getHelpProtecting.findOut") | safe }}
+      </p>
 
-      <a href="{{ paths.DO_WHATS_BEST }}" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
-        {{ __('continue') }}
-      </a>
+      <h2 class="govuk-heading-m">
+        {{ __("childrenNotSafe.content.helpAndSupport.title") }}
+      </h2>
+      <p class="govuk-body">
+        {{ __("childrenNotSafe.content.helpAndSupport.description") }}
+      </p>
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-summary-list__key-mediation-width">
+          </dt>
+          <dd class="govuk-summary-list__value">
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-summary-list__key-mediation-width">
+            {{ __("childrenNotSafe.content.helpAndSupport.table.rowOne.heading") | safe }}
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ __("childrenNotSafe.content.helpAndSupport.table.rowOne.data") | safe }}
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-summary-list__key-mediation-width">
+            {{ __("childrenNotSafe.content.helpAndSupport.table.rowTwo.heading") | safe }}
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ __("childrenNotSafe.content.helpAndSupport.table.rowTwo.data") | safe }}
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-summary-list__key-mediation-width">
+            {{ __("childrenNotSafe.content.helpAndSupport.table.rowThree.heading") | safe }}
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ __("childrenNotSafe.content.helpAndSupport.table.rowThree.data") | safe }}
+          </dd>
+        </div>
+      </dl>
     </div>
   </div>
 {% endblock %}
