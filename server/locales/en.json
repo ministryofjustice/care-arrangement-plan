@@ -258,7 +258,7 @@
         "title": "Get help protecting yourself and your children",
         "content": {
           "abusiveRelationship": "You may have been in an abusive relationship. Domestic abuse or violence is a crime. You can find out how to <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">recognise domestic abuse</a>.",
-          "domesticAbuse": "If you have experienced any kind of domestic abuse, you can <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#get-a-court-order-to-protect-you-or-your-child\">get a court order to protect you or your child</a>.",
+          "domesticAbuse": "If you have experienced any kind of domestic abuse, you can apply to <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#get-a-court-order-to-protect-you-or-your-child\">get a court order to protect you or your child</a>.",
           "citizensAdvice": "Citizens Advice has <a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">advice on making child arrangements when there's been domestic abuse</a>.",
           "findOut": "Find out <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help\">how to get help with domestic abuse</a>.",
           "specificHelp": "If you want to access help specifically to cater to your background and needs or want support and help for specific types of abuse there are several organisations that can help - see <a href=\"https://www.gov.uk/government/publications/domestic-abuse-get-help-for-specific-needs-or-situations/domestic-abuse-specialist-sources-of-support\">Domestic abuse: specialist sources of support</a>."
@@ -307,7 +307,7 @@
       "getHelpProtecting": {
         "title": "Get help protecting your children",
         "importantToRemember": "It is important to remember that there is help and support available to you if your children are unsafe.",
-        "experiencedAbuse": "If you have experienced any kind of domestic abuse, you can <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#get-a-court-order-to-protect-you-or-your-child\">get a court order to protect you or your child</a>.",
+        "experiencedAbuse": "If you or your child(ren) have experienced any kind of domestic abuse, you can apply to <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#get-a-court-order-to-protect-you-or-your-child\">get a court order to protect you or your child</a>.",
         "findOut": "You can find out <a href=\"https://www.gov.uk/guidance/international-parental-child-abduction\">what to do if you believe a child could be taken or has been taken abroad without your permission</a>."
       },
       "helpAndSupport": {
