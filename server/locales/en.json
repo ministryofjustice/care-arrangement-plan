@@ -422,7 +422,7 @@
       "title": "On which days will overnights happen?",
       "emptyError": "Select which days the children will stay overnight",
       "arrangementMissingError": "Enter details of the overnight arrangements",
-      "multiSelectedError": "Describe what other arrangement you are proposing"
+      "multiSelectedError": "Describe the arrangement"
     },
     "willDaytimeVisitsHappen": {
       "title": "Will the children do daytime visits with {{{ adult }}}?",

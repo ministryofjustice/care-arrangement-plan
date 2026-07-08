@@ -351,8 +351,8 @@
   "numberOfChildren": {
     "title": "Ar gyfer faint o blant y mae hwn?",
     "emptyError": "Nodwch faint o blant y mae'r cytundeb hwn ar eu cyfer",
-    "tooFewError": "Your agreement must be for at least 1 child",
-    "tooManyError": "Your agreement cannot be for more than 6 children",
+    "tooFewError": "Rhaid i'ch cytundeb fod ar gyfer o leiaf 1 plentyn",
+    "tooManyError": "Ni all eicn cytundeb fod am fwy na 6 plentyn",
     "notANumberError": "Defnyddiwch rifau’n unig"
   },
   "about": {
@@ -368,32 +368,32 @@
     "multipleFirstName3": "Enw cyntaf y pumed plentyn",
     "multipleFirstName4": "Enw cyntaf y chweched plentyn",
     "multipleFirstName5": "Enw cyntaf y seithfed plentyn",
-    "child-name0Error": "Enter first name for the first child",
-    "child-name1Error": "Enter first name for the second child",
-    "child-name2Error": "Enter first name for the third child",
-    "child-name3Error": "Enter first name for the fourth child",
-    "child-name4Error": "Enter first name for the fifth child",
-    "child-name5Error": "Enter first name for the sixth child"
+    "child-name0Error": "Rhowch enw cyntaf y plentyn cyntaf",
+    "child-name1Error": "Rhowch enw cyntaf yr ail blentyn",
+    "child-name2Error": "Rhowch enw cyntaf y trydydd plentyn",
+    "child-name3Error": "Rhowch enw cyntaf y pedwerydd plentyn",
+    "child-name4Error": "Rhowch enw cyntaf y pumed plentyn",
+    "child-name5Error": "Rhowch enw cyntaf y chweched plentyn"
   },
   "aboutTheAdults": {
     "title": "Ynglŷn â'r oedolion a fydd yn gofalu am y plant",
     "initialParentFirstName": "Eich enw cyntaf",
     "initialParentFirstNameHint": "Os ydych chi'n ateb y cwestiynau hyn ar ran rhywun arall, nodwch eu henw cyntaf",
     "secondaryParentFirstName": "Enw cyntaf y rhiant neu'r gofalwr arall",
-    "initialError": "Enter your first name or the name of the person you represent",
-    "secondaryError": "Enter the name of the other parent or carer",
-    "sameNameError": "Enter a way to tell the adults apart"
+    "initialError": "Nodwch eich enw cyntaf neu enw'r unigolyn rydych yn ei gynrychioli",
+    "secondaryError": "Nodwch enw'r rhiant neu'r gofalwr arall",
+    "sameNameError": "Nodwch ffordd i wahaniaethu rhwng yr oedolion"
   },
   "taskList": {
     "title": "Cynllun trefniadau plant ar gyfer {{{ names }}}",
     "completed": "Wedi'i gwblhau",
-    "incomplete": "Heb ei gwblhau",
+    "incomplete": "Anghyflawn",
     "cannotStart": "Methu dechrau eto",
-    "whoThePlanIsFor": "Ar gyfer pwy y mae'r cynllun",
-    "theChildren": "The children",
+    "whoThePlanIsFor": "Ar gyfer pwy mae'r cynllun",
+    "theChildren": "Y plant",
     "whoIsUsing": "Pwy sy'n defnyddio’r gwasanaeth hwn?",
     "livingAndVisiting": "Byw ac ymweld",
-    "handoverAndHolidays": "Handovers and holidays",
+    "handoverAndHolidays": "Trosglwyddo a gwyliau",
     "specialDays": "Dyddiau arbennig",
     "otherThings": "Pethau eraill",
     "decisionMaking": "Gwneud penderfyniadau"
@@ -403,16 +403,16 @@
       "title": "Ble fydd y plant yn treulio'r rhan fwyaf o'u hamser?",
       "with": "Gyda {{{ adult }}}",
       "split": "Byddant yn rhannu eu hamser rhwng {{{ initialAdult }}} a {{{ secondaryAdult }}}",
-      "anotherArrangement": "Trefniant arall<span class=\"govuk-visually-hidden\">Selecting this will reveal an additional input</span>",
-      "emptyError": "Choose where the children will spend most of their time",
-      "arrangementMissingError": "Describe the living arrangement you are proposing"
+      "anotherArrangement": "Trefniant arall<span class=\"govuk-visually-hidden\">Bydd dewis hwn yn amlygu maes arall</span>",
+      "emptyError": "Dewiswch ble fydd y plant yn treulio'r rhan fwyaf o'u hamser",
+      "arrangementMissingError": "Disgrifiwch y trefniant byw rydych chi'n ei gynnig"
     },
     "whichSchedule": {
       "title": "Pa amserlen sy'n gweddu orau i anghenion y plant?",
-      "getIdeas": "Awgrymiadau amserlen",
+      "getIdeas": "Syniadau amserlennu",
       "commonSchedules": "<p>Dyma rai amserlenni cyffredin a all weithio'n dda i blant.</p><p><b>Bob yn ail wythnos</b><br/>Bydd y plant yn treulio un wythnos mewn un cartref a'r wythnos nesaf yn y llall.</p><p><b>Amserlen 2-2-3</b><br/>Bydd y plant yn treulio dau ddiwrnod mewn un cartref, dau ddiwrnod yn y llall, yna'n ôl i'r cartref cyntaf am 3 diwrnod gan gynnwys y penwythnos.</p><p><b>Amserlen 4-4-3</b><br/>Bydd y plant yn treulio tri diwrnod mewn un cartref ac yna pedwar diwrnod yn y llall. Yr wythnos wedyn bydd fel arall.</p><p><b>Amserlen 2-2-5-5</b><br/>Bydd y plant yn treulio dau ddiwrnod mewn un cartref, yna dau ddiwrnod yn y llall. Ar ôl hynny byddant yn treulio pum diwrnod mewn un cartref, yna pum diwrnod yn y llall.</p>",
       "exactSplitWarning": "Nid yw rhannu amser yn gyfartal rhwng dau gartref bob amser yn addas i fudd gorau plant.",
-      "error": "Describe which schedule will best meet the children's needs"
+      "error": "Disgrifiwch pa amserlen fydd yn gweddu orau i anghenion y plant"
     },
     "willOvernightsHappen": {
       "title": "A fydd y plant yn aros dros nos gyda {{{ adult }}}?",
@@ -422,7 +422,7 @@
       "title": "Ar pa ddyddiau fydd aros dros nos yn digwydd?",
       "emptyError": "Dewiswch pa ddyddiau fydd y plant yn aros dros nos",
       "arrangementMissingError": "Nodwch fanylion y trefniadau dros nos",
-      "multiSelectedError": "Describe what other arrangement you are proposing"
+      "multiSelectedError": "Disgrifiwch y trefniadau"
     },
     "willDaytimeVisitsHappen": {
       "title": "A fydd y plant yn ymweld â {{{ adult }}} yn ystod y dydd?",
@@ -448,8 +448,8 @@
       "neutralLocation": "Lleoliad niwtral",
       "atHome": "Yn nhŷ {{{ adult }}}",
       "atSchool": "Yn yr ysgol",
-      "other": "Other",
-      "otherLabel": "Describe where handover will take place",
+      "other": "Arall",
+      "otherLabel": "Disgrifiwch ble fydd y trosglwyddo'n digwydd",
       "someoneElse": "Someone else will manage handover, such as a grandparent",
       "someoneElseName": "Name of the person who will manage handover",
       "emptyError": "Dewiswch ble mae'r trosglwyddo'n digwydd",
@@ -497,8 +497,8 @@
       "phone": "Galwad ffôn",
       "email": "Trwy e-bost",
       "app": "Defnyddio ap rhianta",
-      "emptyError": "Select a method for how you both communicate changes",
-      "descriptionEmptyError": "Describe how you will communicate changes",
+      "emptyError": "Dewiswch sut y dylid cyfathrebu newidiadau munud olaf?",
+      "descriptionEmptyError": "Disgrifiwch sut byddwch yn cyfathrebu unrhyw newidiadau",
       "selectOneOptionError": "Describe what other arrangement you are proposing"
     },
     "planLongTermNotice": {
@@ -506,7 +506,7 @@
       "weeks": "{{ number }} wythnos",
       "sometimesYouNeedToPlanAhead": "Weithiau efallai y bydd angen i chi gynllunio ymhell ymlaen llaw. Er enghraifft, os ydych chi eisiau cynllunio gwyliau yn ystod amser nad ydych chi fel arfer yn ei dreulio gyda'r plant.",
       "selectOneOptionError": "Dewiswch faint o rybudd sydd ei angen ar gyfer gwneud newidiadau i drefniadau hirdymor",
-      "descriptionEmptyError": "Describe what is the other arrangement you are proposing"
+      "descriptionEmptyError": "Disgrifiwch beth yw'r trefniant arall rydych yn ei gynnig"
     },
     "planReview": {
       "title": "Pryd hoffech chi adolygu'r cynllun hwn?",
@@ -515,9 +515,9 @@
       "months": "Mis",
       "years": "Blwyddyn",
       "bothEmptyError": "Nodwch fisoedd neu flynyddoedd",
-      "bothFilledError": "Enter months or years, not both",
-      "notNumberError": "Your answer must be a number",
-      "notIntError": "Your answer must be a whole number. For example, 3."
+      "bothFilledError": "Nodwch fisoedd neu flynyddoedd nid y ddau",
+      "notNumberError": "Rhaid i'ch ateb fod yn rif",
+      "notIntError": "Rhaid i'ch ateb fod yn rif cyflawn. Er enghraifft, 3."
     }
   },
   "checkYourAnswers": {
@@ -547,8 +547,8 @@
       "willChangeDuringSchoolHolidays": "if the arrangements will change during school holidays",
       "howChangeDuringSchoolHolidays": "how the arrangements will change during school holidays",
       "itemsForChangeover": "what items need to go between households",
-      "whatWillHappen": "what will happen on special days",
-      "whatOtherThingsMatter": "what other things matter to your children",
+      "whatWillHappen": "Beth fydd yn digwydd ar ddyddiau arbennig?",
+      "whatOtherThingsMatter": "Pa bethau eraill sy'n bwysig i'ch plant?",
       "planLastMinuteChanges": "how last-minute changes should be communicated",
       "planLongTermNotice": "how much notice you should give to change long-term arrangements",
       "planReview": "when the children’s needs will change"
@@ -557,15 +557,15 @@
   "sharePlan": {
     "nextSteps": "Y camau nesaf",
     "title": "Rydych chi wedi creu cynllun trefniadau plant arfaethedig",
-    "whatToDoNext": "What to do next",
+    "whatToDoNext": "Beth nesaf",
     "sendToSecondary": "Lawrlwythwch fersiwn PDF neu HTML hygyrch o'r cynllun hwn a'i rannu gyda {{{ otherAdult }}}.",
     "collaborate": "Gallwch gydweithredu â {{{ otherAdult }}} i greu fersiwn rydych chi'ch dau yn cytuno ag o.",
     "downloadPlanButton": "Lawrlwytho'r cynllun fel PDF",
     "downloadHtml": "Lawrlwytho fel HTML (hygyrch)",
-    "ifTheyDoNotRespond": "If there's no response",
-    "tryMediation": "If {{{ otherAdult }}} does not respond or you can't make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
-    "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.",
-    "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
+    "ifTheyDoNotRespond": "Os nad ydynt yn ymateb",
+    "tryMediation": "Os nad yw {{{ otherAdult }}} yn ymateb neu os na allwch ddod i gytundeb rhyngoch chi'ch hunain, gallech roi cynnig ar gyfryngu neu ffordd arall o gytuno y tu allan i'r llys.",
+    "aMediatorIs":"Mae cyfryngwr yn weithiwr proffesiynol a fydd yn gweithio gyda chi i'ch helpu i wneud penderfyniadau yn seiliedig ar fuddiannau gorau eich plentyn. Maen nhw'n gwrando ar y ddau ohonoch ac yn cymryd ymagwedd niwtral.",
+    "ifYouCannotAgree": "Rhagor o wybodaeth am beth i'w wneud os na allwch gytuno",
     "whatWeAreTelling": {
       "proposedPlan": "{{{ senderName }}} has suggested a child arrangements plan",
       "senderHasUsedThe": "{{{ senderName }}} used the Child Arrangements Plan service (https://propose-child-arrangements-plan.service.gov.uk/) on GOV.UK to suggest a plan for how you both might look after {{{ childrenNames }}}.",
