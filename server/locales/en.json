@@ -136,13 +136,15 @@
     "title": "Contact us",
     "reportProblem": "To report a problem or suggest improvements to this service, you can email:",
     "onlyUseForFeedback": "This email address should only be used for feedback on the digital service.",
-    "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created."
+    "cannotAnswerQuestions": "We cannot answer any questions about child arrangements."
   },
   "cookies": {
     "title": "Cookies",
     "name": "Name",
     "purpose": "Purpose",
     "expires": "Expires",
+    "yes": "Yes",
+    "no": "No",
     "aboutCookies": "<p>Propose a child arrangements plan puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the service.</p><p>Cookies are used to:</p><ul class=\"govuk-list govuk-list--bullet\"><li>remember your progress</li><li>measure how you use the service so it can be updated and improved based on your needs</li></ul><p>Propose a child arrangements plan cookies aren't used to identify you personally.</p><p>You'll normally see a message before we store a cookie on your computer.</p><p>Find out more about <a href=\"https://www.aboutcookies.org/\">how to manage cookies</a>.</p>",
     "howCookiesAreUsed": "How cookies are used in this service",
     "essentialCookies": "Essential cookies",
@@ -156,7 +158,7 @@
     "optionalCookies": "Analytics cookies (optional)",
     "aboutOptionalCookies": "<h4 class=\"govuk-heading-s\">Measuring service usage (Google Analytics)</h4><p>We use Google Analytics software to collect information about how you use Propose a child arrangements plan. We do this to help make sure the service meets the needs of its users and to help us make improvements</p><p>Google Analytics stores information about:</p><ul class=\"govuk-list govuk-list--bullet\"><li>the pages you visit</li><li>how long you spend on each page</li><li>how you got to the service</li><li>what you click on while you’re visiting the service</li></ul><p>We don't collect or store your personal information (for example your name or address) so this information can't be used to identify who you are.</p><p>Google Analytics sets the following cookies:</p>",
     "acceptOptionalCookies": "Do you want to accept analytics cookies?",
-    "_gaCookiePurpose": "Checks if you’ve visited the service before. This helps us count how many people visit our site.",
+    "_gaCookiePurpose": "This helps us count how many people visit Get help finding a child arrangement option by tracking if you've visited before",
     "gaCookiesExpiry": "3 years",
     "_ga_IdCookiePurpose": "Used by Google Analytics to find and track an individual session with your device.",
     "opensearchAnalytics": {
@@ -211,22 +213,27 @@
   },
   "termsAndConditions": {
     "title": "Terms and conditions",
-    "agree": "By using this service you agree to these terms and conditions.",
     "responsibilityForTheServiceHeading": "Responsibility for the service",
-    "accurateAndComplete": "The Ministry of Justice (MOJ) runs this service. We try to make sure the information we provide is accurate and complete and the service is always available and virus free.",
+    "accurateAndComplete": "The Ministry of Justice (MOJ) runs this service. We try to make sure the information we provide is accurate and complete and the service is always available and virus free.",
     "noLiabilityFor": "The MoJ accepts no liability for:",
     "unableToAccess": "you being unable to access the service (for example due to high demand or because we've taken it down for maintenance)",
     "indirectDamages": "indirect damages arising from you using the service or relying on its content",
     "externalSites": "the content and availability of external websites that link to the service or which link from it",
     "informationAboutYouHeading": "Information about you and your visits",
-    "informationAboutYou": "We collect information about you in accordance with our <a href={{ privacyUrl }}>privacy policy</a> and our <a href={{ cookieUrl }}>cookie policy</a>. By using this service you agree to us collecting this information and confirm that any data you provide is accurate.",
+    "collectInformation": "We collect and process information related to:",
+    "collectInformationList": {
+      "firstItem": "child arrangement planning to help you identify child arrangement planning options suitable for your circumstances",
+      "secondItem": "how you use the service to help make sure it is meeting the needs of its users and to help us make improvements"
+    },
+    "agreeToUs": "By using this service you agree to us collecting this information.",
+    "informationAboutYou": "However, we do not collect personally identifiable information (PII), such as names, addresses, or contact details, in accordance with our <a href={{ privacyUrl }}>privacy notice</a> and <a href={{ cookieUrl }}>cookie policy</a>.",
     "limitationsHeading": "Limitations of the service",
-    "limitations": "Using this service does not guarantee that you will be able to resolve your child arrangements without going to court. While this tool is designed to help you create a child arrangement plan, some cases may need to be resolved in other ways, perhaps by going to court.",
-    "notLegallyEnforceable": "Any agreement you reach through this service is not legally enforceable in a court. This means that there is no legal requirement for you or the other parent or carer to comply with what you have agreed.",
+    "limitations": "Using this service does not guarantee that you will be able to resolve your child arrangements.",
     "misuseHeading": "Misuse",
-    "misuse": "You must not impersonate another person, provide false or misleading information, or use this service on behalf of someone else without their consent.  ",
+    "misuse": "You must not impersonate another person, provide false or misleading information, or use this service on behalf of someone else without their consent.",
     "restrictionsOnUseHeading": "Restrictions on use",
-    "restrictionsOnUse": "If you have a court order in place that restricts contact with the other parent or child, such as a no contact order, non-molestation order, or any other legal restriction, you must not use this service to contact them. Doing so could be a breach of the order and may have legal consequences. If you are unsure whether a legal order affects your ability to use this service, seek legal advice before proceeding."
+    "restrictionsOnUse": "If you have a court order in place that restricts your contact with the other parent or child, such as a no contact order, non-molestation order, or any other legal restriction, you must not use this service to contact them.",
+    "breachOfTheOrder": "Doing so could be a breach of the order and may have legal consequences. If you are unsure whether a court order or other legal restriction affects your ability to use this service, seek legal advice before proceeding."
   },
   "safetyCheck": {
     "title": "Have you experienced abuse from your ex-partner?",
@@ -422,7 +429,7 @@
       "title": "On which days will overnights happen?",
       "emptyError": "Select which days the children will stay overnight",
       "arrangementMissingError": "Enter details of the overnight arrangements",
-      "multiSelectedError": "Describe what other arrangement you are proposing"
+      "multiSelectedError": "Describe the arrangement"
     },
     "willDaytimeVisitsHappen": {
       "title": "Will the children do daytime visits with {{{ adult }}}?",
@@ -601,7 +608,7 @@
       "specificIssueOrder": "specific issue order",
       "prohibitedStepsOrder": "prohibited steps order",
       "protectiveOrder": "protective order such as a non-molestation order, occupation order or a domestic abuse protection order",
-      "anyOther": "any other order restricting contact between you and the other parent or the children ",
+      "anyOther": "any other order restricting contact between you and the other parent or the children",
       "toChange": "To change or enforce an existing child arrangements order, visit https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order.",
       "moreInfoHeading": "Get more information",
       "moreInfo": "Use GOV.UK to find more information, for example:",
