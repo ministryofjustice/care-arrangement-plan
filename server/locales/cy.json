@@ -26,7 +26,7 @@
   "aAndB": "{{{ itemA }}} and {{{ itemB }}}",
   "describeArrangement": "Disgrifiwch y trefniant",
   "selectAllThatApply": "Dewiswch bob un sy'n berthnasol",
-  "phaseBannerText": "Mae hwn yn wasanaeth newydd.",
+  "phaseBannerText": "Mae hwn yn wasanaeth newydd - bydd eich <a href=\"{{ feedbackUrl }}\" class=\"govuk-link--no-visited-state\">adborth</a> yn ein helpu i'w wella.",
   "days": {
     "monday": "Monday",
     "tuesday": "Tuesday",
@@ -134,9 +134,9 @@
   },
   "contactUs": {
     "title": "Cysylltu â ni",
-    "reportProblem": "I roi gwybod am broblem neu i awgrymu gwelliannau i'r gwasanaeth hwn, gallwch anfon e-bost at:",
+    "reportProblem": "I adrodd am broblem neu awgrymu gwelliannau i'r gwasanaeth hwn, gallwch anfon e-bost i:",
     "onlyUseForFeedback": "Dim ond i roi adborth ar y gwasanaeth digidol y dylid defnyddio'r cyfeiriad e-bost hwn.",
-    "cannotAnswerQuestions": "Ni allwn ateb unrhyw gwestiynau am gynlluniau trefniadau plant sydd wedi eu creu'n barod."
+    "cannotAnswerQuestions": "Ni allwn ateb cwestiynau am drefniadau plant."
   },
   "cookies": {
     "title": "Cwcis",
@@ -213,22 +213,27 @@
   },
   "termsAndConditions": {
     "title": "Telerau ac amodau",
-    "agree": "Trwy ddefnyddio'r gwasanaeth hwn rydych yn cytuno i'r telerau ac amodau hyn.",
     "responsibilityForTheServiceHeading": "Cyfrifoldeb am y gwasanaeth",
-    "accurateAndComplete": "Y Weinyddiaeth Gyfiawnder sy'n cynnal y gwasanaeth hwn. Rydym yn ceisio sicrhau bod yr wybodaeth a ddarperir gennym yn gywir ac yn gyflawn a bod y gwasanaeth bob amser ar gael a heb firysau.",
-    "noLiabilityFor": "Nid yw'r Weinyddiaeth Gyfiawnder yn derbyn unrhyw gyfrifoldeb:",
-    "unableToAccess": "os nad ydych yn gallu cael mynediad i'r gwasanaeth (er enghraifft oherwydd galw mawr neu oherwydd ein bod wedi'i atal ar gyfer gwaith cynnal)",
-    "indirectDamages": "niwed anuniongyrchol sy'n codi drwy ddefnyddio'r gwasanaeth neu'n dibynnu ar y cynnwys",
-    "externalSites": "cynnwys ac argaeledd gwefannau allanol â dolenni i'r gwasanaeth neu o'r gwasanaeth",
-    "informationAboutYouHeading": "Gwybodaeth amdanoch chi a'ch ymweliadau â'r wefan",
-    "informationAboutYou": "Rydym yn casglu gwybodaeth amdanoch yn unol â'n <a href={{ privacyUrl }}>polisi preifatrwydd</a> a'n <a href={{ cookieUrl }}>polisi cwcis</a>. Drwy ddefnyddio'r gwasanaeth hwn rydych yn cytuno i ni gasglu'r wybodaeth hon a chadarnhau bod unrhyw ddata a ddarperir gennych yn gywir.",
+    "accurateAndComplete": "Y Weinyddiaeth Gyfiawnder (MOJ) sy'n rhedeg y gwasanaeth hwn. Rydym yn ceisio sicrhau bod yr wybodaeth a ddarparwn yn gywir ac yn gyflawn a bod y gwasanaeth wastad ar gael ac yn rhydd o unrhyw firysau.",
+    "noLiabilityFor": "Nid yw'r MoJ yn cymryd cyfrifoldeb am:",
+    "unableToAccess": "chi'n methu â chael mynediad at y gwasanaeth (er enghraifft, oherwydd galw uchel neu oherwydd ein bod wedi atal y gwasanaeth i gynnal gwaith cynnal a chadw)",
+    "indirectDamages": "niwed anuniongyrchol sy'n codi o chi'n defnyddio'r gwasanaeth neu'n dibynnu ar ei gynnwys",
+    "externalSites": "cynnwys ag argaeledd gwefannau allanol sy'n cysylltu i'r gwasanaeth neu o'r gwasanaeth",
+    "informationAboutYouHeading": "Gwybodaeth amdanoch chi a'ch ymweliadau i'r wefan",
+    "collectInformation": "Rydym yn casglu a phrosesu gwybodaeth sy'n ymwneud â:",
+    "collectInformationList": {
+      "firstItem": "cynllunio trefniadau plant i'ch helpu i adnabod opsiynau cynllunio trefniadau plant sy'n briodol i'ch amgylchiadau chi",
+      "secondItem": "sut i ddefnyddio'r gwasanaeth i sicrhau ei fod yn bodloni anghenion ei ddefnyddwyr a helpu ni i wneud gwelliannau"
+    },
+    "agreeToUs": "Trwy ddefnyddio'r gwasanaeth gwn rydych yn cytuno i ni gasglu'r wybodaeth hon.",
+    "informationAboutYou": "Fodd bynnag, nid ydym yn casglu gwybodaeth ble gellir adnabod rhywun yn bersonol (PII), fel enwau, cyfeiriadau neu fanylion cyswllt, yn unol â'n <a href={{ privacyUrl }}>hysbysiad preifatrwydd</a> a'r <a href={{ cookieUrl }}>polisi cwcis</a>.",
     "limitationsHeading": "Cyfyngiadau'r gwasanaeth",
-    "limitations": "Nid yw defnyddio'r gwasanaeth hwn yn gwarantu y gallwch ddatrys eich trefniadau plant ar y gwasanaeth neu heb fynd i'r llys. Tra bod yr adnodd hwn wedi'i ddylunio i'ch helpu i greu cynllun trefniadau plant, bydd rhai achosion angen eu datrys mewn ffyrdd eraill, efallai drwy fynd i'r llys.",
-    "notLegallyEnforceable": "Nid yw unrhyw drefniant a gyrhaeddir gennych drwy'r gwasanaeth hwn yn cael ei orfodi'n gyfreithiol mewn llys. Mae hyn yn golygu nad oes unrhyw ofyniad cyfreithiol i chi na'r rhiant neu ofalwr arall gydymffurfio gyda'r hyn y cytunwyd arno gennych.",
-    "misuseHeading": "Camddefnyddio",
-    "misuse": "Ni ddylech ddynwared unrhyw berson arall, darparu gwybodaeth ffug neu gamarweiniol na defnyddio'r gwasanaeth hwn ar ran rhywun arall heb eu caniatâd.",
-    "restrictionsOnUseHeading": "Cyfyngu ar ddefnyddio",
-    "restrictionsOnUse": "Os oes gennych orchymyn llys mewn lle sy'n cyfyngu eich cysylltiad gyda'r rhiant arall neu'r plentyn, fel gorchymyn dim cyswllt, gorchymyn rhag molestu neu unrhyw gyfyngiad cyfreithiol arall, ni ddylech ddefnyddio'r gwasanaeth hwn i gysylltu â nhw. Gall gwneud hynny dorri'r gorchymyn a gall olygu canlyniadau cyfreithiol. Os ydych yn ansicr pa un a yw unrhyw orchymyn llys neu gyfyngiad cyfreithiol arall yn effeithio ar eich gallu i ddefnyddio'r gwasanaeth hwn, dylech ofyn am gyngor cyfreithiol cyn parhau."
+    "limitations": "Nid yw defnyddio'r gwasanaeth hwn yn gwarantu y byddwch yn datrys eich problem trefniadau plant.",
+    "misuseHeading": "Camddefnydd",
+    "misuse": "Ni ddylech personadu rhywun arall, darparu gwybodaeth anwir neu gamarweiniol, neu ddefnyddio'r gwasanaeth hwn ar ran rhywun arall heb eu cydsyniad.",
+    "restrictionsOnUseHeading": "Cyfyngiadau ar ddefnydd",
+    "restrictionsOnUse": "Os oes gennych gorchymyn llys mewn lle sy'n cyfyngu ar eich cyswllt gyda'r rhiant arall neu'r plentyn, fel gorchymyn dim cyswllt, gorchymyn rhag molestu, neu unrhyw gyfyngiad cyfreithiol arall, ni ddylech ddefnyddio'r gwasanaeth hwn i gysylltu â nhw.",
+    "breachOfTheOrder": "Gall wneud hynny torri amodau'r gorchymyn a gall fod goblygiadau cyfreithiol. Os ydych yn ansicr p'un a yw gorchymyn neu gyfyngiad cyfreithiol yn effeithio ar eich gallu i ddefnyddio'r gwasanaeth hwn, dylech geisio cyngor cyfreithiol cyn parhau."
   },
   "safetyCheck": {
     "title": "Eich diogelwch",

@@ -4,7 +4,6 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ __('termsAndConditions.title') }}</h1>
-      <p>{{ __('termsAndConditions.agree') }}</p>
 
       <h2 class="govuk-heading-m">{{ __('termsAndConditions.responsibilityForTheServiceHeading') }}</h2>
       <p>{{ __('termsAndConditions.accurateAndComplete') }}</p>
@@ -16,19 +15,26 @@
       </ul>
 
       <h2 class="govuk-heading-m">{{ __('termsAndConditions.informationAboutYouHeading') }}</h2>
+      <p>{{ __('termsAndConditions.collectInformation') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('termsAndConditions.collectInformationList.firstItem') }}</li>
+        <li>{{ __('termsAndConditions.collectInformationList.secondItem') }}</li>
+      </ul>
+      <p>{{ __('termsAndConditions.agreeToUs') }}</p>
+
       <p>
         {{ __('termsAndConditions.informationAboutYou', { privacyUrl: paths.PRIVACY_NOTICE, cookieUrl: paths.COOKIES }) | safe }}
       </p>
 
       <h2 class="govuk-heading-m">{{ __('termsAndConditions.limitationsHeading') }}</h2>
       <p>{{ __('termsAndConditions.limitations') }}</p>
-      <p>{{ __('termsAndConditions.notLegallyEnforceable') }}</p>
 
       <h2 class="govuk-heading-m">{{ __('termsAndConditions.misuseHeading') }}</h2>
       <p>{{ __('termsAndConditions.misuse') }}</p>
 
       <h2 class="govuk-heading-m">{{ __('termsAndConditions.restrictionsOnUseHeading') }}</h2>
       <p>{{ __('termsAndConditions.restrictionsOnUse') }}</p>
+      <p>{{ __('termsAndConditions.breachOfTheOrder') }}</p>
     </div>
   </div>
 {% endblock %}

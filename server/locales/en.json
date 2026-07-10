@@ -136,7 +136,7 @@
     "title": "Contact us",
     "reportProblem": "To report a problem or suggest improvements to this service, you can email:",
     "onlyUseForFeedback": "This email address should only be used for feedback on the digital service.",
-    "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created."
+    "cannotAnswerQuestions": "We cannot answer any questions about child arrangements."
   },
   "cookies": {
     "title": "Cookies",
@@ -213,22 +213,27 @@
   },
   "termsAndConditions": {
     "title": "Terms and conditions",
-    "agree": "By using this service you agree to these terms and conditions.",
     "responsibilityForTheServiceHeading": "Responsibility for the service",
-    "accurateAndComplete": "The Ministry of Justice (MOJ) runs this service. We try to make sure the information we provide is accurate and complete and the service is always available and virus free.",
+    "accurateAndComplete": "The Ministry of Justice (MOJ) runs this service. We try to make sure the information we provide is accurate and complete and the service is always available and virus free.",
     "noLiabilityFor": "The MoJ accepts no liability for:",
     "unableToAccess": "you being unable to access the service (for example due to high demand or because we've taken it down for maintenance)",
     "indirectDamages": "indirect damages arising from you using the service or relying on its content",
     "externalSites": "the content and availability of external websites that link to the service or which link from it",
     "informationAboutYouHeading": "Information about you and your visits",
-    "informationAboutYou": "We collect information about you in accordance with our <a href={{ privacyUrl }}>privacy policy</a> and our <a href={{ cookieUrl }}>cookie policy</a>. By using this service you agree to us collecting this information and confirm that any data you provide is accurate.",
+    "collectInformation": "We collect and process information related to:",
+    "collectInformationList": {
+      "firstItem": "child arrangement planning to help you identify child arrangement planning options suitable for your circumstances",
+      "secondItem": "how you use the service to help make sure it is meeting the needs of its users and to help us make improvements"
+    },
+    "agreeToUs": "By using this service you agree to us collecting this information.",
+    "informationAboutYou": "However, we do not collect personally identifiable information (PII), such as names, addresses, or contact details, in accordance with our <a href={{ privacyUrl }}>privacy notice</a> and <a href={{ cookieUrl }}>cookie policy</a>.",
     "limitationsHeading": "Limitations of the service",
-    "limitations": "Using this service does not guarantee that you will be able to resolve your child arrangements without going to court. While this tool is designed to help you create a child arrangement plan, some cases may need to be resolved in other ways, perhaps by going to court.",
-    "notLegallyEnforceable": "Any agreement you reach through this service is not legally enforceable in a court. This means that there is no legal requirement for you or the other parent or carer to comply with what you have agreed.",
+    "limitations": "Using this service does not guarantee that you will be able to resolve your child arrangements.",
     "misuseHeading": "Misuse",
-    "misuse": "You must not impersonate another person, provide false or misleading information, or use this service on behalf of someone else without their consent.  ",
+    "misuse": "You must not impersonate another person, provide false or misleading information, or use this service on behalf of someone else without their consent.",
     "restrictionsOnUseHeading": "Restrictions on use",
-    "restrictionsOnUse": "If you have a court order in place that restricts contact with the other parent or child, such as a no contact order, non-molestation order, or any other legal restriction, you must not use this service to contact them. Doing so could be a breach of the order and may have legal consequences. If you are unsure whether a legal order affects your ability to use this service, seek legal advice before proceeding."
+    "restrictionsOnUse": "If you have a court order in place that restricts your contact with the other parent or child, such as a no contact order, non-molestation order, or any other legal restriction, you must not use this service to contact them.",
+    "breachOfTheOrder": "Doing so could be a breach of the order and may have legal consequences. If you are unsure whether a court order or other legal restriction affects your ability to use this service, seek legal advice before proceeding."
   },
   "safetyCheck": {
     "title": "Have you experienced abuse from your ex-partner?",
