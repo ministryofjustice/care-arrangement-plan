@@ -31,8 +31,11 @@
     "node": "^22",
     "npm": "^11.0.0"
   },
+  "packageManager": "npm@11.0.0",
   "overrides": {
-    "js-yaml": "4.2.0"
+    "axios": "1.18.1",
+    "brace-expansion": "5.0.8",
+    "js-yaml": "5.2.2"
   },
   "dependencies": {
     "bunyan": "1.8.15",
@@ -112,5 +115,6 @@
     "typescript": "5.8.3",
     "typescript-eslint": "8.34.0",
     "ws": "^8.21.0"
-  }
+  },
+  "packageManager": "npm@11.0.0+sha512.11dff29565d2297c74e7c594a9762581bde969f0aa5cbe6f5b3644bf008a16c065ece61094d9ffbb81125be38df8e1ba43eb8244b3d30c61eb797e9a2440e3ec"
 }
