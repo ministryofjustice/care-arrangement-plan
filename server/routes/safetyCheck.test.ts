@@ -90,4 +90,13 @@ describe(`GET ${paths.NOT_SAFE}`, () => {
         expect(response.text).toContain('Getting help if you have experienced abuse');
       });
   });
+
+  it('should not render the may not be right for you paragraph', () => {
+    return request(app)
+      .get(paths.NOT_SAFE)
+      .expect('Content-Type', /html/)
+      .expect((response) => {
+        expect(response.text).not.toContain('This service may not be right for you if you’ve experienced domestic abuse.');
+      });
+  });
 });
