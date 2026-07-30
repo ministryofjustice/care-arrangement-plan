@@ -246,13 +246,11 @@
       "harassment": "Harassment and stalking"
     },
     "formHeading": "Select whether you have experienced abuse from your ex-partner",
-    "answerYes": "Answer 'Yes' if you have experienced any of the above, whether or not you have reported your experience to the police.",
     "error": "Select whether you have experienced abuse from your ex-partner"
   },
   "notSafe": {
     "title": "Getting help if you have experienced abuse",
     "content": {
-      "mayNotBeRightForYou": "This service may not be right for you if you’ve experienced domestic abuse.",
       "warningText": "If you are in immediate danger, call 999 and ask for the police.",
       "continueDescription": "If you feel confident that you can carry on without any danger to yourself or the children, you can continue using the service.",
       "description": "You may have been in an abusive relationship. Domestic abuse or violence is a crime. Domestic abuse does not only mean physical violence – it includes emotional, sexual, psychological and financial abuse, as well as harassment and stalking.",
