@@ -91,12 +91,12 @@ describe(`GET ${paths.CHILDREN_NOT_SAFE}`, () => {
       });
   });
 
-  it('should not render the may not be appropriate paragraph', () => {
+  it('should render the may not be appropriate paragraph', () => {
     return request(app)
       .get(paths.CHILDREN_NOT_SAFE)
       .expect('Content-Type', /html/)
       .expect((response) => {
-        expect(response.text).not.toContain(
+        expect(response.text).toContain(
           'It may not be appropriate to make child arrangements if there’s any risk of harm to the children.',
         );
       });
