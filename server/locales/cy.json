@@ -392,6 +392,7 @@
     "sameNameError": "Nodwch ffordd i wahaniaethu rhwng yr oedolion"
   },
   "taskList": {
+    "pageTitle": "Cynllun trefniadau plant gyda manylion y plentyn/plant",
     "title": "Cynllun trefniadau plant ar gyfer {{{ names }}}",
     "completed": "Wedi'i gwblhau",
     "incomplete": "Anghyflawn",

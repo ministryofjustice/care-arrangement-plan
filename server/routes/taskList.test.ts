@@ -68,7 +68,18 @@ describe(`GET ${paths.TASK_LIST}`, () => {
     expect(dom.window.document.querySelector('h1')).toHaveTextContent(
       'Child arrangements plan for James, Rachel and Jack',
     );
+    expect(dom.window.document.title).toContain('Child arrangement plan with child(ren) details');
     expect(dom.window.document.querySelector('[role="button"]')).not.toBeNull();
+  });
+
+  it('should render the browser page title without child names', async () => {
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+    const dom = new JSDOM(response.text);
+
+    expect(dom.window.document.title).toContain('Child arrangement plan with child(ren) details');
+    expect(dom.window.document.title).not.toContain('James');
+    expect(dom.window.document.title).not.toContain('Rachel');
+    expect(dom.window.document.title).not.toContain('Jack');
   });
 
   it('should not render the continue button if the where will the children mostly live section is not filled out', async () => {
