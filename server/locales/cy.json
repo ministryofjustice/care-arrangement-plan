@@ -28,21 +28,21 @@
   "selectAllThatApply": "Dewiswch bob un sy'n berthnasol",
   "phaseBannerText": "Mae hwn yn wasanaeth newydd - bydd eich <a href=\"{{ feedbackUrl }}\" class=\"govuk-link--no-visited-state\">adborth</a> yn ein helpu i'w wella.",
   "days": {
-    "monday": "Monday",
-    "tuesday": "Tuesday",
-    "wednesday": "Wednesday",
-    "thursday": "Thursday",
-    "friday": "Friday",
-    "saturday": "Saturday",
-    "sunday": "Sunday"
+    "monday": "Dydd Llun",
+    "tuesday": "Dydd Mawrth",
+    "wednesday": "Dydd Mercher",
+    "thursday": "Dydd Iau",
+    "friday": "Dydd Gwener",
+    "saturday": "Dydd Sadwrn",
+    "sunday": "Dydd Sul"
   },
   "footer": {
-    "accessibility": "Accessibility",
-    "contact": "Contact",
-    "cookies": "Cookies",
-    "feedback": "Feedback",
-    "privacy": "Privacy",
-    "termsAndConditions": "Terms and conditions"
+    "accessibility": "Datganiad hygyrchedd",
+    "contact": "Cysylltu â ni",
+    "cookies": "Cwcis",
+    "feedback": "Adborth",
+    "privacy": "Hysbysiad Preifatrwydd",
+    "termsAndConditions": "Telerau ac amodau"
   },
   "errorSummary": {
     "title": "Mae yna broblem"
@@ -51,24 +51,24 @@
     "notFound": {
       "title": "Page not found",
       "check": "Please check the web address is correct.",
-      "startAgain": "Start again"
+      "startAgain": "Dechreuwch eto"
     },
     "generic": {
-      "title": "Sorry, there is a problem with the service",
+      "title": "Mae’n ddrwg gennym, ond mae problem gyda'r gwasanaeth",
       "errorLogged": "The error has been logged.",
-      "tryReloading": "You can try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
+      "tryReloading": "You can try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">dechreuwch eto</a>."
     },
     "rateLimit": {
-      "title": "Too many requests have been made",
-      "info": "The page has been reloaded too many times in a short period.",
-      "tryReloading": "Please wait a period of 15 minutes, then try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
+      "title": "Mae gormod o geisiadau wedi'u gwneud",
+      "info": "Mae'r dudalen wedi cael ei hail-lwytho gormod o weithiau mewn cyfnod byr.",
+      "tryReloading": "Arhoswch am gyfnod o 15 munud, yna ceisiwch ail-lwytho'r dudalen neu <a href=\"/\" class=\"govuk-link--no-visited-state\">dechreuwch eto</a>."
     },
     "timeOut": {
-      "title": "Sorry, you'll have to start again",
-      "yourSession": "Your session automatically ends if you don’t use the service for 120 minutes.",
-      "personalInformation": "We haven’t saved any personal information.",
-      "startAgain": "You need to start your child arrangement plan again.",
-      "startAgainButton": "Start again"
+      "title": "Mae'n ddrwg gennym, mae'n rhaid i chi ddechrau eto",
+      "yourSession": "Mae eich sesiwn yn dod i ben yn awtomatig os nad ydych chi'n defnyddio'r gwasanaeth am 120 munud.",
+      "personalInformation": "Nid ydym wedi cadw unrhyw wybodaeth bersonol.",
+      "startAgain": "Mae angen i chi ddechrau eto.",
+      "startAgainButton": "Dechrau eto"
     }
   },
   "cookieBanner": {

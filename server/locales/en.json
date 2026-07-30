@@ -67,7 +67,7 @@
       "title": "Sorry, you'll have to start again",
       "yourSession": "Your session automatically ends if you don’t use the service for 120 minutes.",
       "personalInformation": "We haven’t saved any personal information.",
-      "startAgain": "You need to start your child arrangement plan again.",
+      "startAgain": "You need to start again.",
       "startAgainButton": "Start again"
     }
   },
@@ -97,7 +97,7 @@
       "abilityNet": "<a href=\"https://mcmw.abilitynet.org.uk/\" class=\"govuk-link\">AbilityNet</a> has advice on making your device easier to use if you have a disability.",
       "feedback": {
         "title": "Feedback and contact information",
-        "contact": "If you find any problems not listed on this page or think we're not meeting accessibility requirements, email <a href=\"mailto:feedback@propose-child-arrangements-plan.service.gov.uk\" class=\"govuk-link\">feedback@propose-child-arrangements-plan.service.gov.uk</a>."
+        "contact": "If you find any problems not listed on this page or think we're not meeting accessibility requirements, <a href=\"mailto:feedback@propose-child-arrangements-plan.service.gov.uk\" class=\"govuk-link\">feedback@propose-child-arrangements-plan.service.gov.uk</a>."
       },
       "enforcement": {
         "title": "Enforcement procedure",
