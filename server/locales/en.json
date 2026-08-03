@@ -392,6 +392,7 @@
     "sameNameError": "Enter a way to tell the adults apart"
   },
   "taskList": {
+    "pageTitle": "Child arrangement plan with child(ren) details",
     "title": "Child arrangements plan for {{{ names }}}",
     "completed": "Completed",
     "incomplete": "Incomplete",
