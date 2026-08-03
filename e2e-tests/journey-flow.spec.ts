@@ -43,7 +43,7 @@ test.describe('User Journey Flow', () => {
 
     await expect(page).toHaveURL(/\/not-safe/);
     await expect(page.locator('h1')).toContainText('Getting help if you have experienced abuse');
-    await expect(page.getByText(/This service may not be right for you if you/i)).not.toBeVisible();
+    await expect(page.getByText(/This service may not be right for you if you/i)).toBeVisible();
     await expect(page.getByText(/If you are in immediate danger, call 999 and ask for the police/i)).toBeVisible();
     await expect(page.getByRole('heading', { name: /Get help protecting yourself and your children/i })).toBeVisible();
     await expect(page.getByText(/recognise domestic abuse/i)).toBeVisible();
@@ -71,7 +71,7 @@ test.describe('User Journey Flow', () => {
 
     await expect(page).toHaveURL(/\/children-not-safe/);
     await expect(page.locator('h1')).toContainText('Getting help if your children are not safe');
-    await expect(page.getByText(/It may not be appropriate to make child arrangements/i)).not.toBeVisible();
+    await expect(page.getByText(/It may not be appropriate to make child arrangements/i)).toBeVisible();
     await expect(page.getByText(/If a child is in immediate danger, call 999 and ask for the police/i)).toBeVisible();
     await expect(page.getByRole('heading', { name: /Get help protecting your children/i })).toBeVisible();
     await expect(page.getByText(/It is important to remember that there is help and support available/i)).toBeVisible();
