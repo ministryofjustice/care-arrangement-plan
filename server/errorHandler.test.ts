@@ -36,6 +36,21 @@ describe('errorHandler', () => {
   });
 
   describe('genericError', () => {
+    it('should render the generic error page for the dev test route', async () => {
+      config.production = false;
+      await request(testAppSetup())
+        .get('/dev/create-generic-error')
+        .expect(500)
+        .expect('Content-Type', /html/)
+        .expect((res) => {
+          expect(res.text).toContain('Sorry, there is a problem with the service');
+          expect(res.text).toContain('500');
+        });
+
+      // Note: After security improvements, error may be logged multiple times
+      expect(loggerMocks.error).toHaveBeenCalled();
+    });
+
     it('should render content without stack in production mode', async () => {
       config.production = true;
       await request(testAppSetup())

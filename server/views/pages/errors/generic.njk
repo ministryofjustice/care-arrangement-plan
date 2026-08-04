@@ -3,13 +3,17 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1>{{ title }}</h1>
+      <h1 class="govuk-heading-l">{{ __('errors.generic.title') }}</h1>
       {% if not production %}
-        <h2>{{ status }}</h2>
+        <h2 class="govuk-heading-m">{{ status }}</h2>
         <pre>{{ stack }}</pre>
       {% endif %}
-      <p>{{ __('errors.generic.errorLogged') }}</p>
-      <p>{{ __('errors.generic.tryReloading') | safe }}</p>
+      <p class="govuk-body">{{ __('errors.generic.tryAgainLater') }}</p>
+      <p class="govuk-body">{{ __('errors.generic.youCan') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('errors.generic.descriptionList.findInformation') | safe }}</li>
+        <li>{{ __('errors.generic.descriptionList.contactUs') | safe }}</li>
+      </ul>
     </div>
   </div>
 {% endblock %}

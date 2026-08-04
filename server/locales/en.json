@@ -50,13 +50,17 @@
   "errors": {
     "notFound": {
       "title": "Page not found",
-      "check": "Please check the web address is correct.",
-      "startAgain": "Start again"
+      "check": "If you entered a web address, check it is correct.",
+      "startAgain": "You can <a href=\"https://www.gov.uk\" class=\"govuk-link\">browse from the homepage</a> or use the search box above to find the information you need."
     },
     "generic": {
       "title": "Sorry, there is a problem with the service",
-      "errorLogged": "The error has been logged.",
-      "tryReloading": "You can try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
+      "tryAgainLater": "Try again later.",
+      "youCan": "You can:",
+      "descriptionList": {
+        "findInformation": "find information on child arrangements on <a href=\"https://www.gov.uk/looking-after-children-divorce\" class=\"govuk-link--no-visited-state\">Making child arrangements if you are divorcing or separating</a>",
+        "contactUs": "<a href=\"/contact-us\" class=\"govuk-link--no-visited-state\">contact us</a> to report a problem or suggest improvements to this service"
+      } 
     },
     "rateLimit": {
       "title": "Too many requests have been made",

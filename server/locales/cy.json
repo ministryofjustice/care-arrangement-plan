@@ -49,14 +49,18 @@
   },
   "errors": {
     "notFound": {
-      "title": "Page not found",
-      "check": "Please check the web address is correct.",
-      "startAgain": "Dechreuwch eto"
+      "title": "Ni ellir dod o hyd i’r dudalen",
+      "check": "Os bu ichi deipio cyfeiriad y wefan, gwiriwch ei fod yn gywir.",
+      "startAgain": "Gallwch <a href=\"https://www.gov.uk\" class=\"govuk-link\">bori o'r dudalen hafan</a> neu ddefnyddio'r blwch chwilio i ddod o hyd i'r wybodaeth rydych ei hangen."
     },
     "generic": {
       "title": "Mae’n ddrwg gennym, ond mae problem gyda'r gwasanaeth",
-      "errorLogged": "The error has been logged.",
-      "tryReloading": "You can try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">dechreuwch eto</a>."
+      "tryAgainLater": "Rhowch gynnig arall arni hwyrach ymlaen.",
+      "youCan": "Gallwch wneud y canlynol:",
+      "descriptionList": {
+        "findInformation": "dod o hyd i wybodaeth am drefniadau plant yn <a href=\"https://www.gov.uk/looking-after-children-divorce\" class=\"govuk-link--no-visited-state\">Gwneud trefniadau plant os ydych yn ysgaru neu'n gwahanu</a>",
+        "contactUs": "<a href=\"/contact-us\" class=\"govuk-link--no-visited-state\">cysylltwch â ni</a> i adrodd am broblem neu awgrymu gwelliannau i'r gwasanaeth hwn"
+      } 
     },
     "rateLimit": {
       "title": "Mae gormod o geisiadau wedi'u gwneud",
@@ -198,7 +202,7 @@
         }
       }
     },
-    "saveCookieSettings": "Save cookie settings"
+    "saveCookieSettings": "Cadw eich gosodiadau cwcis"
   },
   "privacyNotice": {
     "title": "Hysbysiad Preifatrwydd",
