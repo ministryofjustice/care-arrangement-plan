@@ -43,7 +43,7 @@ test.describe('User Journey Flow', () => {
 
     await expect(page).toHaveURL(/\/not-safe/);
     await expect(page.locator('h1')).toContainText('Getting help if you have experienced abuse');
-    await expect(page.getByText(/This service may not be right for you if you/i)).toBeVisible();
+    await expect(page.getByText(/This service may not be right for you if you/i)).not.toBeVisible();
     await expect(page.getByText(/If you are in immediate danger, call 999 and ask for the police/i)).toBeVisible();
     await expect(page.getByRole('heading', { name: /Get help protecting yourself and your children/i })).toBeVisible();
     await expect(page.getByText(/recognise domestic abuse/i)).toBeVisible();

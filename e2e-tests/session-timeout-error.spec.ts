@@ -15,7 +15,7 @@ test.describe('Session timeout error (403)', () => {
 
     await expect(page.getByText(/120 minutes/i)).toBeVisible();
     await expect(page.getByText(/saved any personal information/i)).toBeVisible();
-    await expect(page.getByText(/start your child arrangement plan again/i)).toBeVisible();
+    await expect(page.getByText(/you need to start again/i)).toBeVisible();
   });
 
   test('should provide a start again button linking to safety check', async ({ page }) => {

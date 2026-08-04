@@ -241,7 +241,7 @@ describe('App', () => {
       await request(testApp)
         .get(paths.SAFETY_CHECK)
         .expect((response) => {
-          expect(response.text).toContain('Eich diogelwch');
+          expect(response.text).toContain(cy.safetyCheck.title);
           expect(response.text).not.toContain('?lang=');
         });
     });
@@ -259,7 +259,7 @@ describe('App', () => {
 
       expect(flashMock).toHaveBeenCalledWith('errors', [
         expect.objectContaining({
-          msg: 'Dewiswch a ydych chi\'n teimlo\'n ddiogel ac yn hyderus ai peidio',
+          msg: cy.safetyCheck.error,
         }),
       ]);
     });

@@ -50,6 +50,14 @@ export async function expectServiceErrorPage(page: Page) {
   await expect(page.locator('h1')).toContainText(SERVICE_ERROR_MESSAGE);
 }
 
+export function getRadioYes(page: Page) {
+  return page.getByRole('radio', { name: 'Yes', exact: true });
+}
+
+export function getRadioNo(page: Page) {
+  return page.getByRole('radio', { name: 'No', exact: true });
+}
+
 export async function startJourney(page: Page) {
   // Start from homepage - goes to children-safety-check first
   await page.goto('/');
@@ -57,7 +65,7 @@ export async function startJourney(page: Page) {
 }
 
 export async function goToSafetyCheck(page: Page) {
-  await page.getByLabel(/no/i).first().check();
+  await getRadioNo(page).check();
   await page.getByRole('button', { name: /continue/i }).click();
   await expect(page).toHaveURL(/\/safety-check/);
 }
@@ -65,7 +73,7 @@ export async function goToSafetyCheck(page: Page) {
 export async function completeSafetyChecks(page: Page) {
   await goToSafetyCheck(page);
 
-  await page.getByLabel(/no/i).first().check();
+  await getRadioNo(page).check();
   await page.getByRole('button', { name: /continue/i }).click();
 }
 
@@ -78,7 +86,7 @@ export async function completeOnboardingFlow(page: Page) {
   await page.getByRole('button', { name: /continue/i }).click();
 
   // court-order-check
-  await page.getByLabel(/no/i).first().check();
+  await getRadioNo(page).check();
   await page.getByRole('button', { name: /continue/i }).click();
 }
 
