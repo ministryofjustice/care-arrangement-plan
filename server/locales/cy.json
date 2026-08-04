@@ -444,16 +444,15 @@
     },
     "whereHandover": {
       "title": "Ble mae'r trosglwyddo'n digwydd?",
-      "explainer": "Efallai y bydd yn haws i'r plant os bydd y trosglwyddo'n digwydd mewn lleoliad niwtral lle rydych chi'n hyderus y byddwch chi'ch dau yn teimlo'n ddiogel.",
+      "explainer": "Efallai y bydd yn haws i'r plant os bydd y trosglwyddo yn digwydd mewn lleoliad niwtral lle rydych chi'n hyderus y byddwch chi'ch dau yn teimlo'n ddiogel.",
       "neutralLocation": "Lleoliad niwtral",
       "atHome": "Yn nhŷ {{{ adult }}}",
       "atSchool": "Yn yr ysgol",
       "other": "Arall",
       "otherLabel": "Disgrifiwch ble fydd y trosglwyddo'n digwydd",
       "someoneElse": "Someone else will manage handover, such as a grandparent",
-      "someoneElseName": "Name of the person who will manage handover",
-      "emptyError": "Dewiswch ble mae'r trosglwyddo'n digwydd",
-      "otherMissingError": "Describe where handover will take place"
+      "emptyError": "Dewiswch ble mae trrosglwyddo yn digwydd",
+      "otherMissingError": "Disgrifiwch ble fydd y trosglwyddo'n digwydd"
     },
     "willChangeDuringSchoolHolidays": {
       "title": "A fydd y trefniadau hyn yn newid yn ystod gwyliau'r ysgol?",
