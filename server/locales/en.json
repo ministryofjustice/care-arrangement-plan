@@ -50,13 +50,17 @@
   "errors": {
     "notFound": {
       "title": "Page not found",
-      "check": "Please check the web address is correct.",
-      "startAgain": "Start again"
+      "check": "If you entered a web address, check it is correct.",
+      "startAgain": "You can <a href=\"https://www.gov.uk\" class=\"govuk-link\">browse from the homepage</a> or use the search box above to find the information you need."
     },
     "generic": {
       "title": "Sorry, there is a problem with the service",
-      "errorLogged": "The error has been logged.",
-      "tryReloading": "You can try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
+      "tryAgainLater": "Try again later.",
+      "youCan": "You can:",
+      "descriptionList": {
+        "findInformation": "find information on child arrangements on <a href=\"https://www.gov.uk/looking-after-children-divorce\" class=\"govuk-link--no-visited-state\">Making child arrangements if you are divorcing or separating</a>",
+        "contactUs": "<a href=\"/contact-us\" class=\"govuk-link--no-visited-state\">contact us</a> to report a problem or suggest improvements to this service"
+      } 
     },
     "rateLimit": {
       "title": "Too many requests have been made",
@@ -67,7 +71,7 @@
       "title": "Sorry, you'll have to start again",
       "yourSession": "Your session automatically ends if you don’t use the service for 120 minutes.",
       "personalInformation": "We haven’t saved any personal information.",
-      "startAgain": "You need to start your child arrangement plan again.",
+      "startAgain": "You need to start again.",
       "startAgainButton": "Start again"
     }
   },
@@ -97,7 +101,7 @@
       "abilityNet": "<a href=\"https://mcmw.abilitynet.org.uk/\" class=\"govuk-link\">AbilityNet</a> has advice on making your device easier to use if you have a disability.",
       "feedback": {
         "title": "Feedback and contact information",
-        "contact": "If you find any problems not listed on this page or think we're not meeting accessibility requirements, email <a href=\"mailto:feedback@propose-child-arrangements-plan.service.gov.uk\" class=\"govuk-link\">feedback@propose-child-arrangements-plan.service.gov.uk</a>."
+        "contact": "If you find any problems not listed on this page or think we're not meeting accessibility requirements, <a href=\"mailto:feedback@propose-child-arrangements-plan.service.gov.uk\" class=\"govuk-link\">feedback@propose-child-arrangements-plan.service.gov.uk</a>."
       },
       "enforcement": {
         "title": "Enforcement procedure",
@@ -246,7 +250,6 @@
       "harassment": "Harassment and stalking"
     },
     "formHeading": "Select whether you have experienced abuse from your ex-partner",
-    "answerYes": "Answer 'Yes' if you have experienced any of the above, whether or not you have reported your experience to the police.",
     "error": "Select whether you have experienced abuse from your ex-partner"
   },
   "notSafe": {
@@ -459,7 +462,6 @@
       "other": "Other",
       "otherLabel": "Describe where handover will take place",
       "someoneElse": "Someone else will manage handover, such as a grandparent",
-      "someoneElseName": "Name of the person who will manage handover",
       "emptyError": "Select where handover takes place",
       "otherMissingError": "Describe where handover will take place"
     },

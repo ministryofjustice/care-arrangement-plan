@@ -6,6 +6,10 @@ const devErrorRoutes = (router: Router) => {
   router.get('/dev/create-timeout', (_request: Request, _response: Response, next: NextFunction) => {
     next(createError(403));
   });
+
+  router.get('/dev/create-generic-error', (_request: Request, _response: Response, next: NextFunction) => {
+    next(createError(500));
+  });
 };
 
 export default devErrorRoutes;
