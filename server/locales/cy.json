@@ -255,6 +255,7 @@
   "notSafe": {
     "title": "Cael cymorth os ydych wedi profi camdriniaeth",
     "content": {
+      "mayNotBeRightForYou": "Efallai nad yw'r gwasanaeth hwn yn addas i chi os ydych chi wedi profi cam-drin domestig.",
       "warningText": "Os ydych mewn perygl uniongyrchol, ffoniwch 999 a gofynnwch am yr heddlu.",
       "continueDescription": "Os ydych yn teimlo'n hyderus y gallwch barhau heb unrhyw berygl i chi eich hun na'r plant, gallwch barhau i ddefnyddio'r gwasanaeth.",
       "getHelpProtecting": {
