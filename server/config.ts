@@ -64,6 +64,7 @@ const config = {
   feedbackUrl: getStringConfigValue('FEEDBACK_URL'),
   contactEmail: getStringConfigValue('CONTACT_EMAIL'),
   previewEnd: new Date(getStringConfigValue('PREVIEW_END')),
+  serviceUrl: getStringConfigValue('SERVICE_URL'),
 };
 
 if (production) {
