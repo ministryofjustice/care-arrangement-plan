@@ -547,7 +547,7 @@
       "children": "the children",
       "users": "the users",
       "whereWillTheChildrenLive": "where the children will spend most of their time",
-      "whichSchedule": "which schedule best meets the children's needs",
+      "whichSchedule": "which schedule best meets the children's needs?",
       "willOvernightsHappen": "if the children will stay overnight with {{{ adult }}}",
       "whichDaysOvernight": "which days overnights will happen",
       "willDaytimeVisitsHappen": "if the children will do daytime visits with {{{ adult }}}?",

@@ -531,9 +531,9 @@
       "whichDaysDaytimeVisits": "The children will have daytime visits with {{{ adult }}} on {{ days }}"
     },
     "decisionMaking": {
-      "monthsSingular": "1 month",
+      "monthsSingular": "1 mis",
       "yearsSingular": "1 year",
-      "monthsPlural": "{{ number }} months",
+      "monthsPlural": "{{ number }} misoedd",
       "yearsPlural": "{{ number }} years"
     },
     "change": {
@@ -541,7 +541,7 @@
       "children": "the children",
       "users": "the users",
       "whereWillTheChildrenLive": "where the children will spend most of their time",
-      "whichSchedule": "which schedule best meets the children's needs",
+      "whichSchedule": "Pa amserlen sy'n gweddu orau i anghenion y plant?",
       "willOvernightsHappen": "if the children will stay overnight with {{{ adult }}}",
       "whichDaysOvernight": "which days overnights will happen",
       "willDaytimeVisitsHappen": "if the children will do daytime visits with {{{ adult }}}?",
@@ -550,7 +550,7 @@
       "whereHandover": "where the handover takes place",
       "willChangeDuringSchoolHolidays": "if the arrangements will change during school holidays",
       "howChangeDuringSchoolHolidays": "how the arrangements will change during school holidays",
-      "itemsForChangeover": "what items need to go between households",
+      "itemsForChangeover": "Pa eitemau sydd angen mynd o un cartref i'r llall?",
       "whatWillHappen": "Beth fydd yn digwydd ar ddyddiau arbennig?",
       "whatOtherThingsMatter": "Pa bethau eraill sy'n bwysig i'ch plant?",
       "planLastMinuteChanges": "how last-minute changes should be communicated",
@@ -605,14 +605,14 @@
       "prohibitedStepsOrder": "gorchymyn camau gwaharddedig",
       "protectiveOrder": "gorchymyn amddiffynnol fel gorchymyn rhag molestu, gorchymyn anheddu neu orchymyn diogelurhag cam-drin domestig",
       "anyOther": "unrhyw orchymyn arall sy'n cyfyngu ar gyswllt rhyngoch chi a'r rhiant arall neu'r plant",
-      "toChange": "To change or enforce an existing child arrangements order, visit https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order.",
+      "toChange": "I newid neu orfodi gorchymyn trefniadau plant presennol, ewch i https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order.",
       "moreInfoHeading": "Cael rhagor o wybodaeth",
       "moreInfo": "Defnyddiwch GOV.UK i gael rhagor o wybodaeth, er enghraifft:",
       "makingChildArrangements": "gwneud trefniadau plant - https://www.gov.uk/looking-after-children-divorce",
       "legalSeparation": "cael ymwahaniad cyfreithiol - https://www.gov.uk/legal-separation",
       "divorce": "cael ysgariad - https://www.gov.uk/get-a-divorce",
       "legalAdviceHeading": "Os ydych chi eisiau cyngor cyfreithiol",
-      "findLegalAdviser" : "You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser.",
+      "findLegalAdviser" : "Gallwch ddod o hyd i gynghorydd cyfreithiol: https://www.gov.uk/find-legal-advice/find-legal-adviser.",
       "domesticAbuseHeading": "Cael cymorth gyda cam-drin domestig",
       "signsAndEffects": "I gael rhagor o wybodaeth am arwyddion ac effeithiau cam-drin ac esgeuluso plant, ewch i https://www.nspcc.org.uk/what-is-child-abuse.",
       "unsureVictim": "Os ydych chi'n ansicr a ydych chi'n ddioddefwr cam-drin domestig, ewch i https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
@@ -629,10 +629,10 @@
     "yourProposedPlan": {
       "aboutThePlan": "Ynglŷn â'r cynnig trefniadau plant hyn",
       "senderSaid": "Dywedodd {{{ senderName }}}:",
-      "senderSuggested": "{{{ senderName }}} suggested:\n\"{{{ suggestion }}}\"",
+      "senderSuggested": "Awgrymodd {{{ senderName }}}:\n\"{{{ suggestion }}}\"",
       "senderSuggestedDoNotDecide": "{{{ senderName }}} suggested that this does not need to be decided.",
-      "doYouAgree": "Do you agree?",
-      "endOfSection": "End of section",
+      "doYouAgree": "Ydych chi’n cytuno?",
+      "endOfSection": "Diwedd yr adran",
       "noCourtOrder": "nid oes gorchymyn llys ar waith ar hyn o bryd",
       "forOneChild": "cynllun trefniadau plant arfaethedig yw hwn ar gyfer plentyn 1, {{{ childName }}}",
       "forMultipleChildren": "cynllun trefniadau plant arfaethedig yw hwn ar gyfer plant {{ numberOfChildren }}, {{{ childrenNames }}}",
@@ -676,8 +676,8 @@
           "suggestedYearsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} years' time."
         }
       },
-      "nextSteps": "Next steps",
-      "whatToDoNext": "What to do next",
+      "nextSteps": "Y camau nesaf",
+      "whatToDoNext": "Beth i'w wneud nesaf",
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{{ senderName }}}. You should try to create a written record of what you have both agreed.",
       "notLegallyBinding": "Nid yw unrhyw gynllun a wnewch gan ddefnyddio'r ffurflen hon yn gyfreithiol rwymol. Nid oes rhaid i'r person arall wneud yr hyn y mae'n ei ddweud a gall y naill neu'r llall ohonoch awgrymu newidiadau iddo ar unrhyw adeg.",
       "noResponseHeading": "Os nad oes ymateb",
@@ -686,10 +686,10 @@
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
       "doNotAgree": {
         "livingAndVisiting": {
-          "mostlyLive": "If you do not agree, suggest where the children will spend most of their time",
-          "whichSchedule": "If you do not agree, suggest a schedule",
-          "willOvernightsHappen": "If you do not agree, suggest whether the children will stay overnight with {{{ adult }}}",
-          "whichDaysOvernight": "If you do not agree, suggest when the children will stay overnight with {{{ adult }}}",
+          "mostlyLive": "Os nad ydych chi'n cytuno, awgrymwch ble bydd y plant yn treulio'r rhan fwyaf o'u hamser:",
+          "whichSchedule": "Os nad ydych yn cytuno, dylech awgrymu amserlen",
+          "willOvernightsHappen": "Os nad ydych chi'n cytuno, awgrymwch a fydd y plant yn aros dros nos gyda {{{ adult }}}",
+          "whichDaysOvernight": "Os nad ydych chi'n cytuno, awgrymwch fydd y plant yn aros dros nos gyda {{{ adult }}}",
           "willDaytimeVisitsHappen": "Os nad ydych chi'n cytuno, awgrymwch a fydd y plant yn ymweld yn ystod y dydd",
           "whichDaysDaytimeVisits": "Os nad ydych chi'n cytuno, awgrymwch pryd fydd y plant yn ymweld yn ystod y dydd"
         },
@@ -697,7 +697,7 @@
           "getBetweenHouseholds": "Os nad ydych chi'n cytuno, awgrymwch sut fydd y plant yn mynd o un cartref i'r llall",
           "whereHandover": "If you do not agree, suggest where handover takes place",
           "willChangeDuringSchoolHolidays": "Os nad ydych chi'n cytuno, awgrymwch a ddylai'r trefniadau newid yn ystod y gwyliau",
-          "howChangeDuringSchoolHolidays": "If you do not agree, suggest how the arrangements should change during the holidays",
+          "howChangeDuringSchoolHolidays": "Os nad ydych chi'n cytuno, awgrymwch sut ddylai'r trefniadau newid yn ystod y gwyliau",
           "itemsForChangeover": "Os nad ydych yn cytuno, awgrymwch pa eitemau sydd angen mynd o un cartref i'r llall"
         },
         "specialDays": {
@@ -708,7 +708,7 @@
         },
         "decisionMaking": {
           "planLastMinuteChanges": "If you do not agree, suggest how last minute changes should be communicated",
-          "planLongTermNotice": "If you do not agree, suggest how much notice you should give each other",
+          "planLongTermNotice": "Onad ydych yn cytuno, awgrymwch faint o rybudd ddylech chi ei roi i newid trefniadau hirdymor",
           "planReview": "If you do not agree, suggest when you should review this agreement"
         }
       },
@@ -732,12 +732,12 @@
   },
   "pdf": {
     "name": "Proposed child arrangements plan",
-    "everyPageReminder": "Check you have every page of this document",
+    "everyPageReminder": "Gwiriwch fod gennych bob tudalen o'r ddogfen hon",
     "pageCount": "Page {{ currentPage }} of {{ totalPages }}",
     "paidFeedback": {
-      "title": "Get paid to give yourfeedback",
-      "helpToImprove": "With your help we can improve this service and understand how you use your plan.",
-      "signUp": "Sign up and receive an incentive when you take part in further research ",
+      "title": "Cael eich talu i roi eich adborth",
+      "helpToImprove": "Gyda'ch cymorth chi gallwn wella'r gwasanaeth hwn a deall sut rydych chi'n defnyddio'ch cynllun.",
+      "signUp": "Cofrestrwch ac fe gewch gymhelliant pan fyddwch chi'n cymryd rhan mewn ymchwil bellach ",
       "signUpLink": "https://www.smartsurvey.co.uk/t/BDP7V3/"
     }
   }
