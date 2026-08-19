@@ -17,3 +17,4 @@ data:
   PREVIEW_END: '2026-03-31T23:59:59'
   GA4_ID: 'G-YQSM58BJ59'
   IS_LIVE_SERVICE: 'true'
+  SERVICE_URL: 'https://www.gov.uk/looking-after-children-divorce/written-agreement'

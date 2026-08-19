@@ -15,3 +15,4 @@ data:
   CONTACT_EMAIL: 'feedback@propose-child-arrangements-plan.service.gov.uk'
   FEEDBACK_URL: 'https://www.gov.uk/done/propose-child-arrangements-plan'
   PREVIEW_END: '2026-03-31T23:59:59'
+  SERVICE_URL: 'https://staging.child-arrangements-plan.service.justice.gov.uk/'
