@@ -8,7 +8,15 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-      {{ __('cookies.aboutCookies') | safe }}
+      <p>{{ __('cookies.aboutCookies.smallFiles') }}</p>
+      <p>{{ __('cookies.aboutCookies.usedTo') }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ __('cookies.aboutCookies.listItems.rememberProgress') }}</li>
+        <li>{{ __('cookies.aboutCookies.listItems.measureUsage') }}</li>
+      </ul>
+      <p>{{ __('cookies.aboutCookies.notIdentify') }}</p>
+      <p>{{ __('cookies.aboutCookies.message') }}</p>
+      <p>{{ __('cookies.aboutCookies.findOutMore') | safe }}</p>
 
       <h2 class="govuk-heading-l">{{ __('cookies.howCookiesAreUsed') }}</h2>
 
@@ -58,7 +66,17 @@
 
         <h3 class="govuk-heading-m">{{ __('cookies.optionalCookies') }}</h3>
 
-        {{ __('cookies.aboutOptionalCookies') | safe }}
+        <h4 class="govuk-heading-s">{{ __('cookies.aboutOptionalCookies.title') }}</h4>
+        <p>{{ __('cookies.aboutOptionalCookies.collect') }}</p>
+        <p>{{ __('cookies.aboutOptionalCookies.store') }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ __('cookies.aboutOptionalCookies.collectItems.pageViews') }}</li>
+          <li>{{ __('cookies.aboutOptionalCookies.collectItems.timeSpent') }}</li>
+          <li>{{ __('cookies.aboutOptionalCookies.collectItems.howYouGotHere') }}</li>
+          <li>{{ __('cookies.aboutOptionalCookies.collectItems.whatYouClickOn') }}</li>
+        </ul>
+        <p>{{ __('cookies.aboutOptionalCookies.notCollect') }}</p>
+        <p>{{ __('cookies.aboutOptionalCookies.cookies') }}</p>
 
         {{
           govukTable({

@@ -149,7 +149,17 @@
     "expires": "Expires",
     "yes": "Yes",
     "no": "No",
-    "aboutCookies": "<p>Propose a child arrangements plan puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the service.</p><p>Cookies are used to:</p><ul class=\"govuk-list govuk-list--bullet\"><li>remember your progress</li><li>measure how you use the service so it can be updated and improved based on your needs</li></ul><p>Propose a child arrangements plan cookies aren't used to identify you personally.</p><p>You'll normally see a message before we store a cookie on your computer.</p><p>Find out more about <a href=\"https://www.aboutcookies.org/\">how to manage cookies</a>.</p>",
+    "aboutCookies": {
+      "smallFiles": "Propose a child arrangements plan puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the service.",
+      "usedTo": "Cookies are used to:",
+      "listItems": {
+        "rememberProgress": "remember your progress",
+        "measureUsage": "measure how you use the service so it can be updated and improved based on your needs"
+      },
+      "notIdentify": "Propose a child arrangements plan cookies aren't used to identify you personally.",
+      "message": "You'll normally see a message before we store a cookie on your computer.",
+      "findOutMore": "Find out more about <a href=\"https://www.aboutcookies.org/\">how to manage cookies</a>."
+    },
     "howCookiesAreUsed": "How cookies are used in this service",
     "essentialCookies": "Essential cookies",
     "essentialCookiesUse": "Essential cookies are needed for the service to work. We do not need to ask for permission to use them.",
@@ -160,7 +170,19 @@
     "consentPurpose": "Saves your cookie consent settings",
     "consentExpiry": "1 year",
     "optionalCookies": "Analytics cookies (optional)",
-    "aboutOptionalCookies": "<h4 class=\"govuk-heading-s\">Measuring service usage (Google Analytics)</h4><p>We use Google Analytics software to collect information about how you use Propose a child arrangements plan. We do this to help make sure the service meets the needs of its users and to help us make improvements</p><p>Google Analytics stores information about:</p><ul class=\"govuk-list govuk-list--bullet\"><li>the pages you visit</li><li>how long you spend on each page</li><li>how you got to the service</li><li>what you click on while you’re visiting the service</li></ul><p>We don't collect or store your personal information (for example your name or address) so this information can't be used to identify who you are.</p><p>Google Analytics sets the following cookies:</p>",
+    "aboutOptionalCookies": {
+      "title": "Measuring service usage (Google Analytics)",
+      "collect": "We use Google Analytics software to collect information about how you use Propose a child arrangements plan. We do this to help make sure the service meets the needs of its users and to help us make improvements",
+      "store": "Google Analytics stores information about:",
+      "collectItems": {
+        "pageViews": "the pages you visit",
+        "timeSpent": "how long you spend on each page",
+        "howYouGotHere": "how you got to the service",
+        "whatYouClickOn": "what you click on while you’re visiting the service"
+      },
+      "notCollect": "We don't collect or store your personal information (for example your name or address) so this information can't be used to identify who you are.",
+      "cookies": "Google Analytics sets the following cookies:"
+    },
     "acceptOptionalCookies": "Do you want to accept analytics cookies?",
     "_gaCookiePurpose": "This helps us count how many people visit Get help finding a child arrangement option by tracking if you've visited before",
     "gaCookiesExpiry": "3 years",
