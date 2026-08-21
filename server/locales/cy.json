@@ -166,13 +166,13 @@
     "rememberingProgress": "<h4 class=\"govuk-heading-s\">Cofio sut yr ydych chi’n symud ymlaen drwy’r gwasanaeth</h4><p>Byddwn yn storio cwcis i gofio sut yr ydych chi’n symud ymlaen drwy’r gwasanaeth gan ddefnyddio’r cyfrifiadur hwn ac i ddod â'ch sesiwn i ben pan fyddwch heb wneud dim am 120 munud neu pan fyddwch yn cau eich porwr.</p>",
     "sessionPurpose": "Cofio sut yr ydych chi’n symud ymlaen drwy’r gwasanaeth gan ddefnyddio’r cyfrifiadur hwn ac olrhain pan fyddwch heb wneud dim.",
     "sessionExpiry": "Ar ôl 120 munud i chi wneud dim byd neu pan fyddwch yn cau eich porwr gwe",
-    "cookiesMessage": "<h4 class=\"govuk-heading-s\">Neges am gwcis</h4><p>Efallai welwch chi faner pan fyddwch yn ymweld â'r dudalen Cael help i ddod o hyd i opsiwn trefniadau plant yn eich gwahodd i dderbyn neu wrthod cwcis dewisol.</p>",
+    "cookiesMessage": "<h4 class=\"govuk-heading-s\">Neges am gwcis</h4><p>Efallai y byddwch yn gweld baner pan fyddwch yn ymweld â chynnig cynnig trefniadau plant yn eich gwahodd i dderbyn neu wrthod cwcis dewisol.</p>",
     "consentPurpose": "Cadw eich gosodiadau caniatâu cwcis",
     "consentExpiry": "1 flwyddyn",
     "optionalCookies": "Cwcis dadansoddol (dewisol)",
     "aboutOptionalCookies": {
       "title": "Mesur defnydd o’r wefan (Google Analytics)",
-      "collect": "Rydym yn defnyddio meddalwedd Google Analytics i gasglu gwybodaeth am y ffordd rydych yn defnyddio’r gwasanaeth Cael help i ddod o hyd i opsiwn trefniadau plant. Rydym yn gwneud hyn i helpu i sicrhau bod y gwasanaeth yn diwallu anghenion ei ddefnyddwyr ac i'n helpu i wneud gwelliannau.",
+      "collect": "Rydym yn defnyddio meddalwedd Google Analytics i gasglu gwybodaeth am y ffordd rydych yn defnyddio’r gwasanaeth Cynnig cynllun trefniadau plant. Rydym yn gwneud hyn i helpu i sicrhau bod y gwasanaeth yn diwallu anghenion ei ddefnyddwyr ac i'n helpu i wneud gwelliannau.",
       "store": "Mae Google Analytics yn storio gwybodaeth am:",
       "collectItems": {
         "pageViews": "Y tudalennau rydych yn ymweld â nhw",
@@ -184,7 +184,7 @@
       "cookies": "Mae Google Analytics yn gosod y cwcis canlynol:"
     },
     "acceptOptionalCookies": "Ydych chi eisiau derbyn cwcis dadansoddeg?",
-    "_gaCookiePurpose": "Mae hyn yn ein helpu i gyfrif faint o bobl sy'n ymweld â'r gwasanaeth Cael help i ddod o hyd i opsiwn trefniadau plant  drwy olrhain os ydych wedi ymweld o'r blaen",
+    "_gaCookiePurpose": "Mae hyn yn ein helpu i gyfrif faint o bobl sy'n ymweld â'r cynllun cynnig trefniadau plant trwy olrhain a ydych wedi ymweld o'r blaen",
     "gaCookiesExpiry": "3 oed",
     "_ga_IdCookiePurpose": "Defnyddir gan Google Analytics i ddod o hyd i sesiwn unigol gyda'ch dyfais a'i olrhain.",
     "opensearchAnalytics": {
@@ -224,7 +224,7 @@
         }
       }
     },
-    "saveCookieSettings": "Cadw eich gosodiadau cwcis"
+    "saveCookieSettings": "Cadw gosodiadau cwcis"
   },
   "privacyNotice": {
     "title": "Hysbysiad Preifatrwydd",
@@ -232,7 +232,7 @@
     "describeHowAndWhy": "Mae'r hysbysiad hwn yn disgrifio sut a phryd y defnyddir gwybodaeth o'r fath gennym. Mae'r hysbysiad preifatrwydd hwn yn disgrifio sut rydym yn casglu ac yn defnyddio gwybodaeth bersonol yn ystod ac ar ôl eich perthynas â ni, yn unol â chyfraith diogelu data. Caiff yr hysbysiad hwn ei ddiweddaru'n rheolaidd.",
     "typesOfPersonalData": "<h2 class=\"govuk-heading-m\">Math o ddata personol rydym yn ei brosesu</h2><p>Ar hyn o bryd rydym yn casglu ac yn defnyddio'r wybodaeth ganlynol:</p><ul class=\"govuk-list govuk-list--bullet\"><li>enw cyntaf y ddau riant neu ofalwyr</li><li>enwau cyntaf pob plentyn</li></ul><p>Rydym yn casglu a phrosesu gwybodaeth sy'n ymwneud â chynllunio trefniadau plant i'ch helpu i greu cynllun trefniadau plant wedi'i addasu. Fodd bynnag, nid ydym yn casglu gwybodaeth sy'n eich adnabod yn bersonol (PII), fel enwau, cyfeiriadau neu fanylion cyswllt.</p><p>Gan nad ydym yn casglu gwybodaeth y gellir ei defnyddio i'ch adnabod chi, nid yw llawer o hawliau diogelu data yn berthnasol. Rydym yn eich annog i beidio cynnwys y math hyn o fanylion yn eich cynllun. Cyn belled nad ydych yn rhoi gwybodaeth na ofynnir amdani yn y gwasanaeth, nid ydym yn casglu digon o wybodaeth i wybod pwy ydych chi.</p><p>Gall y mathau o wybodaeth a gesglir gennym nad yw'n eich adnabod yn bersonol gynnwys:</p><ul class=\"govuk-list govuk-list--bullet\"><li>manylion cyffredinol am drefniadau plant, fel trefniadau a ffefrir a lleoliadau casglu</li><li>cyswllt a ffefrir gennych</li><li>rhyngweithiad defnyddwyr gyda'n platfform, gan gynnwys ymddygiad llywio a defnydd nodwedd, i wella ein gwasanaeth</li></ul>",
     "howWeGetPersonalData": "<h2 class=\"govuk-heading-m\">Sut rydym yn cael eich data personol a pham ei fod gennym</h2><p>Mae'r rhan fwyaf o'r wybodaeth bersonol rydym yn ei phrosesu yn cael ei darparu'n uniongyrchol gennych chi. Mae'r wybodaeth a ddarperir gennych yn cael ei defnyddio i lunio cynllun trefniadau plant y gallwch lawrlwytho a rhannu gyda'ch cyd-riant. Mae'r wybodaeth a ddarperir gennych yn caniatáu i ni drefnu'r cynllun yn seiliedig ar eich anghenion penodol, gan sicrhau ei fod yn adlewyrchu'r trefniadau a fwriedir gennych i'ch plant.</p><p>Mae casglu'r data hwn yn hanfodol i:</p><ul class=\"govuk-list govuk-list--bullet\"><li>bersonoli'r cynllun ar gyfer eich sefyllfa rhianta</li><li>sicrhau bod dogfen y cynllun wedi'i lawrlwytho a lunir gennych yn cynnwys yr holl fanylion sydd eu hangen arnoch i gefnogi eich trefniadau cyd-rianta</li><li>darparu fersiwn o'r cynllun i chi y gellir ei lawrlwytho er mwyn gallu cyfeirio ato a'i rannu</li></ul><p>Rydym ond yn casglu'r wybodaeth sy'n ofynnol i greu eich cynllun trefniadau plant ac nid ydym yn ei defnyddio at unrhyw ddiben arall heb eich caniatâd.</p><p>Nid ydym yn rhannu'r wybodaeth a ddarperir gennych gydag unrhyw sefydliad nac adran arall o'r llywodraeth. Defnyddir y manylion a roddir gennych i greu eich cynllun trefniadau plant ar gyfer creu eich dogfen cynllun wedi'i bersonoli i chi yn unig.</p><p>O dan Reoliad Diogelu Data Cyffredinol y DU (GDPR y DU), y seiliau cyfreithlon yr ydym yn dibynnu arnynt ar gyfer prosesu'r wybodaeth hon yw eich caniatâd chi. Gallwch dynnu eich caniatâd yn ôl ar unrhyw adeg. Y ffordd haws o wneud hyn yw dileu'r cwcis porwr. Mae yna wybodaeth am sut i wneud hyn <a href=\"https://www.aboutcookies.org/how-to-manage-and-delete-cookies\">yma</a>.</p><p>Os ydych eisiau gofyn i ni ddileu eich data cwcis, cysylltwch â ni.</p>",
-    "internationalTransfers": "<h2 class=\"govuk-heading-m\">Trosglwyddo data yn rhyngwladol</h2><p>Ni fydd y data’n cael ei drosglwyddo’n rhyngwladol.</p>",
+    "internationalTransfers": "<h2 class=\"govuk-heading-m\">Trosglwyddiadau data rhyngwladol</h2><p>Nid oes unrhyw drosglwyddiadau rhyngwladol.</p>",
     "howWeStorePersonalData": "<h2 class=\"govuk-heading-m\">Sut rydym yn storio eich data personol</h2><p>Mae data personol yn cael ei storio dim ond tra byddwch yn creu eich cynllun ac am hyd at 30 diwrnod ar ôl hynny.</p>",
     "howToComplain": "<h2 class=\"govuk-heading-m\">Sut i gwyno</h2><p>Os oes gennych unrhyw bryderon am ein defnydd o'ch data personol, gallwch gysylltu â swyddog diogelu data'r MoJ:</p><div class=\"govuk-inset-text\">Data Protection Officer<br />Ministry of Justice<br />10th Floor, Post Point 10.31<br />102 Petty France<br />London<br />SW1H 9AJ <br /><br /><a href=\"mailto:dpo@justice.gov.uk\">dpo@justice.gov.uk</a></div><p>Gallwch hefyd gwyno i'r ICO os ydych yn anhapus gyda sut rydym wedi defnyddio eich data.</p><div class=\"govuk-inset-text\">Swyddfa'r Comisiynydd Gwybodaeth<br />Wycliffe House<br />Water Lane<br />Wilmslow<br />Swydd Gaer<br />SK9 5AF<br /><br />Rhifau llinellau cymorth: 0303 123 1113<br />Gwefan ICO:<a href=\"https://www.ico.org.uk\">https://www.ico.org.uk</a></div>",
     "preparedDate": "Cafodd y datganiad hwn ei baratoi ar 7 Ionawr 2026."
@@ -581,7 +581,7 @@
     }
   },
   "sharePlan": {
-    "nextSteps": "Y camau nesaf",
+    "nextSteps": "Camau nesaf",
     "title": "Rydych chi wedi creu cynllun trefniadau plant arfaethedig",
     "whatToDoNext": "Beth nesaf",
     "sendToSecondary": "Lawrlwythwch fersiwn PDF neu HTML hygyrch o'r cynllun hwn a'i rannu gyda {{{ otherAdult }}}.",
@@ -652,7 +652,7 @@
       "aboutThePlan": "Ynglŷn â'r cynnig trefniadau plant hyn",
       "senderSaid": "Dywedodd {{{ senderName }}}:",
       "senderSuggested": "Awgrymodd {{{ senderName }}}:\n\"{{{ suggestion }}}\"",
-      "senderSuggestedDoNotDecide": "Awgrymodd {{{ senderName }}} nad oes angen penderfynu ar hwn.",
+      "senderSuggestedDoNotDecide": "Awgrymodd {{{ senderName }}} nid oes angen penderfynu ar hwn.",
       "doYouAgree": "Ydych chi’n cytuno?",
       "endOfSection": "Diwedd yr adran",
       "noCourtOrder": "nid oes gorchymyn llys ar waith ar hyn o bryd",
@@ -682,7 +682,7 @@
         "school": "yr ysgol",
         "suggestedSomeoneElse": "Awgrymodd {{{ senderName }}} y dylai rhywun arall ddelio efo'r trosglwyddiad. {{{ senderName }}} awgrymwyd:\n\"{{{ someoneElse }}}\"",
         "suggestedChangeDuringSchoolHolidays": "Awgrymodd {{{ senderName }}} y dylai'r trefniadau hyn newid yn ystod gwyliau'r ysgol.",
-        "suggestedNoChangeDuringSchoolHolidays": "Awgrymodd {{{ senderName }}} na ddylai'r trefniadau hyn newid yn ystod gwyliau'r ysgol."
+        "suggestedNoChangeDuringSchoolHolidays": "Awgrymodd {{{ senderName }}} ni ddylai'r trefniadau hyn newid yn ystod gwyliau'r ysgol."
       },
       "decisionMaking": {
         "planLastMinuteChanges": {
@@ -698,12 +698,12 @@
           "suggestedYearsPlural": "Awgrymodd {{{ senderName }}} y dylech adolygu'r trefniadau hyn ymhen {{ number }} flynedd/blynedd/mlynedd."
         }
       },
-      "nextSteps": "Y camau nesaf",
+      "nextSteps": "Camau nesaf",
       "whatToDoNext": "Beth i'w wneud nesaf",
       "nowSendPlan": "Nawr anfonwch y cynllun trefniadau plant arfaethedig hwn yn ôl at {{{ senderName }}}. Dylech geisio creu cofnod ysgrifenedig o'r hyn rydych chi'ch dau wedi cytuno arno.",
       "notLegallyBinding": "Nid yw unrhyw gynllun a wnewch gan ddefnyddio'r ffurflen hon yn gyfreithiol rwymol. Nid oes rhaid i'r person arall wneud yr hyn y mae'n ei ddweud a gall y naill neu'r llall ohonoch awgrymu newidiadau iddo ar unrhyw adeg.",
       "noResponseHeading": "Os nad oes ymateb",
-      "unableToAgree": "Os na allwch ddod i gytundeb rhwng eich gilydd, gallwch roi cynnig ar gyfryngu neu ffordd arall o gytuno y tu allan i’r llys.",
+      "unableToAgree": "Os na allwch ddod i gytundeb ymysg eich gilydd, gallech roi cynnig ar gyfryngu neu ffordd arall o gytuno y tu allan i’r llys.",
       "aMediatorIs":"Mae cyfryngwr yn weithiwr proffesiynol a fydd yn gweithio gyda chi i'ch helpu i wneud penderfyniadau yn seiliedig ar fuddiannau gorau eich plentyn. Maen nhw'n gwrando ar y ddau ohonoch ac yn cymryd ymagwedd niwtral.",
       "moreInfoAndSupport": "Mae rhagor o wybodaeth a chyngor ar gael yn https://www.gov.uk/looking-after-children-divorce.",
       "doNotAgree": {
