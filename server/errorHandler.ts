@@ -1,8 +1,9 @@
-import type { Request, Response, NextFunction } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import type { HTTPError } from 'superagent';
 
 import config from './config';
 import logger from './logging/logger';
+import sendSessionTimeoutResponse from './utils/sendSessionTimeoutResponse';
 
 // Some user agents (notably Chrome) probe these URLs automatically.
 // They can safely 404 and shouldn't be logged as application errors.
@@ -31,9 +32,7 @@ export default function createErrorHandler() {
     response.status(status);
 
     if (status === 403) {
-      return response.render('pages/errors/timeOut', {
-        title: request.__('errors.timeOut.title'),
-      });
+      return sendSessionTimeoutResponse(request, response);
     }
 
     return status === 404
