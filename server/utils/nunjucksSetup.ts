@@ -44,6 +44,7 @@ const nunjucksSetup = (app: express.Express): void => {
     'previewEnd',
     config.previewEnd.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }),
   );
+  njkEnv.addGlobal('serviceUrl', config.serviceUrl);
   njkEnv.addGlobal('paths', paths);
   njkEnv.addGlobal('formFields', formFields);
   njkEnv.addGlobal('titleIds', titleIds);
