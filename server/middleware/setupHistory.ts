@@ -14,6 +14,7 @@ const pathsNotForHistory = [
   paths.COOKIES,
   paths.PRIVACY_NOTICE,
   paths.TERMS_AND_CONDITIONS,
+  paths.SESSION_TIMEOUT,
   paths.EXISTING_COURT_ORDER,
 ];
 const pathsForHistory = Object.values(paths).filter((path) => !pathsNotForHistory.includes(path));
@@ -27,6 +28,10 @@ const setupHistory = (): Router => {
 
     // Only update history after response is sent and only if it was successful (200)
     response.on('finish', () => {
+      if (!request.session) {
+        return;
+      }
+
       const history = request.session.pageHistory || [paths.START];
       const lastPage = history[history.length - 1];
       const secondLastPage = history[history.length - 2];

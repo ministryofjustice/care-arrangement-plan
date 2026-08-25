@@ -107,6 +107,8 @@
     window.analyticsEnvironmentEnabled = {{ analyticsEnvironmentEnabled | default(true) | dump | safe }};
     // User consent flag for GA4 (Google Analytics)
     window.enableAnalytics = {{ analyticsEnabled | default(false) | dump | safe }};
+    window.sessionTimeoutMinutes = {{ sessionTimeoutMinutes | dump | safe }};
+    window.sessionTimeoutPath = {{ paths.SESSION_TIMEOUT | dump | safe }};
   </script>
   <script type="module" src="{{ '/assets/js/app.js' | assetMap }}"></script>
 {% endblock %}

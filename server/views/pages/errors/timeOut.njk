@@ -12,9 +12,14 @@
       <p>{{ __('errors.timeOut.yourSession') }}</p>
       <p>{{ __('errors.timeOut.personalInformation') }}</p>
       <p>{{ __('errors.timeOut.startAgain') }}</p>
+      {% set startAgainHref = paths.CHILDREN_SAFETY_CHECK %}
+      {% if includeWelshLanguage and getLocale() == 'cy' %}
+        {% set startAgainHref = paths.CHILDREN_SAFETY_CHECK ~ '?lang=cy' %}
+      {% endif %}
       {{
         govukButton({
-          text: __('errors.timeOut.startAgainButton'), href: paths.SAFETY_CHECK
+          text: __('errors.timeOut.startAgainButton'),
+          href: startAgainHref
         })
       }}
     </div>

@@ -5,6 +5,7 @@ import contactUsRoutes from './contactUs';
 import cookiesRoutes from './cookies';
 import passwordRoutes from './password';
 import privacyNoticeRoutes from './privacyNotice';
+import sessionTimeoutRoutes from './sessionTimeout';
 import termsAndConditionsRoutes from './termsAndConditions';
 
 const routes = (): Router => {
@@ -14,6 +15,7 @@ const routes = (): Router => {
   accessibilityStatementRoutes(router);
   contactUsRoutes(router);
   privacyNoticeRoutes(router);
+  sessionTimeoutRoutes(router);
   termsAndConditionsRoutes(router);
 
   return router;
