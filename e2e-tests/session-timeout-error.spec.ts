@@ -18,18 +18,18 @@ test.describe('Session timeout error (403)', () => {
     await expect(page.getByText(/you need to start again/i)).toBeVisible();
   });
 
-  test('should provide a start again button linking to safety check', async ({ page }) => {
+  test('should provide a start again button linking to children safety check', async ({ page }) => {
     await page.goto('/dev/create-timeout');
 
     const startAgainButton = page.getByRole('button', { name: /^Start again$/i });
     await expect(startAgainButton).toBeVisible();
-    await expect(startAgainButton).toHaveAttribute('href', '/safety-check');
+    await expect(startAgainButton).toHaveAttribute('href', '/children-safety-check');
   });
 
-  test('should navigate to the start page when start again is clicked', async ({ page }) => {
+  test('should navigate to children safety check when start again is clicked', async ({ page }) => {
     await page.goto('/dev/create-timeout');
 
     await page.getByRole('button', { name: /^Start again$/i }).click();
-    await expect(page).toHaveURL('/');
+    await expect(page).toHaveURL(/\/children-safety-check/);
   });
 });
