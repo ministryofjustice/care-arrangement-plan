@@ -24,7 +24,7 @@ const generatePdf = () => {
     pdf.addHeader('Proposed child arrangements plan');
 
     pdf.addBodyText('Use this form from the Child Arrangements Plan service ( https://propose-child-arrangements-plan.service.gov.uk/ ) on GOV.UK to collaborate to create child arrangements which you both agree on, without having to go to court.', { spacing: 3 });
-    pdf.addBodyText('Any plan you create using this service is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.');
+    pdf.addBodyText('Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.');
 
     pdf.addSubsectionHeading('How to use this form');
     pdf.addNumberedList([
@@ -60,7 +60,7 @@ const generatePdf = () => {
     pdf.addBodyText('Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.', { spacing: 2 });
     pdf.addSpacing(8);
 
-    pdf.addSubsectionHeading('Top tips for you and your children');
+    pdf.addSubsectionHeading('Tips to help you and your children');
     pdf.addBodyText('Your child arrangements plan should:', { spacing: 2 });
     pdf.addBulletList([
       '• put the child\'s welfare first',
@@ -112,7 +112,7 @@ const generatePdf = () => {
     pdf.addSubsectionHeading('This plan is not suitable for you if there has been:');
     pdf.addBulletList([
       '• any form of domestic abuse or violence, even if the abuse was not directed at the children',
-      '• child abduction or attempted child abduction',
+      '• actual or attempted child abduction',
       '• child abuse or neglect',
       '• misuse of drugs, alcohol or other substances',
       '• any other safety or welfare concerns that place anyone at significant risk of harm',
@@ -132,8 +132,6 @@ const generatePdf = () => {
     pdf.addBodyText('Who this child arrangements proposal is for');
     pdf.addChildNameGrid();
 
-    pdf.addBodyText('If there are more than 4 children, you can attach a separate sheet', { spacing: 8 });
-
     pdf.addSpacing(8); // Additional spacing between child name boxes and adult name section
     pdf.addSubsectionHeading('The adults who will care for the children');
     pdf.addInputBox(10, 'Your first name', 'If you are answering these questions for someone else, enter their first name', false);
@@ -147,11 +145,12 @@ const generatePdf = () => {
 
     pdf.addSectionHeading('Living and visiting');
     pdf.addQuestionHeading('Where will the children spend most of their time?');
-    pdf.addBodyText('Options include:', { spacing: 5 });
+    pdf.addBodyText('Options could include:', { spacing: 5 });
     pdf.addBulletList([
       '• The children will mostly live with you',
       '• The children will mostly live with the other parent or carer',
       '• They\'ll split time between both households',
+      '• Another arrangement',
     ]);
     pdf.addSpacing(3);
 
@@ -170,7 +169,7 @@ const generatePdf = () => {
 
     pdf.addQuestionHeading('Which schedule best meets the children\'s needs?');
     pdf.addBodyText('What timetable are you proposing for overnight stays, daytime visits and weekends at the other household?', { spacing: 5 });
-    pdf.addTip('Tip: It may not be in the children\'s best interests to split time exactly between households.');
+    pdf.addTip('Tip: An exact split of time between two households does not always suit children\'s best interests.');
     pdf.addSpacing(6);
 
     // Info box with schedules (increased height to fit content)
@@ -231,6 +230,13 @@ const generatePdf = () => {
 
     pdf.addSectionHeading('Handovers and holidays');
     pdf.addQuestionHeading('How will the children get between households?');
+    pdf.addBodyText('Options could include:', { spacing: 5 });
+    pdf.addBulletList([
+      '• You collect them',
+      '• The other parent or carer collects them',
+      '• Another arrangement',
+    ]);
+    pdf.addSpacing(3);
 
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60);
@@ -244,6 +250,15 @@ const generatePdf = () => {
 
     pdf.addQuestionHeading('Where does handover take place?');
     pdf.addBodyText('It may be easier for children if the handover takes place at a neutral location such as a park or railway station which you\'re confident you\'ll both feel safe in.', { spacing: 5 });
+    pdf.addBodyText('Options could include:', { spacing: 5 });
+    pdf.addBulletList([
+      '• Neutral location',
+      '• At your home',
+      '• At the other parent or carer\'s home',
+      '• At school',
+      '• Another arrangement',
+    ]);
+    pdf.addSpacing(3);
 
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60);
@@ -325,9 +340,17 @@ const generatePdf = () => {
       '• With a phone call',
       '• By email',
       '• Using a parenting app',
+      '• Another arrangement',
     ]);
     pdf.addSpacing(3);
 
+    pdf.addParentBoxInstruction();
+    pdf.addParentResponseBoxes(60);
+    pdf.addSpacing(8);
+    pdf.addCompromiseBox(90);
+
+    pdf.addQuestionHeading('How much notice should you give to change long-term arrangements?');
+    pdf.addBodyText('Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.');
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60);
     pdf.addSpacing(8);
@@ -351,11 +374,12 @@ const generatePdf = () => {
     // ===== PAGE 16: What happens now (was page 15) =====
     pdf.addPage();
 
-    pdf.addSectionHeading('What you need to do now');
+    pdf.addSectionHeading('Next steps');
+    pdf.addQuestionHeading('What to do next');
     pdf.addBodyText('Now give this proposed child arrangements plan to the other parent or carer so they can add their response.', { spacing: 2 });
     pdf.addBodyText('When they have added their response, you can collaborate to reach a shared agreement.')
-    pdf.addQuestionHeading('If you can\'t agree');
-    pdf.addBodyText('If you are unable to reach agreement about your child arrangements, you can try mediation or another way of agreeing outside of court.',{ spacing: 2 });
+    pdf.addQuestionHeading('If there\'s no response');
+    pdf.addBodyText('If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.',{ spacing: 2 });
     pdf.addBodyText('A mediator is a professional who will work with you to help you make decisions based on your child\u2019s best interests. They listen to both of you and take a neutral approach.',{ spacing: 2 });
     pdf.addBodyText('More information and support is available at: https://www.gov.uk/looking-after-children-divorce')
     pdf.addFooter(16);
