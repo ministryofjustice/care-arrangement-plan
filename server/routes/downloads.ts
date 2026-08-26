@@ -35,7 +35,8 @@ const downloadRoutes = (router: Router) => {
   });
 
   router.get(paths.DOWNLOAD_PAPER_FORM, (request, response) => {
-    response.download(getAssetPath('other/paperForm.pdf'), `${request.__('pdf.name')}.pdf`);
+    const paperFormFile = request.getLocale() === 'cy' ? 'other/paperForm-cy.pdf' : 'other/paperForm.pdf';
+    response.download(getAssetPath(paperFormFile), `${request.__('pdf.name')}.pdf`);
 
     // Log download event
     logDownload(request, 'offline_pdf');

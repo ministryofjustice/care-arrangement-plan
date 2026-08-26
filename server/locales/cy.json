@@ -762,5 +762,46 @@
       "signUp": "Cofrestrwch ac fe gewch gymhelliant pan fyddwch chi'n cymryd rhan mewn ymchwil bellach ",
       "signUpLink": "https://www.smartsurvey.co.uk/t/BDP7V3/"
     }
+  },
+  "paperForm": {
+    "intro": "Use this form from the Child Arrangements Plan service ( https://propose-child-arrangements-plan.service.gov.uk/ ) on GOV.UK to collaborate to create child arrangements which you both agree on, without having to go to court.",
+    "notLegallyBinding": "Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.",
+    "howToUse": "How to use this form",
+    "howToUseSteps": {
+      "fillOut": "Fill out the form saying what arrangements you would like",
+      "letOtherRespond": "Let the other parent or carer add their response",
+      "collaborate": "Collaborate until you reach agreement"
+    },
+    "shouldOnlyUseIf": "You should only use this form if:",
+    "safetyNotPressured": "both of you do not feel pressured or intimidated into responding",
+    "collaboratingCan": "You may find that collaborating with the other parent or carer on a child arrangements plan:",
+    "whoThisIsFor": "Who this child arrangements proposal is for",
+    "theAdults": "The adults who will care for the children",
+    "childName": "Child {{ number }} (first name)",
+    "parentResponseLabel": "Parent/carer name and response:",
+    "agreedAnswer": "Enter your agreed answer to this question.",
+    "parentBoxInstruction": "Add your first name and response in the box - the other parent/carer should add their first name and response in the other box.",
+    "optionsCouldInclude": "Options could include:",
+    "tipPrefix": "Tip:",
+    "mostlyLiveWithYou": "The children will mostly live with you",
+    "mostlyLiveWithOther": "The children will mostly live with the other parent or carer",
+    "splitTime": "They'll split time between both households",
+    "scheduleExplainer": "What timetable are you proposing for overnight stays, daytime visits and weekends at the other household?",
+    "commonSchedulesIntro": "Here are some common schedules that can work well for children.",
+    "alternatingWeeks": "Alternating weeks",
+    "alternatingWeeksDescription": "The children will spend one week in one household and the next week in the other.",
+    "schedule223": "2-2-3 schedule",
+    "schedule223Description": "Children spend two days in one household, two days in the other, then back to the first house for 3 days including the weekend.",
+    "schedule443": "4-4-3 schedule",
+    "schedule443Description": "Children spend three days in one household then four days in the other. The next week they switch.",
+    "schedule2255": "2-2-5-5 schedule",
+    "schedule2255Description": "Children spend two days in one household, then two days in the other. After that they spend five days in one household, then five days in the other.",
+    "youCollect": "You collect them",
+    "otherCollects": "The other parent or carer collects them",
+    "handoverExplainer": "It may be easier for children if the handover takes place at a neutral location such as a park or railway station which you're confident you'll both feel safe in.",
+    "atYourHome": "At your home",
+    "atOtherHome": "At the other parent or carer's home",
+    "giveToOtherParent": "Now give this proposed child arrangements plan to the other parent or carer so they can add their response.",
+    "collaborateToAgree": "When they have added their response, you can collaborate to reach a shared agreement."
   }
 }
