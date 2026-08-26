@@ -406,6 +406,8 @@ class PdfGenerator {
       { label: 'Child 2 (first name)', x: rightBoxX },
       { label: 'Child 3 (first name)', x: PdfStyles.MARGIN_WIDTH },
       { label: 'Child 4 (first name)', x: rightBoxX },
+      { label: 'Child 5 (first name)', x: PdfStyles.MARGIN_WIDTH },
+      { label: 'Child 6 (first name)', x: rightBoxX },
     ];
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
