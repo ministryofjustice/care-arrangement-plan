@@ -349,6 +349,11 @@ const generatePdf = () => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(90);
 
+    pdf.addFooter(14);
+
+    // ===== PAGE 15: Notice for long-term arrangements =====
+    pdf.addPage();
+
     pdf.addQuestionHeading('How much notice should you give to change long-term arrangements?');
     pdf.addBodyText('Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.');
     pdf.addParentBoxInstruction();
@@ -356,9 +361,9 @@ const generatePdf = () => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(90);
 
-    pdf.addFooter(14);
+    pdf.addFooter(15);
 
-    // ===== PAGE 15: When children's needs change (was page 14) =====
+    // ===== PAGE 16: When children's needs =====
     pdf.addPage();
 
     pdf.addQuestionHeading('When would you like to review this plan?');
@@ -369,9 +374,9 @@ const generatePdf = () => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(90); // Reduced from 110
 
-    pdf.addFooter(15);
+    pdf.addFooter(16);
 
-    // ===== PAGE 16: What happens now (was page 15) =====
+    // ===== PAGE 17: What happens now =====
     pdf.addPage();
 
     pdf.addSectionHeading('Next steps');
@@ -382,7 +387,7 @@ const generatePdf = () => {
     pdf.addBodyText('If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.',{ spacing: 2 });
     pdf.addBodyText('A mediator is a professional who will work with you to help you make decisions based on your child\u2019s best interests. They listen to both of you and take a neutral approach.',{ spacing: 2 });
     pdf.addBodyText('More information and support is available at: https://www.gov.uk/looking-after-children-divorce')
-    pdf.addFooter(16);
+    pdf.addFooter(17);
 
     // Set document title for PDF metadata
     pdf.setProperties({

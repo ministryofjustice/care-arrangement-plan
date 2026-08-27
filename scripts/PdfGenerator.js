@@ -13,7 +13,7 @@ class PdfGenerator {
     this.pageHeight = this.doc.internal.pageSize.getHeight();
     this.currentY = PdfStyles.HEADER_HEIGHT + 10;
     this.currentPage = 1;
-    this.totalPages = 16; // Known from the form
+    this.totalPages = 17; // Known from the form
 
   }
 
