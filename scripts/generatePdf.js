@@ -7,7 +7,7 @@ const { version } = require('../package.json');
  * Standalone script to generate a blank, GDS-styled PDF.
  * Generates paperForm.pdf (English) and paperForm-cy.pdf (Welsh)
  * for use as downloadable templates.
- * Run via: npm run generate:pdf or node scripts/generatePdf.js
+ * Run via: npm run postbuild or node scripts/generatePdf.js [en|cy]
  *
  * Uses modular PdfGenerator class (similar to server/pdf/pdf.ts)
  * with styling separated into pdfStyles.js
@@ -16,7 +16,6 @@ const { version } = require('../package.json');
 const SUPPORTED_LOCALES = ['en', 'cy'];
 
 const paperFormFileName = (locale) => (locale === 'en' ? 'paperForm.pdf' : `paperForm-${locale}.pdf`);
-
 
 const generatePdf = (locale = 'en') => {
   try {
@@ -27,8 +26,6 @@ const generatePdf = (locale = 'en') => {
     // eslint-disable-next-line global-require, import/no-dynamic-require
     const localeData = require(`../server/locales/${locale}.json`);
     const t = localeData.paperForm;
-
-    console.log('TTT', t);
 
     // eslint-disable-next-line global-require, import/no-dynamic-require
     const { jsPDF } = require('jspdf');
@@ -405,8 +402,9 @@ const generatePdf = (locale = 'en') => {
     });
 
     // Output paths: write to both source assets and dist assets
-    const sourceAssetPath = path.resolve(process.cwd(), 'assets', 'other', 'paperForm.pdf');
-    const distAssetPath = path.resolve(process.cwd(), 'dist', 'assets', 'other', 'paperForm.pdf');
+    const fileName = paperFormFileName(locale);
+    const sourceAssetPath = path.resolve(process.cwd(), 'assets', 'other', fileName);
+    const distAssetPath = path.resolve(process.cwd(), 'dist', 'assets', 'other', fileName);
 
     // Ensure directories exist
     fs.mkdirSync(path.dirname(sourceAssetPath), { recursive: true });
@@ -426,7 +424,8 @@ const generatePdf = (locale = 'en') => {
 
 // Run if executed directly
 if (require.main === module) {
-  generatePdf();
+  const locale = process.argv[2] || 'en';
+  generatePdf(locale);
 }
 
 module.exports = generatePdf;
