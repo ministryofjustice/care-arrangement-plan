@@ -771,22 +771,23 @@
     }
   },
   "paperForm": {
+    "title": "Proposed child arrangements plan",
     "intro": "Use this form from the Child Arrangements Plan service (https://propose-child-arrangements-plan.service.gov.uk/) on GOV.UK to collaborate to create child arrangements which you both agree on, without having to go to court.",
     "notLegallyBinding": "Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.",
     "howToUseThisForm": {
       "title": "How to use this form",
       "howToUseSteps": {
-        "fillOut": "Fill out the form saying what arrangements you would like",
-        "letOtherRespond": "Let the other parent or carer add their response",
-        "collaborate": "Collaborate until you reach agreement"
+        "fillOut": "1. Fill out the form saying what arrangements you would like",
+        "letOtherRespond": "2. Let the other parent or carer add their response",
+        "collaborate": "3. Collaborate until you reach agreement"
       }
     },
     "yourSafety": {
       "title": "Your safety",
       "intro": "You should only use this form if:",
       "safetySteps": {
-        "youAreConfident": "you're confident that you and your ex-partner can make decisions together without putting yourself or the children in danger",
-        "doNotFeelPressured": "both of you do not feel pressured or intimidated into responding"
+        "youAreConfident": "• you're confident that you and your ex-partner can make decisions together without putting yourself or the children in danger",
+        "doNotFeelPressured": "• both of you do not feel pressured or intimidated into responding"
       },
       "stopNow": "If you have any concerns about safety, stop now.",
       "feedbackOrSafetyConcerns": "If you have any feedback or safety concerns about this service, you can email <a href=\"mailto:safety@propose-child-arrangements-plan.service.gov.uk\">safety@propose-child-arrangements-plan.service.gov.uk</a>.",
@@ -796,16 +797,16 @@
       "title": "How making a child arrangements plan can help",
       "intro": "You may find that collaborating with the other parent or carer on a child arrangements plan:",
       "benefits": {
-        "cheaperAndQuicker": "is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it’s urgent)",
-        "betterOutcome": "leads to a better outcome for your children, which you and your ex-partner are in control of"
+        "cheaperAndQuicker": "• is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it’s urgent)",
+        "betterOutcome": "• leads to a better outcome for your children, which you and your ex-partner are in control of"
       },
       "goingToCourt": "Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.",
       "tips": "Tips to help you and your children",
       "planShouldIntro": "Your child arrangements plan should:",
       "planShould": {
-        "welfare": "put the child’s welfare first",
-        "wishes": "reflect the wishes, feelings and needs of the child",
-        "considerAnyHarm": "consider any harm the child has suffered or any risk of harm"
+        "welfare": "• put the child’s welfare first",
+        "wishes": "• reflect the wishes, feelings and needs of the child",
+        "considerAnyHarm": "• consider any harm the child has suffered or any risk of harm"
       }
     },
     "ifCourtOrderInPlace": {
@@ -813,20 +814,20 @@
       "doNotContinue": "Do not continue if there’s a court order in place relating to you, the other parent, or the children.",
       "forExample": "For example, a:",
       "orderList": {
-        "childArrangementsOrder": "child arrangements order",
-        "specificIssueOrder": "specific issue order",
-        "prohibitedStepsOrder": "prohibited steps order",
-        "protectiveOrder": "protective order such as a non-molestation order, occupation order or a domestic abuse protection order",
-        "anyOther": "any other order restricting contact between you and the other parent or the children"
+        "childArrangementsOrder": "• child arrangements order",
+        "specificIssueOrder": "• specific issue order",
+        "prohibitedStepsOrder": "• prohibited steps order",
+        "protectiveOrder": "• protective order such as a non-molestation order, occupation order or a domestic abuse protection order",
+        "anyOther": "• any other order restricting contact between you and the other parent or the children"
       },
       "toChangeOrEnforce": "To change or enforce an existing child arrangements order, visit <a href=\"https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order\">https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order</a>.",
       "getMoreInformation": {
         "title": "Get more information",
         "moreInfo": "Use GOV.UK to find more information, for example:",
         "moreInfoList": {
-          "makingChildArrangements": "making child arrangements - <a href=\"https://www.gov.uk/looking-after-children-divorce\">https://www.gov.uk/looking-after-children-divorce</a>",
-          "legalSeparation": "getting a legal separation - <a href=\"https://www.gov.uk/legal-separation\">https://www.gov.uk/legal-separation</a>",
-          "divorce": "getting a divorce - <a href=\"https://www.gov.uk/get-a-divorce\">https://www.gov.uk/get-a-divorce</a>"
+          "makingChildArrangements": "• making child arrangements - <a href=\"https://www.gov.uk/looking-after-children-divorce\">https://www.gov.uk/looking-after-children-divorce</a>",
+          "legalSeparation": "• getting a legal separation - <a href=\"https://www.gov.uk/legal-separation\">https://www.gov.uk/legal-separation</a>",
+          "divorce": "• getting a divorce - <a href=\"https://www.gov.uk/get-a-divorce\">https://www.gov.uk/get-a-divorce</a>"
         }
       },
       "legalAdvice": {
@@ -841,11 +842,11 @@
     },
     "notSuitableForYou": {
       "title": "This plan is not suitable for you if there has been:",
-      "anyForm": "any form of domestic abuse or violence, even if the abuse was not directed at the children",
-      "childAbduction": "actual or attempted child abduction",
-      "childAbuse": "child abuse or neglect",
-      "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
-      "anyOtherSafety": "any other safety or welfare concerns that place anyone at significant risk of harm",
+      "anyForm": "• any form of domestic abuse or violence, even if the abuse was not directed at the children",
+      "childAbduction": "• actual or attempted child abduction",
+      "childAbuse": "• child abuse or neglect",
+      "drugsOrAlcohol": "• misuse of drugs, alcohol or other substances",
+      "anyOtherSafety": "• any other safety or welfare concerns that place anyone at significant risk of harm",
       "feedbackAndSupport": {
         "title": "Feedback and support",
         "toAskForHelp": "To ask for help using this service, or suggest improvements, you can email <a href=\"mailto:feedback@propose-child-arrangements-plan.com\">feedback@propose-child-arrangements-plan.com</a>."
@@ -869,7 +870,7 @@
     "livingAndVisiting": {
       "title": "Living and visiting",
       "intro": "Where will the children spend most of their time?",
-      "livingAndVisitingSteps": {
+      "options": {
         "mostlyLiveWithYou": "The children will mostly live with you",
         "mostlyLiveWithOther": "The children will mostly live with the other parent or carer",
         "splitTime": "They'll split time between both households",
@@ -893,7 +894,7 @@
     "handoversAndHolidays": {
       "title": "Handovers and holidays",
       "intro": "How will the children get between households?",
-      "handoverAndHolidaysList": {
+      "options": {
         "youCollect": "You collect them",
         "otherCollects": "The other parent or carer collects them",
         "anotherArrangement": "Another arrangement"

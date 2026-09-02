@@ -294,11 +294,11 @@ class PdfGenerator {
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
     this.doc.setFontSize(PdfStyles.SMALL_TEXT_SIZE);
-    this.doc.text('Parent/carer name and response:', PdfStyles.MARGIN_WIDTH + 3, this.currentY + 6);
+    this.doc.text(t.parentCarerNameAndResponse, PdfStyles.MARGIN_WIDTH + 3, this.currentY + 6);
 
     // Right box
     this.doc.rect(rightBoxX, this.currentY, boxWidth, height);
-    this.doc.text('Parent/carer name and response:', rightBoxX + 3, this.currentY + 6);
+    this.doc.text(t.parentCarerNameAndResponse, rightBoxX + 3, this.currentY + 6);
 
     this.currentY += height + 6;
   }
@@ -307,7 +307,7 @@ class PdfGenerator {
    * Add compromise box
    */
   addCompromiseBox(height = 80) {
-    this.addBodyText('Enter your agreed answer to this question.', { spacing: 2 }); // Reduced spacing to bring text closer to box
+    this.addBodyText(t.agreedAnswer, { spacing: 2 }); // Reduced spacing to bring text closer to box
 
     // Check if box will overflow into footer
     const maxY = this.pageHeight - PdfStyles.FOOTER_HEIGHT - 5;
@@ -331,7 +331,7 @@ class PdfGenerator {
    * Add instruction text for parent boxes
    */
   addParentBoxInstruction() {
-    const text = 'Add your first name and response in the box - the other parent/carer should add their first name and response in the other box.';
+    const text = t.responseInTheBox;
     const lines = this.doc.splitTextToSize(text, this.pageWidth - 2 * PdfStyles.MARGIN_WIDTH);
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
@@ -402,12 +402,12 @@ class PdfGenerator {
     const rightBoxX = PdfStyles.MARGIN_WIDTH + boxWidth + PdfStyles.MARGIN_WIDTH;
 
     const children = [
-      { label: 'Child 1 (first name)', x: PdfStyles.MARGIN_WIDTH },
-      { label: 'Child 2 (first name)', x: rightBoxX },
-      { label: 'Child 3 (first name)', x: PdfStyles.MARGIN_WIDTH },
-      { label: 'Child 4 (first name)', x: rightBoxX },
-      { label: 'Child 5 (first name)', x: PdfStyles.MARGIN_WIDTH },
-      { label: 'Child 6 (first name)', x: rightBoxX },
+      { label: t.childArrangementsProposal.child1, x: PdfStyles.MARGIN_WIDTH },
+      { label: t.childArrangementsProposal.child2, x: rightBoxX },
+      { label: t.childArrangementsProposal.child3, x: PdfStyles.MARGIN_WIDTH },
+      { label: t.childArrangementsProposal.child4, x: rightBoxX },
+      { label: t.childArrangementsProposal.child5, x: PdfStyles.MARGIN_WIDTH },
+      { label: t.childArrangementsProposal.child6, x: rightBoxX },
     ];
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);

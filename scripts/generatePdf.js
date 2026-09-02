@@ -5,15 +5,31 @@ const { version } = require('../package.json');
 
 /**
  * Standalone script to generate a blank, GDS-styled PDF.
- * Generates paperForm.pdf for use as a downloadable template.
+ * Generates paperForm.pdf (English) and paperForm-cy.pdf (Welsh)
+ * for use as downloadable templates.
  * Run via: npm run generate:pdf or node scripts/generatePdf.js
  *
  * Uses modular PdfGenerator class (similar to server/pdf/pdf.ts)
  * with styling separated into pdfStyles.js
  */
 
-const generatePdf = () => {
+const SUPPORTED_LOCALES = ['en', 'cy'];
+
+const paperFormFileName = (locale) => (locale === 'en' ? 'paperForm.pdf' : `paperForm-${locale}.pdf`);
+
+
+const generatePdf = (locale = 'en') => {
   try {
+    if (!SUPPORTED_LOCALES.includes(locale)) {
+      throw new Error(`Unsupported locale: ${locale}`);
+    }
+
+    // eslint-disable-next-line global-require, import/no-dynamic-require
+    const localeData = require(`../server/locales/${locale}.json`);
+    const t = localeData.paperForm;
+
+    console.log('TTT', t);
+
     // eslint-disable-next-line global-require, import/no-dynamic-require
     const { jsPDF } = require('jspdf');
 
@@ -21,51 +37,51 @@ const generatePdf = () => {
     const pdf = new PdfGenerator(jsPDF, version);
 
     // ===== PAGE 1: Introduction =====
-    pdf.addHeader('Proposed child arrangements plan');
+    pdf.addHeader(t.title);
 
-    pdf.addBodyText('Use this form from the Child Arrangements Plan service ( https://propose-child-arrangements-plan.service.gov.uk/ ) on GOV.UK to collaborate to create child arrangements which you both agree on, without having to go to court.', { spacing: 3 });
-    pdf.addBodyText('Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.');
+    pdf.addBodyText(t.intro, { spacing: 3 });
+    pdf.addBodyText(t.notLegallyBinding);
 
-    pdf.addSubsectionHeading('How to use this form');
+    pdf.addSubsectionHeading(t.howToUseThisForm.title);
     pdf.addNumberedList([
-      '1. Fill out the form saying what arrangements you would like',
-      '2. Let the other parent or carer add their response',
-      '3. Collaborate until you reach agreement',
+      t.howToUseThisForm.howToUseSteps.fillOut,
+      t.howToUseThisForm.howToUseSteps.letOtherRespond,
+      t.howToUseThisForm.howToUseSteps.collaborate,
     ]);
     pdf.addSpacing(8);
 
-    pdf.addSubsectionHeading('Your safety');
-    pdf.addBodyText('You should only use this form if:', { spacing: 2 });
+    pdf.addSubsectionHeading(t.yourSafety.title);
+    pdf.addBodyText(t.yourSafety.intro, { spacing: 2 });
     pdf.addBulletList([
-      '• you\'re confident that you and your ex-partner can make decisions together without putting yourself or the children in danger',
-      '• both of you do not feel pressured or intimidated into responding',
+      t.yourSafety.safetySteps.youAreConfident,
+      t.yourSafety.safetySteps.doNotFeelPressured,
     ]);
     pdf.addSpacing(3);
-    pdf.addBodyText('If you have any concerns about safety, stop now.', { bold: true, spacing: 2 });
-    pdf.addBodyText('If you have any feedback or safety concerns about this service, you can email safety@propose-child-arrangements-plan.service.gov.uk.', { spacing: 2 });
-    pdf.addBodyText('We cannot answer any questions about child arrangement plans that have already been created.');
+    pdf.addBodyText(t.yourSafety.stopNow, { bold: true, spacing: 2 });
+    pdf.addBodyText(t.yourSafety.feedbackOrSafetyConcerns, { spacing: 2 });
+    pdf.addBodyText(t.yourSafety.cannotAnswerQuestions);
 
     pdf.addFooter(1);
 
     // ===== PAGE 2: Other ways, benefits, top tips =====
     pdf.addPage();
 
-    pdf.addSubsectionHeading('How making a child arrangements plan can help');
-    pdf.addBodyText('You may find that collaborating with the other parent or carer on a child arrangements plan:', { spacing: 2 });
+    pdf.addSubsectionHeading(t.howMakingChildArrangementsPlanHelp.title);
+    pdf.addBodyText(t.howMakingChildArrangementsPlanHelp.intro, { spacing: 2 });
     pdf.addBulletList([
-      '• is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it\'s urgent)',
-      '• leads to a better outcome for your children, which you and your ex-partner are in control of',
+      t.howMakingChildArrangementsPlanHelp.benefits.cheaperAndQuicker,
+      t.howMakingChildArrangementsPlanHelp.benefits.betterOutcome,
     ]);
     pdf.addSpacing(3);
-    pdf.addBodyText('Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.', { spacing: 2 });
+    pdf.addBodyText(t.howMakingChildArrangementsPlanHelp.goingToCourt, { spacing: 2 });
     pdf.addSpacing(8);
 
-    pdf.addSubsectionHeading('Tips to help you and your children');
-    pdf.addBodyText('Your child arrangements plan should:', { spacing: 2 });
+    pdf.addSubsectionHeading(t.howMakingChildArrangementsPlanHelp.tips);
+    pdf.addBodyText(t.howMakingChildArrangementsPlanHelp.planShouldIntro, { spacing: 2 });
     pdf.addBulletList([
-      '• put the child\'s welfare first',
-      '• reflect the wishes, feelings and needs of the child',
-      '• consider any harm the child has suffered or any risk of harm',
+      t.howMakingChildArrangementsPlanHelp.planShould.welfare,
+      t.howMakingChildArrangementsPlanHelp.planShould.wishes,
+      t.howMakingChildArrangementsPlanHelp.planShould.considerAnyHarm,
     ]);
 
     pdf.addFooter(2);
@@ -73,88 +89,88 @@ const generatePdf = () => {
     // ===== PAGE 3: More information and safety (was page 2) =====
     pdf.addPage();
 
-    pdf.addSubsectionHeading('If there is a court order in place');
-    pdf.addBodyText('Do not continue if there\'s a court order in place relating to you, the other parent, or the children.', { spacing: 2 });
-    pdf.addBodyText('For example, a:', { spacing: 2 });
+    pdf.addSubsectionHeading(t.ifCourtOrderInPlace.title);
+    pdf.addBodyText(t.ifCourtOrderInPlace.doNotContinue, { spacing: 2 });
+    pdf.addBodyText(t.ifCourtOrderInPlace.forExample, { spacing: 2 });
     pdf.addBulletList([
-      '• child arrangements order',
-      '• specific issue order',
-      '• prohibited steps order',
-      '• protective order such as a non-molestation order, occupation order or a domestic abuse protection order',
-      '• any other order restricting contact between you and the other parent or the children',
+      t.ifCourtOrderInPlace.orderList.childArrangementsOrder,
+      t.ifCourtOrderInPlace.orderList.specificIssueOrder,
+      t.ifCourtOrderInPlace.orderList.prohibitedStepsOrder,
+      t.ifCourtOrderInPlace.orderList.protectiveOrder,
+      t.ifCourtOrderInPlace.orderList.anyOther,
     ]);
     pdf.addSpacing(2);
-    pdf.addBodyText('To change or enforce an existing child arrangements order, visit https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order', { spacing: 0 });
+    pdf.addBodyText(t.ifCourtOrderInPlace.toChangeOrEnforce, { spacing: 0 });
     pdf.addSpacing(8);
 
-    pdf.addSubsectionHeading('Get more information');
-    pdf.addBodyText('Use GOV.UK to find more information, for example:', { spacing: 2 });
+    pdf.addSubsectionHeading(t.ifCourtOrderInPlace.getMoreInformation.title);
+    pdf.addBodyText(t.ifCourtOrderInPlace.getMoreInformation.moreInfo, { spacing: 2 });
     pdf.addBulletList([
-      '• making child arrangements: https://www.gov.uk/looking-after-children-divorce',
-      '• getting a legal separation: https://www.gov.uk/legal-separation',
-      '• getting a divorce: https://www.gov.uk/get-a-divorce',
+      t.ifCourtOrderInPlace.getMoreInformation.moreInfoList.makingChildArrangements,
+      t.ifCourtOrderInPlace.getMoreInformation.moreInfoList.legalSeparation,
+      t.ifCourtOrderInPlace.getMoreInformation.moreInfoList.divorce,
     ]);
     pdf.addSpacing(8);
 
-    pdf.addSubsectionHeading('If you want legal advice');
-    pdf.addBodyText('You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser.', { spacing: 0 });
+    pdf.addSubsectionHeading(t.ifCourtOrderInPlace.legalAdvice.title);
+    pdf.addBodyText(t.ifCourtOrderInPlace.legalAdvice.findLegalAdviser, { spacing: 0 });
     pdf.addSpacing(8);
 
-    pdf.addSubsectionHeading('Getting help with domestic abuse');
-    pdf.addBodyText('To find out more about signs and effects of child abuse and neglect, visit \nhttps://www.nspcc.org.uk/what-is-child-abuse.', { spacing: 2 });
-    pdf.addBodyText('If you\'re unsure whether you\'re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.', { spacing: 0 });
+    pdf.addSubsectionHeading(t.ifCourtOrderInPlace.domesticAbuse.title);
+    pdf.addBodyText(t.ifCourtOrderInPlace.domesticAbuse.signsAndEffects, { spacing: 2 });
+    pdf.addBodyText(t.ifCourtOrderInPlace.domesticAbuse.unsureVictim, { spacing: 0 });
 
     pdf.addFooter(3);
 
     // ===== PAGE 4: Safety continuation =====
     pdf.addPage();
 
-    pdf.addSubsectionHeading('This plan is not suitable for you if there has been:');
+    pdf.addSubsectionHeading(t.notSuitableForYou.title);
     pdf.addBulletList([
-      '• any form of domestic abuse or violence, even if the abuse was not directed at the children',
-      '• actual or attempted child abduction',
-      '• child abuse or neglect',
-      '• misuse of drugs, alcohol or other substances',
-      '• any other safety or welfare concerns that place anyone at significant risk of harm',
+      t.notSuitableForYou.anyForm,
+      t.notSuitableForYou.childAbduction,
+      t.notSuitableForYou.childAbuse,
+      t.notSuitableForYou.drugsOrAlcohol,
+      t.notSuitableForYou.anyOtherSafety,
     ]);
     pdf.addSpacing(8);
 
-    pdf.addSubsectionHeading('Feedback and support');
-    pdf.addBodyText('To ask for help using this service, or suggest improvements, you can email feedback@propose-child-arrangements-plan.service.gov.uk', { spacing: 2 });
-    pdf.addBodyText('We cannot answer any questions about child arrangement plans that have already been created.');
+    pdf.addSubsectionHeading(t.notSuitableForYou.feedbackAndSupport.title);
+    pdf.addBodyText(t.notSuitableForYou.feedbackAndSupport.toAskForHelp, { spacing: 2 });
+    pdf.addBodyText(t.notSuitableForYou.weCannotAnswer);
 
     pdf.addFooter(4);
 
     // ===== PAGE 5: About this proposal (was page 4) =====
     pdf.addPage();
 
-    pdf.addSectionHeading('About this child arrangements proposal');
-    pdf.addBodyText('Who this child arrangements proposal is for');
+    pdf.addSectionHeading(t.childArrangementsProposal.title);
+    pdf.addBodyText(t.childArrangementsProposal.intro);
     pdf.addChildNameGrid();
 
     pdf.addSpacing(8); // Additional spacing between child name boxes and adult name section
-    pdf.addSubsectionHeading('The adults who will care for the children');
-    pdf.addInputBox(10, 'Your first name', 'If you are answering these questions for someone else, enter their first name', false);
+    pdf.addSubsectionHeading(t.childArrangementsProposal.careForChildren);
+    pdf.addInputBox(10, t.childArrangementsProposal.yourFirstName, t.childArrangementsProposal.answeringTheseQuestions, false);
     pdf.addSpacing(4);
-    pdf.addInputBox(10, 'First name of the other parent or carer', null, false);
+    pdf.addInputBox(10, t.childArrangementsProposal.otherParentFirstName, null, false);
 
     pdf.addFooter(5);
 
     // ===== PAGE 6: Living and visiting (was page 5) =====
     pdf.addPage();
 
-    pdf.addSectionHeading('Living and visiting');
-    pdf.addQuestionHeading('Where will the children spend most of their time?');
-    pdf.addBodyText('Options could include:', { spacing: 5 });
+    pdf.addSectionHeading(t.livingAndVisiting.title);
+    pdf.addQuestionHeading(t.livingAndVisiting.intro);
+    pdf.addBodyText(t.optionsCouldInclude, { spacing: 5 });
     pdf.addBulletList([
-      '• The children will mostly live with you',
-      '• The children will mostly live with the other parent or carer',
-      '• They\'ll split time between both households',
-      '• Another arrangement',
+      t.livingAndVisiting.options.mostlyLiveWithYou,
+      t.livingAndVisiting.options.mostlyLiveWithOther,
+      t.livingAndVisiting.options.splitTime,
+      t.livingAndVisiting.options.anotherArrangement,
     ]);
     pdf.addSpacing(3);
 
-    pdf.addTip('Tip: An exact split of time between two households does not always suit children\'s best interests.', { spacing: 0 });
+    pdf.addTip(t.livingAndVisiting.tip, { spacing: 0 });
     pdf.addSpacing(4);
 
     pdf.addParentBoxInstruction();
@@ -167,8 +183,8 @@ const generatePdf = () => {
     // ===== PAGE 7: Schedule (was page 6) =====
     pdf.addPage();
 
-    pdf.addQuestionHeading('Which schedule best meets the children\'s needs?');
-    pdf.addBodyText('What timetable are you proposing for overnight stays, daytime visits and weekends at the other household?', { spacing: 5 });
+    pdf.addQuestionHeading(t.scheduleMeetsChildrenNeeds.title);
+    pdf.addBodyText(t.scheduleMeetsChildrenNeeds.intro, { spacing: 5 });
     pdf.addTip('Tip: An exact split of time between two households does not always suit children\'s best interests.');
     pdf.addSpacing(6);
 
@@ -180,44 +196,44 @@ const generatePdf = () => {
 
       pdf.doc.setFont('Helvetica', 'bold');
       pdf.doc.setFontSize(10);
-      pdf.doc.text('Here are some common schedules that can work well for children.', col1X, boxY);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.commonSchedulesIntro, col1X, boxY);
       boxY += 6; // Increased from 4 to 6 for more space
 
       // Column 1
       pdf.doc.setFont('Helvetica', 'bold');
       pdf.doc.setFontSize(9);
-      pdf.doc.text('Alternating weeks', col1X, boxY);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeks, col1X, boxY);
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text('The children will spend one week in one', col1X, boxY + 4); // Increased spacing
-      pdf.doc.text('household and the next week in the other.', col1X, boxY + 7);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeksDescription, col1X, boxY + 4); // Increased spacing
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeksDescription, col1X, boxY + 7);
 
       pdf.doc.setFont('Helvetica', 'bold');
-      pdf.doc.text('2-2-3 schedule', col1X, boxY + 13); // Increased spacing
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223, col1X, boxY + 13); // Increased spacing
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text('Children spend two days in one household,', col1X, boxY + 17);
-      pdf.doc.text('two days in the other, then back to the first', col1X, boxY + 20);
-      pdf.doc.text('house for 3 days including the weekend.', col1X, boxY + 23);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223Description, col1X, boxY + 17);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223Description, col1X, boxY + 20);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223Description, col1X, boxY + 23);
 
       // Column 2
       pdf.doc.setFont('Helvetica', 'bold');
-      pdf.doc.text('4-4-3 schedule', col2X, boxY);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443, col2X, boxY);
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text('Children spend three days in one household', col2X, boxY + 4);
-      pdf.doc.text('then four days in the other. The next week', col2X, boxY + 7);
-      pdf.doc.text('they switch.', col2X, boxY + 10);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443Description, col2X, boxY + 4);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443Description, col2X, boxY + 7);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443Description, col2X, boxY + 10);
 
       pdf.doc.setFont('Helvetica', 'bold');
-      pdf.doc.text('2-2-5-5 schedule', col2X, boxY + 16); // Increased spacing
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255, col2X, boxY + 16); // Increased spacing
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text('Children spend two days in one household,', col2X, boxY + 20);
-      pdf.doc.text('then two days in the other. After that they spend', col2X, boxY + 23);
-      pdf.doc.text('five days in one household, then five', col2X, boxY + 26);
-      pdf.doc.text('days in the other.', col2X, boxY + 29);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255Description, col2X, boxY + 20);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255Description, col2X, boxY + 23);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255Description, col2X, boxY + 26);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255Description, col2X, boxY + 29);
 
       pdf.currentY = boxY + 32; // Adjusted for new spacing
     }, 45); // Increased height for more bottom padding
     pdf.addSpacing(6);
-    pdf.addBodyText('Add your first name and response in the box - the other parent/carer should add their first name and response in the other box.', { spacing: 6 });
+    pdf.addBodyText(t.responseInTheBox, { spacing: 6 });
 
     pdf.addParentResponseBoxes(75);
     pdf.addSpacing(6);
@@ -228,13 +244,13 @@ const generatePdf = () => {
     // ===== PAGE 8: Handovers (was page 7) =====
     pdf.addPage();
 
-    pdf.addSectionHeading('Handovers and holidays');
-    pdf.addQuestionHeading('How will the children get between households?');
-    pdf.addBodyText('Options could include:', { spacing: 5 });
+    pdf.addSectionHeading(t.handoversAndHolidays.title);
+    pdf.addQuestionHeading(t.handoversAndHolidays.intro);
+    pdf.addBodyText(t.optionsCouldInclude, { spacing: 5 });
     pdf.addBulletList([
-      '• You collect them',
-      '• The other parent or carer collects them',
-      '• Another arrangement',
+      t.handoversAndHolidays.options.youCollect,
+      t.handoversAndHolidays.options.otherCollects,
+      t.handoversAndHolidays.options.anotherArrangement,
     ]);
     pdf.addSpacing(3);
 
@@ -248,15 +264,14 @@ const generatePdf = () => {
     // ===== PAGE 9: Handover location (was page 8) =====
     pdf.addPage();
 
-    pdf.addQuestionHeading('Where does handover take place?');
-    pdf.addBodyText('It may be easier for children if the handover takes place at a neutral location such as a park or railway station which you\'re confident you\'ll both feel safe in.', { spacing: 5 });
-    pdf.addBodyText('Options could include:', { spacing: 5 });
+    pdf.addQuestionHeading(t.handoverLocation.title);
+    pdf.addBodyText(t.handoverLocation.intro, { spacing: 5 });
+    pdf.addBodyText(t.optionsCouldInclude, { spacing: 5 });
     pdf.addBulletList([
-      '• Neutral location',
-      '• At your home',
-      '• At the other parent or carer\'s home',
-      '• At school',
-      '• Another arrangement',
+      t.handoverLocation.handoverLocationList.neutralLocation,
+      t.handoverLocation.handoverLocationList.atHome,
+      t.handoverLocation.handoverLocationList.atOtherHome,
+      t.handoverLocation.handoverLocationList.atSchool,
     ]);
     pdf.addSpacing(3);
 
@@ -270,8 +285,8 @@ const generatePdf = () => {
     // ===== PAGE 10: School holidays (was page 9) =====
     pdf.addPage();
 
-    pdf.addQuestionHeading('How will the arrangements be different in school holidays?');
-    pdf.addBodyText('School holidays include half terms, bank holidays and inset days.', { spacing: 5 });
+    pdf.addQuestionHeading(t.arrangementsSchoolHolidays.title);
+    pdf.addBodyText(t.arrangementsSchoolHolidays.intro, { spacing: 5 });
 
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60);
@@ -283,8 +298,8 @@ const generatePdf = () => {
     // ===== PAGE 11: Items between households (was page 10) =====
     pdf.addPage();
 
-    pdf.addQuestionHeading('What items need to go between households?');
-    pdf.addBodyText('Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes.', { spacing: 5 });
+    pdf.addQuestionHeading(t.itemsBetweenHouseholds.title);
+    pdf.addBodyText(t.itemsBetweenHouseholds.intro, { spacing: 5 });
 
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60);
@@ -297,8 +312,8 @@ const generatePdf = () => {
     pdf.addPage();
 
     pdf.addSectionHeading('Special days');
-    pdf.addQuestionHeading('What will happen on special days?');
-    pdf.addBodyText('Keep your children\'s needs and best interests at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother\'s Day and Father\'s Day, and birthdays.', { spacing: 5 });
+    pdf.addQuestionHeading(t.specialDays.title);
+    pdf.addBodyText(t.specialDays.intro, { spacing: 5 });
 
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60); // Reduced from 90
@@ -311,13 +326,13 @@ const generatePdf = () => {
     pdf.addPage();
 
     pdf.addSectionHeading('Other things');
-    pdf.addQuestionHeading('What other things matter to your children?');
-    pdf.addBodyText('You may want to agree things such as:', { spacing: 5 });
+    pdf.addQuestionHeading(t.otherThings.title);
+    pdf.addBodyText(t.otherThings.intro, { spacing: 5 });
     pdf.addBulletList([
-      '• religious practices, diet, and standard rules across both households',
-      '• extra-curricular activities, such as swimming lessons',
-      '• access to other friends and family',
-      '• other types of contact, such as video calls',
+      t.otherThings.otherThingsList.religionDietAndRules,
+      t.otherThings.otherThingsList.extraCurriculars,
+      t.otherThings.otherThingsList.friendsAndFamily,
+      t.otherThings.otherThingsList.otherContact,
     ]);
     pdf.addSpacing(3);
 
@@ -332,15 +347,15 @@ const generatePdf = () => {
     pdf.addPage();
 
     pdf.addSectionHeading('Decision making');
-    pdf.addQuestionHeading('How should last-minute changes be communicated?');
-    pdf.addBodyText('There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.', { spacing: 5 });
-    pdf.addBodyText('Options could include:', { spacing: 5 });
+    pdf.addQuestionHeading(t.decisionMaking.title);
+    pdf.addBodyText(t.decisionMaking.intro, { spacing: 5 });
+    pdf.addBodyText(t.optionsCouldInclude, { spacing: 5 });
     pdf.addBulletList([
-      '• By text message',
-      '• With a phone call',
-      '• By email',
-      '• Using a parenting app',
-      '• Another arrangement',
+      t.decisionMaking.decisionMakingList.text,
+      t.decisionMaking.decisionMakingList.phone,
+      t.decisionMaking.decisionMakingList.email,
+      t.decisionMaking.decisionMakingList.app,
+      t.decisionMaking.decisionMakingList.anotherArrangement,
     ]);
     pdf.addSpacing(3);
 
@@ -349,8 +364,8 @@ const generatePdf = () => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(90);
 
-    pdf.addQuestionHeading('How much notice should you give to change long-term arrangements?');
-    pdf.addBodyText('Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.');
+    pdf.addQuestionHeading(t.noticeForLongTermArrangements.title);
+    pdf.addBodyText(t.noticeForLongTermArrangements.intro, { spacing: 5 });
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60);
     pdf.addSpacing(8);
@@ -361,9 +376,9 @@ const generatePdf = () => {
     // ===== PAGE 15: When children's needs change (was page 14) =====
     pdf.addPage();
 
-    pdf.addQuestionHeading('When would you like to review this plan?');
-    pdf.addBodyText('Children\'s needs change as they grow. When should you review this agreement to check it is still what\'s best for the children?', { spacing: 5 });
-    pdf.addBodyText('You can also review these arrangements at an earlier time if they no longer meet your children\'s needs.', { spacing: 5 });
+    pdf.addQuestionHeading(t.reviewingThePlan.title);
+    pdf.addBodyText(t.reviewingThePlan.intro, { spacing: 5 });
+    pdf.addBodyText(t.reviewingThePlan.youCanAlsoReview, { spacing: 5 });
     pdf.addParentBoxInstruction();
     pdf.addParentResponseBoxes(60); // Reduced from 90
     pdf.addSpacing(8);
@@ -375,18 +390,18 @@ const generatePdf = () => {
     pdf.addPage();
 
     pdf.addSectionHeading('Next steps');
-    pdf.addQuestionHeading('What to do next');
-    pdf.addBodyText('Now give this proposed child arrangements plan to the other parent or carer so they can add their response.', { spacing: 2 });
-    pdf.addBodyText('When they have added their response, you can collaborate to reach a shared agreement.')
-    pdf.addQuestionHeading('If there\'s no response');
-    pdf.addBodyText('If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.',{ spacing: 2 });
-    pdf.addBodyText('A mediator is a professional who will work with you to help you make decisions based on your child\u2019s best interests. They listen to both of you and take a neutral approach.',{ spacing: 2 });
-    pdf.addBodyText('More information and support is available at: https://www.gov.uk/looking-after-children-divorce')
+    pdf.addQuestionHeading(t.nextSteps.title);
+    pdf.addBodyText(t.nextSteps.addTheirResponse, { spacing: 2 });
+    pdf.addBodyText(t.nextSteps.collaborateToAgree);
+    pdf.addQuestionHeading(t.nextSteps.noResponse);
+    pdf.addBodyText(t.nextSteps.unableToAgree, { spacing: 2 });
+    pdf.addBodyText(t.nextSteps.mediator,{ spacing: 2 });
+    pdf.addBodyText(t.nextSteps.moreInformation);
     pdf.addFooter(16);
 
     // Set document title for PDF metadata
     pdf.setProperties({
-      title: 'Proposed child arrangements plan',
+      title: t.title,
     });
 
     // Output paths: write to both source assets and dist assets
