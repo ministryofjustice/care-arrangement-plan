@@ -764,199 +764,200 @@
     }
   },
   "paperForm": {
-    "title": "Proposed child arrangements plan",
-    "intro": "Use this form from the Child Arrangements Plan service (https://propose-child-arrangements-plan.service.gov.uk/) on GOV.UK to collaborate to create child arrangements which you both agree on, without having to go to court.",
-    "notLegallyBinding": "Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.",
+    "title": "Cynnig cynllun trefniadau plant",
+    "intro": "Defnyddiwch y ffurflen hon o'r gwasanaeth Cynllun Trefniadau Plant (https://propose-child-arrangements-plan.service.gov.uk/) ar GOV.UK i gydweithio i greu trefniadau plant yr ydych chi'ch dau yn cytuno arnynt, heb orfod mynd i'r llys.",
+    "notLegallyBinding": "Nid yw unrhyw gynllun a wnewch gan ddefnyddio'r gwasanaeth hyn yn gyfreithiol rwymol. Nid oed rhaid i'r unigolyn arall rhiant  wneud yr hyn y mae'n ei ddweud, a gall y naill neu'r llall ohonoch awgrymu newidiadau iddo ar unrhyw adeg.",
     "howToUseThisForm": {
-      "title": "How to use this form",
+      "title": "Sut i ddefnyddio'r ffurflen hon",
       "howToUseSteps": {
-        "fillOut": "Fill out the form saying what arrangements you would like",
-        "letOtherRespond": "Let the other parent or carer add their response",
-        "collaborate": "Collaborate until you reach agreement"
+        "fillOut": "1. Llenwch y ffurflen gan ddweud pa drefniadau yr hoffech chi eu gweld",
+        "letOtherRespond": "2. Gadewch i'r rhiant neu'r gofalwr arall ychwanegu eu hymateb",
+        "collaborate": "3. Cydweithiwch nes i chi ddod i gytundeb"
       }
     },
     "yourSafety": {
-      "title": "Your safety",
-      "intro": "You should only use this form if:",
+      "title": "Eich diogelwch",
+      "intro": "Dylech ddefnyddio'r ffurflen hon dim ond os:",
       "safetySteps": {
-        "youAreConfident": "you're confident that you and your ex-partner can make decisions together without putting yourself or the children in danger",
-        "doNotFeelPressured": "both of you do not feel pressured or intimidated into responding"
+        "youAreConfident": "• ydych yn hyderus y gallwch chi a'ch cyn-bartner wneud penderfyniadau gyda'ch gilydd heb eich rhoi chi'ch hun na'r plant mewn perygl",
+        "doNotFeelPressured": "• nad yw'r ddau ohonoch yn teimlo dan bwysau nac yn cael eich bygwth i ymateb"
       },
-      "stopNow": "If you have any concerns about safety, stop now.",
-      "feedbackOrSafetyConcerns": "If you have any feedback or safety concerns about this service, you can email <a href=\"mailto:safety@propose-child-arrangements-plan.service.gov.uk\">safety@propose-child-arrangements-plan.service.gov.uk</a>.",
-      "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created."
+      "stopNow": "Os oes gennych chi unrhyw bryderon am ddiogelwch, stopiwch nawr.",
+      "feedbackOrSafetyConcerns": "Os oes gennych unrhyw adborth neu bryderon diogelwch am y gwasanaeth hwn, gallwch anfon e-bost at <a href=\"mailto:safety@propose-child-arrangements-plan.service.gov.uk\">safety@propose-child-arrangements-plan.service.gov.uk</a>.",
+      "cannotAnswerQuestions": "Ni allwn ateb unrhyw gwestiynau am gynlluniau trefniadau plant sydd eisoes wedi'u creu."
     },
     "howMakingChildArrangementsPlanHelp": {
-      "title": "How making a child arrangements plan can help",
-      "intro": "You may find that collaborating with the other parent or carer on a child arrangements plan:",
+      "title": "Sut y gall gwneud cynllun trefniadau plant helpu",
+      "intro": "Efallai y byddwch yn canfod bod cydweithio â'r rhiant neu'r gofalwr arall ar gynllun trefniadau plant:",
       "benefits": {
-        "cheaperAndQuicker": "is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it’s urgent)",
-        "betterOutcome": "leads to a better outcome for your children, which you and your ex-partner are in control of"
+        "cheaperAndQuicker": "• yn rhatach ac yn gyflymach na mynd i'r llys (fel arfer mae'n cymryd tua 10 mis i gael gorchymyn llys, yn dibynnu ar ble rydych chi'n byw a ph'un a oes brys)",
+        "betterOutcome": "• yn arwain at ganlyniad gwell i'ch plant, y mae chi a'ch cyn-bartner yn rheoli hynny"
       },
-      "goingToCourt": "Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.",
-      "tips": "Tips to help you and your children",
-      "planShouldIntro": "Your child arrangements plan should:",
+      "goingToCourt": "Gall mynd i'r llys weithiau olygu nad chi yw'r rhai sy'n gwneud y penderfyniadau terfynol am eich trefniadau plant.",
+      "tips": "Awgrymiadau i helpu chi a'ch plant",
+      "planShouldIntro": "Dylai eich cynllun trefniadau plant:",
       "planShould": {
-        "welfare": "put the child’s welfare first",
-        "wishes": "reflect the wishes, feelings and needs of the child",
-        "considerAnyHarm": "consider any harm the child has suffered or any risk of harm"
+        "welfare": "• roi lles y plentyn yn gyntaf",
+        "wishes": "• adlewyrchu dymuniadau, teimladau ac anghenion y plentyn",
+        "considerAnyHarm": "• ystyried unrhyw niwed y mae'r plentyn wedi'i ddioddef neu unrhyw risg o niwed"
       }
     },
     "ifCourtOrderInPlace": {
-      "title": "If there is a court order in place",
-      "doNotContinue": "Do not continue if there’s a court order in place relating to you, the other parent, or the children.",
-      "forExample": "For example, a:",
+      "title": "Os oes gorchymyn llys ar waith",
+      "doNotContinue": "Peidiwch a pharhau os oes gorchymyn llys ar waith sy'n ymwneud â chi, y rhiant arall neu'r plant.",
+      "forExample": "Er enghraifft:",
       "orderList": {
-        "childArrangementsOrder": "child arrangements order",
-        "specificIssueOrder": "specific issue order",
-        "prohibitedStepsOrder": "prohibited steps order",
-        "protectiveOrder": "protective order such as a non-molestation order, occupation order or a domestic abuse protection order",
-        "anyOther": "any other order restricting contact between you and the other parent or the children"
+        "childArrangementsOrder": "• gorchymyn trefniadau plant",
+        "specificIssueOrder": "• gorchymyn mater penodol",
+        "prohibitedStepsOrder": "• gorchymyn camau gwaharddedig",
+        "protectiveOrder": "• gorchymyn amddiffynnol fel gorchymyn rhag molestu, gorchymyn anheddu neu orchymyn diogelu rhag cam-drin domestig",
+        "anyOther": "• unrhyw orchymyn arall sy'n cyfyngu ar gyswllt rhyngoch chi a'r rhiant arall neu'r plant"
       },
-      "toChangeOrEnforce": "To change or enforce an existing child arrangements order, visit <a href=\"https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order\">https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order</a>.",
+      "toChangeOrEnforce": "I newid neu orfodi gorchymyn trefniadau plant presennol, ewch i <a href=\"https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order\">https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order</a>.",
       "getMoreInformation": {
-        "title": "Get more information",
-        "moreInfo": "Use GOV.UK to find more information, for example:",
+        "title": "Cael rhagor o wybodaeth",
+        "moreInfo": "Defnyddiwch GOV.UK i gael rhagor o wybodaeth, er enghraifft:",
         "moreInfoList": {
-          "makingChildArrangements": "making child arrangements - <a href=\"https://www.gov.uk/looking-after-children-divorce\">https://www.gov.uk/looking-after-children-divorce</a>",
-          "legalSeparation": "getting a legal separation - <a href=\"https://www.gov.uk/legal-separation\">https://www.gov.uk/legal-separation</a>",
-          "divorce": "getting a divorce - <a href=\"https://www.gov.uk/get-a-divorce\">https://www.gov.uk/get-a-divorce</a>"
+          "makingChildArrangements": "• gwneud trefniadau plant - <a href=\"https://www.gov.uk/looking-after-children-divorce\">https://www.gov.uk/looking-after-children-divorce</a>",
+          "legalSeparation": "• cael ymwahaniad cyfreithiol - <a href=\"https://www.gov.uk/legal-separation\">https://www.gov.uk/legal-separation</a>",
+          "divorce": "• cael ysgariad - <a href=\"https://www.gov.uk/get-a-divorce\">https://www.gov.uk/get-a-divorce</a>"
         }
       },
       "legalAdvice": {
-        "title": "If you want legal advice",
-        "findLegalAdviser" : "You can find a legal adviser: <a href=\"https://www.gov.uk/find-legal-advice/find-legal-adviser\">https://www.gov.uk/find-legal-advice/find-legal-adviser</a>."
+        "title": "Os ydych chi eisiau cyngor cyfreithiol",
+        "findLegalAdviser" : "Gallwch ddod o hyd i gynghorydd cyfreithiol: <a href=\"https://www.gov.uk/find-legal-advice/find-legal-adviser\">https://www.gov.uk/find-legal-advice/find-legal-adviser</a>."
       },
       "domesticAbuse": {
-        "title": "Getting help with domestic abuse",
-        "signsAndEffects": "To find out more about signs and effects of child abuse and neglect, visit <a href=\"https://www.nspcc.org.uk/what-is-child-abuse\">https://www.nspcc.org.uk/what-is-child-abuse</a>.",
-        "unsureVictim": "If you’re unsure whether you’re a victim of domestic abuse, visit <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse</a>."
+        "title": "Cael cymorth gyda cam-drin domestig",
+        "signsAndEffects": "I gael rhagor o wybodaeth am arwyddion ac effeithiau cam-drin ac esgeuluso plant, ewch i <a href=\"https://www.nspcc.org.uk/what-is-child-abuse\">https://www.nspcc.org.uk/what-is-child-abuse</a>.",
+        "unsureVictim": "Os ydych chi'n ansicr a ydych chi'n ddioddefwr cam-drin domestig, ewch i <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse</a>."
       }
     },
     "notSuitableForYou": {
-      "title": "This plan is not suitable for you if there has been:",
-      "anyForm": "any form of domestic abuse or violence, even if the abuse was not directed at the children",
-      "childAbduction": "actual or attempted child abduction",
-      "childAbuse": "child abuse or neglect",
-      "drugsOrAlcohol": "misuse of drugs, alcohol or other substances",
-      "anyOtherSafety": "any other safety or welfare concerns that place anyone at significant risk of harm",
+      "title": "Nid yw'r cynllun hwn yn addas i chi os bu:",
+      "anyForm": "• unrhyw fath o drais neu gam-drin domestig, hyd yn oed os nad oedd y cam-drin wedi'i gyfeirio at y plant",
+      "childAbduction": "• herwgipio plentyn wedi'i gyflawni - neu ymgais i'w herwgipio",
+      "childAbuse": "• cam-drin neu esgeuluso plant",
+      "drugsOrAlcohol": "• camddefnyddio cyffuriau, alcohol neu sylweddau eraill",
+      "anyOtherSafety": "• unrhyw bryderon diogelwch neu lesiant eraill sy'n rhoi unrhyw un mewn perygl sylweddol o niwed",
       "feedbackAndSupport": {
-        "title": "Feedback and support",
-        "toAskForHelp": "To ask for help using this service, or suggest improvements, you can email <a href=\"mailto:feedback@propose-child-arrangements-plan.com\">feedback@propose-child-arrangements-plan.com</a>."
+        "title": "Adborth a chefnogaeth",
+        "toAskForHelp": "I ofyn am gymorth wrth ddefnyddio'r gwasanaeth hwn, neu i awgrymu gwelliannau, gallwch anfon e-bost at <a href=\"mailto:feedback@propose-child-arrangements-plan.com\">feedback@propose-child-arrangements-plan.com</a>."
       },
-      "weCannotAnswer": "We cannot answer any questions about child arrangement plans that have already been created."
+      "weCannotAnswer": "Ni allwn ateb unrhyw gwestiynau am gynlluniau trefniadau plant sydd eisoes wedi'u creu."
     },
     "childArrangementsProposal": {
-      "title": "About this child arrangements proposal",
-      "intro": "Who this child arrangements proposal is for",
-      "child1": "Child 1 (first name)",
-      "child2": "Child 2 (first name)",
-      "child3": "Child 3 (first name)",
-      "child4": "Child 4 (first name)",
-      "child5": "Child 5 (first name)",
-      "child6": "Child 6 (first name)",
-      "careForChildren": "The adults who will care for the children",
-      "yourFirstName": "Your first name",
-      "answeringTheseQuestions": "If you are answering these questions for someone else, enter their first name",
-      "otherParentFirstName": "First name of the other parent or carer"
+      "title": "Ynglŷn â'r cynnig trefniadau plant hyn",
+      "intro": "Ar gyfer pwy mae'r cynnig trefniadau plant hwn",
+      "child1": "Plentyn 1 (enw cyntaf)  ",
+      "child2": "Plentyn 2 (enw cyntaf)",
+      "child3": "Plentyn 3 (enw cyntaf)",
+      "child4": "Plentyn 4 (enw cyntaf)",
+      "child5": "Plentyn 5 (enw cyntaf)",
+      "child6": "Plentyn 6 (enw cyntaf)",
+      "careForChildren": "Yr oedolion a fydd yn gofalu am y plant",
+      "yourFirstName": "Eich enw cyntaf",
+      "answeringTheseQuestions": "Os ydych chi'n ateb y cwestiynau hyn ar ran rhywun arall, nodwch eu henw cyntaf",
+      "otherParentFirstName": "Enw cyntaf y rhiant neu'r gofalwr arall"
     },
     "livingAndVisiting": {
-      "title": "Living and visiting",
-      "intro": "Where will the children spend most of their time?",
-      "livingAndVisitingSteps": {
-        "mostlyLiveWithYou": "The children will mostly live with you",
-        "mostlyLiveWithOther": "The children will mostly live with the other parent or carer",
-        "splitTime": "They'll split time between both households",
-        "anotherArrangement": "Another arrangement"
+      "title": "Byw ac ymweld",
+      "intro": "Ble fydd y plant yn treulio'r rhan fwyaf o'u hamser?",
+      "options": {
+        "mostlyLiveWithYou": "Bydd y plant yn byw gyda chi yn bennaf",
+        "mostlyLiveWithOther": "Bydd y plant yn byw gyda'r rhiant neu'r gofalwr arall yn bennaf",
+        "splitTime": "Byddant yn rhannu eu hamser rhwng y ddau gartref",
+        "anotherArrangement": "Trefniant arall"
       },
-      "tip": "<b>Tip:</b> An exact split of time between two households does not always suit children's best interests."
+      "tip": "<b>Awgrym:</b> Nid yw rhannu amser yn gyfartal rhwng dau gartref bob amser yn addas i fudd gorau plant."
     },
     "scheduleMeetsChildrenNeeds": {
-      "title": "Which schedule best meets the children's needs?",
-      "intro": "What timetable are you proposing for overnight stays, daytime visits and weekends at the other household?",
+      "title": "Pa amserlen sy'n gweddu orau i anghenion y plant?",
+      "intro": "Pa amserlen ydych chi'n ei chynnig ar gyfer aros dros nos, ymweliadau yn ystod y dydd a phenwythnosau yn y cartref arall?",
       "commonSchedulesIntro": "Here are some common schedules that can work well for children.",
-      "alternatingWeeks": "Alternating weeks",
-      "alternatingWeeksDescription": "The children will spend one week in one household and the next week in the other.",
-      "schedule223": "2-2-3 schedule",
-      "schedule223Description": "Children spend two days in one household, two days in the other, then back to the first house for 3 days including the weekend.",
-      "schedule443": "4-4-3 schedule",
-      "schedule443Description": "Children spend three days in one household then four days in the other. The next week they switch.",
-      "schedule2255": "2-2-5-5 schedule",
-      "schedule2255Description": "Children spend two days in one household, then two days in the other. After that they spend five days in one household, then five days in the other."
+      "alternatingWeeks": "Bob yn ail wythnos:",
+      "alternatingWeeksDescription": "Bydd y plant yn treulio un wythnos mewn un cartref a'r wythnos nesaf yn y llall.",
+      "schedule223": "Amserlen 2-2-3:",
+      "schedule223Description": "Bydd y plant yn treulio dau ddiwrnod mewn un cartref, dau ddiwrnod yn y llall, yna'n ôl i'r tŷ cyntaf am 3 diwrnod gan gynnwys y penwythnos.",
+      "schedule443": "Amserlen 4-4-3:",
+      "schedule443Description": "Bydd y plant yn treulio tri diwrnod mewn un cartref ac yna pedwar diwrnod yn y llall. Yr wythnos nesaf maen nhw'n newid.",
+      "schedule2255": "Amserlen 2-2-5-5:",
+      "schedule2255Description": "Bydd y plant yn treulio dau ddiwrnod mewn un cartref ac yna dau ddiwrnod yn y llall. Ar ôl hynny maen nhw'n treulio pum diwrnod mewn un cartref, yna pum diwrnod yn y llall."
     },
     "handoversAndHolidays": {
-      "title": "Handovers and holidays",
-      "intro": "How will the children get between households?",
-      "handoverAndHolidaysList": {
-        "youCollect": "You collect them",
-        "otherCollects": "The other parent or carer collects them",
-        "anotherArrangement": "Another arrangement"
+      "title": "Trosglwyddo a gwyliau",
+      "intro": "Sut fydd y plant yn mynd o un cartref i'r llall?",
+      "options": {
+        "youCollect": "Rydych chi'n eu casglu",
+        "otherCollects": "Mae'r rhiant neu'r gwarcheidwad arall yn eu casglu",
+        "anotherArrangement": "Trefniant arall"
       }
     },
     "handoverLocation": {
-      "title": "Where does handover take place?",
-      "intro": "It may be easier for children if the handover takes place at a neutral location such as a park or railway station which you're confident you'll both feel safe in.",
+      "title": "Ble mae'r trosglwyddo'n digwydd?",
+      "intro": "Efallai y bydd yn haws i'r plant os bydd y trosglwyddo yn digwydd mewn lleoliad niwtral lle rydych chi'n hyderus y byddwch chi'ch dau yn teimlo'n ddiogel.",
       "handoverLocationList": {
-        "neutralLocation": "Neutral location",
-        "atHome": "At your home",
-        "atOtherHome": "At the other parent or carer's home",
-        "atSchool": "At school"
+        "neutralLocation": "Lleoliad niwtral",
+        "atHome": "Yn eich cartref chi",
+        "atOtherHome": "Yng nghartref y rhiant/gofalwr arall",
+        "atSchool": "Yn yr ysgol",
+        "anotherArrangement": "Trefniant arall"
       }
     },
     "arrangementsSchoolHolidays": {
-      "title": "How will the arrangements be different in school holidays?",
-      "intro": "School holidays include half terms, bank holidays and inset days."
+      "title": "Sut fydd y trefniadau'n newid yn ystod gwyliau'r ysgol?",
+      "intro": "Mae gwyliau ysgol yn cynnwys hanner tymor, gwyliau banc a diwrnodau HMS."
     },
     "itemsBetweenHouseholds": {
-      "title": "What items need to go between households?",
-      "intro": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes."
+      "title": "Pa eitemau sydd angen mynd o un cartref i'r llall?",
+      "intro": "Mae eitemau'n cynnwys dillad, cit chwaraeon, offer ysgol, teganau a dyfeisiau electronig, meddyginiaethau ac eitemau gofal personol fel brwsys dannedd."
     },
     "specialDays": {
-      "title": "What will happen on special days?",
-      "intro": "Keep your children's needs and best interests at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother's Day and Father's Day, and birthdays."
+      "title": "Beth fydd yn digwydd ar ddyddiau arbennig?",
+      "intro": "Cadwch anghenion a buddiannau gorau eich plant wrth wraidd eich cynlluniau ar gyfer gwyliau a digwyddiadau pwysig. Er enghraifft, dathliadau'r Flwyddyn Newydd, Sul y Mamau a Sul y Tadau, a phenblwyddi."
     },
     "otherThings": {
-      "title": "What other things matter to your children?",
-      "intro": "You may want to agree things such as:",
+      "title": "Pa bethau eraill sy'n bwysig i'ch plant?",
+      "intro": "Efallai yr hoffech chi gytuno ar bethau fel:",
       "otherThingsList": {
-        "religionDietAndRules": "religious practices, diet, and standard rules across both households",
-        "extraCurriculars": "extra-curricular activities, such as swimming lessons",
-        "friendsAndFamily": "access to other friends and family",
-        "otherContact": "other types of contact, such as video calls"
+        "religionDietAndRules": "• arferion crefyddol, diet, a rheolau safonol ar draws y ddau gartref",
+        "extraCurriculars": "• gweithgareddau allgyrsiol, fel gwersi nofio",
+        "friendsAndFamily": "• mynediad at ffrindiau a theulu eraill",
+        "otherContact": "• mathau eraill o gyswllt, fel galwadau fideo"
       }
     },
     "decisionMaking": {
-      "title": "How should last-minute changes be communicated?",
-      "intro": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.",
+      "title": "Sut ddylid cyfathrebu newidiadau munud olaf?",
+      "intro": "Bydd adegau pan fydd angen newid cynlluniau, fel os bydd un rhiant yn sâl yn sydyn ac yn methu casglu plentyn o'r ysgol.",
       "decisionMakingList": {
-        "text": "By text message",
-        "phone": "With a phone call",
-        "email": "By email",
-        "app": "Using a parenting app",
-        "anotherArrangement": "Another arrangement"
+        "text": "• Trwy neges destun",
+        "phone": "• Galwad ffôn",
+        "email": "• Trwy e-bost",
+        "app": "• Defnyddio ap rhianta",
+        "anotherArrangement": "• Trefniant arall"
       }
     },
     "noticeForLongTermArrangements": {
-      "title": "How much notice should you give to change long-term arrangements?",
-      "intro": "Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children."
+      "title": "Faint o rybudd ddylech chi ei roi i newid trefniadau hirdymor?",
+      "intro": "Weithiau efallai y bydd angen i chi gynllunio ymhell ymlaen llaw. Er enghraifft, os ydych chi eisiau cynllunio gwyliau yn ystod amser nad ydych chi fel arfer yn ei dreulio gyda'r plant."
     },
     "reviewingThePlan": {
-      "title": "When would you like to review this plan?",
-      "intro": "Children's needs change as they grow. When should you review this agreement to check it is still what's best for the children?",
-      "youCanAlsoReview":"You can also review these arrangements at an earlier time if they no longer meet your children's needs."
+      "title": "Pryd hoffech chi adolygu'r cynllun hwn?",
+      "intro": "Mae anghenion plant yn newid wrth iddynt dyfu. Pryd ddylech chi adolygu'r cytundeb hwn i wirio ei fod yn dal i fod yr hyn sydd orau i'r plant?",
+      "youCanAlsoReview":"Gallwch hefyd adolygu'r trefniadau hyn yn gynharach os nad ydyn nhw bellach yn diwallu anghenion eich plant."
     },
     "nextSteps": {
-      "title": "What to do next",
-      "addTheirResponse": "Now give this proposed child arrangements plan to the other parent or carer so they can add their response.",
-      "collaborateToAgree": "When they have added their response, you can collaborate to reach a shared agreement.",
-      "noResponse": "If there's no response",
-      "unableToAgree": "If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
-      "mediator": "A mediator is a professional who will work with you to help you make decisions based on your child's best interests. They listen to both of you and take a neutral approach.",
-      "moreInformation": "More information and support is available at: <a href=\"https://www.gov.uk/looking-after-children-divorce\" target=\"_blank\">https://www.gov.uk/looking-after-children-divorce</a>"
+      "title": "Beth i'w wneud nesaf",
+      "addTheirResponse": "Nawr rhowch y cynllun trefniadau plant arfaethedig hwn i'r rhiant neu'r gofalwr arall fel y gallant ychwanegu eu hymateb.",
+      "collaborateToAgree": "Pan fyddant wedi ychwanegu eu hymateb, gallwch gydweithio i ddod i gytundeb a rennir.",
+      "noResponse": "Os nad oes ymateb",
+      "unableToAgree": "Os na allwch ffurfio cytundeb ymysg eich gilydd, yna gallech roi cynnig ar gyfryngu neu ffordd arall o gytuno y tu allan i'r llys.",
+      "mediator": "Mae cyfryngwr yn weithiwr proffesiynol a fydd yn gweithio gyda chi i'ch helpu i wneud penderfyniadau yn seiliedig ar fuddiannau gorau eich plentyn. Maen nhw'n gwrando ar y ddau ohonoch ac yn cymryd ymagwedd niwtral.",
+      "moreInformation": "Mae rhagor o wybodaeth a chyngor ar gael yn: <a href=\"https://www.gov.uk/looking-after-children-divorce\" target=\"_blank\">https://www.gov.uk/looking-after-children-divorce</a>"
     },
-    "optionsCouldInclude": "Options could include:",
-    "responseInTheBox": "Add your first name and response in the box - the other parent/carer should add their first name and response in the other box.",
-    "parentCarerNameAndResponse": "Parent/carer name and response:",
-    "agreedAnswer": "Enter your agreed answer to this question."
+    "optionsCouldInclude": "Fe all opsiynau gynnwys:",
+    "responseInTheBox": "Ychwanegwch eich enw cyntaf a'ch ymateb yn y blwch - dylai'r rhiant/gofalwr arall ychwanegu eu henw cyntaf a'u hymateb yn y blwch arall.",
+    "parentCarerNameAndResponse": "Enw'r rhiant/gofalwr a'r ymateb:",
+    "agreedAnswer": "Nodwch eich ateb rydych wedi cytuno arno ar gyfer y cwestiwn hwn."
   }
 }
