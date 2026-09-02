@@ -277,7 +277,7 @@ class PdfGenerator {
   /**
    * Add two side-by-side parent response boxes
    */
-  addParentResponseBoxes(height = 60) {
+  addParentResponseBoxes(t, height = 60) {
     // Check if box will overflow into footer
     const maxY = this.pageHeight - PdfStyles.FOOTER_HEIGHT - 5;
     if (this.currentY + height > maxY) {
@@ -306,7 +306,7 @@ class PdfGenerator {
   /**
    * Add compromise box
    */
-  addCompromiseBox(height = 80) {
+  addCompromiseBox(t, height = 80) {
     this.addBodyText(t.agreedAnswer, { spacing: 2 }); // Reduced spacing to bring text closer to box
 
     // Check if box will overflow into footer
@@ -330,7 +330,7 @@ class PdfGenerator {
   /**
    * Add instruction text for parent boxes
    */
-  addParentBoxInstruction() {
+  addParentBoxInstruction(t) {
     const text = t.responseInTheBox;
     const lines = this.doc.splitTextToSize(text, this.pageWidth - 2 * PdfStyles.MARGIN_WIDTH);
 
@@ -396,18 +396,18 @@ class PdfGenerator {
   /**
    * Add 2x2 grid of child name boxes
    */
-  addChildNameGrid() {
+  addChildNameGrid(t) {
     const boxWidth = (this.pageWidth - 3 * PdfStyles.MARGIN_WIDTH) / 2;
     const boxHeight = 10; // Further reduced box height
     const rightBoxX = PdfStyles.MARGIN_WIDTH + boxWidth + PdfStyles.MARGIN_WIDTH;
 
     const children = [
-      { label: t.childArrangementsProposal.child1, x: PdfStyles.MARGIN_WIDTH },
-      { label: t.childArrangementsProposal.child2, x: rightBoxX },
-      { label: t.childArrangementsProposal.child3, x: PdfStyles.MARGIN_WIDTH },
-      { label: t.childArrangementsProposal.child4, x: rightBoxX },
-      { label: t.childArrangementsProposal.child5, x: PdfStyles.MARGIN_WIDTH },
-      { label: t.childArrangementsProposal.child6, x: rightBoxX },
+      { label: t.child1, x: PdfStyles.MARGIN_WIDTH },
+      { label: t.child2, x: rightBoxX },
+      { label: t.child3, x: PdfStyles.MARGIN_WIDTH },
+      { label: t.child4, x: rightBoxX },
+      { label: t.child5, x: PdfStyles.MARGIN_WIDTH },
+      { label: t.child6, x: rightBoxX },
     ];
 
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);

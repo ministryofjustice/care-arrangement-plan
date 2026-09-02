@@ -146,7 +146,7 @@ const generatePdf = (locale = 'en') => {
 
     pdf.addSectionHeading(t.childArrangementsProposal.title);
     pdf.addBodyText(t.childArrangementsProposal.intro);
-    pdf.addChildNameGrid();
+    pdf.addChildNameGrid(t.childArrangementsProposal);
 
     pdf.addSpacing(8); // Additional spacing between child name boxes and adult name section
     pdf.addSubsectionHeading(t.childArrangementsProposal.careForChildren);
@@ -173,10 +173,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addTip(t.livingAndVisiting.tip, { spacing: 0 });
     pdf.addSpacing(4);
 
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60)
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60)
     pdf.addSpacing(4);;
-    pdf.addCompromiseBox(90);
+    pdf.addCompromiseBox(t, 90);
 
     pdf.addFooter(6);
 
@@ -235,9 +235,9 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(6);
     pdf.addBodyText(t.responseInTheBox, { spacing: 6 });
 
-    pdf.addParentResponseBoxes(75);
+    pdf.addParentResponseBoxes(t, 75);
     pdf.addSpacing(6);
-    pdf.addCompromiseBox(50);
+    pdf.addCompromiseBox(t, 50);
 
     pdf.addFooter(7);
 
@@ -254,10 +254,10 @@ const generatePdf = (locale = 'en') => {
     ]);
     pdf.addSpacing(3);
 
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60);
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60);
     pdf.addSpacing(8);
-    pdf.addCompromiseBox(110);
+    pdf.addCompromiseBox(t, 110);
 
     pdf.addFooter(8);
 
@@ -275,10 +275,10 @@ const generatePdf = (locale = 'en') => {
     ]);
     pdf.addSpacing(3);
 
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60);
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60);
     pdf.addSpacing(8);
-    pdf.addCompromiseBox(110);
+    pdf.addCompromiseBox(t, 110);
 
     pdf.addFooter(9);
 
@@ -288,10 +288,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addQuestionHeading(t.arrangementsSchoolHolidays.title);
     pdf.addBodyText(t.arrangementsSchoolHolidays.intro, { spacing: 5 });
 
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60);
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60);
     pdf.addSpacing(8);
-    pdf.addCompromiseBox(110);
+    pdf.addCompromiseBox(t, 110);
 
     pdf.addFooter(10);
 
@@ -301,10 +301,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addQuestionHeading(t.itemsBetweenHouseholds.title);
     pdf.addBodyText(t.itemsBetweenHouseholds.intro, { spacing: 5 });
 
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60);
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60);
     pdf.addSpacing(8);
-    pdf.addCompromiseBox(110);
+    pdf.addCompromiseBox(t, 110);
 
     pdf.addFooter(11);
 
@@ -315,10 +315,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addQuestionHeading(t.specialDays.title);
     pdf.addBodyText(t.specialDays.intro, { spacing: 5 });
 
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60); // Reduced from 90
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60); // Reduced from 90
     pdf.addSpacing(8);
-    pdf.addCompromiseBox(90); // Reduced from 110
+    pdf.addCompromiseBox(t, 90); // Reduced from 110
 
     pdf.addFooter(12);
 
@@ -336,10 +336,10 @@ const generatePdf = (locale = 'en') => {
     ]);
     pdf.addSpacing(3);
 
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60);
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60);
     pdf.addSpacing(8);
-    pdf.addCompromiseBox(90);
+    pdf.addCompromiseBox(t, 90);
 
     pdf.addFooter(13);
 
@@ -359,17 +359,17 @@ const generatePdf = (locale = 'en') => {
     ]);
     pdf.addSpacing(3);
 
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60);
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60);
     pdf.addSpacing(8);
-    pdf.addCompromiseBox(90);
+    pdf.addCompromiseBox(t, 90);
 
     pdf.addQuestionHeading(t.noticeForLongTermArrangements.title);
     pdf.addBodyText(t.noticeForLongTermArrangements.intro, { spacing: 5 });
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60);
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60);
     pdf.addSpacing(8);
-    pdf.addCompromiseBox(90);
+    pdf.addCompromiseBox(t,90);
 
     pdf.addFooter(14);
 
@@ -379,10 +379,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addQuestionHeading(t.reviewingThePlan.title);
     pdf.addBodyText(t.reviewingThePlan.intro, { spacing: 5 });
     pdf.addBodyText(t.reviewingThePlan.youCanAlsoReview, { spacing: 5 });
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60); // Reduced from 90
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60); // Reduced from 90
     pdf.addSpacing(8);
-    pdf.addCompromiseBox(90); // Reduced from 110
+    pdf.addCompromiseBox(t, 90); // Reduced from 110
 
     pdf.addFooter(15);
 
