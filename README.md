@@ -37,6 +37,7 @@ This app is heavily inspired from MoJ's [hmpps-template-typescript](https://gith
 - [Infrastructure](#infrastructure)
 - [Local Development Shortcuts](#local-development-shortcuts)
   - [Seeding the session](#seeding-the-session)
+- [Static PDF Generation](#static-pdf-generation)
 - [Contributing](#contributing)
 - [Preview testing](#preview-testing)
 - [TODO](#todo)
@@ -198,6 +199,10 @@ http://localhost:8001/dev/seed?redirect=/share-plan
 ```
 
 The seed populates the session with two children (Alex and Jamie) and two adults (Sarah and Tom), with all tasks completed.
+
+## Static PDF Generation
+
+The generatePdf.js script is configured to run during the post build to generate the static PDF, that can be downloaded from the start page.
 
 ## Contributing
 
