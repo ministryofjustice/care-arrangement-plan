@@ -170,12 +170,13 @@ describe('App', () => {
       paths.PRIVACY_NOTICE,
       paths.TERMS_AND_CONDITIONS,
     ];
+    const unauthenticatedPaths = [...pathsWithNoAuthentication, paths.SESSION_TIMEOUT];
 
     beforeEach(() => {
       config.useAuth = true;
     });
 
-    it.each(Object.values(paths).filter((path) => !pathsWithNoAuthentication.includes(path)))(
+    it.each(Object.values(paths).filter((path) => !unauthenticatedPaths.includes(path)))(
       'should redirect to password page for %s when not authenticated',
       (path) => {
         return request(app)
@@ -187,6 +188,10 @@ describe('App', () => {
 
     it.each(pathsWithNoAuthentication)('should not redirect to password page for %s when not authenticated', (path) => {
       return request(app).get(path).expect(200);
+    });
+
+    it('should not redirect to password page for session timeout when not authenticated', () => {
+      return request(app).get(paths.SESSION_TIMEOUT).expect(403);
     });
   });
 

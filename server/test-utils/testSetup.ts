@@ -25,6 +25,10 @@ beforeEach(() => {
   flashMockErrors.length = 0;
   flashFormValues.length = 0;
   Object.keys(sessionMock).forEach((key: keyof CAPSession) => delete sessionMock[key]);
+  sessionMock.destroy = jest.fn((callback: (error?: Error) => void) => {
+    callback();
+    return sessionMock;
+  });
   jest.useFakeTimers({ advanceTimers: true }).setSystemTime(mockNow);
   // Disable authentication by default for tests (can be overridden in individual tests)
   config.useAuth = false;

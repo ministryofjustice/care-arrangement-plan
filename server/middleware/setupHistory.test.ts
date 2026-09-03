@@ -115,4 +115,19 @@ describe('setupHistory', () => {
     expect(sessionMock.previousPage).toEqual(paths.START);
   });
 
+  test('does not error when visiting the session timeout page', async () => {
+    sessionMock.pageHistory = [paths.START, paths.SAFETY_CHECK];
+
+    await request(app).get(paths.SESSION_TIMEOUT).expect(403);
+
+    expect(sessionMock.previousPage).toEqual(paths.SAFETY_CHECK);
+    expect(sessionMock.pageHistory).toEqual([paths.START, paths.SAFETY_CHECK]);
+  });
+
+  test('allows navigation to safety check after visiting the session timeout page', async () => {
+    await request(app).get(paths.SESSION_TIMEOUT).expect(403);
+    await request(app).get(paths.SAFETY_CHECK).expect((response) => {
+      expect(response.status).toBeLessThan(500);
+    });
+  });
 });
