@@ -8,6 +8,7 @@ import createHtmlContent from '../html/createHtmlContent';
 import createPdf from '../pdf/createPdf';
 import { logDownload } from '../services/analyticsService';
 import getAssetPath from '../utils/getAssetPath';
+import paperFormFileName from '../utils/paperFormFileName';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
 /**
@@ -35,7 +36,8 @@ const downloadRoutes = (router: Router) => {
   });
 
   router.get(paths.DOWNLOAD_PAPER_FORM, (request, response) => {
-    const paperFormFile = request.getLocale() === 'cy' ? 'other/paperForm-cy.pdf' : 'other/paperForm.pdf';
+    const locale = request.session?.lang || request.getLocale();
+    const paperFormFile = `other/${paperFormFileName(locale)}`;
     response.download(getAssetPath(paperFormFile), `${request.__('pdf.name')}.pdf`);
 
     // Log download event
