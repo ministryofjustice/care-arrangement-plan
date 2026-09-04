@@ -6,6 +6,7 @@ enum paths {
   COOKIES = '/cookies',
   PRIVACY_NOTICE = '/privacy-notice',
   TERMS_AND_CONDITIONS = '/terms-and-conditions',
+  SESSION_TIMEOUT = '/session-timeout',
   SAFETY_CHECK = '/safety-check',
   NOT_SAFE = '/not-safe',
   CHILDREN_SAFETY_CHECK = '/children-safety-check',

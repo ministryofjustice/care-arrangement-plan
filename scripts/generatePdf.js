@@ -356,19 +356,12 @@ const generatePdf = (locale = 'en') => {
     ]);
     pdf.addSpacing(3);
 
-    pdf.addParentBoxInstruction(t);
-    pdf.addParentResponseBoxes(t, 60);
-    pdf.addSpacing(8);
-    pdf.addCompromiseBox(t, 90);
-
-    pdf.addQuestionHeading(t.noticeForLongTermArrangements.title);
-    pdf.addBodyText(t.noticeForLongTermArrangements.intro, { spacing: 5 });
-    pdf.addParentBoxInstruction(t);
-    pdf.addParentResponseBoxes(t, 60);
+    pdf.addParentBoxInstruction();
+    pdf.addParentResponseBoxes(60);
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t,90);
 
-    pdf.addFooter(14);
+    pdf.addFooter(15);
 
     // ===== PAGE 15: When children's needs change (was page 14) =====
     pdf.addPage();
@@ -381,9 +374,9 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t, 90); // Reduced from 110
 
-    pdf.addFooter(15);
+    pdf.addFooter(16);
 
-    // ===== PAGE 16: What happens now (was page 15) =====
+    // ===== PAGE 17: What happens now =====
     pdf.addPage();
 
     pdf.addSectionHeading('Next steps');
