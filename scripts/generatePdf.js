@@ -83,7 +83,7 @@ const generatePdf = (locale = 'en') => {
 
     pdf.addFooter(2);
 
-    // ===== PAGE 3: More information and safety (was page 2) =====
+    // ===== PAGE 3: More information and safety =====
     pdf.addPage();
 
     pdf.addSubsectionHeading(t.ifCourtOrderInPlace.title);
@@ -138,7 +138,7 @@ const generatePdf = (locale = 'en') => {
 
     pdf.addFooter(4);
 
-    // ===== PAGE 5: About this proposal (was page 4) =====
+    // ===== PAGE 5: About this proposal =====
     pdf.addPage();
 
     pdf.addSectionHeading(t.childArrangementsProposal.title);
@@ -153,7 +153,7 @@ const generatePdf = (locale = 'en') => {
 
     pdf.addFooter(5);
 
-    // ===== PAGE 6: Living and visiting (was page 5) =====
+    // ===== PAGE 6: Living and visiting =====
     pdf.addPage();
 
     pdf.addSectionHeading(t.livingAndVisiting.title);
@@ -177,7 +177,7 @@ const generatePdf = (locale = 'en') => {
 
     pdf.addFooter(6);
 
-    // ===== PAGE 7: Schedule (was page 6) =====
+    // ===== PAGE 7: Schedule =====
     pdf.addPage();
 
     pdf.addQuestionHeading(t.scheduleMeetsChildrenNeeds.title);
@@ -201,31 +201,31 @@ const generatePdf = (locale = 'en') => {
       pdf.doc.setFontSize(9);
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeks, col1X, boxY);
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeksDescription, col1X, boxY + 4); // Increased spacing
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeksDescription, col1X, boxY + 7);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeksDescriptionPart1, col1X, boxY + 4);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeksDescriptionPart2, col1X, boxY + 7);
 
       pdf.doc.setFont('Helvetica', 'bold');
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223, col1X, boxY + 13); // Increased spacing
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223Description, col1X, boxY + 17);
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223Description, col1X, boxY + 20);
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223Description, col1X, boxY + 23);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223DescriptionPart1, col1X, boxY + 17);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223DescriptionPart2, col1X, boxY + 20);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223DescriptionPart3, col1X, boxY + 23);
 
       // Column 2
       pdf.doc.setFont('Helvetica', 'bold');
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443, col2X, boxY);
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443Description, col2X, boxY + 4);
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443Description, col2X, boxY + 7);
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443Description, col2X, boxY + 10);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443DescriptionPart1, col2X, boxY + 4);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443DescriptionPart2, col2X, boxY + 7);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443DescriptionPart3, col2X, boxY + 10);
 
       pdf.doc.setFont('Helvetica', 'bold');
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255, col2X, boxY + 16); // Increased spacing
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255, col2X, boxY + 16);
       pdf.doc.setFont('Helvetica', 'normal');
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255Description, col2X, boxY + 20);
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255Description, col2X, boxY + 23);
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255Description, col2X, boxY + 26);
-      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255Description, col2X, boxY + 29);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255DescriptionPart1, col2X, boxY + 20);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255DescriptionPart2, col2X, boxY + 23);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255DescriptionPart3, col2X, boxY + 26);
+      pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255DescriptionPart4, col2X, boxY + 29);
 
       pdf.currentY = boxY + 32; // Adjusted for new spacing
     }, 45); // Increased height for more bottom padding
@@ -356,14 +356,26 @@ const generatePdf = (locale = 'en') => {
     ]);
     pdf.addSpacing(3);
 
-    pdf.addParentBoxInstruction();
-    pdf.addParentResponseBoxes(60);
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60);
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t,90);
 
+    pdf.addFooter(14);
+
+    // ===== PAGE 15: Notice for long-term arrangements =====
+    pdf.addPage();
+
+    pdf.addQuestionHeading(t.noticeForLongTermArrangements.title);
+    pdf.addBodyText(t.noticeForLongTermArrangements.intro, { spacing: 5 });
+    pdf.addParentBoxInstruction(t);
+    pdf.addParentResponseBoxes(t, 60); // Reduced from 90
+    pdf.addSpacing(8);
+    pdf.addCompromiseBox(t, 90); // Reduced from 110
+
     pdf.addFooter(15);
 
-    // ===== PAGE 15: When children's needs change (was page 14) =====
+    // ===== PAGE 16: Reviewing the plan =====
     pdf.addPage();
 
     pdf.addQuestionHeading(t.reviewingThePlan.title);
@@ -387,7 +399,7 @@ const generatePdf = (locale = 'en') => {
     pdf.addBodyText(t.nextSteps.unableToAgree, { spacing: 2 });
     pdf.addBodyText(t.nextSteps.mediator,{ spacing: 2 });
     pdf.addBodyText(t.nextSteps.moreInformation);
-    pdf.addFooter(16);
+    pdf.addFooter(17);
 
     // Set document title for PDF metadata
     pdf.setProperties({

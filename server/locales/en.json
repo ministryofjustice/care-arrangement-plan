@@ -772,7 +772,7 @@
   },
   "paperForm": {
     "title": "Proposed child arrangements plan",
-    "intro": "Use this form from the Child Arrangements Plan service (https://propose-child-arrangements-plan.service.gov.uk/) on GOV.UK to collaborate to create child arrangements which you both agree on, without having to go to court.",
+    "intro": "Use this form from the Child Arrangements Plan service ( https://propose-child-arrangements-plan.service.gov.uk/ ) on GOV.UK to collaborate to create child arrangements which you both agree on, without having to go to court.",
     "notLegallyBinding": "Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.",
     "howToUseThisForm": {
       "title": "How to use this form",
@@ -790,28 +790,28 @@
         "doNotFeelPressured": "• both of you do not feel pressured or intimidated into responding"
       },
       "stopNow": "If you have any concerns about safety, stop now.",
-      "feedbackOrSafetyConcerns": "If you have any feedback or safety concerns about this service, you can email <a href=\"mailto:safety@propose-child-arrangements-plan.service.gov.uk\">safety@propose-child-arrangements-plan.service.gov.uk</a>.",
+      "feedbackOrSafetyConcerns": "If you have any feedback or safety concerns about this service, you can email safety@propose-child-arrangements-plan.service.gov.uk.",
       "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created."
     },
     "howMakingChildArrangementsPlanHelp": {
       "title": "How making a child arrangements plan can help",
       "intro": "You may find that collaborating with the other parent or carer on a child arrangements plan:",
       "benefits": {
-        "cheaperAndQuicker": "• is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it’s urgent)",
+        "cheaperAndQuicker": "• is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it's urgent)",
         "betterOutcome": "• leads to a better outcome for your children, which you and your ex-partner are in control of"
       },
       "goingToCourt": "Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.",
       "tips": "Tips to help you and your children",
       "planShouldIntro": "Your child arrangements plan should:",
       "planShould": {
-        "welfare": "• put the child’s welfare first",
+        "welfare": "• put the child's welfare first",
         "wishes": "• reflect the wishes, feelings and needs of the child",
         "considerAnyHarm": "• consider any harm the child has suffered or any risk of harm"
       }
     },
     "ifCourtOrderInPlace": {
       "title": "If there is a court order in place",
-      "doNotContinue": "Do not continue if there’s a court order in place relating to you, the other parent, or the children.",
+      "doNotContinue": "Do not continue if there's a court order in place relating to you, the other parent, or the children.",
       "forExample": "For example, a:",
       "orderList": {
         "childArrangementsOrder": "• child arrangements order",
@@ -820,24 +820,24 @@
         "protectiveOrder": "• protective order such as a non-molestation order, occupation order or a domestic abuse protection order",
         "anyOther": "• any other order restricting contact between you and the other parent or the children"
       },
-      "toChangeOrEnforce": "To change or enforce an existing child arrangements order, visit <a href=\"https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order\">https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order</a>.",
+      "toChangeOrEnforce": "To change or enforce an existing child arrangements order, visit https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order.",
       "getMoreInformation": {
         "title": "Get more information",
         "moreInfo": "Use GOV.UK to find more information, for example:",
         "moreInfoList": {
-          "makingChildArrangements": "• making child arrangements - <a href=\"https://www.gov.uk/looking-after-children-divorce\">https://www.gov.uk/looking-after-children-divorce</a>",
-          "legalSeparation": "• getting a legal separation - <a href=\"https://www.gov.uk/legal-separation\">https://www.gov.uk/legal-separation</a>",
-          "divorce": "• getting a divorce - <a href=\"https://www.gov.uk/get-a-divorce\">https://www.gov.uk/get-a-divorce</a>"
+          "makingChildArrangements": "• making child arrangements - https://www.gov.uk/looking-after-children-divorce",
+          "legalSeparation": "• getting a legal separation - https://www.gov.uk/legal-separation",
+          "divorce": "• getting a divorce - https://www.gov.uk/get-a-divorce"
         }
       },
       "legalAdvice": {
         "title": "If you want legal advice",
-        "findLegalAdviser" : "You can find a legal adviser: <a href=\"https://www.gov.uk/find-legal-advice/find-legal-adviser\">https://www.gov.uk/find-legal-advice/find-legal-adviser</a>."
+        "findLegalAdviser" : "You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser."
       },
       "domesticAbuse": {
         "title": "Getting help with domestic abuse",
-        "signsAndEffects": "To find out more about signs and effects of child abuse and neglect, visit <a href=\"https://www.nspcc.org.uk/what-is-child-abuse\">https://www.nspcc.org.uk/what-is-child-abuse</a>.",
-        "unsureVictim": "If you’re unsure whether you’re a victim of domestic abuse, visit <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse\">https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse</a>."
+        "signsAndEffects": "To find out more about signs and effects of child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse.",
+        "unsureVictim": "If you're unsure whether you're a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse."
       }
     },
     "notSuitableForYou": {
@@ -849,7 +849,7 @@
       "anyOtherSafety": "• any other safety or welfare concerns that place anyone at significant risk of harm",
       "feedbackAndSupport": {
         "title": "Feedback and support",
-        "toAskForHelp": "To ask for help using this service, or suggest improvements, you can email <a href=\"mailto:feedback@propose-child-arrangements-plan.com\">feedback@propose-child-arrangements-plan.com</a>."
+        "toAskForHelp": "To ask for help using this service, or suggest improvements, you can email feedback@propose-child-arrangements-plan.com."
       },
       "weCannotAnswer": "We cannot answer any questions about child arrangement plans that have already been created."
     },
@@ -871,43 +871,51 @@
       "title": "Living and visiting",
       "intro": "Where will the children spend most of their time?",
       "options": {
-        "mostlyLiveWithYou": "The children will mostly live with you",
-        "mostlyLiveWithOther": "The children will mostly live with the other parent or carer",
-        "splitTime": "They'll split time between both households",
-        "anotherArrangement": "Another arrangement"
+        "mostlyLiveWithYou": "• The children will mostly live with you",
+        "mostlyLiveWithOther": "• The children will mostly live with the other parent or carer",
+        "splitTime": "• They'll split time between both households",
+        "anotherArrangement": "• Another arrangement"
       },
-      "tip": "<b>Tip:</b> An exact split of time between two households does not always suit children's best interests."
+      "tip": "Tip: An exact split of time between two households does not always suit children's best interests."
     },
     "scheduleMeetsChildrenNeeds": {
       "title": "Which schedule best meets the children's needs?",
       "intro": "What timetable are you proposing for overnight stays, daytime visits and weekends at the other household?",
       "commonSchedulesIntro": "Here are some common schedules that can work well for children.",
       "alternatingWeeks": "Alternating weeks",
-      "alternatingWeeksDescription": "The children will spend one week in one household and the next week in the other.",
+      "alternatingWeeksDescriptionPart1": "The children will spend one week in one",
+      "alternatingWeeksDescriptionPart2": "household and the next week in the other.",
       "schedule223": "2-2-3 schedule",
-      "schedule223Description": "Children spend two days in one household, two days in the other, then back to the first house for 3 days including the weekend.",
+      "schedule223DescriptionPart1": "Children spend two days in one household,",
+      "schedule223DescriptionPart2": "two days in the other, then back to the first",
+      "schedule223DescriptionPart3": "house for 3 days including the weekend.",
       "schedule443": "4-4-3 schedule",
-      "schedule443Description": "Children spend three days in one household then four days in the other. The next week they switch.",
+      "schedule443DescriptionPart1": "Children spend three days in one household",
+      "schedule443DescriptionPart2": "then four days in the other. The next week",
+      "schedule443DescriptionPart3": "they switch.",
       "schedule2255": "2-2-5-5 schedule",
-      "schedule2255Description": "Children spend two days in one household, then two days in the other. After that they spend five days in one household, then five days in the other."
+      "schedule2255DescriptionPart1": "Children spend two days in one household,",
+      "schedule2255DescriptionPart2": "then two days in the other. After that they spend",
+      "schedule2255DescriptionPart3": "five days in one household, then five",
+      "schedule2255DescriptionPart4": "days in the other."
     },
     "handoversAndHolidays": {
       "title": "Handovers and holidays",
       "intro": "How will the children get between households?",
       "options": {
-        "youCollect": "You collect them",
-        "otherCollects": "The other parent or carer collects them",
-        "anotherArrangement": "Another arrangement"
+        "youCollect": "• You collect them",
+        "otherCollects": "• The other parent or carer collects them",
+        "anotherArrangement": "• Another arrangement"
       }
     },
     "handoverLocation": {
       "title": "Where does handover take place?",
-      "intro": "It may be easier for children if the handover takes place at a neutral location such as a park or railway station which you're confident you'll both feel safe in.",
+      "intro": "It may be easier for children if the handover takes place at a neutral location which you’re confident you’ll both feel safe in.",
       "handoverLocationList": {
-        "neutralLocation": "Neutral location",
-        "atHome": "At your home",
-        "atOtherHome": "At the other parent or carer's home",
-        "atSchool": "At school"
+        "neutralLocation": "• Neutral location",
+        "atHome": "• At your home",
+        "atOtherHome": "• At the other parent or carer's home",
+        "atSchool": "• At school"
       }
     },
     "arrangementsSchoolHolidays": {
@@ -926,21 +934,21 @@
       "title": "What other things matter to your children?",
       "intro": "You may want to agree things such as:",
       "otherThingsList": {
-        "religionDietAndRules": "religious practices, diet, and standard rules across both households",
-        "extraCurriculars": "extra-curricular activities, such as swimming lessons",
-        "friendsAndFamily": "access to other friends and family",
-        "otherContact": "other types of contact, such as video calls"
+        "religionDietAndRules": "• religious practices, diet, and standard rules across both households",
+        "extraCurriculars": "• extra-curricular activities, such as swimming lessons",
+        "friendsAndFamily": "• access to other friends and family",
+        "otherContact": "• other types of contact, such as video calls"
       }
     },
     "decisionMaking": {
       "title": "How should last-minute changes be communicated?",
       "intro": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.",
       "decisionMakingList": {
-        "text": "By text message",
-        "phone": "With a phone call",
-        "email": "By email",
-        "app": "Using a parenting app",
-        "anotherArrangement": "Another arrangement"
+        "text": "• By text message",
+        "phone": "• With a phone call",
+        "email": "• By email",
+        "app": "• Using a parenting app",
+        "anotherArrangement": "• Another arrangement"
       }
     },
     "noticeForLongTermArrangements": {
@@ -959,7 +967,7 @@
       "noResponse": "If there's no response",
       "unableToAgree": "If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
       "mediator": "A mediator is a professional who will work with you to help you make decisions based on your child's best interests. They listen to both of you and take a neutral approach.",
-      "moreInformation": "More information and support is available at: <a href=\"https://www.gov.uk/looking-after-children-divorce\" target=\"_blank\">https://www.gov.uk/looking-after-children-divorce</a>"
+      "moreInformation": "More information and support is available at: https://www.gov.uk/looking-after-children-divorce"
     },
     "optionsCouldInclude": "Options could include:",
     "responseInTheBox": "Add your first name and response in the box - the other parent/carer should add their first name and response in the other box.",
