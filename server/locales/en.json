@@ -881,6 +881,7 @@
     "scheduleMeetsChildrenNeeds": {
       "title": "Which schedule best meets the children's needs?",
       "intro": "What timetable are you proposing for overnight stays, daytime visits and weekends at the other household?",
+      "tip": "Tip: An exact split of time between two households does not always suit children's best interests.",
       "commonSchedulesIntro": "Here are some common schedules that can work well for children.",
       "alternatingWeeks": "Alternating weeks",
       "alternatingWeeksDescriptionPart1": "The children will spend one week in one",
@@ -910,7 +911,7 @@
     },
     "handoverLocation": {
       "title": "Where does handover take place?",
-      "intro": "It may be easier for children if the handover takes place at a neutral location which you’re confident you’ll both feel safe in.",
+      "intro": "It may be easier for children if the handover takes place at a neutral location which you're confident you'll both feel safe in.",
       "handoverLocationList": {
         "neutralLocation": "• Neutral location",
         "atHome": "• At your home",
@@ -927,10 +928,12 @@
       "intro": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes."
     },
     "specialDays": {
+      "sectionTitle": "Special days",
       "title": "What will happen on special days?",
       "intro": "Keep your children's needs and best interests at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother's Day and Father's Day, and birthdays."
     },
     "otherThings": {
+      "sectionTitle": "Other things",
       "title": "What other things matter to your children?",
       "intro": "You may want to agree things such as:",
       "otherThingsList": {
@@ -941,6 +944,7 @@
       }
     },
     "decisionMaking": {
+      "sectionTitle": "Decision making",
       "title": "How should last-minute changes be communicated?",
       "intro": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.",
       "decisionMakingList": {
@@ -961,6 +965,7 @@
       "youCanAlsoReview":"You can also review these arrangements at an earlier time if they no longer meet your children's needs."
     },
     "nextSteps": {
+      "sectionTitle": "Next steps",
       "title": "What to do next",
       "addTheirResponse": "Now give this proposed child arrangements plan to the other parent or carer so they can add their response.",
       "collaborateToAgree": "When they have added their response, you can collaborate to reach a shared agreement.",

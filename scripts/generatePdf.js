@@ -182,7 +182,7 @@ const generatePdf = (locale = 'en') => {
 
     pdf.addQuestionHeading(t.scheduleMeetsChildrenNeeds.title);
     pdf.addBodyText(t.scheduleMeetsChildrenNeeds.intro, { spacing: 5 });
-    pdf.addTip('Tip: An exact split of time between two households does not always suit children\'s best interests.');
+    pdf.addTip(t.scheduleMeetsChildrenNeeds.tip, { spacing: 0 });
     pdf.addSpacing(6);
 
     // Info box with schedules (increased height to fit content)
@@ -308,7 +308,7 @@ const generatePdf = (locale = 'en') => {
     // ===== PAGE 12: Special days (was page 11) =====
     pdf.addPage();
 
-    pdf.addSectionHeading('Special days');
+    pdf.addSectionHeading(t.specialDays.sectionTitle);
     pdf.addQuestionHeading(t.specialDays.title);
     pdf.addBodyText(t.specialDays.intro, { spacing: 5 });
 
@@ -322,7 +322,7 @@ const generatePdf = (locale = 'en') => {
     // ===== PAGE 13: Other things (was page 12) =====
     pdf.addPage();
 
-    pdf.addSectionHeading('Other things');
+    pdf.addSectionHeading(t.otherThings.sectionTitle);
     pdf.addQuestionHeading(t.otherThings.title);
     pdf.addBodyText(t.otherThings.intro, { spacing: 5 });
     pdf.addBulletList([
@@ -343,7 +343,7 @@ const generatePdf = (locale = 'en') => {
     // ===== PAGE 14: Decision making (was page 13) =====
     pdf.addPage();
 
-    pdf.addSectionHeading('Decision making');
+    pdf.addSectionHeading(t.decisionMaking.sectionTitle);
     pdf.addQuestionHeading(t.decisionMaking.title);
     pdf.addBodyText(t.decisionMaking.intro, { spacing: 5 });
     pdf.addBodyText(t.optionsCouldInclude, { spacing: 5 });
@@ -391,7 +391,7 @@ const generatePdf = (locale = 'en') => {
     // ===== PAGE 17: What happens now =====
     pdf.addPage();
 
-    pdf.addSectionHeading('Next steps');
+    pdf.addSectionHeading(t.nextSteps.sectionTitle);
     pdf.addQuestionHeading(t.nextSteps.title);
     pdf.addBodyText(t.nextSteps.addTheirResponse, { spacing: 2 });
     pdf.addBodyText(t.nextSteps.collaborateToAgree);
