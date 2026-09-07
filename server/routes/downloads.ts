@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 import { Router } from 'express';
 
@@ -36,8 +37,9 @@ const downloadRoutes = (router: Router) => {
   });
 
   router.get(paths.DOWNLOAD_PAPER_FORM, (request, response) => {
-    const locale = request.session?.lang || request.getLocale();
-    const paperFormFile = `other/${paperFormFileName(locale)}`;
+    const requestedLocale = request.session?.lang || request.getLocale();
+    const locale = requestedLocale === 'cy' ? 'cy' : 'en';
+    const paperFormFile = path.join('other', path.basename(paperFormFileName(locale)));
     response.download(getAssetPath(paperFormFile), `${request.__('pdf.name')}.pdf`);
 
     // Log download event

@@ -49,12 +49,12 @@
   },
   "errors": {
     "notFound": {
-      "title": "Ni ellir dod o hyd i’r dudalen",
+      "title": "Ni ellir dod o hyd i'r dudalen",
       "check": "Os bu ichi deipio cyfeiriad y wefan, gwiriwch ei fod yn gywir.",
       "startAgain": "Gallwch <a href=\"https://www.gov.uk\" class=\"govuk-link\">bori o'r dudalen hafan</a> neu ddefnyddio'r blwch chwilio i ddod o hyd i'r wybodaeth rydych ei hangen."
     },
     "generic": {
-      "title": "Mae’n ddrwg gennym, ond mae problem gyda'r gwasanaeth",
+      "title": "Mae'n ddrwg gennym, ond mae problem gyda'r gwasanaeth",
       "tryAgainLater": "Rhowch gynnig arall arni hwyrach ymlaen.",
       "youCan": "Gallwch wneud y canlynol:",
       "descriptionList": {
@@ -81,8 +81,8 @@
     "rejectCookies": "Gwrthod cwcis dadansoddol",
     "viewCookies": "Gweld cwcis",
     "hideCookieMessage": "Cuddio neges cwci",
-    "useEssentialCookies": "Rydym yn defnyddio rhai cwcis hanfodol i wneud i’r gwasanaeth hwn weithio.",
-    "useAnalyticsCookies": "Hoffwn hefyd ddefnyddio cwcis dadansoddol fel y gallwn ddeall sut rydych chi’n defnyddio’r gwasanaeth ac i wneud gwelliannau.",
+    "useEssentialCookies": "Rydym yn defnyddio rhai cwcis hanfodol i wneud i'r gwasanaeth hwn weithio.",
+    "useAnalyticsCookies": "Hoffwn hefyd ddefnyddio cwcis dadansoddol fel y gallwn ddeall sut rydych chi'n defnyddio'r gwasanaeth ac i wneud gwelliannau.",
     "acceptedAnalyticsCookies": "Rydych wedi derbyn cwcis dadansoddol. Gallwch <a href={{ cookiesUrl }} >newid eich gosodiadau cwcis</a> ar unrhyw adeg.",
     "rejectedAnalyticsCookies": "Rydych wedi gwrthod cwcis dadansoddol. Gallwch <a href={{ cookiesUrl }} >newid eich gosodiadau cwcis</a> ar unrhyw adeg."
   },
@@ -90,39 +90,39 @@
     "title": "Datganiad hygyrchedd",
     "content": {
       "appliesTo": "Mae'r datganiad hygyrchedd hwn yn berthnasol i'r gwasanaeth 'Cynnig cynllun trefniadau plant.'",
-      "runBy": "Y Weinyddiaeth Gyfiawnder (MoJ) sy’n gyfrifol am y wefan hon. Rydym eisiau i gymaint o bobl â phosibl allu defnyddio’r wefan hon. Er enghraifft, golyga hyn y dylech allu:",
+      "runBy": "Y Weinyddiaeth Gyfiawnder (MoJ) sy'n gyfrifol am y wefan hon. Rydym eisiau i gymaint o bobl â phosibl allu defnyddio'r wefan hon. Er enghraifft, golyga hyn y dylech allu:",
       "abilities": {
-        "changeColours": "defnyddio gosodiadau eich porwr neu ategion i newid y lliwiau, y lefelau cyferbyniad a’r ffontiau",
+        "changeColours": "defnyddio gosodiadau eich porwr neu ategion i newid y lliwiau, y lefelau cyferbyniad a'r ffontiau",
         "zoomIn": "chwyddo i mewn hyd at 400% heb i'r testun fynd oddi ar y sgrin",
         "navigate": "llywio'r mwyafrif o'r wefan gan ddefnyddio bysellfwrdd neu feddalwedd adnabod llais",
         "listen": "gwrando ar y mwyafrif o'r wefan trwy ddefnyddio darllenydd sgrin (gan gynnwys y fersiynau diweddaraf o JAWS, NVDA a VoiceOver)"
       },
       "simpleText": "Rydym hefyd wedi sicrhau bod testun y wefan mor syml ag sy'n bosibl i'w ddeall.",
-      "abilityNet": "Mae gan <a href=\"https://mcmw.abilitynet.org.uk/\" class=\"govuk-link\">AbilityNet</a> gyngor ynghylch gwneud eich dyfais yn haws i’w defnyddio os oes gennych anabledd.",
+      "abilityNet": "Mae gan <a href=\"https://mcmw.abilitynet.org.uk/\" class=\"govuk-link\">AbilityNet</a> gyngor ynghylch gwneud eich dyfais yn haws i'w defnyddio os oes gennych anabledd.",
       "feedback": {
         "title": "Adborth a gwybodaeth gyswllt",
-        "contact": "Os byddwch yn canfod unrhyw broblemau nad ydynt wedi’u cynnwys ar y dudalen hon, neu’n credu nad ydym yn bodloni’r gofynion o ran hygyrchedd, anfonwch e-bost i <a href=\"mailto:feedback@propose-child-arrangements-plan.service.gov.uk\" class=\"govuk-link\">feedback@propose-child-arrangements-plan.service.gov.uk</a>."
+        "contact": "Os byddwch yn canfod unrhyw broblemau nad ydynt wedi'u cynnwys ar y dudalen hon, neu'n credu nad ydym yn bodloni'r gofynion o ran hygyrchedd, anfonwch e-bost i <a href=\"mailto:feedback@propose-child-arrangements-plan.service.gov.uk\" class=\"govuk-link\">feedback@propose-child-arrangements-plan.service.gov.uk</a>."
       },
       "enforcement": {
         "title": "Y Weithdrefn Orfodi",
-        "responsible": "Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018 (y ‘rheoliadau hygyrchedd’).",
-        "complaint": "Os nad ydych chi’n fodlon gyda’r ffordd rydym yn ymateb i’ch cwyn, cysylltwch â’r <a href=\"https://www.equalityadvisoryservice.com/\" class=\"govuk-link\">Gwasanaeth Cynghori a Chymorth Cydraddoldeb (EASS)</a>."
+        "responsible": "Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy'n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018 (y 'rheoliadau hygyrchedd').",
+        "complaint": "Os nad ydych chi'n fodlon gyda'r ffordd rydym yn ymateb i'ch cwyn, cysylltwch â'r <a href=\"https://www.equalityadvisoryservice.com/\" class=\"govuk-link\">Gwasanaeth Cynghori a Chymorth Cydraddoldeb (EASS)</a>."
       },
       "technical": {
         "title": "Gwybodaeth dechnegol am hygyrchedd y wefan hon",
-        "commitment": "Mae’r Weinyddiaeth Gyfiawnder (MoJ) wedi ymrwymo i sicrhau bod ei wefan yn hygyrch, a hynny yn unol â Rheoliadau Hygyrchedd Cyrff y Sector Gyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018."
+        "commitment": "Mae'r Weinyddiaeth Gyfiawnder (MoJ) wedi ymrwymo i sicrhau bod ei wefan yn hygyrch, a hynny yn unol â Rheoliadau Hygyrchedd Cyrff y Sector Gyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018."
       },
       "compliance": {
         "title": "Statws cydymffurfiaeth",
         "tested": "Rydym wedi profi'r gwasanaeth hwn gyda thechnolegau cynorthwyol gan gynnwys darllenwyr sgrin a thechnoleg testun-i-llais.",
         "wcag": "Cafodd y gwasanaeth archwiliad hygyrchedd WCAG allanol gan User Vision ar 5 Mehefin.",
-        "compliant": "Mae’r gwasanaeth yn cydymffurfio'n llwyr ac yn bodloni'r mwyafrif o ofynion safon AA Canllawiau Hygyrchedd Cynnwys Gwe (WCAG) fersiwn 2.2."
+        "compliant": "Mae'r gwasanaeth yn cydymffurfio'n llwyr ac yn bodloni'r mwyafrif o ofynion safon AA Canllawiau Hygyrchedd Cynnwys Gwe (WCAG) fersiwn 2.2."
       },
       "nonAccessibleContent": {
         "title": "Cynnwys anhygyrch",
         "subtitle": "Diffyg cydymffurfiaeth gyda gweithredu GDS presennol",
         "content": {
-          "screenReader": "Gall defnyddwyr darllenydd sgrin brofi'r materion canlynol gyda'r botwm ‘Gadael y dudalen hon’, sy'n gadael i chi adael y gwasanaeth yn gyflym.",
+          "screenReader": "Gall defnyddwyr darllenydd sgrin brofi'r materion canlynol gyda'r botwm 'Gadael y dudalen hon', sy'n gadael i chi adael y gwasanaeth yn gyflym.",
           "list": {
             "itemOne": "Gellir actifadu'r botwm drwy glicio ar yr allwedd 'Escape' dair gwaith. Gan fod yr allwedd 'Escape' yn lwybr byr cyffredin ar gyfer gadael, gellir actifadu'r botwm yn ddamweiniol."
           },
@@ -150,7 +150,7 @@
     "yes": "Oes",
     "no": "Nac oes",
     "aboutCookies": {
-      "smallFiles": "Mae’r gwasanaeth Cynnig Trefniadau Plant yn rhoi ffeiliau bach (a elwir yn 'cwcis') ar eich cyfrifiadur i gasglu gwybodaeth am y ffordd yr ydych chi’n pori drwy’r gwasanaeth.",
+      "smallFiles": "Mae'r gwasanaeth Cynnig Trefniadau Plant yn rhoi ffeiliau bach (a elwir yn 'cwcis') ar eich cyfrifiadur i gasglu gwybodaeth am y ffordd yr ydych chi'n pori drwy'r gwasanaeth.",
       "usedTo": "Mae cwcis yn cael eu defnyddio i:",
       "listItems": {
         "rememberProgress": "gofio eich cynnydd",
@@ -162,17 +162,17 @@
     },
     "howCookiesAreUsed": "Sut defnyddir cwcis yn y gwasanaeth hwn",
     "essentialCookies": "Cwcis hanfodol",
-    "essentialCookiesUse": "Mae angen cwcis hanfodol i wneud i'r gwasanaeth weithio. Nid oes rhaid inni ofyn am ganiatâd i’w defnyddio.",
-    "rememberingProgress": "<h4 class=\"govuk-heading-s\">Cofio sut yr ydych chi’n symud ymlaen drwy’r gwasanaeth</h4><p>Byddwn yn storio cwcis i gofio sut yr ydych chi’n symud ymlaen drwy’r gwasanaeth gan ddefnyddio’r cyfrifiadur hwn ac i ddod â'ch sesiwn i ben pan fyddwch heb wneud dim am 120 munud neu pan fyddwch yn cau eich porwr.</p>",
-    "sessionPurpose": "Cofio sut yr ydych chi’n symud ymlaen drwy’r gwasanaeth gan ddefnyddio’r cyfrifiadur hwn ac olrhain pan fyddwch heb wneud dim.",
+    "essentialCookiesUse": "Mae angen cwcis hanfodol i wneud i'r gwasanaeth weithio. Nid oes rhaid inni ofyn am ganiatâd i'w defnyddio.",
+    "rememberingProgress": "<h4 class=\"govuk-heading-s\">Cofio sut yr ydych chi'n symud ymlaen drwy'r gwasanaeth</h4><p>Byddwn yn storio cwcis i gofio sut yr ydych chi'n symud ymlaen drwy'r gwasanaeth gan ddefnyddio'r cyfrifiadur hwn ac i ddod â'ch sesiwn i ben pan fyddwch heb wneud dim am 120 munud neu pan fyddwch yn cau eich porwr.</p>",
+    "sessionPurpose": "Cofio sut yr ydych chi'n symud ymlaen drwy'r gwasanaeth gan ddefnyddio'r cyfrifiadur hwn ac olrhain pan fyddwch heb wneud dim.",
     "sessionExpiry": "Ar ôl 120 munud i chi wneud dim byd neu pan fyddwch yn cau eich porwr gwe",
     "cookiesMessage": "<h4 class=\"govuk-heading-s\">Neges am gwcis</h4><p>Efallai y byddwch yn gweld baner pan fyddwch yn ymweld â chynnig cynnig trefniadau plant yn eich gwahodd i dderbyn neu wrthod cwcis dewisol.</p>",
     "consentPurpose": "Cadw eich gosodiadau caniatâu cwcis",
     "consentExpiry": "1 flwyddyn",
     "optionalCookies": "Cwcis dadansoddol (dewisol)",
     "aboutOptionalCookies": {
-      "title": "Mesur defnydd o’r wefan (Google Analytics)",
-      "collect": "Rydym yn defnyddio meddalwedd Google Analytics i gasglu gwybodaeth am y ffordd rydych yn defnyddio’r gwasanaeth Cynnig cynllun trefniadau plant. Rydym yn gwneud hyn i helpu i sicrhau bod y gwasanaeth yn diwallu anghenion ei ddefnyddwyr ac i'n helpu i wneud gwelliannau.",
+      "title": "Mesur defnydd o'r wefan (Google Analytics)",
+      "collect": "Rydym yn defnyddio meddalwedd Google Analytics i gasglu gwybodaeth am y ffordd rydych yn defnyddio'r gwasanaeth Cynnig cynllun trefniadau plant. Rydym yn gwneud hyn i helpu i sicrhau bod y gwasanaeth yn diwallu anghenion ei ddefnyddwyr ac i'n helpu i wneud gwelliannau.",
       "store": "Mae Google Analytics yn storio gwybodaeth am:",
       "collectItems": {
         "pageViews": "Y tudalennau rydych yn ymweld â nhw",
@@ -180,7 +180,7 @@
         "howYouGotHere": "Sut wnaethoch gyrraedd y gwasanaeth",
         "whatYouClickOn": "Beth ydych yn glicio arno pan ydych yn ymweld â'r gwasanaeth"
       },
-      "notCollect": "Nid ydym yn casglu neu storio eich gwybodaeth bersonol (er enghraifft eich enw neu gyfeiriad) fel na ellir defnyddio’r wybodaeth hon i’ch adnabod.",
+      "notCollect": "Nid ydym yn casglu neu storio eich gwybodaeth bersonol (er enghraifft eich enw neu gyfeiriad) fel na ellir defnyddio'r wybodaeth hon i'ch adnabod.",
       "cookies": "Mae Google Analytics yn gosod y cwcis canlynol:"
     },
     "acceptOptionalCookies": "Ydych chi eisiau derbyn cwcis dadansoddeg?",
@@ -240,7 +240,7 @@
   "termsAndConditions": {
     "title": "Telerau ac amodau",
     "responsibilityForTheServiceHeading": "Cyfrifoldeb am y gwasanaeth",
-    "accurateAndComplete": "Y Weinyddiaeth Gyfiawnder (MOJ) sy'n rhedeg y gwasanaeth hwn. Rydym yn ceisio sicrhau bod yr wybodaeth a ddarparwn yn gywir ac yn gyflawn a bod y gwasanaeth wastad ar gael ac yn rhydd o unrhyw firysau.",
+    "accurateAndComplete": "Y Weinyddiaeth Gyfiawnder (MOJ) sy'n rhedeg y gwasanaeth hwn. Rydym yn ceisio sicrhau bod yr wybodaeth a ddarparwn yn gywir ac yn gyflawn a bod y gwasanaeth wastad ar gael ac yn rhydd o unrhyw firysau.",
     "noLiabilityFor": "Nid yw'r MoJ yn cymryd cyfrifoldeb am:",
     "unableToAccess": "chi'n methu â chael mynediad at y gwasanaeth (er enghraifft, oherwydd galw uchel neu oherwydd ein bod wedi atal y gwasanaeth i gynnal gwaith cynnal a chadw)",
     "indirectDamages": "niwed anuniongyrchol sy'n codi o chi'n defnyddio'r gwasanaeth neu'n dibynnu ar ei gynnwys",
@@ -287,7 +287,7 @@
           "domesticAbuse": "Os ydych wedi profi unrhyw fath o gam-drin domestig, gallwch <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#get-a-court-order-to-protect-you-or-your-child\">wneud cais i gael gorchymyn llys i warchod eich hun a neu eich plentyn</a>.",
           "citizensAdvice": "Mae gan Cyngor ar Bopeth <a href=\"https://www.citizensadvice.org.uk/family/making-agreements-about-your-children/making-child-arrangements/\">gyngor ar wneud trefniadau plant lle bo cam-drin domestig wedi digwydd</a>.",
           "findOut": "Dewch i ganfod <a href=\"https://www.gov.uk/guidance/domestic-abuse-how-to-get-help\">sut i gael help gyda cham-drin domestig</a>.",
-          "specificHelp": "Os ydych eisiau cael cymorth yn benodol ar gyfer eich cefndir a'ch anghenion chi neu os oes arnoch angen cefnogaeth a chymorth ar gyfer mathau penodol o gam-drin, mae sawl sefydliad sy'n gallu helpu   - gweler <a href=\"https://www.gov.uk/government/publications/domestic-abuse-get-help-for-specific-needs-or-situations/domestic-abuse-specialist-sources-of-support\">Cam-drin Domestig: ffynonellau cymorth arbenigol</a>."
+          "specificHelp": "Os ydych eisiau cael cymorth yn benodol ar gyfer eich cefndir a'ch anghenion chi neu os oes arnoch angen cefnogaeth a chymorth ar gyfer mathau penodol o gam-drin, mae sawl sefydliad sy'n gallu helpu   - gweler <a href=\"https://www.gov.uk/government/publications/domestic-abuse-get-help-for-specific-needs-or-situations/domestic-abuse-specialist-sources-of-support\">Cam-drin Domestig: ffynonellau cymorth arbenigol</a>."
         }
       },
       "helpAndSupport": {
@@ -296,7 +296,7 @@
         "table": {
           "rowOne": {
             "heading": "<a href=\"https://www.nationaldahelpline.org.uk/\">Llinell Gymorth Cam-drin Domestig Cenedlaethol Refuge</a>",
-            "data": "<p class=\"govuk-body\">Cyngor am ddim a chyfrinachol, 24 awr y dydd os oes arnoch angen cymorth i ddeall eich opsiynau, dod i hyd i loches neu wasanaethau arbenigol eraill.</p><p class=\"govuk-body\">Rhif ffôn: <a href=\"tel:0808 2000 247\">0808 2000 247</a></p>"
+            "data": "<p class=\"govuk-body\">Cyngor am ddim a chyfrinachol, 24 awr y dydd os oes arnoch angen cymorth i ddeall eich opsiynau, dod i hyd i loches neu wasanaethau arbenigol eraill.</p><p class=\"govuk-body\">Rhif ffôn: <a href=\"tel:0808 2000 247\">0808 2000 247</a></p>"
           },
           "rowTwo": {
             "heading": "<a href=\"https://www.rightsofwomen.org.uk/get-advice/family-law/\">Rights of Women</a>",
@@ -379,7 +379,7 @@
     "emptyError": "Nodwch faint o blant y mae'r cytundeb hwn ar eu cyfer",
     "tooFewError": "Rhaid i'ch cytundeb fod ar gyfer o leiaf 1 plentyn",
     "tooManyError": "Ni all eicn cytundeb fod am fwy na 6 plentyn",
-    "notANumberError": "Defnyddiwch rifau’n unig"
+    "notANumberError": "Defnyddiwch rifau'n unig"
   },
   "about": {
     "notStoreInfo": "Nid ydym yn cadw'r wybodaeth hon nac yn ei rhannu ag adrannau eraill y llywodraeth."
@@ -418,7 +418,7 @@
     "cannotStart": "Methu dechrau eto",
     "whoThePlanIsFor": "Ar gyfer pwy mae'r cynllun",
     "theChildren": "Y plant",
-    "whoIsUsing": "Pwy sy'n defnyddio’r gwasanaeth hwn?",
+    "whoIsUsing": "Pwy sy'n defnyddio'r gwasanaeth hwn?",
     "livingAndVisiting": "Byw ac ymweld",
     "handoverAndHolidays": "Trosglwyddo a gwyliau",
     "specialDays": "Dyddiau arbennig",
@@ -568,7 +568,7 @@
       "whichDaysOvernight": "pa ddiwrnodau bydd ymweliadau dros nos yn digwydd",
       "willDaytimeVisitsHappen": "os bydd y plant yn gwneud ymweliadau yn ystod dydd efo {{{ adult }}}?",
       "whichDaysDaytimeVisits": "pa ddiwrnodau bydd ymweliadau yn ystod dydd yn digwydd",
-      "getBetweenHouseholds": "pwy sy’n gyfrifol am gasglu'r plant",
+      "getBetweenHouseholds": "pwy sy'n gyfrifol am gasglu'r plant",
       "whereHandover": "ble mae'r trosglwyddo'n digwydd",
       "willChangeDuringSchoolHolidays": "p'un a fydd y trefniadau'n newid yn ystod gwyliau'r ysgol",
       "howChangeDuringSchoolHolidays": "sut bydd y trefniadau'n newid yn ystod gwyliau'r ysgol",
@@ -595,7 +595,7 @@
     "whatWeAreTelling": {
       "proposedPlan": "Mae {{{ senderName }}} wedi awgrymu cynllun trefniadau plant",
       "senderHasUsedThe": "Defnyddiodd {{{ senderName }}} y gwasanaeth Cynllun Trefniadau Plant (https://propose-child-arrangements-plan.service.gov.uk/) ar GOV.UK i awgrymu cynllun ar gyfer sut y gallech chi'ch dau ofalu am {{{ childrenNames }}}.",
-      "howToRespond": "Sut i ymateb i’r hawliad",
+      "howToRespond": "Sut i ymateb i'r hawliad",
       "pleaseReadThrough": "Gallwch ddarllen eu cynllun awgrymedig a'i ddefnyddio i gydweithio i greu trefniadau plant yr ydych chi'ch dau yn cytuno arnynt.",
       "notLegallyBinding": "Nid yw'r cynllun hwn yn gyfreithiol rwymol ac nid oes rhaid i chi wneud yr hyn y mae'n ei ddweud.",
       "ifYouDontAgree": "Os nad ydych chi'n cytuno, gallwch chi:",
@@ -645,7 +645,7 @@
       "drugsOrAlcohol": "camddefnyddio cyffuriau, alcohol neu sylweddau eraill",
       "anyOtherSafety": "unrhyw bryderon diogelwch neu lesiant eraill sy'n rhoi unrhyw un mewn perygl sylweddol o niwed",
       "feedbackHeading": "Adborth a chefnogaeth",
-      "toAskForHelp": "I ofyn am gymorth wrth ddefnyddio’r gwasanaeth hwn, neu i awgrymu gwelliannau, gallwch anfon e-bost at feedback@propose-child-arrangements-plan.service.gov.uk.",
+      "toAskForHelp": "I ofyn am gymorth wrth ddefnyddio'r gwasanaeth hwn, neu i awgrymu gwelliannau, gallwch anfon e-bost at feedback@propose-child-arrangements-plan.service.gov.uk.",
       "weCannot": "Ni allwn ateb unrhyw gwestiynau am gynlluniau trefniadau plant sydd eisoes wedi'u creu."
     },
     "yourProposedPlan": {
@@ -653,7 +653,7 @@
       "senderSaid": "Dywedodd {{{ senderName }}}:",
       "senderSuggested": "Awgrymodd {{{ senderName }}}:\n\"{{{ suggestion }}}\"",
       "senderSuggestedDoNotDecide": "Awgrymodd {{{ senderName }}} nid oes angen penderfynu ar hwn.",
-      "doYouAgree": "Ydych chi’n cytuno?",
+      "doYouAgree": "Ydych chi'n cytuno?",
       "endOfSection": "Diwedd yr adran",
       "noCourtOrder": "nid oes gorchymyn llys ar waith ar hyn o bryd",
       "forOneChild": "cynllun trefniadau plant arfaethedig yw hwn ar gyfer plentyn 1, {{{ childName }}}",
@@ -661,7 +661,7 @@
       "agreementBetween": "mae'r cytundeb hwn rhwng {{{ senderName }}} and {{{ otherAdultName }}}, sef yr oedolion a fydd yn gofalu am {{{ childrenNames }}}",
       "doYouAgreeOnBasics": "Ydych chi a {{{ senderName }}} yn cytuno ynglŷn ag enwau'r plant, eich enwau chi, ac a oes gorchymyn llys ar waith?",
       "doNotStoreNames": "Nid ydym yn storio'r enwau hyn nac yn rhannu unrhyw ran o'r wybodaeth hon ag adrannau eraill y llywodraeth.",
-      "doNotAgreeOnBasics": "Os ateboch chi ‘Nac ydw’, efallai y byddai’n ddefnyddiol dod o hyd i gyfryngwr a all eich helpu i gytuno ar eich trefniadau plant. Gallwch hefyd gael cymorth ariannol gyda hyn. I gael rhagor o wybodaeth, ewchi i https://www.gov.uk/looking-after-children-divorce.",
+      "doNotAgreeOnBasics": "Os ateboch chi 'Nac ydw', efallai y byddai'n ddefnyddiol dod o hyd i gyfryngwr a all eich helpu i gytuno ar eich trefniadau plant. Gallwch hefyd gael cymorth ariannol gyda hyn. I gael rhagor o wybodaeth, ewchi i https://www.gov.uk/looking-after-children-divorce.",
       "livingAndVisiting": {
         "suggestedLiveWith": "Awgrymodd {{{ senderName }}} y byddai'r plant yn treulio'r rhan fwyaf o'u hamser gyda {{{ adult }}}.",
         "suggestedLiveWithChild": "Awgrymodd {{{ senderName }}} bod {{{ childName }}} yn byw yn bennaf efo {{{ adult }}}.",
@@ -703,7 +703,7 @@
       "nowSendPlan": "Nawr anfonwch y cynllun trefniadau plant arfaethedig hwn yn ôl at {{{ senderName }}}. Dylech geisio creu cofnod ysgrifenedig o'r hyn rydych chi'ch dau wedi cytuno arno.",
       "notLegallyBinding": "Nid yw unrhyw gynllun a wnewch gan ddefnyddio'r ffurflen hon yn gyfreithiol rwymol. Nid oes rhaid i'r person arall wneud yr hyn y mae'n ei ddweud a gall y naill neu'r llall ohonoch awgrymu newidiadau iddo ar unrhyw adeg.",
       "noResponseHeading": "Os nad oes ymateb",
-      "unableToAgree": "Os na allwch ddod i gytundeb ymysg eich gilydd, gallech roi cynnig ar gyfryngu neu ffordd arall o gytuno y tu allan i’r llys.",
+      "unableToAgree": "Os na allwch ddod i gytundeb ymysg eich gilydd, gallech roi cynnig ar gyfryngu neu ffordd arall o gytuno y tu allan i'r llys.",
       "aMediatorIs":"Mae cyfryngwr yn weithiwr proffesiynol a fydd yn gweithio gyda chi i'ch helpu i wneud penderfyniadau yn seiliedig ar fuddiannau gorau eich plentyn. Maen nhw'n gwrando ar y ddau ohonoch ac yn cymryd ymagwedd niwtral.",
       "moreInfoAndSupport": "Mae rhagor o wybodaeth a chyngor ar gael yn https://www.gov.uk/looking-after-children-divorce.",
       "doNotAgree": {

@@ -8,4 +8,9 @@ describe('paperFormFileName', () => {
   test('returns a locale-suffixed filename for Welsh', () => {
     expect(paperFormFileName('cy')).toBe('paperForm-cy.pdf');
   });
+
+  test('returns the English filename for an unsupported locale', () => {
+    expect(paperFormFileName('fr')).toBe('paperForm.pdf');
+    expect(paperFormFileName('../other')).toBe('paperForm.pdf');
+  });
 });

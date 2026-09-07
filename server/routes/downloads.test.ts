@@ -5,6 +5,7 @@ import path from 'path';
 import request from 'supertest';
 
 import { version as packageVersion } from '../../package.json';
+import generatePdf from '../../scripts/generatePdf';
 import config from '../config';
 import paths from '../constants/paths';
 import createPdf from '../pdf/createPdf';
@@ -50,6 +51,12 @@ describe(`GET ${paths.PRINT_PDF}`, () => {
 });
 
 describe(`GET ${paths.DOWNLOAD_PAPER_FORM}`, () => {
+  beforeAll(() => {
+    // Paper form PDFs are gitignored; generate both locales so these tests do not depend on other suites.
+    generatePdf('en');
+    generatePdf('cy');
+  });
+
   const assertPdfMatchesFile = (responseBody: Buffer, fileName: string) => {
     const responseHash = createHash('sha256').update(responseBody).digest('hex');
     const referenceFile = fs.readFileSync(path.resolve(__dirname, `../../assets/other/${fileName}`));
@@ -93,6 +100,19 @@ describe(`GET ${paths.DOWNLOAD_PAPER_FORM}`, () => {
       .expect('Content-Disposition', 'attachment; filename="Cynnig cynllun trefniadau plant.pdf"');
 
     assertPdfMatchesFile(response.body, paperFormFileName('cy'));
+  });
+
+  test('returns the English paper form for an unsupported locale', async () => {
+    config.includeWelshLanguage = true;
+    sessionMock.lang = '../other';
+    const paperFormApp = testAppSetup();
+
+    const response = await request(paperFormApp)
+      .get(paths.DOWNLOAD_PAPER_FORM)
+      .expect('Content-Type', /application\/pdf/)
+      .expect('Content-Disposition', 'attachment; filename="Proposed child arrangements plan.pdf"');
+
+    assertPdfMatchesFile(response.body, paperFormFileName('en'));
   });
 });
 

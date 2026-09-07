@@ -1,4 +1,3 @@
-const paperFormFileName = (locale: string): string =>
-  locale === 'en' ? 'paperForm.pdf' : `paperForm-${locale}.pdf`;
+const paperFormFileName = (locale: string): string => (locale === 'cy' ? 'paperForm-cy.pdf' : 'paperForm.pdf');
 
 export default paperFormFileName;
