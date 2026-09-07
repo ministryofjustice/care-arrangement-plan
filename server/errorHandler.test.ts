@@ -1,3 +1,4 @@
+import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
 import config from './config';
@@ -27,7 +28,10 @@ describe('errorHandler', () => {
         .expect(403)
         .expect('Content-Type', /html/)
         .expect((res) => {
-          expect(res.text).toContain('Your session automatically ends if you don’t use the service for 120 minutes.');
+          const dom = new JSDOM(res.text);
+          expect(dom.window.document.body).toHaveTextContent(
+            "Your session automatically ends if you don't use the service for 120 minutes.",
+          );
         });
 
       // Note: After security improvements, error may be logged multiple times
