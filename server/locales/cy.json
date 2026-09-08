@@ -449,7 +449,8 @@
       "title": "Ar pa ddyddiau fydd aros dros nos yn digwydd?",
       "emptyError": "Dewiswch pa ddyddiau fydd y plant yn aros dros nos",
       "arrangementMissingError": "Nodwch fanylion y trefniadau dros nos",
-      "multiSelectedError": "Disgrifiwch y trefniadau"
+      "multiSelectedError": "Disgrifiwch y trefniadau",
+      "anotherArrangement": "Trefniant eraill<span class=\"govuk-visually-hidden\">Bydd dewis hwn yn amlygu maes arall</span>"
     },
     "willDaytimeVisitsHappen": {
       "title": "A fydd y plant yn ymweld â {{{ adult }}} yn ystod y dydd?",
