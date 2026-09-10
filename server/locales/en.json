@@ -69,8 +69,8 @@
     },
     "timeOut": {
       "title": "Sorry, you'll have to start again",
-      "yourSession": "Your session automatically ends if you don’t use the service for 120 minutes.",
-      "personalInformation": "We haven’t saved any personal information.",
+      "yourSession": "Your session automatically ends if you don't use the service for 120 minutes.",
+      "personalInformation": "We haven't saved any personal information.",
       "startAgain": "You need to start again.",
       "startAgainButton": "Start again"
     }
@@ -82,9 +82,9 @@
     "viewCookies": "View cookies",
     "hideCookieMessage": "Hide cookie message",
     "useEssentialCookies": "We use some essential cookies to make this service work.",
-    "useAnalyticsCookies": "We’d also like to use analytics cookies so we can understand how you use the service and make improvements.",
-    "acceptedAnalyticsCookies": "You’ve accepted analytics cookies. You can <a href={{ cookiesUrl }} >change your cookie settings</a> at any time.",
-    "rejectedAnalyticsCookies": "You’ve rejected analytics cookies. You can <a href={{ cookiesUrl }} >change your cookie settings</a> at any time."
+    "useAnalyticsCookies": "We'd also like to use analytics cookies so we can understand how you use the service and make improvements.",
+    "acceptedAnalyticsCookies": "You've accepted analytics cookies. You can <a href={{ cookiesUrl }} >change your cookie settings</a> at any time.",
+    "rejectedAnalyticsCookies": "You've rejected analytics cookies. You can <a href={{ cookiesUrl }} >change your cookie settings</a> at any time."
   },
   "accessibilityStatement": {
     "title": "Accessibility statement",
@@ -122,11 +122,11 @@
         "title": "Non-accessible content",
         "subtitle": "Non-compliance with current GDS implementation",
         "content": {
-          "screenReader": "Screen reader users may experience the following issues with the ‘Exit this page’ button, which allows you to leave the service quickly.",
+          "screenReader": "Screen reader users may experience the following issues with the 'Exit this page' button, which allows you to leave the service quickly.",
           "list": {
             "itemOne": "The button can be activated by clicking the Escape key three times. As the Escape key is a common shortcut for exiting modals, the button may accidentally be activated."
           },
-          "deviatesFromGDS": "This deviates from by GDS approach to use the Shift key. In user testing the ‘Exit this page’ button was accidentally activated, as it’s a common navigation shortcut. We are working with GDS to improve this experience with user feedback."
+          "deviatesFromGDS": "This deviates from by GDS approach to use the Shift key. In user testing the 'Exit this page' button was accidentally activated, as it's a common navigation shortcut. We are working with GDS to improve this experience with user feedback."
         }
       },
       "preparation": {
@@ -150,7 +150,7 @@
     "yes": "Yes",
     "no": "No",
     "aboutCookies": {
-      "smallFiles": "Propose a child arrangements plan puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the service.",
+      "smallFiles": "Propose a child arrangements plan puts small files (known as 'cookies') onto your computer to collect information about how you browse the service.",
       "usedTo": "Cookies are used to:",
       "listItems": {
         "rememberProgress": "remember your progress",
@@ -166,7 +166,7 @@
     "rememberingProgress": "<h4 class=\"govuk-heading-s\">Remembering your progress</h4><p>We will store cookies to remember your application progress in this computer and to expire your session after 120 minutes of inactivity or when you close your browser.</p>",
     "sessionPurpose": "Saves your current progress in this computer and tracks inactivity periods",
     "sessionExpiry": "After 120 minutes of inactivity or when you close your browser",
-    "cookiesMessage": "<h4 class=\"govuk-heading-s\">Cookies message</h4><p>You may see a banner when you visit Propose a child arrangements plan inviting you to accept or reject optional cookies. We’ll set a cookies so that your computer knows you’ve seen it and not to show it again, and also to store your settings.</p>",
+    "cookiesMessage": "<h4 class=\"govuk-heading-s\">Cookies message</h4><p>You may see a banner when you visit Propose a child arrangements plan inviting you to accept or reject optional cookies. We'll set a cookies so that your computer knows you've seen it and not to show it again, and also to store your settings.</p>",
     "consentPurpose": "Saves your cookie consent settings",
     "consentExpiry": "1 year",
     "optionalCookies": "Analytics cookies (optional)",
@@ -178,13 +178,13 @@
         "pageViews": "the pages you visit",
         "timeSpent": "how long you spend on each page",
         "howYouGotHere": "how you got to the service",
-        "whatYouClickOn": "what you click on while you’re visiting the service"
+        "whatYouClickOn": "what you click on while you're visiting the service"
       },
       "notCollect": "We don't collect or store your personal information (for example your name or address) so this information can't be used to identify who you are.",
       "cookies": "Google Analytics sets the following cookies:"
     },
     "acceptOptionalCookies": "Do you want to accept analytics cookies?",
-    "_gaCookiePurpose": "This helps us count how many people visit Propose a child arrangements plan by tracking if you've visited before",
+    "_gaCookiePurpose": "This helps us count how many people visit Propose a child arrangements plan by tracking if you've visited before",
     "gaCookiesExpiry": "3 years",
     "_ga_IdCookiePurpose": "Used by Google Analytics to find and track an individual session with your device.",
     "opensearchAnalytics": {
@@ -202,7 +202,7 @@
         "monitor": "This data is used only by the Ministry of Justice to monitor and improve the service.",
         "surveys": {
           "title": "Surveys (optional)",
-          "intro": "We will sometimes ask users to take part in a survey, for example our performance survey. If you take part, or dismiss the survey, we’ll save a cookie that lets us know you’ve seen the message so that we do not show it to you again.",
+          "intro": "We will sometimes ask users to take part in a survey, for example our performance survey. If you take part, or dismiss the survey, we'll save a cookie that lets us know you've seen the message so that we do not show it to you again.",
           "table": {
             "headerRow": {
               "name": "Name",
@@ -234,13 +234,13 @@
     "howWeGetPersonalData": "<h2 class=\"govuk-heading-m\">How we get your personal data and why we have it</h2><p>Most of the personal information we process is provided to us directly by you. The information you provide is used to generate a customised child arrangements plan that you can download and share with your co-parent. The information you provide allows us to structure the plan based on your specific needs, ensuring it accurately reflects the arrangements you propose for your children.</p><p>This data collection is essential for:</p><ul class=\"govuk-list govuk-list--bullet\"><li>personalising the plan to fit your parenting situation</li><li>making sure that the download plan document you produce includes all the details you need to support your co-parenting arrangements</li><li>providing you with a version of the plan that can be downloaded for easy reference and sharing</li></ul><p>We only collect the information necessary to generate your child arrangement plan and do not use it for any other purposes without your consent.</p><p>We do not share the information you provide with any other organisation or government department. The details you enter to create your child arrangement plan are used solely for generating your personalised plan document. Under the UK General Data Protection Regulation (UK GDPR), the lawful bases we rely on for processing this information are:</p><p>(a) Your consent. You are able to withdraw your consent at any time. The easiest way to do this is to delete your browser cookies. Guidance on how to do that is <a href=\"https://www.aboutcookies.org/how-to-manage-and-delete-cookies\">here</a>. If you want to ask us to delete your cookie data please contact us.</p>",
     "internationalTransfers": "<h2 class=\"govuk-heading-m\">International data transfers</h2><p>There are no international transfers.</p>",
     "howWeStorePersonalData": "<h2 class=\"govuk-heading-m\">How we store your personal data</h2><p>Personal data is stored only while you create your plan and for up to 30 days afterwards.</p>",
-    "howToComplain": "<h2 class=\"govuk-heading-m\">How to complain</h2><p>If you have any concerns about our use of your personal data, you can contact the MoJ data protection officer:</p><div class=\"govuk-inset-text\">Data Protection Officer<br />Ministry of Justice<br />10th Floor, Post Point 10.31<br />102 Petty France<br />London<br />SW1H 9AJ <br /><br /><a href=\"mailto:dpo@justice.gov.uk\">dpo@justice.gov.uk</a></div><p>You can also complain to the ICO if you are unhappy with how we have used your data.</p><div class=\"govuk-inset-text\">Information Commissioner’s Office<br />Wycliffe House<br />Water Lane<br />Wilmslow<br />Cheshire<br />SK9 5AF<br /><br />Helpline number: 0303 123 1113<br />ICO website:<a href=\"https://www.ico.org.uk\">https://www.ico.org.uk</a></div>",
+    "howToComplain": "<h2 class=\"govuk-heading-m\">How to complain</h2><p>If you have any concerns about our use of your personal data, you can contact the MoJ data protection officer:</p><div class=\"govuk-inset-text\">Data Protection Officer<br />Ministry of Justice<br />10th Floor, Post Point 10.31<br />102 Petty France<br />London<br />SW1H 9AJ <br /><br /><a href=\"mailto:dpo@justice.gov.uk\">dpo@justice.gov.uk</a></div><p>You can also complain to the ICO if you are unhappy with how we have used your data.</p><div class=\"govuk-inset-text\">Information Commissioner's Office<br />Wycliffe House<br />Water Lane<br />Wilmslow<br />Cheshire<br />SK9 5AF<br /><br />Helpline number: 0303 123 1113<br />ICO website:<a href=\"https://www.ico.org.uk\">https://www.ico.org.uk</a></div>",
     "preparedDate": "This statement was prepared on 11 March 2025."
   },
   "termsAndConditions": {
     "title": "Terms and conditions",
     "responsibilityForTheServiceHeading": "Responsibility for the service",
-    "accurateAndComplete": "The Ministry of Justice (MOJ) runs this service. We try to make sure the information we provide is accurate and complete and the service is always available and virus free.",
+    "accurateAndComplete": "The Ministry of Justice (MOJ) runs this service. We try to make sure the information we provide is accurate and complete and the service is always available and virus free.",
     "noLiabilityFor": "The MoJ accepts no liability for:",
     "unableToAccess": "you being unable to access the service (for example due to high demand or because we've taken it down for maintenance)",
     "indirectDamages": "indirect damages arising from you using the service or relying on its content",
@@ -254,12 +254,12 @@
     "agreeToUs": "By using this service you agree to us collecting this information.",
     "informationAboutYou": "However, we do not collect personally identifiable information (PII), such as names, addresses, or contact details, in accordance with our <a href={{ privacyUrl }}>privacy notice</a> and <a href={{ cookieUrl }}>cookie policy</a>.",
     "limitationsHeading": "Limitations of the service",
-    "limitations": "Using this service does not guarantee that you will be able to resolve your child arrangements.",
+    "limitations": "Using this service does not guarantee that you will be able to resolve your child arrangements.",
     "misuseHeading": "Misuse",
     "misuse": "You must not impersonate another person, provide false or misleading information, or use this service on behalf of someone else without their consent.",
     "restrictionsOnUseHeading": "Restrictions on use",
     "restrictionsOnUse": "If you have a court order in place that restricts your contact with the other parent or child, such as a no contact order, non-molestation order, or any other legal restriction, you must not use this service to contact them.",
-    "breachOfTheOrder": "Doing so could be a breach of the order and may have legal consequences. If you are unsure whether a court order or other legal restriction affects your ability to use this service, seek legal advice before proceeding."
+    "breachOfTheOrder": "Doing so could be a breach of the order and may have legal consequences. If you are unsure whether a court order or other legal restriction affects your ability to use this service, seek legal advice before proceeding."
   },
   "safetyCheck": {
     "title": "Have you experienced abuse from your ex-partner?",
@@ -277,15 +277,9 @@
   "notSafe": {
     "title": "Getting help if you have experienced abuse",
     "content": {
-      "mayNotBeRightForYou": "This service may not be right for you if you’ve experienced domestic abuse.",
+      "mayNotBeRightForYou": "This service may not be right for you if you've experienced domestic abuse.",
       "warningText": "If you are in immediate danger, call 999 and ask for the police.",
       "continueDescription": "If you feel confident that you can carry on without any danger to yourself or the children, you can continue using the service.",
-      "description": "You may have been in an abusive relationship. Domestic abuse or violence is a crime. Domestic abuse does not only mean physical violence – it includes emotional, sexual, psychological and financial abuse, as well as harassment and stalking.",
-      "descriptionSupport": "It is important to remember that there is help and support available to you.",
-      "wantToContinue": {
-        "title": "If you want to continue using this service",
-        "description": "If you feel confident that you can carry on without any danger to yourself or the children, you can continue using the service."
-      },
       "getHelpProtecting": {
         "title": "Get help protecting yourself and your children",
         "content": {
@@ -333,7 +327,7 @@
   "childrenNotSafe": {
     "title": "Getting help if your children are not safe",
     "content": {
-      "mayNotBeAppropriate": "It may not be appropriate to make child arrangements if there’s any risk of harm to the children.",
+      "mayNotBeAppropriate": "It may not be appropriate to make child arrangements if there's any risk of harm to the children.",
       "warningText": "If a child is in immediate danger, call 999 and ask for the police.",
       "continueDescription": "If you feel confident that you can carry on without any danger to yourself or the children, you can continue using the service.",
       "getHelpProtecting": {
@@ -363,9 +357,9 @@
     }
   },
   "doWhatsBest": {
-    "title": "What’s best for the children?",
+    "title": "What's best for the children?",
     "content": "<p>Your child arrangements plan should:</p><ul class=\"govuk-list govuk-list--bullet\"><li>put the child's welfare first</li><li>reflect the wishes, feelings and needs of the child</li><li>consider any harm the child has suffered or any risk of harm</li></ul><p><a href=\"https://www.cafcass.gov.uk/sites/default/files/migrated/Top-Tips-for-parents-who-are-separated.pdf\">Tips for parents</a> from a child's perspective.</p>",
-    "childrensNeedsFirst": "I will put my children’s needs first",
+    "childrensNeedsFirst": "I will put my children's needs first",
     "error": "Select the box to continue"
   },
   "courtOrderCheck": {
@@ -444,7 +438,7 @@
       "title": "Which schedule best meets the children's needs?",
       "getIdeas": "Get scheduling ideas",
       "commonSchedules": "<p>Here are some common schedules that can work well for children.</p><p><b>Alternating weeks</b><br/>The children will spend one week in one household and the next week in the other.</p><p><b>2-2-3 schedule</b><br/>Children spend two days in one household, two days in the other, then back to the first house for 3 days including the weekend.</p><p><b>4-4-3 schedule</b><br/>Children spend three days in one household then four days in the other. The next week they switch.</p><p><b>2-2-5-5 schedule</b><br/>Children spend two days in one household, then two days in the other. After that they spend five days in one household, then five days in the other.</p>",
-      "exactSplitWarning": "An exact split of time between two households does not always suit children’s best interests.",
+      "exactSplitWarning": "An exact split of time between two households does not always suit children's best interests.",
       "error": "Describe which schedule will best meet the children's needs"
     },
     "willOvernightsHappen": {
@@ -477,7 +471,7 @@
     },
     "whereHandover": {
       "title": "Where does handover take place?",
-      "explainer": "It may be easier for children if the handover takes place at a neutral location which you’re confident you’ll both feel safe in.",
+      "explainer": "It may be easier for children if the handover takes place at a neutral location which you're confident you'll both feel safe in.",
       "neutralLocation": "Neutral location",
       "atHome": "At {{{ adult }}}'s home",
       "atSchool": "At school",
@@ -505,7 +499,7 @@
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",
-      "content": "Keep your children’s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother’s Day and Father’s Day, and birthdays.",
+      "content": "Keep your children's feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother's Day and Father's Day, and birthdays.",
       "error": "Describe what you propose will happen on special days"
     }
   },
@@ -543,7 +537,7 @@
     "planReview": {
       "title": "When would you like to review this plan?",
       "childrensNeedsChange": "Children's needs change as they grow. When should you review this agreement to check it is still what's best for the children?",
-      "youCanAlsoReview":"You can also review these arrangements at an earlier time if they no longer meet your children’s needs.",
+      "youCanAlsoReview":"You can also review these arrangements at an earlier time if they no longer meet your children's needs.",
       "months": "Months",
       "years": "Years",
       "bothEmptyError": "Enter months or years",
@@ -583,7 +577,7 @@
       "whatOtherThingsMatter": "what other things matter to your children",
       "planLastMinuteChanges": "how last-minute changes should be communicated",
       "planLongTermNotice": "how much notice you should give to change long-term arrangements",
-      "planReview": "when the children’s needs will change"
+      "planReview": "when the children's needs will change"
     }
   },
   "sharePlan": {
@@ -596,7 +590,7 @@
     "downloadHtml": "Download as HTML (accessible)",
     "ifTheyDoNotRespond": "If there's no response",
     "tryMediation": "If {{{ otherAdult }}} does not respond or you can't make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
-    "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.",
+    "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child's best interests. They listen to both of you and take a neutral approach.",
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
     "whatWeAreTelling": {
       "proposedPlan": "{{{ senderName }}} has suggested a child arrangements plan",
@@ -604,30 +598,30 @@
       "howToRespond": "How to respond to this plan",
       "pleaseReadThrough": "You can read their suggested plan and use it to collaborate to create child arrangements which you both agree on.",
       "notLegallyBinding": "This plan is not legally binding and you do not have to do what it says.",
-      "ifYouDontAgree": "If you don’t agree, you can:",
+      "ifYouDontAgree": "If you don't agree, you can:",
       "useThisForm": "use this form to suggest changes to {{{ senderName }}}'s proposed child arrangements plan",
       "startYourOwn": "start your own proposed child arrangements plan on GOV.UK or find a similar service",
       "makeAWrittenAgreement": "make a written agreement of your own without using any service or template",
       "yourSafety": "Your safety",
       "shouldOnlyRespond": "You should only respond to the suggested plan if:",
-      "confident": "you’re confident that you and your ex-partner can make decisions together without putting yourself or the children in danger",
+      "confident": "you're confident that you and your ex-partner can make decisions together without putting yourself or the children in danger",
       "doNotFeelPressured": "you do not feel pressured or intimidated into responding",
       "stopIfAnyConcern": "If you have any concerns about safety, stop now.",
       "feedbackOrSafetyConcerns": "If you have any feedback or safety concerns about this service, you can email safety@propose-child-arrangements-plan.service.gov.uk.",
       "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created.",
       "benefitsHeading": "How making a child arrangements plan can help",
       "mightFind": "You may find that collaborating with {{{ senderName }}} on a child arrangements plan:",
-      "takesAround": "is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it’s urgent)",
+      "takesAround": "is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it's urgent)",
       "bestOutcome": "leads to a better outcome for your children, which you and your ex-partner are in control of",
       "goingToCourt": "Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.",
       "topTips": "Tips to help you and your children",
       "planShould":"Your child arrangements plan should:",
-      "welfare":"put the child’s welfare first",
+      "welfare":"put the child's welfare first",
       "wishes": "reflect the wishes, feelings and needs of the child",
       "considerAnyHarm":"consider any harm the child has suffered or any risk of harm",
       "everyPage": "Check you have every page of this document",
       "ifThereIsCourt": "If there is a court order in place",
-      "doNotContinue": "Do not continue if there’s a court order in place relating to you, the other parent, or the children.",
+      "doNotContinue": "Do not continue if there's a court order in place relating to you, the other parent, or the children.",
       "forExample": "For example, a:",
       "childArrangementsOrder": "child arrangements order",
       "specificIssueOrder": "specific issue order",
@@ -644,7 +638,7 @@
       "findLegalAdviser" : "You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser.",
       "domesticAbuseHeading": "Getting help with domestic abuse",
       "signsAndEffects": "To find out more about signs and effects of child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse.",
-      "unsureVictim": "If you’re unsure whether you’re a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
+      "unsureVictim": "If you're unsure whether you're a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
       "notSuitableHeading": "This plan is not suitable for you if there has been:",
       "anyForm": "any form of domestic abuse or violence, even if the abuse was not directed at the children",
       "childAbduction": "actual or attempted child abduction",
@@ -666,9 +660,9 @@
       "forOneChild": "this is a proposed child arrangements plan for 1 child, {{{ childName }}}",
       "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{{ childrenNames }}}",
       "agreementBetween": "this agreement is between {{{ senderName }}} and {{{ otherAdultName }}}, who are the adults who will care for {{{ childrenNames }}}",
-      "doYouAgreeOnBasics": "Do you and {{{ senderName }}} agree about the children’s names, your names, and whether there is a court order in place?",
+      "doYouAgreeOnBasics": "Do you and {{{ senderName }}} agree about the children's names, your names, and whether there is a court order in place?",
       "doNotStoreNames": "We do not store these names or share any of this information with other government departments.",
-      "doNotAgreeOnBasics": "If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to https://www.gov.uk/looking-after-children-divorce.",
+      "doNotAgreeOnBasics": "If you answered 'No', it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to https://www.gov.uk/looking-after-children-divorce.",
       "livingAndVisiting": {
         "suggestedLiveWith": "{{{ senderName }}} suggested that the children spend most of their time with {{{ adult }}}.",
         "suggestedLiveWithChild": "{{{ senderName }}} suggested that {{{ childName }}} mostly lives with {{{ adult }}}.",
@@ -709,9 +703,9 @@
       "whatToDoNext": "What to do next",
       "nowSendPlan": "Now send this proposed child arrangements plan back to {{{ senderName }}}. You should try to create a written record of what you have both agreed.",
       "notLegallyBinding": "Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",
-      "noResponseHeading": "If there’s no response",
+      "noResponseHeading": "If there's no response",
       "unableToAgree": "If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
-      "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child’s best interests. They listen to both of you and take a neutral approach.",
+      "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child's best interests. They listen to both of you and take a neutral approach.",
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
       "doNotAgree": {
         "livingAndVisiting": {
@@ -769,5 +763,215 @@
       "signUp": "Sign up and receive an incentive when you take part in further research ",
       "signUpLink": "https://www.smartsurvey.co.uk/t/BDP7V3/"
     }
+  },
+  "paperForm": {
+    "title": "Proposed child arrangements plan",
+    "intro": "Use this form from the Child Arrangements Plan service ( https://propose-child-arrangements-plan.service.gov.uk/ ) on GOV.UK to collaborate to create child arrangements which you both agree on, without having to go to court.",
+    "notLegallyBinding": "Any plan you create using this service is not legally binding. The other parent does not have to do what it says and either of you can suggest changes to it at any time.",
+    "howToUseThisForm": {
+      "title": "How to use this form",
+      "howToUseSteps": {
+        "fillOut": "1. Fill out the form saying what arrangements you would like",
+        "letOtherRespond": "2. Let the other parent or carer add their response",
+        "collaborate": "3. Collaborate until you reach agreement"
+      }
+    },
+    "yourSafety": {
+      "title": "Your safety",
+      "intro": "You should only use this form if:",
+      "safetySteps": {
+        "youAreConfident": "• you're confident that you and your ex-partner can make decisions together without putting yourself or the children in danger",
+        "doNotFeelPressured": "• both of you do not feel pressured or intimidated into responding"
+      },
+      "stopNow": "If you have any concerns about safety, stop now.",
+      "feedbackOrSafetyConcerns": "If you have any feedback or safety concerns about this service, you can email safety@propose-child-arrangements-plan.service.gov.uk.",
+      "cannotAnswerQuestions": "We cannot answer any questions about child arrangement plans that have already been created."
+    },
+    "howMakingChildArrangementsPlanHelp": {
+      "title": "How making a child arrangements plan can help",
+      "intro": "You may find that collaborating with the other parent or carer on a child arrangements plan:",
+      "benefits": {
+        "cheaperAndQuicker": "• is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it's urgent)",
+        "betterOutcome": "• leads to a better outcome for your children, which you and your ex-partner are in control of"
+      },
+      "goingToCourt": "Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.",
+      "tips": "Tips to help you and your children",
+      "planShouldIntro": "Your child arrangements plan should:",
+      "planShould": {
+        "welfare": "• put the child's welfare first",
+        "wishes": "• reflect the wishes, feelings and needs of the child",
+        "considerAnyHarm": "• consider any harm the child has suffered or any risk of harm"
+      }
+    },
+    "ifCourtOrderInPlace": {
+      "title": "If there is a court order in place",
+      "doNotContinue": "Do not continue if there's a court order in place relating to you, the other parent, or the children.",
+      "forExample": "For example, a:",
+      "orderList": {
+        "childArrangementsOrder": "• child arrangements order",
+        "specificIssueOrder": "• specific issue order",
+        "prohibitedStepsOrder": "• prohibited steps order",
+        "protectiveOrder": "• protective order such as a non-molestation order, occupation order or a domestic abuse protection order",
+        "anyOther": "• any other order restricting contact between you and the other parent or the children"
+      },
+      "toChangeOrEnforce": "To change or enforce an existing child arrangements order, visit https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order.",
+      "getMoreInformation": {
+        "title": "Get more information",
+        "moreInfo": "Use GOV.UK to find more information, for example:",
+        "moreInfoList": {
+          "makingChildArrangements": "• making child arrangements - https://www.gov.uk/looking-after-children-divorce",
+          "legalSeparation": "• getting a legal separation - https://www.gov.uk/legal-separation",
+          "divorce": "• getting a divorce - https://www.gov.uk/get-a-divorce"
+        }
+      },
+      "legalAdvice": {
+        "title": "If you want legal advice",
+        "findLegalAdviser" : "You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser."
+      },
+      "domesticAbuse": {
+        "title": "Getting help with domestic abuse",
+        "signsAndEffects": "To find out more about signs and effects of child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse.",
+        "unsureVictim": "If you're unsure whether you're a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse."
+      }
+    },
+    "notSuitableForYou": {
+      "title": "This plan is not suitable for you if there has been:",
+      "anyForm": "• any form of domestic abuse or violence, even if the abuse was not directed at the children",
+      "childAbduction": "• actual or attempted child abduction",
+      "childAbuse": "• child abuse or neglect",
+      "drugsOrAlcohol": "• misuse of drugs, alcohol or other substances",
+      "anyOtherSafety": "• any other safety or welfare concerns that place anyone at significant risk of harm",
+      "feedbackAndSupport": {
+        "title": "Feedback and support",
+        "toAskForHelp": "To ask for help using this service, or suggest improvements, you can email feedback@propose-child-arrangements-plan.com."
+      },
+      "weCannotAnswer": "We cannot answer any questions about child arrangement plans that have already been created."
+    },
+    "childArrangementsProposal": {
+      "title": "About this child arrangements proposal",
+      "intro": "Who this child arrangements proposal is for",
+      "child1": "Child 1 (first name)",
+      "child2": "Child 2 (first name)",
+      "child3": "Child 3 (first name)",
+      "child4": "Child 4 (first name)",
+      "child5": "Child 5 (first name)",
+      "child6": "Child 6 (first name)",
+      "careForChildren": "The adults who will care for the children",
+      "yourFirstName": "Your first name",
+      "answeringTheseQuestions": "If you are answering these questions for someone else, enter their first name",
+      "otherParentFirstName": "First name of the other parent or carer"
+    },
+    "livingAndVisiting": {
+      "title": "Living and visiting",
+      "intro": "Where will the children spend most of their time?",
+      "options": {
+        "mostlyLiveWithYou": "• The children will mostly live with you",
+        "mostlyLiveWithOther": "• The children will mostly live with the other parent or carer",
+        "splitTime": "• They'll split time between both households",
+        "anotherArrangement": "• Another arrangement"
+      },
+      "tip": "Tip: An exact split of time between two households does not always suit children's best interests."
+    },
+    "scheduleMeetsChildrenNeeds": {
+      "title": "Which schedule best meets the children's needs?",
+      "intro": "What timetable are you proposing for overnight stays, daytime visits and weekends at the other household?",
+      "tip": "Tip: An exact split of time between two households does not always suit children's best interests.",
+      "commonSchedulesIntro": "Here are some common schedules that can work well for children.",
+      "alternatingWeeks": "Alternating weeks",
+      "alternatingWeeksDescriptionPart1": "The children will spend one week in one",
+      "alternatingWeeksDescriptionPart2": "household and the next week in the other.",
+      "schedule223": "2-2-3 schedule",
+      "schedule223DescriptionPart1": "Children spend two days in one household,",
+      "schedule223DescriptionPart2": "two days in the other, then back to the first",
+      "schedule223DescriptionPart3": "house for 3 days including the weekend.",
+      "schedule443": "4-4-3 schedule",
+      "schedule443DescriptionPart1": "Children spend three days in one household",
+      "schedule443DescriptionPart2": "then four days in the other. The next week",
+      "schedule443DescriptionPart3": "they switch.",
+      "schedule2255": "2-2-5-5 schedule",
+      "schedule2255DescriptionPart1": "Children spend two days in one household,",
+      "schedule2255DescriptionPart2": "then two days in the other. After that they spend",
+      "schedule2255DescriptionPart3": "five days in one household, then five",
+      "schedule2255DescriptionPart4": "days in the other."
+    },
+    "handoversAndHolidays": {
+      "title": "Handovers and holidays",
+      "intro": "How will the children get between households?",
+      "options": {
+        "youCollect": "• You collect them",
+        "otherCollects": "• The other parent or carer collects them",
+        "anotherArrangement": "• Another arrangement"
+      }
+    },
+    "handoverLocation": {
+      "title": "Where does handover take place?",
+      "intro": "It may be easier for children if the handover takes place at a neutral location which you're confident you'll both feel safe in.",
+      "handoverLocationList": {
+        "neutralLocation": "• Neutral location",
+        "atHome": "• At your home",
+        "atOtherHome": "• At the other parent or carer's home",
+        "atSchool": "• At school",
+        "anotherArrangement": "• Another arrangement"
+      }
+    },
+    "arrangementsSchoolHolidays": {
+      "title": "How will the arrangements be different in school holidays?",
+      "intro": "School holidays include half terms, bank holidays and inset days."
+    },
+    "itemsBetweenHouseholds": {
+      "title": "What items need to go between households?",
+      "intro": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes."
+    },
+    "specialDays": {
+      "sectionTitle": "Special days",
+      "title": "What will happen on special days?",
+      "intro": "Keep your children's needs and best interests at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother's Day and Father's Day, and birthdays."
+    },
+    "otherThings": {
+      "sectionTitle": "Other things",
+      "title": "What other things matter to your children?",
+      "intro": "You may want to agree things such as:",
+      "otherThingsList": {
+        "religionDietAndRules": "• religious practices, diet, and standard rules across both households",
+        "extraCurriculars": "• extra-curricular activities, such as swimming lessons",
+        "friendsAndFamily": "• access to other friends and family",
+        "otherContact": "• other types of contact, such as video calls"
+      }
+    },
+    "decisionMaking": {
+      "sectionTitle": "Decision making",
+      "title": "How should last-minute changes be communicated?",
+      "intro": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.",
+      "decisionMakingList": {
+        "text": "• By text message",
+        "phone": "• With a phone call",
+        "email": "• By email",
+        "app": "• Using a parenting app",
+        "anotherArrangement": "• Another arrangement"
+      }
+    },
+    "noticeForLongTermArrangements": {
+      "title": "How much notice should you give to change long-term arrangements?",
+      "intro": "Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children."
+    },
+    "reviewingThePlan": {
+      "title": "When would you like to review this plan?",
+      "intro": "Children's needs change as they grow. When should you review this agreement to check it is still what's best for the children?",
+      "youCanAlsoReview":"You can also review these arrangements at an earlier time if they no longer meet your children's needs."
+    },
+    "nextSteps": {
+      "sectionTitle": "Next steps",
+      "title": "What to do next",
+      "addTheirResponse": "Now give this proposed child arrangements plan to the other parent or carer so they can add their response.",
+      "collaborateToAgree": "When they have added their response, you can collaborate to reach a shared agreement.",
+      "noResponse": "If there's no response",
+      "unableToAgree": "If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
+      "mediator": "A mediator is a professional who will work with you to help you make decisions based on your child's best interests. They listen to both of you and take a neutral approach.",
+      "moreInformation": "More information and support is available at: https://www.gov.uk/looking-after-children-divorce"
+    },
+    "optionsCouldInclude": "Options could include:",
+    "responseInTheBox": "Add your first name and response in the box - the other parent/carer should add their first name and response in the other box.",
+    "parentCarerNameAndResponse": "Parent/carer name and response:",
+    "agreedAnswer": "Enter your agreed answer to this question."
   }
 }

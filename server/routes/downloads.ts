@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 import { Router } from 'express';
 
@@ -8,6 +9,7 @@ import createHtmlContent from '../html/createHtmlContent';
 import createPdf from '../pdf/createPdf';
 import { logDownload } from '../services/analyticsService';
 import getAssetPath from '../utils/getAssetPath';
+import paperFormFileName from '../utils/paperFormFileName';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
 /**
@@ -35,7 +37,10 @@ const downloadRoutes = (router: Router) => {
   });
 
   router.get(paths.DOWNLOAD_PAPER_FORM, (request, response) => {
-    response.download(getAssetPath('other/paperForm.pdf'), `${request.__('pdf.name')}.pdf`);
+    const requestedLocale = request.session?.lang || request.getLocale();
+    const locale = requestedLocale === 'cy' ? 'cy' : 'en';
+    const paperFormFile = path.join('other', path.basename(paperFormFileName(locale)));
+    response.download(getAssetPath(paperFormFile), `${request.__('pdf.name')}.pdf`);
 
     // Log download event
     logDownload(request, 'offline_pdf');

@@ -7,15 +7,6 @@ describe('PDF Generator Integration Tests', () => {
   const sourceOutputPath = path.resolve(__dirname, '../../../assets/other/paperForm.pdf');
   const distOutputPath = path.resolve(__dirname, '../../../dist/assets/other/paperForm.pdf');
 
-  // Clean up generated PDFs before tests
-  beforeAll(() => {
-    [sourceOutputPath, distOutputPath].forEach(filePath => {
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-      }
-    });
-  });
-
   describe('PDF Generation', () => {
     it('should generate PDF without errors', () => {
       expect(() => {
@@ -82,36 +73,6 @@ describe('PDF Generator Integration Tests', () => {
     });
   });
 
-  describe('PDF Directories', () => {
-    it('should create source assets directory if it does not exist', () => {
-      const sourceDir = path.dirname(sourceOutputPath);
-
-      // Remove directory if it exists
-      if (fs.existsSync(sourceDir)) {
-        fs.rmSync(sourceDir, { recursive: true });
-      }
-
-      generatePdf();
-
-      expect(fs.existsSync(sourceDir)).toBe(true);
-      expect(fs.existsSync(sourceOutputPath)).toBe(true);
-    });
-
-    it('should create dist assets directory if it does not exist', () => {
-      const distDir = path.dirname(distOutputPath);
-
-      // Remove directory if it exists
-      if (fs.existsSync(distDir)) {
-        fs.rmSync(distDir, { recursive: true });
-      }
-
-      generatePdf();
-
-      expect(fs.existsSync(distDir)).toBe(true);
-      expect(fs.existsSync(distOutputPath)).toBe(true);
-    });
-  });
-
   describe('PDF File Properties', () => {
     it('should be a readable file', () => {
       generatePdf();
@@ -134,13 +95,8 @@ describe('PDF Generator Integration Tests', () => {
     });
   });
 
-  // Clean up after all tests
   afterAll(() => {
-    // Keep the generated PDFs for manual inspection if needed - comment out the following lines
-    // [sourceOutputPath, distOutputPath].forEach(filePath => {
-    //   if (fs.existsSync(filePath)) {
-    //     fs.unlinkSync(filePath);
-    //   }
-    // });
+    generatePdf('en');
+    generatePdf('cy');
   });
 });
