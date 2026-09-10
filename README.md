@@ -202,7 +202,7 @@ The seed populates the session with two children (Alex and Jamie) and two adults
 
 ## Static PDF Generation
 
-The generatePdf.js script is configured to run during the post build to generate the static PDF, that can be downloaded from the start page.
+The `generatePdf.js` script is configured to run as a post build action to generate static PDFs for both English and Welsh languages. These PDFs can be downloaded from the start page. The script automatically generates versions in both languages to support the app's multi-language functionality.
 
 ## Contributing
 
