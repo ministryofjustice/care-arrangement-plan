@@ -460,7 +460,9 @@
     },
     "willDaytimeVisitsHappen": {
       "title": "Will the children do daytime visits with {{{ adult }}}?",
-      "error": "Select whether the children will have daytime visits"
+      "error": "Select whether the children will have daytime visits",
+      "yes": "Yes",
+      "no": "No"
     },
     "whichDaysDaytimeVisits": {
       "title": "On which days will daytime visits happen?",
