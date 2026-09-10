@@ -502,7 +502,7 @@
   "specialDays": {
     "whatWillHappen": {
       "title": "Beth fydd yn digwydd ar ddyddiau arbennig?",
-      "content": "Cadwch anghenion a buddiannau gorau eich plant wrth wraidd eich cynlluniau ar gyfer gwyliau a digwyddiadau pwysig. Er enghraifft, dathliadau'r Flwyddyn Newydd, Sul y Mamau a Sul y Tadau, a phenblwyddi.",
+      "content": "Cadwch deimladau eich plant wrth wraidd eich cynlluniau ar gyfer gwyliau a digwyddiadau pwysig. Er enghraifft, dathliadau'r Flwyddyn Newydd, Sul y Mamau a Sul y Tadau, a phenblwyddi.",
       "error": "Disgrifiwch beth rydych chi'n ei gynnig fydd yn digwydd ar ddiwrnodau arbennig"
     }
   },
@@ -622,6 +622,7 @@
       "welfare":"roi lles y plentyn yn gyntaf",
       "wishes": "adlewyrchu dymuniadau, teimladau ac anghenion y plentyn",
       "considerAnyHarm":"ystyried unrhyw niwed y mae'r plentyn wedi'i ddioddef neu unrhyw risg o niwed",
+      "everyPage": "Gwiriwch fod gennych bob tudalen o'r ddogfen hon",
       "ifThereIsCourt": "Os oes gorchymyn llys ar waith",
       "doNotContinue": "Peidiwch a pharhau os oes gorchymyn llys ar waith sy'n ymwneud â chi, y rhiant arall neu'r plant",
       "forExample": "Er enghraifft:",
@@ -665,6 +666,8 @@
       "doYouAgreeOnBasics": "Ydych chi a {{{ senderName }}} yn cytuno ynglŷn ag enwau'r plant, eich enwau chi, ac a oes gorchymyn llys ar waith?",
       "doNotStoreNames": "Nid ydym yn storio'r enwau hyn nac yn rhannu unrhyw ran o'r wybodaeth hon ag adrannau eraill y llywodraeth.",
       "doNotAgreeOnBasics": "Os ateboch chi ‘Nac ydw’, efallai y byddai’n ddefnyddiol dod o hyd i gyfryngwr a all eich helpu i gytuno ar eich trefniadau plant. Gallwch hefyd gael cymorth ariannol gyda hyn. I gael rhagor o wybodaeth, ewchi i https://www.gov.uk/looking-after-children-divorce.",
+      "yes": "Ydw",
+      "no": "Nac ydw",
       "livingAndVisiting": {
         "suggestedLiveWith": "Awgrymodd {{{ senderName }}} y byddai'r plant yn treulio'r rhan fwyaf o'u hamser gyda {{{ adult }}}.",
         "suggestedLiveWithChild": "Awgrymodd {{{ senderName }}} bod {{{ childName }}} yn byw yn bennaf efo {{{ adult }}}.",
@@ -701,7 +704,7 @@
           "suggestedYearsPlural": "Awgrymodd {{{ senderName }}} y dylech adolygu'r trefniadau hyn ymhen {{ number }} flynedd/blynedd/mlynedd."
         }
       },
-      "nextSteps": "Camau nesaf",
+      "nextSteps": "Y camau nesaf",
       "whatToDoNext": "Beth i'w wneud nesaf",
       "nowSendPlan": "Nawr anfonwch y cynllun trefniadau plant arfaethedig hwn yn ôl at {{{ senderName }}}. Dylech geisio creu cofnod ysgrifenedig o'r hyn rydych chi'ch dau wedi cytuno arno.",
       "notLegallyBinding": "Nid yw unrhyw gynllun a wnewch gan ddefnyddio'r ffurflen hon yn gyfreithiol rwymol. Nid oes rhaid i'r person arall wneud yr hyn y mae'n ei ddweud a gall y naill neu'r llall ohonoch awgrymu newidiadau iddo ar unrhyw adeg.",

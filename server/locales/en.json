@@ -280,12 +280,6 @@
       "mayNotBeRightForYou": "This service may not be right for you if you’ve experienced domestic abuse.",
       "warningText": "If you are in immediate danger, call 999 and ask for the police.",
       "continueDescription": "If you feel confident that you can carry on without any danger to yourself or the children, you can continue using the service.",
-      "description": "You may have been in an abusive relationship. Domestic abuse or violence is a crime. Domestic abuse does not only mean physical violence – it includes emotional, sexual, psychological and financial abuse, as well as harassment and stalking.",
-      "descriptionSupport": "It is important to remember that there is help and support available to you.",
-      "wantToContinue": {
-        "title": "If you want to continue using this service",
-        "description": "If you feel confident that you can carry on without any danger to yourself or the children, you can continue using the service."
-      },
       "getHelpProtecting": {
         "title": "Get help protecting yourself and your children",
         "content": {
@@ -672,6 +666,8 @@
       "doYouAgreeOnBasics": "Do you and {{{ senderName }}} agree about the children’s names, your names, and whether there is a court order in place?",
       "doNotStoreNames": "We do not store these names or share any of this information with other government departments.",
       "doNotAgreeOnBasics": "If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to https://www.gov.uk/looking-after-children-divorce.",
+      "yes": "Yes",
+      "no": "No",
       "livingAndVisiting": {
         "suggestedLiveWith": "{{{ senderName }}} suggested that the children spend most of their time with {{{ adult }}}.",
         "suggestedLiveWithChild": "{{{ senderName }}} suggested that {{{ childName }}} mostly lives with {{{ adult }}}.",
