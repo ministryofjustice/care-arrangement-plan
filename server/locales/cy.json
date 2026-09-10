@@ -656,7 +656,7 @@
       "aboutThePlan": "Ynglŷn â'r cynnig trefniadau plant hyn",
       "senderSaid": "Dywedodd {{{ senderName }}}:",
       "senderSuggested": "Awgrymodd {{{ senderName }}}:\n\"{{{ suggestion }}}\"",
-      "senderSuggestedDoNotDecide": "Awgrymodd {{{ senderName }}} nid oes angen penderfynu ar hwn.",
+      "senderSuggestedDoNotDecide": "Awgrymodd {{{ senderName }}} nad oes angen penderfynu ar hwn.",
       "doYouAgree": "Ydych chi’n cytuno?",
       "endOfSection": "Diwedd yr adran",
       "noCourtOrder": "nid oes gorchymyn llys ar waith ar hyn o bryd",
