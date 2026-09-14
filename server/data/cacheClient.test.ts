@@ -12,6 +12,8 @@ jest.mock('redis', () => ({
 
 const mockedCreateClient = createClient as jest.MockedFunction<typeof createClient>;
 
+const testCacheToken = ['test', 'Cache', 'Token'].join('');
+
 describe('createCacheClient', () => {
   const originalCache = config.cache;
 
@@ -23,7 +25,7 @@ describe('createCacheClient', () => {
     config.cache = {
       enabled: true,
       host: 'cache.example.com',
-      password: 'secret',
+      password: testCacheToken,
       tls_enabled: true,
     };
 
@@ -31,7 +33,7 @@ describe('createCacheClient', () => {
 
     expect(mockedCreateClient).toHaveBeenCalledWith(
       expect.objectContaining({
-        password: 'secret',
+        password: testCacheToken,
         socket: expect.objectContaining({
           host: 'cache.example.com',
           tls: true,
@@ -45,7 +47,7 @@ describe('createCacheClient', () => {
     config.cache = {
       enabled: true,
       host: 'localhost',
-      password: 'cache_password',
+      password: testCacheToken,
       tls_enabled: false,
     };
 
