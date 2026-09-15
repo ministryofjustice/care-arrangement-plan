@@ -20,7 +20,9 @@ describe(paths.SESSION_TIMEOUT, () => {
     const dom = new JSDOM(response.text);
 
     expect(dom.window.document.querySelector('h1')).toHaveTextContent("Sorry, you'll have to start again");
-    expect(response.text).toContain('Your session automatically ends if you don’t use the service for 120 minutes.');
+    expect(dom.window.document.body).toHaveTextContent(
+      "Your session automatically ends if you don't use the service for 120 minutes.",
+    );
     expect(response.text).toContain(`href="${paths.CHILDREN_SAFETY_CHECK}"`);
     expect(response.text).not.toContain('?lang=cy');
   });

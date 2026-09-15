@@ -15,7 +15,7 @@ describe(paths.DO_WHATS_BEST, () => {
 
       const dom = new JSDOM(response.text);
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('What’s best for the children?');
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent("What's best for the children?");
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(`#${formFields.DO_WHATS_BEST}`)).not.toHaveAttribute('aria-describedby');
     });

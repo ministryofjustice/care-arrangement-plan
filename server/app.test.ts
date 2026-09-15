@@ -62,6 +62,15 @@ describe('App', () => {
             expect(response.text).not.toContain('?lang=cy');
           });
       });
+
+      it('should link to the local paper form download', () => {
+        return request(testAppSetup())
+          .get(paths.START)
+          .expect((response) => {
+            expect(response.text).toContain(`href="${paths.DOWNLOAD_PAPER_FORM}"`);
+            expect(response.text).not.toContain('propose-child-arrangements-plan.service.gov.uk/download-paper-form');
+          });
+      });
     });
 
     describe('when welsh is disabled', () => {

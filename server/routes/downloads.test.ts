@@ -5,10 +5,13 @@ import path from 'path';
 import request from 'supertest';
 
 import { version as packageVersion } from '../../package.json';
+import generatePdf from '../../scripts/generatePdf';
+import config from '../config';
 import paths from '../constants/paths';
 import createPdf from '../pdf/createPdf';
 import testAppSetup from '../test-utils/testAppSetup';
-import { mockNow } from '../test-utils/testMocks';
+import { mockNow, sessionMock } from '../test-utils/testMocks';
+import paperFormFileName from '../utils/paperFormFileName';
 
 const app = testAppSetup();
 
@@ -48,18 +51,68 @@ describe(`GET ${paths.PRINT_PDF}`, () => {
 });
 
 describe(`GET ${paths.DOWNLOAD_PAPER_FORM}`, () => {
-  test('returns the expected response', async () => {
-    const response = await request(app)
+  beforeAll(() => {
+    // Paper form PDFs are gitignored; generate both locales so these tests do not depend on other suites.
+    generatePdf('en');
+    generatePdf('cy');
+  });
+
+  const assertPdfMatchesFile = (responseBody: Buffer, fileName: string) => {
+    const responseHash = createHash('sha256').update(responseBody).digest('hex');
+    const referenceFile = fs.readFileSync(path.resolve(__dirname, `../../assets/other/${fileName}`));
+    const referenceHash = createHash('sha256').update(referenceFile).digest('hex');
+
+    expect(responseHash).toEqual(referenceHash);
+  };
+
+  test('returns the English paper form by default', async () => {
+    config.includeWelshLanguage = true;
+    const paperFormApp = testAppSetup();
+
+    const response = await request(paperFormApp)
       .get(paths.DOWNLOAD_PAPER_FORM)
       .expect('Content-Type', /application\/pdf/)
       .expect('Content-Disposition', 'attachment; filename="Proposed child arrangements plan.pdf"');
 
-    const responseHash = createHash('sha256').update(response.body).digest('hex');
+    assertPdfMatchesFile(response.body, paperFormFileName('en'));
+  });
 
-    const referenceFile = fs.readFileSync(path.resolve(__dirname, `../../assets/other/paperForm.pdf`));
-    const referenceHash = createHash('sha256').update(referenceFile).digest('hex');
+  test('returns the Welsh paper form when locale is cy', async () => {
+    config.includeWelshLanguage = true;
+    const paperFormApp = testAppSetup();
 
-    expect(responseHash).toEqual(referenceHash);
+    const response = await request(paperFormApp)
+      .get(`${paths.DOWNLOAD_PAPER_FORM}?lang=cy`)
+      .expect('Content-Type', /application\/pdf/)
+      .expect('Content-Disposition', 'attachment; filename="Cynnig cynllun trefniadau plant.pdf"');
+
+    assertPdfMatchesFile(response.body, paperFormFileName('cy'));
+  });
+
+  test('returns the Welsh paper form when session language is cy', async () => {
+    config.includeWelshLanguage = true;
+    sessionMock.lang = 'cy';
+    const paperFormApp = testAppSetup();
+
+    const response = await request(paperFormApp)
+      .get(paths.DOWNLOAD_PAPER_FORM)
+      .expect('Content-Type', /application\/pdf/)
+      .expect('Content-Disposition', 'attachment; filename="Cynnig cynllun trefniadau plant.pdf"');
+
+    assertPdfMatchesFile(response.body, paperFormFileName('cy'));
+  });
+
+  test('returns the English paper form for an unsupported locale', async () => {
+    config.includeWelshLanguage = true;
+    sessionMock.lang = '../other';
+    const paperFormApp = testAppSetup();
+
+    const response = await request(paperFormApp)
+      .get(paths.DOWNLOAD_PAPER_FORM)
+      .expect('Content-Type', /application\/pdf/)
+      .expect('Content-Disposition', 'attachment; filename="Proposed child arrangements plan.pdf"');
+
+    assertPdfMatchesFile(response.body, paperFormFileName('en'));
   });
 });
 
