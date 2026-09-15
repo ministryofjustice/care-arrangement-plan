@@ -8,6 +8,14 @@ import { sessionMock } from '../test-utils/testMocks';
 
 const app = testAppSetup();
 
+const getContinueButton = (document: Document) =>
+  document.querySelector(`a.govuk-button[href="${paths.CHECK_YOUR_ANSWERS}"]`);
+
+const expectContinueButtonHidden = (document: Document) => {
+  expect(getContinueButton(document)).toBeNull();
+  expect(document.querySelector('.govuk-exit-this-page__button')).not.toBeNull();
+};
+
 const session: Partial<SessionData> = {
   namesOfChildren: ['James', 'Rachel', 'Jack'],
   livingAndVisiting: {
@@ -69,7 +77,8 @@ describe(`GET ${paths.TASK_LIST}`, () => {
       'Child arrangements plan for James, Rachel and Jack',
     );
     expect(dom.window.document.title).toContain('Child arrangement plan with child(ren) details');
-    expect(dom.window.document.querySelector('[role="button"]')).not.toBeNull();
+    expect(getContinueButton(dom.window.document)).not.toBeNull();
+    expect(getContinueButton(dom.window.document)).toHaveTextContent('Continue');
   });
 
   it('should render the browser page title without child names', async () => {
@@ -89,7 +98,7 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 
   it('should not render the continue button if the get between households section is not filled out', async () => {
@@ -99,7 +108,7 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 
   it('should not render the continue button if the where handover section is not filled out', async () => {
@@ -109,7 +118,7 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 
   it('should not render the continue button if the will change during school holidays section is not filled out', async () => {
@@ -119,7 +128,7 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 
   it('should not render the continue button if the items for changeover section is not filled out', async () => {
@@ -129,7 +138,7 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 
   it('should not render the continue button if the what will happen section is not filled out', async () => {
@@ -139,7 +148,7 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 
   it('should not render the continue button if the what other things matter section is not filled out', async () => {
@@ -149,7 +158,7 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 
   it('should not render the continue button if the decision making section is not filled out', async () => {
@@ -159,7 +168,7 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 
   it('should not render the continue button if the plan last minute changes section is not filled out', async () => {
@@ -169,7 +178,7 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 
   it('should not render the continue button if the plan long term notice section is not filled out', async () => {
@@ -179,7 +188,7 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 
   it('should not render the continue button if the plan review section is not filled out', async () => {
@@ -189,6 +198,6 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('[role="button"]')).toBeNull();
+    expectContinueButtonHidden(dom.window.document);
   });
 });
