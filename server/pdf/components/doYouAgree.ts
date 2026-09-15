@@ -70,8 +70,8 @@ class DoYouAgree extends BaseComponent {
 
     this.pdf.document.addField(this.radioGroup);
 
-    this.addOption(this.pdf.request.__('yes'));
-    this.addOption(this.pdf.request.__('no'));
+    this.addOption(this.pdf.request.__('sharePlan.yourProposedPlan.yes'));
+    this.addOption(this.pdf.request.__('sharePlan.yourProposedPlan.no'));
 
     // Set appearance must be done after the options are created, or it will not work
     // @ts-expect-error There is an error into the jsPDF type declaration.
