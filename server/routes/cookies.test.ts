@@ -22,7 +22,7 @@ describe(paths.COOKIES, () => {
     });
 
     it('should render cookies page when there is a ga4 id', async () => {
-      config.analytics.enabled = true; // Enable analytics for this test
+      config.analytics.enabled = true;
       config.analytics.ga4Id = 'test-ga4-id';
 
       const response = await request(app).get(paths.COOKIES).expect('Content-Type', /html/);
@@ -33,11 +33,50 @@ describe(paths.COOKIES, () => {
       expect(dom.window.document.querySelector('fieldset')).not.toBeNull();
     });
 
+    it('should still render cookie policy options when analytics recording is disabled', async () => {
+      config.analytics.enabled = false;
+      config.analytics.ga4Id = 'test-ga4-id';
+
+      const response = await request(app).get(paths.COOKIES).expect('Content-Type', /html/);
+
+      const dom = new JSDOM(response.text);
+
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Cookies');
+      expect(dom.window.document.querySelector('fieldset')).not.toBeNull();
+      expect(
+        dom.window.document.querySelector(`input[name="${formFields.ACCEPT_OPTIONAL_COOKIES}"][value="Yes"]`),
+      ).not.toBeNull();
+      expect(
+        dom.window.document.querySelector(`input[name="${formFields.ACCEPT_OPTIONAL_COOKIES}"][value="No"]`),
+      ).not.toBeNull();
+    });
+
+    it('should check the accepted cookie option when consent was previously given and recording is disabled', async () => {
+      config.analytics.enabled = false;
+      config.analytics.ga4Id = 'test-ga4-id';
+
+      const response = await request(app)
+        .get(paths.COOKIES)
+        .set('Cookie', `cookie_policy=${encodeURIComponent(JSON.stringify({ acceptAnalytics: 'Yes' }))}`)
+        .expect('Content-Type', /html/);
+
+      const dom = new JSDOM(response.text);
+      const yesRadio = dom.window.document.querySelector(
+        `input[name="${formFields.ACCEPT_OPTIONAL_COOKIES}"][value="Yes"]`,
+      );
+
+      expect(yesRadio).toHaveAttribute('checked');
+    });
+
     it('should render OpenSearch analytics survey details when there is a ga4 id', async () => {
+      config.analytics.ga4Id = 'test-ga4-id';
+
       const response = await request(app).get(paths.COOKIES).expect('Content-Type', /html/);
       const dom = new JSDOM(response.text);
 
-      const surveyHeading = Array.from(dom.window.document.querySelectorAll('h3')).find((heading) => heading.textContent?.trim() === 'Surveys (optional)');
+      const surveyHeading = Array.from(dom.window.document.querySelectorAll('h3')).find(
+        (heading) => heading.textContent?.trim() === 'Surveys (optional)',
+      );
       expect(surveyHeading).not.toBeNull();
       expect(response.text).toContain('govuk_taken[NameOfSurvey]');
       expect(response.text).toContain('govuk_surveySeen[NameOfSurvey]');

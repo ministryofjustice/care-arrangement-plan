@@ -21,6 +21,7 @@ export declare global {
 
     interface Locals {
       analyticsEnabled?: boolean;
+      analyticsEnvironmentEnabled?: boolean;
       ga4Id?: string;
     }
   }

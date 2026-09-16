@@ -125,7 +125,7 @@ describe('App', () => {
       const ga4Id = 'test-ga4-id';
 
       beforeEach(() => {
-        config.analytics.enabled = true; // Enable analytics for these tests
+        config.analytics.enabled = true;
         config.analytics.ga4Id = ga4Id;
       });
 
@@ -162,6 +162,57 @@ describe('App', () => {
 
         expect(response.text).toContain(`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`);
         expect(response.text).not.toContain('Cookies on Propose a child arrangements plan');
+
+        const dom = new JSDOM(response.text);
+
+        expect(dom.window.document.querySelector('body')).toHaveAttribute('data-ga4-id', ga4Id);
+      });
+    });
+
+    describe('when there is a GA4 ID but analytics recording is disabled', () => {
+      const ga4Id = 'test-ga4-id';
+
+      beforeEach(() => {
+        config.analytics.enabled = false;
+        config.analytics.ga4Id = ga4Id;
+      });
+
+      it('should show the banner and not load ga4 if the consent cookie does not exist', async () => {
+        const response = await request(app).get(paths.START).expect('Content-Type', /html/);
+
+        expect(response.text).not.toContain('www.googletagmanager.com');
+        expect(response.text).toContain('Cookies on Propose a child arrangements plan');
+        expect(response.text).toContain('window.analyticsEnvironmentEnabled = false');
+
+        const dom = new JSDOM(response.text);
+
+        expect(dom.window.document.querySelector('body')).toHaveAttribute('data-ga4-id', ga4Id);
+      });
+
+      it('should not show the banner and not load ga4 if the consent cookie is no', async () => {
+        const response = await request(app)
+          .get(paths.START)
+          .set('Cookie', `${cookieNames.ANALYTICS_CONSENT}=${JSON.stringify({ acceptAnalytics: 'No' })}`)
+          .expect('Content-Type', /html/);
+
+        expect(response.text).not.toContain('www.googletagmanager.com');
+        expect(response.text).not.toContain('Cookies on Propose a child arrangements plan');
+
+        const dom = new JSDOM(response.text);
+
+        expect(dom.window.document.querySelector('body')).toHaveAttribute('data-ga4-id', ga4Id);
+      });
+
+      it('should not show the banner and not load ga4 if the consent cookie is yes', async () => {
+        const response = await request(app)
+          .get(paths.START)
+          .set('Cookie', `${cookieNames.ANALYTICS_CONSENT}=${JSON.stringify({ acceptAnalytics: 'Yes' })}`)
+          .expect('Content-Type', /html/);
+
+        expect(response.text).not.toContain('www.googletagmanager.com');
+        expect(response.text).not.toContain('Cookies on Propose a child arrangements plan');
+        expect(response.text).toContain('window.enableAnalytics = true');
+        expect(response.text).toContain('window.analyticsEnvironmentEnabled = false');
 
         const dom = new JSDOM(response.text);
 
@@ -266,10 +317,7 @@ describe('App', () => {
 
       await agent.get(`${paths.START}?lang=cy`);
 
-      await agent
-        .post(paths.SAFETY_CHECK)
-        .expect(302)
-        .expect('location', paths.SAFETY_CHECK);
+      await agent.post(paths.SAFETY_CHECK).expect(302).expect('location', paths.SAFETY_CHECK);
 
       expect(flashMock).toHaveBeenCalledWith('errors', [
         expect.objectContaining({
