@@ -16,7 +16,7 @@ test.describe('Homepage', () => {
   test('should have working navigation links', async ({ page }) => {
     await page.goto('/');
 
-    const cookiesLink = page.getByRole('link', { name: /cookies/i });
+    const cookiesLink = page.locator('footer').getByRole('link', { name: /^cookies$/i });
     await expect(cookiesLink).toBeVisible();
 
     const privacyLink = page.getByRole('link', { name: /privacy/i });

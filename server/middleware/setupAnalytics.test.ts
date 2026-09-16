@@ -13,7 +13,6 @@ describe('setupAnalytics', () => {
   beforeEach(() => {
     request = {} as Request;
     response = { locals: {} } as Response;
-    // Reset analytics enabled to true for most tests
     config.analytics.enabled = true;
   });
 
@@ -77,14 +76,38 @@ describe('setupAnalytics', () => {
     expect(next).toHaveBeenCalled();
   });
 
-  describe('when analytics is disabled at environment level', () => {
+  describe('when analytics recording is disabled at environment level', () => {
+    const ga4Id = 'test-ga4-id';
+
     beforeEach(() => {
       config.analytics.enabled = false;
+      config.analytics.ga4Id = ga4Id;
     });
 
-    it('should set analyticsEnabled to false regardless of consent cookie', () => {
+    it('should still expose ga4Id so cookie banner and cookie policy can render', () => {
+      setupAnalytics()(request, response, next);
+
+      expect(response.locals.ga4Id).toBe(ga4Id);
+      expect(response.locals.analyticsEnvironmentEnabled).toBe(false);
+      expect(next).toHaveBeenCalled();
+    });
+
+    it('should still honour a yes consent cookie without enabling recording', () => {
       request.cookies = {
         [cookieNames.ANALYTICS_CONSENT]: encodeURIComponent(JSON.stringify({ acceptAnalytics: 'Yes' })),
+      };
+
+      setupAnalytics()(request, response, next);
+
+      expect(response.locals.analyticsEnabled).toBe(true);
+      expect(response.locals.analyticsEnvironmentEnabled).toBe(false);
+      expect(response.locals.ga4Id).toBe(ga4Id);
+      expect(next).toHaveBeenCalled();
+    });
+
+    it('should still honour a no consent cookie', () => {
+      request.cookies = {
+        [cookieNames.ANALYTICS_CONSENT]: encodeURIComponent(JSON.stringify({ acceptAnalytics: 'No' })),
       };
 
       setupAnalytics()(request, response, next);
@@ -94,12 +117,13 @@ describe('setupAnalytics', () => {
       expect(next).toHaveBeenCalled();
     });
 
-    it('should set ga4Id to undefined', () => {
-      config.analytics.ga4Id = 'test-ga4-id';
+    it('should leave analyticsEnabled undefined when no consent cookie is set', () => {
+      request.cookies = undefined;
 
       setupAnalytics()(request, response, next);
 
-      expect(response.locals.ga4Id).toBeUndefined();
+      expect(response.locals.analyticsEnabled).toBeUndefined();
+      expect(response.locals.analyticsEnvironmentEnabled).toBe(false);
       expect(next).toHaveBeenCalled();
     });
   });

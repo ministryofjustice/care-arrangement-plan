@@ -32,9 +32,16 @@ describe(paths.ACCESSIBILITY_STATEMENT, () => {
       expect(dom.window.document.title).toContain('Propose a child arrangements plan');
     });
 
+    it('should show the cookie banner when there is no consent cookie', async () => {
+      const { response, dom } = await getPageDom();
+
+      expect(response.text).toContain('Cookies on Propose a child arrangements plan');
+      expect(dom.window.document.querySelector('#cookie-banner')).not.toBeNull();
+    });
+
     it('should render section headings', async () => {
       const { dom } = await getPageDom();
-      const headings = Array.from(dom.window.document.querySelectorAll('h2.govuk-heading-m')).map((heading) =>
+      const headings = Array.from(dom.window.document.querySelectorAll('main h2.govuk-heading-m')).map((heading) =>
         heading.textContent?.trim(),
       );
 
@@ -86,7 +93,9 @@ describe(paths.ACCESSIBILITY_STATEMENT, () => {
       const { dom } = await getPageDom();
       const text = dom.window.document.body.textContent ?? '';
 
-      expect(text).toContain("This accessibility statement applies to the 'Propose a child arrangements plan' service.");
+      expect(text).toContain(
+        "This accessibility statement applies to the 'Propose a child arrangements plan' service.",
+      );
       expect(text).toContain('User Vision on 5th June');
       expect(text).toContain('WCAG 2.2 AA standard');
       expect(text).toContain('This statement was prepared on 16 June 2026');
