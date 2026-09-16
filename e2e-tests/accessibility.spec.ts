@@ -6,7 +6,9 @@ test.describe('Accessibility', () => {
   test('should have proper heading structure on homepage', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.getByRole('heading', { level: 1, name: /making child arrangements if you divorce or separate/i })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { level: 1, name: /making child arrangements if you divorce or separate/i }),
+    ).toBeVisible();
     await expect(page.getByRole('heading', { level: 1, name: /make a child arrangements plan/i })).toBeVisible();
 
     await expect(page.getByRole('heading', { level: 2, name: /what the plan includes/i })).toBeVisible();
@@ -18,7 +20,9 @@ test.describe('Accessibility', () => {
     await goToSafetyCheck(page);
 
     await expect(page).toHaveURL(/\/safety-check/);
-    await expect(page.getByRole('heading', { level: 1, name: /Have you experienced abuse from your ex-partner?/i })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { level: 1, name: /Have you experienced abuse from your ex-partner?/i }),
+    ).toBeVisible();
     await expect(page.locator('h1')).toHaveCount(1);
   });
 
@@ -60,9 +64,9 @@ test.describe('Accessibility', () => {
     await page.goto('/');
 
     await expect(page.getByRole('button', { name: /start now/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /cookies/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /privacy/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /accessibility/i })).toBeVisible();
+    await expect(page.locator('footer').getByRole('link', { name: /^cookies$/i })).toBeVisible();
+    await expect(page.locator('footer').getByRole('link', { name: /privacy/i })).toBeVisible();
+    await expect(page.locator('footer').getByRole('link', { name: /accessibility/i })).toBeVisible();
   });
 
   test('should expose exit this page control on safety check', async ({ page }) => {

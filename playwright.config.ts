@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
+import { dismissedCookieBannerStorageState } from './e2e-tests/fixtures/storage-state';
+
 const allBrowsers = [
   { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
   { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
@@ -21,6 +23,9 @@ export default defineConfig({
     baseURL: 'http://localhost:8001',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    // Cookie banner now renders on lower environments. Dismiss it by default so
+    // journey tests are not blocked by extra buttons and "View cookies" links.
+    storageState: dismissedCookieBannerStorageState,
   },
   // CI: Chromium only for stability
   // Local: All browsers
