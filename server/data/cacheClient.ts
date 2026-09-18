@@ -14,17 +14,12 @@ const reconnectStrategy = (attempts: number) => {
 
 const createCacheClient = (): CacheClient => {
   const client = createClient({
+    url: `rediss://${config.cache.host}`,
     password: config.cache.password,
-    socket: config.cache.tls_enabled
-      ? {
-          host: config.cache.host,
-          tls: true,
-          reconnectStrategy,
-        }
-      : {
-          host: config.cache.host,
-          reconnectStrategy,
-        },
+    socket: {
+      tls: true,
+      reconnectStrategy,
+    },
   });
 
   client.on('error', (e: Error) => logger.error('Cache client error', e));
