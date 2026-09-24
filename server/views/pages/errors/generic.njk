@@ -17,9 +17,9 @@
     </div>
   </div>
   {% if analyticsEnabled and ga4Id %}
-    <script nonce="{{ cspNonce }}">
+    <script nonce="{{ cspNonce }}" data-error-page="{{ errorPage }}">
       gtag('event', 'service_error', {
-        error_page: {{ errorPage | dump | safe }}
+        error_page: document.currentScript.getAttribute('data-error-page')
       });
     </script>
   {% endif %}
