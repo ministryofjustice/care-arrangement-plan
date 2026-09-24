@@ -2,6 +2,7 @@ import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
 import config from './config';
+import cookieNames from './constants/cookieNames';
 import testAppSetup from './test-utils/testAppSetup';
 import { loggerMocks } from './test-utils/testMocks';
 
@@ -85,6 +86,21 @@ describe('errorHandler', () => {
 
       // Note: After security improvements, error may be logged multiple times
       expect(loggerMocks.error).toHaveBeenCalled();
+    });
+
+    it('should send the failing page path to Google Analytics', async () => {
+      config.production = true;
+      config.analytics.enabled = true;
+      config.analytics.ga4Id = 'G-TEST';
+
+      await request(testAppSetup())
+        .get('/create-error?name=secret')
+        .set('Cookie', `${cookieNames.ANALYTICS_CONSENT}=${JSON.stringify({ acceptAnalytics: 'Yes' })}`)
+        .expect(500)
+        .expect((res) => {
+          expect(res.text).toContain("gtag('event', 'service_error'");
+          expect(res.text).toContain('error_page: "/create-error?name=secret"');
+        });
     });
   });
 });
