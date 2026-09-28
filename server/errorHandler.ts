@@ -40,6 +40,7 @@ export default function createErrorHandler() {
       ? response.render('pages/errors/notFound', { title: request.__('errors.notFound.title') })
       : response.render('pages/errors/generic', {
           production,
+          errorPage: request.originalUrl,
           title: production ? request.__('errors.generic.title') : error.message,
         });
   };

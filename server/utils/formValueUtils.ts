@@ -4,6 +4,9 @@ import { dayValues, whichDaysField, yesOrNo } from '../@types/fields';
 import { WhichDays } from '../@types/session';
 
 export const formatListOfStrings = (words: string[], request: Request) => {
+  if (!words) {
+    return '';
+  }
   switch (words.length) {
     case 0:
       return '';

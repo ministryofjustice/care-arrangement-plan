@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import i18n from 'i18n';
 
-import { dayValues } from '../@types/fields';
+import { dayValues, planLastMinuteChangesField } from '../@types/fields';
 import { WhichDays } from '../@types/session';
 
 import {
@@ -9,6 +9,7 @@ import {
   convertWhichDaysFieldToSessionValue,
   convertWhichDaysSessionValueToField,
   formatListOfStrings,
+  formatPlanChangesOptionsIntoList,
   formatWhichDaysSessionValue,
 } from './formValueUtils';
 
@@ -19,6 +20,7 @@ const mockRequest = {
 describe('formValueUtils', () => {
   describe('formatListOfStrings', () => {
     test.each([
+      [undefined, ''],
       [[], ''],
       [['James'], 'James'],
       [['James', 'Rachel'], 'James and Rachel'],
@@ -68,6 +70,10 @@ describe('formValueUtils', () => {
         }),
       ).toEqual([['monday', 'friday', 'saturday']]);
     });
+
+    test('returns undefined days when no session value is set', () => {
+      expect(convertWhichDaysSessionValueToField(undefined)).toEqual([undefined, undefined]);
+    });
   });
 
   describe('formatWhichDaysSessionValue', () => {
@@ -79,6 +85,27 @@ describe('formValueUtils', () => {
       [{ days: ['monday', 'tuesday', 'wednesday'] as dayValues[] }, 'Monday, Tuesday and Wednesday'],
     ])('returns the correct name for %s', (whichDays: WhichDays, expectedFormattedDays) => {
       expect(formatWhichDaysSessionValue(whichDays, mockRequest)).toEqual(expectedFormattedDays);
+    });
+  });
+
+  describe('formatPlanChangesOptionsIntoList', () => {
+    test.each([
+      [['phone'], 'with a phone call'],
+      [['phone', 'email'], 'with a phone call and by email'],
+      [['phone', 'app', 'text', 'email'], 'with a phone call, using a parenting app, by text message and by email'],
+    ])('returns the correct list for %s', (options, expectedList) => {
+      const request = {
+        __: i18n.__,
+        session: {
+          decisionMaking: {
+            planLastMinuteChanges: {
+              options: options as planLastMinuteChangesField[],
+            },
+          },
+        },
+      } as Request;
+
+      expect(formatPlanChangesOptionsIntoList(request)).toEqual(expectedList);
     });
   });
 });
