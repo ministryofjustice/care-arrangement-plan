@@ -15,4 +15,6 @@ data:
   CONTACT_EMAIL: 'feedback@propose-child-arrangements-plan.service.gov.uk'
   FEEDBACK_URL: 'https://www.gov.uk/done/propose-child-arrangements-plan'
   PREVIEW_END: '2026-03-31T23:59:59'
+  GA4_ID: 'CAP-DEV-TEST-GA4-ID'
+  ENABLE_ANALYTICS: 'false'
   SERVICE_URL: 'https://care-arrangement-plan-dev.apps.live.cloud-platform.service.justice.gov.uk'

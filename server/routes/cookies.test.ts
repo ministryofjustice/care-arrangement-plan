@@ -2,13 +2,35 @@ import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
 import config from '../config';
+import cookieNames from '../constants/cookieNames';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 import testAppSetup from '../test-utils/testAppSetup';
 
 const app = testAppSetup();
 
+const originalAnalytics = {
+  enabled: config.analytics.enabled,
+  ga4Id: config.analytics.ga4Id,
+};
+const originalUseHttps = config.useHttps;
+
+const optionalCookieRadio = (dom: JSDOM, value: 'Yes' | 'No') =>
+  dom.window.document.querySelector(`main input[name="${formFields.ACCEPT_OPTIONAL_COOKIES}"][value="${value}"]`);
+
 describe(paths.COOKIES, () => {
+  beforeEach(() => {
+    config.analytics.enabled = originalAnalytics.enabled;
+    config.analytics.ga4Id = originalAnalytics.ga4Id;
+    config.useHttps = originalUseHttps;
+  });
+
+  afterEach(() => {
+    config.analytics.enabled = originalAnalytics.enabled;
+    config.analytics.ga4Id = originalAnalytics.ga4Id;
+    config.useHttps = originalUseHttps;
+  });
+
   describe('GET', () => {
     it('should render cookies page when there is no ga4 id', async () => {
       config.analytics.ga4Id = undefined;
@@ -17,27 +39,65 @@ describe(paths.COOKIES, () => {
 
       const dom = new JSDOM(response.text);
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Cookies');
-      expect(dom.window.document.querySelector('fieldset')).toBeNull();
+      expect(dom.window.document.querySelector('main h1')).toHaveTextContent('Cookies');
+      expect(dom.window.document.querySelector('main fieldset')).toBeNull();
+      expect(dom.window.document.querySelector('#cookie-banner')).toBeNull();
     });
 
     it('should render cookies page when there is a ga4 id', async () => {
-      config.analytics.enabled = true; // Enable analytics for this test
+      config.analytics.enabled = true;
       config.analytics.ga4Id = 'test-ga4-id';
 
       const response = await request(app).get(paths.COOKIES).expect('Content-Type', /html/);
 
       const dom = new JSDOM(response.text);
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Cookies');
-      expect(dom.window.document.querySelector('fieldset')).not.toBeNull();
+      expect(dom.window.document.querySelector('main h1')).toHaveTextContent('Cookies');
+      expect(dom.window.document.querySelector('main fieldset')).not.toBeNull();
+    });
+
+    it('should still render cookie policy options when analytics recording is disabled', async () => {
+      config.analytics.enabled = false;
+      config.analytics.ga4Id = 'test-ga4-id';
+
+      const response = await request(app).get(paths.COOKIES).expect('Content-Type', /html/);
+
+      const dom = new JSDOM(response.text);
+
+      expect(dom.window.document.querySelector('main h1')).toHaveTextContent('Cookies');
+      expect(dom.window.document.querySelector('main fieldset')).not.toBeNull();
+      expect(optionalCookieRadio(dom, 'Yes')).not.toBeNull();
+      expect(optionalCookieRadio(dom, 'No')).not.toBeNull();
+      expect(dom.window.document.querySelector('#cookie-banner')).not.toBeNull();
+    });
+
+    it('should check the accepted cookie option when consent was previously given and recording is disabled', async () => {
+      config.analytics.enabled = false;
+      config.analytics.ga4Id = 'test-ga4-id';
+
+      const response = await request(app)
+        .get(paths.COOKIES)
+        .set('Cookie', `${cookieNames.ANALYTICS_CONSENT}=${JSON.stringify({ acceptAnalytics: 'Yes' })}`)
+        .expect('Content-Type', /html/);
+
+      const dom = new JSDOM(response.text);
+      const yesRadio = optionalCookieRadio(dom, 'Yes');
+      const noRadio = optionalCookieRadio(dom, 'No');
+
+      expect(yesRadio).toBeChecked();
+      expect(noRadio).not.toBeChecked();
+      expect(dom.window.document.querySelector('#cookie-banner')).toBeNull();
     });
 
     it('should render OpenSearch analytics survey details when there is a ga4 id', async () => {
+      config.analytics.ga4Id = 'test-ga4-id';
+
       const response = await request(app).get(paths.COOKIES).expect('Content-Type', /html/);
       const dom = new JSDOM(response.text);
 
-      const surveyHeading = Array.from(dom.window.document.querySelectorAll('h3')).find((heading) => heading.textContent?.trim() === 'Surveys (optional)');
+      const surveyHeading = Array.from(dom.window.document.querySelectorAll('main h3')).find(
+        (heading) => heading.textContent?.trim() === 'Surveys (optional)',
+      );
       expect(surveyHeading).not.toBeNull();
       expect(response.text).toContain('govuk_taken[NameOfSurvey]');
       expect(response.text).toContain('govuk_surveySeen[NameOfSurvey]');
@@ -76,6 +136,22 @@ describe(paths.COOKIES, () => {
         });
     });
 
+    it('should set the consent cookie when recording is disabled', async () => {
+      config.analytics.enabled = false;
+      config.analytics.ga4Id = 'test-ga4-id';
+
+      await request(app)
+        .post(paths.COOKIES)
+        .send({ [formFields.ACCEPT_OPTIONAL_COOKIES]: 'Yes' })
+        .expect(302)
+        .expect('location', paths.COOKIES)
+        .expect((response) => {
+          expect(response.header['set-cookie'][0]).toContain(
+            `cookie_policy=${encodeURIComponent(JSON.stringify({ acceptAnalytics: 'Yes' }))}`,
+          );
+        });
+    });
+
     it('should set secure cookie when useHttps is enabled', async () => {
       config.analytics.ga4Id = 'test-ga4-id';
       config.useHttps = true;
@@ -87,8 +163,6 @@ describe(paths.COOKIES, () => {
           const cookieHeader = response.header['set-cookie'][0];
           expect(cookieHeader).toContain('Secure');
         });
-
-      config.useHttps = false;
     });
 
     it('should not clear analytics cookies when accepting analytics', async () => {

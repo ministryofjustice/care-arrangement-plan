@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import { verifyBackNavigation } from './fixtures/navigation-helpers';
+import { emptyStorageState } from './fixtures/storage-state';
 
 test.describe('Session Persistence', () => {
   test('should maintain form data when navigating back', async ({ page }) => {
@@ -31,20 +32,35 @@ test.describe('Session Persistence', () => {
       await expect(input).toHaveValue('2');
     });
   });
+});
 
-  test('should handle cookie banner preferences', async ({ page }) => {
+test.describe('Cookie banner', () => {
+  test.use({ storageState: emptyStorageState });
+
+  test('should accept analytics cookies from the banner', async ({ page }) => {
     await page.goto('/');
 
-    const cookieBanner = page.locator('.govuk-cookie-banner');
-    if ((await cookieBanner.count()) > 0) {
-      await expect(cookieBanner).toBeVisible();
+    const cookieBanner = page.locator('#cookie-banner');
+    await expect(cookieBanner).toBeVisible();
+    await expect(page.locator('#cookie-banner-main')).toBeVisible();
 
-      const acceptButton = cookieBanner.getByRole('button', { name: /accept/i });
-      if ((await acceptButton.count()) > 0) {
-        await acceptButton.click();
+    await cookieBanner.getByRole('button', { name: /accept analytics cookies/i }).click();
 
-        await expect(cookieBanner).not.toBeVisible();
-      }
-    }
+    await expect(page.locator('#cookie-banner-accepted')).toBeVisible();
+    await cookieBanner.getByRole('button', { name: /hide cookie message/i }).click();
+    await expect(cookieBanner).toBeHidden();
+  });
+
+  test('should reject analytics cookies from the banner', async ({ page }) => {
+    await page.goto('/');
+
+    const cookieBanner = page.locator('#cookie-banner');
+    await expect(cookieBanner).toBeVisible();
+
+    await cookieBanner.getByRole('button', { name: /reject analytics cookies/i }).click();
+
+    await expect(page.locator('#cookie-banner-rejected')).toBeVisible();
+    await cookieBanner.getByRole('button', { name: /hide cookie message/i }).click();
+    await expect(cookieBanner).toBeHidden();
   });
 });
