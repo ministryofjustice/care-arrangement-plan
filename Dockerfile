@@ -1,5 +1,5 @@
 # Stage: base image
-FROM node:26.5.0-trixie-slim AS base
+FROM node:26.10.0-trixie-slim AS base
 
 ENV TZ=Europe/London
 RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone
@@ -13,7 +13,7 @@ RUN apt-get update && \
         apt-get upgrade -y && \
         apt-get autoremove -y && \
         rm -rf /var/lib/apt/lists/* && \
-        npm install -g npm@latest
+        npm install -g npm@12.1.0
 
 # Stage: development image
 FROM base AS dev
