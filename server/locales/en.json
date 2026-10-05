@@ -584,6 +584,103 @@
     }
   },
   "sharePlan": {
+    "contact": "For support with technical or user issues, you can email childarrangements@justice.gov.uk",
+    "unableToAssist": "We are unable to assist with individual court cases or disputes, and we cannot provide procedural or legal advice.", 
+    "beforeYouStart": {
+      "title": "Before you start",
+      "alert": "Do not use this service if you feel pressured or intimidated into using it. If you or your children are at immediate risk of harm, call 999 and ask for the police.",
+      "options": {
+        "voluntary": {
+          "title": "Using this document is voluntary: ",
+          "text": "You do not have to respond if you do not want to."
+        },
+        "legalDocument": {
+          "title": "This is not a legal document or court order: ",
+          "text": "Any plan you make is not legally binding or enforceable. You or the other parent can suggest changes at any time."
+        },
+        "informalAgreements": {
+          "title": "This plan will replace older informal agreements: ",
+          "text": "If you both agree to this plan, it will overwrite any past agreements you made together. It will not overwrite a court order."
+        },
+        "courtOrder": {
+          "title": "If there is a court order: ",
+          "text": "Do not use this document if there is an existing court order about you, the other parent, or the children."
+        }
+      },
+      "startYourOwnPlan": "You can also use the service to start your own plan, visit www.propose-child-arrangements-plan.service.gov.uk",
+      "getMoreInfo": {
+        "title": "Get more information",
+        "intro": "You can use GOV.UK to find more information, including:",
+        "options": {
+          "makingChildArrangements": "making child arrangements - https://www.gov.uk/looking-after-children-divorce",
+          "findWays": "find ways to make child arrangements - https://www.gov.uk/find-ways-to-make-child-arrangements",
+          "childMaintenanceService": "child maintenance service - https://www.gov.uk/child-maintenance-service"
+        }
+      },
+      "useThisDocument": "You can use this document to agree on child arrangements with your child's other parent.",
+      "howToRespond": {
+        "title": "How to respond to this plan",
+        "options": {
+          "suggestedPlan": "Read each section of the suggested plan.",
+          "markYourChoice": "Mark your choice to show if you agree or disagree.",
+          "addYourComments": "Add your comments if you want to suggest a change.",
+          "completedDocument": "Send the completed document back to Harrison."
+        }
+      }
+    },
+    "suggested": {
+      "title": "{{{ senderName }}} has suggested a child arrangements plan",
+      "intro": "{{{ senderName }}} used the Child Arrangements Plan service (https://propose-child-arrangementsplan.service.gov.uk/) on GOV.UK to suggest a plan for how you both might look after {{{ childrenNames }}}.",
+      "howPlanCanHelp": {
+        "title": "How making a child arrangements plan can help",
+        "intro": "You may find that collaborating with {{{ senderName }}} on a child arrangements plan:",
+        "options": {
+          "cheaperAndQuicker": "is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it's urgent)",
+          "betterOutcome": "leads to a better outcome for your children, of which you and your ex-partner are in control"
+        }
+      },
+      "yourPlanShould": {
+        "title": "Your child arrangements plan should:",
+        "options": {
+          "welfareFirst": "put the child's welfare first",
+          "reflectTheWishes": "reflect the wishes, feelings and needs of the child"
+        }
+      }
+    },
+    "yourSafety": {
+      "title": "Your safety",
+      "intro": "You should only respond to the suggested plan if you're confident that you and your ex-partner can make decisions together without putting yourself or the children in danger",
+      "concerns": "If you have any concerns about safety, stop now.",
+      "feedback": "If you have any feedback or safety concerns about this service, you can email childarrangementssafety@justice.gov.uk."
+    },
+    "decideNotToRespond": {
+      "title": "If you decide not to respond to this plan:",
+      "options": {
+        "noNegativeConsequences": "there are no negative consequences",
+        "noCourtImpact": "it will not affect any court cases or your immigration status",
+        "noInformationSharing": "your information will not be shared with anyone"
+      }
+    },
+    "gettingHelpFindingChildArrangementOptions": {
+      "title": "Get help finding a child arrangement option",
+      "intro": "You can find out about your options for making child arrangements suitable for your circumstances, visit https://www.gov.uk/find-ways-to-make-child-arrangements.",
+      "independentFamilyMediator": "You can find an independent family mediator to help you and the other parent understand your options and work out an agreement, visit https://www.familymediationcouncil.org.uk/find-local-mediator/",
+      "notSuitable": {
+        "title": "This plan is not suitable for you if there has been:",
+        "options": {
+          "domesticAbuse": "any form of domestic abuse or violence, even if the abuse was not directed at the children",
+          "childAbduction": "actual or attempted child abduction",
+          "childAbuse": "child abuse or neglect",
+          "substanceMisuse": "misuse of drugs, alcohol or other substances",
+          "otherConcerns": "any other safety or welfare concerns that place anyone at significant risk of harm"
+        }
+      }
+    },
+    "gettingHelpDomesticAbuse": {
+      "title": "Getting help with domestic abuse",
+      "intro": "Domestic abuse or violence is a crime. You can find out how to recognise domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
+      "experiencedAbuse": "If you have experienced any kind of domestic abuse, you can get a court order to protect you or your children, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#get-a-court-order-to-protectyou-or-your-child."
+    },
     "nextSteps": "Next steps",
     "title": "You've created a proposed child arrangements plan.",
     "whatToDoNext": "What to do next",
