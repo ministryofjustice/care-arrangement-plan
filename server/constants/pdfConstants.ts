@@ -1,5 +1,6 @@
 export const LINE_HEIGHT_RATIO = 1.5;
 export const MARGIN_WIDTH = 10;
+export const NO_SPACE = 0;
 export const PARAGRAPH_SPACE = 5;
 export const HEADER_HEIGHT = 22.4;
 export const FOOTER_HEIGHT = 22.4;
@@ -10,3 +11,5 @@ export const QUESTION_TITLE_SIZE = 14;
 export const ADDITIONAL_SUB_HEADING_SIZE = 20;
 export const SUB_HEADING_SIZE = 18;
 export const MAIN_TEXT_SIZE = 12;
+export const INSET_BAR_WIDTH = 2.5;
+export const INSET_TEXT_GAP = 4;
