@@ -1,12 +1,12 @@
 import {
-    ADDITIONAL_SUB_HEADING_SIZE,
     MAIN_TEXT_SIZE,
+    NO_SPACE,
     PARAGRAPH_SPACE,
-    SECTION_HEADING_SIZE,
     SUB_HEADING_SIZE
 } from '../constants/pdfConstants';
 
 import TextComponent from './components/text';
+import TextboxComponent from './components/textbox';
 import FontStyles from './fontStyles';
 import Pdf from './pdf';
 
@@ -14,54 +14,113 @@ const addWhatHappensNow = (pdf: Pdf) => {
   const request = pdf.request;
   new TextComponent(pdf, [
     {
-      text: request.__('sharePlan.yourProposedPlan.nextSteps'),
-      size: SECTION_HEADING_SIZE,
-      style: FontStyles.BOLD,
-      bottomPadding: PARAGRAPH_SPACE,
+      text: request.__('sharePlan.endOfForm.sectionTitle'),
+      size: SUB_HEADING_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: NO_SPACE,
     },
     {
-      text: request.__('sharePlan.yourProposedPlan.whatToDoNext'),
+      text: request.__('sharePlan.endOfForm.title'),
       size: SUB_HEADING_SIZE,
       style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.yourProposedPlan.nowSendPlan', { senderName: request.session.initialAdultName }),
+      text: request.__('sharePlan.endOfForm.subtitle'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+    }
+  ]).addComponentToDocument();
+
+  new TextboxComponent(pdf, [
+    {
+      text: request.__('sharePlan.endOfForm.otherInformationLabel'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+  ], 100).addComponentToDocument();
+
+
+  new TextComponent(pdf, [
+    {
+      text: request.__('sharePlan.endOfForm.jointAgreement.title'),
+      size: SUB_HEADING_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: NO_SPACE,
+    },
+    {
+      text: request.__('sharePlan.endOfForm.jointAgreement.intro'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.yourProposedPlan.notLegallyBinding'),
+      text: request.__('sharePlan.endOfForm.jointAgreement.signBelowToConfirm'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.yourProposedPlan.noResponseHeading'),
-      size: ADDITIONAL_SUB_HEADING_SIZE,
+      text: request.__('sharePlan.endOfForm.jointAgreement.declarationText'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+    }
+  ]).addComponentToDocument();
+
+
+
+  new TextComponent(pdf, [
+    {
+      text: request.__('sharePlan.endOfForm.whatToDoNext.title'),
+      size: SUB_HEADING_SIZE,
       style: FontStyles.BOLD,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.yourProposedPlan.unableToAgree'),
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-      {
-      text: request.__('sharePlan.yourProposedPlan.aMediatorIs'),
+      text: request.__('sharePlan.endOfForm.whatToDoNext.intro'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
     {
-      text: request.__('sharePlan.yourProposedPlan.moreInfoAndSupport'),
+      text: request.__('sharePlan.endOfForm.whatToDoNext.legallyBinding'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
-      urlize: true,
     },
+    {
+      text: request.__('sharePlan.endOfForm.whatToDoNext.cannotReachAnAgreement.title'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: NO_SPACE,
+    },
+    {
+      text: request.__('sharePlan.endOfForm.whatToDoNext.cannotReachAnAgreement.intro'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+    {
+      text: request.__('sharePlan.endOfForm.whatToDoNext.cannotReachAnAgreement.moreInfo'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+    {
+      text: request.__('sharePlan.endOfForm.whatToDoNext.feedback.title'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: NO_SPACE,
+    },
+    {
+      text: request.__('sharePlan.endOfForm.whatToDoNext.feedback.intro'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+    }
   ]).addComponentToDocument();
 };
 
