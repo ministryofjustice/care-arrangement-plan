@@ -1,4 +1,9 @@
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+import {
+  MAIN_TEXT_SIZE,
+  NO_SPACE,
+  PARAGRAPH_SPACE,
+  SUB_HEADING_SIZE
+} from '../constants/pdfConstants';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
 import BulletListComponent from './components/bulletList';
@@ -15,8 +20,14 @@ const addAboutTheProposal = (pdf: Pdf) => {
   new BulletListComponent(pdf, {
     initialText: [
       {
+        text: request.__('sharePlan.yourProposedPlan.sectionTitle'),
+        size: SUB_HEADING_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: NO_SPACE,
+      },
+      {
         text: request.__('sharePlan.yourProposedPlan.aboutThePlan'),
-        size: SECTION_HEADING_SIZE,
+        size: SUB_HEADING_SIZE,
         style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
@@ -24,7 +35,7 @@ const addAboutTheProposal = (pdf: Pdf) => {
         text: request.__('sharePlan.yourProposedPlan.senderSaid', { senderName: initialAdultName }),
         size: MAIN_TEXT_SIZE,
         style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
+        bottomPadding: NO_SPACE,
       },
     ],
     bulletText: [
@@ -41,6 +52,14 @@ const addAboutTheProposal = (pdf: Pdf) => {
         childrenNames,
       }),
     ],
+    finalText: [
+      {
+        text: request.__('sharePlan.yourProposedPlan.doNotStoreNames'),
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+      }
+    ]
   }).addComponentToDocument();
 
   new DoYouAgreeComponent(
@@ -49,12 +68,6 @@ const addAboutTheProposal = (pdf: Pdf) => {
   ).addComponentToDocument();
 
   new TextComponent(pdf, [
-    {
-      text: request.__('sharePlan.yourProposedPlan.doNotStoreNames'),
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
     {
       text: request.__('sharePlan.yourProposedPlan.doNotAgreeOnBasics'),
       size: MAIN_TEXT_SIZE,
