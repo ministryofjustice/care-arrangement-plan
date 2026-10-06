@@ -3,7 +3,6 @@ import fs from 'fs';
 import { Request } from 'express';
 import { jsPDF } from 'jspdf';
 
-import { version as packageVersion } from '../../package.json';
 import { Paragraph, Text } from '../@types/pdf';
 import {
   FONT,
@@ -14,12 +13,15 @@ import {
   LINE_HEIGHT_RATIO,
   MARGIN_WIDTH,
   MM_PER_POINT,
-  SECTION_HEADING_SIZE,
+  SUB_HEADING_SIZE,
 } from '../constants/pdfConstants';
 import logger from '../logging/logger';
 import getAssetPath from '../utils/getAssetPath';
 
 import FontStyles from './fontStyles';
+
+const SUPPORT_BOX_WIDTH = 50;
+const SUPPORT_BOX_GAP = 25;
 
 type SupportToken = {
   text: string;
@@ -51,7 +53,6 @@ class Pdf {
       title: request.__('pdf.name'),
     });
     if (autoPrint) this.document.autoPrint();
-    this.addHeaderToPage();
   }
 
   public toArrayBuffer() {
@@ -78,16 +79,15 @@ class Pdf {
     this.document.addFont('light-94a07e06a1-v2.ttf', FONT, FontStyles.NORMAL);
   }
 
-  private addHeaderToPage() {
-    this.document
-      .setFont(FONT, FontStyles.BOLD)
-      .setFontSize(SECTION_HEADING_SIZE)
-      .text(
-        this.request.__('pdf.name'),
-        MARGIN_WIDTH,
-        HEADER_HEIGHT * 0.5 + 0.25 * LINE_HEIGHT_RATIO * SECTION_HEADING_SIZE * MM_PER_POINT,
-        { align: 'left' },
-      );
+  public addRecipientDocumentLabel() {
+    const pageWidth = this.document.internal.pageSize.getWidth();
+    const lineHeight = SUB_HEADING_SIZE * LINE_HEIGHT_RATIO * MM_PER_POINT;
+    const lines = this.request.__('pdf.recipientDocument').split('\n');
+
+    this.document.setFont(FONT, FontStyles.BOLD).setFontSize(SUB_HEADING_SIZE);
+    lines.forEach((line, index) => {
+      this.document.text(line, pageWidth - MARGIN_WIDTH, lineHeight * (index + 2), { align: 'right' });
+    });
   }
 
   private addFooterToPage(pageNumber: number) {
@@ -101,15 +101,12 @@ class Pdf {
     const pageWidth = this.document.internal.pageSize.getWidth();
     const pageHeight = this.document.internal.pageSize.getHeight();
     const footerY = pageHeight - MARGIN_WIDTH;
+    const footerRuleOffset = 6;
 
-    // Draw left-aligned version and timestamp
-    const now = new Date();
-    const datePart = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' });
-    const timePart = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    this.document
-      .setFont(FONT, FontStyles.NORMAL)
-      .setFontSize(10)
-      .text(`v${packageVersion} · ${datePart} ${timePart}`, MARGIN_WIDTH, footerY, { align: 'left' });
+    // Draw a horizontal line above the footer
+    this.document.setDrawColor(0, 0, 0);
+    this.document.setLineWidth(0.5);
+    this.document.line(MARGIN_WIDTH, footerY - footerRuleOffset, pageWidth - MARGIN_WIDTH, footerY - footerRuleOffset);
 
     // Draw centered, bold extra text if present
     if (extraFooterText) {
@@ -130,9 +127,12 @@ class Pdf {
     this.contentWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
   }
 
-  public addSupportBox(contact: string, unableToAssist: string) {
-    const boxWidth = 58;
-    const boxGap = 6;
+  public reserveSupportColumn() {
+    this.contentWidth = this.supportColumnWidth();
+  }
+
+  public addSupportBox(contact: string, unableToAssist: string, top = this.currentY) {
+    const boxWidth = SUPPORT_BOX_WIDTH;
     const padding = 3.5;
     const paragraphGap = 3;
     const size = 10;
@@ -140,7 +140,7 @@ class Pdf {
     const innerWidth = boxWidth - padding * 2;
     const fullWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
     const boxX = MARGIN_WIDTH + fullWidth - boxWidth;
-    const boxTop = this.currentY;
+    const boxTop = top;
 
     const contactLines = this.layoutSupportLines(this.supportTokens(contact), innerWidth, size);
     const unableLines = this.layoutSupportLines(
@@ -159,8 +159,13 @@ class Pdf {
     textY = this.drawCenteredSupportLines(contactLines, boxX, boxWidth, textY, size);
     this.drawCenteredSupportLines(unableLines, boxX, boxWidth, textY + paragraphGap, size);
 
-    this.contentWidth = fullWidth - boxWidth - boxGap;
+    this.reserveSupportColumn();
     return boxTop + boxHeight;
+  }
+
+  private supportColumnWidth() {
+    const fullWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
+    return fullWidth - SUPPORT_BOX_WIDTH - SUPPORT_BOX_GAP;
   }
 
   heightWillOverflowDocument(height: number) {
@@ -170,7 +175,6 @@ class Pdf {
   createNewPage() {
     this.document.addPage();
     this.currentY = HEADER_HEIGHT;
-    this.addHeaderToPage();
   }
 
   drawBorder(x: number, y: number, xSize: number, ySize: number) {

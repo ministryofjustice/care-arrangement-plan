@@ -1,9 +1,10 @@
 import {
+  HEADING_SIZE,
   MAIN_TEXT_SIZE,
   NO_SPACE,
   PARAGRAPH_SPACE,
   SECTION_HEADING_SIZE,
-  SUB_HEADING_SIZE
+  SUB_HEADING_SIZE,
 } from '../constants/pdfConstants';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
@@ -14,6 +15,18 @@ import Pdf from './pdf';
 
 const addPreamble = (pdf: Pdf) => {
   const request = pdf.request;
+  pdf.reserveSupportColumn();
+
+  new TextComponent(pdf, [
+    {
+      text: request.__('sharePlan.name'),
+      size: HEADING_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
+  ]).addComponentToDocument();
+
+  const supportBoxTop = pdf.currentY;
   new TextComponent(pdf, [
     {
       text: request.__('sharePlan.beforeYouStart.title'),
@@ -23,7 +36,11 @@ const addPreamble = (pdf: Pdf) => {
     },
   ]).addComponentToDocument();
 
-  const supportBoxBottom = pdf.addSupportBox(request.__('sharePlan.contact'), request.__('sharePlan.unableToAssist'));
+  const supportBoxBottom = pdf.addSupportBox(
+    request.__('sharePlan.contact'),
+    request.__('sharePlan.unableToAssist'),
+    supportBoxTop,
+  );
 
   new TextComponent(pdf, [
     {
@@ -101,7 +118,7 @@ const addPreamble = (pdf: Pdf) => {
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
-    }
+    },
   ]).addComponentToDocument();
 
   new BulletListComponent(pdf, {
