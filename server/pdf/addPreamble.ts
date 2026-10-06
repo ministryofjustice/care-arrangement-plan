@@ -1,14 +1,15 @@
 import {
+  ADDITIONAL_SUB_HEADING_SIZE,
   HEADING_SIZE,
   MAIN_TEXT_SIZE,
   NO_SPACE,
   PARAGRAPH_SPACE,
-  SECTION_HEADING_SIZE,
-  SUB_HEADING_SIZE,
+  SUB_HEADING_SIZE
 } from '../constants/pdfConstants';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
 
 import BulletListComponent from './components/bulletList';
+import ShadedTextComponent from './components/shadedText';
 import TextComponent from './components/text';
 import FontStyles from './fontStyles';
 import Pdf from './pdf';
@@ -138,12 +139,14 @@ const addPreamble = (pdf: Pdf) => {
     ],
   }).addComponentToDocument();
 
+  pdf.createNewPage();
+
   new TextComponent(pdf, [
     {
       text: request.__('sharePlan.suggested.title', {
         senderName: request.session.initialAdultName,
       }),
-      size: SECTION_HEADING_SIZE,
+      size: ADDITIONAL_SUB_HEADING_SIZE,
       style: FontStyles.BOLD,
       bottomPadding: NO_SPACE,
     },
@@ -196,7 +199,7 @@ const addPreamble = (pdf: Pdf) => {
     ],
   }).addComponentToDocument();
 
-  new TextComponent(pdf, [
+  new ShadedTextComponent(pdf, [
     {
       text: request.__('sharePlan.yourSafety.title'),
       size: MAIN_TEXT_SIZE,
@@ -219,7 +222,7 @@ const addPreamble = (pdf: Pdf) => {
       text: request.__('sharePlan.yourSafety.feedback'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
+      bottomPadding: NO_SPACE,
     },
   ]).addComponentToDocument();
 

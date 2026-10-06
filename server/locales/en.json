@@ -631,12 +631,12 @@
     },
     "suggested": {
       "title": "{{{ senderName }}} has suggested a child arrangements plan",
-      "intro": "{{{ senderName }}} used the Child Arrangements Plan service (https://propose-child-arrangementsplan.service.gov.uk/) on GOV.UK to suggest a plan for how you both might look after {{{ childrenNames }}}.",
+      "intro": "{{{ senderName }}} used the Child Arrangements Plan service (https://propose-child-arrangements-plan.service.gov.uk/) on GOV.UK to suggest a plan for how you both might look after {{{ childrenNames }}}.",
       "howPlanCanHelp": {
         "title": "How making a child arrangements plan can help",
         "intro": "You may find that collaborating with {{{ senderName }}} on a child arrangements plan:",
         "options": {
-          "cheaperAndQuicker": "is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it's urgent)",
+          "cheaperAndQuicker": "is cheaper and quicker than going to court (it usually takes around 10 months to get a court order,\ndepending on where you live and whether it's urgent)",
           "betterOutcome": "leads to a better outcome for your children, of which you and your ex-partner are in control"
         }
       },
@@ -788,7 +788,7 @@
       "weCannot": "We cannot answer any questions about child arrangement plans that have already been created."
     },
     "yourProposedPlan": {
-      "sectionOne": "Section 1",
+      "sectionTitle": "Section 1",
       "aboutThePlan": "About this child arrangements proposal",
       "senderSaid": "{{{ senderName }}} said:",
       "senderSuggested": "{{{ senderName }}} suggested:\n\"{{{ suggestion }}}\"",
@@ -805,6 +805,8 @@
       "yes": "Yes",
       "no": "No",
       "livingAndVisiting": {
+        "sectionTitle": "Section 2",
+        "mostlyLiveTitle": "2.1 Where will the children spend most of their time?",
         "suggestedLiveWith": "{{{ senderName }}} suggested that the children spend most of their time with {{{ adult }}}.",
         "suggestedLiveWithChild": "{{{ senderName }}} suggested that {{{ childName }}} mostly lives with {{{ adult }}}.",
         "suggestedLiveWithOtherChildren": "{{{ senderName }}} suggested that the other children mostly live with {{{ adult }}}.",
@@ -817,6 +819,10 @@
         "suggestedDaytimeVisitDays": "{{{ senderName }}} suggested that daytime visits happen on {{ days }}."
       },
       "handoverAndHolidays": {
+        "sectionTitle": "Section 3",
+        "householdsTitle": "3.1 How will the children get between households?",
+        "handoverTitle": "3.2 Where does handover take place?",
+        "arrangementsTitle": "3.3 Will these arrangements change during school holidays?",
         "suggestedCollects": "{{{ senderName }}} suggested that {{{ adult }}} collects the children.",
         "suggestedHandover": "{{{ senderName }}} suggested that handover takes place at {{{ location }}}",
         "neutralLocation": "a neutral location",
