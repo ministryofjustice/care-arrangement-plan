@@ -6,6 +6,7 @@ export const HEADER_HEIGHT = 22.4;
 export const FOOTER_HEIGHT = 22.4;
 export const MM_PER_POINT = 0.352778;
 export const FONT = 'transport';
+export const HEADING_SIZE = 28;
 export const SECTION_HEADING_SIZE = 22;
 export const QUESTION_TITLE_SIZE = 14;
 export const ADDITIONAL_SUB_HEADING_SIZE = 20;
