@@ -45,7 +45,7 @@ This app is heavily inspired from MoJ's [hmpps-template-typescript](https://gith
 
 ## Installation
 
-Install Node 22. It is recommended to use a versioning manager such as [nvm](https://github.com/nvm-sh/nvm).
+Install Node 26.10.0. It is recommended to use a versioning manager such as [nvm](https://github.com/nvm-sh/nvm).
 
 To download the dependencies, run `npm install`.
 
