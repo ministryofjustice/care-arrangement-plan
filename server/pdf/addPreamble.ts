@@ -74,12 +74,24 @@ const addPreamble = (pdf: Pdf) => {
     ],
   }).addComponentToDocument();
 
+  const startYourOwnPlan = request.__('sharePlan.beforeYouStart.startYourOwnPlan');
+  const planUrl = 'www.propose-child-arrangements-plan.service.gov.uk';
+  const planUrlAt = startYourOwnPlan.indexOf(planUrl);
+
   new TextComponent(pdf, [
     {
-      text: request.__('sharePlan.beforeYouStart.startYourOwnPlan'),
+      text: startYourOwnPlan,
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
+      segments:
+        planUrlAt === -1
+          ? undefined
+          : [
+              { text: startYourOwnPlan.slice(0, planUrlAt), style: FontStyles.NORMAL },
+              { text: planUrl, style: FontStyles.BOLD, underline: true },
+              { text: startYourOwnPlan.slice(planUrlAt + planUrl.length), style: FontStyles.NORMAL },
+            ],
     },
   ]).addComponentToDocument();
 
@@ -119,10 +131,12 @@ const addPreamble = (pdf: Pdf) => {
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
+      topPadding: PARAGRAPH_SPACE,
     },
   ]).addComponentToDocument();
 
   new BulletListComponent(pdf, {
+    numbered: true,
     initialText: [
       {
         text: request.__('sharePlan.beforeYouStart.howToRespond.title'),

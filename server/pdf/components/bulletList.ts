@@ -18,6 +18,8 @@ type StyledToken = {
   style: FontStyles;
 };
 
+const BULLET_MARKER = '•   ';
+
 const wordTokens = (text: string, style: FontStyles): StyledToken[] =>
   text
     .split(/(\s+)/)
@@ -30,7 +32,6 @@ const boldPrefix = (bold: string, text: string) => {
 };
 
 const tokensForBullet = (item: { bold: string; text: string }): StyledToken[] => [
-  { text: '•   ', style: FontStyles.NORMAL },
   ...wordTokens(boldPrefix(item.bold, item.text), FontStyles.BOLD),
   ...wordTokens(item.text, FontStyles.NORMAL),
 ];
@@ -39,7 +40,7 @@ class BulletList extends TextComponent {
   private readonly bulletItems: BulletText[];
   private readonly leadingParagraphs: Paragraph[];
   private readonly trailingParagraphs: Paragraph[];
-  private readonly plainBullets: boolean;
+  private readonly numbered: boolean;
 
   constructor(
     pdf: Pdf,
@@ -47,32 +48,18 @@ class BulletList extends TextComponent {
       initialText,
       bulletText,
       finalText,
-    }: { initialText?: Paragraph[]; bulletText: BulletText[]; finalText?: Paragraph[] },
+      numbered = false,
+    }: { initialText?: Paragraph[]; bulletText: BulletText[]; finalText?: Paragraph[]; numbered?: boolean },
   ) {
-    const plainBullets = bulletText.every((item): item is string => typeof item === 'string');
-    const paragraphs: Paragraph[] = initialText ? [...initialText] : [];
-
-    if (plainBullets) {
-      paragraphs.push({
-        text: bulletText.map((text) => `•   ${text}`).join('\n'),
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding: PARAGRAPH_SPACE,
-      });
-    }
-
-    if (finalText) paragraphs.push(...finalText);
-    super(pdf, paragraphs);
+    super(pdf, [...(initialText ?? []), ...(finalText ?? [])]);
 
     this.bulletItems = bulletText;
     this.leadingParagraphs = initialText ?? [];
     this.trailingParagraphs = finalText ?? [];
-    this.plainBullets = plainBullets;
+    this.numbered = numbered;
   }
 
   protected getComponentHeight() {
-    if (this.plainBullets) return super.getComponentHeight();
-
     const paragraphHeight = [...this.leadingParagraphs, ...this.trailingParagraphs].reduce(
       (height, paragraph) => height + this.pdf.getParagraphHeight(paragraph),
       0,
@@ -84,11 +71,6 @@ class BulletList extends TextComponent {
   }
 
   protected createComponent() {
-    if (this.plainBullets) {
-      super.createComponent();
-      return;
-    }
-
     this.leadingParagraphs.forEach((paragraph) => this.pdf.addParagraph(paragraph));
     this.bulletItems.forEach((item, index) => this.drawBullet(item, index));
     this.trailingParagraphs.forEach((paragraph) => this.pdf.addParagraph(paragraph));
@@ -102,7 +84,30 @@ class BulletList extends TextComponent {
     return MAIN_TEXT_SIZE * LINE_HEIGHT_RATIO * MM_PER_POINT;
   }
 
-  private layoutMixedBullet(item: { bold: string; text: string }) {
+  private markerFor(index: number) {
+    return this.numbered ? `${index + 1}. ` : BULLET_MARKER;
+  }
+
+  private markerWidth() {
+    const markers = this.numbered ? this.bulletItems.map((_, index) => this.markerFor(index)) : [BULLET_MARKER];
+    return Math.max(
+      ...markers.map((marker) =>
+        this.pdf.getTextWidth({ text: marker, size: MAIN_TEXT_SIZE, style: FontStyles.NORMAL }),
+      ),
+    );
+  }
+
+  private textColumnWidth() {
+    return this.pdf.maxPageWidth - this.markerWidth();
+  }
+
+  private layoutItem(item: BulletText): StyledToken[][] {
+    if (typeof item === 'string') {
+      return this.pdf
+        .splitParagraph({ text: item, size: MAIN_TEXT_SIZE, style: FontStyles.NORMAL }, this.textColumnWidth())
+        .map((line) => [{ text: line, style: FontStyles.NORMAL }]);
+    }
+
     const lines: StyledToken[][] = [];
     let line: StyledToken[] = [];
     let lineWidth = 0;
@@ -110,7 +115,7 @@ class BulletList extends TextComponent {
     tokensForBullet(item).forEach((token) => {
       const width = this.pdf.getTextWidth({ text: token.text, size: MAIN_TEXT_SIZE, style: token.style });
       const isSpace = /^\s+$/.test(token.text);
-      if (line.length > 0 && lineWidth + width > this.pdf.maxPageWidth) {
+      if (line.length > 0 && lineWidth + width > this.textColumnWidth()) {
         lines.push(line);
         line = [];
         lineWidth = 0;
@@ -125,35 +130,26 @@ class BulletList extends TextComponent {
   }
 
   private bulletHeight(item: BulletText, index: number) {
-    const bottomPadding = this.bottomPaddingFor(index);
-    if (typeof item === 'string') {
-      return this.pdf.getParagraphHeight({
-        text: `•   ${item}`,
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding,
-      });
-    }
-
-    return this.layoutMixedBullet(item).length * this.lineHeight() + bottomPadding;
+    return this.layoutItem(item).length * this.lineHeight() + this.bottomPaddingFor(index);
   }
 
   private drawBullet(item: BulletText, index: number) {
-    const bottomPadding = this.bottomPaddingFor(index);
-    if (typeof item === 'string') {
-      this.pdf.addParagraph({
-        text: `•   ${item}`,
-        size: MAIN_TEXT_SIZE,
-        style: FontStyles.NORMAL,
-        bottomPadding,
-      });
-      return;
-    }
-
     const lineHeight = this.lineHeight();
-    this.layoutMixedBullet(item).forEach((line) => {
+    const textX = MARGIN_WIDTH + this.markerWidth();
+
+    this.layoutItem(item).forEach((line, lineIndex) => {
       this.pdf.currentY += lineHeight;
-      let x = MARGIN_WIDTH;
+      if (lineIndex === 0) {
+        this.pdf.addText({
+          text: this.markerFor(index),
+          x: MARGIN_WIDTH,
+          y: this.pdf.currentY,
+          size: MAIN_TEXT_SIZE,
+          style: FontStyles.NORMAL,
+        });
+      }
+
+      let x = textX;
       line.forEach((token) => {
         this.pdf.addText({
           text: token.text,
@@ -165,7 +161,8 @@ class BulletList extends TextComponent {
         x += this.pdf.getTextWidth({ text: token.text, size: MAIN_TEXT_SIZE, style: token.style });
       });
     });
-    this.pdf.currentY += bottomPadding;
+
+    this.pdf.currentY += this.bottomPaddingFor(index);
   }
 }
 
