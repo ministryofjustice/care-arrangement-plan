@@ -58,6 +58,9 @@ const validatePdfResponse = (response: request.Response, minSize: number) => {
   // Check for jsPDF metadata
   expect(pdfText).toContain('/Producer');
   expect(pdfText).toContain('jsPDF');
+
+  // Body text is font-encoded. The paid-feedback sign-up link is stored as a URI.
+  expect(pdfText).toContain('https://www.smartsurvey.co.uk/s/EFO5FJ/');
 };
 
 describe('createPdf', () => {
