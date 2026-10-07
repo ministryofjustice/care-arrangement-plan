@@ -3,16 +3,18 @@ import fs from 'fs';
 import { Request } from 'express';
 import { jsPDF } from 'jspdf';
 
-import { Paragraph, Text } from '../@types/pdf';
+import { Paragraph, Text, TextRun } from '../@types/pdf';
 import {
   FONT,
   FOOTER_HEIGHT,
   HEADER_HEIGHT,
+  HEADING_SIZE,
   INSET_BAR_WIDTH,
   INSET_TEXT_GAP,
   LINE_HEIGHT_RATIO,
   MARGIN_WIDTH,
   MM_PER_POINT,
+  PARAGRAPH_SPACE,
   SUB_HEADING_SIZE,
 } from '../constants/pdfConstants';
 import logger from '../logging/logger';
@@ -77,6 +79,7 @@ class Pdf {
       fs.readFileSync(getAssetPath('fonts/light-94a07e06a1-v2.ttf')).toString('base64'),
     );
     this.document.addFont('light-94a07e06a1-v2.ttf', FONT, FontStyles.NORMAL);
+    this.document.addFont('light-94a07e06a1-v2.ttf', FONT, FontStyles.ITALIC);
   }
 
   public addRecipientDocumentLabel() {
@@ -88,6 +91,12 @@ class Pdf {
     lines.forEach((line, index) => {
       this.document.text(line, pageWidth - MARGIN_WIDTH, lineHeight * (index + 2), { align: 'right' });
     });
+
+    // The title is drawn from currentY, and its cap height sits above that baseline.
+    // Start it below the recipient label so the two do not share a line.
+    const labelBaseline = lineHeight * (lines.length + 1);
+    const titleCapOffset = HEADING_SIZE * MM_PER_POINT * (LINE_HEIGHT_RATIO - 1);
+    this.currentY = labelBaseline + PARAGRAPH_SPACE - titleCapOffset;
   }
 
   private addFooterToPage(pageNumber: number) {
@@ -188,10 +197,11 @@ class Pdf {
     return this.document.splitTextToSize(text, width);
   }
 
-  getParagraphHeight({ text, size, style, bottomPadding, inset }: Paragraph) {
-    this.document.setFontSize(size).setFont(FONT, style);
-    const textLines = this.splitParagraph({ text, size, style }, this.paragraphWidth(inset));
-    return size * LINE_HEIGHT_RATIO * textLines.length * MM_PER_POINT + bottomPadding;
+  getParagraphHeight({ text, size, style, bottomPadding, topPadding = 0, inset, segments }: Paragraph) {
+    const lineCount = segments
+      ? this.layoutMixedLines(segments, size, this.paragraphWidth(inset)).length
+      : this.splitParagraph({ text, size, style }, this.paragraphWidth(inset)).length;
+    return size * LINE_HEIGHT_RATIO * lineCount * MM_PER_POINT + topPadding + bottomPadding;
   }
 
   getTextWidth({ text, size, style }: Text) {
@@ -212,7 +222,26 @@ class Pdf {
     size: number;
     style: FontStyles;
   }) {
-    this.document.setFontSize(size).setFont(FONT, style).text(text, x, y);
+    this.document.setFontSize(size).setFont(FONT, style);
+    if (style !== FontStyles.ITALIC) {
+      this.document.text(text, x, y);
+      return;
+    }
+
+    // Transport has no italic face, so shear the upright glyphs. jsPDF combines a caller
+    // matrix with the line position, which would also slide the line sideways, so each
+    // line cancels that shift and stays on the same left edge as upright text.
+    const skew = Math.tan((12 * Math.PI) / 180);
+    const scaleFactor = this.document.internal.scaleFactor;
+    const pageHeight = this.document.internal.pageSize.getHeight() * scaleFactor;
+    const lines = Array.isArray(text) ? text : [text];
+    const lineHeight = size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+    lines.forEach((line, index) => {
+      const lineY = y + index * lineHeight;
+      const pdfY = pageHeight - lineY * scaleFactor;
+      const matrix = this.document.Matrix(1, 0, skew, 1, -pdfY * skew, 0);
+      this.document.text(line, x, lineY, undefined, matrix);
+    });
   }
 
   private wordsAsTokens(text: string, style: FontStyles): SupportToken[] {
@@ -283,6 +312,40 @@ class Pdf {
     });
 
     return y;
+  }
+
+  private layoutMixedLines(segments: TextRun[], size: number, maxWidth: number) {
+    const tokens = segments.flatMap((segment) =>
+      this.wordsAsTokens(segment.text, segment.style).map((token) =>
+        segment.underline ? { ...token, underline: true } : token,
+      ),
+    );
+    return this.layoutSupportLines(tokens, maxWidth, size);
+  }
+
+  private drawMixedParagraph(segments: TextRun[], size: number, bottomPadding: number, inset?: boolean) {
+    const lines = this.layoutMixedLines(segments, size, this.paragraphWidth(inset));
+    const lineHeight = size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+    const left = inset ? MARGIN_WIDTH + INSET_BAR_WIDTH + INSET_TEXT_GAP : MARGIN_WIDTH;
+
+    if (inset) this.drawInsetBar(this.currentY, size, lines.length);
+
+    lines.forEach((line) => {
+      this.currentY += lineHeight;
+      let x = left;
+      line.forEach((token) => {
+        const width = this.getTextWidth({ text: token.text, size, style: token.style });
+        this.addText({ text: token.text, x, y: this.currentY, size, style: token.style });
+        if (token.underline) {
+          this.document.setDrawColor(0, 0, 0);
+          this.document.setLineWidth(0.3);
+          this.document.line(x, this.currentY + 0.7, x + width, this.currentY + 0.7);
+        }
+        x += width;
+      });
+    });
+
+    this.currentY += bottomPadding;
   }
 
   private paragraphWidth(inset?: boolean) {
@@ -361,7 +424,14 @@ class Pdf {
     });
   }
 
-  addParagraph({ text, size, style, bottomPadding, urlize, inset }: Paragraph) {
+  addParagraph({ text, size, style, bottomPadding, topPadding, urlize, inset, segments }: Paragraph) {
+    if (topPadding) this.currentY += topPadding;
+
+    if (segments) {
+      this.drawMixedParagraph(segments, size, bottomPadding, inset);
+      return;
+    }
+
     // The first line of text goes above the current y value, so add a single line of spacing to make the paragraph
     // behave the same as all other components we add
     const textLines = this.splitParagraph({ text, size, style }, this.paragraphWidth(inset));

@@ -694,7 +694,7 @@
         "title": "Joint agreement",
         "intro": "Now that you have recorded your decisions, you should download or print a copy of this plan so you both have one.",
         "signBelowToConfirm": "You can both sign below to confirm your joint commitment to what you have agreed. As with all parts of this document, you don't have to complete this section if you don’t want to.",
-        "declarationText": "'As parents of Jason, we jointly accept responsibility for their future welfare, stability, development and happiness. We have discussed and agreed the arrangements laid out in this Plan and commit ourselves to these arrangements. We have also discussed these arrangements with our children. We will jointly re-visit these arrangements in future, as necessary. In this way we will take account of changing circumstances and ensure that our children's best interests come first.'",
+        "declarationText": "“As parents of Jason, we jointly accept responsibility for their future welfare, stability, development and happiness. We have discussed and agreed the arrangements laid out in this Plan and commit ourselves to these arrangements. We have also discussed these arrangements with our children. We will jointly re-visit these arrangements in future, as necessary. In this way we will take account of changing circumstances and ensure that our children’s best interests come first.”",
         "Name": "Name",
         "Signature": "Signature",
         "Date": "Date",
@@ -904,13 +904,7 @@
     "name": "Proposed child arrangements plan",
     "recipientDocument": "Recipient\ndocument",
     "everyPageReminder": "Check you have every page of this document",
-    "pageCount": "Page {{ currentPage }} of {{ totalPages }}",
-    "paidFeedback": {
-      "title": "Get paid to give your feedback",
-      "helpToImprove": "With your help we can improve this service and understand how you use your plan.",
-      "signUp": "Sign up and receive an incentive when you take part in further research ",
-      "signUpLink": "https://www.smartsurvey.co.uk/t/BDP7V3/"
-    }
+    "pageCount": "Page {{ currentPage }} of {{ totalPages }}"
   },
   "paperForm": {
     "title": "Proposed child arrangements plan",
