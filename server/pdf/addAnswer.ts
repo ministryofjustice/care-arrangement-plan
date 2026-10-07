@@ -1,4 +1,10 @@
-import { MAIN_TEXT_SIZE, NO_SPACE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE, SUB_HEADING_SIZE } from '../constants/pdfConstants';
+import {
+  MAIN_TEXT_SIZE,
+  NO_SPACE,
+  PARAGRAPH_SPACE,
+  QUESTION_TITLE_SIZE,
+  SUB_HEADING_SIZE
+} from '../constants/pdfConstants';
 
 import DoYouAgreeComponent from './components/doYouAgree';
 import SplittableTextComponent from './components/splittableText';
