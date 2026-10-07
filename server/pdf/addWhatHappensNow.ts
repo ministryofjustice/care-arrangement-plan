@@ -17,7 +17,7 @@ const addWhatHappensNow = (pdf: Pdf) => {
       text: request.__('sharePlan.endOfForm.sectionTitle'),
       size: SUB_HEADING_SIZE,
       style: FontStyles.NORMAL,
-      bottomPadding: NO_SPACE,
+      bottomPadding: PARAGRAPH_SPACE,
     },
     {
       text: request.__('sharePlan.endOfForm.title'),
@@ -40,7 +40,7 @@ const addWhatHappensNow = (pdf: Pdf) => {
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
     },
-  ], 100).addComponentToDocument();
+  ], 120).addComponentToDocument();
 
 
   new TextComponent(pdf, [
@@ -71,8 +71,25 @@ const addWhatHappensNow = (pdf: Pdf) => {
   ]).addComponentToDocument();
 
 
-
   new TextComponent(pdf, [
+    {
+      text: request.__('sharePlan.endOfForm.jointAgreement.legalStatus.title'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.BOLD,
+      bottomPadding: NO_SPACE,
+    },
+    {
+      text: request.__('sharePlan.endOfForm.jointAgreement.legalStatus.intro'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: NO_SPACE,
+    },
+    {
+      text: request.__('sharePlan.endOfForm.jointAgreement.legalStatus.legallyBinding'),
+      size: MAIN_TEXT_SIZE,
+      style: FontStyles.NORMAL,
+      bottomPadding: PARAGRAPH_SPACE,
+    },
     {
       text: request.__('sharePlan.endOfForm.whatToDoNext.title'),
       size: SUB_HEADING_SIZE,

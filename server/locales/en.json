@@ -688,7 +688,7 @@
     "endOfForm": {
       "sectionTitle": "Section 9",
       "title": "End of form",
-      "subtitle": "9.1 Is there anything else you would like to suggest for the child arrangements plan?",
+      "subtitle": "Is there anything else you would like to suggest for the child arrangements plan?",
       "otherInformationLabel": "You can use this space to write any other information you would like included in the plan",
       "jointAgreement": {
         "title": "Joint agreement",
@@ -806,7 +806,7 @@
       "no": "No",
       "livingAndVisiting": {
         "sectionTitle": "Section 2",
-        "mostlyLiveTitle": "2.1 Where will the children spend most of their time?",
+        "mostlyLiveTitle": "Where will the children spend most of their time?",
         "suggestedLiveWith": "{{{ senderName }}} suggested that the children spend most of their time with {{{ adult }}}.",
         "suggestedLiveWithChild": "{{{ senderName }}} suggested that {{{ childName }}} mostly lives with {{{ adult }}}.",
         "suggestedLiveWithOtherChildren": "{{{ senderName }}} suggested that the other children mostly live with {{{ adult }}}.",
@@ -820,9 +820,9 @@
       },
       "handoverAndHolidays": {
         "sectionTitle": "Section 3",
-        "householdsTitle": "3.1 How will the children get between households?",
-        "handoverTitle": "3.2 Where does handover take place?",
-        "arrangementsTitle": "3.3 Will these arrangements change during school holidays?",
+        "householdsTitle": "How will the children get between households?",
+        "handoverTitle": "Where does handover take place?",
+        "arrangementsTitle": "Will these arrangements change during school holidays?",
         "suggestedCollects": "{{{ senderName }}} suggested that {{{ adult }}} collects the children.",
         "suggestedHandover": "{{{ senderName }}} suggested that handover takes place at {{{ location }}}",
         "neutralLocation": "a neutral location",
