@@ -1,8 +1,38 @@
+import { copyFileSync, mkdirSync } from 'node:fs';
+import path from 'node:path';
+
 import { typecheckPlugin } from '@jgoz/esbuild-plugin-typecheck';
 import { build } from 'esbuild';
-import { clean } from 'esbuild-plugin-clean';
-import { copy } from 'esbuild-plugin-copy';
-import { sync } from 'glob';
+import { globSync, sync } from 'glob';
+
+/**
+ * Copy glob matches into `to`, keeping the path under the last `/**` segment.
+ * @param {Array<{ from: string | string[], to: string | string[] }>} assets
+ */
+export function copyFiles(assets) {
+  for (const asset of assets) {
+    const froms = Array.isArray(asset.from) ? asset.from : [asset.from];
+    const tos = Array.isArray(asset.to) ? asset.to : [asset.to];
+
+    for (const rawFrom of froms) {
+      const files = globSync(rawFrom, { nodir: true });
+      const { dir } = path.parse(rawFrom);
+      const startFragment = dir.endsWith('/**') ? dir.slice(0, -3) : dir;
+
+      for (const file of files) {
+        const preserved = file.split(startFragment)[1] ?? '';
+        for (const baseToPath of tos) {
+          const dest =
+            path.extname(baseToPath) === ''
+              ? path.resolve(process.cwd(), baseToPath, preserved.replace(/^[/\\]/, ''))
+              : path.resolve(process.cwd(), baseToPath);
+          mkdirSync(path.dirname(dest), { recursive: true });
+          copyFileSync(file, dest);
+        }
+      }
+    }
+  }
+}
 
 /**
  * Build typescript application into CommonJS
@@ -17,14 +47,15 @@ const buildApp = (buildConfig) => {
     platform: 'node',
     format: 'cjs',
     plugins: [
-      clean({
-        patterns: buildConfig.app.clear,
-      }),
       typecheckPlugin(),
-      copy({
-        resolveFrom: 'cwd',
-        assets: buildConfig.app.copy,
-      }),
+      {
+        name: 'copy-files',
+        setup(esbuildBuild) {
+          esbuildBuild.onEnd(() => {
+            copyFiles(buildConfig.app.copy);
+          });
+        },
+      },
     ],
   });
 };

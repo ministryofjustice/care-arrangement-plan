@@ -20,8 +20,6 @@ FROM base AS dev
 
 ENV NODE_ENV=development
 
-RUN npm i -g nodemon
-
 COPY ./bin/docker-entrypoint.dev.sh /app/bin/entrypoint.sh
 
 RUN chmod +x /app/bin/entrypoint.sh

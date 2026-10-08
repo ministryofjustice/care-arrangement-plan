@@ -1,24 +1,18 @@
 import path from 'node:path';
 
 import { build } from 'esbuild';
-import { copy } from 'esbuild-plugin-copy';
 import manifestPlugin from 'esbuild-plugin-manifest';
 import { sassPlugin } from 'esbuild-sass-plugin';
+
+import { copyFiles } from './app.config.mjs';
 
 /**
  * Copy additional assets into distribution
  * @type {BuildStep}
  */
 const buildAdditionalAssets = (buildConfig) => {
-  return build({
-    outdir: buildConfig.assets.outDir,
-    plugins: [
-      copy({
-        resolveFrom: 'cwd',
-        assets: buildConfig.assets.copy,
-      }),
-    ],
-  });
+  copyFiles(buildConfig.assets.copy);
+  return Promise.resolve();
 };
 
 /**
