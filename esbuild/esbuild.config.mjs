@@ -1,3 +1,4 @@
+import { rmSync } from 'node:fs';
 import path from 'node:path';
 
 import { glob } from 'glob';
@@ -30,7 +31,6 @@ const buildConfig = {
         to: path.join(cwd, 'dist/locales'),
       },
     ],
-    clear: path.join(cwd, 'dist/**/*'),
   },
 
   assets: {
@@ -46,6 +46,8 @@ const buildConfig = {
 };
 
 const main = () => {
+  rmSync(buildConfig.app.outDir, { recursive: true, force: true });
+
   Promise.all([buildApp(buildConfig), buildAssets(buildConfig)]).catch((e) => {
     process.stderr.write(`${e}\n`);
     process.exit(1);
