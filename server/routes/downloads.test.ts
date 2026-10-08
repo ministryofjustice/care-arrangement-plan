@@ -9,6 +9,7 @@ import generatePdf from '../../scripts/generatePdf';
 import config from '../config';
 import paths from '../constants/paths';
 import createPdf from '../pdf/createPdf';
+import sendDownloadFormEvent from '../services/googleAnalyticsService';
 import testAppSetup from '../test-utils/testAppSetup';
 import { mockNow, sessionMock } from '../test-utils/testMocks';
 import paperFormFileName from '../utils/paperFormFileName';
@@ -16,6 +17,10 @@ import paperFormFileName from '../utils/paperFormFileName';
 const app = testAppSetup();
 
 jest.mock('../pdf/createPdf');
+jest.mock('../services/googleAnalyticsService', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 jest.mock('../html/createHtmlContent', () => jest.fn().mockReturnValue(''));
 jest.mock('../utils/sessionHelpers', () => ({ formattedChildrenNames: jest.fn().mockReturnValue('') }));
 jest.mock('../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../assets/${fileName}`));
@@ -64,6 +69,14 @@ describe(`GET ${paths.DOWNLOAD_PAPER_FORM}`, () => {
 
     expect(responseHash).toEqual(referenceHash);
   };
+
+  test('sends a download_form event', async () => {
+    const paperFormApp = testAppSetup();
+
+    await request(paperFormApp).get(paths.DOWNLOAD_PAPER_FORM).expect(200);
+
+    expect(sendDownloadFormEvent).toHaveBeenCalledWith(expect.any(Object));
+  });
 
   test('returns the English paper form by default', async () => {
     config.includeWelshLanguage = true;
