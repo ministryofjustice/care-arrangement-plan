@@ -111,7 +111,7 @@ describe('googleAnalyticsService', () => {
 
     sendDownloadFormEvent(
       requestFor({
-        get: jest.fn((header: string) => (header === 'user-agent' ? 'Mozilla/5.0' : 'not a url')) as Request['get'],
+        get: jest.fn((header: string) => (header === 'user-agent' ? 'Mozilla/5.0' : 'not a url')) as unknown as Request['get'],
       }),
     );
 
