@@ -47,6 +47,7 @@ const config = {
   staticResourceCacheDuration: getStringConfigValue('STATIC_RESOURCE_CACHE_DURATION'),
   analytics: {
     ga4Id: process.env.GA4_ID,
+    apiSecret: process.env.GA4_API_SECRET,
     enabled: process.env.ENABLE_ANALYTICS === 'true',
     hashSecret: process.env.HASH_SECRET,
   },

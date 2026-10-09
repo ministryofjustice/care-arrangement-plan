@@ -21,9 +21,12 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop">
 
-    <h1 class="govuk-heading-l">{{ __('confirmation.title') }}</h1>
+      <h1 class="govuk-heading-l">{{ __('confirmation.title') }}</h1>
 
-  <p class="govuk-body govuk-!-margin-top-6"><b>{{ __('confirmation.whatYouNeedToDoNext') }}</b> {{ __('confirmation.checkDownloadsFolder', { otherAdult: otherAdult }) }}</p>
+      <p class="govuk-body govuk-!-margin-top-6">
+        <b>{{ __('confirmation.whatYouNeedToDoNext') }}</b>
+        {{ __('confirmation.checkDownloadsFolder', { otherAdult: otherAdult }) }}
+      </p>
 
       <h2 class="govuk-heading-m govuk-!-margin-top-6">
         {{ __('sharePlan.ifTheyDoNotRespond', {otherAdult: otherAdult}) }}
@@ -35,50 +38,75 @@
       </p>
 
       <p class="govuk-body">
-        <a href="https://www.gov.uk/looking-after-children-divorce/types-of-court-order" class="govuk-link"
-          >{{ __('sharePlan.ifYouCannotAgree') }}</a
-        >
+        <a href="https://www.gov.uk/looking-after-children-divorce/types-of-court-order" class="govuk-link">
+          {{ __('sharePlan.ifYouCannotAgree') }}
+        </a>
       </p>
     </div>
 
     <div class="govuk-grid-column-one-third">
-      <hr class="govuk-!-margin-bottom-4 now-share-header" />
+      <hr class="govuk-!-margin-bottom-4 now-share-header"/>
       <h2 class="govuk-heading-m govuk-!-margin-bottom-2">{{ __('confirmation.cantFindPlan') }}</h2>
       <p class="govuk-body govuk-!-margin-bottom-4">
         {{ __('confirmation.checkDownloads') }}
       </p>
-      <p class="govuk-body"><a href="{{ paths.DOWNLOAD_PDF }}" class="govuk-link">{{ __('confirmation.downloadPdf') }}</a></p>
-      <p class="govuk-body"><a href="{{ paths.DOWNLOAD_HTML }}" class="govuk-link">{{ __('confirmation.downloadHtml') }}</a></p>
+      <p class="govuk-body">
+        <a href="{{ paths.DOWNLOAD_PDF }}" class="govuk-link">{{ __('confirmation.downloadPdf') }}</a>
+      </p>
+      <p class="govuk-body">
+        <a href="{{ paths.DOWNLOAD_HTML }}" class="govuk-link">{{ __('confirmation.downloadHtml') }}</a>
+      </p>
     </div>
   </div>
 
   <script nonce="{{ cspNonce }}">
-    (function() {
+    (function () {
       'use strict';
 
-      // Auto-trigger download when page loads
-      // Use a unique key per plan attempt to allow multiple plans in the same browser session
+      // Auto-trigger download when page loads.
+      // Use a unique key per plan attempt to allow multiple plans in the same browser session.
       var downloadKey = 'downloadTriggered';
 
-      // Check if this is the first visit to this page (not a refresh or back navigation)
-      if (!sessionStorage.getItem(downloadKey)) {
-        sessionStorage.setItem(downloadKey, 'true');
+      // Check if this is the first visit to this page (not a refresh or back navigation).
+      if (sessionStorage.getItem(downloadKey)) {
+        return;
+      }
 
-        // Get the format parameter from URL (defaults to 'pdf' for backward compatibility)
-        var urlParams = new URLSearchParams(window.location.search);
-        var format = urlParams.get('format') || 'pdf';
+      sessionStorage.setItem(downloadKey, 'true');
 
-        // Determine which download URL to use
-        var downloadUrl = format === 'html' ? '{{ paths.DOWNLOAD_HTML }}' : '{{ paths.DOWNLOAD_PDF }}';
+      // Get the format parameter from URL (defaults to 'pdf' for backward compatibility).
+      var format = new URLSearchParams(window.location.search).get('format') || 'pdf';
+      var downloadUrl = format === 'html'
+        ? '{{ paths.DOWNLOAD_HTML }}'
+        : '{{ paths.DOWNLOAD_PDF }}';
 
-        // Create a temporary link and trigger download
-        var link = document.createElement('a');
-        link.href = downloadUrl;
-        link.setAttribute('download', '');
-        link.style.display = 'none';
-        document.body.appendChild(link);
+      // app.js is a deferred module and registers link tracking before DOMContentLoaded.
+      // Clicking during parsing happens too early, so the click is never tracked.
+      function triggerDownload() {
+        var link = document.querySelector('a[href="' + downloadUrl + '"]');
+
+        if (!link) {
+          link = document.createElement('a');
+          link.href = downloadUrl;
+          link.setAttribute('download', '');
+          link.style.display = 'none';
+          document
+            .body
+            .appendChild(link);
+          link.click();
+          document
+            .body
+            .removeChild(link);
+          return;
+        }
+
         link.click();
-        document.body.removeChild(link);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', triggerDownload);
+      } else {
+        triggerDownload();
       }
     })();
   </script>
