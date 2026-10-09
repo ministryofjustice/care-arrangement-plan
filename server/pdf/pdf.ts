@@ -3,42 +3,58 @@ import fs from 'fs';
 import { Request } from 'express';
 import { jsPDF } from 'jspdf';
 
-import { version as packageVersion } from '../../package.json';
-import {Paragraph, Text} from '../@types/pdf';
+import { Paragraph, Text, TextRun } from '../@types/pdf';
 import {
   FONT,
   FOOTER_HEIGHT,
   HEADER_HEIGHT,
+  HEADING_SIZE,
+  INSET_BAR_WIDTH,
+  INSET_TEXT_GAP,
   LINE_HEIGHT_RATIO,
   MARGIN_WIDTH,
   MM_PER_POINT,
-  SECTION_HEADING_SIZE,
+  PARAGRAPH_SPACE,
+  SUB_HEADING_SIZE,
 } from '../constants/pdfConstants';
 import logger from '../logging/logger';
 import getAssetPath from '../utils/getAssetPath';
 
 import FontStyles from './fontStyles';
 
+const SUPPORT_BOX_WIDTH = 50;
+const SUPPORT_BOX_GAP = 25;
+
+type SupportToken = {
+  text: string;
+  style: FontStyles;
+  underline?: boolean;
+  email?: string;
+};
+
 class Pdf {
   public readonly document: jsPDF;
   public readonly request: Request;
-  public readonly maxPageWidth: number;
+  private contentWidth: number;
 
   public currentY = HEADER_HEIGHT;
+
+  public get maxPageWidth() {
+    return this.contentWidth;
+  }
 
   constructor(autoPrint: boolean, request: Request) {
     this.request = request;
     // @ts-expect-error There is an error into the jsPDF type declaration.
     this.document = new jsPDF({ lineHeight: LINE_HEIGHT_RATIO });
-    this.document.allowFsRead = [getAssetPath("fonts/") + "*"];
-    this.maxPageWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
+    this.document.allowFsRead = [getAssetPath('fonts/') + '*'];
+    this.contentWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
     this.setupFonts();
     // Set document title for proper filename when printing/downloading
     this.document.setProperties({
       title: request.__('pdf.name'),
     });
     if (autoPrint) this.document.autoPrint();
-    this.addHeaderToPage();
   }
 
   public toArrayBuffer() {
@@ -63,18 +79,24 @@ class Pdf {
       fs.readFileSync(getAssetPath('fonts/light-94a07e06a1-v2.ttf')).toString('base64'),
     );
     this.document.addFont('light-94a07e06a1-v2.ttf', FONT, FontStyles.NORMAL);
+    this.document.addFont('light-94a07e06a1-v2.ttf', FONT, FontStyles.ITALIC);
   }
 
-  private addHeaderToPage() {
-    this.document
-      .setFont(FONT, FontStyles.BOLD)
-      .setFontSize(SECTION_HEADING_SIZE)
-      .text(
-        this.request.__('pdf.name'),
-        MARGIN_WIDTH,
-        HEADER_HEIGHT * 0.5 + 0.25 * LINE_HEIGHT_RATIO * SECTION_HEADING_SIZE * MM_PER_POINT,
-        { align: 'left' },
-      );
+  public addRecipientDocumentLabel() {
+    const pageWidth = this.document.internal.pageSize.getWidth();
+    const lineHeight = SUB_HEADING_SIZE * LINE_HEIGHT_RATIO * MM_PER_POINT;
+    const lines = this.request.__('pdf.recipientDocument').split('\n');
+
+    this.document.setFont(FONT, FontStyles.BOLD).setFontSize(SUB_HEADING_SIZE);
+    lines.forEach((line, index) => {
+      this.document.text(line, pageWidth - MARGIN_WIDTH, lineHeight * (index + 2), { align: 'right' });
+    });
+
+    // The title is drawn from currentY, and its cap height sits above that baseline.
+    // Start it below the recipient label so the two do not share a line.
+    const labelBaseline = lineHeight * (lines.length + 1);
+    const titleCapOffset = HEADING_SIZE * MM_PER_POINT * (LINE_HEIGHT_RATIO - 1);
+    this.currentY = labelBaseline + PARAGRAPH_SPACE - titleCapOffset;
   }
 
   private addFooterToPage(pageNumber: number) {
@@ -88,19 +110,19 @@ class Pdf {
     const pageWidth = this.document.internal.pageSize.getWidth();
     const pageHeight = this.document.internal.pageSize.getHeight();
     const footerY = pageHeight - MARGIN_WIDTH;
+    const footerRuleOffset = 6;
 
-    // Draw left-aligned version and timestamp
-    const now = new Date();
-    const datePart = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' });
-    const timePart = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    this.document
-      .setFont(FONT, FontStyles.NORMAL)
-      .setFontSize(10)
-      .text(`v${packageVersion} · ${datePart} ${timePart}`, MARGIN_WIDTH, footerY, { align: 'left' });
+    // Draw a horizontal line above the footer
+    this.document.setDrawColor(0, 0, 0);
+    this.document.setLineWidth(0.5);
+    this.document.line(MARGIN_WIDTH, footerY - footerRuleOffset, pageWidth - MARGIN_WIDTH, footerY - footerRuleOffset);
 
     // Draw centered, bold extra text if present
     if (extraFooterText) {
-      this.document.setFont(FONT, FontStyles.BOLD).setFontSize(10).text(extraFooterText, pageWidth / 2, footerY, { align: 'center' });
+      this.document
+        .setFont(FONT, FontStyles.BOLD)
+        .setFontSize(10)
+        .text(extraFooterText, pageWidth / 2, footerY, { align: 'center' });
     }
 
     // Draw right-aligned page count on the same baseline (normal weight)
@@ -110,6 +132,51 @@ class Pdf {
       .text(pageCountText, pageWidth - MARGIN_WIDTH, footerY, { align: 'right' });
   }
 
+  public restoreContentWidth() {
+    this.contentWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
+  }
+
+  public reserveSupportColumn() {
+    this.contentWidth = this.supportColumnWidth();
+  }
+
+  public addSupportBox(contact: string, unableToAssist: string, top = this.currentY) {
+    const boxWidth = SUPPORT_BOX_WIDTH;
+    const padding = 3.5;
+    const paragraphGap = 3;
+    const size = 10;
+    const lineHeight = size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+    const innerWidth = boxWidth - padding * 2;
+    const fullWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
+    const boxX = MARGIN_WIDTH + fullWidth - boxWidth;
+    const boxTop = top;
+
+    const contactLines = this.layoutSupportLines(this.supportTokens(contact), innerWidth, size);
+    const unableLines = this.layoutSupportLines(
+      this.wordsAsTokens(unableToAssist, FontStyles.NORMAL),
+      innerWidth,
+      size,
+    );
+    const boxHeight =
+      padding + contactLines.length * lineHeight + paragraphGap + unableLines.length * lineHeight + padding;
+
+    this.document.setFillColor(227, 227, 227);
+    this.document.rect(boxX, boxTop, boxWidth, boxHeight, 'F');
+    this.document.setFillColor(0, 0, 0);
+
+    let textY = boxTop + padding;
+    textY = this.drawCenteredSupportLines(contactLines, boxX, boxWidth, textY, size);
+    this.drawCenteredSupportLines(unableLines, boxX, boxWidth, textY + paragraphGap, size);
+
+    this.reserveSupportColumn();
+    return boxTop + boxHeight;
+  }
+
+  private supportColumnWidth() {
+    const fullWidth = this.document.internal.pageSize.getWidth() - 2 * MARGIN_WIDTH;
+    return fullWidth - SUPPORT_BOX_WIDTH - SUPPORT_BOX_GAP;
+  }
+
   heightWillOverflowDocument(height: number) {
     return height + this.currentY > this.document.internal.pageSize.getHeight() - FOOTER_HEIGHT;
   }
@@ -117,7 +184,6 @@ class Pdf {
   createNewPage() {
     this.document.addPage();
     this.currentY = HEADER_HEIGHT;
-    this.addHeaderToPage();
   }
 
   drawBorder(x: number, y: number, xSize: number, ySize: number) {
@@ -126,15 +192,16 @@ class Pdf {
     this.document.rect(x - 0.3, y - 0.3, xSize + 0.6, ySize + 0.6);
   }
 
-  splitParagraph({ text, size, style }: Text): string[] {
+  splitParagraph({ text, size, style }: Text, width = this.maxPageWidth): string[] {
     this.document.setFontSize(size).setFont(FONT, style);
-    return this.document.splitTextToSize(text, this.maxPageWidth);
+    return this.document.splitTextToSize(text, width);
   }
 
-  getParagraphHeight({ text, size, style, bottomPadding }: Paragraph) {
-    this.document.setFontSize(size).setFont(FONT, style);
-    const textLines = this.splitParagraph({ text, size, style });
-    return size * LINE_HEIGHT_RATIO * textLines.length * MM_PER_POINT + bottomPadding;
+  getParagraphHeight({ text, size, style, bottomPadding, topPadding = 0, inset, segments }: Paragraph) {
+    const lineCount = segments
+      ? this.layoutMixedLines(segments, size, this.paragraphWidth(inset)).length
+      : this.splitParagraph({ text, size, style }, this.paragraphWidth(inset)).length;
+    return size * LINE_HEIGHT_RATIO * lineCount * MM_PER_POINT + topPadding + bottomPadding;
   }
 
   getTextWidth({ text, size, style }: Text) {
@@ -155,7 +222,147 @@ class Pdf {
     size: number;
     style: FontStyles;
   }) {
-    this.document.setFontSize(size).setFont(FONT, style).text(text, x, y);
+    this.document.setFontSize(size).setFont(FONT, style);
+    if (style !== FontStyles.ITALIC) {
+      this.document.text(text, x, y);
+      return;
+    }
+
+    // Transport has no italic face, so shear the upright glyphs. jsPDF combines a caller
+    // matrix with the line position, which would also slide the line sideways, so each
+    // line cancels that shift and stays on the same left edge as upright text.
+    const skew = Math.tan((12 * Math.PI) / 180);
+    const scaleFactor = this.document.internal.scaleFactor;
+    const pageHeight = this.document.internal.pageSize.getHeight() * scaleFactor;
+    const lines = Array.isArray(text) ? text : [text];
+    const lineHeight = size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+    lines.forEach((line, index) => {
+      const lineY = y + index * lineHeight;
+      const pdfY = pageHeight - lineY * scaleFactor;
+      const matrix = this.document.Matrix(1, 0, skew, 1, -pdfY * skew, 0);
+      this.document.text(line, x, lineY, undefined, matrix);
+    });
+  }
+
+  private wordsAsTokens(text: string, style: FontStyles): SupportToken[] {
+    return text
+      .split(/(\s+)/)
+      .filter((part) => part.length > 0)
+      .map((part) => ({ text: part, style }));
+  }
+
+  private supportTokens(text: string): SupportToken[] {
+    const match = text.match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
+    if (!match || match.index === undefined) return this.wordsAsTokens(text, FontStyles.NORMAL);
+
+    const email = match[0];
+    const at = email.indexOf('@');
+    return [
+      ...this.wordsAsTokens(text.slice(0, match.index), FontStyles.NORMAL),
+      { text: email.slice(0, at + 1), style: FontStyles.BOLD, underline: true, email },
+      { text: email.slice(at + 1), style: FontStyles.BOLD, underline: true, email },
+      ...this.wordsAsTokens(text.slice(match.index + email.length), FontStyles.NORMAL),
+    ];
+  }
+
+  private layoutSupportLines(tokens: SupportToken[], maxWidth: number, size: number) {
+    const lines: SupportToken[][] = [];
+    let line: SupportToken[] = [];
+    let lineWidth = 0;
+
+    tokens.forEach((token) => {
+      const width = this.getTextWidth({ text: token.text, size, style: token.style });
+      const isSpace = /^\s+$/.test(token.text);
+      if (line.length > 0 && lineWidth + width > maxWidth) {
+        lines.push(line);
+        line = [];
+        lineWidth = 0;
+        if (isSpace) return;
+      }
+      line.push(token);
+      lineWidth += width;
+    });
+
+    if (line.length > 0) lines.push(line);
+    return lines;
+  }
+
+  private drawCenteredSupportLines(lines: SupportToken[][], boxX: number, boxWidth: number, top: number, size: number) {
+    const lineHeight = size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+    let y = top;
+
+    lines.forEach((line) => {
+      y += lineHeight;
+      const widths = line.map((token) => this.getTextWidth({ text: token.text, size, style: token.style }));
+      const lineWidth = widths.reduce((sum, width) => sum + width, 0);
+      let x = boxX + (boxWidth - lineWidth) / 2;
+
+      line.forEach((token, index) => {
+        this.document.setFont(FONT, token.style).setFontSize(size);
+        if (token.underline && token.email) {
+          this.document.textWithLink(token.text, x, y, { url: `mailto:${token.email}` });
+          this.document.setDrawColor(0, 0, 0);
+          this.document.setLineWidth(0.2);
+          this.document.line(x, y + 0.5, x + widths[index], y + 0.5);
+        } else {
+          this.document.text(token.text, x, y);
+        }
+        x += widths[index];
+      });
+    });
+
+    return y;
+  }
+
+  private layoutMixedLines(segments: TextRun[], size: number, maxWidth: number) {
+    const tokens = segments.flatMap((segment) =>
+      this.wordsAsTokens(segment.text, segment.style).map((token) =>
+        segment.underline ? { ...token, underline: true } : token,
+      ),
+    );
+    return this.layoutSupportLines(tokens, maxWidth, size);
+  }
+
+  private drawMixedParagraph(segments: TextRun[], size: number, bottomPadding: number, inset?: boolean) {
+    const lines = this.layoutMixedLines(segments, size, this.paragraphWidth(inset));
+    const lineHeight = size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+    const left = inset ? MARGIN_WIDTH + INSET_BAR_WIDTH + INSET_TEXT_GAP : MARGIN_WIDTH;
+
+    if (inset) this.drawInsetBar(this.currentY, size, lines.length);
+
+    lines.forEach((line) => {
+      this.currentY += lineHeight;
+      let x = left;
+      line.forEach((token) => {
+        const width = this.getTextWidth({ text: token.text, size, style: token.style });
+        this.addText({ text: token.text, x, y: this.currentY, size, style: token.style });
+        if (token.underline) {
+          this.document.setDrawColor(0, 0, 0);
+          this.document.setLineWidth(0.3);
+          this.document.line(x, this.currentY + 0.7, x + width, this.currentY + 0.7);
+        }
+        x += width;
+      });
+    });
+
+    this.currentY += bottomPadding;
+  }
+
+  private paragraphWidth(inset?: boolean) {
+    return inset ? this.maxPageWidth - INSET_BAR_WIDTH - INSET_TEXT_GAP : this.maxPageWidth;
+  }
+
+  private drawInsetBar(top: number, size: number, lineCount: number) {
+    const lineHeight = size * LINE_HEIGHT_RATIO * MM_PER_POINT;
+    const fontHeight = size * MM_PER_POINT;
+    const firstBaseline = top + lineHeight;
+    const lastBaseline = top + lineCount * lineHeight;
+    const barTop = firstBaseline - fontHeight * 0.9;
+    const barBottom = lastBaseline + fontHeight * 0.25;
+
+    this.document.setFillColor(178, 180, 182);
+    this.document.rect(MARGIN_WIDTH, barTop, INSET_BAR_WIDTH, barBottom - barTop, 'F');
+    this.document.setFillColor(0, 0, 0);
   }
 
   private addUrlizedParagraph(
@@ -169,6 +376,7 @@ class Pdf {
       style: FontStyles;
     },
     urls: string[],
+    left = MARGIN_WIDTH,
   ) {
     this.document.setFontSize(size).setFont(FONT, style);
 
@@ -176,7 +384,7 @@ class Pdf {
 
     text.forEach((line) => {
       this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
-      let currentX = MARGIN_WIDTH;
+      let currentX = left;
 
       line
         .trim()
@@ -216,20 +424,34 @@ class Pdf {
     });
   }
 
-  addParagraph({ text, size, style, bottomPadding, urlize }: Paragraph) {
+  addParagraph({ text, size, style, bottomPadding, topPadding, urlize, inset, segments }: Paragraph) {
+    if (topPadding) this.currentY += topPadding;
+
+    if (segments) {
+      this.drawMixedParagraph(segments, size, bottomPadding, inset);
+      return;
+    }
+
     // The first line of text goes above the current y value, so add a single line of spacing to make the paragraph
     // behave the same as all other components we add
-    const textLines = this.splitParagraph({ text, size, style });
+    const textLines = this.splitParagraph({ text, size, style }, this.paragraphWidth(inset));
+    const blockTop = this.currentY;
+    const left = inset ? MARGIN_WIDTH + INSET_BAR_WIDTH + INSET_TEXT_GAP : MARGIN_WIDTH;
+
+    if (inset) this.drawInsetBar(blockTop, size, textLines.length);
+
     if (urlize) {
-      const urls = (text.match(/https?:\/\/\S+/g) || []).map((url) => url.replace(/^[(|<|&lt;]+|[.|,|)|\n|&gt;]+$/g, ''));
-      this.addUrlizedParagraph({ text: textLines, size, style }, urls);
+      const urls = (text.match(/https?:\/\/\S+/g) || []).map((url) =>
+        url.replace(/^[(|<|&lt;]+|[.|,|)|\n|&gt;]+$/g, ''),
+      );
+      this.addUrlizedParagraph({ text: textLines, size, style }, urls, left);
 
       if (urls.length !== 0) {
         logger.error('URL was not linked in PDF. URL missed: ' + urls);
       }
     } else {
       this.currentY += size * LINE_HEIGHT_RATIO * MM_PER_POINT;
-      this.addText({ text: textLines, x: MARGIN_WIDTH, y: this.currentY, size, style });
+      this.addText({ text: textLines, x: left, y: this.currentY, size, style });
       this.currentY += size * LINE_HEIGHT_RATIO * (textLines.length - 1) * MM_PER_POINT;
     }
 
