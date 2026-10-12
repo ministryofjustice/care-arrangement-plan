@@ -8,6 +8,7 @@ import paths from '../constants/paths';
 import createHtmlContent from '../html/createHtmlContent';
 import createPdf from '../pdf/createPdf';
 import { logDownload } from '../services/analyticsService';
+import sendDownloadFormEvent from '../services/googleAnalyticsService';
 import getAssetPath from '../utils/getAssetPath';
 import paperFormFileName from '../utils/paperFormFileName';
 import { formattedChildrenNames } from '../utils/sessionHelpers';
@@ -44,6 +45,7 @@ const downloadRoutes = (router: Router) => {
 
     // Log download event
     logDownload(request, 'offline_pdf');
+    sendDownloadFormEvent(request);
   });
 
   router.get(paths.DOWNLOAD_HTML, (request, response) => {
@@ -67,7 +69,13 @@ const downloadRoutes = (router: Router) => {
       htmlContent,
       logoImageData,
       appVersion: `v${packageVersion}`,
-      generatedAt: new Date().toLocaleString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+      generatedAt: new Date().toLocaleString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
     });
 
     // Log download event
