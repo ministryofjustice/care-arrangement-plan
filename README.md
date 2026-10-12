@@ -159,6 +159,8 @@ Secrets used in the deployment pipeline are stored as GitHub Actions secrets, an
 
 We used GA4 for tracking. GA4 will only be enabled if the environment variable `GA4_ID` exists.
 
+Paper-form downloads are sent to GA4 as a `download_form` event from the server, because `/download-paper-form` returns a PDF and never loads the GA script. That needs a Measurement Protocol API secret from the GA4 data stream, stored as `GA4_API_SECRET`. Requests that have explicitly rejected analytics cookies are not sent.
+
 If the user does not have a `cookie_policy` cookie, GA4 will not activate, and the cookie consent banner will load. Once
 that cookie exists, tracking will be enabled depending on the consent setting within in.
 
