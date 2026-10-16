@@ -1,0 +1,71 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ${KUBE_NAMESPACE}-send-email
+  namespace: ${KUBE_NAMESPACE}
+  labels:
+    app: ${KUBE_NAMESPACE}
+spec:
+  schedule: '0 9 * * *'
+  timeZone: Europe/London
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 120
+      template:
+        metadata:
+          labels:
+            app: ${KUBE_NAMESPACE}
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: cd-serviceaccount
+          containers:
+            - name: send-email
+              image: ${ECR_URL}:${IMAGE_TAG}
+              command: ['node', 'dist/scripts/sendScheduledEmail.js']
+              resources:
+                limits:
+                  cpu: 200m
+                  memory: 150Mi
+                requests:
+                  cpu: 50m
+                  memory: 100Mi
+              securityContext:
+                capabilities:
+                  drop:
+                    - ALL
+                runAsNonRoot: true
+                allowPrivilegeEscalation: false
+                seccompProfile:
+                  type: RuntimeDefault
+              env:
+                - name: BUILD_NUMBER
+                  value: ${BUILD_NUMBER}
+                - name: GIT_REF
+                  value: ${GIT_REF}
+                - name: GIT_BRANCH
+                  value: ${GIT_BRANCH}
+                - name: NOTIFY_TEMPLATE_ID
+                  value: '536a94f7-70bd-42ce-be53-06ed68711da4'
+                - name: NOTIFY_EMAIL_ADDRESS
+                  value: 'john.benjamin@justice.gov.uk'
+                - name: NOTIFY_PERSONALISATION
+                  value: '{"RETENTION_PERIOD":"30","URL":"https://www.google.com/"}'
+                - name: CACHE_HOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: elasticache-redis
+                      key: primary_endpoint_address
+                - name: CACHE_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: elasticache-redis
+                      key: auth_token
+              envFrom:
+                - configMapRef:
+                    name: ${KUBE_NAMESPACE}-config
+                - secretRef:
+                    name: ${KUBE_NAMESPACE}-secrets
