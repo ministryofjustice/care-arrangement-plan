@@ -48,12 +48,6 @@ spec:
                   value: ${GIT_REF}
                 - name: GIT_BRANCH
                   value: ${GIT_BRANCH}
-                - name: NOTIFY_TEMPLATE_ID
-                  value: '536a94f7-70bd-42ce-be53-06ed68711da4'
-                - name: NOTIFY_EMAIL_ADDRESS
-                  value: 'john.benjamin@justice.gov.uk'
-                - name: NOTIFY_PERSONALISATION
-                  value: '{"RETENTION_PERIOD":"30","URL":"https://www.google.com/"}'
                 - name: CACHE_HOST
                   valueFrom:
                     secretKeyRef:

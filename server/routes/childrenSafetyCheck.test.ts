@@ -1,11 +1,19 @@
 import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
+import config from '../config';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
+import sendTemplatedEmail from '../services/notifyTemplates';
 import testAppSetup from '../test-utils/testAppSetup';
 import { flashMock, flashMockErrors } from '../test-utils/testMocks';
 
+jest.mock('../services/notifyTemplates', () => ({
+  __esModule: true,
+  default: jest.fn().mockResolvedValue('notification-id'),
+}));
+
+const mockedSendTemplatedEmail = sendTemplatedEmail as jest.MockedFunction<typeof sendTemplatedEmail>;
 const app = testAppSetup();
 
 describe(paths.CHILDREN_SAFETY_CHECK, () => {
@@ -55,12 +63,17 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
       ]);
     });
 
-    it('should redirect to children not safe if the answer is yes', () => {
-      return request(app)
+    it('should redirect to children not safe if the answer is yes', async () => {
+      await request(app)
         .post(paths.CHILDREN_SAFETY_CHECK)
         .send({ [formFields.CHILDREN_SAFETY_CHECK]: 'Yes' })
         .expect(302)
         .expect('location', paths.CHILDREN_NOT_SAFE);
+
+      expect(mockedSendTemplatedEmail).toHaveBeenCalledWith('retentionReminder', config.notify.emailAddress, {
+        retentionPeriod: config.notify.retentionPeriod,
+        url: config.serviceUrl,
+      });
     });
 
     it('should redirect to do whats best page page if the answer is no', () => {
@@ -71,7 +84,7 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
         .expect('location', paths.SAFETY_CHECK);
     });
 
-    it('should redirect to children not safe if the answer is I\'m not sure', () => {
+    it("should redirect to children not safe if the answer is I'm not sure", () => {
       return request(app)
         .post(paths.CHILDREN_SAFETY_CHECK)
         .send({ [formFields.CHILDREN_SAFETY_CHECK]: 'notSure' })

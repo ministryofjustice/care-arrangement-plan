@@ -2,28 +2,38 @@ import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
 import { yesOrNo } from '../@types/fields';
+import config from '../config';
 import formFields from '../constants/formFields';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
+import logger from '../logging/logger';
 import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
+import sendTemplatedEmail from '../services/notifyTemplates';
 import addCompletedStep from '../utils/addCompletedStep';
-import { sendEmail } from '../services/notifyService';
 
 const safetyCheckRoutes = (router: Router) => {
-  router.get(paths.CHILDREN_SAFETY_CHECK, checkFormProgressFromConfig(FORM_STEPS.CHILDREN_SAFETY_CHECK), (request, response) => {
-    response.render('pages/childrenSafetyCheck', {
-      errors: request.flash('errors'),
-      title: request.__('childrenSafetyCheck.title'),
-    });
-  });
+  router.get(
+    paths.CHILDREN_SAFETY_CHECK,
+    checkFormProgressFromConfig(FORM_STEPS.CHILDREN_SAFETY_CHECK),
+    (request, response) => {
+      response.render('pages/childrenSafetyCheck', {
+        errors: request.flash('errors'),
+        title: request.__('childrenSafetyCheck.title'),
+      });
+    },
+  );
 
-  router.get(paths.CHILDREN_NOT_SAFE, checkFormProgressFromConfig(FORM_STEPS.CHILDREN_NOT_SAFE), (request, response) => {
-    addCompletedStep(request, FORM_STEPS.CHILDREN_NOT_SAFE);
-    response.render('pages/childrenNotSafe', {
-      title: request.__('childrenNotSafe.title'),
-      backLinkHref: paths.CHILDREN_SAFETY_CHECK,
-    });
-  });
+  router.get(
+    paths.CHILDREN_NOT_SAFE,
+    checkFormProgressFromConfig(FORM_STEPS.CHILDREN_NOT_SAFE),
+    (request, response) => {
+      addCompletedStep(request, FORM_STEPS.CHILDREN_NOT_SAFE);
+      response.render('pages/childrenNotSafe', {
+        title: request.__('childrenNotSafe.title'),
+        backLinkHref: paths.CHILDREN_SAFETY_CHECK,
+      });
+    },
+  );
 
   router.post(
     paths.CHILDREN_SAFETY_CHECK,
@@ -31,18 +41,18 @@ const safetyCheckRoutes = (router: Router) => {
     body(formFields.CHILDREN_SAFETY_CHECK)
       .exists()
       .withMessage((_value, { req }) => req.__('childrenSafetyCheck.error')),
-    (request, response) => {
+    async (request, response) => {
+      const { emailAddress, retentionPeriod } = config.notify;
 
-      try
-      {
-        sendEmail('536a94f7-70bd-42ce-be53-06ed68711da4', 'john.benjamin@justice.gov.uk', {
-          personalisation: {
-            RETENTION_PERIOD: '30',
-            URL: 'https://www.google.com/',
-          },
-        });
-      } catch (error) {
-        console.error('Error sending email:', error);
+      if (emailAddress && retentionPeriod) {
+        try {
+          await sendTemplatedEmail('retentionReminder', emailAddress, {
+            retentionPeriod,
+            url: config.serviceUrl,
+          });
+        } catch (error) {
+          logger.error(error, 'Failed to send retention reminder email');
+        }
       }
 
       const errors = validationResult(request);

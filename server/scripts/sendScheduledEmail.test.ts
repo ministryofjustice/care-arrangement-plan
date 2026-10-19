@@ -1,77 +1,46 @@
-import { sendEmail } from '../services/notifyService';
+import config from '../config';
+import sendTemplatedEmail from '../services/notifyTemplates';
 
 import sendScheduledEmail from './sendScheduledEmail';
 
-jest.mock('../services/notifyService', () => ({
-  sendEmail: jest.fn(),
+jest.mock('../services/notifyTemplates', () => ({
+  __esModule: true,
+  default: jest.fn(),
 }));
 
-const mockedSendEmail = sendEmail as jest.MockedFunction<typeof sendEmail>;
+const mockedSendTemplatedEmail = sendTemplatedEmail as jest.MockedFunction<typeof sendTemplatedEmail>;
 
 describe('sendScheduledEmail', () => {
-  const envNames = ['NOTIFY_TEMPLATE_ID', 'NOTIFY_EMAIL_ADDRESS', 'NOTIFY_PERSONALISATION'] as const;
-  const originalEnv = Object.fromEntries(envNames.map((name) => [name, process.env[name]]));
+  const originalEmailAddress = config.notify.emailAddress;
+  const originalRetentionPeriod = config.notify.retentionPeriod;
 
   beforeEach(() => {
-    for (const name of envNames) {
-      delete process.env[name];
-    }
-
-    mockedSendEmail.mockResolvedValue('notification-id');
+    config.notify.emailAddress = 'parent@example.com';
+    config.notify.retentionPeriod = '30';
+    mockedSendTemplatedEmail.mockResolvedValue('notification-id');
   });
 
   afterEach(() => {
-    for (const name of envNames) {
-      if (originalEnv[name] === undefined) {
-        delete process.env[name];
-      } else {
-        process.env[name] = originalEnv[name];
-      }
-    }
+    config.notify.emailAddress = originalEmailAddress;
+    config.notify.retentionPeriod = originalRetentionPeriod;
   });
 
-  it('sends the configured template to the configured address with personalisation', async () => {
-    process.env.NOTIFY_TEMPLATE_ID = '11111111-2222-3333-4444-555555555555';
-    process.env.NOTIFY_EMAIL_ADDRESS = 'parent@example.com';
-    process.env.NOTIFY_PERSONALISATION = JSON.stringify({
-      RETENTION_PERIOD: '30',
-      URL: 'https://www.example.com/',
-    });
-
+  it('sends the retention reminder with values mapped for that template', async () => {
     await expect(sendScheduledEmail()).resolves.toBe('notification-id');
 
-    expect(mockedSendEmail).toHaveBeenCalledWith('11111111-2222-3333-4444-555555555555', 'parent@example.com', {
-      personalisation: {
-        RETENTION_PERIOD: '30',
-        URL: 'https://www.example.com/',
-      },
+    expect(mockedSendTemplatedEmail).toHaveBeenCalledWith('retentionReminder', 'parent@example.com', {
+      retentionPeriod: '30',
+      url: config.serviceUrl,
     });
   });
 
-  it('sends without personalisation when NOTIFY_PERSONALISATION is unset', async () => {
-    process.env.NOTIFY_TEMPLATE_ID = '11111111-2222-3333-4444-555555555555';
-    process.env.NOTIFY_EMAIL_ADDRESS = 'parent@example.com';
+  it.each([
+    ['NOTIFY_EMAIL_ADDRESS', 'emailAddress'],
+    ['RETENTION_PERIOD', 'retentionPeriod'],
+  ] as const)('throws when %s is missing', async (envName, configName) => {
+    config.notify[configName] = undefined;
 
-    await sendScheduledEmail();
-
-    expect(mockedSendEmail).toHaveBeenCalledWith('11111111-2222-3333-4444-555555555555', 'parent@example.com', {});
-  });
-
-  it.each(['NOTIFY_TEMPLATE_ID', 'NOTIFY_EMAIL_ADDRESS'])('throws when %s is missing', async (name) => {
-    process.env.NOTIFY_TEMPLATE_ID = '11111111-2222-3333-4444-555555555555';
-    process.env.NOTIFY_EMAIL_ADDRESS = 'parent@example.com';
-    delete process.env[name];
-
-    await expect(sendScheduledEmail()).rejects.toThrow(`Missing env var ${name}`);
-    expect(mockedSendEmail).not.toHaveBeenCalled();
-  });
-
-  it.each(['not json', '["a"]', '"text"'])('throws when NOTIFY_PERSONALISATION is %p', async (value) => {
-    process.env.NOTIFY_TEMPLATE_ID = '11111111-2222-3333-4444-555555555555';
-    process.env.NOTIFY_EMAIL_ADDRESS = 'parent@example.com';
-    process.env.NOTIFY_PERSONALISATION = value;
-
-    await expect(sendScheduledEmail()).rejects.toThrow(/NOTIFY_PERSONALISATION/);
-    expect(mockedSendEmail).not.toHaveBeenCalled();
+    await expect(sendScheduledEmail()).rejects.toThrow(`Missing env var ${envName}`);
+    expect(mockedSendTemplatedEmail).not.toHaveBeenCalled();
   });
 });

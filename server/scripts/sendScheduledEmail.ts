@@ -1,9 +1,8 @@
+import config from '../config';
 import logger from '../logging/logger';
-import { sendEmail, SendEmailOptions } from '../services/notifyService';
+import sendTemplatedEmail from '../services/notifyTemplates';
 
-const readRequired = (name: string): string => {
-  const value = process.env[name];
-
+const requireValue = (value: string | undefined, name: string): string => {
   if (!value) {
     throw new Error(`Missing env var ${name}`);
   }
@@ -11,34 +10,11 @@ const readRequired = (name: string): string => {
   return value;
 };
 
-const readPersonalisation = (): SendEmailOptions['personalisation'] => {
-  const raw = process.env.NOTIFY_PERSONALISATION;
-
-  if (!raw) {
-    return undefined;
-  }
-
-  let parsed: unknown;
-
-  try {
-    parsed = JSON.parse(raw);
-  } catch {
-    throw new Error('NOTIFY_PERSONALISATION must be valid JSON');
-  }
-
-  if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
-    throw new Error('NOTIFY_PERSONALISATION must be a JSON object');
-  }
-
-  return parsed;
-};
-
 const sendScheduledEmail = async (): Promise<string> => {
-  const templateId = readRequired('NOTIFY_TEMPLATE_ID');
-  const emailAddress = readRequired('NOTIFY_EMAIL_ADDRESS');
-  const personalisation = readPersonalisation();
-
-  return sendEmail(templateId, emailAddress, personalisation ? { personalisation } : {});
+  return sendTemplatedEmail('retentionReminder', requireValue(config.notify.emailAddress, 'NOTIFY_EMAIL_ADDRESS'), {
+    retentionPeriod: requireValue(config.notify.retentionPeriod, 'RETENTION_PERIOD'),
+    url: config.serviceUrl,
+  });
 };
 
 if (require.main === module) {
