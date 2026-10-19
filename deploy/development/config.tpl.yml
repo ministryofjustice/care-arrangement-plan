@@ -18,3 +18,6 @@ data:
   GA4_ID: 'CAP-DEV-TEST-GA4-ID'
   ENABLE_ANALYTICS: 'false'
   SERVICE_URL: 'https://care-arrangement-plan-dev.apps.live.cloud-platform.service.justice.gov.uk'
+  NOTIFY_EMAIL_ADDRESS: 'john.benjamin@justice.gov.uk'
+  NOTIFY_TEMPLATE_RETENTION_REMINDER: '536a94f7-70bd-42ce-be53-06ed68711da4'
+  RETENTION_PERIOD: '30'

@@ -53,6 +53,14 @@ const config = {
   opensearch: {
     proxyUrl: process.env.OPENSEARCH_PROXY_URL,
   },
+  notify: {
+    apiKey: process.env.NOTIFY_API_KEY,
+    emailAddress: process.env.NOTIFY_EMAIL_ADDRESS,
+    retentionPeriod: process.env.RETENTION_PERIOD,
+    templates: {
+      retentionReminder: process.env.NOTIFY_TEMPLATE_RETENTION_REMINDER,
+    },
+  },
   cache: getCacheConfig(),
   session: {
     secret: getStringConfigValue('SESSION_SECRET'),
