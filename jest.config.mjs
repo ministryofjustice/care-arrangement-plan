@@ -29,7 +29,7 @@ const config = {
     ],
   ],
   moduleFileExtensions: ['web.js', 'js', 'json', 'node', 'ts'],
-  setupFiles: ['dotenv/config'],
+  setupFiles: ['dotenv/config', './server/test-utils/forceTestEnv.ts'],
   setupFilesAfterEnv: ['./server/test-utils/testSetup.ts'],
 };
 

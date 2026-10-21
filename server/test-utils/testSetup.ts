@@ -41,8 +41,11 @@ beforeEach(() => {
     return sessionMock;
   });
   jest.useFakeTimers({ advanceTimers: true }).setSystemTime(mockNow);
-  // Disable authentication by default for tests (can be overridden in individual tests)
+  // Disable authentication by default for tests (can be overridden in individual tests).
+  // A developer shell may already have AUTH_PROVIDER=one-login, which would otherwise
+  // turn the password-gate tests into sign-in redirects.
   config.useAuth = false;
+  config.oneLogin = { enabled: false };
   (mockCheckFormProgressFromConfig as jest.Mock).mockClear();
 });
 
