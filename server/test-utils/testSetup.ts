@@ -6,10 +6,17 @@ import i18n from 'i18n';
 import { CAPSession } from '../@types/session';
 import config from '../config';
 
-import { flashFormValues, flashMockErrors, loggerMocks, mockCheckFormProgressFromConfig, mockNow, sessionMock } from './testMocks';
+import {
+  flashFormValues,
+  flashMockErrors,
+  loggerMocks,
+  mockCheckFormProgressFromConfig,
+  mockNow,
+  sessionMock,
+} from './testMocks';
 
 jest.mock('../logging/logger', () => loggerMocks);
-jest.mock('../middleware/checkFormProgressFromConfig', () => mockCheckFormProgressFromConfig)
+jest.mock('../middleware/checkFormProgressFromConfig', () => mockCheckFormProgressFromConfig);
 
 beforeAll(() => {
   i18n.configure({
@@ -27,6 +34,10 @@ beforeEach(() => {
   Object.keys(sessionMock).forEach((key: keyof CAPSession) => delete sessionMock[key]);
   sessionMock.destroy = jest.fn((callback: (error?: Error) => void) => {
     callback();
+    return sessionMock;
+  });
+  sessionMock.regenerate = jest.fn((callback?: (error?: Error) => void) => {
+    callback?.();
     return sessionMock;
   });
   jest.useFakeTimers({ advanceTimers: true }).setSystemTime(mockNow);

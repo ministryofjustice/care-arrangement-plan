@@ -7,6 +7,12 @@ export declare module 'express-session' {
     pageHistory: string[];
     previousPage: string;
     lang: string;
+    oneLogin?: {
+      sub: string;
+      email?: string;
+      emailVerified?: boolean;
+      idToken: string;
+    };
   }
 }
 

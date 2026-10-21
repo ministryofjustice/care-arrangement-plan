@@ -24,6 +24,7 @@ This app is heavily inspired from MoJ's [hmpps-template-typescript](https://gith
 - [Installation](#installation)
 - [Running](#running)
   - [Running with a cache](#running-with-a-cache)
+  - [Authentication with GOV.UK One Login](#authentication-with-govuk-one-login)
   - [Running in Docker](#running-in-docker)
 - [Project Structure](#project-structure)
 - [Language Support](#language-support)
@@ -73,6 +74,25 @@ docker compose up -d
 ```
 
 The app will now connect to Redis when running.
+
+### Authentication with GOV.UK One Login
+
+Local authentication development uses the [GOV.UK One Login simulator](https://docs.sign-in.service.gov.uk/test-your-integration/gov-uk-one-login-simulator/). The simulator is not GOV.UK One Login. Test against the integration environment before going live.
+
+The password page remains the default. To sign in through the simulator instead, set `AUTH_PROVIDER=one-login` in `.env` and leave `USE_AUTH=true`. Against `http://localhost:3000` the app uses the simulator's published client id and private key. Set `ONE_LOGIN_CLIENT_ID` and `ONE_LOGIN_PRIVATE_KEY` yourself for any other issuer.
+
+Start the simulator, then the app:
+
+```shell
+npm run one-login:start
+npm run start:dev
+```
+
+The simulator listens on `http://localhost:3000`. Its callback follows `PORT` in `.env`, so with `PORT=3001` it returns to `http://localhost:3001/oidc/authorization-code/callback`. Opening the app redirects to the simulator, which signs in as `test@example.com` and returns to the page you asked for.
+
+`npm run one-login:config` prints the simulator configuration. `npm run one-login:stop` stops the container.
+
+To try a different user, restart the simulator with `EMAIL` and `SUB` set, or `POST` a new `responseConfiguration` to `http://localhost:3000/config`.
 
 ### Running in Docker
 
@@ -212,6 +232,8 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidance on adding new questions an
 
 The service underwent private preview testing, which ended on 30th April 2025. The `PREVIEW_END` environment variable
 controls this date. After this date, all requests to the service return a page explaining that the preview has ended.
+
+Local sign-in can be exercised with the GOV.UK One Login simulator. See [Authentication with GOV.UK One Login](#authentication-with-govuk-one-login).
 
 To move the service into an open beta, the following changes should be made:
 

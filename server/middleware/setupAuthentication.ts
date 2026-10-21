@@ -16,6 +16,10 @@ const setupAuthentication = () => {
       next();
       return;
     }
+    if (config.oneLogin.enabled) {
+      sendUserToSignIn(req, res);
+      return;
+    }
     sendUserToPasswordPage(req, res);
   });
   return router;
@@ -29,7 +33,20 @@ const sendUserToPasswordPage = (req: Request, res: Response) => {
   res.redirect(passwordPageURL);
 };
 
-const isAuthenticated = (req: Request) =>
-  config.passwords.map(encryptPassword).some((p) => p === req.cookies[cookieNames.AUTHENTICATION]);
+const sendUserToSignIn = (req: Request, res: Response) => {
+  const signInUrl = url.format({
+    pathname: paths.SIGN_IN,
+    query: { returnURL: req.originalUrl },
+  });
+  res.redirect(signInUrl);
+};
+
+const isAuthenticated = (req: Request) => {
+  if (config.oneLogin.enabled) {
+    return Boolean(req.session?.oneLogin?.sub);
+  }
+
+  return config.passwords.map(encryptPassword).some((password) => password === req.cookies[cookieNames.AUTHENTICATION]);
+};
 
 export default setupAuthentication;
