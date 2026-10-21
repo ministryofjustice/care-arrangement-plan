@@ -79,7 +79,7 @@ The app will now connect to Redis when running.
 
 Local authentication development uses the [GOV.UK One Login simulator](https://docs.sign-in.service.gov.uk/test-your-integration/gov-uk-one-login-simulator/). The simulator is not GOV.UK One Login. Test against the integration environment before going live.
 
-The password page remains the default. To sign in through the simulator instead, set `AUTH_PROVIDER=one-login` in `.env` and leave `USE_AUTH=true`. Against `http://localhost:3000` the app uses the simulator's published client id and private key. Set `ONE_LOGIN_CLIENT_ID` and `ONE_LOGIN_PRIVATE_KEY` yourself for any other issuer.
+The password page remains the default. To sign in through the simulator instead, set `AUTH_PROVIDER=one-login` in `.env` and leave `USE_AUTH=true`. Against `http://localhost:3000` the app uses the simulator's published client id. Set `ONE_LOGIN_PRIVATE_KEY` to the private key published with the simulator. Set `ONE_LOGIN_CLIENT_ID` and `ONE_LOGIN_PRIVATE_KEY` yourself for any other issuer.
 
 Start the simulator, then the app:
 

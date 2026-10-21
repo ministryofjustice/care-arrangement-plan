@@ -70,6 +70,24 @@ describe('GOV.UK One Login routes', () => {
     });
   });
 
+  it('uses the return url stored when authentication was required', async () => {
+    sessionMock.returnUrl = paths.TASK_LIST;
+
+    await request(app).get(paths.SIGN_IN).expect(302);
+
+    const state = jest.mocked(buildAuthorizeUrl).mock.calls[0][0].state;
+    expect(openOneLoginTransaction(state, config.session.secret)?.returnUrl).toBe(paths.TASK_LIST);
+  });
+
+  it('does not redirect to an authorize address outside the configured issuer', async () => {
+    jest.mocked(buildAuthorizeUrl).mockResolvedValue('https://evil.example/authorize');
+
+    const response = await request(app).get(paths.SIGN_IN).expect(502);
+
+    expect(response.headers.location).toBeUndefined();
+    expect(response.text).toContain('There is a problem signing you in');
+  });
+
   it('ignores a return URL outside this service', async () => {
     await request(app)
       .get(`${paths.SIGN_IN}?returnURL=${encodeURIComponent('https://evil.example')}`)
@@ -132,6 +150,17 @@ describe('GOV.UK One Login routes', () => {
 
     const response = await request(app).get(paths.SIGNED_OUT).expect(200);
     expect(response.text).toContain('You have signed out');
+  });
+
+  it('does not redirect sign-out to an address outside the configured issuer', async () => {
+    sessionMock.oneLogin = { sub: 'user-1', idToken: 'id-token' };
+    jest.mocked(buildLogoutUrl).mockResolvedValue('https://evil.example/logout');
+
+    const response = await request(app).get(paths.SIGN_OUT).expect(502);
+
+    expect(response.headers.location).toBeUndefined();
+    expect(response.text).toContain('There is a problem signing you in');
+    expect(sessionMock.destroy).not.toHaveBeenCalled();
   });
 
   it('shows a sign out link after the user has signed in', async () => {

@@ -5,7 +5,7 @@ import cookieNames from '../constants/cookieNames';
 import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 import testAppSetup from '../test-utils/testAppSetup';
-import { flashMock, flashMockErrors } from '../test-utils/testMocks';
+import { flashMock, flashMockErrors, sessionMock } from '../test-utils/testMocks';
 
 const app = testAppSetup();
 
@@ -28,6 +28,17 @@ describe('Password Handler', () => {
           expect(response.text).toContain('Sign in');
           expect(response.text).not.toContain('The password is not correct');
         }));
+
+    it('should offer the return url stored when authentication was required', () => {
+      sessionMock.returnUrl = paths.TASK_LIST;
+
+      return request(app)
+        .get(paths.PASSWORD)
+        .expect(200)
+        .expect((response) => {
+          expect(response.text).toContain(`name="returnURL" value="${paths.TASK_LIST}"`);
+        });
+    });
 
     it('should return password page with error if there is an error', () => {
       Object.assign(flashMockErrors, [

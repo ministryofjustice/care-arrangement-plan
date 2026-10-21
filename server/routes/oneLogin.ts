@@ -23,6 +23,37 @@ const safeReturnUrl = (candidate: unknown) => {
   return returnPathsToIgnore.has(pathOnly) ? paths.START : validated;
 };
 
+const issuerRedirectUrl = (candidate: string) => {
+  if (!config.oneLogin.enabled) {
+    throw new OneLoginError('GOV.UK One Login is not enabled', 404);
+  }
+
+  const trusted = new URL(config.oneLogin.issuer);
+  let target: URL;
+  try {
+    target = new URL(candidate);
+  } catch {
+    throw new OneLoginError('GOV.UK One Login returned an invalid redirect', 502);
+  }
+
+  const pathname = target.pathname;
+  const pathIsSafe =
+    pathname.startsWith('/') &&
+    !pathname.startsWith('//') &&
+    !pathname.includes('\\') &&
+    !pathname.includes('\r') &&
+    !pathname.includes('\n');
+
+  if (target.origin !== trusted.origin || target.username || target.password || !pathIsSafe) {
+    throw new OneLoginError('GOV.UK One Login returned an unexpected redirect', 502);
+  }
+
+  const safeUrl = new URL(trusted.origin);
+  safeUrl.pathname = pathname;
+  safeUrl.search = target.search;
+  return safeUrl.href;
+};
+
 const renderProblem = (request: Request, response: Response, status: number) => {
   response.status(status).render('pages/oneLogin/problem', {
     title: request.__('oneLogin.problem.title'),
@@ -38,7 +69,7 @@ const oneLoginRoutes = (router: Router) => {
 
     try {
       const authorizeRequest = createAuthorizeRequest();
-      const returnUrl = safeReturnUrl(request.query.returnURL);
+      const returnUrl = safeReturnUrl(request.query.returnURL ?? request.session.returnUrl);
       const state = sealOneLoginTransaction(
         {
           nonce: authorizeRequest.nonce,
@@ -47,12 +78,14 @@ const oneLoginRoutes = (router: Router) => {
         },
         config.session.secret,
       );
-      const authorizeUrl = await buildAuthorizeUrl({
-        nonce: authorizeRequest.nonce,
-        state,
-        codeChallenge: authorizeRequest.codeChallenge,
-        locale: request.session.lang,
-      });
+      const authorizeUrl = issuerRedirectUrl(
+        await buildAuthorizeUrl({
+          nonce: authorizeRequest.nonce,
+          state,
+          codeChallenge: authorizeRequest.codeChallenge,
+          locale: request.session.lang,
+        }),
+      );
       response.redirect(authorizeUrl);
     } catch (error) {
       logger.error(error, 'Unable to start GOV.UK One Login');
@@ -109,7 +142,7 @@ const oneLoginRoutes = (router: Router) => {
 
     try {
       const idToken = request.session.oneLogin?.idToken;
-      const logoutUrl = idToken ? await buildLogoutUrl(idToken) : paths.SIGNED_OUT;
+      const logoutUrl = idToken ? issuerRedirectUrl(await buildLogoutUrl(idToken)) : paths.SIGNED_OUT;
       request.session.destroy((destroyError) => {
         if (destroyError) {
           next(destroyError);

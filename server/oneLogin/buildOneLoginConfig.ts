@@ -1,5 +1,3 @@
-import simulatorPrivateKey from './simulatorPrivateKey';
-
 const LOCAL_CLIENT_ID = 'HGIOgho9HIRhgoepdIOPFdIUWgewi0jw';
 const LOCAL_ISSUER = 'http://localhost:3000/';
 
@@ -53,7 +51,8 @@ const scopesFrom = (env: NodeJS.ProcessEnv) => {
 
 /**
  * Builds GOV.UK One Login settings.
- * Local development can omit the client credentials and use the published simulator defaults.
+ * Local development can omit the client id and use the published simulator client.
+ * The private key always comes from ONE_LOGIN_PRIVATE_KEY, including for the simulator.
  * Any other issuer, including integration and production, must supply its own client id and private key.
  */
 const buildOneLoginConfig = (env: NodeJS.ProcessEnv, isProduction: boolean): OneLoginConfig => {
@@ -70,7 +69,7 @@ const buildOneLoginConfig = (env: NodeJS.ProcessEnv, isProduction: boolean): One
     enabled: true,
     issuer,
     clientId: required(env, 'ONE_LOGIN_CLIENT_ID', localSimulator ? LOCAL_CLIENT_ID : undefined),
-    privateKey: required(env, 'ONE_LOGIN_PRIVATE_KEY', localSimulator ? simulatorPrivateKey : undefined),
+    privateKey: required(env, 'ONE_LOGIN_PRIVATE_KEY'),
     redirectUrl: required(
       env,
       'ONE_LOGIN_REDIRECT_URL',

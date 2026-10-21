@@ -7,6 +7,7 @@ export declare module 'express-session' {
     pageHistory: string[];
     previousPage: string;
     lang: string;
+    returnUrl?: string;
     oneLogin?: {
       sub: string;
       email?: string;

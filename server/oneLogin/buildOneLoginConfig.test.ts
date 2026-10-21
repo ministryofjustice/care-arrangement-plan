@@ -1,5 +1,4 @@
 import buildOneLoginConfig from './buildOneLoginConfig';
-import simulatorPrivateKey from './simulatorPrivateKey';
 
 describe('buildOneLoginConfig', () => {
   it('leaves One Login disabled unless AUTH_PROVIDER is one-login', () => {
@@ -8,16 +7,27 @@ describe('buildOneLoginConfig', () => {
   });
 
   it('uses the published simulator client when developing against localhost', () => {
-    expect(buildOneLoginConfig({ AUTH_PROVIDER: 'one-login', PORT: '8001' }, false)).toEqual({
+    expect(
+      buildOneLoginConfig(
+        { AUTH_PROVIDER: 'one-login', PORT: '8001', ONE_LOGIN_PRIVATE_KEY: 'local-simulator-private-key' },
+        false,
+      ),
+    ).toEqual({
       enabled: true,
       issuer: 'http://localhost:3000/',
       clientId: 'HGIOgho9HIRhgoepdIOPFdIUWgewi0jw',
-      privateKey: simulatorPrivateKey,
+      privateKey: 'local-simulator-private-key',
       redirectUrl: 'http://localhost:8001/oidc/authorization-code/callback',
       postLogoutRedirectUrl: 'http://localhost:8001/signed-out',
       scopes: ['openid', 'email'],
       vtr: 'Cl.Cm',
     });
+  });
+
+  it('requires a private key for the local simulator', () => {
+    expect(() => buildOneLoginConfig({ AUTH_PROVIDER: 'one-login', PORT: '8001' }, false)).toThrow(
+      'Missing env var ONE_LOGIN_PRIVATE_KEY',
+    );
   });
 
   it('uses explicit settings when they are provided', () => {
