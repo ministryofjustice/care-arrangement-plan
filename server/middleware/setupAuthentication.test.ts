@@ -5,12 +5,12 @@ import cookieNames from '../constants/cookieNames';
 import paths from '../constants/paths';
 import testAppSetup from '../test-utils/testAppSetup';
 import { sessionMock } from '../test-utils/testMocks';
+import encryptPassword from '../utils/encryptPassword';
 
 // Local variables
 
 const testPassword = ['test', 'Password'].join('');
-const encryptedTestPassword = ['fd5cb51bafd60f6fdbedde6e62c473da6f247db271633e15919bab78a02ee9eb'].join('');
-const validAuthenticationCookie = `${cookieNames.AUTHENTICATION}=${encryptedTestPassword}`;
+const validAuthenticationCookie = `${cookieNames.AUTHENTICATION}=${encryptPassword(testPassword)}`;
 const app = testAppSetup();
 
 describe('When a route is called', () => {

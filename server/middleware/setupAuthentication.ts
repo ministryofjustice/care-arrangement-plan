@@ -4,7 +4,7 @@ import type { Request, Response, NextFunction } from 'express-serve-static-core'
 import config from '../config';
 import cookieNames from '../constants/cookieNames';
 import paths from '../constants/paths';
-import encryptPassword from '../utils/encryptPassword';
+import { authenticationCookieMatches } from '../utils/encryptPassword';
 import { validateRedirectUrl } from '../utils/redirectValidator';
 
 const setupAuthentication = () => {
@@ -45,7 +45,7 @@ const isAuthenticated = (req: Request) => {
     return Boolean(req.session?.oneLogin?.sub);
   }
 
-  return config.passwords.map(encryptPassword).some((password) => password === req.cookies[cookieNames.AUTHENTICATION]);
+  return authenticationCookieMatches(req.cookies[cookieNames.AUTHENTICATION], config.passwords);
 };
 
 export default setupAuthentication;
