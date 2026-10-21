@@ -72,6 +72,7 @@ const setupRateLimit = () => {
   router.use('/sign-in', authLimiter);
   router.use('/oidc/authorization-code/callback', authLimiter);
   router.use('/sign-out', authLimiter);
+  router.use('/signed-out', authLimiter);
 
   // Apply general limiter to all other routes
   router.use(generalLimiter);

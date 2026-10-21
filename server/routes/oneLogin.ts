@@ -6,7 +6,6 @@ import logger from '../logging/logger';
 import { buildAuthorizeUrl, buildLogoutUrl, completeAuthorization, createAuthorizeRequest } from '../oneLogin/client';
 import OneLoginError from '../oneLogin/errors';
 import { openOneLoginTransaction, sealOneLoginTransaction } from '../oneLogin/transaction';
-import { validateRedirectUrl } from '../utils/redirectValidator';
 
 const returnPathsToIgnore = new Set<string>([
   paths.SIGN_IN,
@@ -16,11 +15,24 @@ const returnPathsToIgnore = new Set<string>([
   paths.PASSWORD,
 ]);
 
+const allowedReturnPaths = new Map<string, string>(
+  Object.values(paths)
+    .filter((path) => !returnPathsToIgnore.has(path))
+    .map((path) => [path, path]),
+);
+
 const safeReturnUrl = (candidate: unknown) => {
-  const provided = typeof candidate === 'string' ? candidate : undefined;
-  const validated = validateRedirectUrl(provided, paths.START);
-  const pathOnly = validated.split('?')[0].split('#')[0];
-  return returnPathsToIgnore.has(pathOnly) ? paths.START : validated;
+  if (typeof candidate !== 'string') {
+    return paths.START;
+  }
+
+  const pathOnly = candidate.trim().split(/[?#]/, 1)[0];
+  if (pathOnly.includes('\\') || pathOnly.includes('://') || pathOnly.startsWith('//')) {
+    return paths.START;
+  }
+
+  // The map value is one of the application's own paths, never the request value.
+  return allowedReturnPaths.get(pathOnly) ?? paths.START;
 };
 
 const issuerRedirectUrl = (candidate: string) => {

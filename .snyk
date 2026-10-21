@@ -158,6 +158,10 @@ ignore:
         reason: 'Additional auth-specific rate limiting active (10 attempts/15min). Template rendering, not FS operation.'
         expires: '2026-12-04T00:00:00.000Z'
 
+    - 'server/routes/oneLogin.ts':
+        reason: 'FALSE POSITIVE: response.render() is Nunjucks template rendering, not a file system operation. Sign-in, callback, sign-out, and signed-out use the auth limiter (10 failed requests/15min) and the application limiter (250 req/15min). See server/middleware/setupRateLimit.ts.'
+        expires: '2026-12-04T00:00:00.000Z'
+
     - 'server/routes/downloads.ts':
         reason: 'Additional download rate limiting active (20 req/15min). PDF generation is resource-intensive but rate-limited.'
         expires: '2026-12-04T00:00:00.000Z'

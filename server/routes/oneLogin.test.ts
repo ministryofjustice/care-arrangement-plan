@@ -88,6 +88,15 @@ describe('GOV.UK One Login routes', () => {
     expect(response.text).toContain('There is a problem signing you in');
   });
 
+  it('keeps only the allowlisted path from the return URL parameter', async () => {
+    await request(app)
+      .get(`${paths.SIGN_IN}?returnURL=${encodeURIComponent(`${paths.TASK_LIST}?next=https://evil.example`)}`)
+      .expect(302);
+
+    const state = jest.mocked(buildAuthorizeUrl).mock.calls[0][0].state;
+    expect(openOneLoginTransaction(state, config.session.secret)?.returnUrl).toBe(paths.TASK_LIST);
+  });
+
   it('ignores a return URL outside this service', async () => {
     await request(app)
       .get(`${paths.SIGN_IN}?returnURL=${encodeURIComponent('https://evil.example')}`)
@@ -120,6 +129,22 @@ describe('GOV.UK One Login routes', () => {
       idToken: 'id-token',
     });
     expect(sessionMock.regenerate).toHaveBeenCalled();
+  });
+
+  it('redirects to the allowlisted path and drops the rest of the saved return URL', async () => {
+    const state = sealOneLoginTransaction(
+      {
+        nonce: 'nonce-1',
+        codeVerifier: 'verifier-1',
+        returnUrl: `${paths.TASK_LIST}?next=https://evil.example`,
+      },
+      config.session.secret,
+    );
+
+    await request(app)
+      .get(`${paths.ONE_LOGIN_CALLBACK}?code=auth-code&state=${encodeURIComponent(state)}`)
+      .expect(302)
+      .expect('location', paths.TASK_LIST);
   });
 
   it('does not show the provider error on the problem page', async () => {
