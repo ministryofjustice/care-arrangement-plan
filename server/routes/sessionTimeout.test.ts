@@ -4,6 +4,7 @@ import request from 'supertest';
 import config from '../config';
 import paths from '../constants/paths';
 import cy from '../locales/cy.json';
+import en from '../locales/en.json';
 import testAppSetup from '../test-utils/testAppSetup';
 import { sessionMock } from '../test-utils/testMocks';
 
@@ -19,8 +20,8 @@ describe(paths.SESSION_TIMEOUT, () => {
 
     const dom = new JSDOM(response.text);
 
-    expect(dom.window.document.querySelector('h1')).toHaveTextContent("Sorry, you'll have to start again");
-    expect(dom.window.document.title).toContain("Sorry, you'll have to start again");
+    expect(dom.window.document.querySelector('h1')).toHaveTextContent(en.errors.timeOut.unAuthenticatedRoute.title);
+    expect(dom.window.document.title).toContain(en.errors.timeOut.pageTitle);
     expect(dom.window.document.body).toHaveTextContent(
       "Your session automatically ends if you don't use the service for 120 minutes.",
     );
@@ -38,7 +39,7 @@ describe(paths.SESSION_TIMEOUT, () => {
 
     expect(dom.window.document.documentElement.lang).toBe('cy');
     expect(dom.window.document.querySelector('h1')).toHaveTextContent(cy.errors.timeOut.unAuthenticatedRoute.title);
-    expect(dom.window.document.title).toContain(cy.errors.timeOut.unAuthenticatedRoute.title);
+    expect(dom.window.document.title).toContain(cy.errors.timeOut.pageTitle);
     expect(response.text).toContain('Mae eich sesiwn yn dod i ben yn awtomatig');
     expect(response.text).toContain(`${paths.CHILDREN_SAFETY_CHECK}?lang=cy`);
   });
@@ -54,7 +55,7 @@ describe(paths.SESSION_TIMEOUT, () => {
 
     expect(dom.window.document.documentElement.lang).toBe('cy');
     expect(dom.window.document.querySelector('h1')).toHaveTextContent(cy.errors.timeOut.unAuthenticatedRoute.title);
-    expect(dom.window.document.title).toContain(cy.errors.timeOut.unAuthenticatedRoute.title);
+    expect(dom.window.document.title).toContain(cy.errors.timeOut.pageTitle);
     expect(response.text).toContain(`${paths.CHILDREN_SAFETY_CHECK}?lang=cy`);
   });
 });

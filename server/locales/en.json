@@ -68,6 +68,7 @@
       "tryReloading": "Please wait a period of 15 minutes, then try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
     },
     "timeOut": {
+      "pageTitle": "Your session has timed out",
       "authenticatedRoute": {
         "title": "Your session has timed out",
         "yourSession": "Your session has ended because you have not used the service for 120 minutes. This is to help keep your information secure.",

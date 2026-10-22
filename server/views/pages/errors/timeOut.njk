@@ -1,5 +1,17 @@
 {% extends "partials/layout.njk" %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      null,
+      null,
+      null,
+      __(titleIds.TIME_OUT)
+    )
+  }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
