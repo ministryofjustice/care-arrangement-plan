@@ -12,6 +12,6 @@ export default function sendSessionTimeoutResponse(
   }
 
   response.status(403).render('pages/errors/timeOut', {
-    title: request.__('errors.timeOut.title'),
+    title: request.__('errors.timeOut.unAuthenticatedRoute.title'),
   });
 }

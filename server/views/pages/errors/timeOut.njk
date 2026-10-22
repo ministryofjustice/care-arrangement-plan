@@ -4,24 +4,45 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1>{{ __('errors.timeOut.title') }}</h1>
       {% if not production %}
         <h2>{{ status }}</h2>
         <pre>{{ stack }}</pre>
       {% endif %}
-      <p>{{ __('errors.timeOut.yourSession') }}</p>
-      <p>{{ __('errors.timeOut.personalInformation') }}</p>
-      <p>{{ __('errors.timeOut.startAgain') }}</p>
+
       {% set startAgainHref = paths.CHILDREN_SAFETY_CHECK %}
       {% if includeWelshLanguage and getLocale() == 'cy' %}
         {% set startAgainHref = paths.CHILDREN_SAFETY_CHECK ~ '?lang=cy' %}
       {% endif %}
-      {{
-        govukButton({
-          text: __('errors.timeOut.startAgainButton'),
-          href: startAgainHref
-        })
-      }}
+
+      {% if isAuthenticated %}
+        <h1>{{ __('errors.timeOut.authenticatedRoute.title') }}</h1>
+        <p>{{ __('errors.timeOut.authenticatedRoute.yourSession') }}</p>
+        <p>{{ __('errors.timeOut.authenticatedRoute.personalInformation') }}</p>
+        <p>{{ __('errors.timeOut.authenticatedRoute.changesNotSaved') }}</p>
+        {# TODO: This should be the GOV.UK One Login sign in page #}
+        {{
+          govukButton({
+            text: __('errors.timeOut.authenticatedRoute.signInToContinue'),
+            href: startAgainHref
+          })
+        }}
+        <p>
+          <a href="{{ startAgainHref }}" class="govuk-link">
+            {{ __('errors.timeOut.authenticatedRoute.startNewPlan') }}
+          </a>
+        </p>
+      {% else %}
+        <h1>{{ __('errors.timeOut.unAuthenticatedRoute.title') }}</h1>
+        <p>{{ __('errors.timeOut.unAuthenticatedRoute.yourSession') }}</p>
+        <p>{{ __('errors.timeOut.unAuthenticatedRoute.personalInformation') }}</p>
+        <p>{{ __('errors.timeOut.unAuthenticatedRoute.startAgain') }}</p>
+        {{
+          govukButton({
+            text: __('errors.timeOut.unAuthenticatedRoute.startAgainButton'),
+            href: startAgainHref
+          })
+        }}
+      {% endif %}
     </div>
   </div>
 {% endblock %}
