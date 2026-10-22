@@ -502,8 +502,8 @@
     "willDaytimeVisitsHappen": {
       "title": "A fydd y plant yn ymweld â {{{ adult }}} yn ystod y dydd?",
       "error": "Dewiswch p'un a fydd y plant yn cael ymweliadau yn ystod y dydd",
-      "yes": "Byddant",
-      "no": "Na fyddant"
+      "yes": "Bydd",
+      "no": "Na fydd"
     },
     "whichDaysDaytimeVisits": {
       "title": "Ar pa ddyddiau fydd ymweliadau yn ystod y dydd yn digwydd?",
