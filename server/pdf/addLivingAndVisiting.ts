@@ -1,26 +1,24 @@
 import { Request } from 'express';
 
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants';
 import {
-  whichDaysDaytimeVisits,
-  whichDaysOvernight,
-  willDaytimeVisitsHappen,
-  mostlyLive,
-  whichSchedule,
-  willOvernightsHappen,
+    mostlyLive,
+    whichDaysDaytimeVisits,
+    whichDaysOvernight,
+    whichSchedule,
+    willDaytimeVisitsHappen,
+    willOvernightsHappen,
 } from '../utils/formattedAnswersForPdf';
 import { parentNotMostlyLivedWith } from '../utils/sessionHelpers';
 
 import addAnswer from './addAnswer';
-import TextboxComponent from './components/textbox';
-import FontStyles from './fontStyles';
 import Pdf from './pdf';
 
 const addMostlyLive = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
+    request.__('sharePlan.yourProposedPlan.livingAndVisiting.sectionTitle'),
     request.__('taskList.livingAndVisiting'),
-    request.__('livingAndVisiting.mostlyLive.title'),
+    request.__('sharePlan.yourProposedPlan.livingAndVisiting.mostlyLiveTitle'),
     undefined,
     mostlyLive(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.livingAndVisiting.mostlyLive'),
@@ -30,6 +28,7 @@ const addMostlyLive = (pdf: Pdf, request: Request) => {
 const addWhichSchedule = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
+    undefined,
     undefined,
     request.__('livingAndVisiting.whichSchedule.title'),
     request.__('livingAndVisiting.whichSchedule.exactSplitWarning'),
@@ -44,6 +43,7 @@ const addWillOvernightsHappen = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
+    undefined,
     request.__('livingAndVisiting.willOvernightsHappen.title', { adult }),
     undefined,
     willOvernightsHappen(request),
@@ -54,6 +54,7 @@ const addWillOvernightsHappen = (pdf: Pdf, request: Request) => {
 const addWhichDaysOvernight = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
+    undefined,
     undefined,
     request.__('livingAndVisiting.whichDaysOvernight.title'),
     undefined,
@@ -68,6 +69,7 @@ const addWillDaytimeVisitsHappen = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
+    undefined,
     request.__('livingAndVisiting.willDaytimeVisitsHappen.title', { adult: parentNotMostlyLivedWith(request.session) }),
     undefined,
     willDaytimeVisitsHappen(request),
@@ -78,6 +80,7 @@ const addWillDaytimeVisitsHappen = (pdf: Pdf, request: Request) => {
 const addWWhichDaysDaytimeVisits = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
+    undefined,
     undefined,
     request.__('livingAndVisiting.whichDaysDaytimeVisits.title'),
     undefined,
@@ -94,21 +97,6 @@ const addLivingAndVisiting = (pdf: Pdf) => {
   addWhichDaysOvernight(pdf, request);
   addWillDaytimeVisitsHappen(pdf, request);
   addWWhichDaysDaytimeVisits(pdf, request);
-
-  new TextboxComponent(pdf, [
-    {
-      text: request.__('sharePlan.yourProposedPlan.endOfSection'),
-      size: QUESTION_TITLE_SIZE,
-      style: FontStyles.BOLD,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-    {
-      text: request.__('sharePlan.yourProposedPlan.compromise.livingAndVisiting'),
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-  ]).addComponentToDocument();
 };
 
 export default addLivingAndVisiting;
