@@ -27,6 +27,7 @@ enum titleIds {
   WHAT_OTHER_THINGS_MATTER = 'otherThings.whatOtherThingsMatter',
   SPECIAL_DAYS = 'specialDays.whatWillHappen',
   CONFIRMATION = 'confirmation',
+  TIME_OUT = 'errors.timeOut.pageTitle',
 }
 
 export default titleIds;

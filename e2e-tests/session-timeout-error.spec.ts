@@ -1,13 +1,15 @@
 import { test, expect } from '@playwright/test';
 
-const SESSION_TIMEOUT_TITLE = "Sorry, you'll have to start again";
+const SESSION_TIMEOUT_HEADING = "Sorry, you'll have to start again";
+const SESSION_TIMEOUT_PAGE_TITLE = /Your session has timed out/;
 
 test.describe('Session timeout error (403)', () => {
   test('should return 403 and render the session timeout page', async ({ page }) => {
     const response = await page.goto('/dev/create-timeout');
 
     expect(response?.status()).toBe(403);
-    await expect(page.locator('h1')).toContainText(SESSION_TIMEOUT_TITLE);
+    await expect(page.locator('h1')).toContainText(SESSION_TIMEOUT_HEADING);
+    await expect(page).toHaveTitle(SESSION_TIMEOUT_PAGE_TITLE);
   });
 
   test('should display session timeout guidance', async ({ page }) => {
