@@ -272,6 +272,44 @@
     "restrictionsOnUse": "If you have a court order in place that restricts your contact with the other parent or child, such as a no contact order, non-molestation order, or any other legal restriction, you must not use this service to contact them.",
     "breachOfTheOrder": "Doing so could be a breach of the order and may have legal consequences. If you are unsure whether a court order or other legal restriction affects your ability to use this service, seek legal advice before proceeding."
   },
+  "loginStart": {
+    "title": "Start or continue making a child arrangements plan",
+    "createAndDownload": "You can create and download a child arrangements plan without signing in.",
+    "doNotSaveProgress": "If you do not save your progress, your session will end after 120 minutes of inactivity and you may need to start again.",
+    "saveProgress": "You can save your progress using GOV.UK One Login and return to your plan later. You can choose to save while creating your plan.",
+    "question": "What would you like to do?",
+    "options": {
+      "startNewPlan": "Start a new plan",
+      "signIn": "Sign in to continue an existing plan"
+    }
+  },
+  "loginAccount": {
+    "title": "Your child arrangements plans",
+    "description": "Create and manage child arrangements plans for your children.",
+    "guidance": {
+      "title": "Guidance",
+      "links": {
+        "readMore": "<a href=\"https://care-arrangement-plan-prototype-kit.apps.live.cloud-platform.service.justice.gov.uk/mvp-save-and-return/sharing-your-plan\">Read more about sharing your child arrangements plan</a>"
+      }
+    },
+    "table": {
+      "headerRow": {
+        "child": "Child",
+        "parents": "Parents",
+        "status": "Status",
+        "savedUntil": "Saved until",
+        "actions": "Actions"
+      },
+      "rows": {
+        "child": "Jason and Amelia",
+        "parents": "Harrison and Jennifer",
+        "status": "In progress",
+        "savedUntil": "23 October 2026",
+        "actions": "Continue plan"
+      }
+    },
+    "createPlanButton": "Create a plan"
+  },
   "safetyCheck": {
     "title": "Have you experienced abuse from your ex-partner?",
     "rightInformation": "We ask this so we can give you the right information and resources for your situation. Your answer will not be saved or shared with anyone.",
