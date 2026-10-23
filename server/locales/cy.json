@@ -271,6 +271,8 @@
       "coercive": "Rheolaeth drwy orfodaeth a cham-drin seicolegol (bygythiadau, codi cywilydd ar rywun, brawychu, diraddio, ynysu a rheoli)",
       "harassment": "Aflonyddu a stelcio"
     },
+    "yes": "Ydw",
+    "no": "Nac ydw",
     "formHeading": "Dewiswch a ydych wedi profi unrhyw gamdriniaeth gan eich cyn-bartner neu beidio",
     "error": "Dewiswch a ydych wedi profi unrhyw gamdriniaeth gan eich cyn-bartner neu beidio"
   },
@@ -453,7 +455,7 @@
       "anotherArrangement": "Trefniant eraill<span class=\"govuk-visually-hidden\">Bydd dewis hwn yn amlygu maes arall</span>"
     },
     "willDaytimeVisitsHappen": {
-      "title": "A fydd y plant yn ymweld â {{{ adult }}} yn ystod y dydd?",
+      "title": "A fydd y plant yn ymweld â/ag {{{ adult }}} yn ystod y dydd?",
       "error": "Dewiswch p'un a fydd y plant yn cael ymweliadau yn ystod y dydd",
       "yes": "Bydd",
       "no": "Na fydd"
@@ -486,7 +488,9 @@
     },
     "willChangeDuringSchoolHolidays": {
       "title": "A fydd y trefniadau hyn yn newid yn ystod gwyliau'r ysgol?",
-      "error": "Dewiswch p'un a fydd y trefniadau'n newid yn ystod gwyliau'r ysgol"
+      "error": "Dewiswch p'un a fydd y trefniadau'n newid yn ystod gwyliau'r ysgol",
+      "yes": "Bydd",
+      "no": "Na fydd"
     },
     "howChangeDuringSchoolHolidays": {
       "title": "Sut fydd y trefniadau'n newid yn ystod gwyliau'r ysgol?",
@@ -610,7 +614,7 @@
       "confident": "rydych yn hyderus y gallwch chi a'ch cyn-bartner wneud penderfyniadau gyda'ch gilydd heb eich rhoi chi'ch hun na'r plant mewn perygl",
       "doNotFeelPressured": "nad ydych yn teimlo dan bwysau nac yn cael eich bygwth i ymateb",
       "stopIfAnyConcern": "Os oes gennych unrhyw bryderon ynghylch diogelwch, stopiwch nawr.",
-      "feedbackOrSafetyConcerns": "IOs oes gennych unrhyw adborth neu bryderon diogelwch am y gwasanaeth hwn, gallwch anfon e-bost at safety@propose-child-arrangements-plan.service.gov.uk.",
+      "feedbackOrSafetyConcerns": "Os oes gennych unrhyw adborth neu bryderon diogelwch am y gwasanaeth hwn, gallwch anfon e-bost at safety@propose-child-arrangements-plan.service.gov.uk.",
       "cannotAnswerQuestions": "Ni allwn ateb unrhyw gwestiynau am gynlluniau trefniadau plant sydd eisoes wedi'u creu.",
       "benefitsHeading": "Sut y gall gwneud cynllun trefniadau plant helpu",
       "mightFind": "Efallai y byddwch yn canfod bod cydweithio â {{{ senderName }}} ar gynllun trefniadau plant:",
@@ -666,8 +670,8 @@
       "doYouAgreeOnBasics": "Ydych chi a {{{ senderName }}} yn cytuno ynglŷn ag enwau'r plant, eich enwau chi, ac a oes gorchymyn llys ar waith?",
       "doNotStoreNames": "Nid ydym yn storio'r enwau hyn nac yn rhannu unrhyw ran o'r wybodaeth hon ag adrannau eraill y llywodraeth.",
       "doNotAgreeOnBasics": "Os ateboch chi ‘Nac ydw’, efallai y byddai’n ddefnyddiol dod o hyd i gyfryngwr a all eich helpu i gytuno ar eich trefniadau plant. Gallwch hefyd gael cymorth ariannol gyda hyn. I gael rhagor o wybodaeth, ewchi i https://www.gov.uk/looking-after-children-divorce.",
-      "yes": "Ydw",
-      "no": "Nac ydw",
+      "yes": "Ydym / Oes",
+      "no": "Nac ydym / Nac oes",
       "livingAndVisiting": {
         "suggestedLiveWith": "Awgrymodd {{{ senderName }}} y byddai'r plant yn treulio'r rhan fwyaf o'u hamser gyda {{{ adult }}}.",
         "suggestedLiveWithChild": "Awgrymodd {{{ senderName }}} bod {{{ childName }}} yn byw yn bennaf efo {{{ adult }}}.",
