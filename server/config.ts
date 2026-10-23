@@ -1,3 +1,5 @@
+import buildOneLoginConfig from './oneLogin/buildOneLoginConfig';
+
 const production = process.env.NODE_ENV === 'production';
 
 const getStringConfigValue = (name: string): string => {
@@ -60,6 +62,7 @@ const config = {
   },
   passwords: getStringArray('BETA_ACCESS_PASSWORDS'),
   useAuth: getBoolConfigValue('USE_AUTH'),
+  oneLogin: buildOneLoginConfig(process.env, production),
   isLiveService: process.env.IS_LIVE_SERVICE === 'true',
   feedbackUrl: getStringConfigValue('FEEDBACK_URL'),
   contactEmail: getStringConfigValue('CONTACT_EMAIL'),
