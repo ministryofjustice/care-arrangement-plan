@@ -1,5 +1,7 @@
 const FORM_STEPS = {
     START: 'start',
+    LOGIN_START: 'loginStart',
+    LOGIN_ACCOUNT: 'loginAccount',
     SAFETY_CHECK: 'safetyCheck',
     NOT_SAFE: 'notSafe',
     CHILDREN_SAFETY_CHECK: 'childrenSafetyCheck',

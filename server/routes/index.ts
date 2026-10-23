@@ -27,6 +27,8 @@ import safetyCheckRoutes from './safetyCheck';
 import sharePlanRoutes from './sharePlan';
 import specialDaysRoutes from './specialDays';
 import taskListRoutes from './taskList';
+import loginStartRoutes from './loginStart';
+import loginAccountRoutes from './loginAccount';
 
 function clearSessionData(request: Request): void {
   delete request.session.numberOfChildren;
@@ -61,6 +63,8 @@ const routes = (): Router => {
   });
 
   analyticsRoutes(router);
+  loginStartRoutes(router);
+  // loginAccountRoutes(router);
   safetyCheckRoutes(router);
   childrenSafetyRoutesCheck(router);
   doWhatsBestRoutes(router);

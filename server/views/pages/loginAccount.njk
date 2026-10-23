@@ -1,0 +1,84 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      null,
+      titleIds.LOGIN_ACCOUNT
+    )
+  }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container govuk-!-margin-top-3">
+  <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap">
+    <div>
+      <a href="/mvp-save-and-return/login-account" class="govuk-link govuk-link--no-visited-state govuk-!-margin-right-4 govuk-!-font-weight-bold" style="text-decoration: none; border-bottom: 3px solid #1d70b8; padding-bottom: 5px;">
+        Your child arrangements plans
+      </a>
+      <a href="/mvp-save-and-return/login-your-details" class="govuk-link govuk-link--no-visited-state" style="text-decoration: none;">
+        Your account details
+      </a>
+    </div>
+    <div class="govuk-body govuk-!-margin-0">
+      <span class="govuk-!-margin-right-4">
+      </span>
+      <a href="/mvp-save-and-return/clear-session-and-sign-out" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold" style="text-decoration: none">
+        Sign out
+      </a>
+    </div>
+  </div>
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-4">
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ __(loginAccount.title) }}</h1>
+      <p class="govuk-body">{{ __(loginStart.description) }}</p>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <h2 class="govuk-heading-m" id="subsection-title">{{ __(loginStart.guidance.title) }}</h2>
+      <nav role="navigation" aria-labelledby="subsection-title">
+        <ul class="govuk-list govuk-!-font-size-16">
+          <li>
+            <a class="govuk-link" href="#">
+              {{ __(loginStart.guidance.links.readMore) }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column">
+      {{
+        govukTable({
+          head: [
+            { text: __('loginStart.table.headerRow.child') },
+            { text: __('loginStart.table.headerRow.parents') },
+            { text: __('loginStart.table.headerRow.status') },
+            { text: __('loginStart.table.headerRow.savedUntil') },
+            { text: __('loginStart.table.headerRow.actions') }
+          ],
+          rows: [
+            [
+              { text: __('loginStart.table.rows.child') },
+              { text: __('loginStart.table.rows.parents') },
+              { text: __('loginStart.table.rows.status') },
+              { text: __('loginStart.table.rows.savedUntil') },
+              { text: __('loginStart.table.rows.actions') }
+            ]
+          ]
+        })
+      }}
+      <form class="form" action="{{ paths.LOGIN_START }}" method="post" novalidate>  
+        {{ govukButton({text: __('continue')}) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}
