@@ -15,12 +15,12 @@
 
 {% block content %}
 <div class="govuk-width-container govuk-!-margin-top-3">
-  <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap">
+  {# <div>
     <div>
-      <a href="/mvp-save-and-return/login-account" class="govuk-link govuk-link--no-visited-state govuk-!-margin-right-4 govuk-!-font-weight-bold" style="text-decoration: none; border-bottom: 3px solid #1d70b8; padding-bottom: 5px;">
+      <a href="/mvp-save-and-return/login-account" class="govuk-link govuk-link--no-visited-state">
         Your child arrangements plans
       </a>
-      <a href="/mvp-save-and-return/login-your-details" class="govuk-link govuk-link--no-visited-state" style="text-decoration: none;">
+      <a href="/mvp-save-and-return/login-your-details" class="govuk-link govuk-link--no-visited-state">
         Your account details
       </a>
     </div>
@@ -31,23 +31,40 @@
         Sign out
       </a>
     </div>
+  </div> #}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds govuk-!-font-weight-bold">
+      <a class="govuk-link govuk-link--no-visited-state" href="/mvp-save-and-return/login-account">
+        Your child arrangements plans
+      </a>
+      <a class="govuk-link govuk-link--no-visited-state govuk-!-margin-left-4" href="/mvp-save-and-return/login-your-details">
+        Your account details
+      </a>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <a class="govuk-link govuk-link--no-visited-state" href="/mvp-save-and-return/clear-session-and-sign-out">
+        Sign out
+      </a>
+    </div>
   </div>
+
   <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-4">
   </div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">{{ __(loginAccount.title) }}</h1>
-      <p class="govuk-body">{{ __(loginStart.description) }}</p>
+      <h1 class="govuk-heading-l">{{ __('loginAccount.title') }}</h1>
+      <p class="govuk-body">{{ __('loginAccount.description') }}</p>
     </div>
   </div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
-      <h2 class="govuk-heading-m" id="subsection-title">{{ __(loginStart.guidance.title) }}</h2>
+      <h2 class="govuk-heading-m" id="subsection-title">{{ __('loginAccount.guidance.title') }}</h2>
       <nav role="navigation" aria-labelledby="subsection-title">
         <ul class="govuk-list govuk-!-font-size-16">
           <li>
             <a class="govuk-link" href="#">
-              {{ __(loginStart.guidance.links.readMore) }}
+              {{ __('loginAccount.guidance.links.readMore') | safe }}
             </a>
           </li>
         </ul>
@@ -59,25 +76,25 @@
       {{
         govukTable({
           head: [
-            { text: __('loginStart.table.headerRow.child') },
-            { text: __('loginStart.table.headerRow.parents') },
-            { text: __('loginStart.table.headerRow.status') },
-            { text: __('loginStart.table.headerRow.savedUntil') },
-            { text: __('loginStart.table.headerRow.actions') }
+            { text: __('loginAccount.table.headerRow.child') },
+            { text: __('loginAccount.table.headerRow.parents') },
+            { text: __('loginAccount.table.headerRow.status') },
+            { text: __('loginAccount.table.headerRow.savedUntil') },
+            { text: __('loginAccount.table.headerRow.actions') }
           ],
           rows: [
             [
-              { text: __('loginStart.table.rows.child') },
-              { text: __('loginStart.table.rows.parents') },
-              { text: __('loginStart.table.rows.status') },
-              { text: __('loginStart.table.rows.savedUntil') },
-              { text: __('loginStart.table.rows.actions') }
+              { text: __('loginAccount.table.rows.child') },
+              { text: __('loginAccount.table.rows.parents') },
+              { text: __('loginAccount.table.rows.status') },
+              { text: __('loginAccount.table.rows.savedUntil') },
+              { text: __('loginAccount.table.rows.actions') }
             ]
           ]
         })
       }}
       <form class="form" action="{{ paths.LOGIN_START }}" method="post" novalidate>  
-        {{ govukButton({text: __('continue')}) }}
+        {{ govukButton({text: __('loginAccount.createPlanButton')}) }}
       </form>
     </div>
   </div>
