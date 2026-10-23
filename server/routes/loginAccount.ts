@@ -7,8 +7,7 @@ const loginAccountRoutes = (router: Router) => {
   router.get(paths.LOGIN_ACCOUNT, checkFormProgressFromConfig(FORM_STEPS.LOGIN_ACCOUNT), (request, response) => {
     response.render('pages/loginAccount', {
       errors: request.flash('errors'),
-      title: request.__('loginAccount.title'),
-      backLinkHref: paths.LOGIN_ACCOUNT
+      title: request.__('loginAccount.title')
     });
   });
 };

@@ -64,7 +64,7 @@ const routes = (): Router => {
 
   analyticsRoutes(router);
   loginStartRoutes(router);
-  // loginAccountRoutes(router);
+  loginAccountRoutes(router);
   safetyCheckRoutes(router);
   childrenSafetyRoutesCheck(router);
   doWhatsBestRoutes(router);
