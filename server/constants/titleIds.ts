@@ -28,6 +28,8 @@ enum titleIds {
   SPECIAL_DAYS = 'specialDays.whatWillHappen',
   CONFIRMATION = 'confirmation',
   TIME_OUT = 'errors.timeOut.pageTitle',
+  LOGIN_START = 'loginStart',
+  LOGIN_ACCOUNT = 'loginAccount'
 }
 
 export default titleIds;

@@ -13,6 +13,14 @@ const TASK_FLOW_MAP : TaskFlowMapType = {
     path: paths.START,
     dependsOn: [],
   },
+  [FORM_STEPS.LOGIN_START]: {
+    path: paths.LOGIN_START,
+    dependsOn: []
+  },
+  [FORM_STEPS.LOGIN_ACCOUNT]: {
+    path: paths.LOGIN_ACCOUNT,
+    dependsOn: []
+  },
   [FORM_STEPS.CHILDREN_SAFETY_CHECK]: {
     path: paths.CHILDREN_SAFETY_CHECK,
     dependsOn: [],

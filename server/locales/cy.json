@@ -272,6 +272,42 @@
     "restrictionsOnUse": "Os oes gennych gorchymyn llys mewn lle sy'n cyfyngu ar eich cyswllt gyda'r rhiant arall neu'r plentyn, fel gorchymyn dim cyswllt, gorchymyn rhag molestu, neu unrhyw gyfyngiad cyfreithiol arall, ni ddylech ddefnyddio'r gwasanaeth hwn i gysylltu â nhw.",
     "breachOfTheOrder": "Gall wneud hynny torri amodau'r gorchymyn a gall fod goblygiadau cyfreithiol. Os ydych yn ansicr p'un a yw gorchymyn neu gyfyngiad cyfreithiol yn effeithio ar eich gallu i ddefnyddio'r gwasanaeth hwn, dylech geisio cyngor cyfreithiol cyn parhau."
   },
+  "loginStart": {
+    "title": "Start or continue making a child arrangements plan",
+    "createAndDownload": "You can create and download a child arrangements plan without signing in.",
+    "doNotSaveProgress": "If you do not save your progress, your session will end after 120 minutes of inactivity and you may need to start again.",
+    "saveProgress": "You can save your progress using GOV.UK One Login and return to your plan later. You can choose to save while creating your plan.",
+    "question": "What would you like to do?",
+    "options": {
+      "startNewPlan": "Start a new plan without signing in",
+      "signIn": "Sign in with GOV.UK One Login to continue an existing plan"
+    }
+  },
+  "loginAccount": {
+    "title": "Your child arrangements plans",
+    "description": "Create and manage child arrangements plans for your children.",
+    "readMore": "<a href=\"#\">Read more about sharing your child arrangements plan</a>",
+    "table": {
+      "headerRow": {
+        "child": "Child",
+        "parents": "Parents",
+        "status": "Status",
+        "savedUntil": "Saved until",
+        "actions": "Actions"
+      },
+      "rows": {
+        "child": "Jason and Amelia",
+        "parents": "Harrison and Jennifer",
+        "status": "In progress",
+        "savedUntil": "23 October 2026",
+        "actions": {
+          "continue": "<a href=\"#\">Continue plan</a>",
+          "delete": "<a href=\"#\">Delete this plan</a>"
+        }
+      }
+    },
+    "createPlanButton": "Create a new plan"
+  },
   "safetyCheck": {
     "title": "A ydych wedi profi unrhyw gamdriniaeth gan eich cyn-bartner?",
     "rightInformation": "Rydym yn gofyn hyn er mwyn i ni allu rhoi'r wybodaeth a'r adnoddau cywir i chi ar gyfer eich sefyllfa. Ni fydd eich ateb yn cael ei gadw na'i rannu ag unrhyw un.",

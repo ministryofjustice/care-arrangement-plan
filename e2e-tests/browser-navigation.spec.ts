@@ -196,8 +196,12 @@ test.describe('Browser Navigation - Alternative Paths', () => {
       }
     );
 
-    // Change answer and verify different path
-    await getRadioNo(page).check();
+    // Change answer and verify different path.
+    // Firefox does not toggle this radio via locator.check() after browser back, so click its label.
+    const noRadio = getRadioNo(page);
+    const noRadioId = await noRadio.getAttribute('id');
+    await page.locator(`label[for="${noRadioId}"]`).click();
+    await expect(noRadio).toBeChecked();
     await page.getByRole('button', { name: /continue/i }).click();
     await expect(page).toHaveURL(/\/do-whats-best/);
   });

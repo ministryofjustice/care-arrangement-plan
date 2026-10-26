@@ -1,0 +1,103 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      null,
+      titleIds.LOGIN_ACCOUNT
+    )
+  }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-width-container">
+    {# <div>
+      <div>
+        <a href="/mvp-save-and-return/login-account" class="govuk-link govuk-link--no-visited-state">
+          Your child arrangements plans
+        </a>
+        <a href="/mvp-save-and-return/login-your-details" class="govuk-link govuk-link--no-visited-state">
+          Your account details
+        </a>
+      </div>
+      <div class="govuk-body govuk-!-margin-0">
+        <span class="govuk-!-margin-right-4">
+        </span>
+        <a href="/mvp-save-and-return/clear-session-and-sign-out" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold" style="text-decoration: none">
+          Sign out
+        </a>
+      </div>
+    </div> #}
+
+    {% set currentAccountPage = 'plans' %}
+    {% set activeLinkClass = "govuk-!-font-weight-bold" %}
+    {% set inactiveLinkClass = "govuk-link--no-underline" %}
+    {% set plansLinkClass = "govuk-link govuk-link--no-visited-state " + (activeLinkClass if currentAccountPage == "plans" else inactiveLinkClass) %}
+    {% set detailsLinkClass = "govuk-link govuk-link--no-visited-state govuk-!-margin-left-4 " + (activeLinkClass if currentAccountPage == "details" else inactiveLinkClass) %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <a class="{{ plansLinkClass }}" href="/mvp-save-and-return/login-account"{% if currentAccountPage == 'plans' %} aria-current="page"{% endif %}>
+          Your child arrangements plans
+        </a>
+        <a class="{{ detailsLinkClass }}" href="/mvp-save-and-return/login-your-details"{% if currentAccountPage == 'details' %} aria-current="page"{% endif %}>
+          Your account details
+        </a>
+      </div>
+      <div class="govuk-grid-column-one-third govuk-!-text-align-right">
+        <a class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold text-decoration-none" href="/mvp-save-and-return/clear-session-and-sign-out">
+          Sign out
+        </a>
+      </div>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-4">
+    
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">{{ __('loginAccount.title') }}</h1>
+        <p class="govuk-body">{{ __('loginAccount.description') }}</p>
+        <p class="govuk-body">{{ __('loginAccount.readMore') | safe }}</p>
+        <form class="form" action="{{ paths.LOGIN_START }}" method="post" novalidate>  
+          {{ govukButton({text: __('loginAccount.createPlanButton')}) }}
+        </form>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        {% include "partials/exitThisPage.njk" %}
+        <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+          {{ __('exitThisPage') | safe }}
+        </div>
+      </div>
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column">
+        {{
+          govukTable({
+            head: [
+              { text: __('loginAccount.table.headerRow.child') },
+              { text: __('loginAccount.table.headerRow.parents') },
+              { text: __('loginAccount.table.headerRow.status') },
+              { text: __('loginAccount.table.headerRow.savedUntil') },
+              { text: __('loginAccount.table.headerRow.actions') }
+            ],
+            rows: [
+              [
+                { text: __('loginAccount.table.rows.child') },
+                { text: __('loginAccount.table.rows.parents') },
+                { text: __('loginAccount.table.rows.status') },
+                { text: __('loginAccount.table.rows.savedUntil') },
+                {
+                  html: __('loginAccount.table.rows.actions.continue') | safe +
+                    '<div class="govuk-!-margin-top-2">' +
+                    __('loginAccount.table.rows.actions.delete') | safe +
+                    '</div>' }
+              ]
+            ]
+          })
+        }}
+      </div>
+    </div>
+  </div>
+{% endblock %}

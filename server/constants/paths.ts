@@ -7,6 +7,8 @@ enum paths {
   PRIVACY_NOTICE = '/privacy-notice',
   TERMS_AND_CONDITIONS = '/terms-and-conditions',
   SESSION_TIMEOUT = '/session-timeout',
+  LOGIN_START = '/login-start',
+  LOGIN_ACCOUNT = '/login-account',
   SAFETY_CHECK = '/safety-check',
   NOT_SAFE = '/not-safe',
   CHILDREN_SAFETY_CHECK = '/children-safety-check',

@@ -21,6 +21,8 @@ import downloadRoutes from './downloads';
 import existingCourtOrderRoutes from './existingCourtOrder';
 import handoverAndHolidaysRoutes from './handoverAndHolidays';
 import livingAndVisitingRoutes from './livingAndVisiting';
+import loginAccountRoutes from './loginAccount';
+import loginStartRoutes from './loginStart';
 import numberOfChildrenRoutes from './numberOfChildren';
 import otherThingsRoutes from './otherThings';
 import safetyCheckRoutes from './safetyCheck';
@@ -61,6 +63,8 @@ const routes = (): Router => {
   });
 
   analyticsRoutes(router);
+  loginStartRoutes(router);
+  loginAccountRoutes(router);
   safetyCheckRoutes(router);
   childrenSafetyRoutesCheck(router);
   doWhatsBestRoutes(router);
