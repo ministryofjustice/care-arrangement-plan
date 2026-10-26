@@ -68,11 +68,22 @@
       "tryReloading": "Please wait a period of 15 minutes, then try reloading the page or <a href=\"/\" class=\"govuk-link--no-visited-state\">start again</a>."
     },
     "timeOut": {
-      "title": "Sorry, you'll have to start again",
-      "yourSession": "Your session automatically ends if you don't use the service for 120 minutes.",
-      "personalInformation": "We haven't saved any personal information.",
-      "startAgain": "You need to start again.",
-      "startAgainButton": "Start again"
+      "pageTitle": "Your session has timed out",
+      "authenticatedRoute": {
+        "title": "Your session has timed out",
+        "yourSession": "Your session has ended because you have not used the service for 120 minutes. This is to help keep your information secure.",
+        "personalInformation": "If you've saved your child arrangements plan, you can sign in to continue where you left off.",
+        "changesNotSaved": "Any changes you have not saved may be lost.",
+        "signInToContinue": "Sign in to continue",
+        "startNewPlan": "Start a new child arrangements plan"
+      },
+      "unAuthenticatedRoute": {
+        "title": "Sorry, you'll have to start again",
+        "yourSession": "Your session automatically ends if you don't use the service for 120 minutes.",
+        "personalInformation": "We haven't saved any personal information.",
+        "startAgain": "You need to start again.",
+        "startAgainButton": "Start again"
+      }
     }
   },
   "cookieBanner": {

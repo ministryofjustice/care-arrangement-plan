@@ -32,7 +32,7 @@ export default function createErrorHandler() {
 
     if (status === 403) {
       return response.render('pages/errors/timeOut', {
-        title: request.__('errors.timeOut.title'),
+        title: request.__('errors.timeOut.unAuthenticatedRoute.title'),
       });
     }
 

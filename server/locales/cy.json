@@ -68,11 +68,22 @@
       "tryReloading": "Arhoswch am gyfnod o 15 munud, yna ceisiwch ail-lwytho'r dudalen neu <a href=\"/\" class=\"govuk-link--no-visited-state\">dechreuwch eto</a>."
     },
     "timeOut": {
-      "title": "Mae'n ddrwg gennym, mae'n rhaid i chi ddechrau eto",
-      "yourSession": "Mae eich sesiwn yn dod i ben yn awtomatig os nad ydych chi'n defnyddio'r gwasanaeth am 120 munud.",
-      "personalInformation": "Nid ydym wedi cadw unrhyw wybodaeth bersonol.",
-      "startAgain": "Mae angen i chi ddechrau eto.",
-      "startAgainButton": "Dechrau eto"
+      "pageTitle": "Mae'n ddrwg gennym, mae'n rhaid i chi ddechrau eto",
+      "authenticatedRoute": {
+        "title": "Your session has timed out",
+        "yourSession": "Your session has ended because you have not used the service for 120 minutes. This is to help keep your information secure.",
+        "personalInformation": "If you've saved your child arrangements plan, you can sign in to continue where you left off.",
+        "changesNotSaved": "Any changes you have not saved may be lost.",
+        "signInToContinue": "Sign in to continue",
+        "startNewPlan": "Start a new child arrangements plan"
+      },
+      "unAuthenticatedRoute": {
+        "title": "Mae'n ddrwg gennym, mae'n rhaid i chi ddechrau eto",
+        "yourSession": "Mae eich sesiwn yn dod i ben yn awtomatig os nad ydych chi'n defnyddio'r gwasanaeth am 120 munud.",
+        "personalInformation": "Nid ydym wedi cadw unrhyw wybodaeth bersonol.",
+        "startAgain": "Mae angen i chi ddechrau eto.",
+        "startAgainButton": "Dechrau eto"
+      }
     }
   },
   "cookieBanner": {
