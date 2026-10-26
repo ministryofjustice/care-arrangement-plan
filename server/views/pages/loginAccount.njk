@@ -33,12 +33,17 @@
       </div>
     </div> #}
 
+    {% set currentAccountPage = 'plans' %}
+    {% set activeLinkClass = "govuk-!-font-weight-bold" %}
+    {% set inactiveLinkClass = "govuk-link--no-underline" %}
+    {% set plansLinkClass = "govuk-link govuk-link--no-visited-state " + (activeLinkClass if currentAccountPage == "plans" else inactiveLinkClass) %}
+    {% set detailsLinkClass = "govuk-link govuk-link--no-visited-state govuk-!-margin-left-4 " + (activeLinkClass if currentAccountPage == "details" else inactiveLinkClass) %}
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds govuk-!-font-weight-bold">
-        <a class="govuk-link govuk-link--no-visited-state" href="/mvp-save-and-return/login-account">
+      <div class="govuk-grid-column-two-thirds">
+        <a class="{{ plansLinkClass }}" href="/mvp-save-and-return/login-account"{% if currentAccountPage == 'plans' %} aria-current="page"{% endif %}>
           Your child arrangements plans
         </a>
-        <a class="govuk-link govuk-link--no-visited-state govuk-!-margin-left-4" href="/mvp-save-and-return/login-your-details">
+        <a class="{{ detailsLinkClass }}" href="/mvp-save-and-return/login-your-details"{% if currentAccountPage == 'details' %} aria-current="page"{% endif %}>
           Your account details
         </a>
       </div>
@@ -83,7 +88,11 @@
                 { text: __('loginAccount.table.rows.parents') },
                 { text: __('loginAccount.table.rows.status') },
                 { text: __('loginAccount.table.rows.savedUntil') },
-                { text: __('loginAccount.table.rows.actions') }
+                {
+                  html: __('loginAccount.table.rows.actions.continue') | safe +
+                    '<div class="govuk-!-margin-top-2">' +
+                    __('loginAccount.table.rows.actions.delete') | safe +
+                    '</div>' }
               ]
             ]
           })

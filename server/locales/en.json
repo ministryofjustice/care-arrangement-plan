@@ -300,7 +300,10 @@
         "parents": "Harrison and Jennifer",
         "status": "In progress",
         "savedUntil": "23 October 2026",
-        "actions": "Continue plan"
+        "actions": {
+          "continue": "<a href=\"#\">Continue plan</a>",
+          "delete": "<a href=\"#\">Delete this plan</a>"
+        }
       }
     },
     "createPlanButton": "Create a new plan"

@@ -4,9 +4,22 @@ import { test, expect, Page, Locator } from '@playwright/test';
 
 import {startJourney, goToSafetyCheck, navigateToTaskList, completeOnboardingFlow, fillNumberOfChildren} from './fixtures/test-helpers';
 
+// macOS WebKit only tabs to text fields unless Option (Alt) is held.
+function isWebKit(page: Page) {
+  return page.context().browser()?.browserType().name() === 'webkit';
+}
+
+async function pressTab(page: Page) {
+  await page.keyboard.press(isWebKit(page) ? 'Alt+Tab' : 'Tab');
+}
+
+async function pressShiftTab(page: Page) {
+  await page.keyboard.press(isWebKit(page) ? 'Alt+Shift+Tab' : 'Shift+Tab');
+}
+
 // Helper: press Tab and return the newly focused element's locator
 async function tabAndGetFocused(page: Page) {
-  await page.keyboard.press('Tab');
+  await pressTab(page);
   return page.locator(':focus');
 }
 
@@ -49,10 +62,10 @@ async function safeIsInFooter(locator: Locator): Promise<boolean> {
 //Helper: press Tab until the focused element matches a role/name, with a max number of presses
 async function tabToElement(page: Page, role: string, name: RegExp, maxTabs = 30) {
   for (let i = 0; i < maxTabs; i++) {
-    await page.keyboard.press('Tab');
+    await pressTab(page);
 
     const focused = page.locator(':focus');
-    if (await focused.count() === 0) break;
+    if ((await focused.count()) === 0) continue;
 
     const info = await focused.evaluate((el) => {
       const tag = el.tagName.toLowerCase();
@@ -194,10 +207,10 @@ test.describe('Keyboard Accessibility', () => {
       await page.goto('/safety-check');
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForTimeout(150);
-      await page.keyboard.press('Tab');
+      await pressTab(page);
       let skipLink = page.locator(':focus');
       if (!(await skipLink.count())) {
-        await page.keyboard.press('Tab');
+        await pressTab(page);
         skipLink = page.locator(':focus');
       }
       await expect(skipLink).toHaveClass(/govuk-skip-link/);
@@ -211,11 +224,11 @@ test.describe('Keyboard Accessibility', () => {
       await page.goto('/');
 
       // Tab past skip link
-      await page.keyboard.press('Tab');
+      await pressTab(page);
 
       // Tab through several interactive elements and check focus visibility
       for (let i = 0; i < 5; i++) {
-        await page.keyboard.press('Tab');
+        await pressTab(page);
         const focused = page.locator(':focus');
         const count = await focused.count();
         if (count > 0) {
@@ -230,7 +243,7 @@ test.describe('Keyboard Accessibility', () => {
 
       // Tab through form elements and verify focus indicators
       for (let i = 0; i < 10; i++) {
-        await page.keyboard.press('Tab');
+        await pressTab(page);
         const focused = page.locator(':focus');
         const count = await focused.count();
         if (count > 0) {
@@ -251,7 +264,7 @@ test.describe('Keyboard Accessibility', () => {
 
       // Tab through all elements and record the order
       for (let i = 0; i < 20; i++) {
-        await page.keyboard.press('Tab');
+        await pressTab(page);
         const focused = page.locator(':focus');
         const count = await focused.count();
         if (count === 0) break;
@@ -278,7 +291,7 @@ test.describe('Keyboard Accessibility', () => {
       const focusedElements: string[] = [];
 
       for (let i = 0; i < 20; i++) {
-        await page.keyboard.press('Tab');
+        await pressTab(page);
         const focused = page.locator(':focus');
         const count = await focused.count();
         if (count === 0) break;
@@ -360,8 +373,8 @@ test.describe('Keyboard Accessibility', () => {
       await fillNumberOfChildren(page, 1);
 
       // Tab to the child name input
-      await page.keyboard.press('Tab'); 
-      await page.keyboard.press('Shift+Tab'); 
+      await pressTab(page); 
+      await pressShiftTab(page); 
       await page.keyboard.type('KeyboardChild'); 
     });
 
@@ -388,7 +401,7 @@ test.describe('Keyboard Accessibility', () => {
       if (selectCount > 0) {
         // Tab to the select element
         for (let i = 0; i < 20; i++) {
-          await page.keyboard.press('Tab');
+          await pressTab(page);
           const focused = page.locator(':focus');
           const tag = await safeEvaluate(focused, (el) => (el as HTMLElement).tagName.toLowerCase(), '');
           if (tag === 'select') {
@@ -422,7 +435,7 @@ test.describe('Keyboard Accessibility', () => {
       // The error summary should receive focus automatically (GOV.UK pattern)
       // Tab into the error links
       for (let i = 0; i < 5; i++) {
-      await page.keyboard.press('Tab');
+      await pressTab(page);
       const focused = page.locator(':focus');
       const href = await safeGetAttribute(focused, 'href');
       if (href && href.startsWith('#')) {
@@ -498,7 +511,7 @@ test.describe('Keyboard Accessibility', () => {
 
       // Tab through to find the Exit This Page button
       for (let i = 0; i < 20; i++) {
-        await page.keyboard.press('Tab');
+        await pressTab(page);
         const focused = page.locator(':focus');
         const text = await safeTextContent(focused, '');
         if (/exit this page/i.test(text || '')) {
@@ -575,7 +588,7 @@ test.describe('Keyboard Accessibility', () => {
 
       // About the adults - type adult names
       for (let i = 0; i < 15; i++) {
-      await page.keyboard.press('Tab');
+      await pressTab(page);
       const focused = page.locator(':focus');
       const tag = await safeEvaluate(focused, (el) => (el as HTMLElement).tagName.toLowerCase(), '');
       if (tag === 'input') {
@@ -631,7 +644,7 @@ test.describe('Keyboard Accessibility', () => {
 
       // Tab to the textarea and type content
       for (let i = 0; i < 15; i++) {
-        await page.keyboard.press('Tab');
+        await pressTab(page);
         const focused = page.locator(':focus');
         const tag = await focused.evaluate((el) => el.tagName.toLowerCase()).catch(() => '');
         if (tag === 'textarea') {
@@ -662,7 +675,7 @@ test.describe('Keyboard Accessibility', () => {
         await page.goto(pagePath);
       
         // Verify skip link works
-        await page.keyboard.press('Tab');
+        await pressTab(page);
         const skipLink = page.locator(':focus');
         const skipLinkClass = (await safeGetAttribute(skipLink, 'class')) ?? '';
         expect(skipLinkClass).toContain('govuk-skip-link');
@@ -670,7 +683,7 @@ test.describe('Keyboard Accessibility', () => {
         let lastActiveElement = '';
 
         for (let i = 0; i < 30; i++) {
-          await page.keyboard.press('Tab');
+          await pressTab(page);
           const focused = page.locator(':focus');
           const count = await focused.count();
           if (count === 0) break;
@@ -694,7 +707,7 @@ test.describe('Keyboard Accessibility', () => {
       let foundFooterLink = false;
 
       for (let i = 0; i < 60; i++) {
-         await page.keyboard.press('Tab'); 
+         await pressTab(page); 
          const focused = page.locator(':focus'); 
          const isInFooter = await safeIsInFooter(focused); 
 
@@ -714,7 +727,7 @@ test.describe('Keyboard Accessibility', () => {
       // Tab through to find back link
       let foundBackLink = false;
       for (let i = 0; i < 15; i++) {
-        await page.keyboard.press('Tab');
+        await pressTab(page);
         const focused = page.locator(':focus');
         const className = (await safeGetAttribute(focused, 'class')) ?? '';
         if (className && className.includes('govuk-back-link')) {
