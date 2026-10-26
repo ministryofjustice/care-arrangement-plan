@@ -279,19 +279,14 @@
     "saveProgress": "You can save your progress using GOV.UK One Login and return to your plan later. You can choose to save while creating your plan.",
     "question": "What would you like to do?",
     "options": {
-      "startNewPlan": "Start a new plan",
-      "signIn": "Sign in to continue an existing plan"
+      "startNewPlan": "Start a new plan without signing in",
+      "signIn": "Sign in with GOV.UK One Login to continue an existing plan"
     }
   },
   "loginAccount": {
     "title": "Your child arrangements plans",
     "description": "Create and manage child arrangements plans for your children.",
-    "guidance": {
-      "title": "Guidance",
-      "links": {
-        "readMore": "<a href=\"https://care-arrangement-plan-prototype-kit.apps.live.cloud-platform.service.justice.gov.uk/mvp-save-and-return/sharing-your-plan\">Read more about sharing your child arrangements plan</a>"
-      }
-    },
+    "readMore": "<a href=\"#\">Read more about sharing your child arrangements plan</a>",
     "table": {
       "headerRow": {
         "child": "Child",
@@ -308,7 +303,7 @@
         "actions": "Continue plan"
       }
     },
-    "createPlanButton": "Create a plan"
+    "createPlanButton": "Create a new plan"
   },
   "safetyCheck": {
     "title": "Have you experienced abuse from your ex-partner?",

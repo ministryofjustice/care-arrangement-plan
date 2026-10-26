@@ -14,88 +14,81 @@
 {% endblock %}
 
 {% block content %}
-<div class="govuk-width-container govuk-!-margin-top-3">
-  {# <div>
-    <div>
-      <a href="/mvp-save-and-return/login-account" class="govuk-link govuk-link--no-visited-state">
-        Your child arrangements plans
-      </a>
-      <a href="/mvp-save-and-return/login-your-details" class="govuk-link govuk-link--no-visited-state">
-        Your account details
-      </a>
-    </div>
-    <div class="govuk-body govuk-!-margin-0">
-      <span class="govuk-!-margin-right-4">
-      </span>
-      <a href="/mvp-save-and-return/clear-session-and-sign-out" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold" style="text-decoration: none">
-        Sign out
-      </a>
-    </div>
-  </div> #}
+  <div class="govuk-width-container">
+    {# <div>
+      <div>
+        <a href="/mvp-save-and-return/login-account" class="govuk-link govuk-link--no-visited-state">
+          Your child arrangements plans
+        </a>
+        <a href="/mvp-save-and-return/login-your-details" class="govuk-link govuk-link--no-visited-state">
+          Your account details
+        </a>
+      </div>
+      <div class="govuk-body govuk-!-margin-0">
+        <span class="govuk-!-margin-right-4">
+        </span>
+        <a href="/mvp-save-and-return/clear-session-and-sign-out" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold" style="text-decoration: none">
+          Sign out
+        </a>
+      </div>
+    </div> #}
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds govuk-!-font-weight-bold">
-      <a class="govuk-link govuk-link--no-visited-state" href="/mvp-save-and-return/login-account">
-        Your child arrangements plans
-      </a>
-      <a class="govuk-link govuk-link--no-visited-state govuk-!-margin-left-4" href="/mvp-save-and-return/login-your-details">
-        Your account details
-      </a>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds govuk-!-font-weight-bold">
+        <a class="govuk-link govuk-link--no-visited-state" href="/mvp-save-and-return/login-account">
+          Your child arrangements plans
+        </a>
+        <a class="govuk-link govuk-link--no-visited-state govuk-!-margin-left-4" href="/mvp-save-and-return/login-your-details">
+          Your account details
+        </a>
+      </div>
+      <div class="govuk-grid-column-one-third govuk-!-text-align-right">
+        <a class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold text-decoration-none" href="/mvp-save-and-return/clear-session-and-sign-out">
+          Sign out
+        </a>
+      </div>
     </div>
-    <div class="govuk-grid-column-one-third">
-      <a class="govuk-link govuk-link--no-visited-state" href="/mvp-save-and-return/clear-session-and-sign-out">
-        Sign out
-      </a>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-4">
+    
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">{{ __('loginAccount.title') }}</h1>
+        <p class="govuk-body">{{ __('loginAccount.description') }}</p>
+        <p class="govuk-body">{{ __('loginAccount.readMore') | safe }}</p>
+        <form class="form" action="{{ paths.LOGIN_START }}" method="post" novalidate>  
+          {{ govukButton({text: __('loginAccount.createPlanButton')}) }}
+        </form>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        {% include "partials/exitThisPage.njk" %}
+        <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+          {{ __('exitThisPage') | safe }}
+        </div>
+      </div>
     </div>
-  </div>
-
-  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-4">
-  </div>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">{{ __('loginAccount.title') }}</h1>
-      <p class="govuk-body">{{ __('loginAccount.description') }}</p>
-    </div>
-  </div>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third">
-      <h2 class="govuk-heading-m" id="subsection-title">{{ __('loginAccount.guidance.title') }}</h2>
-      <nav role="navigation" aria-labelledby="subsection-title">
-        <ul class="govuk-list govuk-!-font-size-16">
-          <li>
-            <a class="govuk-link" href="#">
-              {{ __('loginAccount.guidance.links.readMore') | safe }}
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column">
-      {{
-        govukTable({
-          head: [
-            { text: __('loginAccount.table.headerRow.child') },
-            { text: __('loginAccount.table.headerRow.parents') },
-            { text: __('loginAccount.table.headerRow.status') },
-            { text: __('loginAccount.table.headerRow.savedUntil') },
-            { text: __('loginAccount.table.headerRow.actions') }
-          ],
-          rows: [
-            [
-              { text: __('loginAccount.table.rows.child') },
-              { text: __('loginAccount.table.rows.parents') },
-              { text: __('loginAccount.table.rows.status') },
-              { text: __('loginAccount.table.rows.savedUntil') },
-              { text: __('loginAccount.table.rows.actions') }
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column">
+        {{
+          govukTable({
+            head: [
+              { text: __('loginAccount.table.headerRow.child') },
+              { text: __('loginAccount.table.headerRow.parents') },
+              { text: __('loginAccount.table.headerRow.status') },
+              { text: __('loginAccount.table.headerRow.savedUntil') },
+              { text: __('loginAccount.table.headerRow.actions') }
+            ],
+            rows: [
+              [
+                { text: __('loginAccount.table.rows.child') },
+                { text: __('loginAccount.table.rows.parents') },
+                { text: __('loginAccount.table.rows.status') },
+                { text: __('loginAccount.table.rows.savedUntil') },
+                { text: __('loginAccount.table.rows.actions') }
+              ]
             ]
-          ]
-        })
-      }}
-      <form class="form" action="{{ paths.LOGIN_START }}" method="post" novalidate>  
-        {{ govukButton({text: __('loginAccount.createPlanButton')}) }}
-      </form>
+          })
+        }}
+      </div>
     </div>
   </div>
 {% endblock %}
