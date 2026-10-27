@@ -71,7 +71,7 @@ class PdfGenerator {
 
     // Right side: Page number
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
-    const pageCountText = `Page ${pageNumber} of ${this.totalPages}`;
+    const pageCountText = `${t.page} ${pageNumber} ${t.of} ${this.totalPages}`;
     this.doc.text(
       pageCountText,
       this.pageWidth - PdfStyles.MARGIN_WIDTH,
