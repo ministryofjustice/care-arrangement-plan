@@ -506,8 +506,8 @@
     "willDaytimeVisitsHappen": {
       "title": "A fydd y plant yn ymweld â/ag {{{ adult }}} yn ystod y dydd?",
       "error": "Dewiswch p'un a fydd y plant yn cael ymweliadau yn ystod y dydd",
-      "yes": "Bydd",
-      "no": "Na fydd"
+      "yes": "Byddant",
+      "no": "Na fyddant"
     },
     "whichDaysDaytimeVisits": {
       "title": "Ar pa ddyddiau fydd ymweliadau yn ystod y dydd yn digwydd?",
@@ -1031,6 +1031,8 @@
     "responseInTheBox": "Ychwanegwch eich enw cyntaf a'ch ymateb yn y blwch - dylai'r rhiant/gofalwr arall ychwanegu eu henw cyntaf a'u hymateb yn y blwch arall.",
     "parentCarerNameAndResponse": "Enw'r rhiant/gofalwr a'r ymateb:",
     "agreedAnswer": "Nodwch eich ateb rydych wedi cytuno arno ar gyfer y cwestiwn hwn.",
-    "footerText": "Gwiriwch fod gennych bob tudalen o'r ddogfen hon"
+    "footerText": "Gwiriwch fod gennych bob tudalen o'r ddogfen hon",
+    "page": "Tudalen",
+    "of": "o"
   }
 }

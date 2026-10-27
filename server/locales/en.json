@@ -1031,6 +1031,8 @@
     "responseInTheBox": "Add your first name and response in the box - the other parent/carer should add their first name and response in the other box.",
     "parentCarerNameAndResponse": "Parent/carer name and response:",
     "agreedAnswer": "Enter your agreed answer to this question.",
-    "footerText": "Check you have every page of this document"
+    "footerText": "Check you have every page of this document",
+    "page": "Page",
+    "of": "of"
   }
 }
