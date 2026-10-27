@@ -492,7 +492,9 @@
     },
     "willOvernightsHappen": {
       "title": "Will the children stay overnight with {{{ adult }}}?",
-      "error": "Select whether the children will stay overnight"
+      "error": "Select whether the children will stay overnight",
+      "yes": "Yes",
+      "no": "No"
     },
     "whichDaysOvernight": {
       "title": "On which days will overnights happen?",
