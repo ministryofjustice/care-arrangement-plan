@@ -318,6 +318,8 @@
       "coercive": "Rheolaeth drwy orfodaeth a cham-drin seicolegol (bygythiadau, codi cywilydd ar rywun, brawychu, diraddio, ynysu a rheoli)",
       "harassment": "Aflonyddu a stelcio"
     },
+    "yes": "Ydw",
+    "no": "Nac ydw",
     "formHeading": "Dewiswch a ydych wedi profi unrhyw gamdriniaeth gan eich cyn-bartner neu beidio",
     "error": "Dewiswch a ydych wedi profi unrhyw gamdriniaeth gan eich cyn-bartner neu beidio"
   },
@@ -490,7 +492,9 @@
     },
     "willOvernightsHappen": {
       "title": "A fydd y plant yn aros dros nos gyda {{{ adult }}}?",
-      "error": "Dewiswch p'un a fydd y plant yn aros dros nos"
+      "error": "Dewiswch p'un a fydd y plant yn aros dros nos",
+      "yes": "Bydd",
+      "no": "Na fydd"
     },
     "whichDaysOvernight": {
       "title": "Ar pa ddyddiau fydd aros dros nos yn digwydd?",
@@ -500,10 +504,10 @@
       "anotherArrangement": "Trefniant eraill<span class=\"govuk-visually-hidden\">Bydd dewis hwn yn amlygu maes arall</span>"
     },
     "willDaytimeVisitsHappen": {
-      "title": "A fydd y plant yn ymweld â {{{ adult }}} yn ystod y dydd?",
+      "title": "A fydd y plant yn ymweld â/ag {{{ adult }}} yn ystod y dydd?",
       "error": "Dewiswch p'un a fydd y plant yn cael ymweliadau yn ystod y dydd",
-      "yes": "Byddant",
-      "no": "Na fyddant"
+      "yes": "Bydd",
+      "no": "Na fydd"
     },
     "whichDaysDaytimeVisits": {
       "title": "Ar pa ddyddiau fydd ymweliadau yn ystod y dydd yn digwydd?",
@@ -533,7 +537,9 @@
     },
     "willChangeDuringSchoolHolidays": {
       "title": "A fydd y trefniadau hyn yn newid yn ystod gwyliau'r ysgol?",
-      "error": "Dewiswch p'un a fydd y trefniadau'n newid yn ystod gwyliau'r ysgol"
+      "error": "Dewiswch p'un a fydd y trefniadau'n newid yn ystod gwyliau'r ysgol",
+      "yes": "Bydd",
+      "no": "Na fydd"
     },
     "howChangeDuringSchoolHolidays": {
       "title": "Sut fydd y trefniadau'n newid yn ystod gwyliau'r ysgol?",
@@ -657,7 +663,7 @@
       "confident": "rydych yn hyderus y gallwch chi a'ch cyn-bartner wneud penderfyniadau gyda'ch gilydd heb eich rhoi chi'ch hun na'r plant mewn perygl",
       "doNotFeelPressured": "nad ydych yn teimlo dan bwysau nac yn cael eich bygwth i ymateb",
       "stopIfAnyConcern": "Os oes gennych unrhyw bryderon ynghylch diogelwch, stopiwch nawr.",
-      "feedbackOrSafetyConcerns": "IOs oes gennych unrhyw adborth neu bryderon diogelwch am y gwasanaeth hwn, gallwch anfon e-bost at safety@propose-child-arrangements-plan.service.gov.uk.",
+      "feedbackOrSafetyConcerns": "Os oes gennych unrhyw adborth neu bryderon diogelwch am y gwasanaeth hwn, gallwch anfon e-bost at safety@propose-child-arrangements-plan.service.gov.uk.",
       "cannotAnswerQuestions": "Ni allwn ateb unrhyw gwestiynau am gynlluniau trefniadau plant sydd eisoes wedi'u creu.",
       "benefitsHeading": "Sut y gall gwneud cynllun trefniadau plant helpu",
       "mightFind": "Efallai y byddwch yn canfod bod cydweithio â {{{ senderName }}} ar gynllun trefniadau plant:",
@@ -700,11 +706,11 @@
       "weCannot": "Ni allwn ateb unrhyw gwestiynau am gynlluniau trefniadau plant sydd eisoes wedi'u creu."
     },
     "yourProposedPlan": {
-      "aboutThePlan": "Ynglŷn â'r cynnig trefniadau plant hyn",
+      "aboutThePlan": "Ynglŷn a'r cynnig trefniadau plant hwn",
       "senderSaid": "Dywedodd {{{ senderName }}}:",
       "senderSuggested": "Awgrymodd {{{ senderName }}}:\n\"{{{ suggestion }}}\"",
       "senderSuggestedDoNotDecide": "Awgrymodd {{{ senderName }}} nad oes angen penderfynu ar hwn.",
-      "doYouAgree": "Ydych chi’n cytuno?",
+      "doYouAgree": "Ydych chi'n cytuno?",
       "endOfSection": "Diwedd yr adran",
       "noCourtOrder": "nid oes gorchymyn llys ar waith ar hyn o bryd",
       "forOneChild": "cynllun trefniadau plant arfaethedig yw hwn ar gyfer plentyn 1, {{{ childName }}}",
@@ -712,9 +718,9 @@
       "agreementBetween": "mae'r cytundeb hwn rhwng {{{ senderName }}} and {{{ otherAdultName }}}, sef yr oedolion a fydd yn gofalu am {{{ childrenNames }}}",
       "doYouAgreeOnBasics": "Ydych chi a {{{ senderName }}} yn cytuno ynglŷn ag enwau'r plant, eich enwau chi, ac a oes gorchymyn llys ar waith?",
       "doNotStoreNames": "Nid ydym yn storio'r enwau hyn nac yn rhannu unrhyw ran o'r wybodaeth hon ag adrannau eraill y llywodraeth.",
-      "doNotAgreeOnBasics": "Os ateboch chi ‘Nac ydw’, efallai y byddai’n ddefnyddiol dod o hyd i gyfryngwr a all eich helpu i gytuno ar eich trefniadau plant. Gallwch hefyd gael cymorth ariannol gyda hyn. I gael rhagor o wybodaeth, ewchi i https://www.gov.uk/looking-after-children-divorce.",
-      "yes": "Ydw",
-      "no": "Nac ydw",
+      "doNotAgreeOnBasics": "Os ateboch chi 'Nac ydw', efallai y byddai'n ddefnyddiol dod o hyd i gyfryngwr a all eich helpu i gytuno ar eich trefniadau plant. Gallwch hefyd gael cymorth ariannol gyda hyn. I gael rhagor o wybodaeth, ewchi i https://www.gov.uk/looking-after-children-divorce.",
+      "yes": "Ydym / Oes",
+      "no": "Nac ydym / Nac oes",
       "livingAndVisiting": {
         "suggestedLiveWith": "Awgrymodd {{{ senderName }}} y byddai'r plant yn treulio'r rhan fwyaf o'u hamser gyda {{{ adult }}}.",
         "suggestedLiveWithChild": "Awgrymodd {{{ senderName }}} bod {{{ childName }}} yn byw yn bennaf efo {{{ adult }}}.",
@@ -847,7 +853,7 @@
         "betterOutcome": "• yn arwain at ganlyniad gwell i'ch plant, y mae chi a'ch cyn-bartner yn rheoli hynny"
       },
       "goingToCourt": "Gall mynd i'r llys weithiau olygu nad chi yw'r rhai sy'n gwneud y penderfyniadau terfynol am eich trefniadau plant.",
-      "tips": "Awgrymiadau i helpu chi a'ch plant",
+      "tips": "Awgrymiadau i'ch helpu chi a'ch plant",
       "planShouldIntro": "Dylai eich cynllun trefniadau plant:",
       "planShould": {
         "welfare": "• roi lles y plentyn yn gyntaf",
@@ -900,7 +906,7 @@
       "weCannotAnswer": "Ni allwn ateb unrhyw gwestiynau am gynlluniau trefniadau plant sydd eisoes wedi'u creu."
     },
     "childArrangementsProposal": {
-      "title": "Ynglŷn â'r cynnig trefniadau plant hyn",
+      "title": "Ynglŷn a'r cynnig trefniadau plant hwn",
       "intro": "Ar gyfer pwy mae'r cynnig trefniadau plant hwn",
       "child1": "Plentyn 1 (enw cyntaf)",
       "child2": "Plentyn 2 (enw cyntaf)",
@@ -1024,6 +1030,7 @@
     "optionsCouldInclude": "Gallai opsiynau gynnwys:",
     "responseInTheBox": "Ychwanegwch eich enw cyntaf a'ch ymateb yn y blwch - dylai'r rhiant/gofalwr arall ychwanegu eu henw cyntaf a'u hymateb yn y blwch arall.",
     "parentCarerNameAndResponse": "Enw'r rhiant/gofalwr a'r ymateb:",
-    "agreedAnswer": "Nodwch eich ateb rydych wedi cytuno arno ar gyfer y cwestiwn hwn."
+    "agreedAnswer": "Nodwch eich ateb rydych wedi cytuno arno ar gyfer y cwestiwn hwn.",
+    "footerText": "Gwiriwch fod gennych bob tudalen o'r ddogfen hon"
   }
 }

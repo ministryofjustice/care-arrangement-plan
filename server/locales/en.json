@@ -318,6 +318,8 @@
       "coercive": "Coercive control and psychological abuse (threats, humiliation, intimidation, degradation, isolation and control)",
       "harassment": "Harassment and stalking"
     },
+    "yes": "Yes",
+    "no": "No",
     "formHeading": "Select whether you have experienced abuse from your ex-partner",
     "error": "Select whether you have experienced abuse from your ex-partner"
   },
@@ -490,7 +492,9 @@
     },
     "willOvernightsHappen": {
       "title": "Will the children stay overnight with {{{ adult }}}?",
-      "error": "Select whether the children will stay overnight"
+      "error": "Select whether the children will stay overnight",
+      "yes": "Yes",
+      "no": "No"
     },
     "whichDaysOvernight": {
       "title": "On which days will overnights happen?",
@@ -533,7 +537,9 @@
     },
     "willChangeDuringSchoolHolidays": {
       "title": "Will these arrangements change during school holidays?",
-      "error": "Select whether the arrangements will change during school holidays"
+      "error": "Select whether the arrangements will change during school holidays",
+      "yes": "Yes",
+      "no": "No"
     },
     "howChangeDuringSchoolHolidays": {
       "title": "How will the arrangements be different in school holidays?",
@@ -1024,6 +1030,7 @@
     "optionsCouldInclude": "Options could include:",
     "responseInTheBox": "Add your first name and response in the box - the other parent/carer should add their first name and response in the other box.",
     "parentCarerNameAndResponse": "Parent/carer name and response:",
-    "agreedAnswer": "Enter your agreed answer to this question."
+    "agreedAnswer": "Enter your agreed answer to this question.",
+    "footerText": "Check you have every page of this document"
   }
 }

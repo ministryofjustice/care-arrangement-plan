@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const PdfStyles = require('./pdfStyles');
 
 /**
@@ -14,7 +17,20 @@ class PdfGenerator {
     this.currentY = PdfStyles.HEADER_HEIGHT + 10;
     this.currentPage = 1;
     this.totalPages = 17; // Known from the form
+    this.embedFonts();
+  }
 
+  // Transport is not a standard PDF font. Embedding it lets Welsh ŵ and ŷ
+  // render as single glyphs instead of overflowing the line.
+  embedFonts() {
+    const fontsDir = path.resolve(__dirname, '../assets/fonts');
+    const lightName = 'light-94a07e06a1-v2.ttf';
+    const boldName = 'bold-b542beb274-v2.ttf';
+
+    this.doc.addFileToVFS(lightName, fs.readFileSync(path.join(fontsDir, lightName)).toString('base64'));
+    this.doc.addFont(lightName, PdfStyles.FONT_FAMILY, PdfStyles.FONT_NORMAL);
+    this.doc.addFileToVFS(boldName, fs.readFileSync(path.join(fontsDir, boldName)).toString('base64'));
+    this.doc.addFont(boldName, PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
   }
 
   /**
@@ -33,7 +49,7 @@ class PdfGenerator {
   /**
    * Add footer with page number and document message
    */
-  addFooter(pageNumber = this.currentPage) {
+  addFooter(t, pageNumber = this.currentPage) {
     const footerY = this.pageHeight - PdfStyles.MARGIN_WIDTH;
 
     // Left side: Version number
@@ -47,7 +63,7 @@ class PdfGenerator {
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
     this.doc.text(
-      'Check you have every page of this document',
+      t.footerText,
       this.pageWidth / 2,
       footerY,
       { align: 'center' }
@@ -67,7 +83,7 @@ class PdfGenerator {
   /**
    * Add a new page with header
    */
-  addPage(headerTitle = 'Proposed child arrangements plan') {
+  addPage(headerTitle) {
     this.doc.addPage();
     this.currentPage++;
     this.currentY = PdfStyles.HEADER_HEIGHT + 10;
