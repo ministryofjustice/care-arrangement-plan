@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const PdfGenerator = require('./PdfGenerator');
+const PdfStyles = require('./pdfStyles');
 const { version } = require('../package.json');
 
 /**
@@ -191,37 +192,37 @@ const generatePdf = (locale = 'en') => {
       const col2X = startX + boxWidth / 2; // Reduced margin between columns
       let boxY = pdf.currentY;
 
-      pdf.doc.setFont('Helvetica', 'bold');
+      pdf.doc.setFont(PdfStyles.FONT_FAMILY, 'bold');
       pdf.doc.setFontSize(10);
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.commonSchedulesIntro, col1X, boxY);
       boxY += 6; // Increased from 4 to 6 for more space
 
       // Column 1
-      pdf.doc.setFont('Helvetica', 'bold');
+      pdf.doc.setFont(PdfStyles.FONT_FAMILY, 'bold');
       pdf.doc.setFontSize(9);
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeks, col1X, boxY);
-      pdf.doc.setFont('Helvetica', 'normal');
+      pdf.doc.setFont(PdfStyles.FONT_FAMILY, 'normal');
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeksDescriptionPart1, col1X, boxY + 4);
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.alternatingWeeksDescriptionPart2, col1X, boxY + 7);
 
-      pdf.doc.setFont('Helvetica', 'bold');
+      pdf.doc.setFont(PdfStyles.FONT_FAMILY, 'bold');
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223, col1X, boxY + 13); // Increased spacing
-      pdf.doc.setFont('Helvetica', 'normal');
+      pdf.doc.setFont(PdfStyles.FONT_FAMILY, 'normal');
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223DescriptionPart1, col1X, boxY + 17);
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223DescriptionPart2, col1X, boxY + 20);
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule223DescriptionPart3, col1X, boxY + 23);
 
       // Column 2
-      pdf.doc.setFont('Helvetica', 'bold');
+      pdf.doc.setFont(PdfStyles.FONT_FAMILY, 'bold');
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443, col2X, boxY);
-      pdf.doc.setFont('Helvetica', 'normal');
+      pdf.doc.setFont(PdfStyles.FONT_FAMILY, 'normal');
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443DescriptionPart1, col2X, boxY + 4);
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443DescriptionPart2, col2X, boxY + 7);
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule443DescriptionPart3, col2X, boxY + 10);
 
-      pdf.doc.setFont('Helvetica', 'bold');
+      pdf.doc.setFont(PdfStyles.FONT_FAMILY, 'bold');
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255, col2X, boxY + 16);
-      pdf.doc.setFont('Helvetica', 'normal');
+      pdf.doc.setFont(PdfStyles.FONT_FAMILY, 'normal');
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255DescriptionPart1, col2X, boxY + 20);
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255DescriptionPart2, col2X, boxY + 23);
       pdf.doc.text(t.scheduleMeetsChildrenNeeds.schedule2255DescriptionPart3, col2X, boxY + 26);

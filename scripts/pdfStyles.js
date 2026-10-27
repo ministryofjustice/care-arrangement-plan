@@ -34,7 +34,7 @@ const PdfStyles = {
   FONT_BOLD: 'bold',
 
   // Fonts
-  FONT_FAMILY: 'Helvetica',
+  FONT_FAMILY: 'Transport',
 };
 
 module.exports = PdfStyles;
