@@ -59,10 +59,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addBodyText(t.yourSafety.feedbackOrSafetyConcerns, { spacing: 2 });
     pdf.addBodyText(t.yourSafety.cannotAnswerQuestions);
 
-    pdf.addFooter(1);
+    pdf.addFooter(t, 1);
 
     // ===== PAGE 2: Other ways, benefits, top tips =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addSubsectionHeading(t.howMakingChildArrangementsPlanHelp.title);
     pdf.addBodyText(t.howMakingChildArrangementsPlanHelp.intro, { spacing: 2 });
@@ -82,10 +82,10 @@ const generatePdf = (locale = 'en') => {
       t.howMakingChildArrangementsPlanHelp.planShould.considerAnyHarm,
     ]);
 
-    pdf.addFooter(2);
+    pdf.addFooter(t, 2);
 
     // ===== PAGE 3: More information and safety =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addSubsectionHeading(t.ifCourtOrderInPlace.title);
     pdf.addBodyText(t.ifCourtOrderInPlace.doNotContinue, { spacing: 2 });
@@ -118,10 +118,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addBodyText(t.ifCourtOrderInPlace.domesticAbuse.signsAndEffects, { spacing: 2 });
     pdf.addBodyText(t.ifCourtOrderInPlace.domesticAbuse.unsureVictim, { spacing: 0 });
 
-    pdf.addFooter(3);
+    pdf.addFooter(t, 3);
 
     // ===== PAGE 4: Safety continuation =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addSubsectionHeading(t.notSuitableForYou.title);
     pdf.addBulletList([
@@ -137,10 +137,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addBodyText(t.notSuitableForYou.feedbackAndSupport.toAskForHelp, { spacing: 2 });
     pdf.addBodyText(t.notSuitableForYou.weCannotAnswer);
 
-    pdf.addFooter(4);
+    pdf.addFooter(t, 4);
 
     // ===== PAGE 5: About this proposal =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addSectionHeading(t.childArrangementsProposal.title);
     pdf.addBodyText(t.childArrangementsProposal.intro);
@@ -152,10 +152,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(4);
     pdf.addInputBox(10, t.childArrangementsProposal.otherParentFirstName, null, false);
 
-    pdf.addFooter(5);
+    pdf.addFooter(t, 5);
 
     // ===== PAGE 6: Living and visiting =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addSectionHeading(t.livingAndVisiting.title);
     pdf.addQuestionHeading(t.livingAndVisiting.intro);
@@ -176,10 +176,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(4);;
     pdf.addCompromiseBox(t, 90);
 
-    pdf.addFooter(6);
+    pdf.addFooter(t, 6);
 
     // ===== PAGE 7: Schedule =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addQuestionHeading(t.scheduleMeetsChildrenNeeds.title);
     pdf.addBodyText(t.scheduleMeetsChildrenNeeds.intro, { spacing: 5 });
@@ -237,10 +237,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(6);
     pdf.addCompromiseBox(t, 50);
 
-    pdf.addFooter(7);
+    pdf.addFooter(t, 7);
 
     // ===== PAGE 8: Handovers (was page 7) =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addSectionHeading(t.handoversAndHolidays.title);
     pdf.addQuestionHeading(t.handoversAndHolidays.intro);
@@ -257,10 +257,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t, 110);
 
-    pdf.addFooter(8);
+    pdf.addFooter(t, 8);
 
     // ===== PAGE 9: Handover location (was page 8) =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addQuestionHeading(t.handoverLocation.title);
     pdf.addBodyText(t.handoverLocation.intro, { spacing: 5 });
@@ -278,10 +278,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t, 110);
 
-    pdf.addFooter(9);
+    pdf.addFooter(t, 9);
 
     // ===== PAGE 10: School holidays (was page 9) =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addQuestionHeading(t.arrangementsSchoolHolidays.title);
     pdf.addBodyText(t.arrangementsSchoolHolidays.intro, { spacing: 5 });
@@ -291,10 +291,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t, 110);
 
-    pdf.addFooter(10);
+    pdf.addFooter(t, 10);
 
     // ===== PAGE 11: Items between households (was page 10) =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addQuestionHeading(t.itemsBetweenHouseholds.title);
     pdf.addBodyText(t.itemsBetweenHouseholds.intro, { spacing: 5 });
@@ -304,10 +304,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t, 110);
 
-    pdf.addFooter(11);
+    pdf.addFooter(t, 11);
 
     // ===== PAGE 12: Special days (was page 11) =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addSectionHeading(t.specialDays.sectionTitle);
     pdf.addQuestionHeading(t.specialDays.title);
@@ -318,10 +318,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t, 90); // Reduced from 110
 
-    pdf.addFooter(12);
+    pdf.addFooter(t, 12);
 
     // ===== PAGE 13: Other things (was page 12) =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addSectionHeading(t.otherThings.sectionTitle);
     pdf.addQuestionHeading(t.otherThings.title);
@@ -339,10 +339,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t, 90);
 
-    pdf.addFooter(13);
+    pdf.addFooter(t, 13);
 
     // ===== PAGE 14: Decision making (was page 13) =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addSectionHeading(t.decisionMaking.sectionTitle);
     pdf.addQuestionHeading(t.decisionMaking.title);
@@ -362,10 +362,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t,90);
 
-    pdf.addFooter(14);
+    pdf.addFooter(t, 14);
 
     // ===== PAGE 15: Notice for long-term arrangements =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addQuestionHeading(t.noticeForLongTermArrangements.title);
     pdf.addBodyText(t.noticeForLongTermArrangements.intro, { spacing: 5 });
@@ -374,10 +374,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t, 90); // Reduced from 110
 
-    pdf.addFooter(15);
+    pdf.addFooter(t, 15);
 
     // ===== PAGE 16: Reviewing the plan =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addQuestionHeading(t.reviewingThePlan.title);
     pdf.addBodyText(t.reviewingThePlan.intro, { spacing: 5 });
@@ -387,10 +387,10 @@ const generatePdf = (locale = 'en') => {
     pdf.addSpacing(8);
     pdf.addCompromiseBox(t, 90); // Reduced from 110
 
-    pdf.addFooter(16);
+    pdf.addFooter(t, 16);
 
     // ===== PAGE 17: What happens now =====
-    pdf.addPage();
+    pdf.addPage(t.title);
 
     pdf.addSectionHeading(t.nextSteps.sectionTitle);
     pdf.addQuestionHeading(t.nextSteps.title);
@@ -400,7 +400,7 @@ const generatePdf = (locale = 'en') => {
     pdf.addBodyText(t.nextSteps.unableToAgree, { spacing: 2 });
     pdf.addBodyText(t.nextSteps.mediator,{ spacing: 2 });
     pdf.addBodyText(t.nextSteps.moreInformation);
-    pdf.addFooter(17);
+    pdf.addFooter(t, 17);
 
     // Set document title for PDF metadata
     pdf.setProperties({

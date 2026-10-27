@@ -49,7 +49,7 @@ class PdfGenerator {
   /**
    * Add footer with page number and document message
    */
-  addFooter(pageNumber = this.currentPage) {
+  addFooter(t, pageNumber = this.currentPage) {
     const footerY = this.pageHeight - PdfStyles.MARGIN_WIDTH;
 
     // Left side: Version number
@@ -63,7 +63,7 @@ class PdfGenerator {
     this.doc.setFont(PdfStyles.FONT_FAMILY, PdfStyles.FONT_BOLD);
     this.doc.setFontSize(PdfStyles.MAIN_TEXT_SIZE);
     this.doc.text(
-      'Check you have every page of this document',
+      t.footerText,
       this.pageWidth / 2,
       footerY,
       { align: 'center' }
@@ -83,7 +83,7 @@ class PdfGenerator {
   /**
    * Add a new page with header
    */
-  addPage(headerTitle = 'Proposed child arrangements plan') {
+  addPage(headerTitle) {
     this.doc.addPage();
     this.currentPage++;
     this.currentY = PdfStyles.HEADER_HEIGHT + 10;

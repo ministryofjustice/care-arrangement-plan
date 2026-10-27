@@ -1030,6 +1030,7 @@
     "optionsCouldInclude": "Gallai opsiynau gynnwys:",
     "responseInTheBox": "Ychwanegwch eich enw cyntaf a'ch ymateb yn y blwch - dylai'r rhiant/gofalwr arall ychwanegu eu henw cyntaf a'u hymateb yn y blwch arall.",
     "parentCarerNameAndResponse": "Enw'r rhiant/gofalwr a'r ymateb:",
-    "agreedAnswer": "Nodwch eich ateb rydych wedi cytuno arno ar gyfer y cwestiwn hwn."
+    "agreedAnswer": "Nodwch eich ateb rydych wedi cytuno arno ar gyfer y cwestiwn hwn.",
+    "footerText": "Gwiriwch fod gennych bob tudalen o'r ddogfen hon"
   }
 }
