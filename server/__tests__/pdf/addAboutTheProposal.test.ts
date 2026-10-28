@@ -36,4 +36,18 @@ describe('addAboutTheProposal', () => {
     const response = await request(app).get(TEST_PATH);
     validateResponseAgainstSnapshot(response.body, 'test-assets/addAboutTheProposal-multipleChildren.pdf');
   });
+
+  test('pdf is created when the number of children is missing', async () => {
+    Object.assign(sessionMock, {
+      namesOfChildren: ['James', 'Rachel', 'Jack'],
+      initialAdultName: 'Bob',
+      secondaryAdultName: 'Sam',
+    });
+    delete sessionMock.numberOfChildren;
+
+    const response = await request(app).get(TEST_PATH).expect(200);
+
+    expect(response.headers['content-type']).toMatch(/pdf/);
+    expect(response.body.subarray(0, 4).toString()).toBe('%PDF');
+  });
 });
