@@ -13,7 +13,8 @@ on:
         - staging
         - production
 
-permissions: {}
+permissions:
+  contents: read
 
 jobs:
   validate:
