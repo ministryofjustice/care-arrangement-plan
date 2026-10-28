@@ -33,7 +33,7 @@ const addAboutTheProposal = (pdf: Pdf) => {
         ? request.__('sharePlan.yourProposedPlan.forOneChild', { childName: childrenNames })
         : request.__('sharePlan.yourProposedPlan.forMultipleChildren', {
             childrenNames,
-            numberOfChildren: numberOfChildren.toString(),
+            numberOfChildren: numberOfChildren?.toString() ?? '',
           }),
       request.__('sharePlan.yourProposedPlan.agreementBetween', {
         senderName: initialAdultName,
