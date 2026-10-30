@@ -588,6 +588,11 @@
     "descriptionEmptyError": "Describe how you will communicate changes",
     "selectOneOptionError": "Describe what other arrangement you are proposing"
   },
+  "childHealthNeeds": {
+    "title": "What are Jason's health needs?",
+    "description": "For example, health routines, medical conditions, medications, appointments and specialist support.",
+    "emptyError": "Error"
+  },
   "specialDays": {
     "whatWillHappen": {
       "title": "What will happen on special days?",

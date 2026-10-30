@@ -53,6 +53,7 @@ enum paths {
   DECISION_MAKING_PLAN_REVIEW = '/decision-making/plan-review',
   CHILD_EDUCATION = '/child-education',
   CHILD_HEALTH = '/child-health',
+  CHILD_HEALTH_NEEDS = '/child-health-needs',
   DOWNLOAD_PDF = '/download-pdf',
   DOWNLOAD_HTML = '/download-html',
   PRINT_PDF = '/print-pdf',

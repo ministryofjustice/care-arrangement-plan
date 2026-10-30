@@ -30,6 +30,7 @@ const FORM_STEPS = {
     DECISION_MAKING_PLAN_LONG_TERM_NOTICE: 'decisionMakingPlanLongTermNotice',
     DECISION_MAKING_PLAN_REVIEW: 'decisionMakingPlanReview',
     CHILD_HEALTH: 'childHealth',
+    CHILD_HEALTH_NEEDS: 'childHealthNeeds',
     CHECK_YOUR_ANSWERS: 'checkYourAnswers',
     SHARE_PLAN: 'sharePlan',
     CONFIRMATION: 'confirmation',

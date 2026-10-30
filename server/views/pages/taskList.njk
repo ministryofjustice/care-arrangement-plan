@@ -129,14 +129,14 @@
                 text: __('taskList.childHealth.routineDecisions', { childName: childName })
               },
               href: paths.CHILD_HEALTH,
-              status: completeStatus if getBetweenHouseholdsComplete else incompleteStatus
+              status: completeStatus if childHealthComplete else incompleteStatus
             },
             {
               title: {
                 text: __('taskList.childHealth.healthNeeds', { childName: childName })
               },
-              href: paths.CHILD_HEALTH if getBetweenHouseholdsComplete else null,
-              status: completeStatus if whereHandoverComplete else (incompleteStatus if getBetweenHouseholdsComplete else cannotStartStatus)
+              href: paths.CHILD_HEALTH_NEEDS if childHealthComplete else null,
+              status: completeStatus if childHealthNeedsComplete else (incompleteStatus if childHealthComplete else cannotStartStatus)
             }
           ]
         })

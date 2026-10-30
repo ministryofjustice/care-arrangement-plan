@@ -61,6 +61,12 @@ export const planLastMinuteChangesComplete = (session: Partial<CAPSession>) =>
 export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
   !!session.decisionMaking?.planLongTermNotice;
 
+export const childHealthComplete = (session: Partial<CAPSession>) =>
+  !!session.childHealth?.options;
+
+export const childHealthNeedsComplete = (session: Partial<CAPSession>) =>
+  !!session.childHealth?.healthNeeds;
+
 export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;
 
 export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => {
