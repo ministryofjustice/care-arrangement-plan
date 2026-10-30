@@ -47,8 +47,11 @@ const taskListRoutes = (router: Router) => {
       isPlanLongTermNoticeComplete &&
       isPlanReviewComplete;
 
+    const childName = formattedChildrenNames(request);
+
     response.render('pages/taskList', {
-      title: request.__('taskList.title', { names: formattedChildrenNames(request) }),
+      title: request.__('taskList.title', { names: childName }),
+      childName,
       numberOfChildren,
       namesOfChildren,
       showContinue: allTasksComplete,

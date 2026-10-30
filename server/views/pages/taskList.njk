@@ -119,23 +119,23 @@
         })
       }}
 
-      <h2 class="govuk-heading-m">{{ __('taskList.health.title') }}</h2>
+      <h2 class="govuk-heading-m">{{ __('taskList.childHealth.title') }}</h2>
       {{
         govukTaskList({
-          idPrefix: 'health-taskList',
+          idPrefix: 'childHealth-taskList',
           items: [
             {
               title: {
-                text: __('taskList.health.routineDecisions')
+                text: __('taskList.childHealth.routineDecisions', { childName: childName })
               },
-              href: paths.HEALTH,
+              href: paths.CHILD_HEALTH,
               status: completeStatus if getBetweenHouseholdsComplete else incompleteStatus
             },
             {
               title: {
-                text: __('taskList.health.healthNeeds')
+                text: __('taskList.childHealth.healthNeeds', { childName: childName })
               },
-              href: paths.HEALTH if getBetweenHouseholdsComplete else null,
+              href: paths.CHILD_HEALTH if getBetweenHouseholdsComplete else null,
               status: completeStatus if whereHandoverComplete else (incompleteStatus if getBetweenHouseholdsComplete else cannotStartStatus)
             }
           ]

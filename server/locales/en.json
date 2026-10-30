@@ -472,13 +472,13 @@
     "whoIsUsing": "Who is using this service?",
     "livingAndVisiting": "Living and visiting",
     "handoverAndHolidays": "Handovers and holidays",
-    "education": {
+    "childEducation": {
       "title": "Education",
       "shareInformation": "How should information from {{{ childName }}}'s school be shared?",
       "routineDecisions": "How will routine decisions about {{{ childName }}}'s education be made?",
       "schoolMeetings": "Who will attend {{{ childName }}}'s school meetings and activities?"
     },
-    "health": {
+    "childHealth": {
       "title": "Health",
       "routineDecisions": "How will routine decisions about {{{ childName }}}'s health be made?",
       "healthNeeds": "What are {{{ childName }}}'s health needs?"
@@ -565,8 +565,8 @@
       "error": "List which items need to go between households"
     }
   },
-  "education": {
-    "title": "How should information from Jason's school be shared?",
+  "childEducation": {
+    "title": "How should information from {{{ childName }}}'s school be shared?",
     "description": "For example, school emails, reports and emergency communications",
     "options": {
       "parent": "You will receive information",
@@ -575,15 +575,18 @@
       "anotherArrangement": "Another arrangement"
     }
   },
-  "health": {
-    "title": "How will routine decisions about Jason's health be made?",
+  "childHealth": {
+    "title": "How will routine decisions about {{{ childName }}}'s health be made?",
     "description": "For example, booking routine check-ups, picking up prescriptions or managing minor illnesses.",
     "options": {
       "parent": "You will decide",
       "otherParent": "The other parent will decide",
       "bothParents": "Both parents will decide",
       "anotherArrangement": "Another arrangement"
-    }
+    },
+    "emptyError": "Select how last-minute changes should be communicated",
+    "descriptionEmptyError": "Describe how you will communicate changes",
+    "selectOneOptionError": "Describe what other arrangement you are proposing"
   },
   "specialDays": {
     "whatWillHappen": {

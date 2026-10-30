@@ -1,7 +1,7 @@
 import {
   dayValues,
   getBetweenHouseholdsField,
-  healthField,
+  childHealthField,
   planLastMinuteChangesField,
   whereHandoverField,
   whereMostlyLive,
@@ -62,8 +62,8 @@ export type CAPSession = {
       answer?: string;
     };
   };
-  health?: {
-    options: healthField[];
+  childHealth?: {
+    options: childHealthField[];
     describeArrangement?: string;
   },
   specialDays?: {
