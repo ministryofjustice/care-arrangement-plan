@@ -29,6 +29,7 @@ const FORM_STEPS = {
     DECISION_MAKING_PLAN_LAST_MINUTE_CHANGES: 'decisionMakingPlanLastMinuteChanges',
     DECISION_MAKING_PLAN_LONG_TERM_NOTICE: 'decisionMakingPlanLongTermNotice',
     DECISION_MAKING_PLAN_REVIEW: 'decisionMakingPlanReview',
+    HEALTH: 'health',
     CHECK_YOUR_ANSWERS: 'checkYourAnswers',
     SHARE_PLAN: 'sharePlan',
     CONFIRMATION: 'confirmation',

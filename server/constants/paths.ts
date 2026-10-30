@@ -51,6 +51,8 @@ enum paths {
   DECISION_MAKING_PLAN_LONG_TERM_NOTICE = '/decision-making/plan-long-term-notice',
   DECISION_MAKING_PLAN_LONG_TERM_NOTICE_CHANGES_NOT_REQUIRED = '/decision-making/plan-long-term-notice/not-required',
   DECISION_MAKING_PLAN_REVIEW = '/decision-making/plan-review',
+  EDUCATION = '/education',
+  HEALTH = '/health',
   DOWNLOAD_PDF = '/download-pdf',
   DOWNLOAD_HTML = '/download-html',
   PRINT_PDF = '/print-pdf',
