@@ -17,11 +17,10 @@ import BaseComponent from './base';
 class DoYouAgree extends BaseComponent {
   private readonly radioGroup: AcroFormRadioButton;
 
-  private currentX = MARGIN_WIDTH;
-
-  private readonly CHECKBOX_SIZE = 10;
-  private readonly CHECKBOX_HORIZONTAL_GAP = 7;
-  private readonly CHECKBOX_TEXT_GAP = 3;
+  private readonly CHECKBOX_SIZE = 6;
+  private readonly CHECKBOX_TEXT_GAP = 2;
+  private readonly OPTION_GAP = 4;
+  private readonly checkboxPositions: { x: number; y: number }[] = [];
   private readonly doYouAgreeParagraph: Paragraph;
 
   constructor(pdf: Pdf, text: string) {
@@ -30,39 +29,55 @@ class DoYouAgree extends BaseComponent {
       text,
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
-      bottomPadding: this.CHECKBOX_TEXT_GAP,
+      bottomPadding: 2,
     };
     this.radioGroup = new AcroFormRadioButton();
     this.radioGroup.radio = true;
     this.radioGroup.caption = '8';
   }
 
+  private drawCheckboxBorder(x: number, y: number) {
+    this.pdf.document.setDrawColor(0, 0, 0);
+    this.pdf.document.setLineWidth(0.4);
+    this.pdf.document.rect(x, y, this.CHECKBOX_SIZE, this.CHECKBOX_SIZE);
+  }
+
   private addOption(text: string) {
-    const textWithStyles = {
+    const x = MARGIN_WIDTH;
+    const y = this.pdf.currentY;
+
+    this.pdf.document.setFillColor(241, 244, 255);
+    this.pdf.document.rect(x, y, this.CHECKBOX_SIZE, this.CHECKBOX_SIZE, 'F');
+    this.drawCheckboxBorder(x, y);
+    this.pdf.document.setFillColor(0, 0, 0);
+
+    this.pdf.addText({
       text,
-      x: this.currentX,
-      y: this.pdf.currentY + this.CHECKBOX_SIZE / 2 + 0.25 * LINE_HEIGHT_RATIO * MAIN_TEXT_SIZE * MM_PER_POINT,
+      x: x + this.CHECKBOX_SIZE + this.CHECKBOX_TEXT_GAP,
+      y: y + this.CHECKBOX_SIZE / 2 + 0.25 * LINE_HEIGHT_RATIO * MAIN_TEXT_SIZE * MM_PER_POINT,
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
-    };
+    });
 
-    this.pdf.addText(textWithStyles);
-
-    this.currentX += this.pdf.getTextWidth(textWithStyles) + this.CHECKBOX_TEXT_GAP;
-
-    this.pdf.drawBorder(this.currentX, this.pdf.currentY, this.CHECKBOX_SIZE, this.CHECKBOX_SIZE);
     Object.assign(this.radioGroup.createOption(text), {
-      x: this.currentX,
-      y: this.pdf.currentY,
+      x,
+      y,
       width: this.CHECKBOX_SIZE,
       height: this.CHECKBOX_SIZE,
     });
+    this.checkboxPositions.push({ x, y });
 
-    this.currentX += this.CHECKBOX_SIZE + this.CHECKBOX_HORIZONTAL_GAP;
+    this.pdf.currentY += this.CHECKBOX_SIZE;
   }
 
   protected getComponentHeight() {
-    return this.pdf.getParagraphHeight(this.doYouAgreeParagraph) + this.CHECKBOX_SIZE + PARAGRAPH_SPACE;
+    return (
+      this.pdf.getParagraphHeight(this.doYouAgreeParagraph) +
+      this.CHECKBOX_SIZE +
+      this.OPTION_GAP +
+      this.CHECKBOX_SIZE +
+      PARAGRAPH_SPACE
+    );
   }
 
   protected createComponent() {
@@ -71,13 +86,15 @@ class DoYouAgree extends BaseComponent {
     this.pdf.document.addField(this.radioGroup);
 
     this.addOption(this.pdf.request.__('sharePlan.yourProposedPlan.yes'));
+    this.pdf.currentY += this.OPTION_GAP;
     this.addOption(this.pdf.request.__('sharePlan.yourProposedPlan.no'));
 
     // Set appearance must be done after the options are created, or it will not work
     // @ts-expect-error There is an error into the jsPDF type declaration.
     this.radioGroup.setAppearance(this.pdf.document.AcroForm.Appearance.RadioButton.Cross);
+    this.checkboxPositions.forEach(({ x, y }) => this.drawCheckboxBorder(x, y));
 
-    this.pdf.currentY += this.CHECKBOX_SIZE + PARAGRAPH_SPACE;
+    this.pdf.currentY += PARAGRAPH_SPACE;
   }
 
   protected handleComponentOverflowingPage() {

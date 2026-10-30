@@ -1,4 +1,10 @@
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+import {
+  MAIN_TEXT_SIZE,
+  NO_SPACE,
+  PARAGRAPH_SPACE,
+  QUESTION_TITLE_SIZE,
+  SUB_HEADING_SIZE
+} from '../constants/pdfConstants';
 
 import DoYouAgreeComponent from './components/doYouAgree';
 import SplittableTextComponent from './components/splittableText';
@@ -8,6 +14,7 @@ import Pdf from './pdf';
 
 const addAnswer = (
   pdf: Pdf,
+  sectionTitle: string | undefined,
   sectionHeading: string | undefined,
   question: string,
   subtext: string | undefined,
@@ -19,10 +26,18 @@ const addAnswer = (
   new SplittableTextComponent(
     pdf,
     [
+      sectionTitle
+        ? {
+            text: sectionTitle,
+            size: SUB_HEADING_SIZE,
+            style: FontStyles.NORMAL,
+            bottomPadding: NO_SPACE,
+          }
+        : undefined,
       sectionHeading
         ? {
             text: sectionHeading,
-            size: SECTION_HEADING_SIZE,
+            size: SUB_HEADING_SIZE,
             style: FontStyles.BOLD,
             bottomPadding: PARAGRAPH_SPACE,
           }
@@ -31,7 +46,7 @@ const addAnswer = (
         text: question,
         size: QUESTION_TITLE_SIZE,
         style: FontStyles.BOLD,
-        bottomPadding: PARAGRAPH_SPACE,
+        bottomPadding: NO_SPACE,
       },
       subtext
         ? {
