@@ -738,6 +738,39 @@
     "childArrangementsProposal": {
 
     },
+    "education": {
+      "sectionTitle": "Section 4",
+      "title": "Education",
+      "schoolInfo": {
+        "question": "How should information from the school be shared?",
+        "description": "For example, school emails, reports, and emergency communications. Harrison did not provide an answer.",
+        "doNotAgree": "If you do not agree, suggest how information from the school should be shared"
+      },
+      "routineDecisions": {
+        "question": "How will routine decisions about education be made?",
+        "description": "For example, day-to-day decisions like homework, school trips, and uniform. Harrison did not provide an answer.",
+        "doNotAgree": "If you do not agree, suggest how routine decisions about education should be made"
+      },
+      "schoolMeetings": {
+        "question": "Who will attend school meetings and activities?",
+        "description": "For example, parents' evenings, school meetings, school trips, and extracurricular activities. Harrison did not provide an answer.",
+        "doNotAgree": "If you do not agree, suggest who will attend school meetings and activities"
+      }
+    },
+    "health": {
+      "sectionTitle": "Section 5",
+      "title": "Health",
+      "routineDecisions": {
+        "question": "How will routine decisions about the children's health be made?",
+        "description": "For example, booking routine check-ups, picking up prescriptions, or managing minor illnesses. Harrison did not provide an answer.",
+        "doNotAgree": "If you do not agree, suggest how routine decisions about the children's health should be made"
+      },
+      "healthNeeds": {
+        "question": "What health needs should parents be aware of?",
+        "description": "For example, health routines, medical conditions, medications, appointments, and specialist support. Harrison did not provide an answer.",
+        "doNotAgree": "If you do not agree, suggest what health needs parents should be aware of"
+      }
+    },
     "endOfForm": {
       "sectionTitle": "Section 9",
       "title": "End of form",
