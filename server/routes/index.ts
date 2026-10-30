@@ -20,6 +20,7 @@ import doWhatsBestRoutes from './doWhatsBest';
 import downloadRoutes from './downloads';
 import existingCourtOrderRoutes from './existingCourtOrder';
 import handoverAndHolidaysRoutes from './handoverAndHolidays';
+import healthRoutes from './health';
 import livingAndVisitingRoutes from './livingAndVisiting';
 import loginAccountRoutes from './loginAccount';
 import loginStartRoutes from './loginStart';
@@ -37,6 +38,7 @@ function clearSessionData(request: Request): void {
   delete request.session.secondaryAdultName;
   delete request.session.livingAndVisiting;
   delete request.session.handoverAndHolidays;
+  delete request.session.health;
   delete request.session.specialDays;
   delete request.session.otherThings;
   delete request.session.decisionMaking;
@@ -79,6 +81,7 @@ const routes = (): Router => {
   confirmationRoutes(router);
   livingAndVisitingRoutes(router);
   handoverAndHolidaysRoutes(router);
+  healthRoutes(router);
   specialDaysRoutes(router);
   otherThingsRoutes(router);
   decisionMakingRoutes(router);
