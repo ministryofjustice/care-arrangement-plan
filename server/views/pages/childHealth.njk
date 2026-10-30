@@ -1,0 +1,95 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      null,
+      null,
+      title
+    )
+  }}
+{% endblock %}
+
+{% block content %}
+  {% include "partials/exitThisPage.njk" %}
+  <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+    {{ __('exitThisPage') | safe }}
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <form class="form" action="{{ paths.CHILD_HEALTH }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+        {% set describeArrangementHtml %}
+          {{
+            govukTextarea({
+              name: formFields.CHILD_HEALTH_DESCRIBE_ARRANGEMENT,
+              label: {
+                text: __('describeArrangement')
+              },
+              value: formValues[formFields.CHILD_HEALTH_DESCRIBE_ARRANGEMENT],
+              errorMessage: errors | findError(formFields.CHILD_HEALTH_DESCRIBE_ARRANGEMENT)
+            })
+          }}
+        {% endset -%}
+
+        {{
+          govukRadios({
+            name: formFields.CHILD_HEALTH_OPTION,
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            hint: {
+              text: __('childHealth.description')
+            },
+            items: [
+              {
+                value: "parent",
+                text: __('childHealth.options.parent')
+              },
+              {
+                value: "otherParent",
+                text: __('childHealth.options.otherParent')
+              },
+              {
+                value: "bothParents",
+                text: __('childHealth.options.bothParents')
+              },
+              {
+                divider: __('or')
+              },
+              {
+                value: "anotherArrangement",
+                text: __('childHealth.options.anotherArrangement'),
+                conditional: {
+                  html: describeArrangementHtml
+                }
+              }
+            ],
+            value: formValues[formFields.CHILD_HEALTH_OPTION],
+            errorMessage: errors | findError(formFields.CHILD_HEALTH_OPTION)
+          })
+        }}
+        <div class="govuk-!-margin-bottom-2">
+          <button type="submit" formaction="{{ paths.DECISION_MAKING_PLAN_LONG_TERM_NOTICE_CHANGES_NOT_REQUIRED }}" class="govuk-link link-styled-button">
+            {{ __('doNotNeedToDecideLongTermNotice') }}
+          </button>
+        </div>
+        <div class="govuk-button-group">
+          {{ govukButton({text: __('saveAndContinue')}) }}
+          {{ govukButton({text: __('saveAndComeBackLater'), classes: "govuk-button--secondary"}) }}
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
