@@ -1,6 +1,7 @@
 import {
   dayValues,
   getBetweenHouseholdsField,
+  childHealthField,
   planLastMinuteChangesField,
   whereHandoverField,
   whereMostlyLive,
@@ -61,6 +62,11 @@ export type CAPSession = {
       answer?: string;
     };
   };
+  childHealth?: {
+    options: childHealthField[];
+    describeArrangement?: string;
+    healthNeeds?: string;
+  },
   specialDays?: {
     whatWillHappen?: {
       noDecisionRequired: boolean;

@@ -12,6 +12,7 @@ import aboutTheChildrenRoutes from './aboutTheChildren';
 import accessibilityStatementRoutes from './accessibilityStatement';
 import analyticsRoutes from './analytics';
 import checkYourAnswersRoutes from './checkYourAnswers';
+import childHealthRoutes from './childHealth';
 import childrenSafetyRoutesCheck from './childrenSafetyCheck';
 import confirmationRoutes from './confirmation';
 import courtOrderCheckRoutes from './courtOrderCheck';
@@ -37,6 +38,7 @@ function clearSessionData(request: Request): void {
   delete request.session.secondaryAdultName;
   delete request.session.livingAndVisiting;
   delete request.session.handoverAndHolidays;
+  delete request.session.childHealth;
   delete request.session.specialDays;
   delete request.session.otherThings;
   delete request.session.decisionMaking;
@@ -79,6 +81,7 @@ const routes = (): Router => {
   confirmationRoutes(router);
   livingAndVisitingRoutes(router);
   handoverAndHolidaysRoutes(router);
+  childHealthRoutes(router);
   specialDaysRoutes(router);
   otherThingsRoutes(router);
   decisionMakingRoutes(router);

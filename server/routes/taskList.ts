@@ -5,17 +5,19 @@ import paths from '../constants/paths';
 import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../utils/addCompletedStep';
 import {
+  childHealthComplete,
+  childHealthNeedsComplete,
   formattedChildrenNames,
-  mostlyLiveComplete,
   getBetweenHouseholdsComplete,
-  whereHandoverComplete,
-  willChangeDuringSchoolHolidaysComplete,
   itemsForChangeoverComplete,
-  whatWillHappenComplete,
-  whatOtherThingsMatterComplete,
+  mostlyLiveComplete,
   planLastMinuteChangesComplete,
   planLongTermNoticeComplete,
   planReviewComplete,
+  whatOtherThingsMatterComplete,
+  whatWillHappenComplete,
+  whereHandoverComplete,
+  willChangeDuringSchoolHolidaysComplete,
 } from '../utils/sessionHelpers';
 
 const taskListRoutes = (router: Router) => {
@@ -32,6 +34,8 @@ const taskListRoutes = (router: Router) => {
     const isPlanLastMinuteChangesComplete = planLastMinuteChangesComplete(request.session);
     const isPlanLongTermNoticeComplete = planLongTermNoticeComplete(request.session);
     const isPlanReviewComplete = planReviewComplete(request.session);
+    const isChildHealthComplete = childHealthComplete(request.session);
+    const isChildHealthNeedsComplete = childHealthNeedsComplete(request.session);
 
     addCompletedStep(request, FORM_STEPS.TASK_LIST);
 
@@ -45,10 +49,15 @@ const taskListRoutes = (router: Router) => {
       isWhatOtherThingsMatterComplete &&
       isPlanLastMinuteChangesComplete &&
       isPlanLongTermNoticeComplete &&
-      isPlanReviewComplete;
+      isPlanReviewComplete &&
+      isChildHealthComplete &&
+      isChildHealthNeedsComplete;
+
+    const childName = formattedChildrenNames(request);
 
     response.render('pages/taskList', {
-      title: request.__('taskList.title', { names: formattedChildrenNames(request) }),
+      title: request.__('taskList.title', { names: childName }),
+      childName,
       numberOfChildren,
       namesOfChildren,
       showContinue: allTasksComplete,
@@ -62,6 +71,8 @@ const taskListRoutes = (router: Router) => {
       planLastMinuteChangesComplete: isPlanLastMinuteChangesComplete,
       planLongTermNoticeComplete: isPlanLongTermNoticeComplete,
       planReviewComplete: isPlanReviewComplete,
+      childHealthComplete: isChildHealthComplete,
+      childHealthNeedsComplete: isChildHealthNeedsComplete,
     });
   });
 };

@@ -119,6 +119,29 @@
         })
       }}
 
+      <h2 class="govuk-heading-m">{{ __('taskList.childHealth.title') }}</h2>
+      {{
+        govukTaskList({
+          idPrefix: 'childHealth-taskList',
+          items: [
+            {
+              title: {
+                text: __('taskList.childHealth.routineDecisions', { childName: childName })
+              },
+              href: paths.CHILD_HEALTH,
+              status: completeStatus if childHealthComplete else incompleteStatus
+            },
+            {
+              title: {
+                text: __('taskList.childHealth.healthNeeds', { childName: childName })
+              },
+              href: paths.CHILD_HEALTH_NEEDS if childHealthComplete else null,
+              status: completeStatus if childHealthNeedsComplete else (incompleteStatus if childHealthComplete else cannotStartStatus)
+            }
+          ]
+        })
+      }}
+
       <h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
       {{
         govukTaskList({
