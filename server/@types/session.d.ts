@@ -65,6 +65,7 @@ export type CAPSession = {
   childHealth?: {
     options: childHealthField[];
     describeArrangement?: string;
+    healthNeeds?: string;
   },
   specialDays?: {
     whatWillHappen?: {
