@@ -72,6 +72,23 @@ export type CAPSession = {
     noDecisionRequired?: boolean;
     description?: string;
   },
+  education?: {
+    shareInformation?: {
+      noDecisionRequired?: boolean;
+      options?: educationShareInformationField[];
+      describeArrangement?: string;
+    };
+    routineDecisions?: {
+      noDecisionRequired?: boolean;
+      options?: educationRoutineDecisionsField[];
+      describeArrangement?: string;
+    };
+    schoolMeetings?: {
+      noDecisionRequired?: boolean;
+      options?: educationSchoolMeetingsField[];
+      describeArrangement?: string;
+    };
+  };
   specialDays?: {
     whatWillHappen?: {
       noDecisionRequired: boolean;

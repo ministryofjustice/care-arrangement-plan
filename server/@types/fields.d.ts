@@ -7,3 +7,6 @@ export type getBetweenHouseholdsField = 'initialCollects' | 'secondaryCollects' 
 export type whereHandoverField = 'neutral' | 'initialHome' | 'secondaryHome' | 'school' | 'other';
 export type planLastMinuteChangesField = 'text' | 'email' | 'phone' | 'app' | 'anotherArrangement';
 export type childHealthField = 'parent' | 'otherParent' | 'bothParents' | 'anotherArrangement';
+export type educationShareInformationField = 'parent' | 'otherParent' | 'bothParents' | 'anotherArrangement';
+export type educationRoutineDecisionsField = 'parent' | 'otherParent' | 'bothParents' | 'anotherArrangement';
+export type educationSchoolMeetingsField = 'parent' | 'otherParent' | 'bothParents' | 'carer' | 'anotherArrangement';
