@@ -473,7 +473,7 @@
     "whoIsUsing": "Who is using this service?",
     "livingAndVisiting": "Living and visiting",
     "handoverAndHolidays": "Handovers and holidays",
-    "childEducation": {
+    "education": {
       "title": "Education",
       "shareInformation": "How should information from {{{ childName }}}'s school be shared?",
       "routineDecisions": "How will routine decisions about {{{ childName }}}'s education be made?",
@@ -566,14 +566,43 @@
       "error": "List which items need to go between households"
     }
   },
-  "childEducation": {
-    "title": "How should information from {{{ childName }}}'s school be shared?",
-    "description": "For example, school emails, reports and emergency communications",
-    "options": {
-      "parent": "You will receive information",
-      "otherParent": "The other parent will receive information",
-      "bothParents": "Both parents will receive information",
-      "anotherArrangement": "Another arrangement"
+  "education": {
+    "shareInformation": {
+      "title": "How should information from {{{ childName }}}'s school be shared?",
+      "description": "For example, school emails, reports and emergency communications",
+      "options": {
+        "parent": "You will receive information",
+        "otherParent": "The other parent will receive information",
+        "bothParents": "Both parents will receive information",
+        "anotherArrangement": "Another arrangement"
+      },
+      "emptyError": "Select how information from the school should be shared",
+      "descriptionEmptyError": "Describe the arrangement you are proposing"
+    },
+    "routineDecisions": {
+      "title": "How will routine decisions about {{{ childName }}}'s education be made?",
+      "description": "For example, day-to-day decisions like homework, school trips and uniform.",
+      "options": {
+        "parent": "You will decide",
+        "otherParent": "The other parent will decide",
+        "bothParents": "Both parents will decide",
+        "anotherArrangement": "Another arrangement"
+      },
+      "emptyError": "Select how routine decisions about education will be made",
+      "descriptionEmptyError": "Describe the arrangement you are proposing"
+    },
+    "schoolMeetings": {
+      "title": "Who will attend {{{ childName }}}'s school meetings and activities?",
+      "description": "For example, parents' evenings, school meetings, school trips and extracurricular activities.",
+      "options": {
+        "parent": "You will attend",
+        "otherParent": "The other parent will attend",
+        "bothParents": "Both parents will attend",
+        "carer": "The parent caring for {{{ childName }}} at the time will attend",
+        "anotherArrangement": "Another arrangement"
+      },
+      "emptyError": "Select who will attend school meetings and activities",
+      "descriptionEmptyError": "Describe the arrangement you are proposing"
     }
   },
   "childHealth": {

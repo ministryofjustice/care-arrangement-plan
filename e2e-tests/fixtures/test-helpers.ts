@@ -4,11 +4,7 @@ const SERVICE_ERROR_MESSAGE = 'Sorry, there is a problem with the service';
 
 const SERVICE_ERROR_HTML = `<h1>${SERVICE_ERROR_MESSAGE}</h1><p>You can try reloading the page or <a href="/">start again</a>.</p>`;
 
-export async function interceptPostWithError(
-  page: Page,
-  urlPattern: string | RegExp,
-  status: number = 500,
-) {
+export async function interceptPostWithError(page: Page, urlPattern: string | RegExp, status: number = 500) {
   await page.route(urlPattern, (route: Route) => {
     if (route.request().method() === 'POST') {
       return route.fulfill({
@@ -112,11 +108,11 @@ export async function fillAllChildrenAndContinue(page: Page, childNames: string[
 }
 
 export async function fillNumberOfChildrenAndDetails(page: Page, count: number, childNames: string[]) {
-      await fillNumberOfChildren(page, count)
-      for (let i = 0; i < childNames.length; i++) {
-        await fillChildDetails(page, childNames[i], i);
-      }
-      await page.getByRole('button', { name: /continue/i }).click();
+  await fillNumberOfChildren(page, count);
+  for (let i = 0; i < childNames.length; i++) {
+    await fillChildDetails(page, childNames[i], i);
+  }
+  await page.getByRole('button', { name: /continue/i }).click();
 }
 
 export async function fillAdultDetails(page: Page, adult1FirstName: string, adult2FirstName: string) {
@@ -172,7 +168,12 @@ export async function expectErrorSummaryLinkToField(page: Page, fieldId: string)
   await expect(errorLink).toBeVisible();
 }
 
-export async function fillLivingAndVisitingSectionAndContinue(page: Page, url: RegExp, heading: string, choiceLabels: string[]) {
+export async function fillLivingAndVisitingSectionAndContinue(
+  page: Page,
+  url: RegExp,
+  heading: string,
+  choiceLabels: string[],
+) {
   await expect(page).toHaveURL(url);
   await expect(page.locator('h1')).toContainText(heading);
   for (const label of choiceLabels) {
@@ -183,28 +184,38 @@ export async function fillLivingAndVisitingSectionAndContinue(page: Page, url: R
   }
 }
 
-export async function fillHandoversAndHolidaySectionAndContinue(page: Page, url: RegExp, heading: string, choiceLabels: string[] = []) {
+export async function fillHandoversAndHolidaySectionAndContinue(
+  page: Page,
+  url: RegExp,
+  heading: string,
+  choiceLabels: string[] = [],
+) {
   await expect(page).toHaveURL(url);
   await expect(page.locator('h1')).toContainText(heading);
   for (const label of choiceLabels) {
     await page.getByLabel(label).check();
   }
-  if (choiceLabels.length > 0) { 
-    await page.getByRole('button', { name: /continue/i }).click(); 
+  if (choiceLabels.length > 0) {
+    await page.getByRole('button', { name: /continue/i }).click();
   }
 }
 
-export async function checkDataPersistsAndContinue(page: Page, choiceLabels: string[] = [], textArea: boolean = false, textAreaValue: string = '') {
+export async function checkDataPersistsAndContinue(
+  page: Page,
+  choiceLabels: string[] = [],
+  textArea: boolean = false,
+  textAreaValue: string = '',
+) {
   for (const label of choiceLabels) {
-      await expect(page.getByLabel(label)).toBeChecked();
+    await expect(page.getByLabel(label)).toBeChecked();
   }
   if (textArea) {
-     await expect(page.locator('textarea:visible')).toHaveValue(textAreaValue);
+    await expect(page.locator('textarea:visible')).toHaveValue(textAreaValue);
   }
   await page.getByRole('button', { name: /continue/i }).click();
 }
 
-  /**
+/**
  * Complete the Living and Visiting section with minimal required data
  */
 export async function completeLivingAndVisitingSection(page: Page) {
@@ -281,11 +292,27 @@ export async function completeHandoverAndHolidaysSection(page: Page) {
  * Complete the Health section with minimal required data
  */
 export async function completeChildHealthSection(page: Page) {
-  await page.getByRole('link', { name: /routine decisions about/i }).click();
+  await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
   await page.getByLabel(/both parents will decide/i).check();
   await page.getByRole('button', { name: /save and continue/i }).click();
   await page.waitForURL(/\/child-health-needs/);
   await page.locator('#child-health-needs-description').fill('Regular check-ups and an inhaler when needed');
+  await page.getByRole('button', { name: /save and continue/i }).click();
+  await page.waitForURL(/\/make-a-plan/);
+}
+
+/**
+ * Complete the Education section with minimal required data
+ */
+export async function completeEducationSection(page: Page) {
+  await page.getByRole('link', { name: /information from .* school be shared/i }).click();
+  await page.getByLabel(/both parents will receive information/i).check();
+  await page.getByRole('button', { name: /save and continue/i }).click();
+  await page.waitForURL(/\/education\/routine-decisions/);
+  await page.getByLabel(/both parents will decide/i).check();
+  await page.getByRole('button', { name: /save and continue/i }).click();
+  await page.waitForURL(/\/education\/school-meetings/);
+  await page.getByLabel(/both parents will attend/i).check();
   await page.getByRole('button', { name: /save and continue/i }).click();
   await page.waitForURL(/\/make-a-plan/);
 }
@@ -349,6 +376,7 @@ export async function completeMinimalJourney(page: Page) {
   await completeLivingAndVisitingSection(page);
   await completeHandoverAndHolidaysSection(page);
   await completeChildHealthSection(page);
+  await completeEducationSection(page);
   await completeSpecialDaysSection(page);
   await completeOtherThingsSection(page);
   await completeDecisionMakingSection(page);

@@ -12,7 +12,7 @@ const mobileDevices = [
 
 async function assertNoHorizontalScroll(page: Page) {
   const html = await page.$('html');
-  const hasHorizontalScroll = await html!.evaluate(el => el.scrollWidth > el.clientWidth);
+  const hasHorizontalScroll = await html!.evaluate((el) => el.scrollWidth > el.clientWidth);
   expect(hasHorizontalScroll).toBe(false);
 }
 
@@ -113,8 +113,25 @@ for (const device of mobileDevices) {
 
       // make-a-plan (Task List)
       await expect(page).toHaveURL(/\/make-a-plan/);
-      await page.getByRole('link', { name: /routine decisions about/i }).scrollIntoViewIfNeeded();
-      await page.getByRole('link', { name: /routine decisions about/i }).tap();
+      await page.getByRole('link', { name: /information from .* school be shared/i }).scrollIntoViewIfNeeded();
+      await page.getByRole('link', { name: /information from .* school be shared/i }).tap();
+
+      // education share information
+      await page.getByLabel(/both parents will receive information/i).check();
+      await page.getByRole('button', { name: /save and continue/i }).tap();
+
+      // education routine decisions
+      await page.getByLabel(/both parents will decide/i).check();
+      await page.getByRole('button', { name: /save and continue/i }).tap();
+
+      // education school meetings
+      await page.getByLabel(/both parents will attend/i).check();
+      await page.getByRole('button', { name: /save and continue/i }).tap();
+
+      // make-a-plan (Task List)
+      await expect(page).toHaveURL(/\/make-a-plan/);
+      await page.getByRole('link', { name: /routine decisions about .* health/i }).scrollIntoViewIfNeeded();
+      await page.getByRole('link', { name: /routine decisions about .* health/i }).tap();
 
       // child-health
       await page.getByLabel(/both parents will decide/i).check();
@@ -144,7 +161,9 @@ for (const device of mobileDevices) {
 
       // make-a-plan (Task List)
       await expect(page).toHaveURL(/\/make-a-plan/);
-      await page.getByRole('link', { name: /How should last-minute changes be communicated/i }).scrollIntoViewIfNeeded();
+      await page
+        .getByRole('link', { name: /How should last-minute changes be communicated/i })
+        .scrollIntoViewIfNeeded();
       await page.getByRole('link', { name: /How should last-minute changes be communicated/i }).tap();
 
       // plan-last-minute-changes

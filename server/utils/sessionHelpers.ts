@@ -69,6 +69,18 @@ export const childHealthNeedsComplete = (session: Partial<CAPSession>) =>
   !!session.childHealthNeeds?.description ||
   !!session.childHealth?.healthNeeds;
 
+export const educationShareInformationComplete = (session: Partial<CAPSession>) =>
+  !!session.education?.shareInformation?.noDecisionRequired ||
+  !!session.education?.shareInformation?.options?.length;
+
+export const educationRoutineDecisionsComplete = (session: Partial<CAPSession>) =>
+  !!session.education?.routineDecisions?.noDecisionRequired ||
+  !!session.education?.routineDecisions?.options?.length;
+
+export const educationSchoolMeetingsComplete = (session: Partial<CAPSession>) =>
+  !!session.education?.schoolMeetings?.noDecisionRequired ||
+  !!session.education?.schoolMeetings?.options?.length;
+
 export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;
 
 export const getBackUrl = (session: Partial<SessionData>, defaultUrl: string) => {

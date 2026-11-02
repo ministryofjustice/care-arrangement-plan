@@ -119,6 +119,36 @@
         })
       }}
 
+      <h2 class="govuk-heading-m">{{ __('taskList.education.title') }}</h2>
+      {{
+        govukTaskList({
+          idPrefix: 'education-taskList',
+          items: [
+            {
+              title: {
+                text: __('taskList.education.shareInformation', { childName: childName })
+              },
+              href: paths.EDUCATION_SHARE_INFORMATION,
+              status: completeStatus if educationShareInformationComplete else incompleteStatus
+            },
+            {
+              title: {
+                text: __('taskList.education.routineDecisions', { childName: childName })
+              },
+              href: paths.EDUCATION_ROUTINE_DECISIONS if educationShareInformationComplete else null,
+              status: completeStatus if educationRoutineDecisionsComplete else (incompleteStatus if educationShareInformationComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('taskList.education.schoolMeetings', { childName: childName })
+              },
+              href: paths.EDUCATION_SCHOOL_MEETINGS if educationShareInformationComplete else null,
+              status: completeStatus if educationSchoolMeetingsComplete else (incompleteStatus if educationShareInformationComplete else cannotStartStatus)
+            }
+          ]
+        })
+      }}
+
       <h2 class="govuk-heading-m">{{ __('taskList.childHealth.title') }}</h2>
       {{
         govukTaskList({

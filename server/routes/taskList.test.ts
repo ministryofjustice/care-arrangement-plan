@@ -67,6 +67,20 @@ const session: Partial<SessionData> = {
     noDecisionRequired: false,
     description: 'Regular check-ups',
   },
+  education: {
+    shareInformation: {
+      noDecisionRequired: false,
+      options: ['bothParents'],
+    },
+    routineDecisions: {
+      noDecisionRequired: false,
+      options: ['bothParents'],
+    },
+    schoolMeetings: {
+      noDecisionRequired: false,
+      options: ['bothParents'],
+    },
+  },
 };
 
 describe(`GET ${paths.TASK_LIST}`, () => {
@@ -201,6 +215,56 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
   it('should not render the continue button if routine health decisions are not filled out', async () => {
     sessionMock.childHealth = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expectContinueButtonHidden(dom.window.document);
+  });
+
+  it('should keep later education tasks locked until school information sharing is answered', async () => {
+    sessionMock.education = {};
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    expect(response.text).toContain(paths.EDUCATION_SHARE_INFORMATION);
+    expect(response.text).not.toContain(paths.EDUCATION_ROUTINE_DECISIONS);
+    expect(response.text).not.toContain(paths.EDUCATION_SCHOOL_MEETINGS);
+    expect(response.text).toContain('Cannot start yet');
+  });
+
+  it('should link later education tasks after school information sharing is answered', async () => {
+    sessionMock.education.shareInformation = { noDecisionRequired: true };
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    expect(response.text).toContain(paths.EDUCATION_ROUTINE_DECISIONS);
+    expect(response.text).toContain(paths.EDUCATION_SCHOOL_MEETINGS);
+  });
+
+  it('should not render the continue button if school information sharing is not filled out', async () => {
+    sessionMock.education.shareInformation = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expectContinueButtonHidden(dom.window.document);
+  });
+
+  it('should not render the continue button if routine education decisions are not filled out', async () => {
+    sessionMock.education.routineDecisions = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expectContinueButtonHidden(dom.window.document);
+  });
+
+  it('should not render the continue button if school meetings are not filled out', async () => {
+    sessionMock.education.schoolMeetings = null;
 
     const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
 

@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import shareInformationRoutes from './shareInformation';
 import routineDecisionsRoutes from './routineDecisions';
 import schoolMeetingsRoutes from './schoolMeetings';
+import shareInformationRoutes from './shareInformation';
 
 const educationRoutes = (router: Router) => {
   shareInformationRoutes(router);

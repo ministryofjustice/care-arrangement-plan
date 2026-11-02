@@ -7,6 +7,9 @@ import addCompletedStep from '../utils/addCompletedStep';
 import {
   childHealthComplete,
   childHealthNeedsComplete,
+  educationRoutineDecisionsComplete,
+  educationSchoolMeetingsComplete,
+  educationShareInformationComplete,
   formattedChildrenNames,
   getBetweenHouseholdsComplete,
   itemsForChangeoverComplete,
@@ -36,6 +39,9 @@ const taskListRoutes = (router: Router) => {
     const isPlanReviewComplete = planReviewComplete(request.session);
     const isChildHealthComplete = childHealthComplete(request.session);
     const isChildHealthNeedsComplete = childHealthNeedsComplete(request.session);
+    const isEducationShareInformationComplete = educationShareInformationComplete(request.session);
+    const isEducationRoutineDecisionsComplete = educationRoutineDecisionsComplete(request.session);
+    const isEducationSchoolMeetingsComplete = educationSchoolMeetingsComplete(request.session);
 
     addCompletedStep(request, FORM_STEPS.TASK_LIST);
 
@@ -51,7 +57,10 @@ const taskListRoutes = (router: Router) => {
       isPlanLongTermNoticeComplete &&
       isPlanReviewComplete &&
       isChildHealthComplete &&
-      isChildHealthNeedsComplete;
+      isChildHealthNeedsComplete &&
+      isEducationShareInformationComplete &&
+      isEducationRoutineDecisionsComplete &&
+      isEducationSchoolMeetingsComplete;
 
     const childName = formattedChildrenNames(request);
 
@@ -73,6 +82,9 @@ const taskListRoutes = (router: Router) => {
       planReviewComplete: isPlanReviewComplete,
       childHealthComplete: isChildHealthComplete,
       childHealthNeedsComplete: isChildHealthNeedsComplete,
+      educationShareInformationComplete: isEducationShareInformationComplete,
+      educationRoutineDecisionsComplete: isEducationRoutineDecisionsComplete,
+      educationSchoolMeetingsComplete: isEducationSchoolMeetingsComplete,
     });
   });
 };

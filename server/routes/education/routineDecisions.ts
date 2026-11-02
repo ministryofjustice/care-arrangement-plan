@@ -35,16 +35,19 @@ const routineDecisionsRoutes = (router: Router) => {
         return next();
       }
 
-      request.session.education.routineDecisions = {
-        ...request.session.education.routineDecisions,
-        noDecisionRequired: true,
-        options: undefined,
-        describeArrangement: undefined,
+      request.session.education = {
+        ...request.session.education,
+        routineDecisions: {
+          ...request.session.education?.routineDecisions,
+          noDecisionRequired: true,
+          options: undefined,
+          describeArrangement: undefined,
+        },
       };
 
       addCompletedStep(request, FORM_STEPS.EDUCATION_ROUTINE_DECISIONS);
 
-      return response.redirect(paths.EDUCATION_ROUTINE_DECISIONS);
+      return response.redirect(paths.EDUCATION_SCHOOL_MEETINGS);
     },
     body(formFields.EDUCATION_ROUTINE_DECISIONS_OPTION)
       .notEmpty()
@@ -73,16 +76,19 @@ const routineDecisionsRoutes = (router: Router) => {
         [formFields.EDUCATION_ROUTINE_DECISIONS_DESCRIBE_ARRANGEMENT]: describeArrangement,
       } = formData;
 
-      request.session.education.routineDecisions = {
-        ...request.session.education.routineDecisions,
-        noDecisionRequired: false,
-        options: [option],
-        describeArrangement: option === 'anotherArrangement' ? describeArrangement : undefined,
+      request.session.education = {
+        ...request.session.education,
+        routineDecisions: {
+          ...request.session.education?.routineDecisions,
+          noDecisionRequired: false,
+          options: [option],
+          describeArrangement: option === 'anotherArrangement' ? describeArrangement : undefined,
+        },
       };
 
       addCompletedStep(request, FORM_STEPS.EDUCATION_ROUTINE_DECISIONS);
 
-      return response.redirect(paths.EDUCATION_ROUTINE_DECISIONS);
+      return response.redirect(paths.EDUCATION_SCHOOL_MEETINGS);
     },
   );
 };
