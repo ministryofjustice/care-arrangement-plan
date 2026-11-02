@@ -1,0 +1,219 @@
+import express, { Express, Router } from 'express';
+import i18n from 'i18n';
+import request from 'supertest';
+
+import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
+import paths from '../../constants/paths';
+import setUpWebRequestParsing from '../../middleware/setupRequestParsing';
+import { flashMock, sessionMock } from '../../test-utils/testMocks';
+
+import routineDecisionsRoutes from './routineDecisions';
+
+const buildApp = (): Express => {
+  const app = express();
+  app.use(setUpWebRequestParsing());
+  app.use(i18n.init);
+  app.use((req, _response, next) => {
+    req.session = sessionMock;
+    req.flash = flashMock;
+    next();
+  });
+
+  const router = Router();
+  routineDecisionsRoutes(router);
+  app.use(router);
+
+  return app;
+};
+
+const app = buildApp();
+
+describe(paths.EDUCATION_ROUTINE_DECISIONS, () => {
+  beforeEach(() => {
+    sessionMock.education = {};
+  });
+
+  describe('POST', () => {
+    it('should reload the page when no option is selected', async () => {
+      await request(app)
+        .post(paths.EDUCATION_ROUTINE_DECISIONS)
+        .expect(302)
+        .expect('location', paths.EDUCATION_ROUTINE_DECISIONS);
+
+      expect(flashMock).toHaveBeenCalledWith(
+        'errors',
+        expect.arrayContaining([
+          expect.objectContaining({
+            msg: 'education.routineDecisions.emptyError',
+            path: formFields.EDUCATION_ROUTINE_DECISIONS_OPTION,
+          }),
+        ]),
+      );
+      expect(flashMock).toHaveBeenCalledWith('formValues', expect.any(Object));
+      expect(sessionMock.completedSteps).toBeUndefined();
+      expect(sessionMock.education?.routineDecisions).toBeUndefined();
+    });
+
+    it('should reload the page when another arrangement has no description', async () => {
+      await request(app)
+        .post(paths.EDUCATION_ROUTINE_DECISIONS)
+        .send({ [formFields.EDUCATION_ROUTINE_DECISIONS_OPTION]: 'anotherArrangement' })
+        .expect(302)
+        .expect('location', paths.EDUCATION_ROUTINE_DECISIONS);
+
+      expect(flashMock).toHaveBeenCalledWith(
+        'errors',
+        expect.arrayContaining([
+          expect.objectContaining({
+            msg: 'education.routineDecisions.descriptionEmptyError',
+            path: formFields.EDUCATION_ROUTINE_DECISIONS_DESCRIBE_ARRANGEMENT,
+          }),
+        ]),
+      );
+      expect(sessionMock.completedSteps).toBeUndefined();
+    });
+
+    it('should reload the page when the description is only whitespace', async () => {
+      await request(app)
+        .post(paths.EDUCATION_ROUTINE_DECISIONS)
+        .send({
+          [formFields.EDUCATION_ROUTINE_DECISIONS_OPTION]: 'anotherArrangement',
+          [formFields.EDUCATION_ROUTINE_DECISIONS_DESCRIBE_ARRANGEMENT]: '   ',
+        })
+        .expect(302)
+        .expect('location', paths.EDUCATION_ROUTINE_DECISIONS);
+
+      expect(sessionMock.education?.routineDecisions).toBeUndefined();
+      expect(sessionMock.completedSteps).toBeUndefined();
+    });
+
+    it.each(['parent', 'otherParent', 'bothParents'] as const)(
+      'should save %s and stay on routine decisions',
+      async (option) => {
+        sessionMock.education = { shareInformation: { noDecisionRequired: true } };
+
+        await request(app)
+          .post(paths.EDUCATION_ROUTINE_DECISIONS)
+          .send({ [formFields.EDUCATION_ROUTINE_DECISIONS_OPTION]: option })
+          .expect(302)
+          .expect('location', paths.EDUCATION_ROUTINE_DECISIONS);
+
+        expect(sessionMock.education).toEqual({
+          shareInformation: { noDecisionRequired: true },
+          routineDecisions: {
+            noDecisionRequired: false,
+            options: [option],
+            describeArrangement: undefined,
+          },
+        });
+        expect(sessionMock.completedSteps).toEqual([FORM_STEPS.EDUCATION_ROUTINE_DECISIONS]);
+      },
+    );
+
+    it('should save a trimmed description when another arrangement is selected', async () => {
+      await request(app)
+        .post(paths.EDUCATION_ROUTINE_DECISIONS)
+        .send({
+          [formFields.EDUCATION_ROUTINE_DECISIONS_OPTION]: 'anotherArrangement',
+          [formFields.EDUCATION_ROUTINE_DECISIONS_DESCRIBE_ARRANGEMENT]: '  Agreed in writing each term  ',
+        })
+        .expect(302)
+        .expect('location', paths.EDUCATION_ROUTINE_DECISIONS);
+
+      expect(sessionMock.education?.routineDecisions).toEqual({
+        noDecisionRequired: false,
+        options: ['anotherArrangement'],
+        describeArrangement: 'Agreed in writing each term',
+      });
+    });
+
+    it('should clear a previous description when a standard option is selected', async () => {
+      sessionMock.education = {
+        routineDecisions: {
+          noDecisionRequired: true,
+          options: ['anotherArrangement'],
+          describeArrangement: 'Old arrangement',
+        },
+      };
+
+      await request(app)
+        .post(paths.EDUCATION_ROUTINE_DECISIONS)
+        .send({ [formFields.EDUCATION_ROUTINE_DECISIONS_OPTION]: 'bothParents' })
+        .expect(302)
+        .expect('location', paths.EDUCATION_ROUTINE_DECISIONS);
+
+      expect(sessionMock.education?.routineDecisions).toEqual({
+        noDecisionRequired: false,
+        options: ['bothParents'],
+        describeArrangement: undefined,
+      });
+    });
+
+    it('should not record the completed step twice', async () => {
+      sessionMock.completedSteps = [FORM_STEPS.EDUCATION_ROUTINE_DECISIONS];
+
+      await request(app)
+        .post(paths.EDUCATION_ROUTINE_DECISIONS)
+        .send({ [formFields.EDUCATION_ROUTINE_DECISIONS_OPTION]: 'parent' })
+        .expect(302)
+        .expect('location', paths.EDUCATION_ROUTINE_DECISIONS);
+
+      expect(sessionMock.completedSteps).toEqual([FORM_STEPS.EDUCATION_ROUTINE_DECISIONS]);
+    });
+
+    it('should keep validating when skip is not true', async () => {
+      await request(app)
+        .post(paths.EDUCATION_ROUTINE_DECISIONS)
+        .send({ skip: 'false' })
+        .expect(302)
+        .expect('location', paths.EDUCATION_ROUTINE_DECISIONS);
+
+      expect(sessionMock.completedSteps).toBeUndefined();
+    });
+  });
+
+  describe('skip', () => {
+    it('should mark the question as skipped', async () => {
+      await request(app)
+        .post(paths.EDUCATION_ROUTINE_DECISIONS)
+        .send({ skip: 'true' })
+        .expect(302)
+        .expect('location', paths.EDUCATION_ROUTINE_DECISIONS);
+
+      expect(sessionMock.education?.routineDecisions).toEqual({
+        noDecisionRequired: true,
+        options: undefined,
+        describeArrangement: undefined,
+      });
+      expect(sessionMock.completedSteps).toEqual([FORM_STEPS.EDUCATION_ROUTINE_DECISIONS]);
+    });
+
+    it('should replace a saved answer when the question is skipped', async () => {
+      sessionMock.education = {
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['parent'],
+          describeArrangement: 'Old arrangement',
+        },
+      };
+      sessionMock.completedSteps = [FORM_STEPS.EDUCATION_ROUTINE_DECISIONS];
+
+      await request(app)
+        .post(paths.EDUCATION_ROUTINE_DECISIONS)
+        .send({
+          skip: 'true',
+          [formFields.EDUCATION_ROUTINE_DECISIONS_OPTION]: 'otherParent',
+        })
+        .expect(302)
+        .expect('location', paths.EDUCATION_ROUTINE_DECISIONS);
+
+      expect(sessionMock.education?.routineDecisions).toEqual({
+        noDecisionRequired: true,
+        options: undefined,
+        describeArrangement: undefined,
+      });
+      expect(sessionMock.completedSteps).toEqual([FORM_STEPS.EDUCATION_ROUTINE_DECISIONS]);
+    });
+  });
+});
