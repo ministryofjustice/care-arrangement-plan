@@ -278,6 +278,19 @@ export async function completeHandoverAndHolidaysSection(page: Page) {
 }
 
 /**
+ * Complete the Health section with minimal required data
+ */
+export async function completeChildHealthSection(page: Page) {
+  await page.getByRole('link', { name: /routine decisions about/i }).click();
+  await page.getByLabel(/both parents will decide/i).check();
+  await page.getByRole('button', { name: /save and continue/i }).click();
+  await page.waitForURL(/\/child-health-needs/);
+  await page.locator('#child-health-needs-description').fill('Regular check-ups and an inhaler when needed');
+  await page.getByRole('button', { name: /save and continue/i }).click();
+  await page.waitForURL(/\/make-a-plan/);
+}
+
+/**
  * Complete the Special Days section with minimal required data
  */
 export async function completeSpecialDaysSection(page: Page) {
@@ -335,6 +348,7 @@ export async function completeMinimalJourney(page: Page) {
   // Complete all required sections
   await completeLivingAndVisitingSection(page);
   await completeHandoverAndHolidaysSection(page);
+  await completeChildHealthSection(page);
   await completeSpecialDaysSection(page);
   await completeOtherThingsSection(page);
   await completeDecisionMakingSection(page);

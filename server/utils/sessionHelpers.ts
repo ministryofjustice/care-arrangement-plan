@@ -62,9 +62,11 @@ export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
   !!session.decisionMaking?.planLongTermNotice;
 
 export const childHealthComplete = (session: Partial<CAPSession>) =>
-  !!session.childHealth?.options;
+  !!session.childHealth?.noDecisionRequired || !!session.childHealth?.options?.length;
 
 export const childHealthNeedsComplete = (session: Partial<CAPSession>) =>
+  !!session.childHealthNeeds?.noDecisionRequired ||
+  !!session.childHealthNeeds?.description ||
   !!session.childHealth?.healthNeeds;
 
 export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;

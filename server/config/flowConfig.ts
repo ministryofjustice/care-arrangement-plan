@@ -113,6 +113,10 @@ const TASK_FLOW_MAP : TaskFlowMapType = {
     path: paths.CHILD_HEALTH,
     dependsOn: [FORM_STEPS.TASK_LIST],
   },
+  [FORM_STEPS.CHILD_HEALTH_NEEDS]: {
+    path: paths.CHILD_HEALTH_NEEDS,
+    dependsOn: [FORM_STEPS.CHILD_HEALTH],
+  },
   [FORM_STEPS.SPECIAL_DAYS_WHAT_WILL_HAPPEN]: {
     path: paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN,
     dependsOn: [FORM_STEPS.TASK_LIST],

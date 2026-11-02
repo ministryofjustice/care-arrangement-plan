@@ -59,6 +59,14 @@ const session: Partial<SessionData> = {
       months: 1,
     },
   },
+  childHealth: {
+    noDecisionRequired: false,
+    options: ['bothParents'],
+  },
+  childHealthNeeds: {
+    noDecisionRequired: false,
+    description: 'Regular check-ups',
+  },
 };
 
 describe(`GET ${paths.TASK_LIST}`, () => {
@@ -183,6 +191,26 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
   it('should not render the continue button if the plan long term notice section is not filled out', async () => {
     sessionMock.decisionMaking.planLongTermNotice = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expectContinueButtonHidden(dom.window.document);
+  });
+
+  it('should not render the continue button if routine health decisions are not filled out', async () => {
+    sessionMock.childHealth = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expectContinueButtonHidden(dom.window.document);
+  });
+
+  it('should not render the continue button if health needs are not filled out', async () => {
+    sessionMock.childHealthNeeds = null;
 
     const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
 

@@ -20,6 +20,7 @@
   "doNotNeedToDecideOtherThings": "Hepgor y cwestiwn hwn",
   "doNotNeedToDecideLastMinuteChanges": "Hepgor y cwestiwn hwn",
   "doNotNeedToDecideLongTermNotice": "Hepgor y cwestiwn hwn",
+  "skipThisQuestion": "Hepgor y cwestiwn hwn",
   "anotherArrangement": "Trefniant arall",
   "or": "Neu",
   "aItem": "a {{ item }}",

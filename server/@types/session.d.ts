@@ -63,9 +63,14 @@ export type CAPSession = {
     };
   };
   childHealth?: {
-    options: childHealthField[];
+    noDecisionRequired?: boolean;
+    options?: childHealthField[];
     describeArrangement?: string;
     healthNeeds?: string;
+  },
+  childHealthNeeds?: {
+    noDecisionRequired?: boolean;
+    description?: string;
   },
   specialDays?: {
     whatWillHappen?: {

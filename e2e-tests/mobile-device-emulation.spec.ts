@@ -113,6 +113,19 @@ for (const device of mobileDevices) {
 
       // make-a-plan (Task List)
       await expect(page).toHaveURL(/\/make-a-plan/);
+      await page.getByRole('link', { name: /routine decisions about/i }).scrollIntoViewIfNeeded();
+      await page.getByRole('link', { name: /routine decisions about/i }).tap();
+
+      // child-health
+      await page.getByLabel(/both parents will decide/i).check();
+      await page.getByRole('button', { name: /save and continue/i }).tap();
+
+      // child-health-needs
+      await page.locator('#child-health-needs-description').fill('test');
+      await page.getByRole('button', { name: /save and continue/i }).tap();
+
+      // make-a-plan (Task List)
+      await expect(page).toHaveURL(/\/make-a-plan/);
       await page.getByRole('link', { name: /What will happen on special days/i }).scrollIntoViewIfNeeded();
       await page.getByRole('link', { name: /What will happen on special days/i }).tap();
 

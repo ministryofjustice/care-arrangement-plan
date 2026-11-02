@@ -22,6 +22,7 @@
   "doNotNeedToDecideOtherThings": "Skip this question",
   "doNotNeedToDecideLastMinuteChanges": "Skip this question",
   "doNotNeedToDecideLongTermNotice": "Skip this question",
+  "skipThisQuestion": "Skip this question",
   "anotherArrangement": "Another arrangement",
   "or": "or",
   "aItem": "a {{ item }}",
@@ -584,14 +585,14 @@
       "bothParents": "Both parents will decide",
       "anotherArrangement": "Another arrangement"
     },
-    "emptyError": "Select how last-minute changes should be communicated",
-    "descriptionEmptyError": "Describe how you will communicate changes",
+    "emptyError": "Select how routine decisions about health will be made",
+    "descriptionEmptyError": "Describe the arrangement you are proposing",
     "selectOneOptionError": "Describe what other arrangement you are proposing"
   },
   "childHealthNeeds": {
-    "title": "What are Jason's health needs?",
+    "title": "What are {{{ childName }}}'s health needs?",
     "description": "For example, health routines, medical conditions, medications, appointments and specialist support.",
-    "emptyError": "Error"
+    "emptyError": "Describe the health needs"
   },
   "specialDays": {
     "whatWillHappen": {
