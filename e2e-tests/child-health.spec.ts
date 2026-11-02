@@ -15,7 +15,7 @@ test.describe('Child health', () => {
   });
 
   test('keeps health needs locked until routine decisions are answered', async ({ page }) => {
-    const routineRow = page.locator('li').filter({ hasText: /routine decisions about/i });
+    const routineRow = page.locator('li').filter({ hasText: /routine decisions about .* health/i });
     const needsRow = page.locator('li').filter({ hasText: /health needs/i });
 
     await expect(routineRow).toContainText(/incomplete/i);
@@ -24,7 +24,7 @@ test.describe('Child health', () => {
   });
 
   test('shows an error when no routine decision is selected', async ({ page }) => {
-    await page.getByRole('link', { name: /routine decisions about/i }).click();
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
     await page.getByRole('button', { name: /save and continue/i }).click();
 
     await expect(page).toHaveURL(/\/child-health$/);
@@ -36,7 +36,7 @@ test.describe('Child health', () => {
   });
 
   test('shows an error when another arrangement has no description', async ({ page }) => {
-    await page.getByRole('link', { name: /routine decisions about/i }).click();
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
     await page.getByLabel(/another arrangement/i).check();
     await page.getByRole('button', { name: /save and continue/i }).click();
 
@@ -48,7 +48,7 @@ test.describe('Child health', () => {
   });
 
   test('continues to health needs after a routine decision is saved', async ({ page }) => {
-    await page.getByRole('link', { name: /routine decisions about/i }).click();
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
     await page.getByLabel(/both parents will decide/i).check();
     await page.getByRole('button', { name: /save and continue/i }).click();
 
@@ -58,7 +58,7 @@ test.describe('Child health', () => {
   });
 
   test('continues to health needs when the routine decision is skipped', async ({ page }) => {
-    await page.getByRole('link', { name: /routine decisions about/i }).click();
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
     await page.getByRole('button', { name: /skip this question/i }).click();
 
     await expect(page).toHaveURL(/\/child-health-needs/);
@@ -76,7 +76,7 @@ test.describe('Child health', () => {
   });
 
   test('keeps a saved routine decision when returning to the page', async ({ page }) => {
-    await page.getByRole('link', { name: /routine decisions about/i }).click();
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
     await page.getByLabel(/another arrangement/i).check();
     await page.locator(`#${ARRANGEMENT_FIELD_ID}`).fill(ARRANGEMENT);
     await page.getByRole('button', { name: /save and continue/i }).click();
@@ -89,7 +89,7 @@ test.describe('Child health', () => {
   });
 
   test('shows an error when health needs are empty or only whitespace', async ({ page }) => {
-    await page.getByRole('link', { name: /routine decisions about/i }).click();
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
     await page.getByRole('button', { name: /skip this question/i }).click();
     await expect(page).toHaveURL(/\/child-health-needs/);
 
@@ -104,14 +104,14 @@ test.describe('Child health', () => {
   });
 
   test('marks both health tasks complete after health needs are saved', async ({ page }) => {
-    await page.getByRole('link', { name: /routine decisions about/i }).click();
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
     await page.getByLabel(/you will decide/i).check();
     await page.getByRole('button', { name: /save and continue/i }).click();
     await page.locator(`#${NEEDS_FIELD_ID}`).fill(HEALTH_NEEDS);
     await page.getByRole('button', { name: /save and continue/i }).click();
 
     await expect(page).toHaveURL(/\/make-a-plan/);
-    await expect(page.locator('li').filter({ hasText: /routine decisions about/i })).toContainText(/completed/i);
+    await expect(page.locator('li').filter({ hasText: /routine decisions about .* health/i })).toContainText(/completed/i);
     await expect(page.locator('li').filter({ hasText: /health needs/i })).toContainText(/completed/i);
 
     await page.getByRole('link', { name: /health needs/i }).click();
@@ -119,12 +119,12 @@ test.describe('Child health', () => {
   });
 
   test('marks health needs complete when that question is skipped', async ({ page }) => {
-    await page.getByRole('link', { name: /routine decisions about/i }).click();
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
     await page.getByRole('button', { name: /skip this question/i }).click();
     await page.getByRole('button', { name: /skip this question/i }).click();
 
     await expect(page).toHaveURL(/\/make-a-plan/);
-    await expect(page.locator('li').filter({ hasText: /routine decisions about/i })).toContainText(/completed/i);
+    await expect(page.locator('li').filter({ hasText: /routine decisions about .* health/i })).toContainText(/completed/i);
     await expect(page.locator('li').filter({ hasText: /health needs/i })).toContainText(/completed/i);
   });
 });

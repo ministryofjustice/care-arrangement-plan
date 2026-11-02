@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 import {
+  completeChildHealthSection,
   completeDecisionMakingSection,
+  completeEducationSection,
   completeHandoverAndHolidaysSection,
   completeLivingAndVisitingSection,
   completeMinimalJourney,
@@ -181,6 +183,8 @@ test.describe('Check Your Answers Summary Page', () => {
 
     await completeLivingAndVisitingSection(page);
     await completeHandoverAndHolidaysSection(page);
+    await completeChildHealthSection(page);
+    await completeEducationSection(page);
     await completeSpecialDaysSection(page);
     await completeOtherThingsSection(page);
     await completeDecisionMakingSection(page);
