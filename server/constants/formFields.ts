@@ -32,6 +32,7 @@ enum formFields {
   CHILD_HEALTH = 'child-health',
   CHILD_HEALTH_OPTION = 'child-health-option',
   CHILD_HEALTH_DESCRIBE_ARRANGEMENT = 'child-health-describe-arrangement',
+  CHILD_HEALTH_NEEDS_DESCRIPTION = 'child-health-needs-description',
   WHAT_OTHER_THINGS_MATTER = 'what-other-things-matter',
   PLAN_LAST_MINUTE_CHANGES = 'plan-last-minute-changes-method',
   PLAN_LAST_MINUTE_CHANGES_DESCRIBE_ARRANGEMENT = 'plan-last-minute-changes-describe-arrangement',

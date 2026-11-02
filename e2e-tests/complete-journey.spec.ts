@@ -113,6 +113,20 @@ test.describe('Complete-journey', () => {
 
     // Make a plan, next section
     await expect(page).toHaveURL(/make-a-plan/);
+    await page.getByRole('link', { name: /routine decisions about/i }).click();
+
+    // Health
+    await expect(page).toHaveURL(/\/child-health$/);
+    await page.getByLabel(/both parents will decide/i).check();
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    // Health needs
+    await expect(page).toHaveURL(/\/child-health-needs/);
+    await page.locator('#child-health-needs-description').fill('test');
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    // Make a plan, next section
+    await expect(page).toHaveURL(/make-a-plan/);
     await page.getByRole('link', { name: /What will happen on special days/i }).click();
 
     // Special days
