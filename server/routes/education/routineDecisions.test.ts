@@ -14,6 +14,7 @@ import routineDecisionsRoutes from './routineDecisions';
 
 const buildApp = (): Express => {
   const app = express();
+  app.disable('x-powered-by');
   app.use(setUpWebRequestParsing());
   app.use(i18n.init);
   app.use((req, _response, next) => {
