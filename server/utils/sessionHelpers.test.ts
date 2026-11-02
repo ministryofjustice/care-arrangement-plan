@@ -3,6 +3,9 @@ import { CAPSession } from '../@types/session';
 import {
   childHealthComplete,
   childHealthNeedsComplete,
+  educationRoutineDecisionsComplete,
+  educationSchoolMeetingsComplete,
+  educationShareInformationComplete,
   mostlyLiveComplete,
   willChangeDuringSchoolHolidaysComplete,
 } from './sessionHelpers';
@@ -257,6 +260,79 @@ describe('sessionHelpers', () => {
 
     it('returns true when health needs were saved on the child health answer', () => {
       expect(childHealthNeedsComplete({ childHealth: { healthNeeds: 'Asthma' } })).toBe(true);
+    });
+  });
+
+  describe('educationShareInformationComplete', () => {
+    it('returns false when school information sharing has not been answered', () => {
+      expect(educationShareInformationComplete({})).toBe(false);
+      expect(
+        educationShareInformationComplete({
+          education: { shareInformation: { noDecisionRequired: false, options: [] } },
+        }),
+      ).toBe(false);
+    });
+
+    it('returns true when an option has been saved', () => {
+      expect(
+        educationShareInformationComplete({
+          education: { shareInformation: { noDecisionRequired: false, options: ['bothParents'] } },
+        }),
+      ).toBe(true);
+    });
+
+    it('returns true when the question was skipped', () => {
+      expect(educationShareInformationComplete({ education: { shareInformation: { noDecisionRequired: true } } })).toBe(
+        true,
+      );
+    });
+  });
+
+  describe('educationRoutineDecisionsComplete', () => {
+    it('returns false when routine education decisions have not been answered', () => {
+      expect(educationRoutineDecisionsComplete({})).toBe(false);
+      expect(
+        educationRoutineDecisionsComplete({
+          education: { routineDecisions: { noDecisionRequired: false, options: [] } },
+        }),
+      ).toBe(false);
+    });
+
+    it('returns true when an option has been saved', () => {
+      expect(
+        educationRoutineDecisionsComplete({
+          education: { routineDecisions: { noDecisionRequired: false, options: ['parent'] } },
+        }),
+      ).toBe(true);
+    });
+
+    it('returns true when the question was skipped', () => {
+      expect(educationRoutineDecisionsComplete({ education: { routineDecisions: { noDecisionRequired: true } } })).toBe(
+        true,
+      );
+    });
+  });
+
+  describe('educationSchoolMeetingsComplete', () => {
+    it('returns false when school meetings have not been answered', () => {
+      expect(educationSchoolMeetingsComplete({})).toBe(false);
+      expect(
+        educationSchoolMeetingsComplete({ education: { schoolMeetings: { noDecisionRequired: false, options: [] } } }),
+      ).toBe(false);
+    });
+
+    it('returns true when an option has been saved', () => {
+      expect(
+        educationSchoolMeetingsComplete({
+          education: { schoolMeetings: { noDecisionRequired: false, options: ['carer'] } },
+        }),
+      ).toBe(true);
+    });
+
+    it('returns true when the question was skipped', () => {
+      expect(educationSchoolMeetingsComplete({ education: { schoolMeetings: { noDecisionRequired: true } } })).toBe(
+        true,
+      );
     });
   });
 });

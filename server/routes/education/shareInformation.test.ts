@@ -1,12 +1,14 @@
 import express, { Express, Router } from 'express';
 import i18n from 'i18n';
+import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
 import formFields from '../../constants/formFields';
 import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import setUpWebRequestParsing from '../../middleware/setupRequestParsing';
-import { flashMock, sessionMock } from '../../test-utils/testMocks';
+import testAppSetup from '../../test-utils/testAppSetup';
+import { flashFormValues, flashMock, flashMockErrors, sessionMock } from '../../test-utils/testMocks';
 
 import shareInformationRoutes from './shareInformation';
 
@@ -28,6 +30,76 @@ const buildApp = (): Express => {
 };
 
 const app = buildApp();
+const pagesApp = testAppSetup();
+
+describe(`${paths.EDUCATION_SHARE_INFORMATION} page`, () => {
+  describe('GET', () => {
+    it('should render the share information page', async () => {
+      sessionMock.namesOfChildren = ['Alex'];
+
+      const response = await request(pagesApp).get(paths.EDUCATION_SHARE_INFORMATION).expect('Content-Type', /html/);
+      const dom = new JSDOM(response.text);
+
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent(
+        "How should information from Alex's school be shared?",
+      );
+      expect(dom.window.document.querySelector('form')).toHaveAttribute('action', paths.EDUCATION_SHARE_INFORMATION);
+    });
+
+    it('should render a previously saved answer', async () => {
+      sessionMock.namesOfChildren = ['Alex'];
+      sessionMock.education = {
+        shareInformation: {
+          noDecisionRequired: false,
+          options: ['bothParents'],
+        },
+      };
+
+      const dom = new JSDOM((await request(pagesApp).get(paths.EDUCATION_SHARE_INFORMATION)).text);
+
+      expect(dom.window.document.querySelector(`#${formFields.EDUCATION_SHARE_INFORMATION_OPTION}-3`)).toBeChecked();
+    });
+
+    it('should render flashed errors', async () => {
+      Object.assign(flashMockErrors, [
+        {
+          location: 'body',
+          msg: 'Select how information from the school should be shared',
+          path: formFields.EDUCATION_SHARE_INFORMATION_OPTION,
+          type: 'field',
+        },
+      ]);
+
+      const dom = new JSDOM((await request(pagesApp).get(paths.EDUCATION_SHARE_INFORMATION)).text);
+
+      expect(
+        dom.window.document.querySelector(`#${formFields.EDUCATION_SHARE_INFORMATION_OPTION}-error`),
+      ).toHaveTextContent('Select how information from the school should be shared');
+    });
+
+    it('should prefer flashed answers over the saved answer', async () => {
+      sessionMock.education = {
+        shareInformation: {
+          noDecisionRequired: false,
+          options: ['parent'],
+        },
+      };
+      Object.assign(flashFormValues, [
+        {
+          [formFields.EDUCATION_SHARE_INFORMATION_OPTION]: 'anotherArrangement',
+          [formFields.EDUCATION_SHARE_INFORMATION_DESCRIBE_ARRANGEMENT]: 'The school emails a grandparent',
+        },
+      ]);
+
+      const dom = new JSDOM((await request(pagesApp).get(paths.EDUCATION_SHARE_INFORMATION)).text);
+
+      expect(dom.window.document.querySelector(`#${formFields.EDUCATION_SHARE_INFORMATION_OPTION}-5`)).toBeChecked();
+      expect(
+        dom.window.document.querySelector(`#${formFields.EDUCATION_SHARE_INFORMATION_DESCRIBE_ARRANGEMENT}`),
+      ).toHaveValue('The school emails a grandparent');
+    });
+  });
+});
 
 describe(paths.EDUCATION_SHARE_INFORMATION, () => {
   beforeEach(() => {
@@ -45,7 +117,7 @@ describe(paths.EDUCATION_SHARE_INFORMATION, () => {
         'errors',
         expect.arrayContaining([
           expect.objectContaining({
-            msg: 'education.shareInformation.emptyError',
+            msg: 'Select how information from the school should be shared',
             path: formFields.EDUCATION_SHARE_INFORMATION_OPTION,
           }),
         ]),
@@ -66,7 +138,7 @@ describe(paths.EDUCATION_SHARE_INFORMATION, () => {
         'errors',
         expect.arrayContaining([
           expect.objectContaining({
-            msg: 'education.shareInformation.descriptionEmptyError',
+            msg: 'Describe the arrangement you are proposing',
             path: formFields.EDUCATION_SHARE_INFORMATION_DESCRIBE_ARRANGEMENT,
           }),
         ]),

@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Complete-journey', () => {
   test('should complete full journey from start to end', async ({ page }) => {
-
     // Start Page
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
@@ -113,7 +112,24 @@ test.describe('Complete-journey', () => {
 
     // Make a plan, next section
     await expect(page).toHaveURL(/make-a-plan/);
-    await page.getByRole('link', { name: /routine decisions about/i }).click();
+    await page.getByRole('link', { name: /information from .* school be shared/i }).click();
+
+    // Education
+    await expect(page).toHaveURL(/\/education\/share-information/);
+    await page.getByLabel(/both parents will receive information/i).check();
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    await expect(page).toHaveURL(/\/education\/routine-decisions/);
+    await page.getByLabel(/both parents will decide/i).check();
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    await expect(page).toHaveURL(/\/education\/school-meetings/);
+    await page.getByLabel(/both parents will attend/i).check();
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    // Make a plan, next section
+    await expect(page).toHaveURL(/make-a-plan/);
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
 
     // Health
     await expect(page).toHaveURL(/\/child-health$/);
@@ -172,8 +188,8 @@ test.describe('Complete-journey', () => {
 
     // share-plan
     await expect(page).toHaveURL(/share-plan/);
-    await page.getByRole('button', { name: /Download plan as PDF/i }).click();   
-    
+    await page.getByRole('button', { name: /Download plan as PDF/i }).click();
+
     // Confirmation
     await expect(page).toHaveURL(/confirmation/);
   });

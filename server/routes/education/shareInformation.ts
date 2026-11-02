@@ -35,11 +35,14 @@ const shareInformationRoutes = (router: Router) => {
         return next();
       }
 
-      request.session.education.shareInformation = {
-        ...request.session.education.shareInformation,
-        noDecisionRequired: true,
-        options: undefined,
-        describeArrangement: undefined,
+      request.session.education = {
+        ...request.session.education,
+        shareInformation: {
+          ...request.session.education?.shareInformation,
+          noDecisionRequired: true,
+          options: undefined,
+          describeArrangement: undefined,
+        },
       };
 
       addCompletedStep(request, FORM_STEPS.EDUCATION_SHARE_INFORMATION);
@@ -73,11 +76,14 @@ const shareInformationRoutes = (router: Router) => {
         [formFields.EDUCATION_SHARE_INFORMATION_DESCRIBE_ARRANGEMENT]: describeArrangement,
       } = formData;
 
-      request.session.education.shareInformation = {
-        ...request.session.education.shareInformation,
-        noDecisionRequired: false,
-        options: [option],
-        describeArrangement: option === 'anotherArrangement' ? describeArrangement : undefined,
+      request.session.education = {
+        ...request.session.education,
+        shareInformation: {
+          ...request.session.education?.shareInformation,
+          noDecisionRequired: false,
+          options: [option],
+          describeArrangement: option === 'anotherArrangement' ? describeArrangement : undefined,
+        },
       };
 
       addCompletedStep(request, FORM_STEPS.EDUCATION_SHARE_INFORMATION);
