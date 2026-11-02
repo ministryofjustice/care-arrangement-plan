@@ -3,6 +3,8 @@ import { test, expect } from '@playwright/test';
 import {
   navigateToTaskList,
   expectErrorSummaryVisible,
+  completeChildHealthSection,
+  completeEducationSection,
   completeLivingAndVisitingSection,
   completeHandoverAndHolidaysSection,
   completeSpecialDaysSection,
@@ -427,6 +429,8 @@ test.describe('Decision Making Section', () => {
       // Complete prerequisite sections
       await completeLivingAndVisitingSection(page);
       await completeHandoverAndHolidaysSection(page);
+      await completeChildHealthSection(page);
+      await completeEducationSection(page);
       await completeSpecialDaysSection(page);
       await completeOtherThingsSection(page);
 
