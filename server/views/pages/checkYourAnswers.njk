@@ -260,24 +260,101 @@
         })
       }}
 
-      <h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
+      <h2 class="govuk-heading-m">{{ __('checkYourAnswers.education.title') }}</h2>
       {{
         govukSummaryList({
         classes: "govuk-!-margin-bottom-9",
         rows: [
           {
             key: {
-              text: __('specialDays.whatWillHappen.title')
+              text: __('checkYourAnswers.education.shareInformation.question')
             },
             value: {
-              text: values.whatWillHappen
+              text: values.educationShareInformation
             },
             actions: {
               items: [
                 {
-                  href: paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN,
+                  href: paths.EDUCATION_SHARE_INFORMATION,
                   text: __('checkYourAnswers.change.text'),
-                  visuallyHiddenText: __('checkYourAnswers.change.whatWillHappen')
+                  visuallyHiddenText: __('checkYourAnswers.education.shareInformation.hiddenText')
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: __('checkYourAnswers.education.routineDecisions.question')
+            },
+            value: {
+              text: values.educationRoutineDecisions
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.EDUCATION_ROUTINE_DECISIONS,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.education.routineDecisions.hiddenText')
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: __('checkYourAnswers.education.schoolMeetings.question')
+            },
+            value: {
+              text: values.educationSchoolMeetings
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.EDUCATION_SCHOOL_MEETINGS,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.education.schoolMeetings.hiddenText')
+                }
+              ]
+            }
+          }
+        ]
+        })
+      }}
+
+      <h2 class="govuk-heading-m">{{ __('checkYourAnswers.childHealth.title') }}</h2>
+      {{
+        govukSummaryList({
+        classes: "govuk-!-margin-bottom-9",
+        rows: [
+          {
+            key: {
+              text: __('checkYourAnswers.childHealth.routineDecisions.question')
+            },
+            value: {
+              text: values.childHealthRoutineDecisions
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.CHILD_HEALTH_ROUTINE_DECISIONS,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.childHealth.routineDecisions.hiddenText')
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: __('checkYourAnswers.childHealth.healthNeeds.question')
+            },
+            value: {
+              text: __('checkYourAnswers.childHealth.healthNeeds.answer')
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.CHILD_HEALTH_HEALTH_NEEDS,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.childHealth.healthNeeds.hiddenText')
                 }
               ]
             }

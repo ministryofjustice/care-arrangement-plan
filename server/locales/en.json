@@ -679,6 +679,37 @@
       "whichDaysOvernight": "The children will stay overnight with {{{ adult }}} on {{ days }}",
       "whichDaysDaytimeVisits": "The children will have daytime visits with {{{ adult }}} on {{ days }}"
     },
+    "education": {
+      "title": "Education",
+      "shareInformation": {
+        "question": "How should information from {{{ children }}}'s school be shared?",
+        "answer": "{{{ answer }}} will receive updates",
+        "hiddenText": ""
+      },
+      "routineDecisions": {
+        "question": "How will routine decisions about {{{ children }}}'s education be made?",
+        "answer": "{{{ answer }}} will make decisions",
+        "hiddenText": ""
+      },
+      "schoolMeetings": {
+        "question": "Who will attend {{{ children }}}'s school meetings and activities?",
+        "answer": "{{{ answer }}} will attend",
+        "hiddenText": ""
+      }
+    },
+    "childHealth": {
+      "title": "Health",
+      "routineDecisions": {
+        "question": "How will routine decisions about {{{ children }}}'s health be made?",
+        "answer": "{{{ answer }}} will decide",
+        "hiddenText": ""
+      },
+      "healthNeeds": {
+        "question": "What are {{{ children }}}'s health needs?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      }
+    },
     "decisionMaking": {
       "monthsSingular": "1 month",
       "yearsSingular": "1 year",
