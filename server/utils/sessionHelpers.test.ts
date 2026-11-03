@@ -230,36 +230,36 @@ describe('sessionHelpers', () => {
   describe('childHealthComplete', () => {
     it('returns false when child health has not been answered', () => {
       expect(childHealthComplete({})).toBe(false);
-      expect(childHealthComplete({ childHealth: { noDecisionRequired: false, options: [] } })).toBe(false);
+      expect(childHealthComplete({ childHealth: { routineDecisions: { noDecisionRequired: false, options: [] } } })).toBe(false);
     });
 
     it('returns true when an option has been saved', () => {
-      expect(childHealthComplete({ childHealth: { noDecisionRequired: false, options: ['bothParents'] } })).toBe(true);
+      expect(childHealthComplete({ childHealth: { routineDecisions: { noDecisionRequired: false, options: ['bothParents'] } } })).toBe(true);
     });
 
     it('returns true when the question was skipped', () => {
-      expect(childHealthComplete({ childHealth: { noDecisionRequired: true } })).toBe(true);
+      expect(childHealthComplete({ childHealth: { routineDecisions: { noDecisionRequired: true } } })).toBe(true);
     });
   });
 
   describe('childHealthNeedsComplete', () => {
     it('returns false when health needs have not been answered', () => {
       expect(childHealthNeedsComplete({})).toBe(false);
-      expect(childHealthNeedsComplete({ childHealthNeeds: { noDecisionRequired: false } })).toBe(false);
+      expect(childHealthNeedsComplete({ childHealth: { childHealthNeeds: { noDecisionRequired: false } } })).toBe(false);
     });
 
     it('returns true when a description has been saved', () => {
       expect(
-        childHealthNeedsComplete({ childHealthNeeds: { noDecisionRequired: false, description: 'Inhaler' } }),
+        childHealthNeedsComplete({ childHealth: { childHealthNeeds: { noDecisionRequired: false, description: 'Inhaler' } } }),
       ).toBe(true);
     });
 
     it('returns true when the question was skipped', () => {
-      expect(childHealthNeedsComplete({ childHealthNeeds: { noDecisionRequired: true } })).toBe(true);
+      expect(childHealthNeedsComplete({ childHealth: { childHealthNeeds: { noDecisionRequired: true } } })).toBe(true);
     });
 
     it('returns true when health needs were saved on the child health answer', () => {
-      expect(childHealthNeedsComplete({ childHealth: { healthNeeds: 'Asthma' } })).toBe(true);
+      expect(childHealthNeedsComplete({ childHealth: { childHealthNeeds: { noDecisionRequired: false, description: 'Asthma' } } })).toBe(true);
     });
   });
 

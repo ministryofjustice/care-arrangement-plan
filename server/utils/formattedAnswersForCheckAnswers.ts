@@ -134,11 +134,11 @@ export const educationShareInformation = (request: Request) => {
   const getAnswerForEducationShareInformation = (who: educationShareInformationField) => {
     switch (who) {
       case 'parent':
-        return request.__('checkYourAnswers.education.shareInformation.parent');
+        return request.__('checkYourAnswers.education.shareInformation.answer', { answer: 'Parent' });
       case 'otherParent':
-        return request.__('checkYourAnswers.education.shareInformation.otherParent');
+        return request.__('checkYourAnswers.education.shareInformation.answer', { answer: 'Other Parent' });
       case 'bothParents':
-        return request.__('checkYourAnswers.education.shareInformation.bothParents');
+        return request.__('checkYourAnswers.education.shareInformation.answer', { answer: 'Both Parents' });
       case 'anotherArrangement':
         return education.shareInformation.describeArrangement;
       default:
@@ -158,11 +158,11 @@ export const educationRoutineDecisions = (request: Request) => {
   const getAnswerForEducationRoutineDecisions = (who: educationRoutineDecisionsField) => {
     switch (who) {
       case 'parent':
-        return request.__('checkYourAnswers.education.routineDecisions.parent');
+        return request.__('checkYourAnswers.education.routineDecisions.answer', { answer: 'Parent' });
       case 'otherParent':
-        return request.__('checkYourAnswers.education.routineDecisions.otherParent');
+        return request.__('checkYourAnswers.education.routineDecisions.answer', { answer: 'Other Parent' });
       case 'bothParents':
-        return request.__('checkYourAnswers.education.routineDecisions.bothParents');
+        return request.__('checkYourAnswers.education.routineDecisions.answer', { answer: 'Both Parents' });
       case 'anotherArrangement':
         return education.routineDecisions.describeArrangement;
       default:
@@ -182,13 +182,13 @@ export const educationSchoolMeetings = (request: Request) => {
   const getAnswerForEducationSchoolMeetings = (who: educationSchoolMeetingsField) => {
     switch (who) {
       case 'parent':
-        return request.__('checkYourAnswers.education.schoolMeetings.parent');
+        return request.__('checkYourAnswers.education.schoolMeetings.answer', { answer: 'Parent' });
       case 'otherParent':
-        return request.__('checkYourAnswers.education.schoolMeetings.otherParent');
+        return request.__('checkYourAnswers.education.schoolMeetings.answer', { answer: 'Other Parent' });
       case 'bothParents':
-        return request.__('checkYourAnswers.education.schoolMeetings.bothParents');
+        return request.__('checkYourAnswers.education.schoolMeetings.answer', { answer: 'Both Parents' });
       case 'carer':
-        return request.__('checkYourAnswers.education.schoolMeetings.carer');
+        return request.__('checkYourAnswers.education.schoolMeetings.answer', { answer: 'Carer' });
       case 'anotherArrangement':
         return education.schoolMeetings.describeArrangement;
       default:
@@ -200,8 +200,8 @@ export const educationSchoolMeetings = (request: Request) => {
 };
 
 export const childHealthRoutineDecisions = (request: Request) => {
-  const { childHealth } = request.session;
-  if (childHealth.noDecisionRequired) {
+  const { health } = request.session;
+  if (health.routineDecisions.noDecisionRequired) {
     return request.__('doNotNeedToDecide');
   }
 
@@ -214,13 +214,13 @@ export const childHealthRoutineDecisions = (request: Request) => {
       case 'bothParents':
         return request.__('checkYourAnswers.childHealth.routineDecisions.bothParents');
       case 'anotherArrangement':
-        return childHealth.describeArrangement;
+        return health.routineDecisions.describeArrangement;
       default:
         return undefined;
     }
   };
 
-  return childHealth.options.map(getAnswerForChildHealthRoutineDecisions).join(', ');
+  return health.routineDecisions.options.map(getAnswerForChildHealthRoutineDecisions).join(', ');
 };
 
 export const willChangeDuringSchoolHolidays = (request: Request) => {

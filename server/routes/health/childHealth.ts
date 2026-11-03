@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
-import { childHealthRoutineDecisionsField } from '../@types/fields';
-import formFields from '../constants/formFields';
-import FORM_STEPS from '../constants/formSteps';
-import paths from '../constants/paths';
-import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
-import addCompletedStep from '../utils/addCompletedStep';
-import { formattedChildrenNames, getBackUrl } from '../utils/sessionHelpers';
+import { childHealthRoutineDecisionsField } from '../../@types/fields';
+import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
+import paths from '../../constants/paths';
+import checkFormProgressFromConfig from '../../middleware/checkFormProgressFromConfig';
+import addCompletedStep from '../../utils/addCompletedStep';
+import { formattedChildrenNames, getBackUrl } from '../../utils/sessionHelpers';
 
 const childHealthRoutes = (router: Router) => {
   router.get(paths.CHILD_HEALTH, checkFormProgressFromConfig(FORM_STEPS.CHILD_HEALTH), (request, response) => {

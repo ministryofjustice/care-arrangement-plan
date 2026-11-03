@@ -606,22 +606,24 @@
     }
   },
   "childHealth": {
-    "title": "How will routine decisions about {{{ childName }}}'s health be made?",
-    "description": "For example, booking routine check-ups, picking up prescriptions or managing minor illnesses.",
-    "options": {
-      "parent": "You will decide",
-      "otherParent": "The other parent will decide",
-      "bothParents": "Both parents will decide",
-      "anotherArrangement": "Another arrangement"
+    "routineDecisions": {
+      "title": "How will routine decisions about {{{ childName }}}'s health be made?",
+      "description": "For example, booking routine check-ups, picking up prescriptions or managing minor illnesses.",
+      "options": {
+        "parent": "You will decide",
+        "otherParent": "The other parent will decide",
+        "bothParents": "Both parents will decide",
+        "anotherArrangement": "Another arrangement"
+      },
+      "emptyError": "Select how routine decisions about health will be made",
+      "descriptionEmptyError": "Describe the arrangement you are proposing",
+      "selectOneOptionError": "Describe what other arrangement you are proposing"
     },
-    "emptyError": "Select how routine decisions about health will be made",
-    "descriptionEmptyError": "Describe the arrangement you are proposing",
-    "selectOneOptionError": "Describe what other arrangement you are proposing"
-  },
-  "childHealthNeeds": {
-    "title": "What are {{{ childName }}}'s health needs?",
-    "description": "For example, health routines, medical conditions, medications, appointments and specialist support.",
-    "emptyError": "Describe the health needs"
+    "healthNeeds": {
+      "title": "What are {{{ childName }}}'s health needs?",
+      "description": "For example, health routines, medical conditions, medications, appointments and specialist support.",
+      "emptyError": "Describe the health needs"
+    }
   },
   "specialDays": {
     "whatWillHappen": {
