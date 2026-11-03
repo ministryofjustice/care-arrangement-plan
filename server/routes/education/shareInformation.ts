@@ -83,6 +83,7 @@ const shareInformationRoutes = (router: Router) => {
           noDecisionRequired: false,
           options: [option],
           describeArrangement: option === 'anotherArrangement' ? describeArrangement : undefined,
+          answer: option
         },
       };
 

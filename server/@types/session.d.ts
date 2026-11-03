@@ -62,33 +62,38 @@ export type CAPSession = {
       answer?: string;
     };
   };
-  childHealth?: {
-    noDecisionRequired?: boolean;
-    options?: childHealthRoutineDecisionsField[];
-    describeArrangement?: string;
-    healthNeeds?: string;
-  },
-  childHealthNeeds?: {
-    noDecisionRequired?: boolean;
-    description?: string;
-  },
   education?: {
     shareInformation?: {
       noDecisionRequired?: boolean;
       options?: educationShareInformationField[];
       describeArrangement?: string;
+      answer?: string;
     };
     routineDecisions?: {
       noDecisionRequired?: boolean;
       options?: educationRoutineDecisionsField[];
       describeArrangement?: string;
+      answer?: string;
     };
     schoolMeetings?: {
       noDecisionRequired?: boolean;
       options?: educationSchoolMeetingsField[];
       describeArrangement?: string;
+      answer?: string;
     };
   };
+  childHealth?: {
+    routineDecisions?: {
+      noDecisionRequired?: boolean;
+      options?: childHealthRoutineDecisionsField[];
+      describeArrangement?: string;
+      answer?: string;
+    };
+    childHealthNeeds?:  {
+      noDecisionRequired?: boolean;
+      description?: string;
+    }
+  },
   specialDays?: {
     whatWillHappen?: {
       noDecisionRequired: boolean;

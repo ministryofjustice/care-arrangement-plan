@@ -1,11 +1,11 @@
 import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
-import formFields from '../constants/formFields';
-import FORM_STEPS from '../constants/formSteps';
-import paths from '../constants/paths';
-import testAppSetup from '../test-utils/testAppSetup';
-import { flashFormValues, flashMock, flashMockErrors, sessionMock } from '../test-utils/testMocks';
+import formFields from '../../constants/formFields';
+import FORM_STEPS from '../../constants/formSteps';
+import paths from '../../constants/paths';
+import testAppSetup from '../../test-utils/testAppSetup';
+import { flashFormValues, flashMock, flashMockErrors, sessionMock } from '../../test-utils/testMocks';
 
 const app = testAppSetup();
 

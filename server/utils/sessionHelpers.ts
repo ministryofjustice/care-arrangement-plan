@@ -61,14 +61,6 @@ export const planLastMinuteChangesComplete = (session: Partial<CAPSession>) =>
 export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
   !!session.decisionMaking?.planLongTermNotice;
 
-export const childHealthComplete = (session: Partial<CAPSession>) =>
-  !!session.childHealth?.noDecisionRequired || !!session.childHealth?.options?.length;
-
-export const childHealthNeedsComplete = (session: Partial<CAPSession>) =>
-  !!session.childHealthNeeds?.noDecisionRequired ||
-  !!session.childHealthNeeds?.description ||
-  !!session.childHealth?.healthNeeds;
-
 export const educationShareInformationComplete = (session: Partial<CAPSession>) =>
   !!session.education?.shareInformation?.noDecisionRequired ||
   !!session.education?.shareInformation?.options?.length;
@@ -80,6 +72,14 @@ export const educationRoutineDecisionsComplete = (session: Partial<CAPSession>) 
 export const educationSchoolMeetingsComplete = (session: Partial<CAPSession>) =>
   !!session.education?.schoolMeetings?.noDecisionRequired ||
   !!session.education?.schoolMeetings?.options?.length;
+
+export const childHealthComplete = (session: Partial<CAPSession>) =>
+  !!session.childHealth?.routineDecisions?.noDecisionRequired || !!session.childHealth?.routineDecisions?.options?.length;
+
+export const childHealthNeedsComplete = (session: Partial<CAPSession>) =>
+  !!session.childHealth?.childHealthNeeds?.noDecisionRequired ||
+  !!session.childHealth?.childHealthNeeds?.description ||
+  !!session.childHealth?.childHealthNeeds?.description?.trim().length;
 
 export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;
 
