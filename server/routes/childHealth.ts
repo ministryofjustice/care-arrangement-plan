@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
-import { childHealthField } from '../@types/fields';
+import { childHealthRoutineDecisionsField } from '../@types/fields';
 import formFields from '../constants/formFields';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
@@ -57,7 +57,7 @@ const childHealthRoutes = (router: Router) => {
     (request, response) => {
       const formData = matchedData<{
         [formFields.CHILD_HEALTH_DESCRIBE_ARRANGEMENT]: string;
-        [formFields.CHILD_HEALTH_OPTION]: childHealthField;
+        [formFields.CHILD_HEALTH_OPTION]: childHealthRoutineDecisionsField;
       }>(request, { onlyValidData: false });
 
       const errors = validationResult(request);

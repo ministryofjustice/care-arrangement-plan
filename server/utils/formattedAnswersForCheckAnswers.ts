@@ -1,6 +1,12 @@
 import { Request } from 'express';
 
-import { whereHandoverField } from '../@types/fields';
+import {
+  childHealthRoutineDecisionsField,
+  educationRoutineDecisionsField,
+  educationSchoolMeetingsField,
+  educationShareInformationField,
+  whereHandoverField
+} from '../@types/fields';
 
 import { formatPlanChangesOptionsIntoList, formatWhichDaysSessionValue } from './formValueUtils';
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
@@ -117,6 +123,104 @@ export const whereHandover = (request: Request) => {
   };
 
   return handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere).join(', ');
+};
+
+export const educationShareInformation = (request: Request) => {
+  const { education } = request.session;
+  if (education.shareInformation.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const getAnswerForEducationShareInformation = (who: educationShareInformationField) => {
+    switch (who) {
+      case 'parent':
+        return request.__('checkYourAnswers.education.shareInformation.parent');
+      case 'otherParent':
+        return request.__('checkYourAnswers.education.shareInformation.otherParent');
+      case 'bothParents':
+        return request.__('checkYourAnswers.education.shareInformation.bothParents');
+      case 'anotherArrangement':
+        return education.shareInformation.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return education.shareInformation.options.map(getAnswerForEducationShareInformation).join(', ');
+};
+
+export const educationRoutineDecisions = (request: Request) => {
+  const { education } = request.session;
+  if (education.routineDecisions.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const getAnswerForEducationRoutineDecisions = (who: educationRoutineDecisionsField) => {
+    switch (who) {
+      case 'parent':
+        return request.__('checkYourAnswers.education.routineDecisions.parent');
+      case 'otherParent':
+        return request.__('checkYourAnswers.education.routineDecisions.otherParent');
+      case 'bothParents':
+        return request.__('checkYourAnswers.education.routineDecisions.bothParents');
+      case 'anotherArrangement':
+        return education.routineDecisions.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return education.routineDecisions.options.map(getAnswerForEducationRoutineDecisions).join(', ');
+};
+
+export const educationSchoolMeetings = (request: Request) => {
+  const { education } = request.session;
+  if (education.schoolMeetings.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const getAnswerForEducationSchoolMeetings = (who: educationSchoolMeetingsField) => {
+    switch (who) {
+      case 'parent':
+        return request.__('checkYourAnswers.education.schoolMeetings.parent');
+      case 'otherParent':
+        return request.__('checkYourAnswers.education.schoolMeetings.otherParent');
+      case 'bothParents':
+        return request.__('checkYourAnswers.education.schoolMeetings.bothParents');
+      case 'carer':
+        return request.__('checkYourAnswers.education.schoolMeetings.carer');
+      case 'anotherArrangement':
+        return education.schoolMeetings.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return education.schoolMeetings.options.map(getAnswerForEducationSchoolMeetings).join(', ');
+};
+
+export const childHealthRoutineDecisions = (request: Request) => {
+  const { childHealth } = request.session;
+  if (childHealth.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const getAnswerForChildHealthRoutineDecisions = (who: childHealthRoutineDecisionsField) => {
+    switch (who) {
+      case 'parent':
+        return request.__('checkYourAnswers.childHealth.routineDecisions.parent');
+      case 'otherParent':
+        return request.__('checkYourAnswers.childHealth.routineDecisions.otherParent');
+      case 'bothParents':
+        return request.__('checkYourAnswers.childHealth.routineDecisions.bothParents');
+      case 'anotherArrangement':
+        return childHealth.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return childHealth.options.map(getAnswerForChildHealthRoutineDecisions).join(', ');
 };
 
 export const willChangeDuringSchoolHolidays = (request: Request) => {

@@ -2,28 +2,32 @@ import { Router } from 'express';
 
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
-import checkFormProgressFromConfig  from '../middleware/checkFormProgressFromConfig';
+import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../utils/addCompletedStep';
 import {
-  mostlyLive,
-  whichDaysDaytimeVisits,
-  whichDaysOvernight,
-  whichSchedule,
-  willDaytimeVisitsHappen,
-  willOvernightsHappen,
+  childHealthRoutineDecisions,
+  educationRoutineDecisions,
+  educationSchoolMeetings,
+  educationShareInformation,
   getBetweenHouseholds,
-  whereHandover,
-  willChangeDuringSchoolHolidays,
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
-  whatWillHappen,
-  whatOtherThingsMatter,
+  mostlyLive,
   planLastMinuteChanges,
   planLongTermNotice,
   planReview,
+  whatOtherThingsMatter,
+  whatWillHappen,
+  whereHandover,
+  whichDaysDaytimeVisits,
+  whichDaysOvernight,
+  whichSchedule,
+  willChangeDuringSchoolHolidays,
+  willDaytimeVisitsHappen,
+  willOvernightsHappen,
 } from '../utils/formattedAnswersForCheckAnswers';
 import { formatListOfStrings } from '../utils/formValueUtils';
-import { formattedChildrenNames, parentNotMostlyLivedWith, getBackUrl } from '../utils/sessionHelpers';
+import { formattedChildrenNames, getBackUrl, parentNotMostlyLivedWith } from '../utils/sessionHelpers';
 
 const checkYourAnswersRoutes = (router: Router) => {
   router.get(paths.CHECK_YOUR_ANSWERS, checkFormProgressFromConfig(FORM_STEPS.CHECK_YOUR_ANSWERS), (request, response) => {
@@ -54,6 +58,10 @@ const checkYourAnswersRoutes = (router: Router) => {
         planLastMinuteChanges: planLastMinuteChanges(request),
         planLongTermNotice: planLongTermNotice(request),
         planReview: planReview(request),
+        educationShareInformation: educationShareInformation(request),
+        educationRoutineDecisions: educationRoutineDecisions(request),
+        educationSchoolMeetings: educationSchoolMeetings(request),
+        childHealthRoutineDecisions: childHealthRoutineDecisions(request)
       },
     });
   });
