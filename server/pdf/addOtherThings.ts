@@ -1,4 +1,9 @@
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE, SECTION_HEADING_SIZE } from '../constants/pdfConstants';
+import {
+  MAIN_TEXT_SIZE,
+  PARAGRAPH_SPACE,
+  QUESTION_TITLE_SIZE,
+  SECTION_HEADING_SIZE
+} from '../constants/pdfConstants';
 import { whatOtherThingsMatter } from '../utils/formattedAnswersForPdf';
 
 import BulletListComponent from './components/bulletList';
@@ -54,21 +59,6 @@ const addOtherThings = (pdf: Pdf) => {
   new TextboxComponent(pdf, [
     {
       text: request.__('sharePlan.yourProposedPlan.doNotAgree.otherThings.whatOtherThingsMatter'),
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-  ]).addComponentToDocument();
-
-  new TextboxComponent(pdf, [
-    {
-      text: request.__('sharePlan.yourProposedPlan.endOfSection'),
-      size: QUESTION_TITLE_SIZE,
-      style: FontStyles.BOLD,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-    {
-      text: request.__('sharePlan.yourProposedPlan.compromise.otherThings'),
       size: MAIN_TEXT_SIZE,
       style: FontStyles.NORMAL,
       bottomPadding: PARAGRAPH_SPACE,
