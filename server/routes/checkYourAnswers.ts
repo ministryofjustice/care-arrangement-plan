@@ -5,6 +5,7 @@ import paths from '../constants/paths';
 import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../utils/addCompletedStep';
 import {
+  childHealthNeeds,
   childHealthRoutineDecisions,
   educationRoutineDecisions,
   educationSchoolMeetings,
@@ -61,7 +62,8 @@ const checkYourAnswersRoutes = (router: Router) => {
         educationShareInformation: educationShareInformation(request),
         educationRoutineDecisions: educationRoutineDecisions(request),
         educationSchoolMeetings: educationSchoolMeetings(request),
-        childHealthRoutineDecisions: childHealthRoutineDecisions(request)
+        childHealthRoutineDecisions: childHealthRoutineDecisions(request),
+        childHealthNeeds: childHealthNeeds(request),
       },
     });
   });

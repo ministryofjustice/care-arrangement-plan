@@ -32,6 +32,8 @@ test.describe('Check Your Answers Summary Page', () => {
     await expect(page.getByRole('heading', { name: /who the plan is for/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /living and visiting/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /handovers? and holidays/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /^education$/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /^health$/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /special days/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /other things/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /decision making/i })).toBeVisible();
@@ -42,7 +44,7 @@ test.describe('Check Your Answers Summary Page', () => {
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Verify children names are displayed
-    await expect(page.getByText('Test')).toBeVisible();
+    await expect(page.getByText('Test', { exact: true })).toBeVisible();
 
     // Verify adult names are displayed
     await expect(page.getByText(/Parent.*Guardian/)).toBeVisible();
@@ -54,6 +56,15 @@ test.describe('Check Your Answers Summary Page', () => {
     await expect(page.getByText('Parent collects the children')).toBeVisible();
     await expect(page.getByText('At school')).toBeVisible();
     await expect(page.getByText('We will alternate holidays')).toBeVisible();
+
+    // Verify education data
+    await expect(page.getByText('Both Parents will receive updates')).toBeVisible();
+    await expect(page.getByText('Both Parents will make decisions')).toBeVisible();
+    await expect(page.getByText('Both Parents will attend')).toBeVisible();
+
+    // Verify health data
+    await expect(page.getByText('Both Parents will decide')).toBeVisible();
+    await expect(page.getByText('Regular check-ups and an inhaler when needed')).toBeVisible();
 
     // Verify special days data
     await expect(page.getByText('We will share birthdays and holidays equally')).toBeVisible();
@@ -102,7 +113,10 @@ test.describe('Check Your Answers Summary Page', () => {
     await page.getByRole('link', { name: /change.*last.*minute/i }).click();
 
     // Update the value
-    await page.getByLabel(/By text message/i).first().check();
+    await page
+      .getByLabel(/By text message/i)
+      .first()
+      .check();
     await page.getByRole('button', { name: /continue/i }).click();
     await page.getByRole('button', { name: /continue/i }).click();
     await page.getByRole('button', { name: /continue/i }).click();
@@ -135,6 +149,40 @@ test.describe('Check Your Answers Summary Page', () => {
     await expect(page).toHaveURL(/\/about-the-children/);
   });
 
+  test('should return to check your answers after health needs are changed', async ({ page }) => {
+    const updatedNeeds = 'Yearly asthma review and an inhaler at both homes';
+
+    await completeMinimalJourney(page);
+    await page.getByRole('button', { name: /continue/i }).click();
+    await expect(page).toHaveURL(/\/check-your-answers/);
+
+    await page.locator('a[href="/child-health-needs"]').click();
+    await expect(page).toHaveURL(/\/child-health-needs/);
+    await expect(page.locator('#child-health-needs-description')).toHaveValue(
+      'Regular check-ups and an inhaler when needed',
+    );
+
+    await page.locator('#child-health-needs-description').fill(updatedNeeds);
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    await expect(page).toHaveURL(/\/make-a-plan/);
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    await expect(page).toHaveURL(/\/check-your-answers/);
+    await expect(page.getByText(updatedNeeds)).toBeVisible();
+    await expect(page.getByText('Regular check-ups and an inhaler when needed')).toHaveCount(0);
+  });
+
+  test('should open the education question from its change link', async ({ page }) => {
+    await completeMinimalJourney(page);
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    await page.locator('a[href="/education/school-meetings"]').click();
+
+    await expect(page).toHaveURL(/\/education\/school-meetings/);
+    await expect(page.getByLabel(/both parents will attend/i)).toBeChecked();
+  });
+
   test('should have continue button to proceed', async ({ page }) => {
     await completeMinimalJourney(page);
     await page.getByRole('button', { name: /continue/i }).click();
@@ -157,9 +205,11 @@ test.describe('Check Your Answers Summary Page', () => {
     expect(headingTexts[0]).toMatch(/who the plan is for/i);
     expect(headingTexts[1]).toMatch(/living and visiting/i);
     expect(headingTexts[2]).toMatch(/handovers? and holidays/i);
-    expect(headingTexts[3]).toMatch(/special days/i);
-    expect(headingTexts[4]).toMatch(/other things/i);
-    expect(headingTexts[5]).toMatch(/decision making/i);
+    expect(headingTexts[3]).toMatch(/education/i);
+    expect(headingTexts[4]).toMatch(/health/i);
+    expect(headingTexts[5]).toMatch(/special days/i);
+    expect(headingTexts[6]).toMatch(/other things/i);
+    expect(headingTexts[7]).toMatch(/decision making/i);
   });
 
   test('should format data appropriately (not raw field values)', async ({ page }) => {
@@ -193,7 +243,7 @@ test.describe('Check Your Answers Summary Page', () => {
     await page.getByRole('button', { name: /continue/i }).click();
 
     await expect(page).toHaveURL(/\/check-your-answers/);
-    await expect(page.getByText('Emma, Oliver and Sophia')).toBeVisible();
+    await expect(page.getByText('Emma, Oliver and Sophia', { exact: true })).toBeVisible();
   });
 
   test('should not show optional fields that were not completed', async ({ page }) => {

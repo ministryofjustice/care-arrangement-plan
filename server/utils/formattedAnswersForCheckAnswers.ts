@@ -126,10 +126,12 @@ export const whereHandover = (request: Request) => {
 };
 
 export const educationShareInformation = (request: Request) => {
-  const { education } = request.session;
-  if (education.shareInformation.noDecisionRequired) {
+  const shareInformation = request.session.education?.shareInformation;
+  if (!shareInformation) return undefined;
+  if (shareInformation.noDecisionRequired) {
     return request.__('doNotNeedToDecide');
   }
+  if (!shareInformation.options?.length) return undefined;
 
   const getAnswerForEducationShareInformation = (who: educationShareInformationField) => {
     switch (who) {
@@ -140,20 +142,22 @@ export const educationShareInformation = (request: Request) => {
       case 'bothParents':
         return request.__('checkYourAnswers.education.shareInformation.answer', { answer: 'Both Parents' });
       case 'anotherArrangement':
-        return education.shareInformation.describeArrangement;
+        return shareInformation.describeArrangement;
       default:
         return undefined;
     }
   };
 
-  return education.shareInformation.options.map(getAnswerForEducationShareInformation).join(', ');
+  return shareInformation.options.map(getAnswerForEducationShareInformation).join(', ');
 };
 
 export const educationRoutineDecisions = (request: Request) => {
-  const { education } = request.session;
-  if (education.routineDecisions.noDecisionRequired) {
+  const routineDecisions = request.session.education?.routineDecisions;
+  if (!routineDecisions) return undefined;
+  if (routineDecisions.noDecisionRequired) {
     return request.__('doNotNeedToDecide');
   }
+  if (!routineDecisions.options?.length) return undefined;
 
   const getAnswerForEducationRoutineDecisions = (who: educationRoutineDecisionsField) => {
     switch (who) {
@@ -164,20 +168,22 @@ export const educationRoutineDecisions = (request: Request) => {
       case 'bothParents':
         return request.__('checkYourAnswers.education.routineDecisions.answer', { answer: 'Both Parents' });
       case 'anotherArrangement':
-        return education.routineDecisions.describeArrangement;
+        return routineDecisions.describeArrangement;
       default:
         return undefined;
     }
   };
 
-  return education.routineDecisions.options.map(getAnswerForEducationRoutineDecisions).join(', ');
+  return routineDecisions.options.map(getAnswerForEducationRoutineDecisions).join(', ');
 };
 
 export const educationSchoolMeetings = (request: Request) => {
-  const { education } = request.session;
-  if (education.schoolMeetings.noDecisionRequired) {
+  const schoolMeetings = request.session.education?.schoolMeetings;
+  if (!schoolMeetings) return undefined;
+  if (schoolMeetings.noDecisionRequired) {
     return request.__('doNotNeedToDecide');
   }
+  if (!schoolMeetings.options?.length) return undefined;
 
   const getAnswerForEducationSchoolMeetings = (who: educationSchoolMeetingsField) => {
     switch (who) {
@@ -190,37 +196,46 @@ export const educationSchoolMeetings = (request: Request) => {
       case 'carer':
         return request.__('checkYourAnswers.education.schoolMeetings.answer', { answer: 'Carer' });
       case 'anotherArrangement':
-        return education.schoolMeetings.describeArrangement;
+        return schoolMeetings.describeArrangement;
       default:
         return undefined;
     }
   };
 
-  return education.schoolMeetings.options.map(getAnswerForEducationSchoolMeetings).join(', ');
+  return schoolMeetings.options.map(getAnswerForEducationSchoolMeetings).join(', ');
 };
 
 export const childHealthRoutineDecisions = (request: Request) => {
-  const { health } = request.session;
-  if (health.routineDecisions.noDecisionRequired) {
+  const routineDecisions = request.session.childHealth?.routineDecisions;
+  if (!routineDecisions) return undefined;
+  if (routineDecisions.noDecisionRequired) {
     return request.__('doNotNeedToDecide');
   }
+  if (!routineDecisions.options?.length) return undefined;
 
   const getAnswerForChildHealthRoutineDecisions = (who: childHealthRoutineDecisionsField) => {
     switch (who) {
       case 'parent':
-        return request.__('checkYourAnswers.childHealth.routineDecisions.parent');
+        return request.__('checkYourAnswers.childHealth.routineDecisions.answer', { answer: 'Parent' });
       case 'otherParent':
-        return request.__('checkYourAnswers.childHealth.routineDecisions.otherParent');
+        return request.__('checkYourAnswers.childHealth.routineDecisions.answer', { answer: 'Other Parent' });
       case 'bothParents':
-        return request.__('checkYourAnswers.childHealth.routineDecisions.bothParents');
+        return request.__('checkYourAnswers.childHealth.routineDecisions.answer', { answer: 'Both Parents' });
       case 'anotherArrangement':
-        return health.routineDecisions.describeArrangement;
+        return routineDecisions.describeArrangement;
       default:
         return undefined;
     }
   };
 
-  return health.routineDecisions.options.map(getAnswerForChildHealthRoutineDecisions).join(', ');
+  return routineDecisions.options.map(getAnswerForChildHealthRoutineDecisions).join(', ');
+};
+
+export const childHealthNeeds = (request: Request) => {
+  const needs = request.session.childHealth?.childHealthNeeds;
+  if (!needs) return undefined;
+
+  return needs.noDecisionRequired ? request.__('doNotNeedToDecide') : needs.description;
 };
 
 export const willChangeDuringSchoolHolidays = (request: Request) => {

@@ -7,6 +7,11 @@ import setUpi18n from '../middleware/setUpi18n';
 import { sessionMock } from '../test-utils/testMocks';
 
 import {
+  childHealthNeeds,
+  childHealthRoutineDecisions,
+  educationRoutineDecisions,
+  educationSchoolMeetings,
+  educationShareInformation,
   getBetweenHouseholds,
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
@@ -60,6 +65,15 @@ const testAppSetup = (): Express => {
         planLastMinuteChanges: planLastMinuteChanges(request),
         planLongTermNotice: planLongTermNotice(request),
         planReview: planReview(request),
+      },
+      education: {
+        shareInformation: educationShareInformation(request),
+        routineDecisions: educationRoutineDecisions(request),
+        schoolMeetings: educationSchoolMeetings(request),
+      },
+      childHealth: {
+        routineDecisions: childHealthRoutineDecisions(request),
+        healthNeeds: childHealthNeeds(request),
       },
     });
   });
@@ -507,6 +521,82 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.decisionMaking).toEqual(expectedValues);
+        });
+    });
+  });
+
+  describe('education and child health', () => {
+    const notRequired = 'We do not need to decide this';
+
+    it('should omit education and health answers that have not been given', () => {
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.education).toEqual({});
+          expect(response.body.childHealth).toEqual({});
+        });
+    });
+
+    it('should return the skipped answer when no decision is required', () => {
+      sessionMock.education = {
+        shareInformation: { noDecisionRequired: true },
+        routineDecisions: { noDecisionRequired: true },
+        schoolMeetings: { noDecisionRequired: true },
+      };
+      sessionMock.childHealth = {
+        routineDecisions: { noDecisionRequired: true },
+        childHealthNeeds: { noDecisionRequired: true },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.education).toEqual({
+            shareInformation: notRequired,
+            routineDecisions: notRequired,
+            schoolMeetings: notRequired,
+          });
+          expect(response.body.childHealth).toEqual({
+            routineDecisions: notRequired,
+            healthNeeds: notRequired,
+          });
+        });
+    });
+
+    it('should format the selected education and health answers', () => {
+      sessionMock.education = {
+        shareInformation: { noDecisionRequired: false, options: ['bothParents'] },
+        routineDecisions: { noDecisionRequired: false, options: ['parent', 'otherParent'] },
+        schoolMeetings: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent attends parents evening',
+        },
+      };
+      sessionMock.childHealth = {
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent books routine appointments',
+        },
+        childHealthNeeds: {
+          noDecisionRequired: false,
+          description: 'Inhaler every morning',
+        },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.education).toEqual({
+            shareInformation: 'Both Parents will receive updates',
+            routineDecisions: 'Parent will make decisions, Other Parent will make decisions',
+            schoolMeetings: 'A grandparent attends parents evening',
+          });
+          expect(response.body.childHealth).toEqual({
+            routineDecisions: 'A grandparent books routine appointments',
+            healthNeeds: 'Inhaler every morning',
+          });
         });
     });
   });

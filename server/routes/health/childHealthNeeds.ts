@@ -13,12 +13,12 @@ const childHealthNeedsRoutes = (router: Router) => {
     const errors = request.flash('errors');
     const childName = formattedChildrenNames(request);
     const formValues = {
-      [formFields.CHILD_HEALTH_NEEDS_DESCRIPTION]: request.session.childHealthNeeds?.description,
+      [formFields.CHILD_HEALTH_NEEDS_DESCRIPTION]: request.session.childHealth?.childHealthNeeds?.description,
       ...request.flash('formValues')?.[0],
     };
 
     response.render('pages/childHealthNeeds', {
-      title: request.__('childHealthNeeds.title', { childName }),
+      title: request.__('childHealth.healthNeeds.title', { childName }),
       backLinkHref: getBackUrl(request.session, paths.CHILD_HEALTH),
       errors,
       formValues,
@@ -33,8 +33,11 @@ const childHealthNeedsRoutes = (router: Router) => {
         return next();
       }
 
-      request.session.childHealthNeeds = {
-        noDecisionRequired: true,
+      request.session.childHealth = {
+        ...request.session.childHealth,
+        childHealthNeeds: {
+          noDecisionRequired: true,
+        },
       };
 
       addCompletedStep(request, FORM_STEPS.CHILD_HEALTH_NEEDS);
@@ -44,7 +47,7 @@ const childHealthNeedsRoutes = (router: Router) => {
     body(formFields.CHILD_HEALTH_NEEDS_DESCRIPTION)
       .trim()
       .notEmpty()
-      .withMessage((_value, { req }) => req.__('childHealthNeeds.emptyError')),
+      .withMessage((_value, { req }) => req.__('childHealth.healthNeeds.emptyError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.CHILD_HEALTH_NEEDS_DESCRIPTION]: string;
@@ -58,9 +61,12 @@ const childHealthNeedsRoutes = (router: Router) => {
         return response.redirect(paths.CHILD_HEALTH_NEEDS);
       }
 
-      request.session.childHealthNeeds = {
-        noDecisionRequired: false,
-        description: formData[formFields.CHILD_HEALTH_NEEDS_DESCRIPTION],
+      request.session.childHealth = {
+        ...request.session.childHealth,
+        childHealthNeeds: {
+          noDecisionRequired: false,
+          description: formData[formFields.CHILD_HEALTH_NEEDS_DESCRIPTION],
+        },
       };
 
       addCompletedStep(request, FORM_STEPS.CHILD_HEALTH_NEEDS);

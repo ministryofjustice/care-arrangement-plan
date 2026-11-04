@@ -47,6 +47,18 @@ test.describe('Child health', () => {
     );
   });
 
+  test('shows an error when another arrangement is only whitespace', async ({ page }) => {
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
+    await page.getByLabel(/another arrangement/i).check();
+    await page.locator(`#${ARRANGEMENT_FIELD_ID}`).fill('   ');
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    await expect(page).toHaveURL(/\/child-health$/);
+    await expect(page.locator(`#${ARRANGEMENT_FIELD_ID}-error`)).toContainText(
+      'Describe the arrangement you are proposing',
+    );
+  });
+
   test('continues to health needs after a routine decision is saved', async ({ page }) => {
     await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
     await page.getByLabel(/both parents will decide/i).check();
@@ -111,7 +123,9 @@ test.describe('Child health', () => {
     await page.getByRole('button', { name: /save and continue/i }).click();
 
     await expect(page).toHaveURL(/\/make-a-plan/);
-    await expect(page.locator('li').filter({ hasText: /routine decisions about .* health/i })).toContainText(/completed/i);
+    await expect(page.locator('li').filter({ hasText: /routine decisions about .* health/i })).toContainText(
+      /completed/i,
+    );
     await expect(page.locator('li').filter({ hasText: /health needs/i })).toContainText(/completed/i);
 
     await page.getByRole('link', { name: /health needs/i }).click();
@@ -124,7 +138,9 @@ test.describe('Child health', () => {
     await page.getByRole('button', { name: /skip this question/i }).click();
 
     await expect(page).toHaveURL(/\/make-a-plan/);
-    await expect(page.locator('li').filter({ hasText: /routine decisions about .* health/i })).toContainText(/completed/i);
+    await expect(page.locator('li').filter({ hasText: /routine decisions about .* health/i })).toContainText(
+      /completed/i,
+    );
     await expect(page.locator('li').filter({ hasText: /health needs/i })).toContainText(/completed/i);
   });
 });

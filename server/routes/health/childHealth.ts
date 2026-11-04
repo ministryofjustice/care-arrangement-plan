@@ -14,13 +14,14 @@ const childHealthRoutes = (router: Router) => {
     const errors = request.flash('errors');
     const childName = formattedChildrenNames(request);
     const formValues = {
-      [formFields.CHILD_HEALTH_OPTION]: request.session.childHealth?.options?.[0],
-      [formFields.CHILD_HEALTH_DESCRIBE_ARRANGEMENT]: request.session.childHealth?.describeArrangement,
+      [formFields.CHILD_HEALTH_OPTION]: request.session.childHealth?.routineDecisions?.options?.[0],
+      [formFields.CHILD_HEALTH_DESCRIBE_ARRANGEMENT]:
+        request.session.childHealth?.routineDecisions?.describeArrangement,
       ...request.flash('formValues')?.[0],
     };
 
     response.render('pages/childHealth', {
-      title: request.__('childHealth.title', { childName }),
+      title: request.__('childHealth.routineDecisions.title', { childName }),
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
       errors,
       formValues,
@@ -37,9 +38,12 @@ const childHealthRoutes = (router: Router) => {
 
       request.session.childHealth = {
         ...request.session.childHealth,
-        noDecisionRequired: true,
-        options: undefined,
-        describeArrangement: undefined,
+        routineDecisions: {
+          ...request.session.childHealth?.routineDecisions,
+          noDecisionRequired: true,
+          options: undefined,
+          describeArrangement: undefined,
+        },
       };
 
       addCompletedStep(request, FORM_STEPS.CHILD_HEALTH);
@@ -48,12 +52,12 @@ const childHealthRoutes = (router: Router) => {
     },
     body(formFields.CHILD_HEALTH_OPTION)
       .notEmpty()
-      .withMessage((_value, { req }) => req.__('childHealth.emptyError')),
+      .withMessage((_value, { req }) => req.__('childHealth.routineDecisions.emptyError')),
     body(formFields.CHILD_HEALTH_DESCRIBE_ARRANGEMENT)
       .if(body(formFields.CHILD_HEALTH_OPTION).equals('anotherArrangement'))
       .trim()
       .notEmpty()
-      .withMessage((_value, { req }) => req.__('childHealth.descriptionEmptyError')),
+      .withMessage((_value, { req }) => req.__('childHealth.routineDecisions.descriptionEmptyError')),
     (request, response) => {
       const formData = matchedData<{
         [formFields.CHILD_HEALTH_DESCRIBE_ARRANGEMENT]: string;
@@ -75,9 +79,12 @@ const childHealthRoutes = (router: Router) => {
 
       request.session.childHealth = {
         ...request.session.childHealth,
-        noDecisionRequired: false,
-        options: [option],
-        describeArrangement: option === 'anotherArrangement' ? describeArrangement : undefined,
+        routineDecisions: {
+          ...request.session.childHealth?.routineDecisions,
+          noDecisionRequired: false,
+          options: [option],
+          describeArrangement: option === 'anotherArrangement' ? describeArrangement : undefined,
+        },
       };
 
       addCompletedStep(request, FORM_STEPS.CHILD_HEALTH);

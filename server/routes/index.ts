@@ -40,7 +40,7 @@ function clearSessionData(request: Request): void {
   delete request.session.livingAndVisiting;
   delete request.session.handoverAndHolidays;
   delete request.session.education;
-  delete request.session.health;
+  delete request.session.childHealth;
   delete request.session.specialDays;
   delete request.session.otherThings;
   delete request.session.decisionMaking;
