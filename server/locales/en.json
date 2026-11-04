@@ -533,7 +533,9 @@
   "handoverAndHolidays": {
     "getBetweenHouseholds": {
       "title": "How will the children get between households?",
-      "collectsTheChildren": "{{{ adult }}} collects the children",
+      "collectsTheChildren": "{{{ adult }}} collects the {{{ children }}}",
+      "bothParentsCollect": "Both parents take turns collecting {{{ children }}}",
+      "someoneElseCollects": "Someone else collects {{{ children }}}",
       "emptyError": "Select how the children will get between households",
       "arrangementMissingError": "Describe how the children will get between households"
     },
