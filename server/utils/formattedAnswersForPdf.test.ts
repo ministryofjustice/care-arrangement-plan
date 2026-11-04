@@ -520,5 +520,21 @@ describe('formattedAnswers', () => {
           expect(response.body.decisionMaking).toEqual(expectedValues);
         });
     });
+
+    it('returns an empty week count when weeks is missing', () => {
+      sessionMock.decisionMaking = {
+        planLastMinuteChanges: { noDecisionRequired: true },
+        planLongTermNotice: { noDecisionRequired: false },
+        planReview: { months: 1 },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.decisionMaking.planLongTermNotice).toBe(
+            `${session.initialAdultName} suggested that you should both give each other  weeks' notice to change long-term arrangements.`,
+          );
+        });
+    });
   });
 });

@@ -246,7 +246,7 @@ export const planLongTermNotice = (request: Request) => {
   }
   return request.__('sharePlan.yourProposedPlan.decisionMaking.planLongTermNotice.howChangesCommunicated', {
     senderName: initialAdultName,
-    numberOfWeeks: decisionMaking.planLongTermNotice.weeks.toString(),
+    numberOfWeeks: decisionMaking.planLongTermNotice.weeks?.toString() ?? '',
   });
 };
 
