@@ -43,7 +43,24 @@
     "glob": "14.0.3",
     "follow-redirects": "1.16.2",
     "joi": "18.3.1",
-    "minimatch": "11.0.4",
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.4"
+    },
+    "nodemon": {
+      "minimatch": "11.0.4"
+    },
+    "test-exclude": {
+      "minimatch": "11.0.4"
+    },
+    "eslint": {
+      "minimatch": "11.0.4"
+    },
+    "@eslint/config-array": {
+      "minimatch": "11.0.4"
+    },
+    "@eslint/eslintrc": {
+      "minimatch": "11.0.4"
+    },
     "eslint-plugin-import": {
       "minimatch": "3.1.5"
     },
