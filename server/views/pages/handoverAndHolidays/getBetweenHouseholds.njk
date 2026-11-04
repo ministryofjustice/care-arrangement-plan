@@ -51,11 +51,22 @@
             items: [
               {
                 value: "initialCollects",
-                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.initialAdultName})
+                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.initialAdultName, children: values.childrenNames})
               },
               {
-                value: "secondaryCollects",
-                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.secondaryAdultName})
+                value: "secondaryParentsCollect",
+                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.secondaryAdultName, children: values.childrenNames})
+              },
+              {
+                value: "bothParentsCollect",
+                text: __('handoverAndHolidays.getBetweenHouseholds.bothParentsCollect', {children: values.childrenNames})
+              },
+              {
+                value: "someoneElseCollects",
+                text: __('handoverAndHolidays.getBetweenHouseholds.someoneElseCollects', {children: values.childrenNames})
+              },
+              {
+                divider: __('or')
               },
               {
                 value: "other",
