@@ -60,12 +60,14 @@ const session: Partial<SessionData> = {
     },
   },
   childHealth: {
-    noDecisionRequired: false,
-    options: ['bothParents'],
-  },
-  childHealthNeeds: {
-    noDecisionRequired: false,
-    description: 'Regular check-ups',
+    routineDecisions: {
+      noDecisionRequired: false,
+      options: ['bothParents'],
+    },
+    childHealthNeeds: {
+      noDecisionRequired: false,
+      description: 'Regular check-ups',
+    },
   },
   education: {
     shareInformation: {
@@ -273,8 +275,28 @@ describe(`GET ${paths.TASK_LIST}`, () => {
     expectContinueButtonHidden(dom.window.document);
   });
 
+  it('should keep health needs locked until routine decisions are answered', async () => {
+    sessionMock.childHealth = {};
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    expect(response.text).toContain(paths.CHILD_HEALTH);
+    expect(response.text).not.toContain(paths.CHILD_HEALTH_NEEDS);
+    expect(response.text).toContain('Cannot start yet');
+  });
+
+  it('should link health needs after routine decisions are answered', async () => {
+    sessionMock.childHealth = {
+      routineDecisions: { noDecisionRequired: true },
+    };
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    expect(response.text).toContain(paths.CHILD_HEALTH_NEEDS);
+  });
+
   it('should not render the continue button if health needs are not filled out', async () => {
-    sessionMock.childHealthNeeds = null;
+    sessionMock.childHealth.childHealthNeeds = null;
 
     const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
 

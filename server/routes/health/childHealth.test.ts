@@ -25,8 +25,10 @@ describe(paths.CHILD_HEALTH, () => {
     it('should render a previously saved answer', async () => {
       sessionMock.namesOfChildren = ['Alex'];
       sessionMock.childHealth = {
-        noDecisionRequired: false,
-        options: ['bothParents'],
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['bothParents'],
+        },
       };
 
       const dom = new JSDOM((await request(app).get(paths.CHILD_HEALTH)).text);
@@ -37,9 +39,11 @@ describe(paths.CHILD_HEALTH, () => {
     it('should render a saved arrangement description', async () => {
       const describeArrangement = 'A grandparent will decide';
       sessionMock.childHealth = {
-        noDecisionRequired: false,
-        options: ['anotherArrangement'],
-        describeArrangement,
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement,
+        },
       };
 
       const dom = new JSDOM((await request(app).get(paths.CHILD_HEALTH)).text);
@@ -72,8 +76,10 @@ describe(paths.CHILD_HEALTH, () => {
 
     it('should prefer flashed answers over the saved answer', async () => {
       sessionMock.childHealth = {
-        noDecisionRequired: false,
-        options: ['parent'],
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['parent'],
+        },
       };
       Object.assign(flashFormValues, [
         {
@@ -101,6 +107,7 @@ describe(paths.CHILD_HEALTH, () => {
           msg: 'Select how routine decisions about health will be made',
           path: formFields.CHILD_HEALTH_OPTION,
           type: 'field',
+          value: undefined,
         },
       ]);
       expect(sessionMock.completedSteps).toBeUndefined();
@@ -147,9 +154,11 @@ describe(paths.CHILD_HEALTH, () => {
         .expect('location', paths.CHILD_HEALTH_NEEDS);
 
       expect(sessionMock.childHealth).toEqual({
-        noDecisionRequired: false,
-        options: ['bothParents'],
-        describeArrangement: undefined,
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['bothParents'],
+          describeArrangement: undefined,
+        },
       });
       expect(sessionMock.completedSteps).toContain(FORM_STEPS.CHILD_HEALTH);
     });
@@ -167,18 +176,22 @@ describe(paths.CHILD_HEALTH, () => {
         .expect('location', paths.CHILD_HEALTH_NEEDS);
 
       expect(sessionMock.childHealth).toEqual({
-        noDecisionRequired: false,
-        options: ['anotherArrangement'],
-        describeArrangement,
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement,
+        },
       });
       expect(sessionMock.completedSteps).toContain(FORM_STEPS.CHILD_HEALTH);
     });
 
     it('should clear a previous description when a standard option is selected', async () => {
       sessionMock.childHealth = {
-        noDecisionRequired: true,
-        options: ['anotherArrangement'],
-        describeArrangement: 'Old arrangement',
+        routineDecisions: {
+          noDecisionRequired: true,
+          options: ['anotherArrangement'],
+          describeArrangement: 'Old arrangement',
+        },
       };
 
       await request(app)
@@ -188,9 +201,11 @@ describe(paths.CHILD_HEALTH, () => {
         .expect('location', paths.CHILD_HEALTH_NEEDS);
 
       expect(sessionMock.childHealth).toEqual({
-        noDecisionRequired: false,
-        options: ['parent'],
-        describeArrangement: undefined,
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['parent'],
+          describeArrangement: undefined,
+        },
       });
     });
 
@@ -217,18 +232,22 @@ describe(`POST ${paths.CHILD_HEALTH} skip`, () => {
       .expect('location', paths.CHILD_HEALTH_NEEDS);
 
     expect(sessionMock.childHealth).toEqual({
-      noDecisionRequired: true,
-      options: undefined,
-      describeArrangement: undefined,
+      routineDecisions: {
+        noDecisionRequired: true,
+        options: undefined,
+        describeArrangement: undefined,
+      },
     });
     expect(sessionMock.completedSteps).toContain(FORM_STEPS.CHILD_HEALTH);
   });
 
   it('should replace a saved answer when the question is skipped', async () => {
     sessionMock.childHealth = {
-      noDecisionRequired: false,
-      options: ['bothParents'],
-      describeArrangement: 'Old arrangement',
+      routineDecisions: {
+        noDecisionRequired: false,
+        options: ['bothParents'],
+        describeArrangement: 'Old arrangement',
+      },
     };
     sessionMock.completedSteps = [FORM_STEPS.CHILD_HEALTH];
 
@@ -242,9 +261,11 @@ describe(`POST ${paths.CHILD_HEALTH} skip`, () => {
       .expect('location', paths.CHILD_HEALTH_NEEDS);
 
     expect(sessionMock.childHealth).toEqual({
-      noDecisionRequired: true,
-      options: undefined,
-      describeArrangement: undefined,
+      routineDecisions: {
+        noDecisionRequired: true,
+        options: undefined,
+        describeArrangement: undefined,
+      },
     });
     expect(sessionMock.completedSteps).toEqual([FORM_STEPS.CHILD_HEALTH]);
   });

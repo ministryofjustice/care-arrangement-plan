@@ -267,7 +267,7 @@
         rows: [
           {
             key: {
-              text: __('checkYourAnswers.education.shareInformation.question')
+              text: __('checkYourAnswers.education.shareInformation.question', { children: values.childrenNames })
             },
             value: {
               text: values.educationShareInformation
@@ -284,7 +284,7 @@
           },
           {
             key: {
-              text: __('checkYourAnswers.education.routineDecisions.question')
+              text: __('checkYourAnswers.education.routineDecisions.question', { children: values.childrenNames })
             },
             value: {
               text: values.educationRoutineDecisions
@@ -301,7 +301,7 @@
           },
           {
             key: {
-              text: __('checkYourAnswers.education.schoolMeetings.question')
+              text: __('checkYourAnswers.education.schoolMeetings.question', { children: values.childrenNames })
             },
             value: {
               text: values.educationSchoolMeetings
@@ -327,7 +327,7 @@
         rows: [
           {
             key: {
-              text: __('checkYourAnswers.childHealth.routineDecisions.question')
+              text: __('checkYourAnswers.childHealth.routineDecisions.question', { children: values.childrenNames })
             },
             value: {
               text: values.childHealthRoutineDecisions
@@ -335,7 +335,7 @@
             actions: {
               items: [
                 {
-                  href: paths.CHILD_HEALTH_ROUTINE_DECISIONS,
+                  href: paths.CHILD_HEALTH,
                   text: __('checkYourAnswers.change.text'),
                   visuallyHiddenText: __('checkYourAnswers.childHealth.routineDecisions.hiddenText')
                 }
@@ -344,17 +344,43 @@
           },
           {
             key: {
-              text: __('checkYourAnswers.childHealth.healthNeeds.question')
+              text: __('checkYourAnswers.childHealth.healthNeeds.question', { children: values.childrenNames })
             },
             value: {
-              text: __('checkYourAnswers.childHealth.healthNeeds.answer')
+              text: values.childHealthNeeds
             },
             actions: {
               items: [
                 {
-                  href: paths.CHILD_HEALTH_HEALTH_NEEDS,
+                  href: paths.CHILD_HEALTH_NEEDS,
                   text: __('checkYourAnswers.change.text'),
                   visuallyHiddenText: __('checkYourAnswers.childHealth.healthNeeds.hiddenText')
+                }
+              ]
+            }
+          }
+        ]
+        })
+      }}
+
+      <h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
+      {{
+        govukSummaryList({
+        classes: "govuk-!-margin-bottom-9",
+        rows: [
+          {
+            key: {
+              text: __('specialDays.whatWillHappen.title')
+            },
+            value: {
+              text: values.whatWillHappen
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.SPECIAL_DAYS_WHAT_WILL_HAPPEN,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.change.whatWillHappen')
                 }
               ]
             }
