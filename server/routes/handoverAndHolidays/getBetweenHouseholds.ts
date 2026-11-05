@@ -7,7 +7,7 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { getBackUrl } from '../../utils/sessionHelpers';
+import { formattedChildrenNames, getBackUrl } from '../../utils/sessionHelpers';
 
 const getBetweenHouseholdsRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS), (request, response) => {
@@ -18,10 +18,15 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
       ...request.flash('formValues')?.[0],
     };
 
+    const { initialAdultName, secondaryAdultName } = request.session;
+    const childrenNames = formattedChildrenNames(request);
+
     response.render('pages/handoverAndHolidays/getBetweenHouseholds', {
       errors: request.flash('errors'),
       title: request.__('handoverAndHolidays.getBetweenHouseholds.title'),
-      values: request.session,
+      initialAdultName,
+      secondaryAdultName,
+      childrenNames,
       formValues,
       backLinkHref: getBackUrl(request.session, paths.TASK_LIST),
     });
@@ -61,7 +66,7 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
         getBetweenHouseholds: {
           noDecisionRequired: false,
           how: howGetBetweenHouseholds,
-          describeArrangement: howGetBetweenHouseholds === 'other' ? describeArrangement : undefined,
+          describeArrangement: howGetBetweenHouseholds === 'anotherArrangement' ? describeArrangement : undefined,
         },
       };
 

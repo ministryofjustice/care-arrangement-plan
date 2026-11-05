@@ -25,7 +25,7 @@ const devSeedData: Partial<CAPSession> = {
   handoverAndHolidays: {
     getBetweenHouseholds: {
       noDecisionRequired: false,
-      how: 'initialCollects',
+      how: 'parent',
     },
     whereHandover: {
       noDecisionRequired: false,

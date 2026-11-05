@@ -42,6 +42,7 @@ export type CAPSession = {
     getBetweenHouseholds?: {
       noDecisionRequired: boolean;
       how?: getBetweenHouseholdsField;
+      whoWillCollect?: string;
       describeArrangement?: string;
     };
     whereHandover?: {

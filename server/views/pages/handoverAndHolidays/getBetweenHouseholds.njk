@@ -38,6 +38,19 @@
           }}
         {% endset -%}
 
+        {% set whoWillCollectHtml %}
+          {{
+            govukTextarea({
+              name: formFields.GET_BETWEEN_HOUSEHOLDS_WHO_WILL_COLLECT,
+              label: {
+                text: __('handoverAndHolidays.getBetweenHouseholds.whoWillCollect', {children: childrenNames})
+              },
+              value: formValues[formFields.GET_BETWEEN_HOUSEHOLDS_WHO_WILL_COLLECT],
+              errorMessage: errors | findError(formFields.GET_BETWEEN_HOUSEHOLDS_WHO_WILL_COLLECT)
+            })
+          }}
+        {% endset -%}
+
         {{
           govukRadios({
             name: formFields.GET_BETWEEN_HOUSEHOLDS,
@@ -51,19 +64,22 @@
             items: [
               {
                 value: "initialCollects",
-                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.initialAdultName, children: values.childrenNames})
+                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: initialAdultName, children: childrenNames})
               },
               {
                 value: "secondaryParentsCollect",
-                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: values.secondaryAdultName, children: values.childrenNames})
+                text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: secondaryAdultName, children: childrenNames})
               },
               {
                 value: "bothParentsCollect",
-                text: __('handoverAndHolidays.getBetweenHouseholds.bothParentsCollect', {children: values.childrenNames})
+                text: __('handoverAndHolidays.getBetweenHouseholds.bothParentsCollect', {children: childrenNames})
               },
               {
                 value: "someoneElseCollects",
-                text: __('handoverAndHolidays.getBetweenHouseholds.someoneElseCollects', {children: values.childrenNames})
+                text: __('handoverAndHolidays.getBetweenHouseholds.someoneElseCollects', {children: childrenNames}),
+                conditional: {
+                  html: whoWillCollectHtml
+                }
               },
               {
                 divider: __('or')
