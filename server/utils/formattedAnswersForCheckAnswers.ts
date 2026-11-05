@@ -88,11 +88,13 @@ export const getBetweenHouseholds = (request: Request) => {
     return request.__('doNotNeedToDecide');
   }
   switch (handoverAndHolidays.getBetweenHouseholds.how) {
-    case 'initialCollects':
-      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: initialAdultName });
-    case 'secondaryCollects':
-      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: secondaryAdultName });
-    case 'other':
+    case 'parent':
+      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: initialAdultName, children: request.session.namesOfChildren.join(', ') });
+    case 'otherParent':
+      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: secondaryAdultName, children: request.session.namesOfChildren.join(', ') });
+    case 'bothParents':
+      return request.__('handoverAndHolidays.getBetweenHouseholds.bothParentsCollectTheChildren', {children: request.session.namesOfChildren.join(', ')});
+    case 'anotherArrangement':
       return handoverAndHolidays.getBetweenHouseholds.describeArrangement;
     default:
       return undefined;

@@ -111,17 +111,17 @@ export const getBetweenHouseholds = (request: Request) => {
     return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
   switch (handoverAndHolidays.getBetweenHouseholds.how) {
-    case 'initialCollects':
+    case 'parent':
       return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
         senderName: initialAdultName,
         adult: initialAdultName,
       });
-    case 'secondaryCollects':
+    case 'otherParent':
       return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
         senderName: initialAdultName,
         adult: secondaryAdultName,
       });
-    case 'other':
+    case 'anotherArrangement':
       return request.__('sharePlan.yourProposedPlan.senderSuggested', {
         senderName: initialAdultName,
         suggestion: handoverAndHolidays.getBetweenHouseholds.describeArrangement,

@@ -87,14 +87,14 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       Object.assign(flashFormValues, [
         {
           [formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT]: arrangement,
-          [formFields.GET_BETWEEN_HOUSEHOLDS]: 'other',
+          [formFields.GET_BETWEEN_HOUSEHOLDS]: 'anotherArrangement',
         },
       ]);
 
       sessionMock.handoverAndHolidays = {
         getBetweenHouseholds: {
           noDecisionRequired: false,
-          how: 'secondaryCollects',
+          how: 'anotherArrangement',
           describeArrangement: 'wrong arrangement',
         },
       };
@@ -113,7 +113,7 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       sessionMock.handoverAndHolidays = {
         getBetweenHouseholds: {
           noDecisionRequired: false,
-          how: 'other',
+          how: 'anotherArrangement',
           describeArrangement: arrangement,
         },
       };
