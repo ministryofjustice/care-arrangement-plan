@@ -281,8 +281,9 @@ export async function completeHandoverAndHolidaysSection(page: Page) {
   await page.getByRole('button', { name: /continue/i }).click();
 
   // Items for changeover (flows directly from previous page)
-  await page.fill('textarea', 'School bag, clothes, favorite toys');
-  await page.getByRole('button', { name: /continue/i }).click();
+  await page.getByLabel('Clothes and shoes').check();
+  await page.getByLabel('School items').check();
+  await page.getByRole('button', { name: 'Save and come back later' }).click();
 
   // Wait for return to task list
   await page.waitForURL(/\/make-a-plan/);

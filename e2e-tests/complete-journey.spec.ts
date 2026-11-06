@@ -107,8 +107,8 @@ test.describe('Complete-journey', () => {
 
     // Handovers and holidays
     await expect(page).toHaveURL(/items-for-changeover/);
-    await page.fill('textarea', 'test');
-    await page.getByRole('button', { name: /continue/i }).click();
+    await page.getByLabel('Clothes and shoes').check();
+    await page.getByRole('button', { name: 'Save and come back later' }).click();
 
     // Make a plan, next section
     await expect(page).toHaveURL(/make-a-plan/);

@@ -3,6 +3,7 @@ import {
   getBetweenHouseholdsField,
   childHealthRoutineDecisionsField,
   planLastMinuteChangesField,
+  itemsForChangeoverField,
   whereHandoverField,
   whereMostlyLive,
   travelAbroadField,
@@ -61,16 +62,18 @@ export type CAPSession = {
     };
     itemsForChangeover?: {
       noDecisionRequired: boolean;
+      options?: itemsForChangeoverField[];
+      describeArrangement?: string;
       answer?: string;
     };
     travelAbroad?: {
       noDecisionRequired: boolean;
-      options: travelAbroadField[];
+      options?: travelAbroadField[];
       describeArrangement?: string;
     };
     travelDocuments?: {
       noDecisionRequired: boolean;
-      options: travelDocumentsField[];
+      options?: travelDocumentsField[];
       describeArrangement?: string;
     };
     travelInformation?: {
@@ -106,11 +109,11 @@ export type CAPSession = {
       describeArrangement?: string;
       answer?: string;
     };
-    childHealthNeeds?:  {
+    childHealthNeeds?: {
       noDecisionRequired?: boolean;
       description?: string;
-    }
-  },
+    };
+  };
   specialDays?: {
     whatWillHappen?: {
       noDecisionRequired: boolean;

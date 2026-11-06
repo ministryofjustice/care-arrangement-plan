@@ -89,14 +89,14 @@
           items: [
             {
               title: {
-                text: __('taskList.handoverAndHolidays.getBetweenHouseholds')
+                text: __('taskList.handoverAndHolidays.getBetweenHouseholds', { childName: childName })
               },
               href: paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS,
               status: completeStatus if getBetweenHouseholdsComplete else incompleteStatus
             },
             {
               title: {
-                text: __('taskList.handoverAndHolidays.whereHandover')
+                text: __('taskList.handoverAndHolidays.whereHandover', { childName: childName })
               },
               href: paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER if getBetweenHouseholdsComplete else null,
               status: completeStatus if whereHandoverComplete else (incompleteStatus if getBetweenHouseholdsComplete else cannotStartStatus)
@@ -110,35 +110,35 @@
             },
             {
               title: {
-                text: __('taskList.handoverAndHolidays.itemsForChangeover')
+                text: __('taskList.handoverAndHolidays.itemsForChangeover', { childName: childName })
               },
               href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
               status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
             },
             {
               title: {
-                text: __('taskList.handoverAndHolidays.travelAbroad')
+                text: __('taskList.handoverAndHolidays.travelAbroad', { childName: childName })
+              },
+              href: paths.HANDOVER_HOLIDAYS_TRAVEL_ABROAD if itemsForChangeoverComplete else null,
+              status: completeStatus if travelAbroadComplete else (incompleteStatus if itemsForChangeoverComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('taskList.handoverAndHolidays.travelDocuments', { childName: childName })
+              },
+              href: paths.HANDOVER_HOLIDAYS_TRAVEL_DOCUMENTS if travelAbroadComplete else null,
+              status: completeStatus if travelDocumentsComplete else (incompleteStatus if travelAbroadComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('taskList.handoverAndHolidays.consentToTravel', { childName: childName })
               },
               href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
               status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
             },
             {
               title: {
-                text: __('taskList.handoverAndHolidays.travelDocuments')
-              },
-              href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
-              status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
-            },
-            {
-              title: {
-                text: __('taskList.handoverAndHolidays.consentToTravel')
-              },
-              href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
-              status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
-            },
-            {
-              title: {
-                text: __('taskList.handoverAndHolidays.travelInformation')
+                text: __('taskList.handoverAndHolidays.travelInformation', { childName: childName })
               },
               href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
               status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)

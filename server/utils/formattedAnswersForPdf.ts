@@ -2,7 +2,12 @@ import { Request } from 'express';
 
 import { whereHandoverField } from '../@types/fields';
 
-import { formatListOfStrings, formatPlanChangesOptionsIntoList, formatWhichDaysSessionValue } from './formValueUtils';
+import {
+  formatItemsForChangeover,
+  formatListOfStrings,
+  formatPlanChangesOptionsIntoList,
+  formatWhichDaysSessionValue,
+} from './formValueUtils';
 import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
 
 export const mostlyLive = (request: Request) => {
@@ -188,12 +193,19 @@ export const howChangeDuringSchoolHolidays = (request: Request) => {
 
 export const itemsForChangeover = (request: Request) => {
   const { handoverAndHolidays, initialAdultName } = request.session;
-  return handoverAndHolidays.itemsForChangeover.noDecisionRequired
-    ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
-    : request.__('sharePlan.yourProposedPlan.senderSuggested', {
-        senderName: initialAdultName,
-        suggestion: handoverAndHolidays.itemsForChangeover.answer,
-      });
+  const items = handoverAndHolidays?.itemsForChangeover;
+  if (!items) return undefined;
+  if (items.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const suggestion = formatItemsForChangeover(items.options, items.describeArrangement, request) ?? items.answer;
+  if (!suggestion) return undefined;
+
+  return request.__('sharePlan.yourProposedPlan.senderSuggested', {
+    senderName: initialAdultName,
+    suggestion,
+  });
 };
 
 export const whatWillHappen = (request: Request) => {

@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-import { dayValues, whichDaysField, yesOrNo } from '../@types/fields';
+import { dayValues, itemsForChangeoverField, whichDaysField, yesOrNo } from '../@types/fields';
 import { WhichDays } from '../@types/session';
 
 export const formatListOfStrings = (words: string[], request: Request) => {
@@ -17,6 +17,24 @@ export const formatListOfStrings = (words: string[], request: Request) => {
     default:
       return request.__('aAndB', { itemA: words.slice(0, -1).join(', '), itemB: words[words.length - 1] });
   }
+};
+
+export const formatItemsForChangeover = (
+  options: itemsForChangeoverField[] | undefined,
+  describeArrangement: string | undefined,
+  request: Request,
+) => {
+  if (!options?.length) return undefined;
+
+  const labels = options
+    .map((option) =>
+      option === 'otherItems'
+        ? describeArrangement
+        : request.__(`handoverAndHolidays.itemsForChangeover.items.${option}`),
+    )
+    .filter((label): label is string => !!label);
+
+  return labels.length ? labels.join(', ') : undefined;
 };
 
 export const convertBooleanValueToRadioButtonValue = (booleanValue: boolean): yesOrNo | undefined => {

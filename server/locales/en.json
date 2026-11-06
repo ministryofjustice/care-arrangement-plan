@@ -474,14 +474,14 @@
     "livingAndVisiting": "Living and visiting",
     "handoverAndHolidays": {
       "title": "Handovers and holidays",
-      "getBetweenHouseholds": "How will {{{ children }}} get between households?",
-      "whereHandover": "Where will handover take place for {{{ children }}}?",
-      "willChangeDuringSchoolHolidays": "Will {{{ children }}}'s arrangements change during school holidays?",
-      "itemsForChangeover": "Which items should move between households for {{{ children }}}?",
-      "travelAbroad": "How much notice should be given before travelling abroad with {{{ children }}}?",
-      "travelDocuments": "Who will arrange passports, visas and other travel documents for {{{ children }}}?",
-      "consentToTravel": "Permission for taking {{{ children }}} abroad",
-      "travelInformation": "What other information should be shared before travelling abroad with {{{ children }}}?"
+      "getBetweenHouseholds": "How will {{{ childName }}} get between households?",
+      "whereHandover": "Where will handover take place for {{{ childName }}}?",
+      "willChangeDuringSchoolHolidays": "Will {{{ childName }}}'s arrangements change during school holidays?",
+      "itemsForChangeover": "Which items should move between households for {{{ childName }}}?",
+      "travelAbroad": "How much notice should be given before travelling abroad with {{{ childName }}}?",
+      "travelDocuments": "Who will arrange passports, visas and other travel documents for {{{ childName }}}?",
+      "consentToTravel": "Permission for taking {{{ childName }}} abroad",
+      "travelInformation": "What other information should be shared before travelling abroad with {{{ childName }}}?"
     },
     "education": {
       "title": "Education",
@@ -588,7 +588,7 @@
       },
       "describeOtherItems": "Describe the other items",
       "error": "List which items need to go between households",
-      "emptyError": "Select which all items should move between households",
+      "emptyError": "Select which items should move between households",
       "descriptionEmptyError": "Describe the other items"
     },
     "travelAbroad": {
@@ -596,7 +596,9 @@
       "twoWeeks": "At least 2 weeks",
       "fourWeeks": "At least 4 weeks",
       "eightWeeks": "At least 8 weeks",
-      "anotherArrangement": "Another arrangement"
+      "anotherArrangement": "Another arrangement",
+      "emptyError": "Select how much notice should be given before travelling abroad with the children",
+      "descriptionEmptyError": "Describe the arrangement you are proposing"
     },
     "travelDocuments": {
       "title": "Who will arrange passports, visas and other travel documents for the children?",

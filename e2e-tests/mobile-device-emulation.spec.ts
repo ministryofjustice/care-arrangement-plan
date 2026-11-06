@@ -108,8 +108,8 @@ for (const device of mobileDevices) {
       await page.getByRole('button', { name: /continue/i }).tap();
 
       // items-for-changeover
-      await page.fill('textarea', 'test');
-      await page.getByRole('button', { name: /continue/i }).tap();
+      await page.getByLabel('Clothes and shoes').check();
+      await page.getByRole('button', { name: 'Save and come back later' }).tap();
 
       // make-a-plan (Task List)
       await expect(page).toHaveURL(/\/make-a-plan/);

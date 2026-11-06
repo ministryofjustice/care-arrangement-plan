@@ -1,0 +1,25 @@
+{% extends "partials/layout.njk" %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      null,
+      null,
+      title
+    )
+  }}
+{% endblock %}
+
+{% block content %}
+  {% include "partials/exitThisPage.njk" %}
+  <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+    {{ __('exitThisPage') | safe }}
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+    </div>
+  </div>
+{% endblock %}

@@ -378,6 +378,25 @@ describe('formattedAnswers', () => {
           expect(response.body.handoverAndHolidays).toEqual(expectedValues);
         });
     });
+
+    it('should list selected changeover items and the other items description', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        itemsForChangeover: {
+          noDecisionRequired: false,
+          options: ['clothesAndShoes', 'electronicDevices', 'otherItems'],
+          describeArrangement: 'Medication',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.itemsForChangeover).toBe(
+            `${session.initialAdultName} suggested:\n"Clothes and shoes, Electronic devices, Medication"`,
+          );
+        });
+    });
   });
 
   describe('specialDays', () => {

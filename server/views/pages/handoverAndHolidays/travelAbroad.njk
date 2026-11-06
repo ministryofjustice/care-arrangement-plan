@@ -84,7 +84,14 @@
         </div>
         <div class="govuk-button-group">
           {{ govukButton({text: __('saveAndContinue')}) }}
-          {{ govukButton({text: __('saveAndComeBackLater'), classes: "govuk-button--secondary"}) }}
+          {{
+            govukButton({
+              text: __('saveAndComeBackLater'),
+              classes: "govuk-button--secondary",
+              name: "saveAndComeBackLater",
+              value: "true"
+            })
+          }}
         </div>
       </form>
     </div>

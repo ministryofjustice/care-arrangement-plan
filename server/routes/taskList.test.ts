@@ -37,6 +37,12 @@ const session: Partial<SessionData> = {
     itemsForChangeover: {
       noDecisionRequired: true,
     },
+    travelAbroad: {
+      noDecisionRequired: true,
+    },
+    travelDocuments: {
+      noDecisionRequired: true,
+    },
   },
   specialDays: {
     whatWillHappen: {

@@ -23,34 +23,30 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ __('handoverAndHolidays.consentToTravel.title') }}</h1>
 
-      <p class="govuk-body">
-        {{ __("handoverAndHolidays.consentToTravel.parentalResponsibility") | safe }}
-      </p>
-      <p class="govuk-body">
-        {{ __("handoverAndHolidays.consentToTravel.eachTime") }}
-      </p>
+      <p class="govuk-body">{{ __("handoverAndHolidays.consentToTravel.parentalResponsibility") | safe }}</p>
+      <p class="govuk-body">{{ __("handoverAndHolidays.consentToTravel.eachTime") }}</p>
 
-      <h2 class="govuk-heading-m">
-        {{ __("handoverAndHolidays.consentToTravel.getPermission.title") }}
-      </h2>
-      <p class="govuk-body">
-        {{ __("handoverAndHolidays.consentToTravel.getPermission.havingPermission") }}
-      </p>
-      <p class="govuk-body">
-        {{ __("handoverAndHolidays.consentToTravel.getPermission.reminder") }}
-      </p>
+      <h2 class="govuk-heading-m">{{ __("handoverAndHolidays.consentToTravel.getPermission.title") }}</h2>
+      <p class="govuk-body">{{ __("handoverAndHolidays.consentToTravel.getPermission.havingPermission") }}</p>
+      <p class="govuk-body">{{ __("handoverAndHolidays.consentToTravel.getPermission.reminder") }}</p>
 
-      <div class="govuk-button-group">
-        {{ govukButton({text: __('saveAndContinue')}) }}
-        {{ govukButton({text: __('saveAndComeBackLater'), classes: "govuk-button--secondary"}) }}
-      </div>
+      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_TRAVEL_CONSENT }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <div class="govuk-button-group">
+          {{ govukButton({text: __('saveAndContinue')}) }}
+          {{
+            govukButton({
+              text: __('saveAndComeBackLater'),
+              classes: "govuk-button--secondary",
+              name: "saveAndComeBackLater",
+              value: "true"
+            })
+          }}
+        </div>
+      </form>
 
-      <h2 class="govuk-heading-m">
-        {{ __("handoverAndHolidays.consentToTravel.concerned.title") }}
-      </h2>
-      <p class="govuk-body">
-        {{ __("handoverAndHolidays.consentToTravel.concerned.description") | safe }}
-      </p>
+      <h2 class="govuk-heading-m">{{ __("handoverAndHolidays.consentToTravel.concerned.title") }}</h2>
+      <p class="govuk-body">{{ __("handoverAndHolidays.consentToTravel.concerned.description") | safe }}</p>
     </div>
   </div>
 {% endblock %}
