@@ -31,7 +31,7 @@
             govukTextarea({
               name: formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_DESCRIBE_ARRANGEMENT,
               label: {
-                text: __('describeArrangement')
+                text: __('handoverAndHolidays.itemsForChangeover.describeOtherItems')
               },
               value: formValues[formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_DESCRIBE_ARRANGEMENT],
               errorMessage: errors | findError(formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_DESCRIBE_ARRANGEMENT)
@@ -49,29 +49,37 @@
                 classes: "govuk-fieldset__legend--l"
               }
             },
+            hint: {
+              text: __('selectAllThatApply')
+            },
             items: [
               {
                 value: "parent",
-                text: __('handoverAndHolidays.travelDocuments.parent')
+                text: __('handoverAndHolidays.itemsForChangeover.items.clothesAndShoes')
               },
               {
-                value: "otherParent",
-                text: __('handoverAndHolidays.travelDocuments.otherParent')
+                value: "parent",
+                text: __('handoverAndHolidays.itemsForChangeover.items.schoolItems')
               },
               {
-                value: "bothParents",
-                text: __('handoverAndHolidays.travelDocuments.bothParents')
+                value: "parent",
+                text: __('handoverAndHolidays.itemsForChangeover.items.toiletries')
               },
               {
-                value: "parentTravelling",
-                text: __('handoverAndHolidays.travelDocuments.parentTravelling')
+                value: "parent",
+                text: __('handoverAndHolidays.itemsForChangeover.items.sports')
               },
               {
-                divider: __('or')
+                value: "parent",
+                text: __('handoverAndHolidays.itemsForChangeover.items.toys')
+              },
+              {
+                value: "parent",
+                text: __('handoverAndHolidays.itemsForChangeover.items.electronicDevices')
               },
               {
                 value: "anotherArrangement",
-                text: __('handoverAndHolidays.travelDocuments.anotherArrangement'),
+                text: __('handoverAndHolidays.itemsForChangeover.items.otherItems'),
                 conditional: {
                   html: describeArrangementHtml
                 }

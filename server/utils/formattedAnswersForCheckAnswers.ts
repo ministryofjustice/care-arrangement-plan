@@ -5,6 +5,9 @@ import {
   educationRoutineDecisionsField,
   educationSchoolMeetingsField,
   educationShareInformationField,
+  travelAbroadField,
+  travelDocumentsField,
+  travelInformationField,
   whereHandoverField,
 } from '../@types/fields';
 
@@ -272,6 +275,68 @@ export const itemsForChangeover = (request: Request) => {
   return handoverAndHolidays.itemsForChangeover.noDecisionRequired
     ? request.__('doNotNeedToDecide')
     : handoverAndHolidays.itemsForChangeover.answer;
+};
+
+export const travelAbroad = (request: Request) => {
+  const { handoverAndHolidays } = request.session;
+  if (handoverAndHolidays.travelAbroad.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const getAnswerForTravelAbroad = (option: travelAbroadField) => {
+    switch (option) {
+      case 'twoWeeks':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelAbroad.answer', { answer: 'At least 2 weeks' });
+      case 'fourWeeks':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelAbroad.answer', { answer: 'At least 4 weeks' });
+      case 'eightWeeks':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelAbroad.answer', { answer: 'At least 8 weeks' });
+      case 'anotherArrangement':
+        return handoverAndHolidays.travelAbroad.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return handoverAndHolidays.travelAbroad.options.map(getAnswerForTravelAbroad).join(', ');
+};
+
+export const travelDocuments = (request: Request) => {
+  const { handoverAndHolidays } = request.session;
+  if (handoverAndHolidays.travelDocuments.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const getAnswerForTravelDocuments = (option: travelDocumentsField) => {
+    switch (option) {
+      case 'parent':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelDocuments.answer', { answer: 'Parent' });
+      case 'otherParent':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelDocuments.answer', { answer: 'Other parent' });
+      case 'bothParents':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelDocuments.answer', { answer: 'Both parents' });
+      case 'withChildren':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelDocuments.answer', { answer: 'The parent travelling with the children' });
+      case 'anotherArrangement':
+        return handoverAndHolidays.travelDocuments.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return handoverAndHolidays.travelDocuments.options.map(getAnswerForTravelDocuments).join(', ');
+};
+
+export const travelInformation = (request: Request) => {
+  const { handoverAndHolidays } = request.session;
+  if (handoverAndHolidays.travelInformation.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const getAnswerForTravelInformation = (option: travelInformationField) => {
+  };
+
+  return handoverAndHolidays.travelInformation.options.map(getAnswerForTravelInformation).join(', ');
 };
 
 export const whatWillHappen = (request: Request) => {

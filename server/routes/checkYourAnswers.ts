@@ -5,6 +5,7 @@ import paths from '../constants/paths';
 import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../utils/addCompletedStep';
 import {
+  travelInformation,
   childHealthNeeds,
   childHealthRoutineDecisions,
   educationRoutineDecisions,
@@ -17,6 +18,8 @@ import {
   planLastMinuteChanges,
   planLongTermNotice,
   planReview,
+  travelAbroad,
+  travelDocuments,
   whatOtherThingsMatter,
   whatWillHappen,
   whereHandover,
@@ -54,6 +57,9 @@ const checkYourAnswersRoutes = (router: Router) => {
         willChangeDuringSchoolHolidays: willChangeDuringSchoolHolidays(request),
         howChangeDuringSchoolHolidays: howChangeDuringSchoolHolidays(request),
         itemsForChangeover: itemsForChangeover(request),
+        travelAbroad: travelAbroad(request),
+        travelDocuments: travelDocuments(request),
+        travelInformation: travelInformation(request),
         whatWillHappen: whatWillHappen(request),
         whatOtherThingsMatter: whatOtherThingsMatter(request),
         planLastMinuteChanges: planLastMinuteChanges(request),
