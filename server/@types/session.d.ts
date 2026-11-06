@@ -78,7 +78,7 @@ export type CAPSession = {
     };
     travelInformation?: {
       noDecisionRequired: boolean;
-      options: travelInformationField[];
+      options?: travelInformationField[];
       describeArrangement?: string;
     };
   };

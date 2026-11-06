@@ -1,4 +1,7 @@
 {% extends "partials/layout.njk" %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "macros/title.njk" import getTitle with context %}
 
 {% block pageTitle %}
@@ -19,7 +22,86 @@
   </div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">{{ title }}</h1>
+      {% include "partials/errorSummary.njk" %}
+      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_TRAVEL_INFORMATION }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+        {% set describeArrangementHtml %}
+          {{
+            govukTextarea({
+              name: formFields.HANDOVER_HOLIDAYS_TRAVEL_INFORMATION_DESCRIBE_ARRANGEMENT,
+              label: {
+                text: __('handoverAndHolidays.travelInformation.describeOtherInformation')
+              },
+              value: formValues[formFields.HANDOVER_HOLIDAYS_TRAVEL_INFORMATION_DESCRIBE_ARRANGEMENT],
+              errorMessage: errors | findError(formFields.HANDOVER_HOLIDAYS_TRAVEL_INFORMATION_DESCRIBE_ARRANGEMENT)
+            })
+          }}
+        {% endset -%}
+
+        {{
+          govukCheckboxes({
+            name: formFields.HANDOVER_HOLIDAYS_TRAVEL_INFORMATION,
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            hint: {
+              text: __('selectAllThatApply')
+            },
+            items: [
+              {
+                value: "dates",
+                text: __('handoverAndHolidays.travelInformation.travelInformation')
+              },
+              {
+                value: "group",
+                text: __('handoverAndHolidays.travelInformation.travelGroup')
+              },
+              {
+                value: "address",
+                text: __('handoverAndHolidays.travelInformation.accommodationAddress')
+              },
+              {
+                value: "contact",
+                text: __('handoverAndHolidays.travelInformation.emergencyContact')
+              },
+              {
+                value: "passport",
+                text: __('handoverAndHolidays.travelInformation.passportHandover')
+              },
+              {
+                value: "other",
+                text: __('handoverAndHolidays.travelInformation.other'),
+                conditional: {
+                  html: describeArrangementHtml
+                }
+              }
+            ],
+            values: formValues[formFields.HANDOVER_HOLIDAYS_TRAVEL_INFORMATION],
+            errorMessage: errors | findError(formFields.HANDOVER_HOLIDAYS_TRAVEL_INFORMATION)
+          })
+        }}
+        <div class="govuk-!-margin-bottom-2">
+          <button type="submit" name="skip" value="true" class="govuk-link link-styled-button">
+            {{ __('skipThisQuestion') }}
+          </button>
+        </div>
+        <div class="govuk-button-group">
+          {{ govukButton({text: __('saveAndContinue')}) }}
+          {{
+            govukButton({
+              text: __('saveAndComeBackLater'),
+              classes: "govuk-button--secondary",
+              name: "saveAndComeBackLater",
+              value: "true"
+            })
+          }}
+        </div>
+      </form>
     </div>
   </div>
 {% endblock %}

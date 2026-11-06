@@ -374,7 +374,7 @@ export const travelInformation = (request: Request) => {
     }
   };
 
-  return handoverAndHolidays.travelInformation.options.map(getAnswerForTravelInformation).join(', ');
+  return handoverAndHolidays.travelInformation.options?.map(getAnswerForTravelInformation).join(', ');
 };
 
 export const whatWillHappen = (request: Request) => {

@@ -25,7 +25,7 @@
       <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {% set hintHtml %}
-          <p>{{ __('handoverAndHolidays.whereHandover.explainer') }}</p>
+          <p>{{ __('handoverAndHolidays.whereHandover.explainer', { children: childrenNames }) }}</p>
           <p>{{ __('selectAllThatApply') }}</p>
         {% endset -%}
 

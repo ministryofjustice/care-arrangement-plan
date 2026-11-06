@@ -16,6 +16,9 @@ import {
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
   mostlyLive,
+  travelAbroad,
+  travelDocuments,
+  travelInformation,
   whatWillHappen,
   whereHandover,
   whichDaysDaytimeVisits,
@@ -54,6 +57,9 @@ const testAppSetup = (): Express => {
         willChangeDuringSchoolHolidays: willChangeDuringSchoolHolidays(request),
         howChangeDuringSchoolHolidays: howChangeDuringSchoolHolidays(request),
         itemsForChangeover: itemsForChangeover(request),
+        travelAbroad: travelAbroad(request),
+        travelDocuments: travelDocuments(request),
+        travelInformation: travelInformation(request),
       },
       specialDays: {
         whatWillHappen: whatWillHappen(request),
@@ -318,7 +324,7 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.initialAdultName} collects James, Rachel and Jack`,
-          whereHandover: `Neutral location, At ${session.initialAdultName}'s home, At school`,
+          whereHandover: `Neutral location, At ${session.initialAdultName}'s home, At school (term time only)`,
           willChangeDuringSchoolHolidays: 'No',
           itemsForChangeover: 'itemsForChangeover arrangement',
         },
@@ -407,6 +413,69 @@ describe('formattedAnswers', () => {
           expect(response.body.handoverAndHolidays.itemsForChangeover).toBe(
             'Clothes and shoes, School items, Medication',
           );
+        });
+    });
+
+    it('should format travel abroad, travel documents and travel information', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        travelAbroad: { noDecisionRequired: false, options: ['fourWeeks'] },
+        travelDocuments: { noDecisionRequired: false, options: ['parentTravelling'] },
+        travelInformation: {
+          noDecisionRequired: false,
+          options: ['dates', 'contact', 'other'],
+          describeArrangement: 'Flight numbers',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.travelAbroad).toBe('At least 4 weeks');
+          expect(response.body.handoverAndHolidays.travelDocuments).toBe('The parent travelling with the children');
+          expect(response.body.handoverAndHolidays.travelInformation).toBe(
+            'Travel information (dates, transport details), Emergency contact details, Flight numbers',
+          );
+        });
+    });
+
+    it('should format skipped travel answers as no decision', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        travelAbroad: { noDecisionRequired: true },
+        travelDocuments: { noDecisionRequired: true },
+        travelInformation: { noDecisionRequired: true },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.travelAbroad).toBe('We do not need to decide this');
+          expect(response.body.handoverAndHolidays.travelDocuments).toBe('We do not need to decide this');
+          expect(response.body.handoverAndHolidays.travelInformation).toBe('We do not need to decide this');
+        });
+    });
+
+    it('should use the free-text arrangement for another travel arrangement', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        travelAbroad: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'At least 12 weeks',
+        },
+        travelDocuments: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent arranges the passports',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.travelAbroad).toBe('At least 12 weeks');
+          expect(response.body.handoverAndHolidays.travelDocuments).toBe('A grandparent arranges the passports');
         });
     });
 

@@ -16,6 +16,7 @@ import {
   mostlyLiveComplete,
   travelAbroadComplete,
   travelDocumentsComplete,
+  travelInformationComplete,
   planLastMinuteChangesComplete,
   planLongTermNoticeComplete,
   planReviewComplete,
@@ -36,6 +37,7 @@ const taskListRoutes = (router: Router) => {
     const isItemsForChangeoverComplete = itemsForChangeoverComplete(request.session);
     const isTravelAbroadComplete = travelAbroadComplete(request.session);
     const isTravelDocumentsComplete = travelDocumentsComplete(request.session);
+    const isTravelInformationComplete = travelInformationComplete(request.session);
     const isWhatWillHappenComplete = whatWillHappenComplete(request.session);
     const isWhatOtherThingsMatterComplete = whatOtherThingsMatterComplete(request.session);
     const isPlanLastMinuteChangesComplete = planLastMinuteChangesComplete(request.session);
@@ -81,6 +83,7 @@ const taskListRoutes = (router: Router) => {
       itemsForChangeoverComplete: isItemsForChangeoverComplete,
       travelAbroadComplete: isTravelAbroadComplete,
       travelDocumentsComplete: isTravelDocumentsComplete,
+      travelInformationComplete: isTravelInformationComplete,
       whatWillHappenComplete: isWhatWillHappenComplete,
       whatOtherThingsMatterComplete: isWhatOtherThingsMatterComplete,
       planLastMinuteChangesComplete: isPlanLastMinuteChangesComplete,

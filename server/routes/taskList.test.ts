@@ -43,6 +43,9 @@ const session: Partial<SessionData> = {
     travelDocuments: {
       noDecisionRequired: true,
     },
+    travelInformation: {
+      noDecisionRequired: true,
+    },
   },
   specialDays: {
     whatWillHappen: {
@@ -109,6 +112,28 @@ describe(`GET ${paths.TASK_LIST}`, () => {
     expect(dom.window.document.title).toContain('Child arrangement plan with child(ren) details');
     expect(getContinueButton(dom.window.document)).not.toBeNull();
     expect(getContinueButton(dom.window.document)).toHaveTextContent('Continue');
+  });
+
+  it('should show travel questions as incomplete until they are answered', async () => {
+    delete sessionMock.handoverAndHolidays?.travelAbroad;
+    delete sessionMock.handoverAndHolidays?.travelDocuments;
+    delete sessionMock.handoverAndHolidays?.travelInformation;
+
+    const dom = new JSDOM((await request(app).get(paths.TASK_LIST)).text);
+
+    const travelAbroadStatus = dom.window.document.querySelector('#handoverAndHolidays-taskList-5-status');
+    const travelDocumentsStatus = dom.window.document.querySelector('#handoverAndHolidays-taskList-6-status');
+    const travelInformationStatus = dom.window.document.querySelector('#handoverAndHolidays-taskList-8-status');
+
+    expect(travelAbroadStatus).toHaveTextContent('Incomplete');
+    expect(travelAbroadStatus?.closest('li')?.querySelector('a')).toHaveAttribute(
+      'href',
+      paths.HANDOVER_HOLIDAYS_TRAVEL_ABROAD,
+    );
+    expect(travelDocumentsStatus).toHaveTextContent('Cannot start yet');
+    expect(travelDocumentsStatus?.closest('li')?.querySelector('a')).toBeNull();
+    expect(travelInformationStatus).toHaveTextContent('Cannot start yet');
+    expect(travelInformationStatus?.closest('li')?.querySelector('a')).toBeNull();
   });
 
   it('should render the browser page title without child names', async () => {

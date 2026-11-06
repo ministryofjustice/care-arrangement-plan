@@ -37,6 +37,7 @@ enum formFields {
   HANDOVER_HOLIDAYS_TRAVEL_DOCUMENTS_DESCRIBE_ARRANGEMENT = 'handover-and-holidays-travel-documents-describe-arrangement',
   HANDOVER_HOLIDAYS_TRAVEL_CONSENT = 'handover-and-holidays-consent-to-travel',
   HANDOVER_HOLIDAYS_TRAVEL_INFORMATION = 'handover-and-holidays-travel-information',
+  HANDOVER_HOLIDAYS_TRAVEL_INFORMATION_DESCRIBE_ARRANGEMENT = 'handover-and-holidays-travel-information-describe-arrangement',
   SPECIAL_DAYS = 'special-days',
   EDUCATION = 'education',
   CHILD_HEALTH = 'child-health',
