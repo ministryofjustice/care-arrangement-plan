@@ -387,7 +387,7 @@ test.describe('Decision Making Section', () => {
     });
 
     test('should show long term notice as "cannot start" before last minute changes is complete', async ({ page }) => {
-      const longTermRow = page.locator('li').filter({ hasText: /how much notice/i });
+      const longTermRow = page.locator('li').filter({ hasText: /how much notice should you give/i });
       await expect(longTermRow).toContainText(/cannot start/i);
     });
 
@@ -416,7 +416,7 @@ test.describe('Decision Making Section', () => {
       const lastMinuteRow = page.locator('li').filter({ hasText: /how should last-minute changes/i });
       await expect(lastMinuteRow).toContainText(/completed/i);
 
-      const longTermRow = page.locator('li').filter({ hasText: /how much notice/i });
+      const longTermRow = page.locator('li').filter({ hasText: /how much notice should you give/i });
       await expect(longTermRow).toContainText(/completed/i);
 
       const planReviewRow = page.locator('li').filter({ hasText: /when would you like to review/i });
