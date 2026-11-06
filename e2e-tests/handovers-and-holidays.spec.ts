@@ -1,6 +1,11 @@
 import { test, expect, Page } from '@playwright/test';
- 
-import { navigateToTaskList, fillHandoversAndHolidaySectionAndContinue, checkDataPersistsAndContinue, expectErrorSummaryVisible} from './fixtures/test-helpers';
+
+import {
+  navigateToTaskList,
+  fillHandoversAndHolidaySectionAndContinue,
+  checkDataPersistsAndContinue,
+  expectErrorSummaryVisible,
+} from './fixtures/test-helpers';
 
 async function checkIfTaskStatusIsCompleted(page: Page) {
   await expect(page.locator('#handoverAndHolidays-taskList-1-status')).toHaveText(/Completed/i);
@@ -10,180 +15,261 @@ async function checkIfTaskStatusIsCompleted(page: Page) {
 }
 
 async function fillTextAreaAndContinue(page: Page, textAreaText: string) {
-  await page.fill('textarea', textAreaText);
+  await page.locator('textarea:visible').fill(textAreaText);
   await page.getByRole('button', { name: /continue/i }).click();
 }
- 
+
 test.describe('Handovers and holidays section', () => {
   test.beforeEach(async ({ page }) => {
     await navigateToTaskList(page);
     await expect(page).toHaveURL(/\/make-a-plan/);
     // navigateToTaskList causes Adult 1 to be named Parent and Adult 2 to be Guardian, so they are mentioned throughout the test.
   });
- 
+
   test.describe('Adult 1 collects the children, handovers take place between adults, arrangements change in school holidays, and items go between households', () => {
     test('Fill fields until section is complete', async ({ page }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
-      await fillHandoversAndHolidaySectionAndContinue(page, /get-between-households/, 'How will the children get between households?', ['Parent collects the children'])
-      await fillHandoversAndHolidaySectionAndContinue(page, /where-handover/, 'Where does handover take place?', ['Neutral location', "At Parent's home", "At Guardian's home", 'At school'])
-      await fillHandoversAndHolidaySectionAndContinue(page, /will-change-during-school-holidays/, 'Will these arrangements change during school holidays?', ['Yes'])
-      await fillHandoversAndHolidaySectionAndContinue(page, /how-change-during-school-holidays/, 'How will the arrangements be different in school holidays?')
-      await fillTextAreaAndContinue(page, "We will alternate holidays")
-      await fillHandoversAndHolidaySectionAndContinue(page, /items-for-changeover/, 'What items need to go between households?')
-      await fillTextAreaAndContinue(page, "School bag, clothes, favorite toys")
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /get-between-households/,
+        'How will the children get between households?',
+        ['Parent collects Test'],
+      );
+      await fillHandoversAndHolidaySectionAndContinue(page, /where-handover/, 'Where does handover take place?', [
+        'Neutral location',
+        "At Parent's home",
+        "At Guardian's home",
+        'At school',
+      ]);
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /will-change-during-school-holidays/,
+        'Will these arrangements change during school holidays?',
+        ['Yes'],
+      );
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /how-change-during-school-holidays/,
+        'How will the arrangements be different in school holidays?',
+      );
+      await fillTextAreaAndContinue(page, 'We will alternate holidays');
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /items-for-changeover/,
+        'What items need to go between households?',
+      );
+      await fillTextAreaAndContinue(page, 'School bag, clothes, favorite toys');
       await expect(page).toHaveURL(/\/make-a-plan/);
-      await checkIfTaskStatusIsCompleted(page)
+      await checkIfTaskStatusIsCompleted(page);
 
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
-      await checkDataPersistsAndContinue(page, ['Parent collects the children'])
-      await checkDataPersistsAndContinue(page, ['Neutral location', "At Parent's home", "At Guardian's home", 'At school'])
-      await checkDataPersistsAndContinue(page, ['Yes'])
-      await checkDataPersistsAndContinue(page, [],  true, 'We will alternate holidays')
-      await checkDataPersistsAndContinue(page, [],  true, 'School bag, clothes, favorite toys')
+      await checkDataPersistsAndContinue(page, ['Parent collects Test']);
+      await checkDataPersistsAndContinue(page, [
+        'Neutral location',
+        "At Parent's home",
+        "At Guardian's home",
+        'At school',
+      ]);
+      await checkDataPersistsAndContinue(page, ['Yes']);
+      await checkDataPersistsAndContinue(page, [], true, 'We will alternate holidays');
+      await checkDataPersistsAndContinue(page, [], true, 'School bag, clothes, favorite toys');
     });
   });
 
   test.describe('Adult 2 collects the children, handovers take place at another (other) location, arrangements do not change in school holidays, and items go between households', () => {
     test('Fill fields until section is complete', async ({ page }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
-      await fillHandoversAndHolidaySectionAndContinue(page, /get-between-households/, 'How will the children get between households?', ['Guardian collects the children'])
-      await fillHandoversAndHolidaySectionAndContinue(page, /where-handover/, 'Where does handover take place?', ['Other'])
-      await fillTextAreaAndContinue(page, "Grandparent's house")
-      await fillHandoversAndHolidaySectionAndContinue(page, /will-change-during-school-holidays/, 'Will these arrangements change during school holidays?', ['No'])
-      await fillHandoversAndHolidaySectionAndContinue(page, /items-for-changeover/, 'What items need to go between households?')
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /get-between-households/,
+        'How will the children get between households?',
+        ['Guardian collects Test'],
+      );
+      await fillHandoversAndHolidaySectionAndContinue(page, /where-handover/, 'Where does handover take place?', [
+        'Other',
+      ]);
+      await fillTextAreaAndContinue(page, "Grandparent's house");
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /will-change-during-school-holidays/,
+        'Will these arrangements change during school holidays?',
+        ['No'],
+      );
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /items-for-changeover/,
+        'What items need to go between households?',
+      );
       await page.fill('textarea', 'School bag, clothes, favorite toys');
       await page.getByRole('button', { name: /continue/i }).click();
       await expect(page).toHaveURL(/\/make-a-plan/);
-      await checkIfTaskStatusIsCompleted(page)
+      await checkIfTaskStatusIsCompleted(page);
 
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
-      await checkDataPersistsAndContinue(page, ['Guardian collects the children'])
-      await checkDataPersistsAndContinue(page, ['Other'], true, "Grandparent's house")
-      await checkDataPersistsAndContinue(page, ['No'])
-      await checkDataPersistsAndContinue(page, [],  true, 'School bag, clothes, favorite toys')
+      await checkDataPersistsAndContinue(page, ['Guardian collects Test']);
+      await checkDataPersistsAndContinue(page, ['Other'], true, "Grandparent's house");
+      await checkDataPersistsAndContinue(page, ['No']);
+      await checkDataPersistsAndContinue(page, [], true, 'School bag, clothes, favorite toys');
     });
   });
 
   test.describe('"Other" can be combined with another handover location option', () => {
-    test('Selecting "Other" alongside another option and providing free text completes the section', async ({ page }) => {
+    test('Selecting "Other" alongside another option and providing free text completes the section', async ({
+      page,
+    }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
-      await fillHandoversAndHolidaySectionAndContinue(page, /get-between-households/, 'How will the children get between households?', ['Parent collects the children'])
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /get-between-households/,
+        'How will the children get between households?',
+        ['Parent collects Test'],
+      );
       await expect(page).toHaveURL(/where-handover/);
       await page.getByLabel('Neutral location').check();
       await page.getByLabel('Other').check();
-      await page.getByRole('textbox', { name: /describe where handover will take place/i }).fill('The leisure centre car park');
+      await page
+        .getByRole('textbox', { name: /describe where handover will take place/i })
+        .fill('The leisure centre car park');
       await page.getByRole('button', { name: /continue/i }).click();
-      await fillHandoversAndHolidaySectionAndContinue(page, /will-change-during-school-holidays/, 'Will these arrangements change during school holidays?', ['No'])
-      await fillHandoversAndHolidaySectionAndContinue(page, /items-for-changeover/, 'What items need to go between households?')
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /will-change-during-school-holidays/,
+        'Will these arrangements change during school holidays?',
+        ['No'],
+      );
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /items-for-changeover/,
+        'What items need to go between households?',
+      );
       await page.fill('textarea', 'School bag');
       await page.getByRole('button', { name: /continue/i }).click();
       await expect(page).toHaveURL(/\/make-a-plan/);
-      await checkIfTaskStatusIsCompleted(page)
+      await checkIfTaskStatusIsCompleted(page);
     });
   });
 
-   test.describe('Another arrangement is made for collecting the children, then both Adults decide that no decision needs to be made, for collecting the children, for handovers, for arrangements in school holidays, and what items go between households', () => {
+  test.describe('Another arrangement is made for collecting the children, then both Adults decide that no decision needs to be made, for collecting the children, for handovers, for arrangements in school holidays, and what items go between households', () => {
     test('Fill fields until section is complete', async ({ page }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
-      await fillHandoversAndHolidaySectionAndContinue(page, /get-between-households/, 'How will the children get between households?')
+      await fillHandoversAndHolidaySectionAndContinue(
+        page,
+        /get-between-households/,
+        'How will the children get between households?',
+      );
       await page.getByLabel(/Another arrangement/).check();
-      await fillTextAreaAndContinue(page, "Grandmother collects the children")
+      await fillTextAreaAndContinue(page, 'Grandmother collects the children');
       await page.locator('.govuk-back-link').click();
       await page.getByRole('button', { name: /Skip this question/i }).click();
       await page.getByRole('button', { name: /Skip this question/i }).click();
       await page.getByRole('button', { name: /Skip this question/i }).click();
       await page.getByRole('button', { name: /Skip this question/i }).click();
       await expect(page).toHaveURL(/\/make-a-plan/);
-      await checkIfTaskStatusIsCompleted(page)
+      await checkIfTaskStatusIsCompleted(page);
     });
   });
 
-
-// Playwright usually uses error ID's to locate error messages, but here errors are inside visually hidden elements, so ID does not work and getByText is used instead.
-// Two non essential error tests are not included here, testing wether an error message is inside a form group, and wether it has the right aria attribute, this is because ID has to be used for these tests.
+  // Playwright usually uses error ID's to locate error messages, but here errors are inside visually hidden elements, so ID does not work and getByText is used instead.
+  // Two non essential error tests are not included here, testing wether an error message is inside a form group, and wether it has the right aria attribute, this is because ID has to be used for these tests.
   test.describe('An error should be shown if no options are chosen and another arrangement is not specified on the get between households page', () => {
-    test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({ page }) => {
+    test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({
+      page,
+    }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("Select how the children will get between households").nth(0) ).toBeVisible()
+      await expect(page.getByText('Select how the children will get between households').nth(0)).toBeVisible();
       await expectErrorSummaryVisible(page);
-      await page.getByText("Select how the children will get between households").nth(0).click();
-      await expect( page.getByRole('heading', { name: 'How will the children get between households?' }) ).toBeInViewport();
+      await page.getByText('Select how the children will get between households').nth(0).click();
+      await expect(
+        page.getByRole('heading', { name: 'How will the children get between households?' }),
+      ).toBeInViewport();
 
       await page.getByText('Another arrangement').click();
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("Describe how the children will get between households").nth(0) ).toBeVisible()
+      await expect(page.getByText('Describe how the children will get between households').nth(0)).toBeVisible();
       await expectErrorSummaryVisible(page);
-      await page.getByText("Describe how the children will get between households").nth(0).click();
-      await expect( page.getByRole('textbox', { name: "Describe the arrangement" }) ).toBeInViewport();
+      await page.getByText('Describe how the children will get between households').nth(0).click();
+      await expect(page.getByRole('textbox', { name: 'Describe the arrangement' })).toBeInViewport();
     });
   });
 
   test.describe('An error should be shown if no options are chosen and the Other free text is not specified on the handovers page', () => {
-    test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({ page }) => {
+    test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({
+      page,
+    }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
-      await page.getByLabel(/Parent collects the children/).check();
+      await page.getByLabel(/Parent collects Test/).check();
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("Select where handover takes place").nth(0) ).toBeVisible()
+      await expect(page.getByText('Select where handover takes place').nth(0)).toBeVisible();
       await expectErrorSummaryVisible(page);
-      await page.getByText("Select where handover takes place").nth(0).click();
-      await expect(page.getByRole('checkbox', { name: "Neutral location" })).toBeInViewport();
+      await page.getByText('Select where handover takes place').nth(0).click();
+      await expect(page.getByRole('checkbox', { name: 'Neutral location' })).toBeInViewport();
 
       await page.getByLabel('Other').check();
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("Describe where handover will take place").nth(0) ).toBeVisible()
+      await expect(page.getByText('Describe where handover will take place').nth(0)).toBeVisible();
       await expectErrorSummaryVisible(page);
-      await page.getByText("Describe where handover will take place").nth(0).click();
-      await expect( page.getByRole('textbox', { name: "Describe where handover will take place" }) ).toBeInViewport();
+      await page.getByText('Describe where handover will take place').nth(0).click();
+      await expect(page.getByRole('textbox', { name: 'Describe where handover will take place' })).toBeInViewport();
     });
   });
 
   test.describe('An error should be shown if no options are chosen on the will arrangements change in school holidays page', () => {
-    test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({ page }) => {
+    test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({
+      page,
+    }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
-      await page.getByLabel(/Parent collects the children/).check();
+      await page.getByLabel(/Parent collects Test/).check();
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByLabel(/Neutral location/).check();
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("Select whether the arrangements will change during school holidays").nth(0) ).toBeVisible()
+      await expect(
+        page.getByText('Select whether the arrangements will change during school holidays').nth(0),
+      ).toBeVisible();
       await expectErrorSummaryVisible(page);
-      await page.getByText("select whether the arrangements will change during school holidays").nth(0).click();
-      await expect( page.getByRole('heading', { name: 'Will these arrangements change during school holidays?' }) ).toBeInViewport();
+      await page.getByText('select whether the arrangements will change during school holidays').nth(0).click();
+      await expect(
+        page.getByRole('heading', { name: 'Will these arrangements change during school holidays?' }),
+      ).toBeInViewport();
     });
   });
 
   test.describe('An error should be shown when a different arrangement for collection in school holidays is not given', () => {
-    test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({ page }) => {
+    test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({
+      page,
+    }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
-      await page.getByLabel(/Parent collects the children/).check();
+      await page.getByLabel(/Parent collects Test/).check();
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByLabel(/Neutral location/).check();
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByLabel(/Yes/).check();
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("Describe the arrangement you are proposing").nth(0) ).toBeVisible()
+      await expect(page.getByText('Describe the arrangement you are proposing').nth(0)).toBeVisible();
       await expectErrorSummaryVisible(page);
-      await page.getByText("Describe the arrangement you are proposing").nth(0).click();
+      await page.getByText('Describe the arrangement you are proposing').nth(0).click();
       await expect(page.getByRole('textbox')).toBeInViewport();
     });
   });
 
   test.describe('An error should be shown when a items for changeovers is not specified', () => {
-    test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({ page }) => {
+    test('An error should be shown at the top of the page, above the blank option or text box, and when the error link is clicked it should link to the missing input', async ({
+      page,
+    }) => {
       await page.getByRole('link', { name: /how will the children get between households/i }).click();
-      await page.getByLabel(/Parent collects the children/).check();
+      await page.getByLabel(/Parent collects Test/).check();
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByLabel(/Neutral location/).check();
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByLabel(/No/).check();
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByRole('button', { name: /continue/i }).click();
-      await expect( page.getByText("List which items need to go between households").nth(0) ).toBeVisible()
+      await expect(page.getByText('List which items need to go between households').nth(0)).toBeVisible();
       await expectErrorSummaryVisible(page);
-      await page.getByText("List which items need to go between households").nth(0).click();
+      await page.getByText('List which items need to go between households').nth(0).click();
       await expect(page.getByRole('textbox')).toBeInViewport();
     });
   });

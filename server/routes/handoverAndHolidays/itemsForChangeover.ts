@@ -4,7 +4,7 @@ import { body, matchedData, validationResult } from 'express-validator';
 import formFields from '../../constants/formFields';
 import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
-import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
+import checkFormProgressFromConfig from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
 import { getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
@@ -21,7 +21,7 @@ const itemsForChangeoverRoutes = (router: Router) => {
   router.post(
     paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER,
     checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER),
-    body(formFields.ITEMS_FOR_CHANGEOVER)
+    body(formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
       .trim()
       .notEmpty()
       .withMessage((_value, { req }) => req.__('handoverAndHolidays.itemsForChangeover.error')),
@@ -33,8 +33,8 @@ const itemsForChangeoverRoutes = (router: Router) => {
         return response.redirect(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
       }
 
-      const { [formFields.ITEMS_FOR_CHANGEOVER]: whatWillHappen } = matchedData<{
-        [formFields.ITEMS_FOR_CHANGEOVER]: string;
+      const { [formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER]: whatWillHappen } = matchedData<{
+        [formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER]: string;
       }>(request, { onlyValidData: false });
 
       request.session.handoverAndHolidays = {
@@ -47,7 +47,7 @@ const itemsForChangeoverRoutes = (router: Router) => {
 
       addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
 
-      return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
+      return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.HANDOVER_HOLIDAYS_TRAVEL_ABROAD));
     },
   );
 
@@ -61,7 +61,7 @@ const itemsForChangeoverRoutes = (router: Router) => {
 
     addCompletedStep(request, FORM_STEPS.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER);
 
-    return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.TASK_LIST));
+    return response.redirect(getRedirectUrlAfterFormSubmit(request.session, paths.HANDOVER_HOLIDAYS_TRAVEL_ABROAD));
   });
 };
 

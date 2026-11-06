@@ -472,7 +472,17 @@
     "theChildren": "The children",
     "whoIsUsing": "Who is using this service?",
     "livingAndVisiting": "Living and visiting",
-    "handoverAndHolidays": "Handovers and holidays",
+    "handoverAndHolidays": {
+      "title": "Handovers and holidays",
+      "getBetweenHouseholds": "How will {{{ children }}} get between households?",
+      "whereHandover": "Where will handover take place for {{{ children }}}?",
+      "schoolHolidays": "Will {{{ children }}}'s arrangements change during school holidays?",
+      "whichItems": "Which items should move between households for {{{ children }}}?",
+      "notice": "How much notice should be given before travelling abroad with {{{ children }}}?",
+      "travelDocuments": "Who will arrange passports, visas and other travel documents for {{{ children }}}?",
+      "abroadPermission": "Permission for taking {{{ children }}} abroad",
+      "otherAbroadInformation": "What other information should be shared before travelling abroad with {{{ children }}}?"
+    },
     "education": {
       "title": "Education",
       "shareInformation": "How should information from {{{ childName }}}'s school be shared?",
@@ -531,22 +541,24 @@
     }
   },
   "handoverAndHolidays": {
+    "title": "Handovers and holidays",
     "getBetweenHouseholds": {
-      "title": "How will the children get between households?",
+      "title": "How will {{{ children }}} get between households?",
       "collectsTheChildren": "{{{ adult }}} collects {{{ children }}}",
       "bothParentsCollect": "Both parents take turns collecting {{{ children }}}",
       "someoneElseCollects": "Someone else collects {{{ children }}}",
       "whoWillCollect": "Who will collect {{{ children }}}?",
+      "whoWillCollectEmptyError": "Enter who will collect the children",
       "emptyError": "Select how the children will get between households",
       "arrangementMissingError": "Describe how the children will get between households"
     },
     "whereHandover": {
-      "title": "Where does handover take place?",
-      "explainer": "It may be easier for children if the handover takes place at a neutral location which you're confident you'll both feel safe in.",
+      "title": "Where will handover take place for {{{ children }}}?",
+      "explainer": "Choose places where both parents and {{{ children }}} will feel safe and comfortable.",
       "neutralLocation": "Neutral location",
       "atHome": "At {{{ adult }}}'s home",
-      "atSchool": "At school",
-      "other": "Other",
+      "atSchool": "At school (term time only)",
+      "other": "Another location",
       "otherLabel": "Describe where handover will take place",
       "someoneElse": "Someone else will manage handover, such as a grandparent",
       "emptyError": "Select where handover takes place",
@@ -563,10 +575,71 @@
       "content": "School holidays include half terms, bank holidays and inset days.",
       "error": "Describe the arrangement you are proposing"
     },
+    "whichItems": {
+      "title": "Which items should move between households?",
+      "clothesAndShoes": "Clothes and shoes",
+      "schoolItems": "School items",
+      "toiletsAndPersonalCare": "Toiletries and personal care items",
+      "sportsOrActivityEquipment": "Sports or activity equipment",
+      "toysOrComfortItems": "Toys or comfort items",
+      "electronicDevices": "Electronic devices",
+      "otherItems": "Other items"
+    },
+    "travelAbroad": {
+      "title": "How much notice should be given before travelling abroad with the children?",
+      "twoWeeks": "At least 2 weeks",
+      "fourWeeks": "At least 4 weeks",
+      "eightWeeks": "At least 8 weeks",
+      "anotherArrangement": "Another arrangement"
+    },
+    "travelDocuments": {
+      "title": "Who will arrange passports, visas and other travel documents for the children?",
+      "description": "For example, applying for or renewing passports and visas, or completing applications. <a href=\"https://www.gov.uk/get-a-child-passport\" target=\"_blank\">Get a child passport (opens in new tab)</a>",
+      "parent": "You",
+      "otherParent": "The other parent",
+      "bothParents": " Both parents",
+      "parentTravelling": "The parent travelling with the children",
+      "anotherArrangement": "Another arrangement",
+      "emptyError": "Select who will arrange passports, visas and other travel documents",
+      "descriptionEmptyError": "Describe the arrangement you are proposing"
+    },
+    "consentToTravel": {
+      "title": "Permission for taking the children abroad",
+      "parentalResponsibility": "You must <a href=\"https://www.gov.uk/permission-take-child-abroad\" target=\"_blank\">get permission to take a child abroad (opens in a new tab)</a> from everyone with parental responsibility or from a court.",
+      "eachTime": "You need to get permission each time you plan to take a child abroad.",
+      "getPermission": {
+        "title": "Get permission in writing",
+        "havingPermission": "Having permission in writing provides a record that consent has been given and can help avoid problems or delays when travelling.",
+        "reminder": "A reminder about getting permission before taking the children abroad will be included in your child arrangements plan."
+      },
+      "concerned": {
+        "title": "If you're concerned your child could be taken abroad",
+        "description": "You can find out <a href=\"https://www.gov.uk/guidance/international-parental-child-abduction\">what to do if you believe a child could be taken or has been taken abroad without your permission</a>."
+      }
+    },
+    "abroadOtherInformation": {
+      "title": "What other information should be shared before travelling abroad with the children?",
+      "travelInformation": "Travel information (dates, transport details)",
+      "travelGroup": "Names of people in the travel group",
+      "accommodationAddress": "Accommodation address",
+      "emergencyContact": "Emergency contact details",
+      "passportHandover": "Passport handover arrangements",
+      "other": "Other"
+    },
     "itemsForChangeover": {
-      "title": "What items need to go between households?",
-      "content": "Items include clothes, sports kit, school equipment, toys and electronics, medicines and personal care items such as toothbrushes.",
-      "error": "List which items need to go between households"
+      "title": "Which items should move between households?",
+      "items": {
+        "clothesAndShoes": "Clothes and shoes",
+        "schoolItems": "School items",
+        "toiletries": "Toiletries and personal care",
+        "sports": "Sports and activity equipment",
+        "toys": "Toys and comfort items",
+        "electronicDevices": "Electronic devices",
+        "otherItems": "Other items"
+      },
+      "error": "List which items need to go between households",
+      "emptyError": "Select which all items should move between households",
+      "descriptionEmptyError": "Describe the other items"
     }
   },
   "education": {

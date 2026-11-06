@@ -20,8 +20,8 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('What items need to go between households?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(
-        dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}`).getAttribute('aria-describedby'),
-      ).not.toContain(`${formFields.ITEMS_FOR_CHANGEOVER}-error`);
+        dom.window.document.querySelector(`#${formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER}`).getAttribute('aria-describedby'),
+      ).not.toContain(`${formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER}-error`);
     });
 
     it('should render error flash responses correctly', async () => {
@@ -29,7 +29,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
         {
           location: 'body',
           msg: 'Invalid value',
-          path: formFields.ITEMS_FOR_CHANGEOVER,
+          path: formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER,
           type: 'field',
         },
       ]);
@@ -39,9 +39,9 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toHaveTextContent(
         'There is a problem',
       );
-      expect(dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}`)).toHaveAttribute(
+      expect(dom.window.document.querySelector(`#${formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER}`)).toHaveAttribute(
         'aria-describedby',
-        expect.stringContaining(`${formFields.ITEMS_FOR_CHANGEOVER}-error`),
+        expect.stringContaining(`${formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER}-error`),
       );
     });
 
@@ -57,7 +57,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.ITEMS_FOR_CHANGEOVER}`)).toHaveValue(response);
+      expect(dom.window.document.querySelector(`#${formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER}`)).toHaveValue(response);
     });
   });
 
@@ -72,7 +72,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
         {
           location: 'body',
           msg: 'List which items need to go between households',
-          path: formFields.ITEMS_FOR_CHANGEOVER,
+          path: formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER,
           type: 'field',
           value: '',
         },
@@ -86,7 +86,7 @@ describe(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER, () => {
 
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
-        .send({ [formFields.ITEMS_FOR_CHANGEOVER]: answer })
+        .send({ [formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER]: answer })
         .expect(302)
         .expect('location', paths.TASK_LIST);
 

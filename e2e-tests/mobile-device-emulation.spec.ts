@@ -92,7 +92,7 @@ for (const device of mobileDevices) {
       await page.getByRole('link', { name: /How will the children get between households/i }).tap();
 
       // get-between-households
-      await page.getByLabel(/Parent collects the children/i).check();
+      await page.getByLabel(/Parent collects test/i).check();
       await page.getByRole('button', { name: /continue/i }).tap();
 
       // where-handover

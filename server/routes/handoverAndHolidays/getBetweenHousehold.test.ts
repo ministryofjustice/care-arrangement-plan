@@ -10,6 +10,7 @@ import { flashFormValues, flashMock, flashMockErrors, sessionMock } from '../../
 const app = testAppSetup();
 
 const session: Partial<SessionData> = {
+  namesOfChildren: ['Alex'],
   initialAdultName: 'Sarah',
   secondaryAdultName: 'Steph',
 };
@@ -34,11 +35,17 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset')).not.toHaveAttribute('aria-describedby');
       expect(dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}"]`)).toHaveTextContent(
-        `${session.initialAdultName} collects the children`,
+        `${session.initialAdultName} collects Alex`,
       );
       expect(
         dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}-2"]`),
-      ).toHaveTextContent(`${session.secondaryAdultName} collects the children`);
+      ).toHaveTextContent(`${session.secondaryAdultName} collects Alex`);
+      expect(
+        dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}-3"]`),
+      ).toHaveTextContent('Both parents take turns collecting Alex');
+      expect(
+        dom.window.document.querySelector(`label[for="${formFields.GET_BETWEEN_HOUSEHOLDS}-4"]`),
+      ).toHaveTextContent('Someone else collects Alex');
       expect(
         dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}`),
       ).not.toHaveAttribute('aria-describedby');
@@ -101,7 +108,7 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-3`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-6`)).toBeChecked();
       expect(
         dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}`),
       ).toHaveValue(arrangement);
@@ -120,10 +127,27 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
 
       const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)).text);
 
-      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-3`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-6`)).toBeChecked();
       expect(
         dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_DESCRIBE_ARRANGEMENT}`),
       ).toHaveValue(arrangement);
+    });
+
+    it('should render a saved someone else answer', async () => {
+      sessionMock.handoverAndHolidays = {
+        getBetweenHouseholds: {
+          noDecisionRequired: false,
+          how: 'someoneElse',
+          whoWillCollect: 'Grandmother',
+        },
+      };
+
+      const dom = new JSDOM((await request(app).get(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)).text);
+
+      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS}-4`)).toBeChecked();
+      expect(dom.window.document.querySelector(`#${formFields.GET_BETWEEN_HOUSEHOLDS_WHO_WILL_COLLECT}`)).toHaveValue(
+        'Grandmother',
+      );
     });
   });
 
@@ -145,10 +169,10 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       ]);
     });
 
-    it('should reload page and set flash when the radio button is other, but arrangements are not described', async () => {
+    it('should reload page and set flash when the radio button is another arrangement, but arrangements are not described', async () => {
       await request(app)
         .post(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)
-        .send({ [formFields.GET_BETWEEN_HOUSEHOLDS]: 'other' })
+        .send({ [formFields.GET_BETWEEN_HOUSEHOLDS]: 'anotherArrangement' })
         .expect(302)
         .expect('location', paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS);
 
@@ -163,8 +187,26 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       ]);
     });
 
+    it('should reload page and set flash when someone else is selected, but who will collect is empty', async () => {
+      await request(app)
+        .post(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)
+        .send({ [formFields.GET_BETWEEN_HOUSEHOLDS]: 'someoneElse' })
+        .expect(302)
+        .expect('location', paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS);
+
+      expect(flashMock).toHaveBeenCalledWith('errors', [
+        {
+          location: 'body',
+          msg: 'Enter who will collect the children',
+          path: formFields.GET_BETWEEN_HOUSEHOLDS_WHO_WILL_COLLECT,
+          type: 'field',
+          value: '',
+        },
+      ]);
+    });
+
     it('should redirect to where handover page if the page is correctly filled', async () => {
-      const how = 'other';
+      const how = 'anotherArrangement';
       const describeArrangement = 'arrangement';
       const initialHandoverAndHolidays = { whereHandover: { noDecisionRequired: true } };
 
@@ -182,6 +224,25 @@ describe(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS, () => {
       expect(sessionMock.handoverAndHolidays).toEqual({
         ...initialHandoverAndHolidays,
         getBetweenHouseholds: { noDecisionRequired: false, how, describeArrangement },
+      });
+    });
+
+    it('should save who will collect when someone else is selected', async () => {
+      sessionMock.handoverAndHolidays = { whereHandover: { noDecisionRequired: true } };
+
+      await request(app)
+        .post(paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS)
+        .send({
+          [formFields.GET_BETWEEN_HOUSEHOLDS]: 'someoneElse',
+          [formFields.GET_BETWEEN_HOUSEHOLDS_WHO_WILL_COLLECT]: '  Grandmother  ',
+        })
+        .expect(302)
+        .expect('location', paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER);
+
+      expect(sessionMock.handoverAndHolidays.getBetweenHouseholds).toEqual({
+        noDecisionRequired: false,
+        how: 'someoneElse',
+        whoWillCollect: 'Grandmother',
       });
     });
   });

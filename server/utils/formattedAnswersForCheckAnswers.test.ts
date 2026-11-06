@@ -308,7 +308,7 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'parent' as getBetweenHouseholdsField },
           whereHandover: {
             noDecisionRequired: false,
             where: ['neutral', 'initialHome', 'school'] as whereHandoverField[],
@@ -317,7 +317,7 @@ describe('formattedAnswers', () => {
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
         },
         {
-          getBetweenHouseholds: `${session.initialAdultName} collects the children`,
+          getBetweenHouseholds: `${session.initialAdultName} collects James, Rachel and Jack`,
           whereHandover: `Neutral location, At ${session.initialAdultName}'s home, At school`,
           willChangeDuringSchoolHolidays: 'No',
           itemsForChangeover: 'itemsForChangeover arrangement',
@@ -327,7 +327,7 @@ describe('formattedAnswers', () => {
         {
           getBetweenHouseholds: {
             noDecisionRequired: false,
-            how: 'other' as getBetweenHouseholdsField,
+            how: 'anotherArrangement' as getBetweenHouseholdsField,
             describeArrangement: 'getBetweenHouseholds arrangement',
           },
           whereHandover: {
@@ -349,7 +349,7 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'parent' as getBetweenHouseholdsField },
           whereHandover: {
             noDecisionRequired: false,
             where: ['neutral', 'other'] as whereHandoverField[],
@@ -359,7 +359,7 @@ describe('formattedAnswers', () => {
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
         },
         {
-          getBetweenHouseholds: `${session.initialAdultName} collects the children`,
+          getBetweenHouseholds: `${session.initialAdultName} collects James, Rachel and Jack`,
           whereHandover: `Neutral location, the park near school`,
           willChangeDuringSchoolHolidays: 'No',
           itemsForChangeover: 'itemsForChangeover arrangement',
@@ -367,14 +367,14 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: { noDecisionRequired: false, how: 'secondaryCollects' as getBetweenHouseholdsField },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'otherParent' as getBetweenHouseholdsField },
           whereHandover: { noDecisionRequired: false, where: ['secondaryHome'] as whereHandoverField[] },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
           howChangeDuringSchoolHolidays: { noDecisionRequired: true },
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
         },
         {
-          getBetweenHouseholds: `${session.secondaryAdultName} collects the children`,
+          getBetweenHouseholds: `${session.secondaryAdultName} collects James, Rachel and Jack`,
           whereHandover: `At ${session.secondaryAdultName}'s home`,
           willChangeDuringSchoolHolidays: 'Yes',
           howChangeDuringSchoolHolidays: 'We do not need to decide this',
@@ -388,6 +388,39 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.handoverAndHolidays).toEqual(expectedValues);
+        });
+    });
+
+    it('should return both parents and someone else answers', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        getBetweenHouseholds: {
+          noDecisionRequired: false,
+          how: 'bothParents',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.getBetweenHouseholds).toBe(
+            'Both parents take turns collecting James, Rachel and Jack',
+          );
+        });
+
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        getBetweenHouseholds: {
+          noDecisionRequired: false,
+          how: 'someoneElse',
+          whoWillCollect: 'Grandmother',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.getBetweenHouseholds).toBe('Grandmother');
         });
     });
   });
