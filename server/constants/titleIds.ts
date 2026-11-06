@@ -20,7 +20,7 @@ enum titleIds {
   WILL_CHANGE_DURING_SCHOOL_HOLIDAYS = 'handoverAndHolidays.willChangeDuringSchoolHolidays',
   HANDOVER_HOLIDAYS_TRAVEL_ABROAD = 'handoverAndHolidays.travelAbroad',
   HANDOVER_HOLIDAYS_TRAVEL_DOCUMENTS = 'handoverAndHolidays.TravelDocuments',
-  HANDOVER_HOLIDAYS_TRAVEL_CONSENT = 'handoverAndHolidays.ConsentToTravel',
+  HANDOVER_HOLIDAYS_TRAVEL_CONSENT = 'handoverAndHolidays.consentToTravel',
   HANDOVER_HOLIDAYS_TRAVEL_INFORMATION = 'handoverAndHolidays.TravelInformation',
   MOSTLY_LIVE = 'livingAndVisiting.mostlyLive',
   WHICH_DAYS_DAYTIME_VISITS = 'livingAndVisiting.whichDaysDaytimeVisits',

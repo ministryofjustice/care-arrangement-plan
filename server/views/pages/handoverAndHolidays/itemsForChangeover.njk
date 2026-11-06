@@ -54,39 +54,39 @@
             },
             items: [
               {
-                value: "parent",
+                value: "clothesAndShoes",
                 text: __('handoverAndHolidays.itemsForChangeover.items.clothesAndShoes')
               },
               {
-                value: "parent",
+                value: "schoolItems",
                 text: __('handoverAndHolidays.itemsForChangeover.items.schoolItems')
               },
               {
-                value: "parent",
+                value: "toiletries",
                 text: __('handoverAndHolidays.itemsForChangeover.items.toiletries')
               },
               {
-                value: "parent",
+                value: "sports",
                 text: __('handoverAndHolidays.itemsForChangeover.items.sports')
               },
               {
-                value: "parent",
+                value: "toys",
                 text: __('handoverAndHolidays.itemsForChangeover.items.toys')
               },
               {
-                value: "parent",
+                value: "electronicDevices",
                 text: __('handoverAndHolidays.itemsForChangeover.items.electronicDevices')
               },
               {
-                value: "anotherArrangement",
+                value: "otherItems",
                 text: __('handoverAndHolidays.itemsForChangeover.items.otherItems'),
                 conditional: {
                   html: describeArrangementHtml
                 }
               }
             ],
-            value: formValues[formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_OPTION],
-            errorMessage: errors | findError(formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_OPTION)
+            values: formValues[formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER],
+            errorMessage: errors | findError(formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
           })
         }}
         <div class="govuk-!-margin-bottom-2">
@@ -96,7 +96,14 @@
         </div>
         <div class="govuk-button-group">
           {{ govukButton({text: __('saveAndContinue')}) }}
-          {{ govukButton({text: __('saveAndComeBackLater'), classes: "govuk-button--secondary"}) }}
+          {{
+            govukButton({
+              text: __('saveAndComeBackLater'),
+              classes: "govuk-button--secondary",
+              name: "saveAndComeBackLater",
+              value: "true"
+            })
+          }}
         </div>
       </form>
     </div>

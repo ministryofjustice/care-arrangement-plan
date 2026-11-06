@@ -391,6 +391,25 @@ describe('formattedAnswers', () => {
         });
     });
 
+    it('should list selected changeover items and the other items description', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        itemsForChangeover: {
+          noDecisionRequired: false,
+          options: ['clothesAndShoes', 'schoolItems', 'otherItems'],
+          describeArrangement: 'Medication',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.itemsForChangeover).toBe(
+            'Clothes and shoes, School items, Medication',
+          );
+        });
+    });
+
     it('should return both parents and someone else answers', async () => {
       sessionMock.handoverAndHolidays = {
         ...session.handoverAndHolidays,

@@ -14,6 +14,8 @@ import {
   getBetweenHouseholdsComplete,
   itemsForChangeoverComplete,
   mostlyLiveComplete,
+  travelAbroadComplete,
+  travelDocumentsComplete,
   planLastMinuteChangesComplete,
   planLongTermNoticeComplete,
   planReviewComplete,
@@ -32,6 +34,8 @@ const taskListRoutes = (router: Router) => {
     const isWhereHandoverComplete = whereHandoverComplete(request.session);
     const isWillChangeDuringSchoolHolidaysComplete = willChangeDuringSchoolHolidaysComplete(request.session);
     const isItemsForChangeoverComplete = itemsForChangeoverComplete(request.session);
+    const isTravelAbroadComplete = travelAbroadComplete(request.session);
+    const isTravelDocumentsComplete = travelDocumentsComplete(request.session);
     const isWhatWillHappenComplete = whatWillHappenComplete(request.session);
     const isWhatOtherThingsMatterComplete = whatOtherThingsMatterComplete(request.session);
     const isPlanLastMinuteChangesComplete = planLastMinuteChangesComplete(request.session);
@@ -75,6 +79,8 @@ const taskListRoutes = (router: Router) => {
       whereHandoverComplete: isWhereHandoverComplete,
       willChangeDuringSchoolHolidaysComplete: isWillChangeDuringSchoolHolidaysComplete,
       itemsForChangeoverComplete: isItemsForChangeoverComplete,
+      travelAbroadComplete: isTravelAbroadComplete,
+      travelDocumentsComplete: isTravelDocumentsComplete,
       whatWillHappenComplete: isWhatWillHappenComplete,
       whatOtherThingsMatterComplete: isWhatOtherThingsMatterComplete,
       planLastMinuteChangesComplete: isPlanLastMinuteChangesComplete,

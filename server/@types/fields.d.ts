@@ -5,8 +5,16 @@ export type dayValues = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'frida
 export type whichDaysField = (dayValues | 'other')[];
 export type getBetweenHouseholdsField = 'parent' | 'otherParent' | 'bothParents' | 'someoneElse' | 'anotherArrangement';
 export type whereHandoverField = 'neutral' | 'initialHome' | 'secondaryHome' | 'school' | 'other';
+export type itemsForChangeoverField =
+  | 'clothesAndShoes'
+  | 'schoolItems'
+  | 'toiletries'
+  | 'sports'
+  | 'toys'
+  | 'electronicDevices'
+  | 'otherItems';
 export type travelAbroadField = 'twoWeeks' | 'fourWeeks' | 'eightWeeks' | 'anotherArrangement';
-export type travelDocumentsField = 'parent' | 'otherParent' | 'bothParents' | 'withChildren' | 'anotherArrangement';
+export type travelDocumentsField = 'parent' | 'otherParent' | 'bothParents' | 'parentTravelling' | 'anotherArrangement';
 export type travelInformationField = 'dates' | 'group' | 'address' | 'contact' | 'passport' | 'other';
 export type planLastMinuteChangesField = 'text' | 'email' | 'phone' | 'app' | 'anotherArrangement';
 export type childHealthRoutineDecisionsField = 'parent' | 'otherParent' | 'bothParents' | 'anotherArrangement';

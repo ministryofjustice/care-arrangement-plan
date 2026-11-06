@@ -53,12 +53,13 @@ test.describe('Handovers and holidays section', () => {
         'How will the arrangements be different in school holidays?',
       );
       await fillTextAreaAndContinue(page, 'We will alternate holidays');
-      await fillHandoversAndHolidaySectionAndContinue(
-        page,
-        /items-for-changeover/,
-        'What items need to go between households?',
-      );
-      await fillTextAreaAndContinue(page, 'School bag, clothes, favorite toys');
+      await expect(page).toHaveURL(/items-for-changeover/);
+      await expect(page.locator('h1')).toContainText('Which items should move between households?');
+      await page.getByLabel('Clothes and shoes').check();
+      await page.getByLabel('School items').check();
+      await page.getByLabel('Other items').check();
+      await page.getByRole('textbox', { name: 'Describe the other items' }).fill('A favourite teddy');
+      await page.getByRole('button', { name: 'Save and come back later' }).click();
       await expect(page).toHaveURL(/\/make-a-plan/);
       await checkIfTaskStatusIsCompleted(page);
 
@@ -72,7 +73,12 @@ test.describe('Handovers and holidays section', () => {
       ]);
       await checkDataPersistsAndContinue(page, ['Yes']);
       await checkDataPersistsAndContinue(page, [], true, 'We will alternate holidays');
-      await checkDataPersistsAndContinue(page, [], true, 'School bag, clothes, favorite toys');
+      await checkDataPersistsAndContinue(
+        page,
+        ['Clothes and shoes', 'School items', 'Other items'],
+        true,
+        'A favourite teddy',
+      );
     });
   });
 
@@ -95,13 +101,10 @@ test.describe('Handovers and holidays section', () => {
         'Will these arrangements change during school holidays?',
         ['No'],
       );
-      await fillHandoversAndHolidaySectionAndContinue(
-        page,
-        /items-for-changeover/,
-        'What items need to go between households?',
-      );
-      await page.fill('textarea', 'School bag, clothes, favorite toys');
-      await page.getByRole('button', { name: /continue/i }).click();
+      await expect(page).toHaveURL(/items-for-changeover/);
+      await expect(page.locator('h1')).toContainText('Which items should move between households?');
+      await page.getByLabel('Clothes and shoes').check();
+      await page.getByRole('button', { name: 'Save and come back later' }).click();
       await expect(page).toHaveURL(/\/make-a-plan/);
       await checkIfTaskStatusIsCompleted(page);
 
@@ -109,7 +112,7 @@ test.describe('Handovers and holidays section', () => {
       await checkDataPersistsAndContinue(page, ['Guardian collects Test']);
       await checkDataPersistsAndContinue(page, ['Other'], true, "Grandparent's house");
       await checkDataPersistsAndContinue(page, ['No']);
-      await checkDataPersistsAndContinue(page, [], true, 'School bag, clothes, favorite toys');
+      await checkDataPersistsAndContinue(page, ['Clothes and shoes']);
     });
   });
 
@@ -137,13 +140,10 @@ test.describe('Handovers and holidays section', () => {
         'Will these arrangements change during school holidays?',
         ['No'],
       );
-      await fillHandoversAndHolidaySectionAndContinue(
-        page,
-        /items-for-changeover/,
-        'What items need to go between households?',
-      );
-      await page.fill('textarea', 'School bag');
-      await page.getByRole('button', { name: /continue/i }).click();
+      await expect(page).toHaveURL(/items-for-changeover/);
+      await expect(page.locator('h1')).toContainText('Which items should move between households?');
+      await page.getByLabel('School items').check();
+      await page.getByRole('button', { name: 'Save and come back later' }).click();
       await expect(page).toHaveURL(/\/make-a-plan/);
       await checkIfTaskStatusIsCompleted(page);
     });
@@ -164,6 +164,8 @@ test.describe('Handovers and holidays section', () => {
       await page.getByRole('button', { name: /Skip this question/i }).click();
       await page.getByRole('button', { name: /Skip this question/i }).click();
       await page.getByRole('button', { name: /Skip this question/i }).click();
+      await expect(page).toHaveURL(/travel-abroad/);
+      await page.goto('/make-a-plan');
       await expect(page).toHaveURL(/\/make-a-plan/);
       await checkIfTaskStatusIsCompleted(page);
     });
@@ -266,11 +268,18 @@ test.describe('Handovers and holidays section', () => {
       await page.getByRole('button', { name: /continue/i }).click();
       await page.getByLabel(/No/).check();
       await page.getByRole('button', { name: /continue/i }).click();
-      await page.getByRole('button', { name: /continue/i }).click();
-      await expect(page.getByText('List which items need to go between households').nth(0)).toBeVisible();
+      await page.getByRole('button', { name: 'Save and continue' }).click();
+      await expect(page.getByText('Select which items should move between households').nth(0)).toBeVisible();
       await expectErrorSummaryVisible(page);
-      await page.getByText('List which items need to go between households').nth(0).click();
-      await expect(page.getByRole('textbox')).toBeInViewport();
+      await page.getByText('Select which items should move between households').nth(0).click();
+      await expect(page.getByRole('heading', { name: 'Which items should move between households?' })).toBeInViewport();
+
+      await page.getByLabel('Other items').check();
+      await page.getByRole('button', { name: 'Save and continue' }).click();
+      await expect(page.getByText('Describe the other items').nth(0)).toBeVisible();
+      await expectErrorSummaryVisible(page);
+      await page.getByText('Describe the other items').nth(0).click();
+      await expect(page.getByRole('textbox', { name: 'Describe the other items' })).toBeInViewport();
     });
   });
 });
