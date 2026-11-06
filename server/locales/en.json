@@ -476,12 +476,12 @@
       "title": "Handovers and holidays",
       "getBetweenHouseholds": "How will {{{ children }}} get between households?",
       "whereHandover": "Where will handover take place for {{{ children }}}?",
-      "schoolHolidays": "Will {{{ children }}}'s arrangements change during school holidays?",
-      "whichItems": "Which items should move between households for {{{ children }}}?",
-      "notice": "How much notice should be given before travelling abroad with {{{ children }}}?",
+      "willChangeDuringSchoolHolidays": "Will {{{ children }}}'s arrangements change during school holidays?",
+      "itemsForChangeover": "Which items should move between households for {{{ children }}}?",
+      "travelAbroad": "How much notice should be given before travelling abroad with {{{ children }}}?",
       "travelDocuments": "Who will arrange passports, visas and other travel documents for {{{ children }}}?",
-      "abroadPermission": "Permission for taking {{{ children }}} abroad",
-      "otherAbroadInformation": "What other information should be shared before travelling abroad with {{{ children }}}?"
+      "consentToTravel": "Permission for taking {{{ children }}} abroad",
+      "travelInformation": "What other information should be shared before travelling abroad with {{{ children }}}?"
     },
     "education": {
       "title": "Education",
@@ -572,18 +572,24 @@
     },
     "howChangeDuringSchoolHolidays": {
       "title": "How will the arrangements be different in school holidays?",
-      "content": "School holidays include half terms, bank holidays and inset days.",
+      "content": "For example, half terms, bank holidays and inset days.",
       "error": "Describe the arrangement you are proposing"
     },
-    "whichItems": {
+    "itemsForChangeover": {
       "title": "Which items should move between households?",
-      "clothesAndShoes": "Clothes and shoes",
-      "schoolItems": "School items",
-      "toiletsAndPersonalCare": "Toiletries and personal care items",
-      "sportsOrActivityEquipment": "Sports or activity equipment",
-      "toysOrComfortItems": "Toys or comfort items",
-      "electronicDevices": "Electronic devices",
-      "otherItems": "Other items"
+      "items": {
+        "clothesAndShoes": "Clothes and shoes",
+        "schoolItems": "School items",
+        "toiletries": "Toiletries and personal care",
+        "sports": "Sports and activity equipment",
+        "toys": "Toys and comfort items",
+        "electronicDevices": "Electronic devices",
+        "otherItems": "Other items"
+      },
+      "describeOtherItems": "Describe the other items",
+      "error": "List which items need to go between households",
+      "emptyError": "Select which all items should move between households",
+      "descriptionEmptyError": "Describe the other items"
     },
     "travelAbroad": {
       "title": "How much notice should be given before travelling abroad with the children?",
@@ -617,7 +623,7 @@
         "description": "You can find out <a href=\"https://www.gov.uk/guidance/international-parental-child-abduction\">what to do if you believe a child could be taken or has been taken abroad without your permission</a>."
       }
     },
-    "abroadOtherInformation": {
+    "travelInformation": {
       "title": "What other information should be shared before travelling abroad with the children?",
       "travelInformation": "Travel information (dates, transport details)",
       "travelGroup": "Names of people in the travel group",
@@ -625,21 +631,6 @@
       "emergencyContact": "Emergency contact details",
       "passportHandover": "Passport handover arrangements",
       "other": "Other"
-    },
-    "itemsForChangeover": {
-      "title": "Which items should move between households?",
-      "items": {
-        "clothesAndShoes": "Clothes and shoes",
-        "schoolItems": "School items",
-        "toiletries": "Toiletries and personal care",
-        "sports": "Sports and activity equipment",
-        "toys": "Toys and comfort items",
-        "electronicDevices": "Electronic devices",
-        "otherItems": "Other items"
-      },
-      "error": "List which items need to go between households",
-      "emptyError": "Select which all items should move between households",
-      "descriptionEmptyError": "Describe the other items"
     }
   },
   "education": {
@@ -756,6 +747,49 @@
     "livingAndVisiting": {
       "whichDaysOvernight": "The children will stay overnight with {{{ adult }}} on {{ days }}",
       "whichDaysDaytimeVisits": "The children will have daytime visits with {{{ adult }}} on {{ days }}"
+    },
+    "handoverAndHolidays": {
+      "title": "Handovers and holidays",
+      "getBetweenHouseholds": {
+        "question": "How will {{{ children }}} get between households?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "whereHandover": {
+        "question": "Where will handover take place for {{{ children }}}?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "willChangeDuringSchoolHolidays": {
+        "question": "Will {{{ children }}}'s arrangements change during school holidays?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "itemsForChangeover": {
+        "question": "Which items should move between households for {{{ children }}}?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "travelAbroad": {
+        "question": "How much notice should be given before travelling abroad with {{{ children }}}?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "travelDocuments": {
+        "question": "Who will arrange passports, visas and other travel documents for {{{ children }}}?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "consentToTravel": {
+        "question": "Permission for taking {{{ children }}} abroad",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "travelInformation": {
+        "question": "What other information should be shared before travelling abroad with {{{ children }}}?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      }
     },
     "education": {
       "title": "Education",

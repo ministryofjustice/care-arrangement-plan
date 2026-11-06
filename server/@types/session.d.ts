@@ -5,6 +5,7 @@ import {
   planLastMinuteChangesField,
   whereHandoverField,
   whereMostlyLive,
+  travelAbroadField,
 } from './fields';
 
 export type WhichDays = {
@@ -61,6 +62,21 @@ export type CAPSession = {
     itemsForChangeover?: {
       noDecisionRequired: boolean;
       answer?: string;
+    };
+    travelAbroad?: {
+      noDecisionRequired: boolean;
+      options: travelAbroadField[];
+      describeArrangement?: string;
+    };
+    travelDocuments?: {
+      noDecisionRequired: boolean;
+      options: travelDocumentsField[];
+      describeArrangement?: string;
+    };
+    travelInformation?: {
+      noDecisionRequired: boolean;
+      options: travelInformationField[];
+      describeArrangement?: string;
     };
   };
   education?: {
