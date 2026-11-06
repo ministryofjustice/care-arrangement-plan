@@ -3,6 +3,21 @@ export type yesOrNoOrNotSure = 'Yes' | 'No' | 'notSure';
 export type whereMostlyLive = 'withInitial' | 'withSecondary' | 'split' | 'other';
 export type dayValues = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 export type whichDaysField = (dayValues | 'other')[];
-export type getBetweenHouseholdsField = 'initialCollects' | 'secondaryCollects' | 'other';
+export type getBetweenHouseholdsField = 'parent' | 'otherParent' | 'bothParents' | 'someoneElse' | 'anotherArrangement';
 export type whereHandoverField = 'neutral' | 'initialHome' | 'secondaryHome' | 'school' | 'other';
+export type itemsForChangeoverField =
+  | 'clothesAndShoes'
+  | 'schoolItems'
+  | 'toiletries'
+  | 'sports'
+  | 'toys'
+  | 'electronicDevices'
+  | 'otherItems';
+export type travelAbroadField = 'twoWeeks' | 'fourWeeks' | 'eightWeeks' | 'anotherArrangement';
+export type travelDocumentsField = 'parent' | 'otherParent' | 'bothParents' | 'parentTravelling' | 'anotherArrangement';
+export type travelInformationField = 'dates' | 'group' | 'address' | 'contact' | 'passport' | 'other';
 export type planLastMinuteChangesField = 'text' | 'email' | 'phone' | 'app' | 'anotherArrangement';
+export type childHealthRoutineDecisionsField = 'parent' | 'otherParent' | 'bothParents' | 'anotherArrangement';
+export type educationShareInformationField = 'parent' | 'otherParent' | 'bothParents' | 'anotherArrangement';
+export type educationRoutineDecisionsField = 'parent' | 'otherParent' | 'bothParents' | 'anotherArrangement';
+export type educationSchoolMeetingsField = 'parent' | 'otherParent' | 'bothParents' | 'carer' | 'anotherArrangement';

@@ -1,9 +1,12 @@
 import {
   dayValues,
   getBetweenHouseholdsField,
+  childHealthRoutineDecisionsField,
   planLastMinuteChangesField,
+  itemsForChangeoverField,
   whereHandoverField,
   whereMostlyLive,
+  travelAbroadField,
 } from './fields';
 
 export type WhichDays = {
@@ -41,6 +44,7 @@ export type CAPSession = {
     getBetweenHouseholds?: {
       noDecisionRequired: boolean;
       how?: getBetweenHouseholdsField;
+      whoWillCollect?: string;
       describeArrangement?: string;
     };
     whereHandover?: {
@@ -58,7 +62,56 @@ export type CAPSession = {
     };
     itemsForChangeover?: {
       noDecisionRequired: boolean;
+      options?: itemsForChangeoverField[];
+      describeArrangement?: string;
       answer?: string;
+    };
+    travelAbroad?: {
+      noDecisionRequired: boolean;
+      options?: travelAbroadField[];
+      describeArrangement?: string;
+    };
+    travelDocuments?: {
+      noDecisionRequired: boolean;
+      options?: travelDocumentsField[];
+      describeArrangement?: string;
+    };
+    travelInformation?: {
+      noDecisionRequired: boolean;
+      options?: travelInformationField[];
+      describeArrangement?: string;
+    };
+  };
+  education?: {
+    shareInformation?: {
+      noDecisionRequired?: boolean;
+      options?: educationShareInformationField[];
+      describeArrangement?: string;
+      answer?: string;
+    };
+    routineDecisions?: {
+      noDecisionRequired?: boolean;
+      options?: educationRoutineDecisionsField[];
+      describeArrangement?: string;
+      answer?: string;
+    };
+    schoolMeetings?: {
+      noDecisionRequired?: boolean;
+      options?: educationSchoolMeetingsField[];
+      describeArrangement?: string;
+      answer?: string;
+    };
+  };
+  childHealth?: {
+    routineDecisions?: {
+      noDecisionRequired?: boolean;
+      options?: childHealthRoutineDecisionsField[];
+      describeArrangement?: string;
+      answer?: string;
+    };
+    childHealthNeeds?: {
+      noDecisionRequired?: boolean;
+      description?: string;
     };
   };
   specialDays?: {

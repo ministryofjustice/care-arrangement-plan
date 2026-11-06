@@ -12,6 +12,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     permissions:
+      actions: write
       contents: read
 
     steps:
@@ -34,3 +35,11 @@ jobs:
 
       - name: 'Run Unit Tests'
         run: npm run test:ci
+
+      - name: 'Upload code coverage'
+        if: always()
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: unit-test-coverage-${{ github.run_number }}
+          path: coverage/
+          retention-days: 30

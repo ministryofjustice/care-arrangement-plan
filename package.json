@@ -15,6 +15,7 @@
     "prettier:fix": "prettier . --cache --write",
     "typecheck": "tsc && tsc -p e2e-tests",
     "test": "DOTENV_CONFIG_PATH='.env.test' jest",
+    "test:coverage": "DOTENV_CONFIG_PATH='.env.test' jest --coverage",
     "test:update-pdf-snapshots": "DOTENV_CONFIG_PATH='.env.test' UPDATE_PDF_SNAPSHOTS=true jest server/__tests__/pdf",
     "test:save-html-preview": "DOTENV_CONFIG_PATH='.env.test' jest createHtml.test",
     "test:ci": "DOTENV_CONFIG_PATH='.env.test' jest --runInBand --coverage",

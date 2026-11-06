@@ -37,6 +37,15 @@ const session: Partial<SessionData> = {
     itemsForChangeover: {
       noDecisionRequired: true,
     },
+    travelAbroad: {
+      noDecisionRequired: true,
+    },
+    travelDocuments: {
+      noDecisionRequired: true,
+    },
+    travelInformation: {
+      noDecisionRequired: true,
+    },
   },
   specialDays: {
     whatWillHappen: {
@@ -59,6 +68,30 @@ const session: Partial<SessionData> = {
       months: 1,
     },
   },
+  childHealth: {
+    routineDecisions: {
+      noDecisionRequired: false,
+      options: ['bothParents'],
+    },
+    childHealthNeeds: {
+      noDecisionRequired: false,
+      description: 'Regular check-ups',
+    },
+  },
+  education: {
+    shareInformation: {
+      noDecisionRequired: false,
+      options: ['bothParents'],
+    },
+    routineDecisions: {
+      noDecisionRequired: false,
+      options: ['bothParents'],
+    },
+    schoolMeetings: {
+      noDecisionRequired: false,
+      options: ['bothParents'],
+    },
+  },
 };
 
 describe(`GET ${paths.TASK_LIST}`, () => {
@@ -79,6 +112,28 @@ describe(`GET ${paths.TASK_LIST}`, () => {
     expect(dom.window.document.title).toContain('Child arrangement plan with child(ren) details');
     expect(getContinueButton(dom.window.document)).not.toBeNull();
     expect(getContinueButton(dom.window.document)).toHaveTextContent('Continue');
+  });
+
+  it('should show travel questions as incomplete until they are answered', async () => {
+    delete sessionMock.handoverAndHolidays?.travelAbroad;
+    delete sessionMock.handoverAndHolidays?.travelDocuments;
+    delete sessionMock.handoverAndHolidays?.travelInformation;
+
+    const dom = new JSDOM((await request(app).get(paths.TASK_LIST)).text);
+
+    const travelAbroadStatus = dom.window.document.querySelector('#handoverAndHolidays-taskList-5-status');
+    const travelDocumentsStatus = dom.window.document.querySelector('#handoverAndHolidays-taskList-6-status');
+    const travelInformationStatus = dom.window.document.querySelector('#handoverAndHolidays-taskList-8-status');
+
+    expect(travelAbroadStatus).toHaveTextContent('Incomplete');
+    expect(travelAbroadStatus?.closest('li')?.querySelector('a')).toHaveAttribute(
+      'href',
+      paths.HANDOVER_HOLIDAYS_TRAVEL_ABROAD,
+    );
+    expect(travelDocumentsStatus).toHaveTextContent('Cannot start yet');
+    expect(travelDocumentsStatus?.closest('li')?.querySelector('a')).toBeNull();
+    expect(travelInformationStatus).toHaveTextContent('Cannot start yet');
+    expect(travelInformationStatus?.closest('li')?.querySelector('a')).toBeNull();
   });
 
   it('should render the browser page title without child names', async () => {
@@ -183,6 +238,96 @@ describe(`GET ${paths.TASK_LIST}`, () => {
 
   it('should not render the continue button if the plan long term notice section is not filled out', async () => {
     sessionMock.decisionMaking.planLongTermNotice = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expectContinueButtonHidden(dom.window.document);
+  });
+
+  it('should not render the continue button if routine health decisions are not filled out', async () => {
+    sessionMock.childHealth = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expectContinueButtonHidden(dom.window.document);
+  });
+
+  it('should keep later education tasks locked until school information sharing is answered', async () => {
+    sessionMock.education = {};
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    expect(response.text).toContain(paths.EDUCATION_SHARE_INFORMATION);
+    expect(response.text).not.toContain(paths.EDUCATION_ROUTINE_DECISIONS);
+    expect(response.text).not.toContain(paths.EDUCATION_SCHOOL_MEETINGS);
+    expect(response.text).toContain('Cannot start yet');
+  });
+
+  it('should link later education tasks after school information sharing is answered', async () => {
+    sessionMock.education.shareInformation = { noDecisionRequired: true };
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    expect(response.text).toContain(paths.EDUCATION_ROUTINE_DECISIONS);
+    expect(response.text).toContain(paths.EDUCATION_SCHOOL_MEETINGS);
+  });
+
+  it('should not render the continue button if school information sharing is not filled out', async () => {
+    sessionMock.education.shareInformation = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expectContinueButtonHidden(dom.window.document);
+  });
+
+  it('should not render the continue button if routine education decisions are not filled out', async () => {
+    sessionMock.education.routineDecisions = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expectContinueButtonHidden(dom.window.document);
+  });
+
+  it('should not render the continue button if school meetings are not filled out', async () => {
+    sessionMock.education.schoolMeetings = null;
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    const dom = new JSDOM(response.text);
+
+    expectContinueButtonHidden(dom.window.document);
+  });
+
+  it('should keep health needs locked until routine decisions are answered', async () => {
+    sessionMock.childHealth = {};
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    expect(response.text).toContain(paths.CHILD_HEALTH);
+    expect(response.text).not.toContain(paths.CHILD_HEALTH_NEEDS);
+    expect(response.text).toContain('Cannot start yet');
+  });
+
+  it('should link health needs after routine decisions are answered', async () => {
+    sessionMock.childHealth = {
+      routineDecisions: { noDecisionRequired: true },
+    };
+
+    const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
+
+    expect(response.text).toContain(paths.CHILD_HEALTH_NEEDS);
+  });
+
+  it('should not render the continue button if health needs are not filled out', async () => {
+    sessionMock.childHealth.childHealthNeeds = null;
 
     const response = await request(app).get(paths.TASK_LIST).expect('Content-Type', /html/);
 

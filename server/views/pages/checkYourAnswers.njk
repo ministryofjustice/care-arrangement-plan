@@ -166,14 +166,14 @@
         })
       }}
 
-      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays') }}</h2>
+      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays.title') }}</h2>
       {{
         govukSummaryList({
           classes: "govuk-!-margin-bottom-9",
           rows: [
             {
               key: {
-                text: __('handoverAndHolidays.getBetweenHouseholds.title')
+                text: __('handoverAndHolidays.getBetweenHouseholds.title', { children: values.childrenNames })
               },
               value: {
                 text: values.getBetweenHouseholds
@@ -190,7 +190,7 @@
             },
             {
               key: {
-                text: __('handoverAndHolidays.whereHandover.title')
+                text: __('handoverAndHolidays.whereHandover.title', { children: values.childrenNames })
               },
               value: {
                 text: values.whereHandover
@@ -260,6 +260,109 @@
         })
       }}
 
+      <h2 class="govuk-heading-m">{{ __('checkYourAnswers.education.title') }}</h2>
+      {{
+        govukSummaryList({
+        classes: "govuk-!-margin-bottom-9",
+        rows: [
+          {
+            key: {
+              text: __('checkYourAnswers.education.shareInformation.question', { children: values.childrenNames })
+            },
+            value: {
+              text: values.educationShareInformation
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.EDUCATION_SHARE_INFORMATION,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.education.shareInformation.hiddenText')
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: __('checkYourAnswers.education.routineDecisions.question', { children: values.childrenNames })
+            },
+            value: {
+              text: values.educationRoutineDecisions
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.EDUCATION_ROUTINE_DECISIONS,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.education.routineDecisions.hiddenText')
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: __('checkYourAnswers.education.schoolMeetings.question', { children: values.childrenNames })
+            },
+            value: {
+              text: values.educationSchoolMeetings
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.EDUCATION_SCHOOL_MEETINGS,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.education.schoolMeetings.hiddenText')
+                }
+              ]
+            }
+          }
+        ]
+        })
+      }}
+
+      <h2 class="govuk-heading-m">{{ __('checkYourAnswers.childHealth.title') }}</h2>
+      {{
+        govukSummaryList({
+        classes: "govuk-!-margin-bottom-9",
+        rows: [
+          {
+            key: {
+              text: __('checkYourAnswers.childHealth.routineDecisions.question', { children: values.childrenNames })
+            },
+            value: {
+              text: values.childHealthRoutineDecisions
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.CHILD_HEALTH,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.childHealth.routineDecisions.hiddenText')
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: __('checkYourAnswers.childHealth.healthNeeds.question', { children: values.childrenNames })
+            },
+            value: {
+              text: values.childHealthNeeds
+            },
+            actions: {
+              items: [
+                {
+                  href: paths.CHILD_HEALTH_NEEDS,
+                  text: __('checkYourAnswers.change.text'),
+                  visuallyHiddenText: __('checkYourAnswers.childHealth.healthNeeds.hiddenText')
+                }
+              ]
+            }
+          }
+        ]
+        })
+      }}
+
       <h2 class="govuk-heading-m">{{ __('taskList.specialDays') }}</h2>
       {{
         govukSummaryList({
@@ -311,6 +414,7 @@
         ]
         })
       }}
+
       <h2 class="govuk-heading-m">{{ __('taskList.decisionMaking') }}</h2>
       {{
         govukSummaryList({

@@ -5,6 +5,8 @@
   "notSure": "Dydw i ddim yn siŵr",
   "back": "Yn ôl",
   "continue": "Parhau",
+  "saveAndContinue": "Save and continue",
+  "saveAndComeBackLater": "Save and come back later",
   "exitThisPage": "<span class=\"govuk-visually-hidden\">I adael y gwasanaeth hwn yn gyflym, pwyswch escape dair gwaith.</span>",
   "exitThisPageButtonText": "Gadael y dudalen hon",
   "error": "Gwall",
@@ -20,6 +22,7 @@
   "doNotNeedToDecideOtherThings": "Hepgor y cwestiwn hwn",
   "doNotNeedToDecideLastMinuteChanges": "Hepgor y cwestiwn hwn",
   "doNotNeedToDecideLongTermNotice": "Hepgor y cwestiwn hwn",
+  "skipThisQuestion": "Hepgor y cwestiwn hwn",
   "anotherArrangement": "Trefniant arall",
   "or": "Neu",
   "aItem": "a {{ item }}",
@@ -469,7 +472,28 @@
     "theChildren": "Y plant",
     "whoIsUsing": "Pwy sy'n defnyddio'r gwasanaeth hwn?",
     "livingAndVisiting": "Byw ac ymweld",
-    "handoverAndHolidays": "Trosglwyddo a gwyliau",
+    "handoverAndHolidays": {
+      "title": "Trosglwyddo a gwyliau",
+      "getBetweenHouseholds": "How will {{{ childName }}} get between households?",
+      "whereHandover": "Where will handover take place for {{{ childName }}}?",
+      "willChangeDuringSchoolHolidays": "Will {{{ childName }}}'s arrangements change during school holidays?",
+      "itemsForChangeover": "Which items should move between households for {{{ childName }}}?",
+      "travelAbroad": "How much notice should be given before travelling abroad with {{{ childName }}}?",
+      "travelDocuments": "Who will arrange passports, visas and other travel documents for {{{ childName }}}?",
+      "consentToTravel": "Permission for taking {{{ childName }}} abroad",
+      "travelInformation": "What other information should be shared before travelling abroad with {{{ childName }}}?"
+    },
+    "education": {
+      "title": "Education",
+      "shareInformation": "How should information from {{{ childName }}}'s school be shared?",
+      "routineDecisions": "How will routine decisions about {{{ childName }}}'s education be made?",
+      "schoolMeetings": "Who will attend {{{ childName }}}'s school meetings and activities?"
+    },
+    "childHealth": {
+      "title": "Health",
+      "routineDecisions": "How will routine decisions about {{{ childName }}}'s health be made?",
+      "healthNeeds": "What are {{{ childName }}}'s health needs?"
+    },
     "specialDays": "Dyddiau arbennig",
     "otherThings": "Pethau eraill",
     "decisionMaking": "Gwneud penderfyniadau"
@@ -517,9 +541,14 @@
     }
   },
   "handoverAndHolidays": {
+    "title": "Handovers and holidays",
     "getBetweenHouseholds": {
       "title": "Sut fydd y plant yn mynd o un cartref i'r llall?",
-      "collectsTheChildren": "Bydd {{{ adult }}} yn casglu'r plant",
+      "collectsTheChildren": "Bydd {{{ adult }}} yn casglu {{{ children }}}",
+      "bothParentsCollect": "Bydd y ddau riant yn cymryd tro i gasglu {{{ children }}}",
+      "someoneElseCollects": "Bydd rhywun arall yn casglu {{{ children }}}",
+      "whoWillCollect": "Pwy fydd yn casglu {{{ children }}}?",
+      "whoWillCollectEmptyError": "Rhowch wybod pwy fydd yn casglu'r plant",
       "emptyError": "Dewiswch sut fydd y plant yn mynd o un cartref i'r llall?",
       "arrangementMissingError": "Disgrifiwch sut fydd y plant yn mynd o un cartref i'r llall?"
     },
@@ -548,8 +577,124 @@
     },
     "itemsForChangeover": {
       "title": "Pa eitemau sydd angen mynd o un cartref i'r llall?",
-      "content": "Mae eitemau'n cynnwys dillad, cit chwaraeon, offer ysgol, teganau a dyfeisiau electronig, meddyginiaethau ac eitemau gofal personol fel brwsys dannedd.",
-      "error": "Rhestrwch pa eitemau sydd angen mynd o un cartref i'r llall?"
+      "items": {
+        "clothesAndShoes": "Clothes and shoes",
+        "schoolItems": "School items",
+        "toiletries": "Toiletries and personal care",
+        "sports": "Sports and activity equipment",
+        "toys": "Toys and comfort items",
+        "electronicDevices": "Electronic devices",
+        "otherItems": "Other items"
+      },
+      "describeOtherItems": "Describe the other items",
+      "error": "Rhestrwch pa eitemau sydd angen mynd o un cartref i'r llall?",
+      "emptyError": "Select which items should move between households",
+      "descriptionEmptyError": "Describe the other items"
+    },
+    "travelAbroad": {
+      "title": "How much notice should be given before travelling abroad with the children?",
+      "twoWeeks": "At least 2 weeks",
+      "fourWeeks": "At least 4 weeks",
+      "eightWeeks": "At least 8 weeks",
+      "anotherArrangement": "Another arrangement",
+      "emptyError": "Select how much notice should be given before travelling abroad with the children",
+      "descriptionEmptyError": "Describe the arrangement you are proposing"
+    },
+    "travelDocuments": {
+      "title": "Who will arrange passports, visas and other travel documents for the children?",
+      "description": "For example, applying for or renewing passports and visas, or completing applications. <a href=\"https://www.gov.uk/get-a-child-passport\" target=\"_blank\">Get a child passport (opens in new tab)</a>",
+      "parent": "You",
+      "otherParent": "The other parent",
+      "bothParents": " Both parents",
+      "parentTravelling": "The parent travelling with the children",
+      "anotherArrangement": "Another arrangement",
+      "emptyError": "Select who will arrange passports, visas and other travel documents",
+      "descriptionEmptyError": "Describe the arrangement you are proposing"
+    },
+    "consentToTravel": {
+      "title": "Permission for taking the children abroad",
+      "parentalResponsibility": "You must <a href=\"https://www.gov.uk/permission-take-child-abroad\" target=\"_blank\">get permission to take a child abroad (opens in a new tab)</a> from everyone with parental responsibility or from a court.",
+      "eachTime": "You need to get permission each time you plan to take a child abroad.",
+      "getPermission": {
+        "title": "Get permission in writing",
+        "havingPermission": "Having permission in writing provides a record that consent has been given and can help avoid problems or delays when travelling.",
+        "reminder": "A reminder about getting permission before taking the children abroad will be included in your child arrangements plan."
+      },
+      "concerned": {
+        "title": "If you're concerned your child could be taken abroad",
+        "description": "You can find out <a href=\"https://www.gov.uk/guidance/international-parental-child-abduction\">what to do if you believe a child could be taken or has been taken abroad without your permission</a>."
+      }
+    },
+    "travelInformation": {
+      "title": "What other information should be shared before travelling abroad with the children?",
+      "travelInformation": "Travel information (dates, transport details)",
+      "travelGroup": "Names of people in the travel group",
+      "accommodationAddress": "Accommodation address",
+      "emergencyContact": "Emergency contact details",
+      "passportHandover": "Passport handover arrangements",
+      "other": "Other",
+      "describeOtherInformation": "Describe the other information",
+      "emptyError": "Select what other information should be shared before travelling abroad with the children",
+      "descriptionEmptyError": "Describe the other information"
+    }
+  },
+  "education": {
+    "shareInformation": {
+      "title": "How should information from {{{ childName }}}'s school be shared?",
+      "description": "For example, school emails, reports and emergency communications",
+      "options": {
+        "parent": "You will receive information",
+        "otherParent": "The other parent will receive information",
+        "bothParents": "Both parents will receive information",
+        "anotherArrangement": "Another arrangement"
+      },
+      "emptyError": "Select how information from the school should be shared",
+      "descriptionEmptyError": "Describe the arrangement you are proposing"
+    },
+    "routineDecisions": {
+      "title": "How will routine decisions about {{{ childName }}}'s education be made?",
+      "description": "For example, day-to-day decisions like homework, school trips and uniform.",
+      "options": {
+        "parent": "You will decide",
+        "otherParent": "The other parent will decide",
+        "bothParents": "Both parents will decide",
+        "anotherArrangement": "Another arrangement"
+      },
+      "emptyError": "Select how routine decisions about education will be made",
+      "descriptionEmptyError": "Describe the arrangement you are proposing"
+    },
+    "schoolMeetings": {
+      "title": "Who will attend {{{ childName }}}'s school meetings and activities?",
+      "description": "For example, parents' evenings, school meetings, school trips and extracurricular activities.",
+      "options": {
+        "parent": "You will attend",
+        "otherParent": "The other parent will attend",
+        "bothParents": "Both parents will attend",
+        "carer": "The parent caring for {{{ childName }}} at the time will attend",
+        "anotherArrangement": "Another arrangement"
+      },
+      "emptyError": "Select who will attend school meetings and activities",
+      "descriptionEmptyError": "Describe the arrangement you are proposing"
+    }
+  },
+  "childHealth": {
+    "routineDecisions": {
+      "title": "How will routine decisions about {{{ childName }}}'s health be made?",
+      "description": "For example, booking routine check-ups, picking up prescriptions or managing minor illnesses.",
+      "options": {
+        "parent": "You will decide",
+        "otherParent": "The other parent will decide",
+        "bothParents": "Both parents will decide",
+        "anotherArrangement": "Another arrangement"
+      },
+      "emptyError": "Select how routine decisions about health will be made",
+      "descriptionEmptyError": "Describe the arrangement you are proposing",
+      "selectOneOptionError": "Describe what other arrangement you are proposing"
+    },
+    "healthNeeds": {
+      "title": "What are {{{ childName }}}'s health needs?",
+      "description": "For example, health routines, medical conditions, medications, appointments and specialist support.",
+      "emptyError": "Describe the health needs"
     }
   },
   "specialDays": {
@@ -607,6 +752,80 @@
     "livingAndVisiting": {
       "whichDaysOvernight": "Bydd y plant yn aros dros nos efo {{{ adult }}} ar {{ days }}",
       "whichDaysDaytimeVisits": "Bydd y plant yn cael ymweliadau yn ystod dydd efo {{{ adult }}} ar {{ days }}"
+    },
+    "handoverAndHolidays": {
+      "title": "Handovers and holidays",
+      "getBetweenHouseholds": {
+        "question": "How will {{{ children }}} get between households?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "whereHandover": {
+        "question": "Where will handover take place for {{{ children }}}?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "willChangeDuringSchoolHolidays": {
+        "question": "Will {{{ children }}}'s arrangements change during school holidays?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "itemsForChangeover": {
+        "question": "Which items should move between households for {{{ children }}}?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "travelAbroad": {
+        "question": "How much notice should be given before travelling abroad with {{{ children }}}?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "travelDocuments": {
+        "question": "Who will arrange passports, visas and other travel documents for {{{ children }}}?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "consentToTravel": {
+        "question": "Permission for taking {{{ children }}} abroad",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "travelInformation": {
+        "question": "What other information should be shared before travelling abroad with {{{ children }}}?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      }
+    },
+    "education": {
+      "title": "Education",
+      "shareInformation": {
+        "question": "How should information from {{{ children }}}'s school be shared?",
+        "answer": "{{{ answer }}} will receive updates",
+        "hiddenText": ""
+      },
+      "routineDecisions": {
+        "question": "How will routine decisions about {{{ children }}}'s education be made?",
+        "answer": "{{{ answer }}} will make decisions",
+        "hiddenText": ""
+      },
+      "schoolMeetings": {
+        "question": "Who will attend {{{ children }}}'s school meetings and activities?",
+        "answer": "{{{ answer }}} will attend",
+        "hiddenText": ""
+      }
+    },
+    "childHealth": {
+      "title": "Health",
+      "routineDecisions": {
+        "question": "How will routine decisions about {{{ children }}}'s health be made?",
+        "answer": "{{{ answer }}} will decide",
+        "hiddenText": ""
+      },
+      "healthNeeds": {
+        "question": "What are {{{ children }}}'s health needs?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      }
     },
     "decisionMaking": {
       "monthsSingular": "1 mis",

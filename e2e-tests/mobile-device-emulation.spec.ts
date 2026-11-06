@@ -12,7 +12,7 @@ const mobileDevices = [
 
 async function assertNoHorizontalScroll(page: Page) {
   const html = await page.$('html');
-  const hasHorizontalScroll = await html!.evaluate(el => el.scrollWidth > el.clientWidth);
+  const hasHorizontalScroll = await html!.evaluate((el) => el.scrollWidth > el.clientWidth);
   expect(hasHorizontalScroll).toBe(false);
 }
 
@@ -89,10 +89,10 @@ for (const device of mobileDevices) {
 
       // make-a-plan (Task List)
       await expect(page).toHaveURL(/\/make-a-plan/);
-      await page.getByRole('link', { name: /How will the children get between households/i }).tap();
+      await page.getByRole('link', { name: /how will .* get between households/i }).tap();
 
       // get-between-households
-      await page.getByLabel(/Parent collects the children/i).check();
+      await page.getByLabel(/Parent collects test/i).check();
       await page.getByRole('button', { name: /continue/i }).tap();
 
       // where-handover
@@ -108,8 +108,53 @@ for (const device of mobileDevices) {
       await page.getByRole('button', { name: /continue/i }).tap();
 
       // items-for-changeover
-      await page.fill('textarea', 'test');
-      await page.getByRole('button', { name: /continue/i }).tap();
+      await page.getByLabel('Clothes and shoes').check();
+      await page.getByRole('button', { name: 'Save and continue' }).tap();
+
+      // travel-abroad
+      await page.getByLabel('At least 4 weeks').check();
+      await page.getByRole('button', { name: 'Save and continue' }).tap();
+
+      // travel-documents
+      await page.getByRole('radio', { name: 'You', exact: true }).check();
+      await page.getByRole('button', { name: 'Save and continue' }).tap();
+
+      // consent-to-travel
+      await page.getByRole('button', { name: 'Save and continue' }).tap();
+
+      // travel-information
+      await page.getByLabel('Travel information (dates, transport details)').check();
+      await page.getByRole('button', { name: 'Save and continue' }).tap();
+
+      // make-a-plan (Task List)
+      await expect(page).toHaveURL(/\/make-a-plan/);
+      await page.getByRole('link', { name: /information from .* school be shared/i }).scrollIntoViewIfNeeded();
+      await page.getByRole('link', { name: /information from .* school be shared/i }).tap();
+
+      // education share information
+      await page.getByLabel(/both parents will receive information/i).check();
+      await page.getByRole('button', { name: /save and continue/i }).tap();
+
+      // education routine decisions
+      await page.getByLabel(/both parents will decide/i).check();
+      await page.getByRole('button', { name: /save and continue/i }).tap();
+
+      // education school meetings
+      await page.getByLabel(/both parents will attend/i).check();
+      await page.getByRole('button', { name: /save and continue/i }).tap();
+
+      // make-a-plan (Task List)
+      await expect(page).toHaveURL(/\/make-a-plan/);
+      await page.getByRole('link', { name: /routine decisions about .* health/i }).scrollIntoViewIfNeeded();
+      await page.getByRole('link', { name: /routine decisions about .* health/i }).tap();
+
+      // child-health
+      await page.getByLabel(/both parents will decide/i).check();
+      await page.getByRole('button', { name: /save and continue/i }).tap();
+
+      // child-health-needs
+      await page.locator('#child-health-needs-description').fill('test');
+      await page.getByRole('button', { name: /save and continue/i }).tap();
 
       // make-a-plan (Task List)
       await expect(page).toHaveURL(/\/make-a-plan/);
@@ -131,7 +176,9 @@ for (const device of mobileDevices) {
 
       // make-a-plan (Task List)
       await expect(page).toHaveURL(/\/make-a-plan/);
-      await page.getByRole('link', { name: /How should last-minute changes be communicated/i }).scrollIntoViewIfNeeded();
+      await page
+        .getByRole('link', { name: /How should last-minute changes be communicated/i })
+        .scrollIntoViewIfNeeded();
       await page.getByRole('link', { name: /How should last-minute changes be communicated/i }).tap();
 
       // plan-last-minute-changes
