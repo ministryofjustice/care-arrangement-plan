@@ -520,7 +520,11 @@
   "handoverAndHolidays": {
     "getBetweenHouseholds": {
       "title": "Sut fydd y plant yn mynd o un cartref i'r llall?",
-      "collectsTheChildren": "Bydd {{{ adult }}} yn casglu'r plant",
+      "collectsTheChildren": "Bydd {{{ adult }}} yn casglu {{{ children }}}",
+      "bothParentsCollect": "Bydd y ddau riant yn cymryd tro i gasglu {{{ children }}}",
+      "someoneElseCollects": "Bydd rhywun arall yn casglu {{{ children }}}",
+      "whoWillCollect": "Pwy fydd yn casglu {{{ children }}}?",
+      "whoWillCollectEmptyError": "Rhowch wybod pwy fydd yn casglu'r plant",
       "emptyError": "Dewiswch sut fydd y plant yn mynd o un cartref i'r llall?",
       "arrangementMissingError": "Disgrifiwch sut fydd y plant yn mynd o un cartref i'r llall?"
     },

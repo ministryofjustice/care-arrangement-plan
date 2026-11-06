@@ -87,7 +87,7 @@ test.describe('Complete-journey', () => {
 
     // Handovers and holidays
     await expect(page).toHaveURL(/get-between-households/);
-    await page.getByLabel(/Parent collects the children/i).check();
+    await page.getByLabel(/Parent collects test/i).check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Handovers and holidays

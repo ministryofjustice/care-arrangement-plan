@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import consentToTravelRoutes from './consentToTravel';
 import getBetweenHouseholdsRoutes from './getBetweenHouseholds';
 import howChangeDuringSchoolHolidaysRoutes from './howChangeDuringSchoolHolidays';
 import itemsForChangeoverRoutes from './itemsForChangeover';
@@ -12,6 +13,7 @@ const handoverAndHolidaysRoutes = (router: Router) => {
   willChangeDuringSchoolHolidaysRoutes(router);
   howChangeDuringSchoolHolidaysRoutes(router);
   itemsForChangeoverRoutes(router);
+  consentToTravelRoutes(router);
 };
 
 export default handoverAndHolidaysRoutes;

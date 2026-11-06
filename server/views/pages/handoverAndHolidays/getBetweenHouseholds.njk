@@ -56,26 +56,26 @@
             name: formFields.GET_BETWEEN_HOUSEHOLDS,
             fieldset: {
               legend: {
-                text: __('handoverAndHolidays.getBetweenHouseholds.title'),
+                text: __('handoverAndHolidays.getBetweenHouseholds.title', {children: childrenNames}),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }
             },
             items: [
               {
-                value: "initialCollects",
+                value: "parent",
                 text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: initialAdultName, children: childrenNames})
               },
               {
-                value: "secondaryParentsCollect",
+                value: "otherParent",
                 text: __('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {adult: secondaryAdultName, children: childrenNames})
               },
               {
-                value: "bothParentsCollect",
+                value: "bothParents",
                 text: __('handoverAndHolidays.getBetweenHouseholds.bothParentsCollect', {children: childrenNames})
               },
               {
-                value: "someoneElseCollects",
+                value: "someoneElse",
                 text: __('handoverAndHolidays.getBetweenHouseholds.someoneElseCollects', {children: childrenNames}),
                 conditional: {
                   html: whoWillCollectHtml
@@ -85,7 +85,7 @@
                 divider: __('or')
               },
               {
-                value: "other",
+                value: "anotherArrangement",
                 text: __('anotherArrangement'),
                 conditional: {
                   html: describeArrangementHtml

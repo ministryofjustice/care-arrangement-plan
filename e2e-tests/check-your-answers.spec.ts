@@ -53,7 +53,7 @@ test.describe('Check Your Answers Summary Page', () => {
     await expect(page.getByText(/with Parent on a Monday/i)).toBeVisible();
 
     // Verify handover and holidays data
-    await expect(page.getByText('Parent collects the children')).toBeVisible();
+    await expect(page.getByText('Parent collects Test')).toBeVisible();
     await expect(page.getByText('At school')).toBeVisible();
     await expect(page.getByText('We will alternate holidays')).toBeVisible();
 

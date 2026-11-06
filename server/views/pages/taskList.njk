@@ -82,7 +82,7 @@
         })
       }}
 
-      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays') }}</h2>
+      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays.title') }}</h2>
       {{
         govukTaskList({
           idPrefix: 'handoverAndHolidays-taskList',
@@ -111,6 +111,34 @@
             {
               title: {
                 text: __('handoverAndHolidays.itemsForChangeover.title')
+              },
+              href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
+              status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('handoverAndHolidays.travelAbroad.title')
+              },
+              href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
+              status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('handoverAndHolidays.travelDocuments.title')
+              },
+              href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
+              status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('handoverAndHolidays.consentToTravel.title')
+              },
+              href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
+              status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('handoverAndHolidays.abroadOtherInformation.title')
               },
               href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
               status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)

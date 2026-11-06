@@ -5,11 +5,11 @@ import {
   educationRoutineDecisionsField,
   educationSchoolMeetingsField,
   educationShareInformationField,
-  whereHandoverField
+  whereHandoverField,
 } from '../@types/fields';
 
 import { formatPlanChangesOptionsIntoList, formatWhichDaysSessionValue } from './formValueUtils';
-import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
+import { formattedChildrenNames, parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
 
 export const mostlyLive = (request: Request) => {
   const { livingAndVisiting, initialAdultName, secondaryAdultName } = request.session;
@@ -87,13 +87,23 @@ export const getBetweenHouseholds = (request: Request) => {
   if (handoverAndHolidays.getBetweenHouseholds.noDecisionRequired) {
     return request.__('doNotNeedToDecide');
   }
+  const children = formattedChildrenNames(request);
+
   switch (handoverAndHolidays.getBetweenHouseholds.how) {
     case 'parent':
-      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: initialAdultName, children: request.session.namesOfChildren.join(', ') });
+      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {
+        adult: initialAdultName,
+        children,
+      });
     case 'otherParent':
-      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: secondaryAdultName, children: request.session.namesOfChildren.join(', ') });
+      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {
+        adult: secondaryAdultName,
+        children,
+      });
     case 'bothParents':
-      return request.__('handoverAndHolidays.getBetweenHouseholds.bothParentsCollectTheChildren', {children: request.session.namesOfChildren.join(', ')});
+      return request.__('handoverAndHolidays.getBetweenHouseholds.bothParentsCollect', { children });
+    case 'someoneElse':
+      return handoverAndHolidays.getBetweenHouseholds.whoWillCollect;
     case 'anotherArrangement':
       return handoverAndHolidays.getBetweenHouseholds.describeArrangement;
     default:
