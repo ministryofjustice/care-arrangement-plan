@@ -58,6 +58,10 @@ export const travelDocumentsComplete = (session: Partial<CAPSession>) =>
   !!session.handoverAndHolidays?.travelDocuments?.noDecisionRequired ||
   !!session.handoverAndHolidays?.travelDocuments?.options?.length;
 
+export const travelInformationComplete = (session: Partial<CAPSession>) =>
+  !!session.handoverAndHolidays?.travelInformation?.noDecisionRequired ||
+  !!session.handoverAndHolidays?.travelInformation?.options?.length;
+
 export const whatWillHappenComplete = (session: Partial<CAPSession>) => !!session.specialDays?.whatWillHappen;
 
 export const whatOtherThingsMatterComplete = (session: Partial<CAPSession>) =>

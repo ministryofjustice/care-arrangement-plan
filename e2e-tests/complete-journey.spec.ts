@@ -83,7 +83,7 @@ test.describe('Complete-journey', () => {
 
     // Make a plan continued
     await expect(page).toHaveURL(/make-a-plan/);
-    await page.getByRole('link', { name: /How will the children get between households/i }).click();
+    await page.getByRole('link', { name: /how will .* get between households/i }).click();
 
     // Handovers and holidays
     await expect(page).toHaveURL(/get-between-households/);
@@ -108,7 +108,22 @@ test.describe('Complete-journey', () => {
     // Handovers and holidays
     await expect(page).toHaveURL(/items-for-changeover/);
     await page.getByLabel('Clothes and shoes').check();
-    await page.getByRole('button', { name: 'Save and come back later' }).click();
+    await page.getByRole('button', { name: 'Save and continue' }).click();
+
+    await expect(page).toHaveURL(/travel-abroad/);
+    await page.getByLabel('At least 4 weeks').check();
+    await page.getByRole('button', { name: 'Save and continue' }).click();
+
+    await expect(page).toHaveURL(/travel-documents/);
+    await page.getByRole('radio', { name: 'You', exact: true }).check();
+    await page.getByRole('button', { name: 'Save and continue' }).click();
+
+    await expect(page).toHaveURL(/consent-to-travel/);
+    await page.getByRole('button', { name: 'Save and continue' }).click();
+
+    await expect(page).toHaveURL(/travel-information/);
+    await page.getByLabel('Travel information (dates, transport details)').check();
+    await page.getByRole('button', { name: 'Save and continue' }).click();
 
     // Make a plan, next section
     await expect(page).toHaveURL(/make-a-plan/);

@@ -632,7 +632,10 @@
       "accommodationAddress": "Accommodation address",
       "emergencyContact": "Emergency contact details",
       "passportHandover": "Passport handover arrangements",
-      "other": "Other"
+      "other": "Other",
+      "describeOtherInformation": "Describe the other information",
+      "emptyError": "Select what other information should be shared before travelling abroad with the children",
+      "descriptionEmptyError": "Describe the other information"
     }
   },
   "education": {

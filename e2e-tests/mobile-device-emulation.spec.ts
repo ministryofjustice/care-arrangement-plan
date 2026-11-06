@@ -89,7 +89,7 @@ for (const device of mobileDevices) {
 
       // make-a-plan (Task List)
       await expect(page).toHaveURL(/\/make-a-plan/);
-      await page.getByRole('link', { name: /How will the children get between households/i }).tap();
+      await page.getByRole('link', { name: /how will .* get between households/i }).tap();
 
       // get-between-households
       await page.getByLabel(/Parent collects test/i).check();
@@ -109,7 +109,22 @@ for (const device of mobileDevices) {
 
       // items-for-changeover
       await page.getByLabel('Clothes and shoes').check();
-      await page.getByRole('button', { name: 'Save and come back later' }).tap();
+      await page.getByRole('button', { name: 'Save and continue' }).tap();
+
+      // travel-abroad
+      await page.getByLabel('At least 4 weeks').check();
+      await page.getByRole('button', { name: 'Save and continue' }).tap();
+
+      // travel-documents
+      await page.getByRole('radio', { name: 'You', exact: true }).check();
+      await page.getByRole('button', { name: 'Save and continue' }).tap();
+
+      // consent-to-travel
+      await page.getByRole('button', { name: 'Save and continue' }).tap();
+
+      // travel-information
+      await page.getByLabel('Travel information (dates, transport details)').check();
+      await page.getByRole('button', { name: 'Save and continue' }).tap();
 
       // make-a-plan (Task List)
       await expect(page).toHaveURL(/\/make-a-plan/);

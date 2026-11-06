@@ -140,8 +140,8 @@
               title: {
                 text: __('taskList.handoverAndHolidays.travelInformation', { childName: childName })
               },
-              href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
-              status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
+              href: paths.HANDOVER_HOLIDAYS_TRAVEL_INFORMATION if travelDocumentsComplete else null,
+              status: completeStatus if travelInformationComplete else (incompleteStatus if travelDocumentsComplete else cannotStartStatus)
             }
           ]
         })

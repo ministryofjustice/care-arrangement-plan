@@ -166,14 +166,14 @@
         })
       }}
 
-      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays') }}</h2>
+      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays.title') }}</h2>
       {{
         govukSummaryList({
           classes: "govuk-!-margin-bottom-9",
           rows: [
             {
               key: {
-                text: __('handoverAndHolidays.getBetweenHouseholds.title')
+                text: __('handoverAndHolidays.getBetweenHouseholds.title', { children: values.childrenNames })
               },
               value: {
                 text: values.getBetweenHouseholds
@@ -190,7 +190,7 @@
             },
             {
               key: {
-                text: __('handoverAndHolidays.whereHandover.title')
+                text: __('handoverAndHolidays.whereHandover.title', { children: values.childrenNames })
               },
               value: {
                 text: values.whereHandover

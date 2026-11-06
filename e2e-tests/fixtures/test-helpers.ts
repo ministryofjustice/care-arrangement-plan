@@ -187,7 +187,7 @@ export async function fillLivingAndVisitingSectionAndContinue(
 export async function fillHandoversAndHolidaySectionAndContinue(
   page: Page,
   url: RegExp,
-  heading: string,
+  heading: string | RegExp,
   choiceLabels: string[] = [],
 ) {
   await expect(page).toHaveURL(url);
@@ -264,7 +264,7 @@ export async function completeLivingAndVisitingSection(page: Page) {
  */
 export async function completeHandoverAndHolidaysSection(page: Page) {
   // Get between households
-  await page.getByRole('link', { name: /how will the children get between households/i }).click();
+  await page.getByRole('link', { name: /how will .* get between households/i }).click();
   await page.getByLabel(/parent collects/i).check();
   await page.getByRole('button', { name: /continue/i }).click();
 
@@ -283,9 +283,32 @@ export async function completeHandoverAndHolidaysSection(page: Page) {
   // Items for changeover (flows directly from previous page)
   await page.getByLabel('Clothes and shoes').check();
   await page.getByLabel('School items').check();
-  await page.getByRole('button', { name: 'Save and come back later' }).click();
+  await page.getByRole('button', { name: 'Save and continue' }).click();
 
-  // Wait for return to task list
+  await completeTravelQuestions(page);
+}
+
+/**
+ * Complete travel abroad, travel documents, consent and travel information.
+ * Starts on the travel abroad page and returns to the task list.
+ */
+export async function completeTravelQuestions(page: Page) {
+  await expect(page).toHaveURL(/travel-abroad/);
+  await page.getByLabel('At least 4 weeks').check();
+  await page.getByRole('button', { name: 'Save and continue' }).click();
+
+  await expect(page).toHaveURL(/travel-documents/);
+  await page.getByRole('radio', { name: 'You', exact: true }).check();
+  await page.getByRole('button', { name: 'Save and continue' }).click();
+
+  await expect(page).toHaveURL(/consent-to-travel/);
+  await page.getByRole('button', { name: 'Save and continue' }).click();
+
+  await expect(page).toHaveURL(/travel-information/);
+  await page.getByLabel('Travel information (dates, transport details)').check();
+  await page.getByLabel('Emergency contact details').check();
+  await page.getByRole('button', { name: 'Save and continue' }).click();
+
   await page.waitForURL(/\/make-a-plan/);
 }
 
