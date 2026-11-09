@@ -766,7 +766,12 @@
         "hiddenText": ""
       },
       "willChangeDuringSchoolHolidays": {
-        "question": "Will {{{ children }}}'s arrangements change during school holidays?",
+        "question": "Will these arrangements change during school holidays?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "howChangeDuringSchoolHolidays": {
+        "question": "How will the arrangements be different in school holidays?",
         "answer": "{{{ answer }}}",
         "hiddenText": ""
       },
@@ -787,8 +792,7 @@
       },
       "consentToTravel": {
         "question": "Permission for taking {{{ children }}} abroad",
-        "answer": "{{{ answer }}}",
-        "hiddenText": ""
+        "answer": "You usually need permission from everyone with parental responsibility before taking a child abroad."
       },
       "travelInformation": {
         "question": "What other information should be shared before travelling abroad with {{{ children }}}?",

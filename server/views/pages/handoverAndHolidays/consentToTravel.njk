@@ -33,7 +33,7 @@
       <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_TRAVEL_CONSENT }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         <div class="govuk-button-group">
-          {{ govukButton({text: __('saveAndContinue')}) }}
+          {{ govukButton({text: __('continue')}) }}
           {{
             govukButton({
               text: __('saveAndComeBackLater'),

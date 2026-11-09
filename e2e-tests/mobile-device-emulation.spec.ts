@@ -120,7 +120,7 @@ for (const device of mobileDevices) {
       await page.getByRole('button', { name: 'Save and continue' }).tap();
 
       // consent-to-travel
-      await page.getByRole('button', { name: 'Save and continue' }).tap();
+      await page.getByRole('button', { name: 'Continue', exact: true }).tap();
 
       // travel-information
       await page.getByLabel('Travel information (dates, transport details)').check();

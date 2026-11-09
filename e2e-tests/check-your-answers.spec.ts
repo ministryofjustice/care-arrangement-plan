@@ -39,6 +39,53 @@ test.describe('Check Your Answers Summary Page', () => {
     await expect(page.getByRole('heading', { name: /decision making/i })).toBeVisible();
   });
 
+  test('should list handover locations, changeover items and travel information separately', async ({ page }) => {
+    await completeMinimalJourney(page);
+    await page.getByRole('button', { name: /continue/i }).click();
+    await expect(page).toHaveURL(/\/check-your-answers/);
+
+    await page.locator('a[href="/handover-and-holidays/where-handover"]').click();
+    await expect(page.getByLabel(/at school/i)).toBeChecked();
+    await page.getByLabel('Neutral location').check();
+    await page.getByLabel('Other').check();
+    await page.getByRole('textbox', { name: /describe where handover will take place/i }).fill("Grandparent's house");
+    await page.getByRole('button', { name: /^continue$/i }).click();
+    await page.goto('/check-your-answers');
+
+    await expect(page).toHaveURL(/\/check-your-answers/);
+
+    const handoverLocations = page
+      .locator('.govuk-summary-list__row')
+      .filter({ hasText: /where will handover take place/i })
+      .locator('ul.govuk-list--bullet li');
+    await expect(handoverLocations).toHaveText([
+      'Neutral location',
+      'At school (term time only)',
+      "Grandparent's house",
+    ]);
+
+    const changeoverItems = page
+      .locator('.govuk-summary-list__row')
+      .filter({ hasText: /which items should move between households/i })
+      .locator('ul.govuk-list--bullet li');
+    await expect(changeoverItems).toHaveText(['Clothes and shoes', 'School items']);
+
+    const travelInformation = page
+      .locator('.govuk-summary-list__row')
+      .filter({ hasText: /what other information should be shared before travelling abroad/i })
+      .locator('ul.govuk-list--bullet li');
+    await expect(travelInformation).toHaveText([
+      'Travel information (dates, transport details)',
+      'Emergency contact details',
+    ]);
+
+    await expect(page.getByText('Neutral location, At school')).toHaveCount(0);
+    await expect(page.getByText('Clothes and shoes, School items')).toHaveCount(0);
+    await expect(
+      page.getByText('Travel information (dates, transport details), Emergency contact details'),
+    ).toHaveCount(0);
+  });
+
   test('should show summary of entered information for each section', async ({ page }) => {
     await completeMinimalJourney(page);
     await page.getByRole('button', { name: /continue/i }).click();

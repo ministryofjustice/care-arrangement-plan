@@ -12,8 +12,9 @@ import {
 } from '../@types/fields';
 
 import {
-  formatItemsForChangeover,
+  formatItemsForChangeoverList,
   formatPlanChangesOptionsIntoList,
+  formatUnorderedList,
   formatWhichDaysSessionValue,
 } from './formValueUtils';
 import { formattedChildrenNames, parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
@@ -141,7 +142,7 @@ export const whereHandover = (request: Request) => {
     }
   };
 
-  return handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere).join(', ');
+  return formatUnorderedList(handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere));
 };
 
 export const educationShareInformation = (request: Request) => {
@@ -281,7 +282,7 @@ export const itemsForChangeover = (request: Request) => {
     return request.__('doNotNeedToDecide');
   }
 
-  return formatItemsForChangeover(items.options, items.describeArrangement, request) ?? items.answer;
+  return formatItemsForChangeoverList(items.options, items.describeArrangement, request) ?? items.answer;
 };
 
 export const travelAbroad = (request: Request) => {
@@ -374,7 +375,7 @@ export const travelInformation = (request: Request) => {
     }
   };
 
-  return handoverAndHolidays.travelInformation.options?.map(getAnswerForTravelInformation).join(', ');
+  return formatUnorderedList(handoverAndHolidays.travelInformation.options?.map(getAnswerForTravelInformation) ?? []);
 };
 
 export const whatWillHappen = (request: Request) => {

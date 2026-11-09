@@ -119,7 +119,7 @@ test.describe('Complete-journey', () => {
     await page.getByRole('button', { name: 'Save and continue' }).click();
 
     await expect(page).toHaveURL(/consent-to-travel/);
-    await page.getByRole('button', { name: 'Save and continue' }).click();
+    await page.getByRole('button', { name: 'Continue', exact: true }).click();
 
     await expect(page).toHaveURL(/travel-information/);
     await page.getByLabel('Travel information (dates, transport details)').check();

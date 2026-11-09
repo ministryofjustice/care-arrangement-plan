@@ -193,6 +193,8 @@
                 text: __('checkYourAnswers.handoverAndHolidays.whereHandover.question', { children: values.childrenNames })
               },
               value: {
+                html: values.whereHandover
+              } if values.whereHandover and values.whereHandover.startsWith('<ul') else {
                 text: values.whereHandover
               },
               actions: {
@@ -201,23 +203,6 @@
                     href: paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER,
                     text: __('checkYourAnswers.change.text'),
                     visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.whereHandover.hiddenText')
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: __('checkYourAnswers.handoverAndHolidays.willChangeDuringSchoolHolidays.question', { children: values.childrenNames })
-              },
-              value: {
-                text: values.willChangeDuringSchoolHolidays
-              },
-              actions: {
-                items: [
-                  {
-                    href: paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
-                    text: __('checkYourAnswers.change.text'),
-                    visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.willChangeDuringSchoolHolidays.hiddenText')
                   }
                 ]
               }
@@ -261,6 +246,8 @@
                 text: __('checkYourAnswers.handoverAndHolidays.itemsForChangeover.question')
               },
               value: {
+                html: values.itemsForChangeover
+              } if values.itemsForChangeover and values.itemsForChangeover.startsWith('<ul') else {
                 text: values.itemsForChangeover
               },
               actions: {
@@ -320,6 +307,8 @@
                 text: __('checkYourAnswers.handoverAndHolidays.travelInformation.question', { children: values.childrenNames })
               },
               value: {
+                html: values.travelInformation
+              } if values.travelInformation and values.travelInformation.startsWith('<ul') else {
                 text: values.travelInformation
               },
               actions: {

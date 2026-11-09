@@ -324,7 +324,7 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.initialAdultName} collects James, Rachel and Jack`,
-          whereHandover: `Neutral location, At ${session.initialAdultName}'s home, At school (term time only)`,
+          whereHandover: `<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Neutral location</li><li>At ${session.initialAdultName}&#039;s home</li><li>At school (term time only)</li></ul>`,
           willChangeDuringSchoolHolidays: 'No',
           itemsForChangeover: 'itemsForChangeover arrangement',
         },
@@ -347,7 +347,8 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: 'getBetweenHouseholds arrangement',
-          whereHandover: 'Grandma',
+          whereHandover:
+            '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Grandma</li></ul>',
           willChangeDuringSchoolHolidays: 'Yes',
           howChangeDuringSchoolHolidays: 'howChangeDuringSchoolHolidays answer',
           itemsForChangeover: 'itemsForChangeover arrangement',
@@ -366,7 +367,8 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.initialAdultName} collects James, Rachel and Jack`,
-          whereHandover: `Neutral location, the park near school`,
+          whereHandover:
+            '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Neutral location</li><li>the park near school</li></ul>',
           willChangeDuringSchoolHolidays: 'No',
           itemsForChangeover: 'itemsForChangeover arrangement',
         },
@@ -381,7 +383,7 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.secondaryAdultName} collects James, Rachel and Jack`,
-          whereHandover: `At ${session.secondaryAdultName}'s home`,
+          whereHandover: `<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>At ${session.secondaryAdultName}&#039;s home</li></ul>`,
           willChangeDuringSchoolHolidays: 'Yes',
           howChangeDuringSchoolHolidays: 'We do not need to decide this',
           itemsForChangeover: 'itemsForChangeover arrangement',
@@ -411,7 +413,7 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.handoverAndHolidays.itemsForChangeover).toBe(
-            'Clothes and shoes, School items, Medication',
+            '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Clothes and shoes</li><li>School items</li><li>Medication</li></ul>',
           );
         });
     });
@@ -434,7 +436,7 @@ describe('formattedAnswers', () => {
           expect(response.body.handoverAndHolidays.travelAbroad).toBe('At least 4 weeks');
           expect(response.body.handoverAndHolidays.travelDocuments).toBe('The parent travelling with the children');
           expect(response.body.handoverAndHolidays.travelInformation).toBe(
-            'Travel information (dates, transport details), Emergency contact details, Flight numbers',
+            '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Travel information (dates, transport details)</li><li>Emergency contact details</li><li>Flight numbers</li></ul>',
           );
         });
     });

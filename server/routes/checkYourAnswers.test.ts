@@ -69,6 +69,47 @@ describe(`GET ${paths.CHECK_YOUR_ANSWERS}`, () => {
       });
   });
 
+  it('should render changeover items and travel information as unordered lists', () => {
+    Object.assign(sessionMock, structuredClone(session), {
+      handoverAndHolidays: {
+        ...session.handoverAndHolidays,
+        whereHandover: {
+          noDecisionRequired: false,
+          where: ['neutral', 'other'],
+          other: 'the park <near> school & library',
+        },
+        itemsForChangeover: {
+          noDecisionRequired: false,
+          options: ['clothesAndShoes', 'schoolItems', 'otherItems'],
+          describeArrangement: 'Medication <daily> & cream',
+        },
+        travelInformation: {
+          noDecisionRequired: false,
+          options: ['dates', 'contact', 'other'],
+          describeArrangement: 'Flight numbers',
+        },
+      },
+    });
+
+    return request(app)
+      .get(paths.CHECK_YOUR_ANSWERS)
+      .expect('Content-Type', /html/)
+      .expect((response) => {
+        expect(response.text).toContain(
+          '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Neutral location</li><li>the park &lt;near&gt; school &amp; library</li></ul>',
+        );
+        expect(response.text).toContain(
+          '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Clothes and shoes</li><li>School items</li><li>Medication &lt;daily&gt; &amp; cream</li></ul>',
+        );
+        expect(response.text).toContain(
+          '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Travel information (dates, transport details)</li><li>Emergency contact details</li><li>Flight numbers</li></ul>',
+        );
+        expect(response.text).not.toContain('Neutral location, the park');
+        expect(response.text).not.toContain('Clothes and shoes, School items');
+        expect(response.text).not.toContain('Emergency contact details, Flight numbers');
+      });
+  });
+
   it('should render education and health answers with links back to those questions', () => {
     Object.assign(sessionMock, structuredClone(session), {
       education: {

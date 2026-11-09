@@ -300,7 +300,7 @@ test.describe('Handovers and holidays section', () => {
 
       await expect(page).toHaveURL(/consent-to-travel/);
       await expect(page.locator('h1')).toContainText('Permission for taking the children abroad');
-      await page.getByRole('button', { name: 'Save and continue' }).click();
+      await page.getByRole('button', { name: 'Continue', exact: true }).click();
 
       await expect(page).toHaveURL(/travel-information/);
       await expect(page.locator('h1')).toContainText(
@@ -322,7 +322,7 @@ test.describe('Handovers and holidays section', () => {
       await page.getByRole('button', { name: 'Save and continue' }).click();
       await expect(page.getByRole('radio', { name: 'The parent travelling with the children' })).toBeChecked();
       await page.getByRole('button', { name: 'Save and continue' }).click();
-      await page.getByRole('button', { name: 'Save and continue' }).click();
+      await page.getByRole('button', { name: 'Continue', exact: true }).click();
       await expect(page.getByLabel('Accommodation address')).toBeChecked();
       await expect(page.getByLabel('Other', { exact: true })).toBeChecked();
       await expect(page.getByRole('textbox', { name: 'Describe the other information' })).toHaveValue('Flight numbers');
@@ -397,7 +397,7 @@ test.describe('Handovers and holidays section', () => {
       await page.getByRole('button', { name: 'Save and continue' }).click();
       await page.getByRole('radio', { name: 'You', exact: true }).check();
       await page.getByRole('button', { name: 'Save and continue' }).click();
-      await page.getByRole('button', { name: 'Save and continue' }).click();
+      await page.getByRole('button', { name: 'Continue', exact: true }).click();
 
       await page.getByRole('button', { name: 'Save and continue' }).click();
       await expect(
