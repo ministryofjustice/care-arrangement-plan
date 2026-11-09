@@ -758,7 +758,7 @@
       "getBetweenHouseholds": {
         "question": "How will {{{ children }}} get between households?",
         "answer": "{{{ answer }}}",
-        "hiddenText": ""
+        "hiddenText": "who is responsible for collecting the children"
       },
       "whereHandover": {
         "question": "Where will handover take place for {{{ children }}}?",
@@ -766,17 +766,22 @@
         "hiddenText": ""
       },
       "willChangeDuringSchoolHolidays": {
-        "question": "Will {{{ children }}}'s arrangements change during school holidays?",
+        "question": "Will these arrangements change during school holidays?",
+        "answer": "{{{ answer }}}",
+        "hiddenText": ""
+      },
+      "howChangeDuringSchoolHolidays": {
+        "question": "How will the arrangements be different in school holidays?",
         "answer": "{{{ answer }}}",
         "hiddenText": ""
       },
       "itemsForChangeover": {
-        "question": "Which items should move between households for {{{ children }}}?",
+        "question": "Which items should move between households?",
         "answer": "{{{ answer }}}",
         "hiddenText": ""
       },
       "travelAbroad": {
-        "question": "How much notice should be given before travelling abroad with {{{ children }}}?",
+        "question": "How much notice should you give if you want to change long-term arrangements for {{{ children }}}?",
         "answer": "{{{ answer }}}",
         "hiddenText": ""
       },
@@ -787,8 +792,7 @@
       },
       "consentToTravel": {
         "question": "Permission for taking {{{ children }}} abroad",
-        "answer": "{{{ answer }}}",
-        "hiddenText": ""
+        "answer": "You usually need permission from everyone with parental responsibility before taking a child abroad."
       },
       "travelInformation": {
         "question": "What other information should be shared before travelling abroad with {{{ children }}}?",

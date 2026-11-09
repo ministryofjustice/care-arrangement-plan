@@ -166,14 +166,14 @@
         })
       }}
 
-      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays.title') }}</h2>
+      <h2 class="govuk-heading-m">{{ __('checkYourAnswers.handoverAndHolidays.title') }}</h2>
       {{
         govukSummaryList({
           classes: "govuk-!-margin-bottom-9",
           rows: [
             {
               key: {
-                text: __('handoverAndHolidays.getBetweenHouseholds.title', { children: values.childrenNames })
+                text: __('checkYourAnswers.handoverAndHolidays.getBetweenHouseholds.question', { children: values.childrenNames })
               },
               value: {
                 text: values.getBetweenHouseholds
@@ -183,14 +183,14 @@
                   {
                     href: paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS,
                     text: __('checkYourAnswers.change.text'),
-                    visuallyHiddenText: __('checkYourAnswers.change.getBetweenHouseholds')
+                    visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.getBetweenHouseholds.hiddenText')
                   }
                 ]
               }
             },
             {
               key: {
-                text: __('handoverAndHolidays.whereHandover.title', { children: values.childrenNames })
+                text: __('checkYourAnswers.handoverAndHolidays.whereHandover.question', { children: values.childrenNames })
               },
               value: {
                 text: values.whereHandover
@@ -200,14 +200,14 @@
                   {
                     href: paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER,
                     text: __('checkYourAnswers.change.text'),
-                    visuallyHiddenText: __('checkYourAnswers.change.whereHandover')
+                    visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.whereHandover.hiddenText')
                   }
                 ]
               }
             },
             {
               key: {
-                text: __('handoverAndHolidays.willChangeDuringSchoolHolidays.title')
+                text: __('checkYourAnswers.handoverAndHolidays.willChangeDuringSchoolHolidays.question', { children: values.childrenNames })
               },
               value: {
                 text: values.willChangeDuringSchoolHolidays
@@ -217,14 +217,31 @@
                   {
                     href: paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
                     text: __('checkYourAnswers.change.text'),
-                    visuallyHiddenText: __('checkYourAnswers.change.willChangeDuringSchoolHolidays')
+                    visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.willChangeDuringSchoolHolidays.hiddenText')
                   }
                 ]
               }
             },
             {
               key: {
-                text: __('handoverAndHolidays.howChangeDuringSchoolHolidays.title')
+                text: __('checkYourAnswers.handoverAndHolidays.willChangeDuringSchoolHolidays.question')
+              },
+              value: {
+                text: values.willChangeDuringSchoolHolidays
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.willChangeDuringSchoolHolidays.hiddenText')
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: __('checkYourAnswers.handoverAndHolidays.howChangeDuringSchoolHolidays.question')
               },
               value: {
                 text: values.howChangeDuringSchoolHolidays
@@ -234,14 +251,14 @@
                   {
                     href: paths.HANDOVER_HOLIDAYS_HOW_CHANGE_DURING_SCHOOL_HOLIDAYS,
                     text: __('checkYourAnswers.change.text'),
-                    visuallyHiddenText: __('checkYourAnswers.change.howChangeDuringSchoolHolidays')
+                    visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.howChangeDuringSchoolHolidays.hiddenText')
                   }
                 ]
               }
             } if values.howChangeDuringSchoolHolidays else null,
             {
               key: {
-                text: __('handoverAndHolidays.itemsForChangeover.title')
+                text: __('checkYourAnswers.handoverAndHolidays.itemsForChangeover.question')
               },
               value: {
                 text: values.itemsForChangeover
@@ -251,7 +268,66 @@
                   {
                     href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER,
                     text: __('checkYourAnswers.change.text'),
-                    visuallyHiddenText: __('checkYourAnswers.change.itemsForChangeover')
+                    visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.itemsForChangeover.hiddenText')
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: __('checkYourAnswers.handoverAndHolidays.travelAbroad.question', { children: values.childrenNames })
+              },
+              value: {
+                text: values.travelAbroad
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.HANDOVER_HOLIDAYS_TRAVEL_ABROAD,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.travelAbroad.hiddenText')
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: __('checkYourAnswers.handoverAndHolidays.travelDocuments.question', { children: values.childrenNames })
+              },
+              value: {
+                text: values.travelDocuments
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.HANDOVER_HOLIDAYS_TRAVEL_DOCUMENTS,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.travelDocuments.hiddenText')
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: __('checkYourAnswers.handoverAndHolidays.consentToTravel.question', { children: values.childrenNames })
+              },
+              value: {
+                text: __('checkYourAnswers.handoverAndHolidays.consentToTravel.answer')
+              }
+            },
+            {
+              key: {
+                text: __('checkYourAnswers.handoverAndHolidays.travelInformation.question', { children: values.childrenNames })
+              },
+              value: {
+                text: values.travelInformation
+              },
+              actions: {
+                items: [
+                  {
+                    href: paths.HANDOVER_HOLIDAYS_TRAVEL_INFORMATION,
+                    text: __('checkYourAnswers.change.text'),
+                    visuallyHiddenText: __('checkYourAnswers.handoverAndHolidays.travelInformation.hiddenText')
                   }
                 ]
               }
