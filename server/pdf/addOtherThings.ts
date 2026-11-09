@@ -39,15 +39,18 @@ const addOtherThings = (pdf: Pdf) => {
     ],
   }).addComponentToDocument();
 
-  new SplittableTextComponent(pdf, [
-    {
-      text: whatOtherThingsMatter(request),
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-      splittable: true,
-    },
-  ]).addComponentToDocument();
+  const otherThingsAnswer = whatOtherThingsMatter(request);
+  if (otherThingsAnswer) {
+    new SplittableTextComponent(pdf, [
+      {
+        text: otherThingsAnswer,
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: PARAGRAPH_SPACE,
+        splittable: true,
+      },
+    ]).addComponentToDocument();
+  }
 
   new DoYouAgreeComponent(pdf, request.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument();
 
