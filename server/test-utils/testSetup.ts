@@ -6,10 +6,17 @@ import i18n from 'i18n';
 import { CAPSession } from '../@types/session';
 import config from '../config';
 
-import { flashFormValues, flashMockErrors, loggerMocks, mockCheckFormProgressFromConfig, mockNow, sessionMock } from './testMocks';
+import {
+  flashFormValues,
+  flashMockErrors,
+  loggerMocks,
+  mockCheckFormProgressFromConfig,
+  mockNow,
+  sessionMock,
+} from './testMocks';
 
 jest.mock('../logging/logger', () => loggerMocks);
-jest.mock('../middleware/checkFormProgressFromConfig', () => mockCheckFormProgressFromConfig)
+jest.mock('../middleware/checkFormProgressFromConfig', () => mockCheckFormProgressFromConfig);
 
 beforeAll(() => {
   i18n.configure({
@@ -29,9 +36,16 @@ beforeEach(() => {
     callback();
     return sessionMock;
   });
+  sessionMock.regenerate = jest.fn((callback?: (error?: Error) => void) => {
+    callback?.();
+    return sessionMock;
+  });
   jest.useFakeTimers({ advanceTimers: true }).setSystemTime(mockNow);
-  // Disable authentication by default for tests (can be overridden in individual tests)
+  // Disable authentication by default for tests (can be overridden in individual tests).
+  // A developer shell may already have AUTH_PROVIDER=one-login, which would otherwise
+  // turn the password-gate tests into sign-in redirects.
   config.useAuth = false;
+  config.oneLogin = { enabled: false };
   (mockCheckFormProgressFromConfig as jest.Mock).mockClear();
 });
 

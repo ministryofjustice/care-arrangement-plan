@@ -45,7 +45,8 @@ const handlePostPassword = (request: Request, response: Response) => {
 };
 
 const handleGetPassword = async (request: Request, response: Response) => {
-  const providedReturnURL = typeof request.query.returnURL === 'string' ? request.query.returnURL : undefined;
+  const providedReturnURL =
+    typeof request.query.returnURL === 'string' ? request.query.returnURL : request.session.returnUrl;
   const returnURL = validateRedirectUrl(providedReturnURL, paths.START);
 
   response.render('pages/password', { returnURL, errors: request.flash('errors'), title: 'Sign in' });

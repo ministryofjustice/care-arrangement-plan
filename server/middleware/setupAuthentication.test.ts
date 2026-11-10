@@ -4,12 +4,13 @@ import config from '../config';
 import cookieNames from '../constants/cookieNames';
 import paths from '../constants/paths';
 import testAppSetup from '../test-utils/testAppSetup';
+import { sessionMock } from '../test-utils/testMocks';
+import encryptPassword from '../utils/encryptPassword';
 
 // Local variables
 
 const testPassword = ['test', 'Password'].join('');
-const encryptedTestPassword = ['fd5cb51bafd60f6fdbedde6e62c473da6f247db271633e15919bab78a02ee9eb'].join('');
-const validAuthenticationCookie = `${cookieNames.AUTHENTICATION}=${encryptedTestPassword}`;
+const validAuthenticationCookie = `${cookieNames.AUTHENTICATION}=${encryptPassword(testPassword)}`;
 const app = testAppSetup();
 
 describe('When a route is called', () => {
@@ -22,14 +23,16 @@ describe('When a route is called', () => {
       config.passwords = [testPassword];
     });
 
-    it('should redirect to password page with return url', () => {
-      const originalUrl = '/myPage/?param=value';
-      const expectedRedirectUrlQueryParameters = 'returnURL=%2FmyPage%2F%3Fparam%3Dvalue';
+    it('should redirect to the password page and keep an allowlisted return url', async () => {
+      await request(app).get(paths.TASK_LIST).expect(302).expect('location', paths.PASSWORD);
 
-      return request(app)
-        .get(originalUrl)
-        .expect(302)
-        .expect('location', `${paths.PASSWORD}?${expectedRedirectUrlQueryParameters}`);
+      expect(sessionMock.returnUrl).toBe(paths.TASK_LIST);
+    });
+
+    it('should redirect to the password page and drop a return url outside this service', async () => {
+      await request(app).get('/myPage/?param=value').expect(302).expect('location', paths.PASSWORD);
+
+      expect(sessionMock.returnUrl).toBe(paths.START);
     });
   });
 
@@ -40,6 +43,43 @@ describe('When a route is called', () => {
 
     it('should not redirect to password page', () => {
       return request(app).get(`/`).set('Cookie', [validAuthenticationCookie]).expect(200);
+    });
+  });
+
+  describe('and GOV.UK One Login is enabled', () => {
+    const originalOneLogin = config.oneLogin;
+
+    beforeEach(() => {
+      config.oneLogin = {
+        enabled: true,
+        issuer: 'http://localhost:3000/',
+        clientId: 'test-client',
+        privateKey: 'test-key',
+        redirectUrl: 'http://localhost:8001/oidc/authorization-code/callback',
+        postLogoutRedirectUrl: 'http://localhost:8001/signed-out',
+        scopes: ['openid', 'email'],
+        vtr: 'Cl.Cm',
+      };
+    });
+
+    afterEach(() => {
+      config.oneLogin = originalOneLogin;
+    });
+
+    it('should redirect to GOV.UK One Login instead of the password page', async () => {
+      await request(app)
+        .get(paths.START)
+        .set('Cookie', [validAuthenticationCookie])
+        .expect(302)
+        .expect('location', paths.SIGN_IN);
+
+      expect(sessionMock.returnUrl).toBe(paths.START);
+    });
+
+    it('should allow a user who has signed in with GOV.UK One Login', () => {
+      sessionMock.oneLogin = { sub: 'user-1', idToken: 'id-token' };
+
+      return request(app).get(paths.START).expect(200);
     });
   });
 });

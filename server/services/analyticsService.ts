@@ -38,7 +38,15 @@ const logPageVisit = (req: Request, res: Response) => {
   // This rotates every 24 hours for GDPR compliance while allowing deduplication
   const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
 
-  if (path !== paths.PASSWORD && Object.values(paths).includes(path as paths)) {
+  const authenticationPaths: string[] = [
+    paths.PASSWORD,
+    paths.SIGN_IN,
+    paths.ONE_LOGIN_CALLBACK,
+    paths.SIGN_OUT,
+    paths.SIGNED_OUT,
+  ];
+
+  if (!authenticationPaths.includes(path) && Object.values(paths).includes(path as paths)) {
     const eventData = {
       hashed_user_id: hashedUserId,
       path: path,
@@ -47,7 +55,7 @@ const logPageVisit = (req: Request, res: Response) => {
     };
 
     logEvent(UserEvents.PAGE_VISIT, eventData);
-  } 
+  }
 };
 
 /**
@@ -78,13 +86,7 @@ const logDownload = (req: Request, downloadType: string) => {
  * @param linkType - Optional type of link (internal or external)
  * @param currentPage - Optional page path where the link was clicked
  */
-const logLinkClick = (
-  req: Request,
-  linkUrl: string,
-  linkText?: string,
-  linkType?: string,
-  currentPage?: string,
-) => {
+const logLinkClick = (req: Request, linkUrl: string, linkText?: string, linkType?: string, currentPage?: string) => {
   // Generate privacy-preserving hashed identifier
   const hashedUserId = generateHashedIdentifier(req.ip, req.get('user-agent'));
 

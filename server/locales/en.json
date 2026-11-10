@@ -44,6 +44,19 @@
     "privacy": "Privacy",
     "termsAndConditions": "Terms and conditions"
   },
+  "oneLogin": {
+    "signOut": "Sign out",
+    "signedOut": {
+      "title": "You have signed out",
+      "body": "You have signed out of Propose a child arrangements plan.",
+      "startAgain": "Start again"
+    },
+    "problem": {
+      "title": "There is a problem signing you in",
+      "body": "GOV.UK One Login did not sign you in. Try again.",
+      "startAgain": "Try again"
+    }
+  },
   "errorSummary": {
     "title": "There is a problem"
   },

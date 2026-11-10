@@ -31,7 +31,11 @@ export default defineConfig({
   // Local: All browsers
   projects: process.env.CI ? [allBrowsers[0]] : allBrowsers,
   webServer: {
-    command: 'npm run build && ENV_FILE_OPTION="--env-file=.env.test" npm start',
+    // Prefix assignments win over both the developer shell and --env-file.
+    // Node does not let --env-file override variables that are already set,
+    // so a local AUTH_PROVIDER=one-login or PORT=3001 would start the wrong server.
+    command:
+      'npm run build && PORT=8001 USE_AUTH=false AUTH_PROVIDER=password NODE_ENV=test ENV_FILE_OPTION="--env-file=.env.test" npm start',
     url: 'http://localhost:8001/health',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,

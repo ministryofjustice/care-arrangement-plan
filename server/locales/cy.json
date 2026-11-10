@@ -44,6 +44,19 @@
     "privacy": "Hysbysiad Preifatrwydd",
     "termsAndConditions": "Telerau ac amodau"
   },
+  "oneLogin": {
+    "signOut": "Allgofnodi",
+    "signedOut": {
+      "title": "Rydych wedi allgofnodi",
+      "body": "Rydych wedi allgofnodi o Cynnig cynllun trefniant plentyn.",
+      "startAgain": "Dechrau eto"
+    },
+    "problem": {
+      "title": "Mae problem wrth eich mewngofnodi",
+      "body": "Nid yw GOV.UK One Login wedi eich mewngofnodi. Rhowch gynnig arall arni.",
+      "startAgain": "Rhowch gynnig arall arni"
+    }
+  },
   "errorSummary": {
     "title": "Mae yna broblem"
   },
