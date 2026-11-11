@@ -6,13 +6,12 @@ import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 import testAppSetup from '../test-utils/testAppSetup';
 import { flashMock, flashMockErrors } from '../test-utils/testMocks';
+import { authenticationCookieMatches } from '../utils/encryptPassword';
 
 const app = testAppSetup();
 
 const testPassword1 = ['test', 'Password'].join('');
 const testPassword2 = ['test', 'Password2'].join('');
-
-const encryptedTestPassword = ['fd5cb51bafd60f6fdbedde6e62c473da6f247db271633e15919bab78a02ee9eb'].join('');
 
 describe('Password Handler', () => {
   describe('GET', () => {
@@ -71,19 +70,20 @@ describe('Password Handler', () => {
         });
 
         it('should set authentication cookie', () => {
-          const returnURL = paths.TASK_LIST; // Use a valid path from the whitelist
-          const authenticatedCookieProperties = [
-            `${cookieNames.AUTHENTICATION}=${encryptedTestPassword};`,
-            `Max-Age=${60 * 60 * 24 * 30}`,
-            `Secure`,
-          ];
+          const returnURL = paths.TASK_LIST;
 
           return request(app)
             .post(paths.PASSWORD)
             .send({ password: testPassword1, returnURL })
             .expect(302)
             .expect((response) => {
-              authenticatedCookieProperties.forEach((p) => expect(response.header['set-cookie'][0]).toContain(p));
+              const header = response.header['set-cookie'][0];
+              const cookieValue = decodeURIComponent(header.split(';')[0].split('=').slice(1).join('='));
+
+              expect(header.startsWith(`${cookieNames.AUTHENTICATION}=`)).toBe(true);
+              expect(header).toContain(`Max-Age=${60 * 60 * 24 * 30}`);
+              expect(header).toContain('Secure');
+              expect(authenticationCookieMatches(cookieValue, [testPassword1])).toBe(true);
             });
         });
       });

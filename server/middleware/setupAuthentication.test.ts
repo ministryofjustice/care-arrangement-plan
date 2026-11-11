@@ -4,12 +4,10 @@ import config from '../config';
 import cookieNames from '../constants/cookieNames';
 import paths from '../constants/paths';
 import testAppSetup from '../test-utils/testAppSetup';
-
-// Local variables
+import { sessionMock } from '../test-utils/testMocks';
+import encryptPassword from '../utils/encryptPassword';
 
 const testPassword = ['test', 'Password'].join('');
-const encryptedTestPassword = ['fd5cb51bafd60f6fdbedde6e62c473da6f247db271633e15919bab78a02ee9eb'].join('');
-const validAuthenticationCookie = `${cookieNames.AUTHENTICATION}=${encryptedTestPassword}`;
 const app = testAppSetup();
 
 describe('When a route is called', () => {
@@ -22,14 +20,24 @@ describe('When a route is called', () => {
       config.passwords = [testPassword];
     });
 
-    it('should redirect to password page with return url', () => {
-      const originalUrl = '/myPage/?param=value';
-      const expectedRedirectUrlQueryParameters = 'returnURL=%2FmyPage%2F%3Fparam%3Dvalue';
-
+    it('should redirect to the password page and remember only an application path', () => {
       return request(app)
-        .get(originalUrl)
+        .get(`${paths.TASK_LIST}?param=value`)
         .expect(302)
-        .expect('location', `${paths.PASSWORD}?${expectedRedirectUrlQueryParameters}`);
+        .expect('location', paths.PASSWORD)
+        .expect(() => {
+          expect(sessionMock.returnUrl).toBe(`${paths.TASK_LIST}?param=value`);
+        });
+    });
+
+    it('should not copy an unknown address into the redirect', () => {
+      return request(app)
+        .get('/myPage/?param=value')
+        .expect(302)
+        .expect('location', paths.PASSWORD)
+        .expect(() => {
+          expect(sessionMock.returnUrl).toBe(paths.START);
+        });
     });
   });
 
@@ -39,7 +47,10 @@ describe('When a route is called', () => {
     });
 
     it('should not redirect to password page', () => {
-      return request(app).get(`/`).set('Cookie', [validAuthenticationCookie]).expect(200);
+      return request(app)
+        .get(`/`)
+        .set('Cookie', [`${cookieNames.AUTHENTICATION}=${encryptPassword(testPassword)}`])
+        .expect(200);
     });
   });
 });

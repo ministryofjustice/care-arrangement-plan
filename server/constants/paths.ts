@@ -4,7 +4,7 @@ enum paths {
   SIGN_IN = '/sign-in',
   SIGN_OUT = '/sign-out',
   SIGNED_OUT = '/signed-out',
-  ONE_LOGIN_CALLBACK = 'oidc/authorization-code/callback',
+  ONE_LOGIN_CALLBACK = '/oidc/authorization-code/callback',
   ACCESSIBILITY_STATEMENT = '/accessibility-statement',
   CONTACT_US = '/contact-us',
   COOKIES = '/cookies',

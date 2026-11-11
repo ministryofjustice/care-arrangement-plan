@@ -242,7 +242,10 @@ describe('App', () => {
         return request(app)
           .get(path)
           .expect(302)
-          .expect('location', `${paths.PASSWORD}?returnURL=${encodeURIComponent(path)}`);
+          .expect('location', paths.PASSWORD)
+          .expect(() => {
+            expect(sessionMock.returnUrl).toBe(path);
+          });
       },
     );
 

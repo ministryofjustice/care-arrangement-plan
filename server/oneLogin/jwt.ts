@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+
 import OneLoginError from './error';
 
 const CLOCK_SKEW_SECONDS = 60;
