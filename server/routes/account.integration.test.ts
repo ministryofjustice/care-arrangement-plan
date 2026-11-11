@@ -149,7 +149,7 @@ describe('GOV.UK One Login routes', () => {
     clearDiscoveryCache();
     enableOneLogin();
     sessionMock.regenerate = (callback) => {
-      callback();
+      callback(null);
       return sessionMock;
     };
     sessionMock.lang = 'en';
