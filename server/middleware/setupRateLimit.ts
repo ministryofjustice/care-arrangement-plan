@@ -36,8 +36,8 @@ const setupRateLimit = () => {
 
   // download/PDF generation endpoints (resource-intensive)
   const downloadLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,// 15 minutes
-    max: isTestEnvironment ? 1000 : 20,// Higher limit for tests
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: isTestEnvironment ? 1000 : 20, // Higher limit for tests
     standardHeaders: true,
     legacyHeaders: false,
     validate: { trustProxy: true },
@@ -54,7 +54,7 @@ const setupRateLimit = () => {
     max: isTestEnvironment ? 1000 : 10, // Higher limit for tests
     standardHeaders: true,
     legacyHeaders: false,
-    validate: { trustProxy: true},
+    validate: { trustProxy: true },
     keyGenerator: (req: Request) => {
       return req.ip || 'unknown';
     },
@@ -69,6 +69,9 @@ const setupRateLimit = () => {
   router.use('/print-pdf', downloadLimiter);
   router.use('/download-paper-form', downloadLimiter);
   router.use('/password', authLimiter);
+  router.use('/sign-in', authLimiter);
+  router.use('/oidc/authorization-code/callback', authLimiter);
+  router.use('/sign-out', authLimiter);
 
   // Apply general limiter to all other routes
   router.use(generalLimiter);

@@ -1,0 +1,17 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ __('oneLogin.signedOut.title') }}</h1>
+      <p>{{ __('oneLogin.signedOut.body') }}</p>
+      {{
+        govukButton({
+          text: __('oneLogin.signedOut.startAgain'),
+          href: paths.START
+        })
+      }}
+    </div>
+  </div>
+{% endblock %}
