@@ -1,5 +1,6 @@
 import config from '../config';
 import logger from '../logging/logger';
+
 import OneLoginError from './error';
 import { codeChallengeFor, JsonWebKeyWithKid, randomUrlSafe, signClientAssertion, verifyIdToken } from './jwt';
 

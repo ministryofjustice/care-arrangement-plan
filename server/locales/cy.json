@@ -1,5 +1,17 @@
 {
   "serviceName": "Cynnig cynllun trefniant plentyn",
+  "oneLogin": {
+    "signOut": "Allgofnodi",
+    "problem": {
+      "title": "Mae'n ddrwg gennym, ond mae problem gyda GOV.UK One Login",
+      "body": "Gallwch geisio mewngofnodi eto."
+    },
+    "signedOut": {
+      "title": "Rydych wedi allgofnodi",
+      "body": "Gallwch fewngofnodi eto i barhau i wneud cynllun.",
+      "startAgain": "Dechrau eto"
+    }
+  },
   "yes": "Ydyn",
   "no": "Nac ydyn",
   "notSure": "Dydw i ddim yn siŵr",
@@ -60,7 +72,7 @@
       "descriptionList": {
         "findInformation": "dod o hyd i wybodaeth am drefniadau plant yn <a href=\"https://www.gov.uk/looking-after-children-divorce\" class=\"govuk-link--no-visited-state\">Gwneud trefniadau plant os ydych yn ysgaru neu'n gwahanu</a>",
         "contactUs": "<a href=\"/contact-us\" class=\"govuk-link--no-visited-state\">cysylltwch â ni</a> i adrodd am broblem neu awgrymu gwelliannau i'r gwasanaeth hwn"
-      } 
+      }
     },
     "rateLimit": {
       "title": "Mae gormod o geisiadau wedi'u gwneud",
@@ -593,7 +605,7 @@
     "planReview": {
       "title": "Pryd hoffech chi adolygu'r cynllun hwn?",
       "childrensNeedsChange": "Mae anghenion plant yn newid wrth iddynt dyfu. Pryd dylech chi adolygu'r cytundeb hwn i wirio ei fod yn dal i fod yr hyn sydd orau i'r plant?",
-      "youCanAlsoReview":"Gallwch hefyd adolygu'r trefniadau hyn yn gynharach os nad ydyn nhw bellach yn diwallu anghenion eich plant.",
+      "youCanAlsoReview": "Gallwch hefyd adolygu'r trefniadau hyn yn gynharach os nad ydyn nhw bellach yn diwallu anghenion eich plant.",
       "months": "Mis",
       "years": "Blwyddyn",
       "bothEmptyError": "Nodwch fisoedd neu flynyddoedd",
@@ -646,7 +658,7 @@
     "downloadHtml": "Lawrlwytho fel HTML (hygyrch)",
     "ifTheyDoNotRespond": "Os nad ydynt yn ymateb",
     "tryMediation": "Os nad yw {{{ otherAdult }}} yn ymateb neu os na allwch ddod i gytundeb rhyngoch chi'ch hunain, gallech roi cynnig ar gyfryngu neu ffordd arall o gytuno y tu allan i'r llys.",
-    "aMediatorIs":"Mae cyfryngwr yn weithiwr proffesiynol a fydd yn gweithio gyda chi i'ch helpu i wneud penderfyniadau yn seiliedig ar fuddiannau gorau eich plentyn. Maen nhw'n gwrando ar y ddau ohonoch ac yn cymryd ymagwedd niwtral.",
+    "aMediatorIs": "Mae cyfryngwr yn weithiwr proffesiynol a fydd yn gweithio gyda chi i'ch helpu i wneud penderfyniadau yn seiliedig ar fuddiannau gorau eich plentyn. Maen nhw'n gwrando ar y ddau ohonoch ac yn cymryd ymagwedd niwtral.",
     "ifYouCannotAgree": "Rhagor o wybodaeth am beth i'w wneud os na allwch gytuno",
     "whatWeAreTelling": {
       "proposedPlan": "Mae {{{ senderName }}} wedi awgrymu cynllun trefniadau plant",
@@ -671,10 +683,10 @@
       "bestOutcome": "yn arwain at ganlyniad gwell i'ch plant, y mae chi a'ch cyn-bartner yn rheoli hynny",
       "goingToCourt": "Gall mynd i'r llys weithiau olygu nad chi yw'r rhai sy'n gwneud y penderfyniadau terfynol am eich trefniadau plant.",
       "topTips": "Awgrymiadau i'ch helpu chi a'ch plant",
-      "planShould":"Dylai eich cynllun trefniadau plant:",
-      "welfare":"roi lles y plentyn yn gyntaf",
+      "planShould": "Dylai eich cynllun trefniadau plant:",
+      "welfare": "roi lles y plentyn yn gyntaf",
       "wishes": "adlewyrchu dymuniadau, teimladau ac anghenion y plentyn",
-      "considerAnyHarm":"ystyried unrhyw niwed y mae'r plentyn wedi'i ddioddef neu unrhyw risg o niwed",
+      "considerAnyHarm": "ystyried unrhyw niwed y mae'r plentyn wedi'i ddioddef neu unrhyw risg o niwed",
       "everyPage": "Gwiriwch fod gennych bob tudalen o'r ddogfen hon",
       "ifThereIsCourt": "Os oes gorchymyn llys ar waith",
       "doNotContinue": "Peidiwch a pharhau os oes gorchymyn llys ar waith sy'n ymwneud â chi, y rhiant arall neu'r plant",
@@ -691,7 +703,7 @@
       "legalSeparation": "cael ymwahaniad cyfreithiol - https://www.gov.uk/legal-separation",
       "divorce": "cael ysgariad - https://www.gov.uk/get-a-divorce",
       "legalAdviceHeading": "Os ydych chi eisiau cyngor cyfreithiol",
-      "findLegalAdviser" : "Gallwch ddod o hyd i gynghorydd cyfreithiol: https://www.gov.uk/find-legal-advice/find-legal-adviser.",
+      "findLegalAdviser": "Gallwch ddod o hyd i gynghorydd cyfreithiol: https://www.gov.uk/find-legal-advice/find-legal-adviser.",
       "domesticAbuseHeading": "Cael cymorth gyda cam-drin domestig",
       "signsAndEffects": "I gael rhagor o wybodaeth am arwyddion ac effeithiau cam-drin ac esgeuluso plant, ewch i https://www.nspcc.org.uk/what-is-child-abuse.",
       "unsureVictim": "Os ydych chi'n ansicr a ydych chi'n ddioddefwr cam-drin domestig, ewch i https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
@@ -763,7 +775,7 @@
       "notLegallyBinding": "Nid yw unrhyw gynllun a wnewch gan ddefnyddio'r ffurflen hon yn gyfreithiol rwymol. Nid oes rhaid i'r person arall wneud yr hyn y mae'n ei ddweud a gall y naill neu'r llall ohonoch awgrymu newidiadau iddo ar unrhyw adeg.",
       "noResponseHeading": "Os nad oes ymateb",
       "unableToAgree": "Os na allwch ddod i gytundeb ymysg eich gilydd, gallech roi cynnig ar gyfryngu neu ffordd arall o gytuno y tu allan i'r llys.",
-      "aMediatorIs":"Mae cyfryngwr yn weithiwr proffesiynol a fydd yn gweithio gyda chi i'ch helpu i wneud penderfyniadau yn seiliedig ar fuddiannau gorau eich plentyn. Maen nhw'n gwrando ar y ddau ohonoch ac yn cymryd ymagwedd niwtral.",
+      "aMediatorIs": "Mae cyfryngwr yn weithiwr proffesiynol a fydd yn gweithio gyda chi i'ch helpu i wneud penderfyniadau yn seiliedig ar fuddiannau gorau eich plentyn. Maen nhw'n gwrando ar y ddau ohonoch ac yn cymryd ymagwedd niwtral.",
       "moreInfoAndSupport": "Mae rhagor o wybodaeth a chyngor ar gael yn https://www.gov.uk/looking-after-children-divorce.",
       "doNotAgree": {
         "livingAndVisiting": {
@@ -884,7 +896,7 @@
       },
       "legalAdvice": {
         "title": "Os ydych chi eisiau cyngor cyfreithiol",
-        "findLegalAdviser" : "Gallwch ddod o hyd i gynghorydd cyfreithiol: https://www.gov.uk/find-legal-advice/find-legal-adviser."
+        "findLegalAdviser": "Gallwch ddod o hyd i gynghorydd cyfreithiol: https://www.gov.uk/find-legal-advice/find-legal-adviser."
       },
       "domesticAbuse": {
         "title": "Cael cymorth gyda cam-drin domestig",
@@ -1015,7 +1027,7 @@
     "reviewingThePlan": {
       "title": "Pryd hoffech chi adolygu'r cynllun hwn?",
       "intro": "Mae anghenion plant yn newid wrth iddynt dyfu. Pryd ddylech chi adolygu'r cytundeb hwn i wirio ei fod yn dal i fod yr hyn sydd orau i'r plant?",
-      "youCanAlsoReview":"Gallwch hefyd adolygu'r trefniadau hyn yn gynharach os nad ydyn nhw bellach yn diwallu anghenion eich plant."
+      "youCanAlsoReview": "Gallwch hefyd adolygu'r trefniadau hyn yn gynharach os nad ydyn nhw bellach yn diwallu anghenion eich plant."
     },
     "nextSteps": {
       "sectionTitle": "Camau nesaf",
