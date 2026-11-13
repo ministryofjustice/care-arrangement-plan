@@ -8,6 +8,11 @@ export declare module 'express-session' {
     previousPage: string;
     lang: string;
     returnUrl?: string;
+    oneLoginRequest?: {
+      state: string;
+      nonce: string;
+      codeVerifier: string;
+    };
     oneLogin?: {
       sub: string;
       email?: string;

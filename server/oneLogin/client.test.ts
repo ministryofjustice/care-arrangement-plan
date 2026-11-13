@@ -15,7 +15,15 @@ import { codeChallengeFor, JsonWebKeyWithKid } from './jwt';
 
 const rsa = crypto.generateKeyPairSync('rsa', { modulusLength: 2048 });
 const privateKey = rsa.privateKey.export({ type: 'pkcs8', format: 'pem' }).toString();
-const jwk = { ...rsa.publicKey.export({ format: 'jwk' }), alg: 'RS256', kid: 'issuer-key' } as JsonWebKeyWithKid;
+const issuerKeyId = crypto.randomBytes(8).toString('hex');
+const clientId = crypto.randomBytes(16).toString('hex');
+const accessToken = crypto.randomBytes(16).toString('hex');
+const authorizationCode = crypto.randomBytes(16).toString('hex');
+const codeVerifier = crypto.randomBytes(32).toString('base64url');
+const nonce = crypto.randomBytes(16).toString('base64url');
+const state = crypto.randomBytes(16).toString('base64url');
+const codeChallenge = crypto.randomBytes(32).toString('base64url');
+const jwk = { ...rsa.publicKey.export({ format: 'jwk' }), alg: 'RS256', kid: issuerKeyId } as JsonWebKeyWithKid;
 const issuer = 'https://issuer.example/';
 const discovery = {
   issuer,
@@ -33,7 +41,7 @@ const jsonResponse = (status: number, body: unknown) =>
   new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } });
 
 const signIdToken = (claims: Record<string, unknown>) => {
-  const header = Buffer.from(JSON.stringify({ alg: 'RS256', kid: 'issuer-key' })).toString('base64url');
+  const header = Buffer.from(JSON.stringify({ alg: 'RS256', kid: issuerKeyId })).toString('base64url');
   const payload = Buffer.from(JSON.stringify(claims)).toString('base64url');
   const signature = crypto.sign('RSA-SHA256', Buffer.from(`${header}.${payload}`), rsa.privateKey);
   return `${header}.${payload}.${signature.toString('base64url')}`;
@@ -41,10 +49,10 @@ const signIdToken = (claims: Record<string, unknown>) => {
 
 const idToken = signIdToken({
   iss: issuer,
-  aud: 'client-id',
+  aud: clientId,
   exp: Math.floor(Date.now() / 1000) + 300,
   iat: Math.floor(Date.now() / 1000),
-  nonce: 'nonce-value',
+  nonce,
   sub: 'user-1',
 });
 
@@ -52,7 +60,7 @@ const enableOneLogin = () => {
   config.oneLogin = {
     enabled: true,
     issuer,
-    clientId: 'client-id',
+    clientId,
     privateKey,
     redirectUrl: 'http://localhost:3001/oidc/authorization-code/callback',
     postLogoutRedirectUrl: 'http://localhost:3001/signed-out',
@@ -72,8 +80,7 @@ describe('One Login client', () => {
       if (url === discovery.userinfo_endpoint) {
         return jsonResponse(200, { sub: 'user-1', email: 'person@example.com', email_verified: true });
       }
-      if (url === discovery.token_endpoint)
-        return jsonResponse(200, { access_token: 'access-token', id_token: idToken });
+      if (url === discovery.token_endpoint) return jsonResponse(200, { access_token: accessToken, id_token: idToken });
       throw new Error(`Unexpected request ${url}`);
     });
   });
@@ -91,8 +98,8 @@ describe('One Login client', () => {
     const authorizeRequest = createAuthorizeRequest();
     const authorizeUrl = new URL(
       await buildAuthorizeUrl({
-        nonce: 'nonce-value',
-        state: 'state-value',
+        nonce,
+        state,
         codeChallenge: authorizeRequest.codeChallenge,
         locale: 'cy',
       }),
@@ -101,28 +108,26 @@ describe('One Login client', () => {
     expect(authorizeRequest.codeChallenge).toBe(codeChallengeFor(authorizeRequest.codeVerifier));
     expect(authorizeUrl.origin).toBe('https://issuer.example');
     expect(authorizeUrl.searchParams.get('response_type')).toBe('code');
-    expect(authorizeUrl.searchParams.get('client_id')).toBe('client-id');
+    expect(authorizeUrl.searchParams.get('client_id')).toBe(clientId);
     expect(authorizeUrl.searchParams.get('redirect_uri')).toBe(
       'http://localhost:3001/oidc/authorization-code/callback',
     );
     expect(authorizeUrl.searchParams.get('scope')).toBe('openid email');
-    expect(authorizeUrl.searchParams.get('nonce')).toBe('nonce-value');
-    expect(authorizeUrl.searchParams.get('state')).toBe('state-value');
+    expect(authorizeUrl.searchParams.get('nonce')).toBe(nonce);
+    expect(authorizeUrl.searchParams.get('state')).toBe(state);
     expect(authorizeUrl.searchParams.get('code_challenge_method')).toBe('S256');
     expect(authorizeUrl.searchParams.get('vtr')).toBe('["Cl.Cm"]');
     expect(authorizeUrl.searchParams.get('ui_locales')).toBe('cy');
   });
 
   it('omits ui_locales unless the locale is English or Welsh', async () => {
-    const authorizeUrl = new URL(
-      await buildAuthorizeUrl({ nonce: 'nonce-value', state: 'state-value', codeChallenge: 'challenge', locale: 'fr' }),
-    );
+    const authorizeUrl = new URL(await buildAuthorizeUrl({ nonce, state, codeChallenge, locale: 'fr' }));
 
     expect(authorizeUrl.searchParams.has('ui_locales')).toBe(false);
   });
 
   it('exchanges the code, checks the ID token, and reads the userinfo profile', async () => {
-    const result = await completeAuthorization({ code: 'auth-code', codeVerifier: 'verifier', nonce: 'nonce-value' });
+    const result = await completeAuthorization({ code: authorizationCode, codeVerifier, nonce });
 
     expect(result.user).toEqual({ sub: 'user-1', email: 'person@example.com', emailVerified: true });
     expect(result.idToken).toBe(idToken);
@@ -130,8 +135,8 @@ describe('One Login client', () => {
     const tokenCall = fetchMock.mock.calls.find((call) => String(call[0]) === discovery.token_endpoint);
     const body = new URLSearchParams(String((tokenCall?.[1] as RequestInit).body));
     expect(body.get('grant_type')).toBe('authorization_code');
-    expect(body.get('code')).toBe('auth-code');
-    expect(body.get('code_verifier')).toBe('verifier');
+    expect(body.get('code')).toBe(authorizationCode);
+    expect(body.get('code_verifier')).toBe(codeVerifier);
     expect(body.get('client_assertion_type')).toBe('urn:ietf:params:oauth:client-assertion-type:jwt-bearer');
     expect(body.get('client_assertion')).toEqual(expect.any(String));
   });
@@ -150,9 +155,9 @@ describe('One Login client', () => {
       jsonResponse(200, { ...discovery, authorization_endpoint: 'https://evil.example/authorize' }),
     );
 
-    await expect(
-      buildAuthorizeUrl({ nonce: 'nonce-value', state: 'state-value', codeChallenge: 'challenge' }),
-    ).rejects.toThrow(new OneLoginError('GOV.UK One Login discovery returned an unexpected endpoint', 502));
+    await expect(buildAuthorizeUrl({ nonce, state, codeChallenge })).rejects.toThrow(
+      new OneLoginError('GOV.UK One Login discovery returned an unexpected endpoint', 502),
+    );
   });
 
   it('rejects a token response without tokens and a userinfo subject that does not match', async () => {
@@ -163,23 +168,22 @@ describe('One Login client', () => {
       throw new Error(`Unexpected request ${url}`);
     });
 
-    await expect(
-      completeAuthorization({ code: 'auth-code', codeVerifier: 'verifier', nonce: 'nonce-value' }),
-    ).rejects.toThrow('GOV.UK One Login did not return tokens');
+    await expect(completeAuthorization({ code: authorizationCode, codeVerifier, nonce })).rejects.toThrow(
+      'GOV.UK One Login did not return tokens',
+    );
 
     clearDiscoveryCache();
     fetchMock.mockImplementation(async (input) => {
       const url = String(input);
       if (url.endsWith('/.well-known/openid-configuration')) return jsonResponse(200, discovery);
-      if (url === discovery.token_endpoint)
-        return jsonResponse(200, { access_token: 'access-token', id_token: idToken });
+      if (url === discovery.token_endpoint) return jsonResponse(200, { access_token: accessToken, id_token: idToken });
       if (url === discovery.jwks_uri) return jsonResponse(200, { keys: [jwk] });
       return jsonResponse(200, { sub: 'someone-else' });
     });
 
-    await expect(
-      completeAuthorization({ code: 'auth-code', codeVerifier: 'verifier', nonce: 'nonce-value' }),
-    ).rejects.toThrow('GOV.UK One Login userinfo subject did not match the ID token');
+    await expect(completeAuthorization({ code: authorizationCode, codeVerifier, nonce })).rejects.toThrow(
+      'GOV.UK One Login userinfo subject did not match the ID token',
+    );
   });
 
   it('reports the provider as unavailable when the request fails', async () => {
@@ -195,8 +199,6 @@ describe('One Login client', () => {
   it('fails closed when GOV.UK One Login is disabled', async () => {
     config.oneLogin = { enabled: false };
 
-    await expect(
-      buildAuthorizeUrl({ nonce: 'nonce-value', state: 'state-value', codeChallenge: 'challenge' }),
-    ).rejects.toMatchObject({ status: 404 });
+    await expect(buildAuthorizeUrl({ nonce, state, codeChallenge })).rejects.toMatchObject({ status: 404 });
   });
 });
