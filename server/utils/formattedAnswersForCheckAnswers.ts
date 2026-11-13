@@ -1,9 +1,23 @@
 import { Request } from 'express';
 
-import { whereHandoverField } from '../@types/fields';
+import {
+  childHealthRoutineDecisionsField,
+  educationRoutineDecisionsField,
+  educationSchoolMeetingsField,
+  educationShareInformationField,
+  travelAbroadField,
+  travelDocumentsField,
+  travelInformationField,
+  whereHandoverField,
+} from '../@types/fields';
 
-import { formatPlanChangesOptionsIntoList, formatWhichDaysSessionValue } from './formValueUtils';
-import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
+import {
+  formatItemsForChangeoverList,
+  formatPlanChangesOptionsIntoList,
+  formatUnorderedList,
+  formatWhichDaysSessionValue,
+} from './formValueUtils';
+import { childrenReference, parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
 
 export const mostlyLive = (request: Request) => {
   const { livingAndVisiting, initialAdultName, secondaryAdultName } = request.session;
@@ -81,12 +95,24 @@ export const getBetweenHouseholds = (request: Request) => {
   if (handoverAndHolidays.getBetweenHouseholds.noDecisionRequired) {
     return request.__('doNotNeedToDecide');
   }
+  const children = childrenReference(request);
+
   switch (handoverAndHolidays.getBetweenHouseholds.how) {
-    case 'initialCollects':
-      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: initialAdultName });
-    case 'secondaryCollects':
-      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', { adult: secondaryAdultName });
-    case 'other':
+    case 'parent':
+      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {
+        adult: initialAdultName,
+        children,
+      });
+    case 'otherParent':
+      return request.__('handoverAndHolidays.getBetweenHouseholds.collectsTheChildren', {
+        adult: secondaryAdultName,
+        children,
+      });
+    case 'bothParents':
+      return request.__('handoverAndHolidays.getBetweenHouseholds.bothParentsCollect', { children });
+    case 'someoneElse':
+      return handoverAndHolidays.getBetweenHouseholds.whoWillCollect;
+    case 'anotherArrangement':
       return handoverAndHolidays.getBetweenHouseholds.describeArrangement;
     default:
       return undefined;
@@ -116,7 +142,120 @@ export const whereHandover = (request: Request) => {
     }
   };
 
-  return handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere).join(', ');
+  return formatUnorderedList(handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere));
+};
+
+export const educationShareInformation = (request: Request) => {
+  const shareInformation = request.session.education?.shareInformation;
+  if (!shareInformation) return undefined;
+  if (shareInformation.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+  if (!shareInformation.options?.length) return undefined;
+
+  const getAnswerForEducationShareInformation = (who: educationShareInformationField) => {
+    switch (who) {
+      case 'parent':
+        return request.__('checkYourAnswers.education.shareInformation.answer', { answer: 'Parent' });
+      case 'otherParent':
+        return request.__('checkYourAnswers.education.shareInformation.answer', { answer: 'Other Parent' });
+      case 'bothParents':
+        return request.__('checkYourAnswers.education.shareInformation.answer', { answer: 'Both Parents' });
+      case 'anotherArrangement':
+        return shareInformation.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return shareInformation.options.map(getAnswerForEducationShareInformation).join(', ');
+};
+
+export const educationRoutineDecisions = (request: Request) => {
+  const routineDecisions = request.session.education?.routineDecisions;
+  if (!routineDecisions) return undefined;
+  if (routineDecisions.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+  if (!routineDecisions.options?.length) return undefined;
+
+  const getAnswerForEducationRoutineDecisions = (who: educationRoutineDecisionsField) => {
+    switch (who) {
+      case 'parent':
+        return request.__('checkYourAnswers.education.routineDecisions.answer', { answer: 'Parent' });
+      case 'otherParent':
+        return request.__('checkYourAnswers.education.routineDecisions.answer', { answer: 'Other Parent' });
+      case 'bothParents':
+        return request.__('checkYourAnswers.education.routineDecisions.answer', { answer: 'Both Parents' });
+      case 'anotherArrangement':
+        return routineDecisions.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return routineDecisions.options.map(getAnswerForEducationRoutineDecisions).join(', ');
+};
+
+export const educationSchoolMeetings = (request: Request) => {
+  const schoolMeetings = request.session.education?.schoolMeetings;
+  if (!schoolMeetings) return undefined;
+  if (schoolMeetings.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+  if (!schoolMeetings.options?.length) return undefined;
+
+  const getAnswerForEducationSchoolMeetings = (who: educationSchoolMeetingsField) => {
+    switch (who) {
+      case 'parent':
+        return request.__('checkYourAnswers.education.schoolMeetings.answer', { answer: 'Parent' });
+      case 'otherParent':
+        return request.__('checkYourAnswers.education.schoolMeetings.answer', { answer: 'Other Parent' });
+      case 'bothParents':
+        return request.__('checkYourAnswers.education.schoolMeetings.answer', { answer: 'Both Parents' });
+      case 'carer':
+        return request.__('checkYourAnswers.education.schoolMeetings.answer', { answer: 'Carer' });
+      case 'anotherArrangement':
+        return schoolMeetings.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return schoolMeetings.options.map(getAnswerForEducationSchoolMeetings).join(', ');
+};
+
+export const childHealthRoutineDecisions = (request: Request) => {
+  const routineDecisions = request.session.childHealth?.routineDecisions;
+  if (!routineDecisions) return undefined;
+  if (routineDecisions.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+  if (!routineDecisions.options?.length) return undefined;
+
+  const getAnswerForChildHealthRoutineDecisions = (who: childHealthRoutineDecisionsField) => {
+    switch (who) {
+      case 'parent':
+        return request.__('checkYourAnswers.childHealth.routineDecisions.answer', { answer: 'Parent' });
+      case 'otherParent':
+        return request.__('checkYourAnswers.childHealth.routineDecisions.answer', { answer: 'Other Parent' });
+      case 'bothParents':
+        return request.__('checkYourAnswers.childHealth.routineDecisions.answer', { answer: 'Both Parents' });
+      case 'anotherArrangement':
+        return routineDecisions.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return routineDecisions.options.map(getAnswerForChildHealthRoutineDecisions).join(', ');
+};
+
+export const childHealthNeeds = (request: Request) => {
+  const needs = request.session.childHealth?.childHealthNeeds;
+  if (!needs) return undefined;
+
+  return needs.noDecisionRequired ? request.__('doNotNeedToDecide') : needs.description;
 };
 
 export const willChangeDuringSchoolHolidays = (request: Request) => {
@@ -137,10 +276,106 @@ export const howChangeDuringSchoolHolidays = (request: Request) => {
 };
 
 export const itemsForChangeover = (request: Request) => {
+  const items = request.session.handoverAndHolidays?.itemsForChangeover;
+  if (!items) return undefined;
+  if (items.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  return formatItemsForChangeoverList(items.options, items.describeArrangement, request) ?? items.answer;
+};
+
+export const travelAbroad = (request: Request) => {
   const { handoverAndHolidays } = request.session;
-  return handoverAndHolidays.itemsForChangeover.noDecisionRequired
-    ? request.__('doNotNeedToDecide')
-    : handoverAndHolidays.itemsForChangeover.answer;
+  if (!handoverAndHolidays?.travelAbroad) return undefined;
+  if (handoverAndHolidays.travelAbroad.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const getAnswerForTravelAbroad = (option: travelAbroadField) => {
+    switch (option) {
+      case 'twoWeeks':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelAbroad.answer', { answer: 'At least 2 weeks' });
+      case 'fourWeeks':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelAbroad.answer', { answer: 'At least 4 weeks' });
+      case 'eightWeeks':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelAbroad.answer', { answer: 'At least 8 weeks' });
+      case 'anotherArrangement':
+        return handoverAndHolidays.travelAbroad.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return handoverAndHolidays.travelAbroad.options?.map(getAnswerForTravelAbroad).join(', ');
+};
+
+export const travelDocuments = (request: Request) => {
+  const { handoverAndHolidays } = request.session;
+  if (!handoverAndHolidays?.travelDocuments) return undefined;
+  if (handoverAndHolidays.travelDocuments.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const getAnswerForTravelDocuments = (option: travelDocumentsField) => {
+    switch (option) {
+      case 'parent':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelDocuments.answer', { answer: 'Parent' });
+      case 'otherParent':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelDocuments.answer', { answer: 'Other parent' });
+      case 'bothParents':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelDocuments.answer', { answer: 'Both parents' });
+      case 'parentTravelling':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelDocuments.answer', {
+          answer: 'The parent travelling with the children',
+        });
+      case 'anotherArrangement':
+        return handoverAndHolidays.travelDocuments.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return handoverAndHolidays.travelDocuments.options?.map(getAnswerForTravelDocuments).join(', ');
+};
+
+export const travelInformation = (request: Request) => {
+  const { handoverAndHolidays } = request.session;
+  if (!handoverAndHolidays?.travelInformation) return undefined;
+  if (handoverAndHolidays.travelInformation.noDecisionRequired) {
+    return request.__('doNotNeedToDecide');
+  }
+
+  const getAnswerForTravelInformation = (option: travelInformationField) => {
+    switch (option) {
+      case 'dates':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelInformation.answer', {
+          answer: request.__('handoverAndHolidays.travelInformation.travelInformation'),
+        });
+      case 'group':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelInformation.answer', {
+          answer: request.__('handoverAndHolidays.travelInformation.travelGroup'),
+        });
+      case 'address':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelInformation.answer', {
+          answer: request.__('handoverAndHolidays.travelInformation.accommodationAddress'),
+        });
+      case 'contact':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelInformation.answer', {
+          answer: request.__('handoverAndHolidays.travelInformation.emergencyContact'),
+        });
+      case 'passport':
+        return request.__('checkYourAnswers.handoverAndHolidays.travelInformation.answer', {
+          answer: request.__('handoverAndHolidays.travelInformation.passportHandover'),
+        });
+      case 'other':
+        return handoverAndHolidays.travelInformation.describeArrangement;
+      default:
+        return undefined;
+    }
+  };
+
+  return formatUnorderedList(handoverAndHolidays.travelInformation.options?.map(getAnswerForTravelInformation) ?? []);
 };
 
 export const whatWillHappen = (request: Request) => {

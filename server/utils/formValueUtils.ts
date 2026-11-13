@@ -1,7 +1,23 @@
 import { Request } from 'express';
 
-import { dayValues, whichDaysField, yesOrNo } from '../@types/fields';
+import { dayValues, itemsForChangeoverField, whichDaysField, yesOrNo } from '../@types/fields';
 import { WhichDays } from '../@types/session';
+
+const escapeHtmlText = (text: string): string =>
+  text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
+export const formatUnorderedList = (items: Array<string | undefined>): string | undefined => {
+  const labels = items.filter((item): item is string => !!item);
+  if (!labels.length) return undefined;
+
+  const listItems = labels.map((item) => `<li>${escapeHtmlText(item)}</li>`).join('');
+  return `<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0">${listItems}</ul>`;
+};
 
 export const formatListOfStrings = (words: string[], request: Request) => {
   if (!words) {
@@ -18,6 +34,37 @@ export const formatListOfStrings = (words: string[], request: Request) => {
       return request.__('aAndB', { itemA: words.slice(0, -1).join(', '), itemB: words[words.length - 1] });
   }
 };
+
+const itemsForChangeoverLabels = (
+  options: itemsForChangeoverField[] | undefined,
+  describeArrangement: string | undefined,
+  request: Request,
+) => {
+  if (!options?.length) return [];
+
+  return options
+    .map((option) =>
+      option === 'otherItems'
+        ? describeArrangement
+        : request.__(`handoverAndHolidays.itemsForChangeover.items.${option}`),
+    )
+    .filter((label): label is string => !!label);
+};
+
+export const formatItemsForChangeover = (
+  options: itemsForChangeoverField[] | undefined,
+  describeArrangement: string | undefined,
+  request: Request,
+) => {
+  const labels = itemsForChangeoverLabels(options, describeArrangement, request);
+  return labels.length ? labels.join(', ') : undefined;
+};
+
+export const formatItemsForChangeoverList = (
+  options: itemsForChangeoverField[] | undefined,
+  describeArrangement: string | undefined,
+  request: Request,
+) => formatUnorderedList(itemsForChangeoverLabels(options, describeArrangement, request));
 
 export const convertBooleanValueToRadioButtonValue = (booleanValue: boolean): yesOrNo | undefined => {
   switch (booleanValue) {

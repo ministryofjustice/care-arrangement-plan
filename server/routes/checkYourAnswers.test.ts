@@ -65,6 +65,84 @@ describe(`GET ${paths.CHECK_YOUR_ANSWERS}`, () => {
         expect(response.text).toContain('Check your answers');
         expect(response.text).toContain('Bob and Sam');
         expect(response.text).toContain('James, Rachel and Jack');
+        expect(response.text).toContain('Special days');
+      });
+  });
+
+  it('should render changeover items and travel information as unordered lists', () => {
+    Object.assign(sessionMock, structuredClone(session), {
+      handoverAndHolidays: {
+        ...session.handoverAndHolidays,
+        whereHandover: {
+          noDecisionRequired: false,
+          where: ['neutral', 'other'],
+          other: 'the park <near> school & library',
+        },
+        itemsForChangeover: {
+          noDecisionRequired: false,
+          options: ['clothesAndShoes', 'schoolItems', 'otherItems'],
+          describeArrangement: 'Medication <daily> & cream',
+        },
+        travelInformation: {
+          noDecisionRequired: false,
+          options: ['dates', 'contact', 'other'],
+          describeArrangement: 'Flight numbers',
+        },
+      },
+    });
+
+    return request(app)
+      .get(paths.CHECK_YOUR_ANSWERS)
+      .expect('Content-Type', /html/)
+      .expect((response) => {
+        expect(response.text).toContain(
+          '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Neutral location</li><li>the park &lt;near&gt; school &amp; library</li></ul>',
+        );
+        expect(response.text).toContain(
+          '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Clothes and shoes</li><li>School items</li><li>Medication &lt;daily&gt; &amp; cream</li></ul>',
+        );
+        expect(response.text).toContain(
+          '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Travel information (dates, transport details)</li><li>Emergency contact details</li><li>Flight numbers</li></ul>',
+        );
+        expect(response.text).not.toContain('Neutral location, the park');
+        expect(response.text).not.toContain('Clothes and shoes, School items');
+        expect(response.text).not.toContain('Emergency contact details, Flight numbers');
+      });
+  });
+
+  it('should render education and health answers with links back to those questions', () => {
+    Object.assign(sessionMock, structuredClone(session), {
+      education: {
+        shareInformation: { noDecisionRequired: false, options: ['bothParents'] },
+        routineDecisions: { noDecisionRequired: false, options: ['parent'] },
+        schoolMeetings: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent attends parents evening',
+        },
+      },
+      childHealth: {
+        routineDecisions: { noDecisionRequired: false, options: ['otherParent'] },
+        childHealthNeeds: { noDecisionRequired: false, description: 'Inhaler every morning' },
+      },
+    });
+
+    return request(app)
+      .get(paths.CHECK_YOUR_ANSWERS)
+      .expect('Content-Type', /html/)
+      .expect((response) => {
+        expect(response.text).toContain('Education');
+        expect(response.text).toContain('Health');
+        expect(response.text).toContain('Both Parents will receive updates');
+        expect(response.text).toContain('Parent will make decisions');
+        expect(response.text).toContain('A grandparent attends parents evening');
+        expect(response.text).toContain('Other Parent will decide');
+        expect(response.text).toContain('Inhaler every morning');
+        expect(response.text).toContain(`href="${paths.EDUCATION_SHARE_INFORMATION}"`);
+        expect(response.text).toContain(`href="${paths.EDUCATION_ROUTINE_DECISIONS}"`);
+        expect(response.text).toContain(`href="${paths.EDUCATION_SCHOOL_MEETINGS}"`);
+        expect(response.text).toContain(`href="${paths.CHILD_HEALTH}"`);
+        expect(response.text).toContain(`href="${paths.CHILD_HEALTH_NEEDS}"`);
       });
   });
 });

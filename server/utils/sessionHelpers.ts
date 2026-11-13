@@ -9,6 +9,14 @@ import { validateRedirectUrl } from './redirectValidator';
 export const formattedChildrenNames = (request: Request) =>
   formatListOfStrings(request.session.namesOfChildren, request);
 
+export const childrenReference = (request: Request) => {
+  const names = request.session.namesOfChildren;
+  if (names && names.length > 1) {
+    return request.__('checkYourAnswers.change.children');
+  }
+  return formattedChildrenNames(request);
+};
+
 export const parentMostlyLivedWith = (session: Partial<CAPSession>) =>
   session.livingAndVisiting.mostlyLive.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;
 
@@ -50,6 +58,18 @@ export const willChangeDuringSchoolHolidaysComplete = ({ handoverAndHolidays }: 
 export const itemsForChangeoverComplete = (session: Partial<CAPSession>) =>
   !!session.handoverAndHolidays?.itemsForChangeover;
 
+export const travelAbroadComplete = (session: Partial<CAPSession>) =>
+  !!session.handoverAndHolidays?.travelAbroad?.noDecisionRequired ||
+  !!session.handoverAndHolidays?.travelAbroad?.options?.length;
+
+export const travelDocumentsComplete = (session: Partial<CAPSession>) =>
+  !!session.handoverAndHolidays?.travelDocuments?.noDecisionRequired ||
+  !!session.handoverAndHolidays?.travelDocuments?.options?.length;
+
+export const travelInformationComplete = (session: Partial<CAPSession>) =>
+  !!session.handoverAndHolidays?.travelInformation?.noDecisionRequired ||
+  !!session.handoverAndHolidays?.travelInformation?.options?.length;
+
 export const whatWillHappenComplete = (session: Partial<CAPSession>) => !!session.specialDays?.whatWillHappen;
 
 export const whatOtherThingsMatterComplete = (session: Partial<CAPSession>) =>
@@ -60,6 +80,24 @@ export const planLastMinuteChangesComplete = (session: Partial<CAPSession>) =>
 
 export const planLongTermNoticeComplete = (session: Partial<CAPSession>) =>
   !!session.decisionMaking?.planLongTermNotice;
+
+export const educationShareInformationComplete = (session: Partial<CAPSession>) =>
+  !!session.education?.shareInformation?.noDecisionRequired || !!session.education?.shareInformation?.options?.length;
+
+export const educationRoutineDecisionsComplete = (session: Partial<CAPSession>) =>
+  !!session.education?.routineDecisions?.noDecisionRequired || !!session.education?.routineDecisions?.options?.length;
+
+export const educationSchoolMeetingsComplete = (session: Partial<CAPSession>) =>
+  !!session.education?.schoolMeetings?.noDecisionRequired || !!session.education?.schoolMeetings?.options?.length;
+
+export const childHealthComplete = (session: Partial<CAPSession>) =>
+  !!session.childHealth?.routineDecisions?.noDecisionRequired ||
+  !!session.childHealth?.routineDecisions?.options?.length;
+
+export const childHealthNeedsComplete = (session: Partial<CAPSession>) =>
+  !!session.childHealth?.childHealthNeeds?.noDecisionRequired ||
+  !!session.childHealth?.childHealthNeeds?.description ||
+  !!session.childHealth?.childHealthNeeds?.description?.trim().length;
 
 export const planReviewComplete = (session: Partial<CAPSession>) => !!session.decisionMaking?.planReview;
 

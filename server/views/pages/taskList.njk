@@ -82,38 +82,119 @@
         })
       }}
 
-      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays') }}</h2>
+      <h2 class="govuk-heading-m">{{ __('taskList.handoverAndHolidays.title') }}</h2>
       {{
         govukTaskList({
           idPrefix: 'handoverAndHolidays-taskList',
           items: [
             {
               title: {
-                text: __('handoverAndHolidays.getBetweenHouseholds.title')
+                text: __('taskList.handoverAndHolidays.getBetweenHouseholds', { childName: childName })
               },
               href: paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS,
               status: completeStatus if getBetweenHouseholdsComplete else incompleteStatus
             },
             {
               title: {
-                text: __('handoverAndHolidays.whereHandover.title')
+                text: __('taskList.handoverAndHolidays.whereHandover', { childName: childName })
               },
               href: paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER if getBetweenHouseholdsComplete else null,
               status: completeStatus if whereHandoverComplete else (incompleteStatus if getBetweenHouseholdsComplete else cannotStartStatus)
             },
             {
               title: {
-                text: __('handoverAndHolidays.willChangeDuringSchoolHolidays.title')
+                text: __('taskList.handoverAndHolidays.willChangeDuringSchoolHolidays', { childName: childName })
               },
               href: paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS if whereHandoverComplete else null,
               status: completeStatus if willChangeDuringSchoolHolidaysComplete else (incompleteStatus if whereHandoverComplete else cannotStartStatus)
             },
             {
               title: {
-                text: __('handoverAndHolidays.itemsForChangeover.title')
+                text: __('taskList.handoverAndHolidays.itemsForChangeover', { childName: childName })
               },
               href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
               status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('taskList.handoverAndHolidays.travelAbroad', { childName: childName })
+              },
+              href: paths.HANDOVER_HOLIDAYS_TRAVEL_ABROAD if itemsForChangeoverComplete else null,
+              status: completeStatus if travelAbroadComplete else (incompleteStatus if itemsForChangeoverComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('taskList.handoverAndHolidays.travelDocuments', { childName: childName })
+              },
+              href: paths.HANDOVER_HOLIDAYS_TRAVEL_DOCUMENTS if travelAbroadComplete else null,
+              status: completeStatus if travelDocumentsComplete else (incompleteStatus if travelAbroadComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('taskList.handoverAndHolidays.consentToTravel', { childName: childName })
+              },
+              href: paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER if willChangeDuringSchoolHolidaysComplete else null,
+              status: completeStatus if itemsForChangeoverComplete else (incompleteStatus if willChangeDuringSchoolHolidaysComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('taskList.handoverAndHolidays.travelInformation', { childName: childName })
+              },
+              href: paths.HANDOVER_HOLIDAYS_TRAVEL_INFORMATION if travelDocumentsComplete else null,
+              status: completeStatus if travelInformationComplete else (incompleteStatus if travelDocumentsComplete else cannotStartStatus)
+            }
+          ]
+        })
+      }}
+
+      <h2 class="govuk-heading-m">{{ __('taskList.education.title') }}</h2>
+      {{
+        govukTaskList({
+          idPrefix: 'education-taskList',
+          items: [
+            {
+              title: {
+                text: __('taskList.education.shareInformation', { childName: childName })
+              },
+              href: paths.EDUCATION_SHARE_INFORMATION,
+              status: completeStatus if educationShareInformationComplete else incompleteStatus
+            },
+            {
+              title: {
+                text: __('taskList.education.routineDecisions', { childName: childName })
+              },
+              href: paths.EDUCATION_ROUTINE_DECISIONS if educationShareInformationComplete else null,
+              status: completeStatus if educationRoutineDecisionsComplete else (incompleteStatus if educationShareInformationComplete else cannotStartStatus)
+            },
+            {
+              title: {
+                text: __('taskList.education.schoolMeetings', { childName: childName })
+              },
+              href: paths.EDUCATION_SCHOOL_MEETINGS if educationShareInformationComplete else null,
+              status: completeStatus if educationSchoolMeetingsComplete else (incompleteStatus if educationShareInformationComplete else cannotStartStatus)
+            }
+          ]
+        })
+      }}
+
+      <h2 class="govuk-heading-m">{{ __('taskList.childHealth.title') }}</h2>
+      {{
+        govukTaskList({
+          idPrefix: 'childHealth-taskList',
+          items: [
+            {
+              title: {
+                text: __('taskList.childHealth.routineDecisions', { childName: childName })
+              },
+              href: paths.CHILD_HEALTH,
+              status: completeStatus if childHealthComplete else incompleteStatus
+            },
+            {
+              title: {
+                text: __('taskList.childHealth.healthNeeds', { childName: childName })
+              },
+              href: paths.CHILD_HEALTH_NEEDS if childHealthComplete else null,
+              status: completeStatus if childHealthNeedsComplete else (incompleteStatus if childHealthComplete else cannotStartStatus)
             }
           ]
         })

@@ -1,0 +1,52 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/exit-this-page/macro.njk" import govukExitThisPage %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      null,
+      titleIds.HANDOVER_HOLIDAYS_TRAVEL_CONSENT
+    )
+  }}
+{% endblock %}
+
+{% block content %}
+  {% include "partials/exitThisPage.njk" %}
+  <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+    {{ __('exitThisPage') | safe }}
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ __('handoverAndHolidays.consentToTravel.title') }}</h1>
+
+      <p class="govuk-body">{{ __("handoverAndHolidays.consentToTravel.parentalResponsibility") | safe }}</p>
+      <p class="govuk-body">{{ __("handoverAndHolidays.consentToTravel.eachTime") }}</p>
+
+      <h2 class="govuk-heading-m">{{ __("handoverAndHolidays.consentToTravel.getPermission.title") }}</h2>
+      <p class="govuk-body">{{ __("handoverAndHolidays.consentToTravel.getPermission.havingPermission") }}</p>
+      <p class="govuk-body">{{ __("handoverAndHolidays.consentToTravel.getPermission.reminder") }}</p>
+
+      <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_TRAVEL_CONSENT }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+        <div class="govuk-button-group">
+          {{ govukButton({text: __('continue')}) }}
+          {{
+            govukButton({
+              text: __('saveAndComeBackLater'),
+              classes: "govuk-button--secondary",
+              name: "saveAndComeBackLater",
+              value: "true"
+            })
+          }}
+        </div>
+      </form>
+
+      <h2 class="govuk-heading-m">{{ __("handoverAndHolidays.consentToTravel.concerned.title") }}</h2>
+      <p class="govuk-body">{{ __("handoverAndHolidays.consentToTravel.concerned.description") | safe }}</p>
+    </div>
+  </div>
+{% endblock %}

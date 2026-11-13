@@ -8,7 +8,7 @@ const config = {
     ],
   },
   collectCoverageFrom: ['server/**/*.{ts,js,jsx,mjs}'],
-  coverageReporters: ['cobertura', 'text'],
+  coverageReporters: ['cobertura', 'html', 'lcov', 'text', 'text-summary'],
   testMatch: ['<rootDir>/server/**/*.test.{ts,js,jsx,mjs}'],
   testEnvironment: 'node',
   reporters: [

@@ -7,10 +7,18 @@ import setUpi18n from '../middleware/setUpi18n';
 import { sessionMock } from '../test-utils/testMocks';
 
 import {
+  childHealthNeeds,
+  childHealthRoutineDecisions,
+  educationRoutineDecisions,
+  educationSchoolMeetings,
+  educationShareInformation,
   getBetweenHouseholds,
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
   mostlyLive,
+  travelAbroad,
+  travelDocuments,
+  travelInformation,
   whatWillHappen,
   whereHandover,
   whichDaysDaytimeVisits,
@@ -49,6 +57,9 @@ const testAppSetup = (): Express => {
         willChangeDuringSchoolHolidays: willChangeDuringSchoolHolidays(request),
         howChangeDuringSchoolHolidays: howChangeDuringSchoolHolidays(request),
         itemsForChangeover: itemsForChangeover(request),
+        travelAbroad: travelAbroad(request),
+        travelDocuments: travelDocuments(request),
+        travelInformation: travelInformation(request),
       },
       specialDays: {
         whatWillHappen: whatWillHappen(request),
@@ -60,6 +71,15 @@ const testAppSetup = (): Express => {
         planLastMinuteChanges: planLastMinuteChanges(request),
         planLongTermNotice: planLongTermNotice(request),
         planReview: planReview(request),
+      },
+      education: {
+        shareInformation: educationShareInformation(request),
+        routineDecisions: educationRoutineDecisions(request),
+        schoolMeetings: educationSchoolMeetings(request),
+      },
+      childHealth: {
+        routineDecisions: childHealthRoutineDecisions(request),
+        healthNeeds: childHealthNeeds(request),
       },
     });
   });
@@ -294,7 +314,7 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'parent' as getBetweenHouseholdsField },
           whereHandover: {
             noDecisionRequired: false,
             where: ['neutral', 'initialHome', 'school'] as whereHandoverField[],
@@ -304,7 +324,7 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.initialAdultName} collects the children`,
-          whereHandover: `Neutral location, At ${session.initialAdultName}'s home, At school`,
+          whereHandover: `<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Neutral location</li><li>At ${session.initialAdultName}&#039;s home</li><li>At school (term time only)</li></ul>`,
           willChangeDuringSchoolHolidays: 'No',
           itemsForChangeover: 'itemsForChangeover arrangement',
         },
@@ -313,7 +333,7 @@ describe('formattedAnswers', () => {
         {
           getBetweenHouseholds: {
             noDecisionRequired: false,
-            how: 'other' as getBetweenHouseholdsField,
+            how: 'anotherArrangement' as getBetweenHouseholdsField,
             describeArrangement: 'getBetweenHouseholds arrangement',
           },
           whereHandover: {
@@ -327,7 +347,8 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: 'getBetweenHouseholds arrangement',
-          whereHandover: 'Grandma',
+          whereHandover:
+            '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Grandma</li></ul>',
           willChangeDuringSchoolHolidays: 'Yes',
           howChangeDuringSchoolHolidays: 'howChangeDuringSchoolHolidays answer',
           itemsForChangeover: 'itemsForChangeover arrangement',
@@ -335,7 +356,7 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'parent' as getBetweenHouseholdsField },
           whereHandover: {
             noDecisionRequired: false,
             where: ['neutral', 'other'] as whereHandoverField[],
@@ -346,14 +367,15 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.initialAdultName} collects the children`,
-          whereHandover: `Neutral location, the park near school`,
+          whereHandover:
+            '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Neutral location</li><li>the park near school</li></ul>',
           willChangeDuringSchoolHolidays: 'No',
           itemsForChangeover: 'itemsForChangeover arrangement',
         },
       ],
       [
         {
-          getBetweenHouseholds: { noDecisionRequired: false, how: 'secondaryCollects' as getBetweenHouseholdsField },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'otherParent' as getBetweenHouseholdsField },
           whereHandover: { noDecisionRequired: false, where: ['secondaryHome'] as whereHandoverField[] },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
           howChangeDuringSchoolHolidays: { noDecisionRequired: true },
@@ -361,7 +383,7 @@ describe('formattedAnswers', () => {
         },
         {
           getBetweenHouseholds: `${session.secondaryAdultName} collects the children`,
-          whereHandover: `At ${session.secondaryAdultName}'s home`,
+          whereHandover: `<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>At ${session.secondaryAdultName}&#039;s home</li></ul>`,
           willChangeDuringSchoolHolidays: 'Yes',
           howChangeDuringSchoolHolidays: 'We do not need to decide this',
           itemsForChangeover: 'itemsForChangeover arrangement',
@@ -374,6 +396,121 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.handoverAndHolidays).toEqual(expectedValues);
+        });
+    });
+
+    it('should list selected changeover items and the other items description', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        itemsForChangeover: {
+          noDecisionRequired: false,
+          options: ['clothesAndShoes', 'schoolItems', 'otherItems'],
+          describeArrangement: 'Medication',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.itemsForChangeover).toBe(
+            '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Clothes and shoes</li><li>School items</li><li>Medication</li></ul>',
+          );
+        });
+    });
+
+    it('should format travel abroad, travel documents and travel information', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        travelAbroad: { noDecisionRequired: false, options: ['fourWeeks'] },
+        travelDocuments: { noDecisionRequired: false, options: ['parentTravelling'] },
+        travelInformation: {
+          noDecisionRequired: false,
+          options: ['dates', 'contact', 'other'],
+          describeArrangement: 'Flight numbers',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.travelAbroad).toBe('At least 4 weeks');
+          expect(response.body.handoverAndHolidays.travelDocuments).toBe('The parent travelling with the children');
+          expect(response.body.handoverAndHolidays.travelInformation).toBe(
+            '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Travel information (dates, transport details)</li><li>Emergency contact details</li><li>Flight numbers</li></ul>',
+          );
+        });
+    });
+
+    it('should format skipped travel answers as no decision', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        travelAbroad: { noDecisionRequired: true },
+        travelDocuments: { noDecisionRequired: true },
+        travelInformation: { noDecisionRequired: true },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.travelAbroad).toBe('We do not need to decide this');
+          expect(response.body.handoverAndHolidays.travelDocuments).toBe('We do not need to decide this');
+          expect(response.body.handoverAndHolidays.travelInformation).toBe('We do not need to decide this');
+        });
+    });
+
+    it('should use the free-text arrangement for another travel arrangement', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        travelAbroad: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'At least 12 weeks',
+        },
+        travelDocuments: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent arranges the passports',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.travelAbroad).toBe('At least 12 weeks');
+          expect(response.body.handoverAndHolidays.travelDocuments).toBe('A grandparent arranges the passports');
+        });
+    });
+
+    it('should return both parents and someone else answers', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        getBetweenHouseholds: {
+          noDecisionRequired: false,
+          how: 'bothParents',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.getBetweenHouseholds).toBe(
+            'Both parents take turns collecting the children',
+          );
+        });
+
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        getBetweenHouseholds: {
+          noDecisionRequired: false,
+          how: 'someoneElse',
+          whoWillCollect: 'Grandmother',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.getBetweenHouseholds).toBe('Grandmother');
         });
     });
   });
@@ -507,6 +644,82 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.decisionMaking).toEqual(expectedValues);
+        });
+    });
+  });
+
+  describe('education and child health', () => {
+    const notRequired = 'We do not need to decide this';
+
+    it('should omit education and health answers that have not been given', () => {
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.education).toEqual({});
+          expect(response.body.childHealth).toEqual({});
+        });
+    });
+
+    it('should return the skipped answer when no decision is required', () => {
+      sessionMock.education = {
+        shareInformation: { noDecisionRequired: true },
+        routineDecisions: { noDecisionRequired: true },
+        schoolMeetings: { noDecisionRequired: true },
+      };
+      sessionMock.childHealth = {
+        routineDecisions: { noDecisionRequired: true },
+        childHealthNeeds: { noDecisionRequired: true },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.education).toEqual({
+            shareInformation: notRequired,
+            routineDecisions: notRequired,
+            schoolMeetings: notRequired,
+          });
+          expect(response.body.childHealth).toEqual({
+            routineDecisions: notRequired,
+            healthNeeds: notRequired,
+          });
+        });
+    });
+
+    it('should format the selected education and health answers', () => {
+      sessionMock.education = {
+        shareInformation: { noDecisionRequired: false, options: ['bothParents'] },
+        routineDecisions: { noDecisionRequired: false, options: ['parent', 'otherParent'] },
+        schoolMeetings: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent attends parents evening',
+        },
+      };
+      sessionMock.childHealth = {
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent books routine appointments',
+        },
+        childHealthNeeds: {
+          noDecisionRequired: false,
+          description: 'Inhaler every morning',
+        },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.education).toEqual({
+            shareInformation: 'Both Parents will receive updates',
+            routineDecisions: 'Parent will make decisions, Other Parent will make decisions',
+            schoolMeetings: 'A grandparent attends parents evening',
+          });
+          expect(response.body.childHealth).toEqual({
+            routineDecisions: 'A grandparent books routine appointments',
+            healthNeeds: 'Inhaler every morning',
+          });
         });
     });
   });

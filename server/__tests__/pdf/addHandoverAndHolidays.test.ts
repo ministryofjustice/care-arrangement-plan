@@ -31,7 +31,7 @@ describe('addHandoverAndHolidays', () => {
     [
       'addHandoverAndHolidays-2',
       {
-        getBetweenHouseholds: { noDecisionRequired: false, how: 'initialCollects' },
+        getBetweenHouseholds: { noDecisionRequired: false, how: 'parent' },
         whereHandover: { noDecisionRequired: false, where: ['neutral', 'initialHome', 'school'] },
         willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: false },
         itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
@@ -42,7 +42,7 @@ describe('addHandoverAndHolidays', () => {
       {
         getBetweenHouseholds: {
           noDecisionRequired: false,
-          how: 'other',
+          how: 'anotherArrangement',
           describeArrangement: 'getBetweenHouseholds arrangement',
         },
         whereHandover: { noDecisionRequired: false, where: ['neutral', 'other'], other: 'Grandma' },
@@ -54,7 +54,7 @@ describe('addHandoverAndHolidays', () => {
     [
       'addHandoverAndHolidays-4',
       {
-        getBetweenHouseholds: { noDecisionRequired: false, how: 'secondaryCollects' },
+        getBetweenHouseholds: { noDecisionRequired: false, how: 'otherParent' },
         whereHandover: { noDecisionRequired: false, where: ['secondaryHome'] },
         willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
         howChangeDuringSchoolHolidays: { noDecisionRequired: true },
