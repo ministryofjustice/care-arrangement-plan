@@ -1,3 +1,5 @@
+import crypto from 'crypto';
+
 import type { Request, Response, Router } from 'express-serve-static-core';
 
 import config from '../config';
@@ -5,7 +7,6 @@ import paths from '../constants/paths';
 import logger from '../logging/logger';
 import { buildAuthorizeUrl, buildLogoutUrl, completeAuthorization, createAuthorizeRequest } from '../oneLogin/client';
 import OneLoginError from '../oneLogin/error';
-import { openOneLoginTransaction, sealOneLoginTransaction } from '../oneLogin/transaction';
 
 const returnPathsToIgnore = new Set<string>([
   paths.SIGN_IN,
@@ -15,24 +16,26 @@ const returnPathsToIgnore = new Set<string>([
   paths.PASSWORD,
 ]);
 
-const allowedReturnPaths = new Map<string, string>(
-  Object.values(paths)
-    .filter((path) => !returnPathsToIgnore.has(path))
-    .map((path) => [path, path]),
-);
+const sameSecret = (left: string, right: string) => {
+  const leftBytes = Buffer.from(left);
+  const rightBytes = Buffer.from(right);
+  return leftBytes.length === rightBytes.length && crypto.timingSafeEqual(leftBytes, rightBytes);
+};
 
-const safeReturnUrl = (candidate: unknown) => {
+// Returns one of this service's own paths. The request value is only compared, never redirected to.
+const applicationPath = (candidate: unknown): paths => {
   if (typeof candidate !== 'string') {
     return paths.START;
   }
 
   const pathOnly = candidate.trim().split(/[?#]/, 1)[0];
-  if (pathOnly.includes('\\') || pathOnly.includes('://') || pathOnly.startsWith('//')) {
-    return paths.START;
+  for (const path of Object.values(paths)) {
+    if (!returnPathsToIgnore.has(path) && path === pathOnly) {
+      return path;
+    }
   }
 
-  // The map value is one of the application's own paths, never the request value.
-  return allowedReturnPaths.get(pathOnly) ?? paths.START;
+  return paths.START;
 };
 
 const issuerRedirectUrl = (candidate: string) => {
@@ -81,19 +84,16 @@ const accountRoutes = (router: Router) => {
 
     try {
       const authorizeRequest = createAuthorizeRequest();
-      const returnUrl = safeReturnUrl(request.query.returnURL ?? request.session.returnUrl);
-      const state = sealOneLoginTransaction(
-        {
-          nonce: authorizeRequest.nonce,
-          codeVerifier: authorizeRequest.codeVerifier,
-          returnUrl,
-        },
-        config.session.secret,
-      );
+      request.session.returnUrl = applicationPath(request.query.returnURL ?? request.session.returnUrl);
+      request.session.oneLoginRequest = {
+        state: authorizeRequest.state,
+        nonce: authorizeRequest.nonce,
+        codeVerifier: authorizeRequest.codeVerifier,
+      };
       const authorizeUrl = issuerRedirectUrl(
         await buildAuthorizeUrl({
           nonce: authorizeRequest.nonce,
-          state,
+          state: authorizeRequest.state,
           codeChallenge: authorizeRequest.codeChallenge,
           locale: request.session.lang,
         }),
@@ -114,21 +114,25 @@ const accountRoutes = (router: Router) => {
     const state = typeof request.query.state === 'string' ? request.query.state : undefined;
     const code = typeof request.query.code === 'string' ? request.query.code : undefined;
     const providerError = typeof request.query.error === 'string' ? request.query.error : undefined;
-    const transaction = state ? openOneLoginTransaction(state, config.session.secret) : undefined;
+    const pending = request.session.oneLoginRequest;
+    const stateMatches = Boolean(pending && state && sameSecret(state, pending.state));
 
-    if (providerError || !transaction || !code) {
+    if (providerError || !pending || !stateMatches || !code) {
       logger.info('Rejected GOV.UK One Login callback', { providerError: providerError || 'invalid_callback' });
       renderProblem(request, response, 400);
       return;
     }
 
+    const { nonce, codeVerifier } = pending;
+    const returnPath = applicationPath(request.session.returnUrl);
+    delete request.session.oneLoginRequest;
+
     try {
       const { idToken, user } = await completeAuthorization({
         code,
-        codeVerifier: transaction.codeVerifier,
-        nonce: transaction.nonce,
+        codeVerifier,
+        nonce,
       });
-      const returnUrl = safeReturnUrl(transaction.returnUrl);
 
       request.session.regenerate((regenerateError) => {
         if (regenerateError) {
@@ -138,7 +142,7 @@ const accountRoutes = (router: Router) => {
 
         request.session.oneLogin = { ...user, idToken };
         logger.info('Received successful login request');
-        response.redirect(returnUrl);
+        response.redirect(returnPath);
       });
     } catch (error) {
       logger.error(error, 'GOV.UK One Login callback failed');
