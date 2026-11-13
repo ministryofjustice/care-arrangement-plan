@@ -1,5 +1,17 @@
 {
   "serviceName": "Propose a child arrangements plan",
+  "oneLogin": {
+    "signOut": "Sign out",
+    "problem": {
+      "title": "Sorry, there is a problem with GOV.UK One Login",
+      "body": "You can try signing in again."
+    },
+    "signedOut": {
+      "title": "You have signed out",
+      "body": "You can sign in again to continue making a plan.",
+      "startAgain": "Start again"
+    }
+  },
   "yes": "Yes",
   "no": "No",
   "notSure": "I'm not sure",
@@ -60,7 +72,7 @@
       "descriptionList": {
         "findInformation": "find information on child arrangements on <a href=\"https://www.gov.uk/looking-after-children-divorce\" class=\"govuk-link--no-visited-state\">Making child arrangements if you are divorcing or separating</a>",
         "contactUs": "<a href=\"/contact-us\" class=\"govuk-link--no-visited-state\">contact us</a> to report a problem or suggest improvements to this service"
-      } 
+      }
     },
     "rateLimit": {
       "title": "Too many requests have been made",
@@ -593,7 +605,7 @@
     "planReview": {
       "title": "When would you like to review this plan?",
       "childrensNeedsChange": "Children's needs change as they grow. When should you review this agreement to check it is still what's best for the children?",
-      "youCanAlsoReview":"You can also review these arrangements at an earlier time if they no longer meet your children's needs.",
+      "youCanAlsoReview": "You can also review these arrangements at an earlier time if they no longer meet your children's needs.",
       "months": "Months",
       "years": "Years",
       "bothEmptyError": "Enter months or years",
@@ -646,7 +658,7 @@
     "downloadHtml": "Download as HTML (accessible)",
     "ifTheyDoNotRespond": "If there's no response",
     "tryMediation": "If {{{ otherAdult }}} does not respond or you can't make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
-    "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child's best interests. They listen to both of you and take a neutral approach.",
+    "aMediatorIs": "A mediator is a professional who will work with you to help you make decisions based on your child's best interests. They listen to both of you and take a neutral approach.",
     "ifYouCannotAgree": "Find out more about what to do if you cannot agree.",
     "whatWeAreTelling": {
       "proposedPlan": "{{{ senderName }}} has suggested a child arrangements plan",
@@ -671,10 +683,10 @@
       "bestOutcome": "leads to a better outcome for your children, which you and your ex-partner are in control of",
       "goingToCourt": "Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.",
       "topTips": "Tips to help you and your children",
-      "planShould":"Your child arrangements plan should:",
-      "welfare":"put the child's welfare first",
+      "planShould": "Your child arrangements plan should:",
+      "welfare": "put the child's welfare first",
       "wishes": "reflect the wishes, feelings and needs of the child",
-      "considerAnyHarm":"consider any harm the child has suffered or any risk of harm",
+      "considerAnyHarm": "consider any harm the child has suffered or any risk of harm",
       "everyPage": "Check you have every page of this document",
       "ifThereIsCourt": "If there is a court order in place",
       "doNotContinue": "Do not continue if there's a court order in place relating to you, the other parent, or the children.",
@@ -691,7 +703,7 @@
       "legalSeparation": "getting a legal separation - https://www.gov.uk/legal-separation",
       "divorce": "getting a divorce - https://www.gov.uk/get-a-divorce",
       "legalAdviceHeading": "If you want legal advice",
-      "findLegalAdviser" : "You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser.",
+      "findLegalAdviser": "You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser.",
       "domesticAbuseHeading": "Getting help with domestic abuse",
       "signsAndEffects": "To find out more about signs and effects of child abuse and neglect, visit https://www.nspcc.org.uk/what-is-child-abuse.",
       "unsureVictim": "If you're unsure whether you're a victim of domestic abuse, visit https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse.",
@@ -763,7 +775,7 @@
       "notLegallyBinding": "Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.",
       "noResponseHeading": "If there's no response",
       "unableToAgree": "If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.",
-      "aMediatorIs":"A mediator is a professional who will work with you to help you make decisions based on your child's best interests. They listen to both of you and take a neutral approach.",
+      "aMediatorIs": "A mediator is a professional who will work with you to help you make decisions based on your child's best interests. They listen to both of you and take a neutral approach.",
       "moreInfoAndSupport": "More information and support is available at https://www.gov.uk/looking-after-children-divorce.",
       "doNotAgree": {
         "livingAndVisiting": {
@@ -884,7 +896,7 @@
       },
       "legalAdvice": {
         "title": "If you want legal advice",
-        "findLegalAdviser" : "You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser."
+        "findLegalAdviser": "You can find a legal adviser: https://www.gov.uk/find-legal-advice/find-legal-adviser."
       },
       "domesticAbuse": {
         "title": "Getting help with domestic abuse",
@@ -1015,7 +1027,7 @@
     "reviewingThePlan": {
       "title": "When would you like to review this plan?",
       "intro": "Children's needs change as they grow. When should you review this agreement to check it is still what's best for the children?",
-      "youCanAlsoReview":"You can also review these arrangements at an earlier time if they no longer meet your children's needs."
+      "youCanAlsoReview": "You can also review these arrangements at an earlier time if they no longer meet your children's needs."
     },
     "nextSteps": {
       "sectionTitle": "Next steps",

@@ -10,6 +10,7 @@ import addCompletedStep from '../utils/addCompletedStep';
 import aboutTheAdultsRoutes from './aboutTheAdults';
 import aboutTheChildrenRoutes from './aboutTheChildren';
 import accessibilityStatementRoutes from './accessibilityStatement';
+import accountRoutes from './account';
 import analyticsRoutes from './analytics';
 import checkYourAnswersRoutes from './checkYourAnswers';
 import childrenSafetyRoutesCheck from './childrenSafetyCheck';
@@ -84,6 +85,7 @@ const routes = (): Router => {
   decisionMakingRoutes(router);
   downloadRoutes(router);
   accessibilityStatementRoutes(router);
+  accountRoutes(router);
 
   if (!config.production) {
     devSeedRoutes(router);
