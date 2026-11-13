@@ -6,12 +6,12 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { formattedChildrenNames, getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
+import { childrenReference, getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const childHealthNeedsRoutes = (router: Router) => {
   router.get(paths.CHILD_HEALTH_NEEDS, checkFormProgressFromConfig(FORM_STEPS.CHILD_HEALTH_NEEDS), (request, response) => {
     const errors = request.flash('errors');
-    const childName = formattedChildrenNames(request);
+    const childName = childrenReference(request);
     const formValues = {
       [formFields.CHILD_HEALTH_NEEDS_DESCRIPTION]: request.session.childHealth?.childHealthNeeds?.description,
       ...request.flash('formValues')?.[0],

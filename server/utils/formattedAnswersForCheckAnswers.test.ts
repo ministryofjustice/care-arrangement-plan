@@ -323,7 +323,7 @@ describe('formattedAnswers', () => {
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
         },
         {
-          getBetweenHouseholds: `${session.initialAdultName} collects James, Rachel and Jack`,
+          getBetweenHouseholds: `${session.initialAdultName} collects the children`,
           whereHandover: `<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Neutral location</li><li>At ${session.initialAdultName}&#039;s home</li><li>At school (term time only)</li></ul>`,
           willChangeDuringSchoolHolidays: 'No',
           itemsForChangeover: 'itemsForChangeover arrangement',
@@ -366,7 +366,7 @@ describe('formattedAnswers', () => {
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
         },
         {
-          getBetweenHouseholds: `${session.initialAdultName} collects James, Rachel and Jack`,
+          getBetweenHouseholds: `${session.initialAdultName} collects the children`,
           whereHandover:
             '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Neutral location</li><li>the park near school</li></ul>',
           willChangeDuringSchoolHolidays: 'No',
@@ -382,7 +382,7 @@ describe('formattedAnswers', () => {
           itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
         },
         {
-          getBetweenHouseholds: `${session.secondaryAdultName} collects James, Rachel and Jack`,
+          getBetweenHouseholds: `${session.secondaryAdultName} collects the children`,
           whereHandover: `<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>At ${session.secondaryAdultName}&#039;s home</li></ul>`,
           willChangeDuringSchoolHolidays: 'Yes',
           howChangeDuringSchoolHolidays: 'We do not need to decide this',
@@ -494,7 +494,7 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.handoverAndHolidays.getBetweenHouseholds).toBe(
-            'Both parents take turns collecting James, Rachel and Jack',
+            'Both parents take turns collecting the children',
           );
         });
 

@@ -7,12 +7,12 @@ import {
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
 } from '../utils/formattedAnswersForPdf';
-import { formattedChildrenNames } from '../utils/sessionHelpers';
+import { childrenReference } from '../utils/sessionHelpers';
 
 import addAnswer, { renderTextBox } from './addAnswer';
 
 const addGetBetweenHouseholds = (request: Request): string => {
-  const children = formattedChildrenNames(request);
+  const children = childrenReference(request);
 
   return addAnswer(
     request.__('taskList.handoverAndHolidays.title'),
@@ -25,7 +25,7 @@ const addGetBetweenHouseholds = (request: Request): string => {
 };
 
 const addWhereHandover = (request: Request): string => {
-  const children = formattedChildrenNames(request);
+  const children = childrenReference(request);
 
   return addAnswer(
     undefined,

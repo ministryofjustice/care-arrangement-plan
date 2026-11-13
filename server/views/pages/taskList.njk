@@ -103,7 +103,7 @@
             },
             {
               title: {
-                text: __('taskList.handoverAndHolidays.willChangeDuringSchoolHolidays')
+                text: __('taskList.handoverAndHolidays.willChangeDuringSchoolHolidays', { childName: childName })
               },
               href: paths.HANDOVER_HOLIDAYS_WILL_CHANGE_DURING_SCHOOL_HOLIDAYS if whereHandoverComplete else null,
               status: completeStatus if willChangeDuringSchoolHolidaysComplete else (incompleteStatus if whereHandoverComplete else cannotStartStatus)

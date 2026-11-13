@@ -9,6 +9,14 @@ import { validateRedirectUrl } from './redirectValidator';
 export const formattedChildrenNames = (request: Request) =>
   formatListOfStrings(request.session.namesOfChildren, request);
 
+export const childrenReference = (request: Request) => {
+  const names = request.session.namesOfChildren;
+  if (names && names.length > 1) {
+    return request.__('checkYourAnswers.change.children');
+  }
+  return formattedChildrenNames(request);
+};
+
 export const parentMostlyLivedWith = (session: Partial<CAPSession>) =>
   session.livingAndVisiting.mostlyLive.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;
 

@@ -17,7 +17,7 @@ import {
   formatUnorderedList,
   formatWhichDaysSessionValue,
 } from './formValueUtils';
-import { formattedChildrenNames, parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
+import { childrenReference, parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
 
 export const mostlyLive = (request: Request) => {
   const { livingAndVisiting, initialAdultName, secondaryAdultName } = request.session;
@@ -95,7 +95,7 @@ export const getBetweenHouseholds = (request: Request) => {
   if (handoverAndHolidays.getBetweenHouseholds.noDecisionRequired) {
     return request.__('doNotNeedToDecide');
   }
-  const children = formattedChildrenNames(request);
+  const children = childrenReference(request);
 
   switch (handoverAndHolidays.getBetweenHouseholds.how) {
     case 'parent':

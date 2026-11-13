@@ -10,6 +10,7 @@ import {
   educationRoutineDecisionsComplete,
   educationSchoolMeetingsComplete,
   educationShareInformationComplete,
+  childrenReference,
   formattedChildrenNames,
   getBetweenHouseholdsComplete,
   itemsForChangeoverComplete,
@@ -68,10 +69,10 @@ const taskListRoutes = (router: Router) => {
       isEducationRoutineDecisionsComplete &&
       isEducationSchoolMeetingsComplete;
 
-    const childName = formattedChildrenNames(request);
+    const childName = childrenReference(request);
 
     response.render('pages/taskList', {
-      title: request.__('taskList.title', { names: childName }),
+      title: request.__('taskList.title', { names: formattedChildrenNames(request) }),
       childName,
       numberOfChildren,
       namesOfChildren,

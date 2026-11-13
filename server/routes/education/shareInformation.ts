@@ -7,12 +7,12 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { formattedChildrenNames, getBackUrl } from '../../utils/sessionHelpers';
+import { childrenReference, getBackUrl } from '../../utils/sessionHelpers';
 
 const shareInformationRoutes = (router: Router) => {
   router.get(paths.EDUCATION_SHARE_INFORMATION, checkFormProgressFromConfig(FORM_STEPS.EDUCATION_SHARE_INFORMATION), (request, response) => {
     const errors = request.flash('errors');
-    const childName = formattedChildrenNames(request);
+    const childName = childrenReference(request);
     const formValues = {
       [formFields.EDUCATION_SHARE_INFORMATION_OPTION]: request.session.education?.shareInformation?.options?.[0],
       [formFields.EDUCATION_SHARE_INFORMATION_DESCRIBE_ARRANGEMENT]: request.session.education?.shareInformation?.describeArrangement,

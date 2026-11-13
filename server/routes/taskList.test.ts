@@ -109,6 +109,8 @@ describe(`GET ${paths.TASK_LIST}`, () => {
     expect(dom.window.document.querySelector('h1')).toHaveTextContent(
       'Child arrangements plan for James, Rachel and Jack',
     );
+    expect(response.text).toContain('How will the children get between households?');
+    expect(response.text).not.toContain('How will James, Rachel and Jack get between households?');
     expect(dom.window.document.title).toContain('Child arrangement plan with child(ren) details');
     expect(getContinueButton(dom.window.document)).not.toBeNull();
     expect(getContinueButton(dom.window.document)).toHaveTextContent('Continue');

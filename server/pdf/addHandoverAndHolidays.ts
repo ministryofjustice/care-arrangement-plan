@@ -8,7 +8,7 @@ import {
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
 } from '../utils/formattedAnswersForPdf';
-import { formattedChildrenNames } from '../utils/sessionHelpers';
+import { childrenReference } from '../utils/sessionHelpers';
 
 import addAnswer from './addAnswer';
 import TextboxComponent from './components/textbox';
@@ -16,7 +16,7 @@ import FontStyles from './fontStyles';
 import Pdf from './pdf';
 
 const addGetBetweenHouseholds = (pdf: Pdf, request: Request) => {
-  const children = formattedChildrenNames(request);
+  const children = childrenReference(request);
 
   addAnswer(
     pdf,
@@ -29,7 +29,7 @@ const addGetBetweenHouseholds = (pdf: Pdf, request: Request) => {
 };
 
 const addWhereHandover = (pdf: Pdf, request: Request) => {
-  const children = formattedChildrenNames(request);
+  const children = childrenReference(request);
 
   addAnswer(
     pdf,

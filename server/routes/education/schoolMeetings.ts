@@ -7,7 +7,7 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { formattedChildrenNames, getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
+import { childrenReference, getBackUrl, getRedirectUrlAfterFormSubmit } from '../../utils/sessionHelpers';
 
 const schoolMeetingsRoutes = (router: Router) => {
   router.get(
@@ -15,7 +15,7 @@ const schoolMeetingsRoutes = (router: Router) => {
     checkFormProgressFromConfig(FORM_STEPS.EDUCATION_SCHOOL_MEETINGS),
     (request, response) => {
       const errors = request.flash('errors');
-      const childName = formattedChildrenNames(request);
+      const childName = childrenReference(request);
       const formValues = {
         [formFields.EDUCATION_SCHOOL_MEETINGS_OPTION]: request.session.education?.schoolMeetings?.options?.[0],
         [formFields.EDUCATION_SCHOOL_MEETINGS_DESCRIBE_ARRANGEMENT]:

@@ -7,12 +7,12 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { formattedChildrenNames, getBackUrl } from '../../utils/sessionHelpers';
+import { childrenReference, getBackUrl } from '../../utils/sessionHelpers';
 
 const routineDecisionsRoutes = (router: Router) => {
   router.get(paths.EDUCATION_ROUTINE_DECISIONS, checkFormProgressFromConfig(FORM_STEPS.EDUCATION_ROUTINE_DECISIONS), (request, response) => {
     const errors = request.flash('errors');
-    const childName = formattedChildrenNames(request);
+    const childName = childrenReference(request);
     const formValues = {
       [formFields.EDUCATION_ROUTINE_DECISIONS_OPTION]: request.session.education?.routineDecisions?.options?.[0],
       [formFields.EDUCATION_ROUTINE_DECISIONS_DESCRIBE_ARRANGEMENT]: request.session.education?.routineDecisions?.describeArrangement,

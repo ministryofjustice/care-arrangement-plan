@@ -7,7 +7,7 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { formattedChildrenNames, getBackUrl } from '../../utils/sessionHelpers';
+import { childrenReference, getBackUrl } from '../../utils/sessionHelpers';
 
 const getBetweenHouseholdsRoutes = (router: Router) => {
   router.get(
@@ -24,7 +24,7 @@ const getBetweenHouseholdsRoutes = (router: Router) => {
       };
 
       const { initialAdultName, secondaryAdultName } = request.session;
-      const childrenNames = formattedChildrenNames(request);
+      const childrenNames = childrenReference(request);
 
       response.render('pages/handoverAndHolidays/getBetweenHouseholds', {
         errors: request.flash('errors'),
