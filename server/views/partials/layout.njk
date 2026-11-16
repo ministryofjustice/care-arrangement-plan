@@ -9,10 +9,23 @@
   {{ govukHeader({
     homepageUrl: 'https://www.gov.uk/'
   }) }}
-  {{ govukServiceNavigation({
-    serviceName: __('serviceName'),
-    serviceUrl: serviceUrl
-  }) }}
+  {% if oneLoginSignedIn %}
+    {{ govukServiceNavigation({
+      serviceName: __('serviceName'),
+      serviceUrl: serviceUrl,
+      navigation: [
+        {
+          href: paths.SIGN_OUT,
+          text: __('oneLogin.signOut')
+        }
+      ]
+    }) }}
+  {% else %}
+    {{ govukServiceNavigation({
+      serviceName: __('serviceName'),
+      serviceUrl: serviceUrl
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block pageTitle %}

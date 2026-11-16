@@ -32,6 +32,34 @@ services:
       - ./reporter-config.json:/app/reporter-config.json
       - ./tsconfig.json:/app/tsconfig.json
     ports:
-      - "8001:8001"
+      - '8001:8001'
     profiles:
       - dev
+
+  one-login-simulator:
+    image: ghcr.io/govuk-one-login/simulator:latest
+    container_name: one-login-simulator
+    ports:
+      - '3000:3000'
+    environment:
+      PORT: '3000'
+      SIMULATOR_URL: http://localhost:3000
+      REDIRECT_URLS: http://localhost:${PORT:-8001}/oidc/authorization-code/callback
+      POST_LOGOUT_REDIRECT_URLS: http://localhost:${PORT:-8001}/signed-out
+      SCOPES: openid,email
+      EMAIL: test@example.com
+      EMAIL_VERIFIED: 'true'
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:3000/.well-known/openid-configuration').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    profiles:
+      - one-login

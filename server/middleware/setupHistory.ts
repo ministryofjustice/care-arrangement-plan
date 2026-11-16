@@ -9,6 +9,10 @@ const pathsNotForHistory = [
   paths.DOWNLOAD_PAPER_FORM,
   // These pages should be skipped in the back button
   paths.PASSWORD,
+  paths.SIGN_IN,
+  paths.ONE_LOGIN_CALLBACK,
+  paths.SIGN_OUT,
+  paths.SIGNED_OUT,
   paths.ACCESSIBILITY_STATEMENT,
   paths.CONTACT_US,
   paths.COOKIES,
