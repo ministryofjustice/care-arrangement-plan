@@ -126,6 +126,16 @@ describe('formattedAnswers', () => {
         });
     });
 
+    it('should return undefined answers when living and visiting was never saved', () => {
+      delete sessionMock.livingAndVisiting;
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.livingAndVisiting).toEqual({});
+        });
+    });
+
     it('should return correctly for other', () => {
       const arrangement = 'arrangement';
       sessionMock.livingAndVisiting = {

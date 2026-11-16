@@ -7,7 +7,7 @@ import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelper
 
 export const mostlyLive = (request: Request) => {
   const { livingAndVisiting, initialAdultName, secondaryAdultName } = request.session;
-  if (!livingAndVisiting.mostlyLive) return undefined;
+  if (!livingAndVisiting?.mostlyLive) return undefined;
   switch (livingAndVisiting.mostlyLive.where) {
     case 'withInitial':
     case 'withSecondary':
@@ -32,7 +32,7 @@ export const mostlyLive = (request: Request) => {
 
 export const whichSchedule = (request: Request) => {
   const { livingAndVisiting, initialAdultName } = request.session;
-  if (!livingAndVisiting.whichSchedule) return undefined;
+  if (!livingAndVisiting?.whichSchedule) return undefined;
   return livingAndVisiting.whichSchedule.noDecisionRequired
     ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
     : request.__('sharePlan.yourProposedPlan.senderSuggested', {
@@ -43,7 +43,7 @@ export const whichSchedule = (request: Request) => {
 
 export const willOvernightsHappen = (request: Request) => {
   const { livingAndVisiting, initialAdultName } = request.session;
-  if (!livingAndVisiting.overnightVisits) return undefined;
+  if (!livingAndVisiting?.overnightVisits) return undefined;
   return livingAndVisiting.overnightVisits.willHappen
     ? request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedStayOvernight', {
         senderName: initialAdultName,
@@ -56,7 +56,7 @@ export const willOvernightsHappen = (request: Request) => {
 
 export const whichDaysOvernight = (request: Request) => {
   const { livingAndVisiting, initialAdultName } = request.session;
-  if (!livingAndVisiting.overnightVisits?.whichDays) return undefined;
+  if (!livingAndVisiting?.overnightVisits?.whichDays) return undefined;
   if (livingAndVisiting.overnightVisits.whichDays.describeArrangement) {
     return request.__('sharePlan.yourProposedPlan.senderSuggested', {
       senderName: initialAdultName,
@@ -75,7 +75,7 @@ export const whichDaysOvernight = (request: Request) => {
 
 export const willDaytimeVisitsHappen = (request: Request) => {
   const { livingAndVisiting, initialAdultName } = request.session;
-  if (!livingAndVisiting.daytimeVisits) return undefined;
+  if (!livingAndVisiting?.daytimeVisits) return undefined;
   return livingAndVisiting.daytimeVisits.willHappen
     ? request.__('sharePlan.yourProposedPlan.livingAndVisiting.suggestedDaytimeVisits', {
         senderName: initialAdultName,
@@ -88,7 +88,7 @@ export const willDaytimeVisitsHappen = (request: Request) => {
 
 export const whichDaysDaytimeVisits = (request: Request) => {
   const { livingAndVisiting, initialAdultName } = request.session;
-  if (!livingAndVisiting.daytimeVisits?.whichDays) return undefined;
+  if (!livingAndVisiting?.daytimeVisits?.whichDays) return undefined;
   if (livingAndVisiting.daytimeVisits.whichDays.describeArrangement) {
     return request.__('sharePlan.yourProposedPlan.senderSuggested', {
       senderName: initialAdultName,
@@ -107,6 +107,7 @@ export const whichDaysDaytimeVisits = (request: Request) => {
 
 export const getBetweenHouseholds = (request: Request) => {
   const { handoverAndHolidays, initialAdultName, secondaryAdultName } = request.session;
+  if (!handoverAndHolidays?.getBetweenHouseholds) return undefined;
   if (handoverAndHolidays.getBetweenHouseholds.noDecisionRequired) {
     return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
@@ -133,6 +134,7 @@ export const getBetweenHouseholds = (request: Request) => {
 
 export const whereHandover = (request: Request) => {
   const { handoverAndHolidays, initialAdultName, secondaryAdultName } = request.session;
+  if (!handoverAndHolidays?.whereHandover) return undefined;
   if (handoverAndHolidays.whereHandover.noDecisionRequired) {
     return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
@@ -154,6 +156,8 @@ export const whereHandover = (request: Request) => {
     }
   };
 
+  if (!handoverAndHolidays.whereHandover.where?.length) return undefined;
+
   return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedHandover', {
     senderName: initialAdultName,
     location: formatListOfStrings(handoverAndHolidays.whereHandover.where.map(getAnswerForWhereHandoverWhere), request),
@@ -162,6 +166,7 @@ export const whereHandover = (request: Request) => {
 
 export const willChangeDuringSchoolHolidays = (request: Request) => {
   const { handoverAndHolidays, initialAdultName } = request.session;
+  if (!handoverAndHolidays?.willChangeDuringSchoolHolidays) return undefined;
   if (handoverAndHolidays.willChangeDuringSchoolHolidays.noDecisionRequired) {
     return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
@@ -176,7 +181,7 @@ export const willChangeDuringSchoolHolidays = (request: Request) => {
 
 export const howChangeDuringSchoolHolidays = (request: Request) => {
   const { handoverAndHolidays, initialAdultName } = request.session;
-  if (!handoverAndHolidays.howChangeDuringSchoolHolidays) return undefined;
+  if (!handoverAndHolidays?.howChangeDuringSchoolHolidays) return undefined;
 
   return handoverAndHolidays.howChangeDuringSchoolHolidays.noDecisionRequired
     ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
@@ -188,6 +193,7 @@ export const howChangeDuringSchoolHolidays = (request: Request) => {
 
 export const itemsForChangeover = (request: Request) => {
   const { handoverAndHolidays, initialAdultName } = request.session;
+  if (!handoverAndHolidays?.itemsForChangeover) return undefined;
   return handoverAndHolidays.itemsForChangeover.noDecisionRequired
     ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
     : request.__('sharePlan.yourProposedPlan.senderSuggested', {
@@ -198,6 +204,7 @@ export const itemsForChangeover = (request: Request) => {
 
 export const whatWillHappen = (request: Request) => {
   const { specialDays, initialAdultName } = request.session;
+  if (!specialDays?.whatWillHappen) return undefined;
   return specialDays.whatWillHappen.noDecisionRequired
     ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
     : request.__('sharePlan.yourProposedPlan.senderSuggested', {
@@ -208,6 +215,7 @@ export const whatWillHappen = (request: Request) => {
 
 export const whatOtherThingsMatter = (request: Request) => {
   const { otherThings, initialAdultName } = request.session;
+  if (!otherThings?.whatOtherThingsMatter) return undefined;
   return otherThings.whatOtherThingsMatter.noDecisionRequired
     ? request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName })
     : request.__('sharePlan.yourProposedPlan.senderSuggested', {
@@ -218,9 +226,11 @@ export const whatOtherThingsMatter = (request: Request) => {
 
 export const planLastMinuteChanges = (request: Request) => {
   const { decisionMaking, initialAdultName } = request.session;
+  if (!decisionMaking?.planLastMinuteChanges) return undefined;
   if (decisionMaking.planLastMinuteChanges.noDecisionRequired) {
     return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
+  if (!decisionMaking.planLastMinuteChanges.options) return undefined;
   if (decisionMaking.planLastMinuteChanges.options.includes('anotherArrangement')) {
     return request.__('sharePlan.yourProposedPlan.senderSuggested', {
       senderName: initialAdultName,
@@ -235,6 +245,7 @@ export const planLastMinuteChanges = (request: Request) => {
 
 export const planLongTermNotice = (request: Request) => {
   const { decisionMaking, initialAdultName } = request.session;
+  if (!decisionMaking?.planLongTermNotice) return undefined;
   if (decisionMaking.planLongTermNotice.noDecisionRequired) {
     return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
@@ -252,7 +263,8 @@ export const planLongTermNotice = (request: Request) => {
 
 export const planReview = (request: Request) => {
   const { decisionMaking, initialAdultName } = request.session;
-  let number: number;
+  if (!decisionMaking?.planReview) return undefined;
+  let number: number | undefined;
   let translationName: string;
 
   if (decisionMaking.planReview.months) {
@@ -262,6 +274,8 @@ export const planReview = (request: Request) => {
     number = decisionMaking.planReview.years;
     translationName = 'sharePlan.yourProposedPlan.decisionMaking.planReview.suggestedYears';
   }
+
+  if (typeof number !== 'number') return undefined;
 
   const translationSuffix = number === 1 ? 'Singular' : 'Plural';
 

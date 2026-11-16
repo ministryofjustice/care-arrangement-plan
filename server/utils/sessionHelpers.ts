@@ -10,10 +10,10 @@ export const formattedChildrenNames = (request: Request) =>
   formatListOfStrings(request.session.namesOfChildren, request);
 
 export const parentMostlyLivedWith = (session: Partial<CAPSession>) =>
-  session.livingAndVisiting.mostlyLive.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;
+  session.livingAndVisiting?.mostlyLive?.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;
 
 export const parentNotMostlyLivedWith = (session: Partial<CAPSession>) =>
-  session.livingAndVisiting.mostlyLive.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;
+  session.livingAndVisiting?.mostlyLive?.where === 'withInitial' ? session.initialAdultName : session.secondaryAdultName;
 
 export const mostlyLiveComplete = (session: Partial<CAPSession>) => {
   if (!session.livingAndVisiting?.mostlyLive) return false;

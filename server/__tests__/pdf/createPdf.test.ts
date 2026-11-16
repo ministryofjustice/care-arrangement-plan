@@ -197,4 +197,38 @@ describe('createPdf', () => {
     validatePdfResponse(response, 300000); // Should be at least 300KB with all the long strings
     validateResponseAgainstSnapshot(response.body, 'test-assets/fullTestOutput-longAnswers.pdf');
   });
+
+  test('returns a pdf when living and visiting has not been answered', async () => {
+    Object.assign(sessionMock, {
+      numberOfChildren: 1,
+      namesOfChildren: ['James'],
+      initialAdultName: 'Bob',
+      secondaryAdultName: 'Sam',
+    });
+
+    const response = await request(app).get(paths.DOWNLOAD_PDF).buffer(true);
+
+    validatePdfResponse(response, 1000);
+  });
+
+  test('returns a pdf when later answers have no numbers or lists', async () => {
+    Object.assign(sessionMock, {
+      numberOfChildren: 1,
+      namesOfChildren: ['James'],
+      initialAdultName: 'Bob',
+      secondaryAdultName: 'Sam',
+      handoverAndHolidays: {
+        whereHandover: { noDecisionRequired: false },
+      },
+      decisionMaking: {
+        planLastMinuteChanges: { noDecisionRequired: false },
+        planLongTermNotice: { noDecisionRequired: false },
+        planReview: {},
+      },
+    });
+
+    const response = await request(app).get(paths.DOWNLOAD_PDF).buffer(true);
+
+    validatePdfResponse(response, 1000);
+  });
 });

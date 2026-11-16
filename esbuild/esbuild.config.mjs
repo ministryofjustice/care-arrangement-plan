@@ -1,7 +1,7 @@
 import { rmSync } from 'node:fs';
 import path from 'node:path';
 
-import { glob } from 'glob';
+import { globSync } from 'glob';
 
 import buildApp from './app.config.mjs';
 import buildAssets from './assets.config.mjs';
@@ -17,8 +17,7 @@ const buildConfig = {
 
   app: {
     outDir: path.join(cwd, 'dist'),
-    entryPoints: glob
-      .sync([path.join(cwd, '*.ts'), path.join(cwd, 'server/**/*.ts')])
+    entryPoints: globSync([path.join(cwd, '*.ts'), path.join(cwd, 'server/**/*.ts')])
       .filter((file) => !file.endsWith('.test.ts'))
       .filter((file) => !file.endsWith('.config.ts')),
     copy: [
@@ -35,7 +34,7 @@ const buildConfig = {
 
   assets: {
     outDir: path.join(cwd, 'dist/assets'),
-    entryPoints: glob.sync([path.join(cwd, 'assets/js/index.js'), path.join(cwd, 'assets/scss/application.scss')]),
+    entryPoints: globSync([path.join(cwd, 'assets/js/index.js'), path.join(cwd, 'assets/scss/application.scss')]),
     copy: [
       {
         from: path.join(cwd, 'assets/**/!(*.js|*.scss)'),
