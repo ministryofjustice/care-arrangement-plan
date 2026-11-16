@@ -1,5 +1,5 @@
 {
-  "serviceName": "Cynnig cynllun trefniant plentyn",
+  "serviceName": "Cynnig cynllun trefniadau plant",
   "yes": "Ydyn",
   "no": "Nac ydyn",
   "notSure": "Dydw i ddim yn siŵr",
@@ -23,7 +23,7 @@
   "anotherArrangement": "Trefniant arall",
   "or": "Neu",
   "aItem": "a {{ item }}",
-  "aAndB": "{{{ itemA }}} and {{{ itemB }}}",
+  "aAndB": "{{{ itemA }}} a/ac {{{ itemB }}}",
   "describeArrangement": "Disgrifiwch y trefniant",
   "selectAllThatApply": "Dewiswch bob un sy'n berthnasol",
   "phaseBannerText": "Mae hwn yn wasanaeth newydd - bydd eich <a href=\"{{ feedbackUrl }}\" class=\"govuk-link--no-visited-state\">adborth</a> yn ein helpu i'w wella.",
@@ -87,7 +87,7 @@
     }
   },
   "cookieBanner": {
-    "title": "Cwcis ar Cynnig Cynllun Trefniadau Plant",
+    "title": "Cwcis ar Cynnig cynllun trefniadau plant",
     "acceptCookies": "Derbyn cwcis dadansoddol",
     "rejectCookies": "Gwrthod cwcis dadansoddol",
     "viewCookies": "Gweld cwcis",
@@ -158,8 +158,8 @@
     "name": "Enw",
     "purpose": "Pwrpas",
     "expires": "Daw i ben ar",
-    "yes": "Oes",
-    "no": "Nac oes",
+    "yes": "Ydw",
+    "no": "Nac ydw",
     "aboutCookies": {
       "smallFiles": "Mae'r gwasanaeth Cynnig Trefniadau Plant yn rhoi ffeiliau bach (a elwir yn 'cwcis') ar eich cyfrifiadur i gasglu gwybodaeth am y ffordd yr ydych chi'n pori drwy'r gwasanaeth.",
       "usedTo": "Mae cwcis yn cael eu defnyddio i:",
@@ -477,8 +477,8 @@
   "livingAndVisiting": {
     "mostlyLive": {
       "title": "Ble fydd y plant yn treulio'r rhan fwyaf o'u hamser?",
-      "with": "Gyda {{{ adult }}}",
-      "split": "Byddant yn rhannu eu hamser rhwng {{{ initialAdult }}} ac {{{ secondaryAdult }}}",
+      "with": "Gyda(g) {{{ adult }}}",
+      "split": "Byddant yn rhannu eu hamser rhwng {{{ initialAdult }}} a/ac {{{ secondaryAdult }}}",
       "anotherArrangement": "Trefniant arall<span class=\"govuk-visually-hidden\">Bydd dewis hwn yn amlygu maes arall</span>",
       "emptyError": "Dewiswch ble fydd y plant yn treulio'r rhan fwyaf o'u hamser",
       "arrangementMissingError": "Disgrifiwch y trefniant byw rydych chi'n ei gynnig"
@@ -491,7 +491,7 @@
       "error": "Disgrifiwch pa amserlen fydd yn gweddu orau i anghenion y plant"
     },
     "willOvernightsHappen": {
-      "title": "A fydd y plant yn aros dros nos gyda {{{ adult }}}?",
+      "title": "A fydd y plant yn aros dros nos gyda(g) {{{ adult }}}?",
       "error": "Dewiswch p'un a fydd y plant yn aros dros nos",
       "yes": "Bydd",
       "no": "Na fydd"
@@ -555,7 +555,7 @@
   "specialDays": {
     "whatWillHappen": {
       "title": "Beth fydd yn digwydd ar ddyddiau arbennig?",
-      "content": "Cadwch deimladau eich plant wrth wraidd eich cynlluniau ar gyfer gwyliau a digwyddiadau pwysig. Er enghraifft, dathliadau'r Flwyddyn Newydd, Sul y Mamau a Sul y Tadau, a phenblwyddi.",
+      "content": "Cadwch deimladau eich plant wrth wraidd eich cynlluniau ar gyfer gwyliau a digwyddiadau pwysig. Er enghraifft, dathliadau'r Flwyddyn Newydd, Sul y Mamau a Sul y Tadau, a phen-blwyddi.",
       "error": "Disgrifiwch beth rydych chi'n ei gynnig fydd yn digwydd ar ddiwrnodau arbennig"
     }
   },
@@ -825,7 +825,7 @@
   "paperForm": {
     "title": "Cynnig cynllun trefniadau plant",
     "intro": "Defnyddiwch y ffurflen hon o'r gwasanaeth Cynllun Trefniadau Plant ( https://propose-child-arrangements-plan.service.gov.uk/ ) ar GOV.UK i gydweithio i greu trefniadau plant yr ydych chi'ch dau yn cytuno arnynt, heb orfod mynd i'r llys.",
-    "notLegallyBinding": "Nid yw unrhyw gynllun a wnewch gan ddefnyddio'r gwasanaeth hyn yn gyfreithiol rwymol. Nid oed rhaid i'r unigolyn arall rhiant  wneud yr hyn y mae'n ei ddweud, a gall y naill neu'r llall ohonoch awgrymu newidiadau iddo ar unrhyw adeg.",
+    "notLegallyBinding": "Nid yw unrhyw gynllun a wnewch gan ddefnyddio'r gwasanaeth hyn yn gyfreithiol rwymol. Nid oes rhaid i'r rhiant arall wneud yr hyn y mae'n ei ddweud, a gall y naill neu'r llall ohonoch awgrymu newidiadau iddo ar unrhyw adeg.",
     "howToUseThisForm": {
       "title": "Sut i ddefnyddio'r ffurflen hon",
       "howToUseSteps": {

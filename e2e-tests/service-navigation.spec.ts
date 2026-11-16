@@ -5,7 +5,7 @@ import { startJourney, navigateToTaskList } from './fixtures/test-helpers';
 
 const SERVICE_URL = 'http://localhost:3001';
 const SERVICE_NAME_EN = 'Propose a child arrangements plan';
-const SERVICE_NAME_CY = 'Cynnig cynllun trefniant plentyn';
+const SERVICE_NAME_CY = 'Cynnig cynllun trefniadau plant';
 
 test.describe('Service navigation', () => {
   test('should display service name and link on the homepage', async ({ page }) => {

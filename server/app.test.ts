@@ -14,7 +14,7 @@ const app = testAppSetup();
 type languages = 'en' | 'cy';
 const homepageLanguageStrings = {
   en: 'Propose a child arrangements plan',
-  cy: 'Cynnig cynllun trefniant plentyn',
+  cy: 'Cynnig cynllun trefniadau plant',
 };
 
 describe('App', () => {
