@@ -12,6 +12,7 @@ import {
   navigateToTaskList,
   getRadioNo,
   getRadioYes,
+  continueWithoutSigningIn,
 } from './fixtures/test-helpers';
 
 test.describe('Browser Navigation - Onboarding Flow', () => {
@@ -181,6 +182,7 @@ test.describe('Browser Navigation - Alternative Paths', () => {
   test('should navigate back from not-safe page', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     await goToSafetyCheck(page);
 
@@ -209,6 +211,7 @@ test.describe('Browser Navigation - Alternative Paths', () => {
   test('should navigate back from children-not-safe page', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     await getRadioYes(page).check();
     await page.getByRole('button', { name: /continue/i }).click();

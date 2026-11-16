@@ -8,6 +8,7 @@ export declare module 'express-session' {
     previousPage: string;
     lang: string;
     returnUrl?: string;
+    continueWithoutSignIn?: boolean;
     oneLoginRequest?: {
       state: string;
       nonce: string;

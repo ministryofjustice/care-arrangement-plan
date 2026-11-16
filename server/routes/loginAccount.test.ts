@@ -1,6 +1,7 @@
 import { JSDOM } from 'jsdom';
 import request from 'supertest';
 
+import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 import testAppSetup from '../test-utils/testAppSetup';
 
@@ -18,6 +19,10 @@ describe(paths.LOGIN_ACCOUNT, () => {
       expect(document.querySelector(`form[action="${paths.LOGIN_START}"] button`)).toHaveTextContent(
         'Create a new plan',
       );
+      expect(document.querySelector(`input[name="${formFields.LOGIN_START}"]`)).toHaveAttribute(
+        'value',
+        'start-new-plan',
+      );
     });
 
     it('should render the saved plan and its actions', async () => {
@@ -30,6 +35,10 @@ describe(paths.LOGIN_ACCOUNT, () => {
       expect(document.body).toHaveTextContent('In progress');
       expect(document.body).toHaveTextContent('23 October 2026');
       expect(document.body).toHaveTextContent('Continue plan');
+      const continuePlan = Array.from(document.querySelectorAll('a')).find((link) =>
+        link.textContent?.includes('Continue plan'),
+      );
+      expect(continuePlan).toHaveAttribute('href', paths.LOGIN_ACCOUNT);
       expect(document.body).toHaveTextContent('Delete this plan');
     });
   });

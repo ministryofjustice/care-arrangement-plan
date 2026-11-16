@@ -16,7 +16,14 @@ const setupAuthentication = () => {
       return;
     }
     if (config.oneLogin.enabled) {
-      sendUserToSignIn(req, res);
+      // The login-start form is the only place that starts GOV.UK One Login,
+      // and only after the user chooses to continue an existing plan.
+      if (req.path === paths.START || req.path === paths.LOGIN_START || req.session?.continueWithoutSignIn) {
+        next();
+        return;
+      }
+      rememberReturnUrl(req);
+      res.redirect(paths.LOGIN_START);
       return;
     }
     sendUserToPasswordPage(req, res);
@@ -33,11 +40,6 @@ const rememberReturnUrl = (req: Request) => {
 const sendUserToPasswordPage = (req: Request, res: Response) => {
   rememberReturnUrl(req);
   res.redirect(paths.PASSWORD);
-};
-
-const sendUserToSignIn = (req: Request, res: Response) => {
-  rememberReturnUrl(req);
-  res.redirect(paths.SIGN_IN);
 };
 
 const isAuthenticated = (req: Request) => {

@@ -5,6 +5,23 @@ import helmet from 'helmet';
 
 import config from '../config';
 
+// The sign-in form follows redirects from the issuer to the GOV.UK One Login
+// sign-in host. form-action has to allow every host in that chain.
+const oneLoginFormActions = (): string[] => {
+  if (!config.oneLogin.enabled) {
+    return [];
+  }
+
+  const issuer = new URL(config.oneLogin.issuer);
+  const origins = [issuer.origin];
+  if (issuer.hostname.startsWith('oidc.')) {
+    const signInHost = new URL(issuer.origin);
+    signInHost.hostname = `signin.${issuer.hostname.slice('oidc.'.length)}`;
+    origins.push(signInHost.origin);
+  }
+  return origins;
+};
+
 const setUpWebSecurity = (): Router => {
   const router = Router();
 
@@ -40,7 +57,7 @@ const setUpWebSecurity = (): Router => {
           ],
           styleSrc: ["'self'", (_req: Request, response: Response) => `'nonce-${response.locals.cspNonce}'`],
           fontSrc: ["'self'"],
-          formAction: ["'self'"],
+          formAction: ["'self'", ...oneLoginFormActions()],
           upgradeInsecureRequests: config.useHttps ? [] : null,
         },
       },

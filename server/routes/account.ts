@@ -8,34 +8,10 @@ import logger from '../logging/logger';
 import { buildAuthorizeUrl, buildLogoutUrl, completeAuthorization, createAuthorizeRequest } from '../oneLogin/client';
 import OneLoginError from '../oneLogin/error';
 
-const returnPathsToIgnore = new Set<string>([
-  paths.SIGN_IN,
-  paths.ONE_LOGIN_CALLBACK,
-  paths.SIGN_OUT,
-  paths.SIGNED_OUT,
-  paths.PASSWORD,
-]);
-
 const sameSecret = (left: string, right: string) => {
   const leftBytes = Buffer.from(left);
   const rightBytes = Buffer.from(right);
   return leftBytes.length === rightBytes.length && crypto.timingSafeEqual(leftBytes, rightBytes);
-};
-
-// Returns one of this service's own paths. The request value is only compared, never redirected to.
-const applicationPath = (candidate: unknown): paths => {
-  if (typeof candidate !== 'string') {
-    return paths.START;
-  }
-
-  const pathOnly = candidate.trim().split(/[?#]/, 1)[0];
-  for (const path of Object.values(paths)) {
-    if (!returnPathsToIgnore.has(path) && path === pathOnly) {
-      return path;
-    }
-  }
-
-  return paths.START;
 };
 
 const issuerRedirectUrl = (candidate: string) => {
@@ -84,7 +60,7 @@ const accountRoutes = (router: Router) => {
 
     try {
       const authorizeRequest = createAuthorizeRequest();
-      request.session.returnUrl = applicationPath(request.query.returnURL ?? request.session.returnUrl);
+      request.session.returnUrl = paths.LOGIN_ACCOUNT;
       request.session.oneLoginRequest = {
         state: authorizeRequest.state,
         nonce: authorizeRequest.nonce,
@@ -124,7 +100,6 @@ const accountRoutes = (router: Router) => {
     }
 
     const { nonce, codeVerifier } = pending;
-    const returnPath = applicationPath(request.session.returnUrl);
     delete request.session.oneLoginRequest;
 
     try {
@@ -133,6 +108,7 @@ const accountRoutes = (router: Router) => {
         codeVerifier,
         nonce,
       });
+      const signedInPath = paths.LOGIN_ACCOUNT;
 
       request.session.regenerate((regenerateError) => {
         if (regenerateError) {
@@ -141,8 +117,25 @@ const accountRoutes = (router: Router) => {
         }
 
         request.session.oneLogin = { ...user, idToken };
-        logger.info('Received successful login request');
-        response.redirect(returnPath);
+        request.session.returnUrl = signedInPath;
+
+        const openAccount = () => {
+          logger.info('Received successful login request');
+          response.redirect(signedInPath);
+        };
+
+        if (typeof request.session.save === 'function') {
+          request.session.save((saveError) => {
+            if (saveError) {
+              next(saveError);
+              return;
+            }
+            openAccount();
+          });
+          return;
+        }
+
+        openAccount();
       });
     } catch (error) {
       logger.error(error, 'GOV.UK One Login callback failed');

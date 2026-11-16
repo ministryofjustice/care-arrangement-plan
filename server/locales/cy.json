@@ -296,7 +296,8 @@
     "options": {
       "startNewPlan": "Start a new plan without signing in",
       "signIn": "Sign in with GOV.UK One Login to continue an existing plan"
-    }
+    },
+    "error": "Select whether you want to start a new plan or sign in"
   },
   "loginAccount": {
     "title": "Your child arrangements plans",
@@ -316,7 +317,7 @@
         "status": "In progress",
         "savedUntil": "23 October 2026",
         "actions": {
-          "continue": "<a href=\"#\">Continue plan</a>",
+          "continue": "<a href=\"/login-account\">Continue plan</a>",
           "delete": "<a href=\"#\">Delete this plan</a>"
         }
       }

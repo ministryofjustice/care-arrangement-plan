@@ -53,4 +53,32 @@ describe('When a route is called', () => {
         .expect(200);
     });
   });
+
+  describe('and GOV.UK One Login is enabled', () => {
+    const originalOneLogin = config.oneLogin;
+
+    beforeEach(() => {
+      config.oneLogin = {
+        enabled: true,
+        issuer: 'https://issuer.example/',
+        clientId: 'client-id',
+        privateKey: 'private-key',
+        redirectUrl: 'http://localhost:3001/oidc/authorization-code/callback',
+        postLogoutRedirectUrl: 'http://localhost:3001/signed-out',
+        scopes: ['openid', 'email'],
+        vtr: 'Cl.Cm',
+      };
+      delete sessionMock.oneLogin;
+      delete sessionMock.continueWithoutSignIn;
+    });
+
+    afterEach(() => {
+      config.oneLogin = originalOneLogin;
+      delete sessionMock.continueWithoutSignIn;
+    });
+
+    it('should send the user to the sign-in choice rather than straight to GOV.UK One Login', () => {
+      return request(app).get(paths.TASK_LIST).expect(302).expect('location', paths.LOGIN_START);
+    });
+  });
 });

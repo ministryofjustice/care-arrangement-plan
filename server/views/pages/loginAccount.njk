@@ -40,7 +40,7 @@
     {% set detailsLinkClass = "govuk-link govuk-link--no-visited-state govuk-!-margin-left-4 " + (activeLinkClass if currentAccountPage == "details" else inactiveLinkClass) %}
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <a class="{{ plansLinkClass }}" href="/mvp-save-and-return/login-account"{% if currentAccountPage == 'plans' %} aria-current="page"{% endif %}>
+        <a class="{{ plansLinkClass }}" href="{{ paths.LOGIN_ACCOUNT }}"{% if currentAccountPage == 'plans' %} aria-current="page"{% endif %}>
           Your child arrangements plans
         </a>
         <a class="{{ detailsLinkClass }}" href="/mvp-save-and-return/login-your-details"{% if currentAccountPage == 'details' %} aria-current="page"{% endif %}>
@@ -48,7 +48,7 @@
         </a>
       </div>
       <div class="govuk-grid-column-one-third govuk-!-text-align-right">
-        <a class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold text-decoration-none" href="/mvp-save-and-return/clear-session-and-sign-out">
+        <a class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold text-decoration-none" href="{{ paths.SIGN_OUT }}">
           Sign out
         </a>
       </div>
@@ -60,7 +60,9 @@
         <h1 class="govuk-heading-l">{{ __('loginAccount.title') }}</h1>
         <p class="govuk-body">{{ __('loginAccount.description') }}</p>
         <p class="govuk-body">{{ __('loginAccount.readMore') | safe }}</p>
-        <form class="form" action="{{ paths.LOGIN_START }}" method="post" novalidate>  
+        <form class="form" action="{{ paths.LOGIN_START }}" method="post" novalidate>
+          <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+          <input type="hidden" name="{{ formFields.LOGIN_START }}" value="start-new-plan" />
           {{ govukButton({text: __('loginAccount.createPlanButton')}) }}
         </form>
       </div>

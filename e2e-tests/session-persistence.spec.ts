@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import { verifyBackNavigation } from './fixtures/navigation-helpers';
+import { continueWithoutSigningIn } from './fixtures/test-helpers';
 import { emptyStorageState } from './fixtures/storage-state';
 
 test.describe('Session Persistence', () => {
@@ -8,6 +9,7 @@ test.describe('Session Persistence', () => {
     // Navigate through flow to number-of-children
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     // Complete safety checks
     await page.getByLabel(/no/i).first().check();

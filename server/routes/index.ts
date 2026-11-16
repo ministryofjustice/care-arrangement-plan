@@ -47,6 +47,7 @@ function clearSessionData(request: Request): void {
   delete request.session.decisionMaking;
   delete request.session.pageHistory;
   delete request.session.completedSteps;
+  delete request.session.continueWithoutSignIn;
   request.session.planStartTime = Date.now();
 }
 
@@ -55,16 +56,13 @@ const routes = (): Router => {
 
   router.get(paths.START, (request, response) => {
     clearSessionData(request);
-    if (config.isLiveService) {
-      return response.redirect(paths.CHILDREN_SAFETY_CHECK);
-    }
     addCompletedStep(request, FORM_STEPS.START);
     response.render('pages/index');
   });
 
   router.post(paths.START, (request, response) => {
     clearSessionData(request);
-    response.redirect(paths.CHILDREN_SAFETY_CHECK);
+    response.redirect(paths.LOGIN_START);
   });
 
   analyticsRoutes(router);

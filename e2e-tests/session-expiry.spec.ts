@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import { completeOnboardingFlow, navigateToTaskList } from './fixtures/test-helpers';
+import { completeOnboardingFlow, continueWithoutSigningIn, navigateToTaskList } from './fixtures/test-helpers';
 
 test.describe('Session Expiry', () => {
   test('should redirect to start page when session expires mid-journey', async ({ page }) => {
@@ -34,6 +34,7 @@ test.describe('Session Expiry', () => {
     await page.context().clearCookies();
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
     await expect(page).toHaveURL(/\/children-safety-check/);
   });
 

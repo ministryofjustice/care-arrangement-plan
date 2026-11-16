@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test';
 
+import { continueWithoutSigningIn } from './fixtures/test-helpers';
+
 test.describe('Complete-journey', () => {
   test('should complete full journey from start to end', async ({ page }) => {
     // Start Page
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     // Children-safety-check
     await expect(page).toHaveURL(/children-safety-check/);

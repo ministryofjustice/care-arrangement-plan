@@ -9,6 +9,7 @@ import path from 'path';
 import request from 'supertest';
 
 import config from '../config';
+import formFields from '../constants/formFields';
 import paths from '../constants/paths';
 import { clearDiscoveryCache } from '../oneLogin/client';
 import { JsonWebKeyWithKid } from '../oneLogin/jwt';
@@ -291,8 +292,14 @@ describe('GOV.UK One Login routes', () => {
     sessionMock.lang = 'en';
   });
 
-  it('sends a protected page to sign-in and returns the user to that page after the callback', async () => {
-    await request(app).get(paths.TASK_LIST).expect(302).expect('location', paths.SIGN_IN);
+  it('starts sign-in from the existing-plan choice and opens the account page', async () => {
+    await request(app).get(paths.TASK_LIST).expect(302).expect('location', paths.LOGIN_START);
+
+    await request(app)
+      .post(paths.LOGIN_START)
+      .send({ [formFields.LOGIN_START]: 'sign-in' })
+      .expect(302)
+      .expect('location', paths.SIGN_IN);
 
     const signIn = await request(app).get(paths.SIGN_IN).expect(302);
     const authorizeUrl = new URL(signIn.headers.location || '');
@@ -314,7 +321,7 @@ describe('GOV.UK One Login routes', () => {
       .query({ code: authorizationCode, state: authorizeUrl.searchParams.get('state') })
       .expect(302);
 
-    expect(callback.headers.location).toBe(paths.TASK_LIST);
+    expect(callback.headers.location).toBe(paths.LOGIN_ACCOUNT);
     expect(sessionMock.oneLogin).toEqual({
       sub: 'user-1',
       email: 'person@example.com',
@@ -349,7 +356,7 @@ describe('GOV.UK One Login routes', () => {
       .get(paths.ONE_LOGIN_CALLBACK)
       .query({ code: authorizationCode, state: authorizeUrl.searchParams.get('state') })
       .expect(302)
-      .expect('location', paths.START);
+      .expect('location', paths.LOGIN_ACCOUNT);
   });
 
   it('shows a problem page when the provider or the callback is rejected', async () => {
