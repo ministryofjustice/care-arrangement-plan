@@ -1,15 +1,18 @@
 import { Request } from 'express';
 import i18n from 'i18n';
 
-import { dayValues, planLastMinuteChangesField } from '../@types/fields';
+import { dayValues, itemsForChangeoverField, planLastMinuteChangesField } from '../@types/fields';
 import { WhichDays } from '../@types/session';
 
 import {
   convertBooleanValueToRadioButtonValue,
   convertWhichDaysFieldToSessionValue,
   convertWhichDaysSessionValueToField,
+  formatItemsForChangeover,
+  formatItemsForChangeoverList,
   formatListOfStrings,
   formatPlanChangesOptionsIntoList,
+  formatUnorderedList,
   formatWhichDaysSessionValue,
 } from './formValueUtils';
 
@@ -18,6 +21,40 @@ const mockRequest = {
 } as Request;
 
 describe('formValueUtils', () => {
+  describe('formatUnorderedList', () => {
+    test('returns undefined when there is nothing to list', () => {
+      expect(formatUnorderedList([])).toBeUndefined();
+      expect(formatUnorderedList([undefined, ''])).toBeUndefined();
+    });
+
+    test('returns an escaped bullet list', () => {
+      expect(formatUnorderedList(['Clothes and shoes', "At Parent's home", 'Meds <daily> & "cream"'])).toBe(
+        '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Clothes and shoes</li><li>At Parent&#039;s home</li><li>Meds &lt;daily&gt; &amp; &quot;cream&quot;</li></ul>',
+      );
+    });
+  });
+
+  describe('formatItemsForChangeoverList', () => {
+    test('returns undefined when no items are selected', () => {
+      expect(formatItemsForChangeoverList(undefined, 'Medication', mockRequest)).toBeUndefined();
+      expect(formatItemsForChangeoverList([], 'Medication', mockRequest)).toBeUndefined();
+    });
+
+    test('returns selected items and the other description as a bullet list', () => {
+      const options: itemsForChangeoverField[] = ['clothesAndShoes', 'schoolItems', 'otherItems'];
+
+      expect(formatItemsForChangeoverList(options, 'Medication <daily> & cream', mockRequest)).toBe(
+        '<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0"><li>Clothes and shoes</li><li>School items</li><li>Medication &lt;daily&gt; &amp; cream</li></ul>',
+      );
+    });
+
+    test('keeps a comma-separated list for the proposed plan', () => {
+      const options: itemsForChangeoverField[] = ['clothesAndShoes', 'schoolItems'];
+
+      expect(formatItemsForChangeover(options, undefined, mockRequest)).toBe('Clothes and shoes, School items');
+    });
+  });
+
   describe('formatListOfStrings', () => {
     test.each([
       [undefined, ''],

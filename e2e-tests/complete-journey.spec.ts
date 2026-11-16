@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Complete-journey', () => {
   test('should complete full journey from start to end', async ({ page }) => {
-
     // Start Page
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
@@ -84,11 +83,11 @@ test.describe('Complete-journey', () => {
 
     // Make a plan continued
     await expect(page).toHaveURL(/make-a-plan/);
-    await page.getByRole('link', { name: /How will the children get between households/i }).click();
+    await page.getByRole('link', { name: /how will .* get between households/i }).click();
 
     // Handovers and holidays
     await expect(page).toHaveURL(/get-between-households/);
-    await page.getByLabel(/Parent collects the children/i).check();
+    await page.getByLabel(/Parent collects test/i).check();
     await page.getByRole('button', { name: /continue/i }).click();
 
     // Handovers and holidays
@@ -108,8 +107,54 @@ test.describe('Complete-journey', () => {
 
     // Handovers and holidays
     await expect(page).toHaveURL(/items-for-changeover/);
-    await page.fill('textarea', 'test');
-    await page.getByRole('button', { name: /continue/i }).click();
+    await page.getByLabel('Clothes and shoes').check();
+    await page.getByRole('button', { name: 'Save and continue' }).click();
+
+    await expect(page).toHaveURL(/travel-abroad/);
+    await page.getByLabel('At least 4 weeks').check();
+    await page.getByRole('button', { name: 'Save and continue' }).click();
+
+    await expect(page).toHaveURL(/travel-documents/);
+    await page.getByRole('radio', { name: 'You', exact: true }).check();
+    await page.getByRole('button', { name: 'Save and continue' }).click();
+
+    await expect(page).toHaveURL(/consent-to-travel/);
+    await page.getByRole('button', { name: 'Continue', exact: true }).click();
+
+    await expect(page).toHaveURL(/travel-information/);
+    await page.getByLabel('Travel information (dates, transport details)').check();
+    await page.getByRole('button', { name: 'Save and continue' }).click();
+
+    // Make a plan, next section
+    await expect(page).toHaveURL(/make-a-plan/);
+    await page.getByRole('link', { name: /information from .* school be shared/i }).click();
+
+    // Education
+    await expect(page).toHaveURL(/\/education\/share-information/);
+    await page.getByLabel(/both parents will receive information/i).check();
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    await expect(page).toHaveURL(/\/education\/routine-decisions/);
+    await page.getByLabel(/both parents will decide/i).check();
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    await expect(page).toHaveURL(/\/education\/school-meetings/);
+    await page.getByLabel(/both parents will attend/i).check();
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    // Make a plan, next section
+    await expect(page).toHaveURL(/make-a-plan/);
+    await page.getByRole('link', { name: /routine decisions about .* health/i }).click();
+
+    // Health
+    await expect(page).toHaveURL(/\/child-health$/);
+    await page.getByLabel(/both parents will decide/i).check();
+    await page.getByRole('button', { name: /save and continue/i }).click();
+
+    // Health needs
+    await expect(page).toHaveURL(/\/child-health-needs/);
+    await page.locator('#child-health-needs-description').fill('test');
+    await page.getByRole('button', { name: /save and continue/i }).click();
 
     // Make a plan, next section
     await expect(page).toHaveURL(/make-a-plan/);
@@ -158,8 +203,8 @@ test.describe('Complete-journey', () => {
 
     // share-plan
     await expect(page).toHaveURL(/share-plan/);
-    await page.getByRole('button', { name: /Download plan as PDF/i }).click();   
-    
+    await page.getByRole('button', { name: /Download plan as PDF/i }).click();
+
     // Confirmation
     await expect(page).toHaveURL(/confirmation/);
   });

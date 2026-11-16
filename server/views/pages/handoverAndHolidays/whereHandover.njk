@@ -25,7 +25,7 @@
       <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
         {% set hintHtml %}
-          <p>{{ __('handoverAndHolidays.whereHandover.explainer') }}</p>
+          <p>{{ __('handoverAndHolidays.whereHandover.explainer', { children: childrenNames }) }}</p>
           <p>{{ __('selectAllThatApply') }}</p>
         {% endset -%}
 
@@ -47,7 +47,7 @@
             name: formFields.WHERE_HANDOVER,
             fieldset: {
               legend: {
-                text: __('handoverAndHolidays.whereHandover.title'),
+                text: __('handoverAndHolidays.whereHandover.title', {children: childrenNames}),
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }

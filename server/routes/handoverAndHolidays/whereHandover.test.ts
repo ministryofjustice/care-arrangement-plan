@@ -10,6 +10,7 @@ import { flashFormValues, flashMock, flashMockErrors, sessionMock } from '../../
 const app = testAppSetup();
 
 const session: Partial<SessionData> = {
+  namesOfChildren: ['Alex'],
   initialAdultName: 'Sarah',
   secondaryAdultName: 'Steph',
 };
@@ -25,7 +26,7 @@ describe(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, () => {
 
       const dom = new JSDOM(response.text);
 
-      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Where does handover take place?');
+      expect(dom.window.document.querySelector('h1')).toHaveTextContent('Where will handover take place for Alex?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
       expect(dom.window.document.querySelector(':checked')).toBeNull();
       expect(dom.window.document.querySelector('fieldset').getAttribute('aria-describedby')).not.toContain(

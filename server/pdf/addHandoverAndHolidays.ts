@@ -8,6 +8,7 @@ import {
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
 } from '../utils/formattedAnswersForPdf';
+import { childrenReference } from '../utils/sessionHelpers';
 
 import addAnswer from './addAnswer';
 import TextboxComponent from './components/textbox';
@@ -15,10 +16,12 @@ import FontStyles from './fontStyles';
 import Pdf from './pdf';
 
 const addGetBetweenHouseholds = (pdf: Pdf, request: Request) => {
+  const children = childrenReference(request);
+
   addAnswer(
     pdf,
-    request.__('taskList.handoverAndHolidays'),
-    request.__('handoverAndHolidays.getBetweenHouseholds.title'),
+    request.__('taskList.handoverAndHolidays.title'),
+    request.__('handoverAndHolidays.getBetweenHouseholds.title', { children }),
     undefined,
     getBetweenHouseholds(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.getBetweenHouseholds'),
@@ -26,11 +29,13 @@ const addGetBetweenHouseholds = (pdf: Pdf, request: Request) => {
 };
 
 const addWhereHandover = (pdf: Pdf, request: Request) => {
+  const children = childrenReference(request);
+
   addAnswer(
     pdf,
     undefined,
-    request.__('handoverAndHolidays.whereHandover.title'),
-    request.__('handoverAndHolidays.whereHandover.explainer'),
+    request.__('handoverAndHolidays.whereHandover.title', { children }),
+    request.__('handoverAndHolidays.whereHandover.explainer', { children }),
     whereHandover(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.whereHandover'),
   );

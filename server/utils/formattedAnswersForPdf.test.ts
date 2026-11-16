@@ -296,7 +296,7 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'parent' as getBetweenHouseholdsField },
           whereHandover: {
             noDecisionRequired: false,
             where: ['neutral', 'initialHome', 'school'] as whereHandoverField[],
@@ -315,7 +315,7 @@ describe('formattedAnswers', () => {
         {
           getBetweenHouseholds: {
             noDecisionRequired: false,
-            how: 'other' as getBetweenHouseholdsField,
+            how: 'anotherArrangement' as getBetweenHouseholdsField,
             describeArrangement: 'getBetweenHouseholds arrangement',
           },
           whereHandover: {
@@ -337,7 +337,7 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: { noDecisionRequired: false, how: 'initialCollects' as getBetweenHouseholdsField },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'parent' as getBetweenHouseholdsField },
           whereHandover: {
             noDecisionRequired: false,
             where: ['neutral', 'other'] as whereHandoverField[],
@@ -355,7 +355,7 @@ describe('formattedAnswers', () => {
       ],
       [
         {
-          getBetweenHouseholds: { noDecisionRequired: false, how: 'secondaryCollects' as getBetweenHouseholdsField },
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'otherParent' as getBetweenHouseholdsField },
           whereHandover: { noDecisionRequired: false, where: ['secondaryHome'] as whereHandoverField[] },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
           howChangeDuringSchoolHolidays: { noDecisionRequired: true },
@@ -376,6 +376,25 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.handoverAndHolidays).toEqual(expectedValues);
+        });
+    });
+
+    it('should list selected changeover items and the other items description', async () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        itemsForChangeover: {
+          noDecisionRequired: false,
+          options: ['clothesAndShoes', 'electronicDevices', 'otherItems'],
+          describeArrangement: 'Medication',
+        },
+      };
+
+      await request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.itemsForChangeover).toBe(
+            `${session.initialAdultName} suggested:\n"Clothes and shoes, Electronic devices, Medication"`,
+          );
         });
     });
   });

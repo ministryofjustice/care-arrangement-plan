@@ -7,7 +7,7 @@ import FORM_STEPS from '../../constants/formSteps';
 import paths from '../../constants/paths';
 import checkFormProgressFromConfig  from '../../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../../utils/addCompletedStep';
-import { getBackUrl } from '../../utils/sessionHelpers';
+import { childrenReference, getBackUrl } from '../../utils/sessionHelpers';
 
 const whereHandoverRoutes = (router: Router) => {
   router.get(paths.HANDOVER_HOLIDAYS_WHERE_HANDOVER, checkFormProgressFromConfig(FORM_STEPS.HANDOVER_HOLIDAYS_WHERE_HANDOVER), (request, response) => {
@@ -16,11 +16,13 @@ const whereHandoverRoutes = (router: Router) => {
       [formFields.WHERE_HANDOVER_OTHER]: request.session.handoverAndHolidays?.whereHandover?.other,
       ...request.flash('formValues')?.[0],
     };
+    const childrenNames = childrenReference(request);
 
     response.render('pages/handoverAndHolidays/whereHandover', {
       errors: request.flash('errors'),
       formValues,
       values: request.session,
+      childrenNames,
       title: request.__('handoverAndHolidays.whereHandover.title'),
       backLinkHref: getBackUrl(request.session, paths.HANDOVER_HOLIDAYS_GET_BETWEEN_HOUSEHOLDS),
     });

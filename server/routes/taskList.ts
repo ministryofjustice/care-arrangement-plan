@@ -5,17 +5,26 @@ import paths from '../constants/paths';
 import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../utils/addCompletedStep';
 import {
+  childHealthComplete,
+  childHealthNeedsComplete,
+  educationRoutineDecisionsComplete,
+  educationSchoolMeetingsComplete,
+  educationShareInformationComplete,
+  childrenReference,
   formattedChildrenNames,
-  mostlyLiveComplete,
   getBetweenHouseholdsComplete,
-  whereHandoverComplete,
-  willChangeDuringSchoolHolidaysComplete,
   itemsForChangeoverComplete,
-  whatWillHappenComplete,
-  whatOtherThingsMatterComplete,
+  mostlyLiveComplete,
+  travelAbroadComplete,
+  travelDocumentsComplete,
+  travelInformationComplete,
   planLastMinuteChangesComplete,
   planLongTermNoticeComplete,
   planReviewComplete,
+  whatOtherThingsMatterComplete,
+  whatWillHappenComplete,
+  whereHandoverComplete,
+  willChangeDuringSchoolHolidaysComplete,
 } from '../utils/sessionHelpers';
 
 const taskListRoutes = (router: Router) => {
@@ -27,11 +36,19 @@ const taskListRoutes = (router: Router) => {
     const isWhereHandoverComplete = whereHandoverComplete(request.session);
     const isWillChangeDuringSchoolHolidaysComplete = willChangeDuringSchoolHolidaysComplete(request.session);
     const isItemsForChangeoverComplete = itemsForChangeoverComplete(request.session);
+    const isTravelAbroadComplete = travelAbroadComplete(request.session);
+    const isTravelDocumentsComplete = travelDocumentsComplete(request.session);
+    const isTravelInformationComplete = travelInformationComplete(request.session);
     const isWhatWillHappenComplete = whatWillHappenComplete(request.session);
     const isWhatOtherThingsMatterComplete = whatOtherThingsMatterComplete(request.session);
     const isPlanLastMinuteChangesComplete = planLastMinuteChangesComplete(request.session);
     const isPlanLongTermNoticeComplete = planLongTermNoticeComplete(request.session);
     const isPlanReviewComplete = planReviewComplete(request.session);
+    const isChildHealthComplete = childHealthComplete(request.session);
+    const isChildHealthNeedsComplete = childHealthNeedsComplete(request.session);
+    const isEducationShareInformationComplete = educationShareInformationComplete(request.session);
+    const isEducationRoutineDecisionsComplete = educationRoutineDecisionsComplete(request.session);
+    const isEducationSchoolMeetingsComplete = educationSchoolMeetingsComplete(request.session);
 
     addCompletedStep(request, FORM_STEPS.TASK_LIST);
 
@@ -45,10 +62,18 @@ const taskListRoutes = (router: Router) => {
       isWhatOtherThingsMatterComplete &&
       isPlanLastMinuteChangesComplete &&
       isPlanLongTermNoticeComplete &&
-      isPlanReviewComplete;
+      isPlanReviewComplete &&
+      isChildHealthComplete &&
+      isChildHealthNeedsComplete &&
+      isEducationShareInformationComplete &&
+      isEducationRoutineDecisionsComplete &&
+      isEducationSchoolMeetingsComplete;
+
+    const childName = childrenReference(request);
 
     response.render('pages/taskList', {
       title: request.__('taskList.title', { names: formattedChildrenNames(request) }),
+      childName,
       numberOfChildren,
       namesOfChildren,
       showContinue: allTasksComplete,
@@ -57,11 +82,19 @@ const taskListRoutes = (router: Router) => {
       whereHandoverComplete: isWhereHandoverComplete,
       willChangeDuringSchoolHolidaysComplete: isWillChangeDuringSchoolHolidaysComplete,
       itemsForChangeoverComplete: isItemsForChangeoverComplete,
+      travelAbroadComplete: isTravelAbroadComplete,
+      travelDocumentsComplete: isTravelDocumentsComplete,
+      travelInformationComplete: isTravelInformationComplete,
       whatWillHappenComplete: isWhatWillHappenComplete,
       whatOtherThingsMatterComplete: isWhatOtherThingsMatterComplete,
       planLastMinuteChangesComplete: isPlanLastMinuteChangesComplete,
       planLongTermNoticeComplete: isPlanLongTermNoticeComplete,
       planReviewComplete: isPlanReviewComplete,
+      childHealthComplete: isChildHealthComplete,
+      childHealthNeedsComplete: isChildHealthNeedsComplete,
+      educationShareInformationComplete: isEducationShareInformationComplete,
+      educationRoutineDecisionsComplete: isEducationRoutineDecisionsComplete,
+      educationSchoolMeetingsComplete: isEducationSchoolMeetingsComplete,
     });
   });
 };

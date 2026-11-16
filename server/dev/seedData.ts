@@ -25,7 +25,7 @@ const devSeedData: Partial<CAPSession> = {
   handoverAndHolidays: {
     getBetweenHouseholds: {
       noDecisionRequired: false,
-      how: 'initialCollects',
+      how: 'parent',
     },
     whereHandover: {
       noDecisionRequired: false,
@@ -41,7 +41,8 @@ const devSeedData: Partial<CAPSession> = {
     },
     itemsForChangeover: {
       noDecisionRequired: false,
-      answer: 'Each child should have their school bag, PE kit, and any medication.',
+      options: ['schoolItems', 'sports', 'otherItems'],
+      describeArrangement: 'Any medication',
     },
   },
   specialDays: {

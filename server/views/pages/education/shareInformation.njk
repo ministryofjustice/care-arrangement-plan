@@ -1,0 +1,95 @@
+{% extends "partials/layout.njk" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      errors,
+      null,
+      null,
+      title
+    )
+  }}
+{% endblock %}
+
+{% block content %}
+  {% include "partials/exitThisPage.njk" %}
+  <div class="govuk-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+    {{ __('exitThisPage') | safe }}
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% include "partials/errorSummary.njk" %}
+      <form class="form" action="{{ paths.EDUCATION_SHARE_INFORMATION }}" method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+        {% set describeArrangementHtml %}
+          {{
+            govukTextarea({
+              name: formFields.EDUCATION_SHARE_INFORMATION_DESCRIBE_ARRANGEMENT,
+              label: {
+                text: __('describeArrangement')
+              },
+              value: formValues[formFields.EDUCATION_SHARE_INFORMATION_DESCRIBE_ARRANGEMENT],
+              errorMessage: errors | findError(formFields.EDUCATION_SHARE_INFORMATION_DESCRIBE_ARRANGEMENT)
+            })
+          }}
+        {% endset -%}
+
+        {{
+          govukRadios({
+            name: formFields.EDUCATION_SHARE_INFORMATION_OPTION,
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            hint: {
+              text: __('education.shareInformation.description')
+            },
+            items: [
+              {
+                value: "parent",
+                text: __('education.shareInformation.options.parent')
+              },
+              {
+                value: "otherParent",
+                text: __('education.shareInformation.options.otherParent')
+              },
+              {
+                value: "bothParents",
+                text: __('education.shareInformation.options.bothParents')
+              },
+              {
+                divider: __('or')
+              },
+              {
+                value: "anotherArrangement",
+                text: __('education.shareInformation.options.anotherArrangement'),
+                conditional: {
+                  html: describeArrangementHtml
+                }
+              }
+            ],
+            value: formValues[formFields.EDUCATION_SHARE_INFORMATION_OPTION],
+            errorMessage: errors | findError(formFields.EDUCATION_SHARE_INFORMATION_OPTION)
+          })
+        }}
+        <div class="govuk-!-margin-bottom-2">
+          <button type="submit" name="skip" value="true" class="govuk-link link-styled-button">
+            {{ __('skipThisQuestion') }}
+          </button>
+        </div>
+        <div class="govuk-button-group">
+          {{ govukButton({text: __('saveAndContinue')}) }}
+          {{ govukButton({text: __('saveAndComeBackLater'), classes: "govuk-button--secondary"}) }}
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

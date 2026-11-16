@@ -142,7 +142,7 @@ describe('createPdf', () => {
       handoverAndHolidays: {
         getBetweenHouseholds: {
           noDecisionRequired: false,
-          how: 'other',
+          how: 'anotherArrangement',
           describeArrangement: longString,
         },
         whereHandover: {

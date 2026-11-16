@@ -1,4 +1,5 @@
 {% extends "partials/layout.njk" %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "macros/title.njk" import getTitle with context %}
@@ -7,8 +8,9 @@
   {{
     getTitle(
       errors,
-      titleIds.ITEMS_FOR_CHANGEOVER,
-      [formFields.ITEMS_FOR_CHANGEOVER]
+      null,
+      null,
+      title
     )
   }}
 {% endblock %}
@@ -23,23 +25,86 @@
       {% include "partials/errorSummary.njk" %}
       <form class="form" action="{{ paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER }}" method="post" novalidate>
         <input type="hidden" name="_csrf" value="{{ csrfToken }}" />
+
+        {% set describeArrangementHtml %}
+          {{
+            govukTextarea({
+              name: formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_DESCRIBE_ARRANGEMENT,
+              label: {
+                text: __('handoverAndHolidays.itemsForChangeover.describeOtherItems')
+              },
+              value: formValues[formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_DESCRIBE_ARRANGEMENT],
+              errorMessage: errors | findError(formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_DESCRIBE_ARRANGEMENT)
+            })
+          }}
+        {% endset -%}
+
         {{
-          govukTextarea({
-            label: {
-              text: __('handoverAndHolidays.itemsForChangeover.title'),
-              classes: "govuk-label--l",
-              isPageHeading: true
+          govukCheckboxes({
+            name: formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER,
+            fieldset: {
+              legend: {
+                text: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
             },
             hint: {
-              text: __('handoverAndHolidays.itemsForChangeover.content')
+              text: __('selectAllThatApply')
             },
-            name: formFields.ITEMS_FOR_CHANGEOVER,
-            value: initialItemsForChangeover,
-            errorMessage: errors | findError(formFields.ITEMS_FOR_CHANGEOVER)
+            items: [
+              {
+                value: "clothesAndShoes",
+                text: __('handoverAndHolidays.itemsForChangeover.items.clothesAndShoes')
+              },
+              {
+                value: "schoolItems",
+                text: __('handoverAndHolidays.itemsForChangeover.items.schoolItems')
+              },
+              {
+                value: "toiletries",
+                text: __('handoverAndHolidays.itemsForChangeover.items.toiletries')
+              },
+              {
+                value: "sports",
+                text: __('handoverAndHolidays.itemsForChangeover.items.sports')
+              },
+              {
+                value: "toys",
+                text: __('handoverAndHolidays.itemsForChangeover.items.toys')
+              },
+              {
+                value: "electronicDevices",
+                text: __('handoverAndHolidays.itemsForChangeover.items.electronicDevices')
+              },
+              {
+                value: "otherItems",
+                text: __('handoverAndHolidays.itemsForChangeover.items.otherItems'),
+                conditional: {
+                  html: describeArrangementHtml
+                }
+              }
+            ],
+            values: formValues[formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER],
+            errorMessage: errors | findError(formFields.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER)
           })
         }}
-        <div class="govuk-!-margin-bottom-2"><button type="submit" formaction="{{ paths.HANDOVER_HOLIDAYS_ITEMS_FOR_CHANGEOVER_NOT_REQUIRED }}" class="govuk-link link-styled-button">{{ __('doNotNeedToDecideItemsForChangeover') }}</button></div>
-        {{ govukButton({text: __('continue')}) }}
+        <div class="govuk-!-margin-bottom-2">
+          <button type="submit" name="skip" value="true" class="govuk-link link-styled-button">
+            {{ __('skipThisQuestion') }}
+          </button>
+        </div>
+        <div class="govuk-button-group">
+          {{ govukButton({text: __('saveAndContinue')}) }}
+          {{
+            govukButton({
+              text: __('saveAndComeBackLater'),
+              classes: "govuk-button--secondary",
+              name: "saveAndComeBackLater",
+              value: "true"
+            })
+          }}
+        </div>
       </form>
     </div>
   </div>

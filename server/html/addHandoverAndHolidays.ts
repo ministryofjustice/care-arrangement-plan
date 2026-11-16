@@ -7,13 +7,16 @@ import {
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
 } from '../utils/formattedAnswersForPdf';
+import { childrenReference } from '../utils/sessionHelpers';
 
 import addAnswer, { renderTextBox } from './addAnswer';
 
 const addGetBetweenHouseholds = (request: Request): string => {
+  const children = childrenReference(request);
+
   return addAnswer(
-    request.__('taskList.handoverAndHolidays'),
-    request.__('handoverAndHolidays.getBetweenHouseholds.title'),
+    request.__('taskList.handoverAndHolidays.title'),
+    request.__('handoverAndHolidays.getBetweenHouseholds.title', { children }),
     undefined,
     getBetweenHouseholds(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.getBetweenHouseholds'),
@@ -22,10 +25,12 @@ const addGetBetweenHouseholds = (request: Request): string => {
 };
 
 const addWhereHandover = (request: Request): string => {
+  const children = childrenReference(request);
+
   return addAnswer(
     undefined,
-    request.__('handoverAndHolidays.whereHandover.title'),
-    request.__('handoverAndHolidays.whereHandover.explainer'),
+    request.__('handoverAndHolidays.whereHandover.title', { children }),
+    request.__('handoverAndHolidays.whereHandover.explainer', { children }),
     whereHandover(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.whereHandover'),
     request,
