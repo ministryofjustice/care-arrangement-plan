@@ -17,7 +17,6 @@ export declare module 'express-session' {
     oneLogin?: {
       sub: string;
       email?: string;
-      emailVerified?: boolean;
       idToken: string;
     };
   }

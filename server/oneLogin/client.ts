@@ -7,7 +7,6 @@ import { codeChallengeFor, JsonWebKeyWithKid, randomUrlSafe, signClientAssertion
 export type OneLoginUser = {
   sub: string;
   email?: string;
-  emailVerified?: boolean;
 };
 
 type DiscoveryDocument = {
@@ -196,9 +195,6 @@ export const completeAuthorization = async (request: { code: string; codeVerifie
   const user: OneLoginUser = { sub: claims.sub };
   if (typeof userinfo.email === 'string') {
     user.email = userinfo.email;
-  }
-  if (userinfo.email_verified === true) {
-    user.emailVerified = true;
   }
 
   return { idToken: tokens.id_token, user };

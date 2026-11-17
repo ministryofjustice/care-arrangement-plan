@@ -129,7 +129,7 @@ describe('One Login client', () => {
   it('exchanges the code, checks the ID token, and reads the userinfo profile', async () => {
     const result = await completeAuthorization({ code: authorizationCode, codeVerifier, nonce });
 
-    expect(result.user).toEqual({ sub: 'user-1', email: 'person@example.com', emailVerified: true });
+    expect(result.user).toEqual({ sub: 'user-1', email: 'person@example.com' });
     expect(result.idToken).toBe(idToken);
 
     const tokenCall = fetchMock.mock.calls.find((call) => String(call[0]) === discovery.token_endpoint);

@@ -328,7 +328,6 @@ describe('GOV.UK One Login routes', () => {
     expect(sessionMock.oneLogin).toEqual({
       sub: 'user-1',
       email: 'person@example.com',
-      emailVerified: true,
       idToken: issuedLogin.idToken,
     });
     expect(tokenRequest?.get('client_id')).toBe(clientId);
