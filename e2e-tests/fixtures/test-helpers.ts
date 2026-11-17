@@ -54,10 +54,15 @@ export function getRadioNo(page: Page) {
   return page.getByRole('radio', { name: 'No', exact: true });
 }
 
+export async function continueWithoutSigningIn(page: Page) {
+  await page.getByRole('radio', { name: /start a new plan without signing in/i }).check();
+  await page.getByRole('button', { name: /^continue$/i }).click();
+}
+
 export async function startJourney(page: Page) {
-  // Start from homepage - goes to children-safety-check first
   await page.goto('/');
   await page.getByRole('button', { name: /start now/i }).click();
+  await continueWithoutSigningIn(page);
 }
 
 export async function goToSafetyCheck(page: Page) {

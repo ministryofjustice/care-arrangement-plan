@@ -1,5 +1,7 @@
 import { test, devices, expect, Page } from '@playwright/test';
 
+import { continueWithoutSigningIn } from './fixtures/test-helpers';
+
 const mobileDevices = [
   { name: 'iPhone 12', config: devices['iPhone 12'] },
   { name: 'iPhone 13', config: devices['iPhone 13'] },
@@ -26,6 +28,7 @@ for (const device of mobileDevices) {
     test('Multiple Mobile Devices of different view-ports can navigate through the service', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).tap();
+      await continueWithoutSigningIn(page);
 
       // children-safety-check
       await page.getByLabel(/no/i).first().check();

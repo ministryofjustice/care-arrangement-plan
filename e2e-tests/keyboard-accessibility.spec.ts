@@ -2,7 +2,7 @@
 
 import { test, expect, Page, Locator } from '@playwright/test';
 
-import {startJourney, goToSafetyCheck, navigateToTaskList, completeOnboardingFlow, fillNumberOfChildren} from './fixtures/test-helpers';
+import {startJourney, goToSafetyCheck, navigateToTaskList, completeOnboardingFlow, fillNumberOfChildren, continueWithoutSigningIn} from './fixtures/test-helpers';
 
 // macOS WebKit only tabs to text fields unless Option (Alt) is held.
 function isWebKit(page: Page) {
@@ -285,7 +285,7 @@ test.describe('Keyboard Accessibility', () => {
     test('tab order is logical on a radio button form page', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).click();
-      await expect(page).toHaveURL(/\/children-safety-check/);
+      await expect(page).toHaveURL(/\/login-start/);
       await page.locator('h1').focus();
 
       const focusedElements: string[] = [];
@@ -317,6 +317,7 @@ test.describe('Keyboard Accessibility', () => {
     test('radio buttons are selectable with Space key', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).click();
+      await continueWithoutSigningIn(page);
 
       // Tab to the first radio button (Yes)
       const yesRadio = page.getByRole('radio', { name: /yes/i }); 
@@ -328,6 +329,7 @@ test.describe('Keyboard Accessibility', () => {
     test('radio buttons are navigable with Arrow keys', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).click();
+      await continueWithoutSigningIn(page);
 
       // Tab to the first radio button
       await page.waitForSelector('input[type="radio"]');
@@ -385,8 +387,8 @@ test.describe('Keyboard Accessibility', () => {
       const _button = await tabToElement(page, 'button', /start now/i);
       await page.keyboard.press('Enter');
 
-      // Should have navigated to the next page
-      await expect(page).toHaveURL(/\/children-safety-check/);
+      // Should have navigated to the login start page
+      await expect(page).toHaveURL(/\/login-start/);
     });
 
     test('dropdowns are navigable with arrow keys', async ({ page }) => {
@@ -467,6 +469,7 @@ test.describe('Keyboard Accessibility', () => {
     test('Escape key triggers quick exit on safety-check page', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).click();
+      await continueWithoutSigningIn(page);
       await goToSafetyCheck(page);
 
       // Press Escape three times quickly (should not be in an input field)
@@ -507,6 +510,7 @@ test.describe('Keyboard Accessibility', () => {
     test('Exit This Page button is reachable via Tab', async ({ page }) => {
       await page.goto('/');
       await page.getByRole('button', { name: /start now/i }).click();
+      await continueWithoutSigningIn(page);
       await expect(page).toHaveURL(/\/children-safety-check/);
 
       // Tab through to find the Exit This Page button
@@ -539,6 +543,7 @@ test.describe('Keyboard Accessibility', () => {
       // Tab to Start Now button and press Enter
       await tabToElement(page, 'button', /start now/i);
       await page.keyboard.press('Enter');
+      await continueWithoutSigningIn(page);
       await expect(page).toHaveURL(/\/children-safety-check/);
 
       // Children safety check - select No

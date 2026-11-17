@@ -7,6 +7,18 @@ export declare module 'express-session' {
     pageHistory: string[];
     previousPage: string;
     lang: string;
+    returnUrl?: string;
+    continueWithoutSignIn?: boolean;
+    oneLoginRequest?: {
+      state: string;
+      nonce: string;
+      codeVerifier: string;
+    };
+    oneLogin?: {
+      sub: string;
+      email?: string;
+      idToken: string;
+    };
   }
 }
 

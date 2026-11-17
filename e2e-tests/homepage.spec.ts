@@ -26,13 +26,12 @@ test.describe('Homepage', () => {
     await expect(accessibilityLink).toBeVisible();
   });
 
-  test('should navigate to safety check when clicking start button (auth disabled)', async ({ page }) => {
+  test('should navigate to the login start page when clicking start', async ({ page }) => {
     await page.goto('/');
 
     const startButton = page.getByRole('button', { name: /start now/i });
     await startButton.click();
 
-    // When USE_AUTH=false, goes directly to children safety check
-    await expect(page).toHaveURL(/\/children-safety-check/);
+    await expect(page).toHaveURL(/\/login-start/);
   });
 });

@@ -23,9 +23,11 @@ const testAppSetup = (): Express => {
   app.disable('x-powered-by');
   app.use(setUpi18n());
   nunjucksSetup(app);
-  app.use((request, _response, next) => {
+  app.use((request, response, next) => {
     request.session = sessionMock;
     request.flash = flashMock;
+    response.locals.oneLoginSignedIn = Boolean(request.session.oneLogin?.sub);
+    response.locals.currentPath = request.path;
     next();
   });
   app.use(setUpLocaleFromSession());

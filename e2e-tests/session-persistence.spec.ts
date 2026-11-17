@@ -1,13 +1,15 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 import { verifyBackNavigation } from './fixtures/navigation-helpers';
 import { emptyStorageState } from './fixtures/storage-state';
+import { continueWithoutSigningIn } from './fixtures/test-helpers';
 
 test.describe('Session Persistence', () => {
   test('should maintain form data when navigating back', async ({ page }) => {
     // Navigate through flow to number-of-children
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     // Complete safety checks
     await page.getByLabel(/no/i).first().check();

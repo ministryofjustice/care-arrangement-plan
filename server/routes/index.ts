@@ -10,6 +10,7 @@ import addCompletedStep from '../utils/addCompletedStep';
 import aboutTheAdultsRoutes from './aboutTheAdults';
 import aboutTheChildrenRoutes from './aboutTheChildren';
 import accessibilityStatementRoutes from './accessibilityStatement';
+import accountRoutes from './account';
 import analyticsRoutes from './analytics';
 import checkYourAnswersRoutes from './checkYourAnswers';
 import childrenSafetyRoutesCheck from './childrenSafetyCheck';
@@ -25,6 +26,7 @@ import healthRoutes from './health';
 import livingAndVisitingRoutes from './livingAndVisiting';
 import loginAccountRoutes from './loginAccount';
 import loginStartRoutes from './loginStart';
+import loginYourDetailsRoutes from './loginYourDetails';
 import numberOfChildrenRoutes from './numberOfChildren';
 import otherThingsRoutes from './otherThings';
 import safetyCheckRoutes from './safetyCheck';
@@ -46,6 +48,7 @@ function clearSessionData(request: Request): void {
   delete request.session.decisionMaking;
   delete request.session.pageHistory;
   delete request.session.completedSteps;
+  delete request.session.continueWithoutSignIn;
   request.session.planStartTime = Date.now();
 }
 
@@ -54,21 +57,19 @@ const routes = (): Router => {
 
   router.get(paths.START, (request, response) => {
     clearSessionData(request);
-    if (config.isLiveService) {
-      return response.redirect(paths.CHILDREN_SAFETY_CHECK);
-    }
     addCompletedStep(request, FORM_STEPS.START);
     response.render('pages/index');
   });
 
   router.post(paths.START, (request, response) => {
     clearSessionData(request);
-    response.redirect(paths.CHILDREN_SAFETY_CHECK);
+    response.redirect(paths.LOGIN_START);
   });
 
   analyticsRoutes(router);
   loginStartRoutes(router);
   loginAccountRoutes(router);
+  loginYourDetailsRoutes(router);
   safetyCheckRoutes(router);
   childrenSafetyRoutesCheck(router);
   doWhatsBestRoutes(router);
@@ -90,6 +91,7 @@ const routes = (): Router => {
   decisionMakingRoutes(router);
   downloadRoutes(router);
   accessibilityStatementRoutes(router);
+  accountRoutes(router);
 
   if (!config.production) {
     devSeedRoutes(router);

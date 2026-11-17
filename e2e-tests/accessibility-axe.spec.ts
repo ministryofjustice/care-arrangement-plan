@@ -1,7 +1,7 @@
 import { AxeBuilder } from '@axe-core/playwright';
 import { test, expect } from '@playwright/test';
 
-import { completeMinimalJourney, navigateToTaskList } from './fixtures/test-helpers';
+import { completeMinimalJourney, continueWithoutSigningIn, navigateToTaskList } from './fixtures/test-helpers';
 
 test.describe('Accessibility - Axe Core Scanning', () => {
   test('should pass axe accessibility scan on homepage', async ({ page }) => {
@@ -17,6 +17,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   test('should pass axe accessibility scan on safety check page', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
@@ -59,6 +60,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   test('should have proper form labels associated with inputs', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     // Check that form labels are properly associated
     const accessibilityScanResults = await new AxeBuilder({ page }).withTags(['wcag2a']).include('form').analyze();
@@ -72,6 +74,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   test('should have accessible form validation errors', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     // Navigate to a form page
     await page.getByLabel(/no/i).first().check();
@@ -101,6 +104,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   test('should have error summary with appropriate ARIA attributes', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
     await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     await page.getByLabel(/no/i).first().check();
@@ -158,6 +162,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   test('should indicate required fields for screen readers', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
     await page.getByLabel(/no/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
     await page.getByLabel(/no/i).first().check();
@@ -259,6 +264,7 @@ test.describe('Accessibility - Axe Core Scanning', () => {
   test('should pass axe scan on form pages across the journey', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     // Safety check page
     let scanResults = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();

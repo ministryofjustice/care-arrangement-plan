@@ -1,12 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-import { goToSafetyCheck } from './fixtures/test-helpers';
+import { continueWithoutSigningIn, goToSafetyCheck } from './fixtures/test-helpers';
 
 test.describe('User Journey Flow', () => {
   test('should complete the initial onboarding flow', async ({ page }) => {
     await page.goto('/');
 
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     await expect(page).toHaveURL(/\/children-safety-check/);
 
@@ -22,6 +23,7 @@ test.describe('User Journey Flow', () => {
     await page.goto('/');
 
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     await goToSafetyCheck(page);
 
@@ -35,6 +37,7 @@ test.describe('User Journey Flow', () => {
     await page.goto('/');
 
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     await goToSafetyCheck(page);
 
@@ -63,6 +66,7 @@ test.describe('User Journey Flow', () => {
     await page.goto('/');
 
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     await expect(page).toHaveURL(/\/children-safety-check/);
 
@@ -91,6 +95,7 @@ test.describe('User Journey Flow', () => {
   test('should handle number of children input', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     await goToSafetyCheck(page);
     await page.getByLabel(/no/i).first().check();
@@ -113,6 +118,7 @@ test.describe('User Journey Flow', () => {
   test('should validate form inputs and show errors', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     await goToSafetyCheck(page);
     await page.getByLabel(/no/i).first().check();

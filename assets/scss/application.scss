@@ -1254,3 +1254,125 @@
 .text-decoration-none {
   text-decoration: none;
 }
+
+// Signed-in GOV.UK One Login header. Sign out sits on the right of the blue
+// bar, after the One Login link, with a vertical divider between them.
+.one-login-header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.govuk-header .one-login-header__container .govuk-header__logo {
+  float: none;
+  width: auto;
+  max-width: 33.33%;
+  margin-bottom: 0;
+  padding-right: 0;
+}
+
+.one-login-header__nav {
+  margin-left: auto;
+  max-width: 66%;
+}
+
+.one-login-header__nav__list {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.one-login-header__nav__list-item {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.one-login-header__nav__link {
+  @include govuk-font($size: 16, $weight: bold);
+  color: govuk-colour("white");
+  text-decoration: none;
+
+  &:link,
+  &:visited {
+    color: govuk-colour("white");
+  }
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.1578em;
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+}
+
+.one-login-header__nav__text {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.one-login-header__nav__text--sign-out {
+  height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-left: 1px solid govuk-colour("white");
+}
+
+.one-login-header__logo-icon {
+  margin-right: govuk-spacing(2);
+  flex: none;
+}
+
+@media (max-width: 40.0525em) {
+  .one-login-header__nav {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .one-login-header__nav__list {
+    display: block;
+    margin-right: -15px;
+    margin-left: -15px;
+    padding: 0 15px;
+    color: $govuk-brand-colour;
+    background-color: govuk-colour("white");
+  }
+
+  .one-login-header__nav__list-item {
+    padding: 15px 0;
+  }
+
+  .one-login-header__nav__list-item:not(:last-child) {
+    border-bottom: 1px solid govuk-colour("mid-grey");
+  }
+
+  .one-login-header__nav__text,
+  .one-login-header__nav__text--sign-out {
+    height: auto;
+    padding: 0;
+    border-left: 0;
+  }
+
+  .one-login-header__logo-icon {
+    display: none;
+  }
+
+  .one-login-header__nav__link,
+  .one-login-header__nav__link:link,
+  .one-login-header__nav__link:visited {
+    color: $govuk-link-colour;
+  }
+}
+
+.app-login-account-table .govuk-table__header {
+  border-top: 1px solid $govuk-border-colour;
+}

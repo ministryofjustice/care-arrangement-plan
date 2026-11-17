@@ -231,9 +231,15 @@ describe('App', () => {
       paths.TERMS_AND_CONDITIONS,
     ];
     const unauthenticatedPaths = [...pathsWithNoAuthentication, paths.SESSION_TIMEOUT];
+    const originalOneLogin = config.oneLogin;
 
     beforeEach(() => {
       config.useAuth = true;
+      config.oneLogin = { enabled: false };
+    });
+
+    afterEach(() => {
+      config.oneLogin = originalOneLogin;
     });
 
     it.each(Object.values(paths).filter((path) => !unauthenticatedPaths.includes(path)))(
@@ -242,7 +248,10 @@ describe('App', () => {
         return request(app)
           .get(path)
           .expect(302)
-          .expect('location', `${paths.PASSWORD}?returnURL=${encodeURIComponent(path)}`);
+          .expect('location', paths.PASSWORD)
+          .expect(() => {
+            expect(sessionMock.returnUrl).toBe(path);
+          });
       },
     );
 
@@ -252,6 +261,21 @@ describe('App', () => {
 
     it('should not redirect to password page for session timeout when not authenticated', () => {
       return request(app).get(paths.SESSION_TIMEOUT).expect(403);
+    });
+
+    it('should redirect a protected page to the sign-in choice when GOV.UK One Login is enabled', () => {
+      config.oneLogin = {
+        enabled: true,
+        issuer: 'https://oidc.integration.account.gov.uk/',
+        clientId: 'client-id',
+        privateKey: 'private-key',
+        redirectUrl: 'https://example.test/oidc/authorization-code/callback',
+        postLogoutRedirectUrl: 'https://example.test/signed-out',
+        scopes: ['openid', 'email'],
+        vtr: 'Cl.Cm',
+      };
+
+      return request(app).get(paths.TASK_LIST).expect(302).expect('location', paths.LOGIN_START);
     });
   });
 

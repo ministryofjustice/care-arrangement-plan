@@ -10,6 +10,7 @@ import {
   fillNumberOfChildren,
   fillAllChildrenAndContinue,
   navigateToTaskList,
+  continueWithoutSigningIn,
 } from './fixtures/test-helpers';
 
 /**
@@ -154,6 +155,7 @@ test.describe('Service Back Link Navigation - Alternative Paths', () => {
   test('should navigate back from not-safe page', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     await goToSafetyCheck(page);
 
@@ -177,6 +179,7 @@ test.describe('Service Back Link Navigation - Alternative Paths', () => {
   test('should navigate back from children-not-safe page', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /start now/i }).click();
+    await continueWithoutSigningIn(page);
 
     await page.getByLabel(/yes/i).first().check();
     await page.getByRole('button', { name: /continue/i }).click();
