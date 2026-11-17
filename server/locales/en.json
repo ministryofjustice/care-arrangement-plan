@@ -1,6 +1,7 @@
 {
   "serviceName": "Propose a child arrangements plan",
   "oneLogin": {
+    "brand": "GOV.UK One Login",
     "signOut": "Sign out",
     "problem": {
       "title": "Sorry, there is a problem with GOV.UK One Login",
@@ -11,6 +12,10 @@
       "body": "You can sign in again to continue making a plan.",
       "startAgain": "Start again"
     }
+  },
+  "navigation": {
+    "yourPlans": "Your child arrangements plans",
+    "yourDetails": "Your details"
   },
   "yes": "Yes",
   "no": "No",
@@ -323,6 +328,14 @@
       }
     },
     "createPlanButton": "Create a new plan"
+  },
+  "loginYourDetails": {
+    "title": "Your details",
+    "signInDetails": "Sign in details",
+    "usesOneLogin": "You use GOV.UK One Login to sign in to this service.",
+    "email": "Email address",
+    "manage": "To change your email address or password, you need to manage your sign in details through GOV.UK One Login.",
+    "manageLink": "Manage your GOV.UK One Login"
   },
   "safetyCheck": {
     "title": "Have you experienced abuse from your ex-partner?",

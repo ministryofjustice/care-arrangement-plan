@@ -15,45 +15,11 @@
 
 {% block content %}
   <div class="govuk-width-container">
-    {# <div>
-      <div>
-        <a href="/mvp-save-and-return/login-account" class="govuk-link govuk-link--no-visited-state">
-          Your child arrangements plans
-        </a>
-        <a href="/mvp-save-and-return/login-your-details" class="govuk-link govuk-link--no-visited-state">
-          Your account details
-        </a>
-      </div>
-      <div class="govuk-body govuk-!-margin-0">
-        <span class="govuk-!-margin-right-4">
-        </span>
-        <a href="/mvp-save-and-return/clear-session-and-sign-out" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold" style="text-decoration: none">
-          Sign out
-        </a>
-      </div>
-    </div> #}
-
     {% set currentAccountPage = 'plans' %}
     {% set activeLinkClass = "govuk-!-font-weight-bold" %}
     {% set inactiveLinkClass = "govuk-link--no-underline" %}
     {% set plansLinkClass = "govuk-link govuk-link--no-visited-state " + (activeLinkClass if currentAccountPage == "plans" else inactiveLinkClass) %}
     {% set detailsLinkClass = "govuk-link govuk-link--no-visited-state govuk-!-margin-left-4 " + (activeLinkClass if currentAccountPage == "details" else inactiveLinkClass) %}
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <a class="{{ plansLinkClass }}" href="{{ paths.LOGIN_ACCOUNT }}"{% if currentAccountPage == 'plans' %} aria-current="page"{% endif %}>
-          Your child arrangements plans
-        </a>
-        <a class="{{ detailsLinkClass }}" href="/mvp-save-and-return/login-your-details"{% if currentAccountPage == 'details' %} aria-current="page"{% endif %}>
-          Your account details
-        </a>
-      </div>
-      <div class="govuk-grid-column-one-third govuk-!-text-align-right">
-        <a class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold text-decoration-none" href="{{ paths.SIGN_OUT }}">
-          Sign out
-        </a>
-      </div>
-    </div>
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-margin-top-2 govuk-!-margin-bottom-4">
     
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
@@ -74,9 +40,10 @@
       </div>
     </div>
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column">
+      <div class="govuk-grid-column govuk-!-padding-3">
         {{
           govukTable({
+            classes: "app-login-account-table",
             head: [
               { text: __('loginAccount.table.headerRow.child') },
               { text: __('loginAccount.table.headerRow.parents') },

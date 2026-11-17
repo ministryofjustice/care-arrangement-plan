@@ -36,7 +36,8 @@ enum titleIds {
   CONFIRMATION = 'confirmation',
   TIME_OUT = 'errors.timeOut.pageTitle',
   LOGIN_START = 'loginStart',
-  LOGIN_ACCOUNT = 'loginAccount'
+  LOGIN_ACCOUNT = 'loginAccount',
+  LOGIN_YOUR_DETAILS = 'loginYourDetails'
 }
 
 export default titleIds;

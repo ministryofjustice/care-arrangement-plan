@@ -1,6 +1,7 @@
 {
   "serviceName": "Cynnig cynllun trefniant plentyn",
   "oneLogin": {
+    "brand": "GOV.UK One Login",
     "signOut": "Allgofnodi",
     "problem": {
       "title": "Mae'n ddrwg gennym, ond mae problem gyda GOV.UK One Login",
@@ -11,6 +12,10 @@
       "body": "Gallwch fewngofnodi eto i barhau i wneud cynllun.",
       "startAgain": "Dechrau eto"
     }
+  },
+  "navigation": {
+    "yourPlans": "Eich cynlluniau trefniadau plant",
+    "yourDetails": "Eich manylion"
   },
   "yes": "Ydyn",
   "no": "Nac ydyn",
@@ -323,6 +328,14 @@
       }
     },
     "createPlanButton": "Create a new plan"
+  },
+  "loginYourDetails": {
+    "title": "Eich manylion",
+    "signInDetails": "Manylion mewngofnodi",
+    "usesOneLogin": "Rydych yn defnyddio GOV.UK One Login i fewngofnodi i'r gwasanaeth hwn.",
+    "email": "Cyfeiriad e-bost",
+    "manage": "I newid eich cyfeiriad e-bost neu gyfrinair, mae angen i chi reoli eich manylion mewngofnodi drwy GOV.UK One Login.",
+    "manageLink": "Rheoli eich GOV.UK One Login"
   },
   "safetyCheck": {
     "title": "A ydych wedi profi unrhyw gamdriniaeth gan eich cyn-bartner?",

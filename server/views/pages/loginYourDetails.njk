@@ -1,0 +1,36 @@
+{% extends "partials/layout.njk" %}
+{% from "macros/title.njk" import getTitle with context %}
+
+{% block pageTitle %}
+  {{
+    getTitle(
+      null,
+      titleIds.LOGIN_YOUR_DETAILS
+    )
+  }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">{{ __('loginYourDetails.title') }}</h1>
+
+        <h2 class="govuk-heading-m">{{ __('loginYourDetails.signInDetails') }}</h2>
+        <p class="govuk-body">{{ __('loginYourDetails.usesOneLogin') }}</p>
+
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ __('loginYourDetails.email') }}</dt>
+            <dd class="govuk-summary-list__value">{{ email }}</dd>
+          </div>
+        </dl>
+
+        <p class="govuk-body">{{ __('loginYourDetails.manage') }}</p>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://home.account.gov.uk/">{{ __('loginYourDetails.manageLink') }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

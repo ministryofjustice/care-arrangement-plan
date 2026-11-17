@@ -13,6 +13,7 @@ enum paths {
   SESSION_TIMEOUT = '/session-timeout',
   LOGIN_START = '/login-start',
   LOGIN_ACCOUNT = '/login-account',
+  LOGIN_YOUR_DETAILS = '/login-your-details',
   SAFETY_CHECK = '/safety-check',
   NOT_SAFE = '/not-safe',
   CHILDREN_SAFETY_CHECK = '/children-safety-check',

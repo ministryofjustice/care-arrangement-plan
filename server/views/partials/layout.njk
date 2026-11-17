@@ -6,22 +6,29 @@
 {% set mainClasses = "app-container govuk-body" %}
 
 {% block header %}
-  {{ govukHeader({
-    homepageUrl: 'https://www.gov.uk/'
-  }) }}
-
-  {% if signedIn %}
+  {% if oneLoginSignedIn %}
+    {% include "partials/oneLoginHeader.njk" %}
     {{ govukServiceNavigation({
       serviceName: __('serviceName'),
       serviceUrl: serviceUrl,
+      navigationId: 'service-navigation',
       navigation: [
         {
-          href: paths.SIGN_OUT,
-          text: __('oneLogin.signOut')
+          href: paths.LOGIN_ACCOUNT,
+          text: __('navigation.yourPlans'),
+          current: currentPath != paths.LOGIN_YOUR_DETAILS
+        },
+        {
+          href: paths.LOGIN_YOUR_DETAILS,
+          text: __('navigation.yourDetails'),
+          current: currentPath == paths.LOGIN_YOUR_DETAILS
         }
       ]
     }) }}
   {% else %}
+    {{ govukHeader({
+      homepageUrl: 'https://www.gov.uk/'
+    }) }}
     {{ govukServiceNavigation({
       serviceName: __('serviceName'),
       serviceUrl: serviceUrl

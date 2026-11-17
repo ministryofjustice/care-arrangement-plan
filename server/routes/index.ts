@@ -26,6 +26,7 @@ import healthRoutes from './health';
 import livingAndVisitingRoutes from './livingAndVisiting';
 import loginAccountRoutes from './loginAccount';
 import loginStartRoutes from './loginStart';
+import loginYourDetailsRoutes from './loginYourDetails';
 import numberOfChildrenRoutes from './numberOfChildren';
 import otherThingsRoutes from './otherThings';
 import safetyCheckRoutes from './safetyCheck';
@@ -68,6 +69,7 @@ const routes = (): Router => {
   analyticsRoutes(router);
   loginStartRoutes(router);
   loginAccountRoutes(router);
+  loginYourDetailsRoutes(router);
   safetyCheckRoutes(router);
   childrenSafetyRoutesCheck(router);
   doWhatsBestRoutes(router);

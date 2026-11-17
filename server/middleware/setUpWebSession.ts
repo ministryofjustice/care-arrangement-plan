@@ -36,6 +36,7 @@ const setUpWebSession = (): Router => {
   router.use((request, response, next) => {
     request.session.nowInMinutes = Math.floor(Date.now() / 60e3);
     response.locals.oneLoginSignedIn = Boolean(request.session.oneLogin?.sub);
+    response.locals.currentPath = request.path;
     next();
   });
 
