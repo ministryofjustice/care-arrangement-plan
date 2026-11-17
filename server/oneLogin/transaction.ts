@@ -24,6 +24,9 @@ export const sealOneLoginTransaction = (transaction: OneLoginTransaction, secret
 export const openOneLoginTransaction = (state: string, secret: string): OneLoginTransaction | undefined => {
   try {
     const payload = Buffer.from(state, 'base64url');
+    if (payload.length < 29 || payload.toString('base64url') !== state) {
+      return undefined;
+    }
     const iv = payload.subarray(0, 12);
     const tag = payload.subarray(12, 28);
     const ciphertext = payload.subarray(28);
