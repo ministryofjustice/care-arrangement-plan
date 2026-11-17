@@ -20,10 +20,7 @@ describe(paths.LOGIN_ACCOUNT, () => {
       expect(document.querySelector(`form[action="${paths.LOGIN_START}"] button`)).toHaveTextContent(
         'Create a new plan',
       );
-      expect(document.querySelector(`input[name="${formFields.LOGIN_START}"]`)).toHaveAttribute(
-        'value',
-        'start-new-plan',
-      );
+      expect(document.querySelector(`input[name="${formFields.LOGIN_START}"]`)).toHaveValue('start-new-plan');
     });
 
     it('should render the saved plan and its actions', async () => {

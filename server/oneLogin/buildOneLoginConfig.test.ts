@@ -36,11 +36,33 @@ describe('buildOneLoginConfig', () => {
     });
   });
 
+  it('uses the simulator on localhost when the integration issuer is configured', () => {
+    const config = buildOneLoginConfig(
+      env({
+        PORT: '3001',
+        ONE_LOGIN_ISSUER: 'https://oidc.integration.account.gov.uk/',
+        ONE_LOGIN_CLIENT_ID: 'integration-client',
+        ONE_LOGIN_REDIRECT_URL:
+          'https://care-arrangement-plan-dev.apps.live.cloud-platform.service.justice.gov.uk/oidc/authorization-code/callback',
+        ONE_LOGIN_POST_LOGOUT_REDIRECT_URL:
+          'https://care-arrangement-plan-dev.apps.live.cloud-platform.service.justice.gov.uk/signed-out',
+      }),
+      false,
+    );
+
+    expect(config).toMatchObject({
+      issuer: 'http://localhost:3000/',
+      clientId: 'HGIOgho9HIRhgoepdIOPFdIUWgewi0jw',
+      redirectUrl: 'http://localhost:3001/oidc/authorization-code/callback',
+      postLogoutRedirectUrl: 'http://localhost:3001/signed-out',
+    });
+  });
+
   it('requires the integration client id, key, and redirect URLs', () => {
     const issuer = { ONE_LOGIN_ISSUER: 'https://oidc.integration.account.gov.uk' };
 
-    expect(() => buildOneLoginConfig(env(issuer), false)).toThrow('Missing env var ONE_LOGIN_CLIENT_ID');
-    expect(() => buildOneLoginConfig(env({ ...issuer, ONE_LOGIN_CLIENT_ID: 'client-id' }), false)).toThrow(
+    expect(() => buildOneLoginConfig(env(issuer), true)).toThrow('Missing env var ONE_LOGIN_CLIENT_ID');
+    expect(() => buildOneLoginConfig(env({ ...issuer, ONE_LOGIN_CLIENT_ID: 'client-id' }), true)).toThrow(
       'Missing env var ONE_LOGIN_REDIRECT_URL',
     );
     expect(() =>
@@ -48,9 +70,10 @@ describe('buildOneLoginConfig', () => {
         env({
           ...issuer,
           ONE_LOGIN_CLIENT_ID: 'client-id',
-          ONE_LOGIN_REDIRECT_URL: 'http://localhost:3001/oidc/authorization-code/callback',
+          ONE_LOGIN_REDIRECT_URL:
+            'https://staging.child-arrangements-plan.service.justice.gov.uk/oidc/authorization-code/callback',
         }),
-        false,
+        true,
       ),
     ).toThrow('Missing env var ONE_LOGIN_POST_LOGOUT_REDIRECT_URL');
   });
@@ -71,7 +94,7 @@ describe('buildOneLoginConfig', () => {
         ONE_LOGIN_SCOPES: ' email , phone ',
         ONE_LOGIN_VTR: 'Cl.Cm.P2',
       }),
-      false,
+      true,
     );
 
     expect(config).toMatchObject({

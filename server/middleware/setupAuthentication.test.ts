@@ -11,8 +11,15 @@ const testPassword = ['test', 'Password'].join('');
 const app = testAppSetup();
 
 describe('When a route is called', () => {
+  const originalOneLogin = config.oneLogin;
+
   beforeEach(() => {
     config.useAuth = true;
+    config.oneLogin = { enabled: false };
+  });
+
+  afterEach(() => {
+    config.oneLogin = originalOneLogin;
   });
 
   describe('and client has no authentication cookie', () => {
@@ -55,8 +62,6 @@ describe('When a route is called', () => {
   });
 
   describe('and GOV.UK One Login is enabled', () => {
-    const originalOneLogin = config.oneLogin;
-
     beforeEach(() => {
       config.oneLogin = {
         enabled: true,
@@ -73,7 +78,6 @@ describe('When a route is called', () => {
     });
 
     afterEach(() => {
-      config.oneLogin = originalOneLogin;
       delete sessionMock.continueWithoutSignIn;
     });
 

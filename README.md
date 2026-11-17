@@ -62,6 +62,12 @@ cp .env.example .env
 
 Now to run the app, run `npm run start:dev`, which will start the app (by default on port 8001), with hot reloading enabled.
 
+### GOV.UK One Login
+
+Localhost uses the GOV.UK One Login simulator at `http://localhost:3000/`. With `AUTH_PROVIDER=one-login`, set `ONE_LOGIN_PRIVATE_KEY` to the private key published with the simulator. The simulator client id and localhost redirect URLs are used automatically.
+
+Development and staging use the GOV.UK integration environment, `https://oidc.integration.account.gov.uk/`. Each of those GitHub environments needs `ONE_LOGIN_CLIENT_ID` and `ONE_LOGIN_PRIVATE_KEY` secrets. The redirect URLs are the environment's `/oidc/authorization-code/callback` and `/signed-out` addresses.
+
 ### Running with a cache
 
 When deployed to an environment with multiple pods we run applications with an instance of Redis/Elasticache to provide

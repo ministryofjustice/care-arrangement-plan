@@ -32,6 +32,7 @@ const issuerJwk = {
 } as JsonWebKeyWithKid;
 const originalOneLogin = config.oneLogin;
 const originalUseAuth = config.useAuth;
+const originalPreviewEnd = config.previewEnd;
 const originalFetch = global.fetch.bind(global);
 
 const createIssuerCertificate = () => {
@@ -252,6 +253,7 @@ const startIssuer = () =>
 
 const enableOneLogin = () => {
   config.useAuth = true;
+  config.previewEnd = new Date('2099-01-01T00:00:00Z');
   config.oneLogin = {
     enabled: true,
     issuer: `${issuerOrigin}/`,
@@ -274,6 +276,7 @@ describe('GOV.UK One Login routes', () => {
     global.fetch = originalFetch;
     config.oneLogin = originalOneLogin;
     config.useAuth = originalUseAuth;
+    config.previewEnd = originalPreviewEnd;
     clearDiscoveryCache();
     await new Promise<void>((resolve, reject) => issuer.close((error) => (error ? reject(error) : resolve())));
   });

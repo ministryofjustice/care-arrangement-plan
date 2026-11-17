@@ -168,8 +168,12 @@ test.describe('Browser Navigation - Onboarding Flow', () => {
     await expect(page).toHaveURL(/\/make-a-plan/);
   });
 
-  test('should navigate back from first page to homepage', async ({ page }) => {
+  test('should navigate back from the first plan page through the sign-in choice to the homepage', async ({ page }) => {
     await startJourney(page);
+
+    await verifyBackNavigation(page, /\/login-start/, async () => {
+      await expect(page.getByRole('radio', { name: /start a new plan without signing in/i })).toBeChecked();
+    });
 
     await verifyHomeNavigation(page, '/');
 
