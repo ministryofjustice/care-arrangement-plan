@@ -7,14 +7,15 @@ import Pdf from '../pdf';
 import TextComponent from './text';
 
 class Textbox extends TextComponent {
-  private readonly TEXTBOX_HEIGHT = 20;
+  private readonly height: number;
 
-  constructor(pdf: Pdf, paragraphs: Paragraph[]) {
+  constructor(pdf: Pdf, paragraphs: Paragraph[], height = 20) {
     super(pdf, paragraphs);
+    this.height = height;
   }
 
   protected getComponentHeight() {
-    return super.getComponentHeight() + this.TEXTBOX_HEIGHT + PARAGRAPH_SPACE;
+    return super.getComponentHeight() + this.height + PARAGRAPH_SPACE;
   }
 
   protected createComponent() {
@@ -25,10 +26,10 @@ class Textbox extends TextComponent {
     textField.x = MARGIN_WIDTH;
     textField.y = this.pdf.currentY;
     textField.width = this.pdf.maxPageWidth;
-    textField.height = this.TEXTBOX_HEIGHT;
+    textField.height = this.height;
     this.pdf.document.addField(textField);
-    this.pdf.drawBorder(MARGIN_WIDTH, this.pdf.currentY, this.pdf.maxPageWidth, this.TEXTBOX_HEIGHT);
-    this.pdf.currentY += this.TEXTBOX_HEIGHT + PARAGRAPH_SPACE;
+    this.pdf.drawBorder(MARGIN_WIDTH, this.pdf.currentY, this.pdf.maxPageWidth, this.height);
+    this.pdf.currentY += this.height + PARAGRAPH_SPACE;
   }
 }
 
