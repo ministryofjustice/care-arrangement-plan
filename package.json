@@ -68,6 +68,7 @@
     "proxy-addr": "2.0.8",
     "compression": "1.8.2",
     "body-parser": "1.20.9",
+    "picomatch": "npm:@ryotsu/picomatch@4.0.7-a",
     "qs": "6.16.2",
     "@humanfs/node": "0.16.8"
   },
