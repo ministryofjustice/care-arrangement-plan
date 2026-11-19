@@ -52,7 +52,7 @@ const debugSession: Partial<CAPSession> & { lang: string } = {
     daytimeVisits: { willHappen: true, whichDays: {} },
   },
   handoverAndHolidays: {
-    getBetweenHouseholds: { noDecisionRequired: false, how: 'secondaryCollects' },
+    getBetweenHouseholds: { noDecisionRequired: false, how: 'otherParent' },
     whereHandover: { noDecisionRequired: false, where: [] },
     willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
     howChangeDuringSchoolHolidays: { noDecisionRequired: true },
