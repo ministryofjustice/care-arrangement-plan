@@ -55,6 +55,9 @@ const config = {
   opensearch: {
     proxyUrl: process.env.OPENSEARCH_PROXY_URL,
   },
+  dynamo: {
+    region: getStringConfigValue('AWS_REGION'),
+  },
   cache: getCacheConfig(),
   session: {
     secret: getStringConfigValue('SESSION_SECRET'),

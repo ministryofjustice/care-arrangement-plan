@@ -73,6 +73,8 @@
     "@humanfs/node": "0.16.8"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1172.0",
+    "@aws-sdk/lib-dynamodb": "^3.1172.0",
     "bunyan": "1.8.15",
     "bunyan-format": "0.2.1",
     "compression": "1.8.2",
