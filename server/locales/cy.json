@@ -1007,7 +1007,7 @@
         "doNotAgree": "If you do not agree, suggest who will attend school meetings and activities"
       }
     },
-    "health": {
+    "childHealth": {
       "sectionTitle": "Section 5",
       "title": "Health",
       "routineDecisions": {
