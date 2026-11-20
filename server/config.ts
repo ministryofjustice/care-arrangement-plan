@@ -56,8 +56,9 @@ const config = {
     proxyUrl: process.env.OPENSEARCH_PROXY_URL,
   },
   dynamo: {
-    region: getStringConfigValue('AWS_REGION'),
-  },
+  region: getStringConfigValue('AWS_REGION'),
+  tableName: getStringConfigValue('DYNAMODB_TABLE_NAME'),
+},
   cache: getCacheConfig(),
   session: {
     secret: getStringConfigValue('SESSION_SECRET'),

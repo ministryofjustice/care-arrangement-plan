@@ -1,30 +1,41 @@
 apiVersion: apps/v1
+
 kind: Deployment
+
 metadata:
   name: ${KUBE_NAMESPACE}-deployment
   namespace: ${KUBE_NAMESPACE}
-  labels:
-    app: ${KUBE_NAMESPACE}
+
+labels:
+  app: ${KUBE_NAMESPACE}
+
 spec:
   replicas: 1
+
   strategy:
     type: RollingUpdate
+
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 100%
+
   selector:
     matchLabels:
       app: ${KUBE_NAMESPACE}
+
   template:
     metadata:
       labels:
         app: ${KUBE_NAMESPACE}
+
     spec:
       terminationGracePeriodSeconds: 35
       serviceAccountName: cd-serviceaccount
+
       containers:
         - name: node
           image: ${ECR_URL}:${IMAGE_TAG}
+
           resources:
             limits:
               cpu: 500m
@@ -32,17 +43,21 @@ spec:
             requests:
               cpu: 50m
               memory: 100Mi
+
           readinessProbe:
             httpGet:
               path: /health
               port: 8080
+
           livenessProbe:
             httpGet:
               path: /health
               port: 8080
+
           ports:
             - containerPort: 8080
               name: http
+
           securityContext:
             capabilities:
               drop:
@@ -51,34 +66,50 @@ spec:
             allowPrivilegeEscalation: false
             seccompProfile:
               type: RuntimeDefault
+
           env:
             - name: BUILD_NUMBER
               value: ${BUILD_NUMBER}
+
             - name: GIT_REF
               value: ${GIT_REF}
+
             - name: GIT_BRANCH
               value: ${GIT_BRANCH}
+
             - name: PORT
               value: '8080'
+
             - name: NODE_OPTIONS
               value: '--max-old-space-size=200'
+
             - name: CACHE_HOST
               valueFrom:
                 secretKeyRef:
                   name: elasticache-redis
                   key: primary_endpoint_address
+
             - name: CACHE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: elasticache-redis
                   key: auth_token
+
             - name: OPENSEARCH_PROXY_URL
               valueFrom:
                 secretKeyRef:
                   name: care-arrangement-plan-opensearch-proxy-url
                   key: proxy_url
+
+            - name: DYNAMODB_TABLE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: cap-dynamodb-output
+                  key: table_name
+
           envFrom:
             - configMapRef:
                 name: ${KUBE_NAMESPACE}-config
+
             - secretRef:
                 name: ${KUBE_NAMESPACE}-secrets
