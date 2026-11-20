@@ -92,6 +92,27 @@ test.describe('PDF Download Functionality', () => {
 
     // PDF body text is encoded, but the urlized sign-up link is embedded as plain text
     expect(pdfString).toContain('smartsurvey.co.uk');
-    expect(pdfString).toContain('BDP7V3');
+    expect(pdfString).toContain('EFO5FJ');
+  });
+
+  test('should include health, education and travel sections in the downloaded PDF', async ({ page }) => {
+    await completeMinimalJourney(page);
+
+    const response = await page.request.get('/download-pdf');
+    const pdf = (await response.body()).toString('latin1');
+
+    expect(response.status()).toBe(200);
+    expect(pdf.startsWith('%PDF-')).toBe(true);
+
+    // Body copy is stored in a custom font, so the new answers are not searchable text.
+    // Each answered question, including health, education, travel and the consent reminder,
+    // adds a disagreement text field and keeps the plan on several pages.
+    const pageCount = pdf.match(/\/Type\s*\/Page(?!s)/g)?.length ?? 0;
+    const textFields = pdf.match(/\/FT\s*\/Tx/g)?.length ?? 0;
+
+    // The minimal journey answers living, handover, travel, health, education,
+    // special days, other things and decision making. Consent is always included.
+    expect(pageCount).toBe(13);
+    expect(textFields).toBe(29);
   });
 });

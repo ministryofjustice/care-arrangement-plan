@@ -1,27 +1,25 @@
 import { Request } from 'express';
 
-import { MAIN_TEXT_SIZE, PARAGRAPH_SPACE, QUESTION_TITLE_SIZE } from '../constants/pdfConstants';
 import {
   getBetweenHouseholds,
-  whereHandover,
-  willChangeDuringSchoolHolidays,
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
+  travelAbroad,
+  travelDocuments,
+  travelInformation,
+  whereHandover,
+  willChangeDuringSchoolHolidays,
 } from '../utils/formattedAnswersForPdf';
-import { childrenReference } from '../utils/sessionHelpers';
 
 import addAnswer from './addAnswer';
-import TextboxComponent from './components/textbox';
-import FontStyles from './fontStyles';
 import Pdf from './pdf';
 
 const addGetBetweenHouseholds = (pdf: Pdf, request: Request) => {
-  const children = childrenReference(request);
-
   addAnswer(
     pdf,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.sectionTitle'),
     request.__('taskList.handoverAndHolidays.title'),
-    request.__('handoverAndHolidays.getBetweenHouseholds.title', { children }),
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.householdsTitle'),
     undefined,
     getBetweenHouseholds(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.getBetweenHouseholds'),
@@ -29,13 +27,12 @@ const addGetBetweenHouseholds = (pdf: Pdf, request: Request) => {
 };
 
 const addWhereHandover = (pdf: Pdf, request: Request) => {
-  const children = childrenReference(request);
-
   addAnswer(
     pdf,
     undefined,
-    request.__('handoverAndHolidays.whereHandover.title', { children }),
-    request.__('handoverAndHolidays.whereHandover.explainer', { children }),
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.handoverTitle'),
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.handoverIntro'),
     whereHandover(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.whereHandover'),
   );
@@ -45,7 +42,8 @@ const addWillChangeDuringSchoolHolidays = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
-    request.__('handoverAndHolidays.willChangeDuringSchoolHolidays.title'),
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.arrangementsTitle'),
     undefined,
     willChangeDuringSchoolHolidays(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.willChangeDuringSchoolHolidays'),
@@ -59,8 +57,9 @@ const addHowChangeDuringSchoolHolidays = (pdf: Pdf, request: Request) => {
     addAnswer(
       pdf,
       undefined,
-      request.__('handoverAndHolidays.howChangeDuringSchoolHolidays.title'),
-      request.__('handoverAndHolidays.howChangeDuringSchoolHolidays.content'),
+      undefined,
+      request.__('sharePlan.yourProposedPlan.handoverAndHolidays.howChangeDuringSchoolHolidays.title'),
+      request.__('sharePlan.yourProposedPlan.handoverAndHolidays.howChangeDuringSchoolHolidays.intro'),
       answer,
       request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.howChangeDuringSchoolHolidays'),
     );
@@ -71,10 +70,59 @@ const addItemsForChangeover = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
     undefined,
-    request.__('handoverAndHolidays.itemsForChangeover.title'),
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.itemsForChangeover.title'),
     undefined,
     itemsForChangeover(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.itemsForChangeover'),
+  );
+};
+
+const addTravelAbroad = (pdf: Pdf, request: Request) => {
+  addAnswer(
+    pdf,
+    undefined,
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelAbroad.title'),
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelAbroad.intro'),
+    travelAbroad(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.travelAbroad'),
+  );
+};
+
+const addTravelDocuments = (pdf: Pdf, request: Request) => {
+  addAnswer(
+    pdf,
+    undefined,
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelDocuments.title'),
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelDocuments.intro'),
+    travelDocuments(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.travelDocuments'),
+  );
+};
+
+const addConsentToTravel = (pdf: Pdf, request: Request) => {
+  addAnswer(
+    pdf,
+    undefined,
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.consentToTravel.title'),
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.consentToTravel.parentalResponsibility'),
+    undefined
+  );
+};
+
+const addTravelInformation = (pdf: Pdf, request: Request) => {
+  addAnswer(
+    pdf,
+    undefined,
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelInformation.title'),
+    undefined,
+    travelInformation(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.travelInformation'),
   );
 };
 
@@ -85,21 +133,10 @@ const addHandoverAndHolidays = (pdf: Pdf) => {
   addWillChangeDuringSchoolHolidays(pdf, request);
   addHowChangeDuringSchoolHolidays(pdf, request);
   addItemsForChangeover(pdf, request);
-
-  new TextboxComponent(pdf, [
-    {
-      text: request.__('sharePlan.yourProposedPlan.endOfSection'),
-      size: QUESTION_TITLE_SIZE,
-      style: FontStyles.BOLD,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-    {
-      text: request.__('sharePlan.yourProposedPlan.compromise.handoverAndHolidays'),
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-  ]).addComponentToDocument();
+  addTravelAbroad(pdf, request);
+  addTravelDocuments(pdf, request);
+  addConsentToTravel(pdf, request);
+  addTravelInformation(pdf, request);
 };
 
 export default addHandoverAndHolidays;

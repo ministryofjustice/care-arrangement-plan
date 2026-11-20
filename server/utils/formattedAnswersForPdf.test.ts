@@ -23,6 +23,14 @@ import {
   planReview,
   planLongTermNotice,
   planLastMinuteChanges,
+  childHealthNeeds,
+  childHealthRoutineDecisions,
+  educationRoutineDecisions,
+  educationSchoolMeetings,
+  educationShareInformation,
+  travelAbroad,
+  travelDocuments,
+  travelInformation,
 } from './formattedAnswersForPdf';
 
 const testPath = '/test';
@@ -49,6 +57,9 @@ const testAppSetup = (): Express => {
         willChangeDuringSchoolHolidays: willChangeDuringSchoolHolidays(request),
         howChangeDuringSchoolHolidays: howChangeDuringSchoolHolidays(request),
         itemsForChangeover: itemsForChangeover(request),
+        travelAbroad: travelAbroad(request),
+        travelDocuments: travelDocuments(request),
+        travelInformation: travelInformation(request),
       },
       specialDays: {
         whatWillHappen: whatWillHappen(request),
@@ -60,6 +71,15 @@ const testAppSetup = (): Express => {
         planLastMinuteChanges: planLastMinuteChanges(request),
         planLongTermNotice: planLongTermNotice(request),
         planReview: planReview(request),
+      },
+      childHealth: {
+        routineDecisions: childHealthRoutineDecisions(request),
+        healthNeeds: childHealthNeeds(request),
+      },
+      education: {
+        shareInformation: educationShareInformation(request),
+        routineDecisions: educationRoutineDecisions(request),
+        schoolMeetings: educationSchoolMeetings(request),
       },
     });
   });
@@ -397,6 +417,51 @@ describe('formattedAnswers', () => {
           );
         });
     });
+
+    it('should return the travel notice, documents, and information to share', () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        travelAbroad: { noDecisionRequired: false, options: ['fourWeeks'] },
+        travelDocuments: { noDecisionRequired: false, options: ['parentTravelling'] },
+        travelInformation: {
+          noDecisionRequired: false,
+          options: ['dates', 'contact', 'other'],
+          describeArrangement: 'Flight numbers',
+        },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.handoverAndHolidays.travelAbroad).toBe(
+            `${session.initialAdultName} suggested:\n"At least 4 weeks"`,
+          );
+          expect(response.body.handoverAndHolidays.travelDocuments).toBe(
+            `${session.initialAdultName} suggested:\n"The parent travelling with the children"`,
+          );
+          expect(response.body.handoverAndHolidays.travelInformation).toBe(
+            `${session.initialAdultName} suggested:\n"Travel information (dates, transport details), Emergency contact details and Flight numbers"`,
+          );
+        });
+    });
+
+    it('should return the do not decide wording for unanswered travel arrangements', () => {
+      sessionMock.handoverAndHolidays = {
+        ...session.handoverAndHolidays,
+        travelAbroad: { noDecisionRequired: true },
+        travelDocuments: { noDecisionRequired: true },
+        travelInformation: { noDecisionRequired: true },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          const doNotDecide = `${session.initialAdultName} suggested that this does not need to be decided.`;
+          expect(response.body.handoverAndHolidays.travelAbroad).toBe(doNotDecide);
+          expect(response.body.handoverAndHolidays.travelDocuments).toBe(doNotDecide);
+          expect(response.body.handoverAndHolidays.travelInformation).toBe(doNotDecide);
+        });
+    });
   });
 
   describe('specialDays', () => {
@@ -537,6 +602,135 @@ describe('formattedAnswers', () => {
         .get(testPath)
         .expect((response) => {
           expect(response.body.decisionMaking).toEqual(expectedValues);
+        });
+    });
+  });
+
+  describe('childHealth', () => {
+    it('should return undefined when health has not been answered', () => {
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.childHealth).toEqual({});
+        });
+    });
+
+    it('should return the chosen routine decision and described health needs', () => {
+      sessionMock.childHealth = {
+        routineDecisions: { noDecisionRequired: false, options: ['otherParent'] },
+        childHealthNeeds: { noDecisionRequired: false, description: 'Inhaler every morning' },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.childHealth).toEqual({
+            routineDecisions: `${session.initialAdultName} suggested:\n"The other parent will decide"`,
+            healthNeeds: `${session.initialAdultName} suggested:\n"Inhaler every morning"`,
+          });
+        });
+    });
+
+    it('should use the described arrangement for routine health decisions', () => {
+      sessionMock.childHealth = {
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent will decide routine appointments',
+        },
+        childHealthNeeds: {
+          noDecisionRequired: false,
+          description: 'Asthma inhaler every morning and a yearly review',
+        },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.childHealth).toEqual({
+            routineDecisions: `${session.initialAdultName} suggested:\n"A grandparent will decide routine appointments"`,
+            healthNeeds: `${session.initialAdultName} suggested:\n"Asthma inhaler every morning and a yearly review"`,
+          });
+        });
+    });
+
+    it('should return the do not decide wording when no decision is required', () => {
+      sessionMock.childHealth = {
+        routineDecisions: { noDecisionRequired: true },
+        childHealthNeeds: { noDecisionRequired: true },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.childHealth).toEqual({
+            routineDecisions: `${session.initialAdultName} suggested that this does not need to be decided.`,
+            healthNeeds: `${session.initialAdultName} suggested that this does not need to be decided.`,
+          });
+        });
+    });
+  });
+
+  describe('education', () => {
+    it('should return undefined when education has not been answered', () => {
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.education).toEqual({});
+        });
+    });
+
+    it('should return the chosen school information, routine decisions, and school meetings', () => {
+      sessionMock.education = {
+        shareInformation: { noDecisionRequired: false, options: ['bothParents'] },
+        routineDecisions: { noDecisionRequired: false, options: ['parent'] },
+        schoolMeetings: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent attends parents evening',
+        },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.education).toEqual({
+            shareInformation: `${session.initialAdultName} suggested:\n"Both parents will receive information"`,
+            routineDecisions: `${session.initialAdultName} suggested:\n"You will decide"`,
+            schoolMeetings: `${session.initialAdultName} suggested:\n"A grandparent attends parents evening"`,
+          });
+        });
+    });
+
+    it('should name the children when the carer attends school meetings', () => {
+      sessionMock.education = {
+        schoolMeetings: { noDecisionRequired: false, options: ['carer'] },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.education.schoolMeetings).toBe(
+            `${session.initialAdultName} suggested:\n"The parent caring for the children at the time will attend"`,
+          );
+        });
+    });
+
+    it('should return the do not decide wording when no decision is required', () => {
+      sessionMock.education = {
+        shareInformation: { noDecisionRequired: true },
+        routineDecisions: { noDecisionRequired: true },
+        schoolMeetings: { noDecisionRequired: true },
+      };
+
+      return request(app)
+        .get(testPath)
+        .expect((response) => {
+          expect(response.body.education).toEqual({
+            shareInformation: `${session.initialAdultName} suggested that this does not need to be decided.`,
+            routineDecisions: `${session.initialAdultName} suggested that this does not need to be decided.`,
+            schoolMeetings: `${session.initialAdultName} suggested that this does not need to be decided.`,
+          });
         });
     });
   });

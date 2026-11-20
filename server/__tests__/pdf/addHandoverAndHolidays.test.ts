@@ -7,8 +7,10 @@ import { validateResponseAgainstSnapshot } from '../../test-utils/pdfUtils';
 import { sessionMock } from '../../test-utils/testMocks';
 import testAppSetup, { TEST_PATH } from '../../test-utils/testPdfAppSetup';
 
-
-jest.mock('../../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../../assets/${fileName}`));
+jest.mock(
+  '../../utils/getAssetPath',
+  () => (fileName: string) => path.resolve(__dirname, `../../../assets/${fileName}`),
+);
 
 const app = testAppSetup(addHandoverAndHolidays);
 
@@ -59,6 +61,22 @@ describe('addHandoverAndHolidays', () => {
         willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
         howChangeDuringSchoolHolidays: { noDecisionRequired: true },
         itemsForChangeover: { noDecisionRequired: false, answer: 'itemsForChangeover arrangement' },
+      },
+    ],
+    [
+      'addHandoverAndHolidays-5',
+      {
+        getBetweenHouseholds: { noDecisionRequired: true },
+        whereHandover: { noDecisionRequired: true },
+        willChangeDuringSchoolHolidays: { noDecisionRequired: true },
+        itemsForChangeover: { noDecisionRequired: true },
+        travelAbroad: { noDecisionRequired: false, options: ['fourWeeks'] },
+        travelDocuments: { noDecisionRequired: false, options: ['parentTravelling'] },
+        travelInformation: {
+          noDecisionRequired: false,
+          options: ['dates', 'contact', 'other'],
+          describeArrangement: 'Flight numbers',
+        },
       },
     ],
   ])('pdf matches for %s', async (pdfName, handoverAndHolidays) => {
