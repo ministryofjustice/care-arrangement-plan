@@ -66,16 +66,19 @@ const addAnswer = (
     ].filter((paragraph) => !!paragraph),
   ).addComponentToDocument();
 
-  new DoYouAgreeComponent(pdf, pdf.request.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument();
+  if (disagreeText) {
+    new DoYouAgreeComponent(pdf, pdf.request.__('sharePlan.yourProposedPlan.doYouAgree')).addComponentToDocument();
 
-  new TextboxComponent(pdf, [
-    {
-      text: disagreeText,
-      size: MAIN_TEXT_SIZE,
-      style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
-    },
-  ]).addComponentToDocument();
+    new TextboxComponent(pdf, [
+      {
+        text: disagreeText,
+        size: MAIN_TEXT_SIZE,
+        style: FontStyles.NORMAL,
+        // Baseline-to-box gap. Leaves a small clearance under descenders, matching the returned form.
+        bottomPadding: 3,
+      },
+    ]).addComponentToDocument();
+  }
 };
 
 export default addAnswer;

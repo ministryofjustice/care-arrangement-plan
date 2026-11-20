@@ -887,6 +887,7 @@
   },
   "sharePlan": {
     "name": "Proposed child arrangements plan",
+    "recipientDocument": "Recipient\ndocument",
     "contact": "For support with technical or user issues, you can email childarrangements@justice.gov.uk",
     "unableToAssist": "We are unable to assist with individual court cases or disputes, and we cannot provide procedural or legal advice.", 
     "beforeYouStart": {
@@ -1006,7 +1007,7 @@
         "doNotAgree": "If you do not agree, suggest who will attend school meetings and activities"
       }
     },
-    "health": {
+    "childHealth": {
       "sectionTitle": "Section 5",
       "title": "Health",
       "routineDecisions": {
@@ -1157,6 +1158,7 @@
         "sectionTitle": "Section 3",
         "householdsTitle": "How will the children get between households?",
         "handoverTitle": "Where does handover take place?",
+        "handoverIntro": "It may be easier for children if the handover takes place at a neutral location which you're confident you'll both feel safe in.",
         "arrangementsTitle": "Will these arrangements change during school holidays?",
         "suggestedCollects": "{{{ senderName }}} suggested that {{{ adult }}} collects the children.",
         "suggestedHandover": "{{{ senderName }}} suggested that handover takes place at {{{ location }}}",
@@ -1165,7 +1167,29 @@
         "school": "school",
         "suggestedSomeoneElse": "{{{ senderName }}} suggested that someone else will manage handover. {{{ senderName }}} suggested:\n\"{{{ someoneElse }}}\"",
         "suggestedChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements should change during school holidays.",
-        "suggestedNoChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements should not change during school holidays."
+        "suggestedNoChangeDuringSchoolHolidays": "{{{ senderName }}} suggested that these arrangements should not change during school holidays.",
+        "howChangeDuringSchoolHolidays": {
+          "title": "How will the arrangements be different in school holidays?",
+          "intro": "School holidays include half terms, bank holidays and inset days."
+        },
+        "itemsForChangeover": {
+          "title": "What items need to go between households?"
+        },
+        "travelDocuments": {
+          "title": "Who will arrange passports, visas, and other travel documents?",
+          "intro": "For example, applying for or renewing passports and visas, or completing applications."
+        },
+        "consentToTravel": {
+          "title": "Permission for taking the children abroad",
+          "parentalResponsibility": "You usually need permission from everyone with parental responsibility before taking a child abroad.\nGet permission in writing\nHaving permission in writing provides a record that consent has been given and can help avoid problems or delays when travelling.\nA reminder about getting permission before taking the children abroad will be included in your child arrangements plan.\nIf you're concerned your child could be taken abroad, find out what to do if you believe a child could be taken or has been taken abroad without your permission."
+        },
+        "travelAbroad": {
+          "title": "How much notice should be given before travelling abroad with the children?",
+          "intro": "You must get permission to take a child abroad from everyone with parental responsibility or from a court."
+        },
+        "travelInformation": {
+          "title": "What other information should be shared before travelling abroad?"
+        }
       },
       "decisionMaking": {
         "planLastMinuteChanges": {
@@ -1203,7 +1227,11 @@
           "whereHandover": "If you do not agree, suggest where handover takes place",
           "willChangeDuringSchoolHolidays": "If you do not agree, suggest whether the arrangements should change during the holidays",
           "howChangeDuringSchoolHolidays": "If you do not agree, suggest how the arrangements should change during the holidays",
-          "itemsForChangeover": "If you do not agree, suggest which items need to go between households"
+          "itemsForChangeover": "If you do not agree, suggest which items need to go between households",
+          "travelAbroad": "If you do not agree, suggest how much notice should be given before travelling abroad",
+          "travelDocuments": "If you do not agree, suggest who will arrange passports, visas and other travel documents",
+          "consentToTravel": "If you do not agree, suggest how permission to take the children abroad should be recorded",
+          "travelInformation": "If you do not agree, suggest what other information should be shared before travelling abroad with the children"
         },
         "specialDays": {
           "whatWillHappen": "If you do not agree, suggest what will happen on special days"

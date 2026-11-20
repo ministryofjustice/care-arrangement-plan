@@ -8,7 +8,7 @@ import {
   formatPlanChangesOptionsIntoList,
   formatWhichDaysSessionValue,
 } from './formValueUtils';
-import { parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
+import { childrenReference, parentMostlyLivedWith, parentNotMostlyLivedWith } from './sessionHelpers';
 
 export const mostlyLive = (request: Request) => {
   const { livingAndVisiting, initialAdultName, secondaryAdultName } = request.session;
@@ -208,6 +208,112 @@ export const itemsForChangeover = (request: Request) => {
   });
 };
 
+const suggestedAnswer = (request: Request, senderName: string, suggestion: string | undefined) => {
+  if (!suggestion) return undefined;
+
+  return request.__('sharePlan.yourProposedPlan.senderSuggested', {
+    senderName,
+    suggestion,
+  });
+};
+
+export const travelAbroad = (request: Request) => {
+  const { handoverAndHolidays, initialAdultName } = request.session;
+  const travel = handoverAndHolidays?.travelAbroad;
+  if (!travel) return undefined;
+
+  if (travel.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const suggestion = travel.options
+    ?.map((option) => {
+      switch (option) {
+        case 'twoWeeks':
+          return request.__('handoverAndHolidays.travelAbroad.twoWeeks');
+        case 'fourWeeks':
+          return request.__('handoverAndHolidays.travelAbroad.fourWeeks');
+        case 'eightWeeks':
+          return request.__('handoverAndHolidays.travelAbroad.eightWeeks');
+        case 'anotherArrangement':
+          return travel.describeArrangement;
+        default:
+          return undefined;
+      }
+    })
+    .filter((option): option is string => !!option)
+    .join(', ');
+
+  return suggestedAnswer(request, initialAdultName, suggestion);
+};
+
+export const travelDocuments = (request: Request) => {
+  const { handoverAndHolidays, initialAdultName } = request.session;
+  const documents = handoverAndHolidays?.travelDocuments;
+  if (!documents) return undefined;
+
+  if (documents.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const suggestion = documents.options
+    ?.map((option) => {
+      switch (option) {
+        case 'parent':
+          return request.__('handoverAndHolidays.travelDocuments.parent');
+        case 'otherParent':
+          return request.__('handoverAndHolidays.travelDocuments.otherParent');
+        case 'bothParents':
+          return request.__('handoverAndHolidays.travelDocuments.bothParents').trim();
+        case 'parentTravelling':
+          return request.__('handoverAndHolidays.travelDocuments.parentTravelling');
+        case 'anotherArrangement':
+          return documents.describeArrangement;
+        default:
+          return undefined;
+      }
+    })
+    .filter((option): option is string => !!option)
+    .join(', ');
+
+  return suggestedAnswer(request, initialAdultName, suggestion);
+};
+
+export const travelInformation = (request: Request) => {
+  const { handoverAndHolidays, initialAdultName } = request.session;
+  const information = handoverAndHolidays?.travelInformation;
+  if (!information) return undefined;
+
+  if (information.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const labels = information.options
+    ?.map((option) => {
+      switch (option) {
+        case 'dates':
+          return request.__('handoverAndHolidays.travelInformation.travelInformation');
+        case 'group':
+          return request.__('handoverAndHolidays.travelInformation.travelGroup');
+        case 'address':
+          return request.__('handoverAndHolidays.travelInformation.accommodationAddress');
+        case 'contact':
+          return request.__('handoverAndHolidays.travelInformation.emergencyContact');
+        case 'passport':
+          return request.__('handoverAndHolidays.travelInformation.passportHandover');
+        case 'other':
+          return information.describeArrangement;
+        default:
+          return undefined;
+      }
+    })
+    .filter((option): option is string => !!option);
+
+  if (!labels?.length) return undefined;
+
+  return suggestedAnswer(request, initialAdultName, formatListOfStrings(labels, request));
+};
+
 export const whatWillHappen = (request: Request) => {
   const { specialDays, initialAdultName } = request.session;
   return specialDays.whatWillHappen.noDecisionRequired
@@ -281,4 +387,157 @@ export const planReview = (request: Request) => {
     senderName: initialAdultName,
     number: number.toString(),
   });
+};
+
+export const childHealthRoutineDecisions = (request: Request) => {
+  const { childHealth, initialAdultName } = request.session;
+  const routineDecisions = childHealth?.routineDecisions;
+  if (!routineDecisions) return undefined;
+
+  if (routineDecisions.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const suggestion = routineDecisions.options
+    ?.map((option) => {
+      switch (option) {
+        case 'parent':
+          return request.__('childHealth.routineDecisions.options.parent');
+        case 'otherParent':
+          return request.__('childHealth.routineDecisions.options.otherParent');
+        case 'bothParents':
+          return request.__('childHealth.routineDecisions.options.bothParents');
+        case 'anotherArrangement':
+          return routineDecisions.describeArrangement;
+        default:
+          return undefined;
+      }
+    })
+    .filter((option): option is string => !!option)
+    .join(', ');
+
+  if (!suggestion) return undefined;
+
+  return request.__('sharePlan.yourProposedPlan.senderSuggested', {
+    senderName: initialAdultName,
+    suggestion,
+  });
+};
+
+export const childHealthNeeds = (request: Request) => {
+  const { childHealth, initialAdultName } = request.session;
+  const needs = childHealth?.childHealthNeeds;
+  if (!needs) return undefined;
+
+  if (needs.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  if (!needs.description) return undefined;
+
+  return request.__('sharePlan.yourProposedPlan.senderSuggested', {
+    senderName: initialAdultName,
+    suggestion: needs.description,
+  });
+};
+
+const suggestedEducationAnswer = (request: Request, senderName: string, suggestion: string | undefined) => {
+  if (!suggestion) return undefined;
+
+  return request.__('sharePlan.yourProposedPlan.senderSuggested', {
+    senderName,
+    suggestion,
+  });
+};
+
+export const educationShareInformation = (request: Request) => {
+  const { education, initialAdultName } = request.session;
+  const shareInformation = education?.shareInformation;
+  if (!shareInformation) return undefined;
+
+  if (shareInformation.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const suggestion = shareInformation.options
+    ?.map((option) => {
+      switch (option) {
+        case 'parent':
+          return request.__('education.shareInformation.options.parent');
+        case 'otherParent':
+          return request.__('education.shareInformation.options.otherParent');
+        case 'bothParents':
+          return request.__('education.shareInformation.options.bothParents');
+        case 'anotherArrangement':
+          return shareInformation.describeArrangement;
+        default:
+          return undefined;
+      }
+    })
+    .filter((option): option is string => !!option)
+    .join(', ');
+
+  return suggestedEducationAnswer(request, initialAdultName, suggestion);
+};
+
+export const educationRoutineDecisions = (request: Request) => {
+  const { education, initialAdultName } = request.session;
+  const routineDecisions = education?.routineDecisions;
+  if (!routineDecisions) return undefined;
+
+  if (routineDecisions.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const suggestion = routineDecisions.options
+    ?.map((option) => {
+      switch (option) {
+        case 'parent':
+          return request.__('education.routineDecisions.options.parent');
+        case 'otherParent':
+          return request.__('education.routineDecisions.options.otherParent');
+        case 'bothParents':
+          return request.__('education.routineDecisions.options.bothParents');
+        case 'anotherArrangement':
+          return routineDecisions.describeArrangement;
+        default:
+          return undefined;
+      }
+    })
+    .filter((option): option is string => !!option)
+    .join(', ');
+
+  return suggestedEducationAnswer(request, initialAdultName, suggestion);
+};
+
+export const educationSchoolMeetings = (request: Request) => {
+  const { education, initialAdultName } = request.session;
+  const schoolMeetings = education?.schoolMeetings;
+  if (!schoolMeetings) return undefined;
+
+  if (schoolMeetings.noDecisionRequired) {
+    return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
+  }
+
+  const suggestion = schoolMeetings.options
+    ?.map((option) => {
+      switch (option) {
+        case 'parent':
+          return request.__('education.schoolMeetings.options.parent');
+        case 'otherParent':
+          return request.__('education.schoolMeetings.options.otherParent');
+        case 'bothParents':
+          return request.__('education.schoolMeetings.options.bothParents');
+        case 'carer':
+          return request.__('education.schoolMeetings.options.carer', { childName: childrenReference(request) });
+        case 'anotherArrangement':
+          return schoolMeetings.describeArrangement;
+        default:
+          return undefined;
+      }
+    })
+    .filter((option): option is string => !!option)
+    .join(', ');
+
+  return suggestedEducationAnswer(request, initialAdultName, suggestion);
 };

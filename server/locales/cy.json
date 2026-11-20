@@ -887,6 +887,7 @@
   },
   "sharePlan": {
     "name": "Proposed child arrangements plan",
+    "recipientDocument": "Recipient\ndocument",
     "contact": "For support with technical or user issues, you can email childarrangements@justice.gov.uk",
     "unableToAssist": "We are unable to assist with individual court cases or disputes, and we cannot provide procedural or legal advice.", 
     "beforeYouStart": {
@@ -986,6 +987,39 @@
     },
     "childArrangementsProposal": {
 
+    },
+    "education": {
+      "sectionTitle": "Section 4",
+      "title": "Education",
+      "schoolInfo": {
+        "question": "How should information from the school be shared?",
+        "description": "For example, school emails, reports, and emergency communications. Harrison did not provide an answer.",
+        "doNotAgree": "If you do not agree, suggest how information from the school should be shared"
+      },
+      "routineDecisions": {
+        "question": "How will routine decisions about education be made?",
+        "description": "For example, day-to-day decisions like homework, school trips, and uniform. Harrison did not provide an answer.",
+        "doNotAgree": "If you do not agree, suggest how routine decisions about education should be made"
+      },
+      "schoolMeetings": {
+        "question": "Who will attend school meetings and activities?",
+        "description": "For example, parents' evenings, school meetings, school trips, and extracurricular activities. Harrison did not provide an answer.",
+        "doNotAgree": "If you do not agree, suggest who will attend school meetings and activities"
+      }
+    },
+    "health": {
+      "sectionTitle": "Section 5",
+      "title": "Health",
+      "routineDecisions": {
+        "question": "How will routine decisions about the children's health be made?",
+        "description": "For example, booking routine check-ups, picking up prescriptions, or managing minor illnesses. Harrison did not provide an answer.",
+        "doNotAgree": "If you do not agree, suggest how routine decisions about the children's health should be made"
+      },
+      "healthNeeds": {
+        "question": "What health needs should parents be aware of?",
+        "description": "For example, health routines, medical conditions, medications, appointments, and specialist support. Harrison did not provide an answer.",
+        "doNotAgree": "If you do not agree, suggest what health needs parents should be aware of"
+      }
     },
     "endOfForm": {
       "sectionTitle": "Section 9",
@@ -1124,6 +1158,7 @@
         "sectionTitle": "Section 3",
         "householdsTitle": "How will the children get between households?",
         "handoverTitle": "Where does handover take place?",
+        "handoverIntro": "It may be easier for children if the handover takes place at a neutral location which you're confident you'll both feel safe in.",
         "arrangementsTitle": "Will these arrangements change during school holidays?",
         "suggestedCollects": "Awgrymodd {{{ senderName }}} y dylai {{{ adult }}} gasglu'r plant.",
         "suggestedHandover": "Awgrymodd {{{ senderName }}} y dylai'r trosglwyddiad ddigwydd yn {{{ location }}}",
@@ -1132,7 +1167,29 @@
         "school": "yr ysgol",
         "suggestedSomeoneElse": "Awgrymodd {{{ senderName }}} y dylai rhywun arall ddelio efo'r trosglwyddiad. {{{ senderName }}} awgrymwyd:\n\"{{{ someoneElse }}}\"",
         "suggestedChangeDuringSchoolHolidays": "Awgrymodd {{{ senderName }}} y dylai'r trefniadau hyn newid yn ystod gwyliau'r ysgol.",
-        "suggestedNoChangeDuringSchoolHolidays": "Awgrymodd {{{ senderName }}} ni ddylai'r trefniadau hyn newid yn ystod gwyliau'r ysgol."
+        "suggestedNoChangeDuringSchoolHolidays": "Awgrymodd {{{ senderName }}} ni ddylai'r trefniadau hyn newid yn ystod gwyliau'r ysgol.",
+        "howChangeDuringSchoolHolidays": {
+          "title": "How will the arrangements be different in school holidays?",
+          "intro": "School holidays include half terms, bank holidays and inset days."
+        },
+        "itemsForChangeover": {
+          "title": "What items need to go between households?"
+        },
+        "travelDocuments": {
+          "title": "Who will arrange passports, visas, and other travel documents?",
+          "intro": "For example, applying for or renewing passports and visas, or completing applications."
+        },
+        "consentToTravel": {
+          "title": "Permission for taking the children abroad",
+          "parentalResponsibility": "You usually need permission from everyone with parental responsibility before taking a child abroad.\nGet permission in writing\nHaving permission in writing provides a record that consent has been given and can help avoid problems or delays when travelling.\nA reminder about getting permission before taking the children abroad will be included in your child arrangements plan.\nIf you're concerned your child could be taken abroad, find out what to do if you believe a child could be taken or has been taken abroad without your permission."
+        },
+        "travelAbroad": {
+          "title": "How much notice should be given before travelling abroad with the children?",
+          "intro": "You must get permission to take a child abroad from everyone with parental responsibility or from a court."
+        },
+        "travelInformation": {
+          "title": "What other information should be shared before travelling abroad?"
+        }
       },
       "decisionMaking": {
         "planLastMinuteChanges": {
@@ -1170,7 +1227,11 @@
           "whereHandover": "Os nad ydych chi'n cytuno, awgrymwch ble fydd y trosglwyddo'n digwydd",
           "willChangeDuringSchoolHolidays": "Os nad ydych chi'n cytuno, awgrymwch a ddylai'r trefniadau newid yn ystod y gwyliau",
           "howChangeDuringSchoolHolidays": "Os nad ydych chi'n cytuno, awgrymwch sut ddylai'r trefniadau newid yn ystod y gwyliau",
-          "itemsForChangeover": "Os nad ydych yn cytuno, awgrymwch pa eitemau sydd angen mynd o un cartref i'r llall"
+          "itemsForChangeover": "Os nad ydych yn cytuno, awgrymwch pa eitemau sydd angen mynd o un cartref i'r llall",
+          "travelAbroad": "If you do not agree, suggest how much notice should be given before travelling abroad with the children",
+          "travelDocuments": "If you do not agree, suggest who will arrange passports, visas and other travel documents",
+          "consentToTravel": "If you do not agree, suggest how permission to take the children abroad should be recorded",
+          "travelInformation": "If you do not agree, suggest what other information should be shared before travelling abroad with the children"
         },
         "specialDays": {
           "whatWillHappen": "Os nad ydych yn cytuno, awgrymwch beth fydd yn digwydd ar ddyddiau arbennig"

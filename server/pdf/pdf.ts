@@ -5,6 +5,7 @@ import { jsPDF } from 'jspdf';
 
 import { Paragraph, Text, TextRun } from '../@types/pdf';
 import {
+  ADDITIONAL_SUB_HEADING_SIZE,
   FONT,
   FOOTER_HEIGHT,
   HEADER_HEIGHT,
@@ -14,8 +15,6 @@ import {
   LINE_HEIGHT_RATIO,
   MARGIN_WIDTH,
   MM_PER_POINT,
-  PARAGRAPH_SPACE,
-  SUB_HEADING_SIZE,
 } from '../constants/pdfConstants';
 import logger from '../logging/logger';
 import getAssetPath from '../utils/getAssetPath';
@@ -84,19 +83,23 @@ class Pdf {
 
   public addRecipientDocumentLabel() {
     const pageWidth = this.document.internal.pageSize.getWidth();
-    const lineHeight = SUB_HEADING_SIZE * LINE_HEIGHT_RATIO * MM_PER_POINT;
-    const lines = this.request.__('pdf.recipientDocument').split('\n');
+    const size = ADDITIONAL_SUB_HEADING_SIZE;
+    const lineHeight = size * 1.5 * MM_PER_POINT;
+    const lines = this.request.__('sharePlan.recipientDocument').split('\n');
+    const firstBaseline = 19;
 
-    this.document.setFont(FONT, FontStyles.BOLD).setFontSize(SUB_HEADING_SIZE);
+    this.document.setFont(FONT, FontStyles.BOLD).setFontSize(size);
     lines.forEach((line, index) => {
-      this.document.text(line, pageWidth - MARGIN_WIDTH, lineHeight * (index + 2), { align: 'right' });
+      this.document.text(line, pageWidth - MARGIN_WIDTH, firstBaseline + lineHeight * index, { align: 'right' });
     });
 
-    // The title is drawn from currentY, and its cap height sits above that baseline.
-    // Start it below the recipient label so the two do not share a line.
-    const labelBaseline = lineHeight * (lines.length + 1);
-    const titleCapOffset = HEADING_SIZE * MM_PER_POINT * (LINE_HEIGHT_RATIO - 1);
-    this.currentY = labelBaseline + PARAGRAPH_SPACE - titleCapOffset;
+    // The title paragraph adds one line of leading before its baseline.
+    // Leave a gap under both lines, matching the returned-form first page.
+    const lastBaseline = firstBaseline + lineHeight * (lines.length - 1);
+    const titleLineHeight = HEADING_SIZE * LINE_HEIGHT_RATIO * MM_PER_POINT;
+    const titleCapHeight = HEADING_SIZE * 0.72 * MM_PER_POINT;
+    const gapBelowLabel = 10.5;
+    this.currentY = lastBaseline + gapBelowLabel + titleCapHeight - titleLineHeight;
   }
 
   private addFooterToPage(pageNumber: number) {

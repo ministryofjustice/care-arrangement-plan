@@ -1,17 +1,19 @@
 import { Request } from 'express';
 
+import { childHealthNeeds, childHealthRoutineDecisions } from '../utils/formattedAnswersForPdf';
+
 import addAnswer from './addAnswer';
 import Pdf from './pdf';
 
 const addRoutineDecisions = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
-    request.__('sharePlan.health.sectionTitle'),
-    request.__('taskList.health.title'),
-    request.__('sharePlan.health.routineDecisions.question'),
-    request.__('sharePlan.health.routineDecisions.description'),
-    undefined,
-    undefined
+    request.__('sharePlan.childHealth.sectionTitle'),
+    request.__('sharePlan.childHealth.title'),
+    request.__('sharePlan.childHealth.routineDecisions.question'),
+    request.__('childHealth.routineDecisions.description'),
+    childHealthRoutineDecisions(request),
+    request.__('sharePlan.childHealth.routineDecisions.doNotAgree'),
   );
 };
 
@@ -20,10 +22,10 @@ const addHealthNeeds = (pdf: Pdf, request: Request) => {
     pdf,
     undefined,
     undefined,
-    request.__('sharePlan.health.routineDecisions.question'),
-    request.__('sharePlan.health.routineDecisions.description'),
-    undefined,
-    undefined
+    request.__('sharePlan.childHealth.healthNeeds.question'),
+    request.__('childHealth.healthNeeds.description'),
+    childHealthNeeds(request),
+    request.__('sharePlan.childHealth.healthNeeds.doNotAgree'),
   );
 };
 

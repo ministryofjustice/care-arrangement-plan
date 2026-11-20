@@ -94,6 +94,26 @@ describe('createPdf', () => {
         itemsForChangeover: {
           noDecisionRequired: true,
         },
+        travelAbroad: { noDecisionRequired: false, options: ['fourWeeks'] },
+        travelDocuments: { noDecisionRequired: false, options: ['parentTravelling'] },
+        travelInformation: {
+          noDecisionRequired: false,
+          options: ['dates', 'contact', 'other'],
+          describeArrangement: 'Flight numbers',
+        },
+      },
+      childHealth: {
+        routineDecisions: { noDecisionRequired: false, options: ['otherParent'] },
+        childHealthNeeds: { noDecisionRequired: false, description: 'Inhaler every morning' },
+      },
+      education: {
+        shareInformation: { noDecisionRequired: false, options: ['bothParents'] },
+        routineDecisions: { noDecisionRequired: false, options: ['parent'] },
+        schoolMeetings: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent attends parents evening',
+        },
       },
       specialDays: {
         whatWillHappen: {
@@ -164,6 +184,46 @@ describe('createPdf', () => {
         itemsForChangeover: {
           noDecisionRequired: false,
           answer: longString,
+        },
+        travelAbroad: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: longString,
+        },
+        travelDocuments: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: longString,
+        },
+        travelInformation: {
+          noDecisionRequired: false,
+          options: ['other'],
+          describeArrangement: longString,
+        },
+      },
+      childHealth: {
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: longString,
+        },
+        childHealthNeeds: { noDecisionRequired: false, description: longString },
+      },
+      education: {
+        shareInformation: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: longString,
+        },
+        routineDecisions: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: longString,
+        },
+        schoolMeetings: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: longString,
         },
       },
       specialDays: {

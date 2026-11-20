@@ -22,8 +22,8 @@ const createPdf = (autoPrint: boolean, request: Request) => {
   addAboutTheProposal(pdf);
   addLivingAndVisiting(pdf);
   addHandoverAndHolidays(pdf);
-  addHealth(pdf);
   addEducation(pdf);
+  addHealth(pdf);
   addSpecialDays(pdf);
   addOtherThings(pdf);
   addDecisionMaking(pdf);
