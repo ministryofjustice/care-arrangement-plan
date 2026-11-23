@@ -101,6 +101,63 @@ test.describe('HTML Download Functionality', () => {
     expect(htmlContent).toMatch(/v\d+\.\d+\.\d+/);
   });
 
+  test('should include section 9 end of form content in the downloaded HTML', async ({ page }) => {
+    await completeMinimalJourney(page);
+
+    const response = await page.request.get('/download-html');
+    const htmlContent = await response.text();
+
+    expect(response.status()).toBe(200);
+    expect(htmlContent).toContain('<section id="what-happens-now"');
+    expect(htmlContent).toContain('Section 9');
+    expect(htmlContent).toContain('End of form');
+    expect(htmlContent).toContain('Is there anything else you would like to suggest for the child arrangements plan?');
+    expect(htmlContent).toContain('id="end-of-form-other-information"');
+    expect(htmlContent).toContain('Joint agreement');
+    expect(htmlContent).toContain('name="jointAgreementName1"');
+    expect(htmlContent).toContain('name="jointAgreementSignature2"');
+    expect(htmlContent).toContain('name="jointAgreementDate1"');
+    expect(htmlContent).toContain('Legal status of this agreement');
+    expect(htmlContent).toContain('href="https://www.gov.uk/find-legal-advice"');
+    expect(htmlContent).toContain('What to do next');
+    expect(htmlContent).toContain('Any plan you make using this form is not legally binding.');
+    expect(htmlContent).toContain('If you cannot reach an agreement');
+    expect(htmlContent).toContain('href="https://www.gov.uk/find-ways-to-make-child-arrangements"');
+    expect(htmlContent).toContain('href="https://www.gov.uk/looking-after-children-divorce"');
+    expect(htmlContent).toContain('Get paid to give your feedback');
+    expect(htmlContent).toContain('href="https://www.smartsurvey.co.uk/s/EFO5FJ/"');
+  });
+
+  test('should include education, health, travel, and section compromise notes in the downloaded HTML', async ({
+    page,
+  }) => {
+    await completeMinimalJourney(page);
+
+    const response = await page.request.get('/download-html');
+    const htmlContent = await response.text();
+
+    expect(response.status()).toBe(200);
+    expect(htmlContent).toContain('id="education"');
+    expect(htmlContent).toContain('Section 4');
+    expect(htmlContent).toContain('How should information from the school be shared?');
+    expect(htmlContent).toContain('Both parents will receive information');
+    expect(htmlContent).toContain('Both parents will attend');
+    expect(htmlContent).toContain('id="child-health"');
+    expect(htmlContent).toContain('Section 5');
+    expect(htmlContent).toContain('Regular check-ups and an inhaler when needed');
+    expect(htmlContent).toContain('At least 4 weeks');
+    expect(htmlContent).toContain('Clothes and shoes');
+    expect(htmlContent).toContain('We will alternate holidays');
+    expect(htmlContent).toContain('End of section');
+    expect(htmlContent).toContain(
+      'You can use this space to write your agreed answer for the living and visiting section',
+    );
+    expect(htmlContent).toContain(
+      'You can use this space to write your agreed answer for the handovers and holidays section',
+    );
+    expect(htmlContent).toContain('You can use this space to write your agreed answer for the decision making section');
+  });
+
   // TODO: HTML download does not yet redirect to the confirmation page.
   // Once that bug is fixed, add a test to verify the HTML download link
   // is also available on the confirmation page (similar to PDF behaviour).

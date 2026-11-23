@@ -1,5 +1,6 @@
 import { createHash } from 'crypto';
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 
 import request from 'supertest';
@@ -15,10 +16,20 @@ import paperFormFileName from '../utils/paperFormFileName';
 
 const app = testAppSetup();
 
+// Keep paper forms away from assets/other, which the PDF generator tests also write.
+const mockPaperFormDirectory = path.join(os.tmpdir(), 'care-arrangement-plan-paper-forms');
+
 jest.mock('../pdf/createPdf');
 jest.mock('../html/createHtmlContent', () => jest.fn().mockReturnValue(''));
 jest.mock('../utils/sessionHelpers', () => ({ formattedChildrenNames: jest.fn().mockReturnValue('') }));
-jest.mock('../utils/getAssetPath', () => (fileName: string) => path.resolve(__dirname, `../../assets/${fileName}`));
+jest.mock('../utils/getAssetPath', () => (fileName: string) => {
+  const baseName = path.basename(fileName);
+  if (baseName === 'paperForm.pdf' || baseName === 'paperForm-cy.pdf') {
+    return path.join(os.tmpdir(), 'care-arrangement-plan-paper-forms', baseName);
+  }
+
+  return path.resolve(__dirname, `../../assets/${fileName}`);
+});
 
 describe(`GET ${paths.DOWNLOAD_PDF}`, () => {
   test('returns the expected header', () => {
@@ -53,13 +64,21 @@ describe(`GET ${paths.PRINT_PDF}`, () => {
 describe(`GET ${paths.DOWNLOAD_PAPER_FORM}`, () => {
   beforeAll(() => {
     // Paper form PDFs are gitignored; generate both locales so these tests do not depend on other suites.
+    fs.mkdirSync(mockPaperFormDirectory, { recursive: true });
     generatePdf('en');
     generatePdf('cy');
+    ['en', 'cy'].forEach((locale) => {
+      const fileName = paperFormFileName(locale);
+      fs.copyFileSync(
+        path.resolve(__dirname, `../../assets/other/${fileName}`),
+        path.join(mockPaperFormDirectory, fileName),
+      );
+    });
   });
 
   const assertPdfMatchesFile = (responseBody: Buffer, fileName: string) => {
     const responseHash = createHash('sha256').update(responseBody).digest('hex');
-    const referenceFile = fs.readFileSync(path.resolve(__dirname, `../../assets/other/${fileName}`));
+    const referenceFile = fs.readFileSync(path.join(mockPaperFormDirectory, fileName));
     const referenceHash = createHash('sha256').update(referenceFile).digest('hex');
 
     expect(responseHash).toEqual(referenceHash);

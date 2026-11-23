@@ -1,15 +1,12 @@
 import { Request } from 'express';
 
-import {
-  planLastMinuteChanges,
-  planLongTermNotice,
-  planReview,
-} from '../utils/formattedAnswersForPdf';
+import { planLastMinuteChanges, planLongTermNotice, planReview } from '../utils/formattedAnswersForPdf';
 
 import addAnswer, { renderTextBox } from './addAnswer';
 
 const addPlanLastMinuteChanges = (request: Request): string => {
   return addAnswer(
+    undefined,
     request.__('taskList.decisionMaking'),
     request.__('decisionMaking.planLastMinuteChanges.title'),
     request.__('decisionMaking.planLastMinuteChanges.howChangesCommunicatedAdditionalDescription'),
@@ -22,6 +19,7 @@ const addPlanLastMinuteChanges = (request: Request): string => {
 const addPlanLongTermNotice = (request: Request): string => {
   return addAnswer(
     undefined,
+    undefined,
     request.__('decisionMaking.planLongTermNotice.title'),
     request.__('decisionMaking.planLongTermNotice.sometimesYouNeedToPlanAhead'),
     planLongTermNotice(request),
@@ -33,6 +31,7 @@ const addPlanLongTermNotice = (request: Request): string => {
 const addPlanReview = (request: Request): string => {
   return addAnswer(
     undefined,
+    undefined,
     request.__('decisionMaking.planReview.title'),
     request.__('decisionMaking.planReview.childrensNeedsChange'),
     planReview(request),
@@ -42,11 +41,9 @@ const addPlanReview = (request: Request): string => {
 };
 
 const addDecisionMaking = (request: Request): string => {
-  const answers = [
-    addPlanLastMinuteChanges(request),
-    addPlanLongTermNotice(request),
-    addPlanReview(request),
-  ].filter((item) => item !== '');
+  const answers = [addPlanLastMinuteChanges(request), addPlanLongTermNotice(request), addPlanReview(request)].filter(
+    (item) => item !== '',
+  );
 
   if (answers.length === 0) {
     return '';

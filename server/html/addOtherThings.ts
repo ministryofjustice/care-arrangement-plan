@@ -2,7 +2,7 @@ import { Request } from 'express';
 
 import { whatOtherThingsMatter } from '../utils/formattedAnswersForPdf';
 
-import { escapeHtmlText, getNextQuestionNumber, renderTextBox } from './addAnswer';
+import { escapeHtmlText, getNextQuestionNumber } from './addAnswer';
 
 const addOtherThings = (request: Request): string => {
   const answer = whatOtherThingsMatter(request);
@@ -45,10 +45,6 @@ const addOtherThings = (request: Request): string => {
   html += `    <textarea class="user-input-area" id="${textareaId}" aria-label="${escapeHtmlText(request.__('sharePlan.yourProposedPlan.doNotAgree.otherThings.whatOtherThingsMatter'))}"></textarea>\n`;
   html += `  </div>\n`;
   html += '</div>\n';
-  html += renderTextBox(
-    request.__('sharePlan.yourProposedPlan.endOfSection'),
-    request.__('sharePlan.yourProposedPlan.compromise.otherThings'),
-  );
   html += '</section>\n\n';
 
   return html;

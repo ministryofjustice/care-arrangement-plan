@@ -2,7 +2,9 @@ import { Request } from 'express';
 
 import { resetQuestionCounter, resetTextboxCounter } from './addAnswer';
 import addDecisionMaking from './addDecisionMaking';
+import addEducation from './addEducation';
 import addHandoverAndHolidays from './addHandoverAndHolidays';
+import addHealth from './addHealth';
 import addLivingAndVisiting from './addLivingAndVisiting';
 import addOtherThings from './addOtherThings';
 import addSpecialDays from './addSpecialDays';
@@ -18,6 +20,8 @@ const createHtmlContent = (request: Request): string => {
   // Add all sections
   html += addLivingAndVisiting(request);
   html += addHandoverAndHolidays(request);
+  html += addEducation(request);
+  html += addHealth(request);
   html += addSpecialDays(request);
   html += addOtherThings(request);
   html += addDecisionMaking(request);
