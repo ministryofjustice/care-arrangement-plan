@@ -5,8 +5,11 @@ import config from '../config';
 import dynamoClient from './dynamoClient';
 
 export interface Pdf {
-  userId: string;
+  planId: string;
   pdfId: string;
+  s3Key: string;
+  version: number;
+  generatedDate: string;
 }
 
 export default class PdfRepository {
