@@ -21,7 +21,7 @@ const addGetBetweenHouseholds = (request: Request): string => {
     undefined,
     getBetweenHouseholds(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.getBetweenHouseholds'),
-    request
+    request,
   );
 };
 
@@ -33,7 +33,7 @@ const addWhereHandover = (request: Request): string => {
     request.__('sharePlan.yourProposedPlan.handoverAndHolidays.handoverIntro'),
     whereHandover(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.whereHandover'),
-    request
+    request,
   );
 };
 
@@ -45,7 +45,7 @@ const addWillChangeDuringSchoolHolidays = (request: Request): string => {
     undefined,
     willChangeDuringSchoolHolidays(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.willChangeDuringSchoolHolidays'),
-    request
+    request,
   );
 };
 
@@ -64,7 +64,7 @@ const addHowChangeDuringSchoolHolidays = (request: Request): string => {
       request.__('sharePlan.yourProposedPlan.handoverAndHolidays.howChangeDuringSchoolHolidays.intro'),
       answer,
       request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.howChangeDuringSchoolHolidays'),
-      request
+      request,
     );
   }
 };
@@ -77,7 +77,7 @@ const addItemsForChangeover = (request: Request): string => {
     undefined,
     itemsForChangeover(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.itemsForChangeover'),
-    request
+    request,
   );
 };
 
@@ -89,7 +89,7 @@ const addTravelAbroad = (request: Request): string => {
     request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelAbroad.intro'),
     travelAbroad(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.travelAbroad'),
-    request
+    request,
   );
 };
 
@@ -101,7 +101,7 @@ const addTravelDocuments = (request: Request): string => {
     request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelDocuments.intro'),
     travelDocuments(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.travelDocuments'),
-    request
+    request,
   );
 };
 
@@ -113,7 +113,7 @@ const addConsentToTravel = (request: Request): string => {
     undefined,
     request.__('sharePlan.yourProposedPlan.handoverAndHolidays.consentToTravel.parentalResponsibility'),
     undefined,
-    request
+    request,
   );
 };
 
@@ -125,7 +125,7 @@ const addTravelInformation = (request: Request): string => {
     undefined,
     travelInformation(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.travelInformation'),
-    request
+    request,
   );
 };
 
@@ -139,7 +139,7 @@ const addHandoverAndHolidays = (request: Request): string => {
     addTravelAbroad(request),
     addTravelDocuments(request),
     addConsentToTravel(request),
-    addTravelInformation(request)
+    addTravelInformation(request),
   ].filter((item) => item !== '');
 
   if (answers.length === 0) {
@@ -148,6 +148,10 @@ const addHandoverAndHolidays = (request: Request): string => {
 
   let html = '<section id="handover-holidays" aria-labelledby="handover-holidays-heading">\n';
   html += answers.join('\n');
+  html += renderTextBox(
+    request.__('sharePlan.yourProposedPlan.endOfSection'),
+    request.__('sharePlan.yourProposedPlan.compromise.handoverAndHolidays'),
+  );
   html += '</section>\n\n';
 
   return html;

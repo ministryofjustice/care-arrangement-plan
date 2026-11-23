@@ -2,7 +2,7 @@ import { Request } from 'express';
 
 import { whatWillHappen } from '../utils/formattedAnswersForPdf';
 
-import addAnswer, { renderTextBox } from './addAnswer';
+import addAnswer from './addAnswer';
 
 const addSpecialDays = (request: Request): string => {
   const answer = whatWillHappen(request);

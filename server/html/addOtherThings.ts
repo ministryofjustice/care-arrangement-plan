@@ -2,7 +2,7 @@ import { Request } from 'express';
 
 import { whatOtherThingsMatter } from '../utils/formattedAnswersForPdf';
 
-import { escapeHtmlText, getNextQuestionNumber, renderTextBox } from './addAnswer';
+import { escapeHtmlText, getNextQuestionNumber } from './addAnswer';
 
 const addOtherThings = (request: Request): string => {
   const answer = whatOtherThingsMatter(request);

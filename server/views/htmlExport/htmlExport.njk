@@ -337,6 +337,68 @@
       margin-top: 10px;
     }
 
+    .section-number {
+      font-weight: 400;
+    }
+
+    .joint-agreement-declaration {
+      font-style: italic;
+    }
+
+    .signature-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 40px;
+      row-gap: 15px;
+      margin: 20px 0 30px;
+    }
+
+    .signature-field {
+      display: grid;
+      grid-template-columns: 6.5em 1fr;
+      align-items: center;
+      column-gap: 15px;
+    }
+
+    .signature-field .govuk-label {
+      margin-bottom: 0;
+    }
+
+    .signature-field .govuk-input,
+    .signature-field .govuk-textarea {
+      width: 100%;
+      margin: 0;
+      padding: 5px;
+      border: 1px solid #0b0c0c;
+      background-color: #f1f4ff;
+      box-sizing: border-box;
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    .signature-field .govuk-input {
+      min-height: 40px;
+    }
+
+    .signature-field .govuk-textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    .signature-field .govuk-input:focus,
+    .signature-field .govuk-textarea:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 2px;
+    }
+
+    @media (max-width: 640px) {
+      .signature-fields {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Print styles */
     @media print {
       body {

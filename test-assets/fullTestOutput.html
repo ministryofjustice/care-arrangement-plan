@@ -337,6 +337,68 @@
       margin-top: 10px;
     }
 
+    .section-number {
+      font-weight: 400;
+    }
+
+    .joint-agreement-declaration {
+      font-style: italic;
+    }
+
+    .signature-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 40px;
+      row-gap: 15px;
+      margin: 20px 0 30px;
+    }
+
+    .signature-field {
+      display: grid;
+      grid-template-columns: 6.5em 1fr;
+      align-items: center;
+      column-gap: 15px;
+    }
+
+    .signature-field .govuk-label {
+      margin-bottom: 0;
+    }
+
+    .signature-field .govuk-input,
+    .signature-field .govuk-textarea {
+      width: 100%;
+      margin: 0;
+      padding: 5px;
+      border: 1px solid #0b0c0c;
+      background-color: #f1f4ff;
+      box-sizing: border-box;
+      font-family: "GDS Transport", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    .signature-field .govuk-input {
+      min-height: 40px;
+    }
+
+    .signature-field .govuk-textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    .signature-field .govuk-input:focus,
+    .signature-field .govuk-textarea:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 2px;
+    }
+
+    @media (max-width: 640px) {
+      .signature-fields {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Print styles */
     @media print {
       body {
@@ -571,6 +633,7 @@
 
 <section id="handover-holidays" aria-labelledby="handover-holidays-heading">
 <div class="answer-section">
+  <h2 class="govuk-!-font-weight-regular">Section 3</h2>
   <h2>Handovers and holidays</h2>
   <h3 class="question">How will the children get between households?</h3>
   <p class="answer">Bob suggested that this does not need to be decided.</p>
@@ -608,8 +671,8 @@
 </div>
 
 <div class="answer-section">
-  <h3 class="question">Where will handover take place for the children?</h3>
-  <p class="hint">Choose places where both parents and the children will feel safe and comfortable.</p>
+  <h3 class="question">Where does handover take place?</h3>
+  <p class="hint">It may be easier for children if the handover takes place at a neutral location which you&#039;re confident you&#039;ll both feel safe in.</p>
   <p class="answer">Bob suggested that this does not need to be decided.</p>
   <div class="do-you-agree">
     <div class="govuk-form-group">
@@ -681,7 +744,7 @@
 </div>
 
 <div class="answer-section">
-  <h3 class="question">Which items should move between households?</h3>
+  <h3 class="question">What items need to go between households?</h3>
   <p class="answer">Bob suggested that this does not need to be decided.</p>
   <div class="do-you-agree">
     <div class="govuk-form-group">
@@ -715,6 +778,15 @@
     </div>
   </div>
 </div>
+
+<div class="answer-section">
+  <h3 class="question">Permission for taking the children abroad</h3>
+  <p class="answer">You usually need permission from everyone with parental responsibility before taking a child abroad.
+Get permission in writing
+Having permission in writing provides a record that consent has been given and can help avoid problems or delays when travelling.
+A reminder about getting permission before taking the children abroad will be included in your child arrangements plan.
+If you&#039;re concerned your child could be taken abroad, find out what to do if you believe a child could be taken or has been taken abroad without your permission.</p>
+</div>
 <div class="text-box">
   <h4>End of section</h4>
   <div class="govuk-form-group">
@@ -741,14 +813,14 @@
         </legend>
         <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
           <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="question-6-yes" name="question-6" type="checkbox" value="yes">
-            <label class="govuk-label govuk-checkboxes__label" for="question-6-yes">
+            <input class="govuk-checkboxes__input" id="question-7-yes" name="question-7" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-7-yes">
               Yes
             </label>
           </div>
           <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="question-6-no" name="question-6" type="checkbox" value="no">
-            <label class="govuk-label govuk-checkboxes__label" for="question-6-no">
+            <input class="govuk-checkboxes__input" id="question-7-no" name="question-7" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-7-no">
               No
             </label>
           </div>
@@ -758,20 +830,11 @@
   </div>
   <div class="text-box">
     <div class="govuk-form-group">
-      <label class="govuk-label" for="notes-6">
+      <label class="govuk-label" for="notes-7">
         If you do not agree, suggest what will happen on special days
       </label>
-      <textarea class="govuk-textarea user-input-area" id="notes-6" name="notes-6" rows="5"></textarea>
+      <textarea class="govuk-textarea user-input-area" id="notes-7" name="notes-7" rows="5"></textarea>
     </div>
-  </div>
-</div>
-<div class="text-box">
-  <h4>End of section</h4>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="textbox-3">
-      You can use this space to write your agreed answer for the special days section
-    </label>
-    <textarea class="govuk-textarea user-input-area" id="textbox-3" name="textbox-3" rows="5"></textarea>
   </div>
 </div>
 </section>
@@ -793,27 +856,18 @@
     <p>Do you agree?</p>
     <div class="do-you-agree-options">
       <label>
-        <input type="radio" name="question-7" value="yes">
+        <input type="radio" name="question-8" value="yes">
         <span>Yes</span>
       </label>
       <label>
-        <input type="radio" name="question-7" value="no">
+        <input type="radio" name="question-8" value="no">
         <span>No</span>
       </label>
     </div>
   </div>
   <div class="text-box">
     <p>If you do not agree, suggest what other things matter to your children</p>
-    <textarea class="user-input-area" id="notes-7" aria-label="If you do not agree, suggest what other things matter to your children"></textarea>
-  </div>
-</div>
-<div class="text-box">
-  <h4>End of section</h4>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="textbox-4">
-      You can use this space to write your agreed answer for the other things section
-    </label>
-    <textarea class="govuk-textarea user-input-area" id="textbox-4" name="textbox-4" rows="5"></textarea>
+    <textarea class="user-input-area" id="notes-8" aria-label="If you do not agree, suggest what other things matter to your children"></textarea>
   </div>
 </div>
 </section>
@@ -823,43 +877,6 @@
   <h2>Decision making</h2>
   <h3 class="question">How should last-minute changes be communicated?</h3>
   <p class="hint">There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.</p>
-  <p class="answer">Bob suggested that this does not need to be decided.</p>
-  <div class="do-you-agree">
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-          Do you agree?
-        </legend>
-        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="question-8-yes" name="question-8" type="checkbox" value="yes">
-            <label class="govuk-label govuk-checkboxes__label" for="question-8-yes">
-              Yes
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="question-8-no" name="question-8" type="checkbox" value="no">
-            <label class="govuk-label govuk-checkboxes__label" for="question-8-no">
-              No
-            </label>
-          </div>
-        </div>
-      </fieldset>
-    </div>
-  </div>
-  <div class="text-box">
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="notes-8">
-        If you do not agree, suggest how last minute changes should be communicated
-      </label>
-      <textarea class="govuk-textarea user-input-area" id="notes-8" name="notes-8" rows="5"></textarea>
-    </div>
-  </div>
-</div>
-
-<div class="answer-section">
-  <h3 class="question">How much notice should you give to change long-term arrangements?</h3>
-  <p class="hint">Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.</p>
   <p class="answer">Bob suggested that this does not need to be decided.</p>
   <div class="do-you-agree">
     <div class="govuk-form-group">
@@ -887,7 +904,7 @@
   <div class="text-box">
     <div class="govuk-form-group">
       <label class="govuk-label" for="notes-9">
-        If you do not agree, suggest how much notice you should give each other
+        If you do not agree, suggest how last minute changes should be communicated
       </label>
       <textarea class="govuk-textarea user-input-area" id="notes-9" name="notes-9" rows="5"></textarea>
     </div>
@@ -895,9 +912,9 @@
 </div>
 
 <div class="answer-section">
-  <h3 class="question">When would you like to review this plan?</h3>
-  <p class="hint">Children&#039;s needs change as they grow. When should you review this agreement to check it is still what&#039;s best for the children?</p>
-  <p class="answer">Bob suggested that you should review this arrangement in 1 month&#039;s time.</p>
+  <h3 class="question">How much notice should you give to change long-term arrangements?</h3>
+  <p class="hint">Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.</p>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
   <div class="do-you-agree">
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset">
@@ -924,32 +941,113 @@
   <div class="text-box">
     <div class="govuk-form-group">
       <label class="govuk-label" for="notes-10">
-        If you do not agree, suggest when you should review this agreement
+        If you do not agree, suggest how much notice you should give each other
       </label>
       <textarea class="govuk-textarea user-input-area" id="notes-10" name="notes-10" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">When would you like to review this plan?</h3>
+  <p class="hint">Children&#039;s needs change as they grow. When should you review this agreement to check it is still what&#039;s best for the children?</p>
+  <p class="answer">Bob suggested that you should review this arrangement in 1 month&#039;s time.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-11-yes" name="question-11" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-11-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-11-no" name="question-11" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-11-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-11">
+        If you do not agree, suggest when you should review this agreement
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-11" name="notes-11" rows="5"></textarea>
     </div>
   </div>
 </div>
 <div class="text-box">
   <h4>End of section</h4>
   <div class="govuk-form-group">
-    <label class="govuk-label" for="textbox-5">
+    <label class="govuk-label" for="textbox-3">
       You can use this space to write your agreed answer for the decision making section
     </label>
-    <textarea class="govuk-textarea user-input-area" id="textbox-5" name="textbox-5" rows="5"></textarea>
+    <textarea class="govuk-textarea user-input-area" id="textbox-3" name="textbox-3" rows="5"></textarea>
   </div>
 </div>
 </section>
 
 <section id="what-happens-now" aria-labelledby="what-happens-now-heading">
-  <h2 id="what-happens-now-heading">Next steps</h2>
-  <h3 id="what-to-do-next">What to do next</h3>
-  <p>Now send this proposed child arrangements plan back to Bob. You should try to create a written record of what you have both agreed.</p>
-  <p>Any plan you make using this form is not legally binding. The other person does not have to do what it says and either of you can suggest changes to it at any time.</p>
-  <h3 id="what-happens-now-heading">If there&#039;s no response</h3>
-  <p>If you are unable to make an agreement between yourselves, you could try mediation or another way of agreeing outside of court.</p>
-  <p>A mediator is a professional who will work with you to help you make decisions based on your child&#039;s best interests. They listen to both of you and take a neutral approach.</p>
-  <p><a href="https://www.gov.uk/looking-after-children-divorce">More information and support is available at https://www.gov.uk/looking-after-children-divorce.</a></p>
+  <h2 class="section-number">Section 9</h2>
+  <h2 id="what-happens-now-heading">End of form</h2>
+  <p><strong>Is there anything else you would like to suggest for the child arrangements plan?</strong></p>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="end-of-form-other-information">
+        You can use this space to write any other information you would like included in the plan
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="end-of-form-other-information" name="endOfFormOtherInformation" rows="8"></textarea>
+    </div>
+  </div>
+  <h2>Joint agreement</h2>
+  <p>Now that you have recorded your decisions, you should download or print a copy of this plan so you both have one.</p>
+  <p>You can both sign below to confirm your joint commitment to what you have agreed.<strong> As with all parts of this document, you don&#039;t have to complete this section if you don’t want to.</strong></p>
+  <p class="joint-agreement-declaration">“As parents of Jason, we jointly accept responsibility for their future welfare, stability, development and happiness. We have discussed and agreed the arrangements laid out in this Plan and commit ourselves to these arrangements. We have also discussed these arrangements with our children. We will jointly re-visit these arrangements in future, as necessary. In this way we will take account of changing circumstances and ensure that our children’s best interests come first.”</p>
+  <div class="signature-fields">
+    <div class="signature-field">
+      <label class="govuk-label" for="jointAgreementName-1">Name</label>
+      <input class="govuk-input" id="jointAgreementName-1" name="jointAgreementName1" type="text" autocomplete="off">
+    </div>
+    <div class="signature-field">
+      <label class="govuk-label" for="jointAgreementName-2">Name</label>
+      <input class="govuk-input" id="jointAgreementName-2" name="jointAgreementName2" type="text" autocomplete="off">
+    </div>
+    <div class="signature-field">
+      <label class="govuk-label" for="jointAgreementSignature-1">Signature</label>
+      <textarea class="govuk-textarea" id="jointAgreementSignature-1" name="jointAgreementSignature1" rows="3"></textarea>
+    </div>
+    <div class="signature-field">
+      <label class="govuk-label" for="jointAgreementSignature-2">Signature</label>
+      <textarea class="govuk-textarea" id="jointAgreementSignature-2" name="jointAgreementSignature2" rows="3"></textarea>
+    </div>
+    <div class="signature-field">
+      <label class="govuk-label" for="jointAgreementDate-1">Date</label>
+      <input class="govuk-input" id="jointAgreementDate-1" name="jointAgreementDate1" type="text" autocomplete="off">
+    </div>
+    <div class="signature-field">
+      <label class="govuk-label" for="jointAgreementDate-2">Date</label>
+      <input class="govuk-input" id="jointAgreementDate-2" name="jointAgreementDate2" type="text" autocomplete="off">
+    </div>
+  </div>
+  <h3>Legal status of this agreement</h3>
+  <p>This is not a legal contract. By signing above, you are simply confirming that you have jointly agreed to the arrangements. There is no legal commitment in doing so.</p>
+  <p>If you want to make your agreement legally binding, you can ask a legal adviser to help you apply for a consent order. You can find a legal adviser at: <a href="https://www.gov.uk/find-legal-advice">www.gov.uk/find-legal-advice</a>.</p>
+  <h2>What to do next</h2>
+  <p>You can send this proposed child arrangements plan back to Harrison. You should try to create a written record of what you have both agreed.</p>
+  <p><strong>Any plan you make using this form is not legally binding.</strong> The other person does not have to do what it says and either of you can suggest changes to it at any time.</p>
+  <h3>If you cannot reach an agreement</h3>
+  <p>If you do not get a response, or if you cannot agree on a plan together, you can find other ways to make child arrangements on GOV.UK: <a href="https://www.gov.uk/find-ways-to-make-child-arrangements">www.gov.uk/find-ways-to-make-child-arrangements</a></p>
+  <p>More information and support is also available at: <a href="https://www.gov.uk/looking-after-children-divorce">https://www.gov.uk/looking-after-children-divorce</a>.</p>
+  <h3>Get paid to give your feedback</h3>
+  <p>With your help we can improve this service and understand how you use your plan. Sign up and receive an incentive when you take part in further research <a href="https://www.smartsurvey.co.uk/s/EFO5FJ/">https://www.smartsurvey.co.uk/s/EFO5FJ/</a></p>
 </section>
 
 

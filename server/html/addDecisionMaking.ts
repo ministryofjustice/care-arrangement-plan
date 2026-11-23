@@ -1,10 +1,6 @@
 import { Request } from 'express';
 
-import {
-  planLastMinuteChanges,
-  planLongTermNotice,
-  planReview,
-} from '../utils/formattedAnswersForPdf';
+import { planLastMinuteChanges, planLongTermNotice, planReview } from '../utils/formattedAnswersForPdf';
 
 import addAnswer, { renderTextBox } from './addAnswer';
 
@@ -45,11 +41,9 @@ const addPlanReview = (request: Request): string => {
 };
 
 const addDecisionMaking = (request: Request): string => {
-  const answers = [
-    addPlanLastMinuteChanges(request),
-    addPlanLongTermNotice(request),
-    addPlanReview(request),
-  ].filter((item) => item !== '');
+  const answers = [addPlanLastMinuteChanges(request), addPlanLongTermNotice(request), addPlanReview(request)].filter(
+    (item) => item !== '',
+  );
 
   if (answers.length === 0) {
     return '';
@@ -57,6 +51,10 @@ const addDecisionMaking = (request: Request): string => {
 
   let html = '<section id="decision-making" aria-labelledby="decision-making-heading">\n';
   html += answers.join('\n');
+  html += renderTextBox(
+    request.__('sharePlan.yourProposedPlan.endOfSection'),
+    request.__('sharePlan.yourProposedPlan.compromise.decisionMaking'),
+  );
   html += '</section>\n\n';
 
   return html;

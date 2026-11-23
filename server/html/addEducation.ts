@@ -1,12 +1,12 @@
 import { Request } from 'express';
 
-import addAnswer, { renderTextBox } from './addAnswer';
-
 import {
   educationRoutineDecisions,
   educationSchoolMeetings,
   educationShareInformation,
 } from '../utils/formattedAnswersForPdf';
+
+import addAnswer from './addAnswer';
 
 const addSchoolInfo = (request: Request): string => {
   return addAnswer(

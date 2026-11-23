@@ -2,7 +2,7 @@ import { Request } from 'express';
 
 import { childHealthNeeds, childHealthRoutineDecisions } from '../utils/formattedAnswersForPdf';
 
-import addAnswer, { renderTextBox } from './addAnswer';
+import addAnswer from './addAnswer';
 
 const addRoutineDecisions = (request: Request): string => {
   return addAnswer(

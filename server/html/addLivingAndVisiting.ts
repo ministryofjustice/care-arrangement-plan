@@ -104,6 +104,10 @@ const addLivingAndVisiting = (request: Request): string => {
 
   let html = '<section id="living-visiting" aria-labelledby="living-visiting-heading">\n';
   html += answers.join('\n');
+  html += renderTextBox(
+    request.__('sharePlan.yourProposedPlan.endOfSection'),
+    request.__('sharePlan.yourProposedPlan.compromise.livingAndVisiting'),
+  );
   html += '</section>\n\n';
 
   return html;

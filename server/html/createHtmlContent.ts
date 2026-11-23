@@ -2,13 +2,13 @@ import { Request } from 'express';
 
 import { resetQuestionCounter, resetTextboxCounter } from './addAnswer';
 import addDecisionMaking from './addDecisionMaking';
+import addEducation from './addEducation';
 import addHandoverAndHolidays from './addHandoverAndHolidays';
+import addHealth from './addHealth';
 import addLivingAndVisiting from './addLivingAndVisiting';
 import addOtherThings from './addOtherThings';
 import addSpecialDays from './addSpecialDays';
 import addWhatHappensNow from './addWhatHappensNow';
-import addEducation from './addEducation';
-import addHealth from './addHealth';
 
 const createHtmlContent = (request: Request): string => {
   // Reset counters for each export
