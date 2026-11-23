@@ -5,9 +5,8 @@ kind: Deployment
 metadata:
   name: ${KUBE_NAMESPACE}-deployment
   namespace: ${KUBE_NAMESPACE}
-
-labels:
-  app: ${KUBE_NAMESPACE}
+  labels:
+    app: ${KUBE_NAMESPACE}
 
 spec:
   replicas: 1
