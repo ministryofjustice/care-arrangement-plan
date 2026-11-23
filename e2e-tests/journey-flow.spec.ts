@@ -10,6 +10,8 @@ test.describe('User Journey Flow', () => {
     await continueWithoutSigningIn(page);
 
     await expect(page).toHaveURL(/\/children-safety-check/);
+    await expect(page.getByRole('heading', { name: 'Have the children ever been at risk?' })).toBeVisible();
+    expect(page.url()).not.toContain('download-html');
 
     await goToSafetyCheck(page);
 
@@ -52,7 +54,9 @@ test.describe('User Journey Flow', () => {
     await expect(page.getByText(/recognise domestic abuse/i)).toBeVisible();
     await expect(page.getByText(/get a court order to protect you or your child/i)).toBeVisible();
     await expect(page.getByRole('heading', { name: /Help and support/i })).toBeVisible();
-    await expect(page.getByText(/There is free, confidential support available to help you and your family/i)).toBeVisible();
+    await expect(
+      page.getByText(/There is free, confidential support available to help you and your family/i),
+    ).toBeVisible();
     await expect(page.getByRole('link', { name: /Refuge National Domestic Abuse Helpline/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /Rights of Women/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /Men's Advice Line/i })).toBeVisible();
@@ -82,7 +86,9 @@ test.describe('User Journey Flow', () => {
     await expect(page.getByText(/get a court order to protect you or your child/i)).toBeVisible();
     await expect(page.getByText(/what to do if you believe a child could be taken/i)).toBeVisible();
     await expect(page.getByRole('heading', { name: /Help and support/i })).toBeVisible();
-    await expect(page.getByText(/There is free, confidential support available to help you and your family/i)).toBeVisible();
+    await expect(
+      page.getByText(/There is free, confidential support available to help you and your family/i),
+    ).toBeVisible();
     await expect(page.getByRole('link', { name: /Refuge National Domestic Abuse Helpline/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /Rights of Women/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /Reunite International Child Abduction Centre/i })).toBeVisible();

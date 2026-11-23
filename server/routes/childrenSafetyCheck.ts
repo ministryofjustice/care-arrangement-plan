@@ -2,117 +2,17 @@ import { Router } from 'express';
 import { body, matchedData, validationResult } from 'express-validator';
 
 import { yesOrNo } from '../@types/fields';
-import { CAPSession } from '../@types/session';
 import formFields from '../constants/formFields';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
 import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../utils/addCompletedStep';
 
-// Temporary local debugging session. whichDays, whereHandover.where, and
-// planLastMinuteChanges.options were truncated to [Object]/[Array] in the log.
-const debugSession: Partial<CAPSession> & { lang: string } = {
-  lang: 'en',
-  planStartTime: 1793351647481,
-  completedSteps: [
-    'childrenSafetyCheck',
-    'safetyCheck',
-    'doWhatsBest',
-    'courtOrderCheck',
-    'numberOfChildren',
-    'aboutTheChildren',
-    'aboutTheAdults',
-    'taskList',
-    'livingAndVisitingMostlyLive',
-    'livingAndVisitingWillOvernightsHappen',
-    'livingAndVisitingWhichDaysOvernight',
-    'livingAndVisitingWillDaytimeVisitsHappen',
-    'livingAndVisitingWhichDaysDaytimeVisits',
-    'handoverHolidaysGetBetweenHouseholds',
-    'handoverHolidaysWhereHandover',
-    'handoverHolidaysWillChangeDuringSchoolHolidays',
-    'handoverHolidaysHowChangeDuringSchoolHolidays',
-    'handoverHolidaysItemsForChangeover',
-    'handoverHolidaysTravelAbroad',
-    'handoverHolidaysTravelDocuments',
-    'handoverHolidaysConsentToTravel',
-    'handoverHolidaysTravelInformation',
-    'specialDaysWhatWillHappen',
-    'otherThingsWhatOtherThingsMatter',
-    'decisionMakingPlanLastMinuteChanges',
-    'decisionMakingPlanLongTermNotice',
-    'decisionMakingPlanReview',
-    'childHealth',
-    'childHealthNeeds',
-    'educationShareInformation',
-    'educationRoutineDecisions',
-    'educationSchoolMeetings',
-    'checkYourAnswers',
-    'sharePlan',
-    'confirmation',
-  ],
-  numberOfChildren: 2,
-  namesOfChildren: ['Child One', 'Child Two'],
-  initialAdultName: 'John',
-  secondaryAdultName: 'Ben',
-  livingAndVisiting: {
-    mostlyLive: { where: 'withSecondary' },
-    overnightVisits: { willHappen: true, whichDays: {} },
-    daytimeVisits: { willHappen: true, whichDays: {} },
-  },
-  handoverAndHolidays: {
-    getBetweenHouseholds: { noDecisionRequired: false, how: 'otherParent' },
-    whereHandover: { noDecisionRequired: false, where: ['secondaryHome', 'school'] },
-    willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
-    howChangeDuringSchoolHolidays: {
-      noDecisionRequired: false,
-      answer: 'Overnights move to the other household for the first week of each school holiday',
-    },
-    itemsForChangeover: {
-      noDecisionRequired: false,
-      options: ['clothesAndShoes', 'schoolItems', 'otherItems'],
-      describeArrangement: 'Medication',
-    },
-    travelAbroad: { noDecisionRequired: false, options: ['fourWeeks'] },
-    travelDocuments: { noDecisionRequired: false, options: ['parentTravelling'] },
-    travelInformation: {
-      noDecisionRequired: false,
-      options: ['dates', 'contact', 'other'],
-      describeArrangement: 'Flight numbers',
-    },
-  },
-  education: {
-    shareInformation: { noDecisionRequired: false, options: ['bothParents'] },
-    routineDecisions: { noDecisionRequired: false, options: ['parent'] },
-    schoolMeetings: {
-      noDecisionRequired: false,
-      options: ['anotherArrangement'],
-      describeArrangement: 'A grandparent attends parents evening',
-    },
-  },
-  childHealth: {
-    routineDecisions: { noDecisionRequired: false, options: ['otherParent'] },
-    childHealthNeeds: { noDecisionRequired: false, description: 'Inhaler every morning' },
-  },
-  specialDays: { whatWillHappen: { noDecisionRequired: true } },
-  otherThings: { whatOtherThingsMatter: { noDecisionRequired: true } },
-  decisionMaking: {
-    planLastMinuteChanges: { noDecisionRequired: false, options: [] },
-    planLongTermNotice: { noDecisionRequired: false, weeks: 8 },
-    planReview: { months: 2 },
-  },
-};
-
 const safetyCheckRoutes = (router: Router) => {
   router.get(
     paths.CHILDREN_SAFETY_CHECK,
     checkFormProgressFromConfig(FORM_STEPS.CHILDREN_SAFETY_CHECK),
     (request, response) => {
-      if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'production') {
-        Object.assign(request.session, debugSession);
-        return response.redirect(paths.DOWNLOAD_HTML);
-      }
-
       response.render('pages/childrenSafetyCheck', {
         errors: request.flash('errors'),
         title: request.__('childrenSafetyCheck.title'),

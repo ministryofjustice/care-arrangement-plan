@@ -11,12 +11,15 @@ const app = testAppSetup();
 describe(paths.CHILDREN_SAFETY_CHECK, () => {
   describe('GET', () => {
     it('should render children safety check page', async () => {
-      const response = await request(app).get(paths.CHILDREN_SAFETY_CHECK).expect('Content-Type', /html/);
+      const response = await request(app).get(paths.CHILDREN_SAFETY_CHECK).expect(200).expect('Content-Type', /html/);
+
+      expect(response.headers.location).toBeUndefined();
 
       const dom = new JSDOM(response.text);
 
       expect(dom.window.document.querySelector('h1')).toHaveTextContent('Have the children ever been at risk?');
       expect(dom.window.document.querySelector('h2.govuk-error-summary__title')).toBeNull();
+      expect(response.text).not.toContain('id="what-happens-now"');
     });
 
     it('should render error flash responses correctly', async () => {
@@ -71,7 +74,7 @@ describe(paths.CHILDREN_SAFETY_CHECK, () => {
         .expect('location', paths.SAFETY_CHECK);
     });
 
-    it('should redirect to children not safe if the answer is I\'m not sure', () => {
+    it("should redirect to children not safe if the answer is I'm not sure", () => {
       return request(app)
         .post(paths.CHILDREN_SAFETY_CHECK)
         .send({ [formFields.CHILDREN_SAFETY_CHECK]: 'notSure' })
