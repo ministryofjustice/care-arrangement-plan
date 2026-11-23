@@ -33,11 +33,20 @@ const debugSession: Partial<CAPSession> & { lang: string } = {
     'handoverHolidaysWillChangeDuringSchoolHolidays',
     'handoverHolidaysHowChangeDuringSchoolHolidays',
     'handoverHolidaysItemsForChangeover',
+    'handoverHolidaysTravelAbroad',
+    'handoverHolidaysTravelDocuments',
+    'handoverHolidaysConsentToTravel',
+    'handoverHolidaysTravelInformation',
     'specialDaysWhatWillHappen',
     'otherThingsWhatOtherThingsMatter',
     'decisionMakingPlanLastMinuteChanges',
     'decisionMakingPlanLongTermNotice',
     'decisionMakingPlanReview',
+    'childHealth',
+    'childHealthNeeds',
+    'educationShareInformation',
+    'educationRoutineDecisions',
+    'educationSchoolMeetings',
     'checkYourAnswers',
     'sharePlan',
     'confirmation',
@@ -53,10 +62,37 @@ const debugSession: Partial<CAPSession> & { lang: string } = {
   },
   handoverAndHolidays: {
     getBetweenHouseholds: { noDecisionRequired: false, how: 'otherParent' },
-    whereHandover: { noDecisionRequired: false, where: [] },
+    whereHandover: { noDecisionRequired: false, where: ['secondaryHome', 'school'] },
     willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
-    howChangeDuringSchoolHolidays: { noDecisionRequired: true },
-    itemsForChangeover: { noDecisionRequired: true },
+    howChangeDuringSchoolHolidays: {
+      noDecisionRequired: false,
+      answer: 'Overnights move to the other household for the first week of each school holiday',
+    },
+    itemsForChangeover: {
+      noDecisionRequired: false,
+      options: ['clothesAndShoes', 'schoolItems', 'otherItems'],
+      describeArrangement: 'Medication',
+    },
+    travelAbroad: { noDecisionRequired: false, options: ['fourWeeks'] },
+    travelDocuments: { noDecisionRequired: false, options: ['parentTravelling'] },
+    travelInformation: {
+      noDecisionRequired: false,
+      options: ['dates', 'contact', 'other'],
+      describeArrangement: 'Flight numbers',
+    },
+  },
+  education: {
+    shareInformation: { noDecisionRequired: false, options: ['bothParents'] },
+    routineDecisions: { noDecisionRequired: false, options: ['parent'] },
+    schoolMeetings: {
+      noDecisionRequired: false,
+      options: ['anotherArrangement'],
+      describeArrangement: 'A grandparent attends parents evening',
+    },
+  },
+  childHealth: {
+    routineDecisions: { noDecisionRequired: false, options: ['otherParent'] },
+    childHealthNeeds: { noDecisionRequired: false, description: 'Inhaler every morning' },
   },
   specialDays: { whatWillHappen: { noDecisionRequired: true } },
   otherThings: { whatOtherThingsMatter: { noDecisionRequired: true } },
@@ -74,6 +110,7 @@ const safetyCheckRoutes = (router: Router) => {
     (request, response) => {
       if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'production') {
         Object.assign(request.session, debugSession);
+        return response.redirect(paths.DOWNLOAD_HTML);
       }
 
       response.render('pages/childrenSafetyCheck', {

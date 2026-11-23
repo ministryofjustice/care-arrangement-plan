@@ -2,49 +2,50 @@ import { Request } from 'express';
 
 import {
   getBetweenHouseholds,
-  whereHandover,
-  willChangeDuringSchoolHolidays,
   howChangeDuringSchoolHolidays,
   itemsForChangeover,
+  travelAbroad,
+  travelDocuments,
+  travelInformation,
+  whereHandover,
+  willChangeDuringSchoolHolidays,
 } from '../utils/formattedAnswersForPdf';
-import { childrenReference } from '../utils/sessionHelpers';
 
 import addAnswer, { renderTextBox } from './addAnswer';
 
 const addGetBetweenHouseholds = (request: Request): string => {
-  const children = childrenReference(request);
-
   return addAnswer(
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.sectionTitle'),
     request.__('taskList.handoverAndHolidays.title'),
-    request.__('handoverAndHolidays.getBetweenHouseholds.title', { children }),
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.householdsTitle'),
     undefined,
     getBetweenHouseholds(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.getBetweenHouseholds'),
-    request,
+    request
   );
 };
 
 const addWhereHandover = (request: Request): string => {
-  const children = childrenReference(request);
-
   return addAnswer(
     undefined,
-    request.__('handoverAndHolidays.whereHandover.title', { children }),
-    request.__('handoverAndHolidays.whereHandover.explainer', { children }),
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.handoverTitle'),
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.handoverIntro'),
     whereHandover(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.whereHandover'),
-    request,
+    request
   );
 };
 
 const addWillChangeDuringSchoolHolidays = (request: Request): string => {
   return addAnswer(
     undefined,
-    request.__('handoverAndHolidays.willChangeDuringSchoolHolidays.title'),
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.arrangementsTitle'),
     undefined,
     willChangeDuringSchoolHolidays(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.willChangeDuringSchoolHolidays'),
-    request,
+    request
   );
 };
 
@@ -55,24 +56,76 @@ const addHowChangeDuringSchoolHolidays = (request: Request): string => {
     return '';
   }
 
-  return addAnswer(
-    undefined,
-    request.__('handoverAndHolidays.howChangeDuringSchoolHolidays.title'),
-    request.__('handoverAndHolidays.howChangeDuringSchoolHolidays.content'),
-    answer,
-    request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.howChangeDuringSchoolHolidays'),
-    request,
-  );
+  if (answer) {
+    return addAnswer(
+      undefined,
+      undefined,
+      request.__('sharePlan.yourProposedPlan.handoverAndHolidays.howChangeDuringSchoolHolidays.title'),
+      request.__('sharePlan.yourProposedPlan.handoverAndHolidays.howChangeDuringSchoolHolidays.intro'),
+      answer,
+      request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.howChangeDuringSchoolHolidays'),
+      request
+    );
+  }
 };
 
 const addItemsForChangeover = (request: Request): string => {
   return addAnswer(
     undefined,
-    request.__('handoverAndHolidays.itemsForChangeover.title'),
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.itemsForChangeover.title'),
     undefined,
     itemsForChangeover(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.itemsForChangeover'),
-    request,
+    request
+  );
+};
+
+const addTravelAbroad = (request: Request): string => {
+  return addAnswer(
+    undefined,
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelAbroad.title'),
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelAbroad.intro'),
+    travelAbroad(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.travelAbroad'),
+    request
+  );
+};
+
+const addTravelDocuments = (request: Request): string => {
+  return addAnswer(
+    undefined,
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelDocuments.title'),
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelDocuments.intro'),
+    travelDocuments(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.travelDocuments'),
+    request
+  );
+};
+
+const addConsentToTravel = (request: Request): string => {
+  return addAnswer(
+    undefined,
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.consentToTravel.title'),
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.consentToTravel.parentalResponsibility'),
+    undefined,
+    request
+  );
+};
+
+const addTravelInformation = (request: Request): string => {
+  return addAnswer(
+    undefined,
+    undefined,
+    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.travelInformation.title'),
+    undefined,
+    travelInformation(request),
+    request.__('sharePlan.yourProposedPlan.doNotAgree.handoverAndHolidays.travelInformation'),
+    request
   );
 };
 
@@ -83,6 +136,10 @@ const addHandoverAndHolidays = (request: Request): string => {
     addWillChangeDuringSchoolHolidays(request),
     addHowChangeDuringSchoolHolidays(request),
     addItemsForChangeover(request),
+    addTravelAbroad(request),
+    addTravelDocuments(request),
+    addConsentToTravel(request),
+    addTravelInformation(request)
   ].filter((item) => item !== '');
 
   if (answers.length === 0) {
@@ -91,10 +148,6 @@ const addHandoverAndHolidays = (request: Request): string => {
 
   let html = '<section id="handover-holidays" aria-labelledby="handover-holidays-heading">\n';
   html += answers.join('\n');
-  html += renderTextBox(
-    request.__('sharePlan.yourProposedPlan.endOfSection'),
-    request.__('sharePlan.yourProposedPlan.compromise.handoverAndHolidays'),
-  );
   html += '</section>\n\n';
 
   return html;

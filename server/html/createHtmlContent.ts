@@ -7,6 +7,8 @@ import addLivingAndVisiting from './addLivingAndVisiting';
 import addOtherThings from './addOtherThings';
 import addSpecialDays from './addSpecialDays';
 import addWhatHappensNow from './addWhatHappensNow';
+import addEducation from './addEducation';
+import addHealth from './addHealth';
 
 const createHtmlContent = (request: Request): string => {
   // Reset counters for each export
@@ -18,6 +20,8 @@ const createHtmlContent = (request: Request): string => {
   // Add all sections
   html += addLivingAndVisiting(request);
   html += addHandoverAndHolidays(request);
+  html += addEducation(request);
+  html += addHealth(request);
   html += addSpecialDays(request);
   html += addOtherThings(request);
   html += addDecisionMaking(request);
