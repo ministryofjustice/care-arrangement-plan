@@ -128,6 +128,36 @@ test.describe('HTML Download Functionality', () => {
     expect(htmlContent).toContain('href="https://www.smartsurvey.co.uk/s/EFO5FJ/"');
   });
 
+  test('should include education, health, travel, and section compromise notes in the downloaded HTML', async ({
+    page,
+  }) => {
+    await completeMinimalJourney(page);
+
+    const response = await page.request.get('/download-html');
+    const htmlContent = await response.text();
+
+    expect(response.status()).toBe(200);
+    expect(htmlContent).toContain('id="education"');
+    expect(htmlContent).toContain('Section 4');
+    expect(htmlContent).toContain('How should information from the school be shared?');
+    expect(htmlContent).toContain('Both parents will receive information');
+    expect(htmlContent).toContain('Both parents will attend');
+    expect(htmlContent).toContain('id="child-health"');
+    expect(htmlContent).toContain('Section 5');
+    expect(htmlContent).toContain('Regular check-ups and an inhaler when needed');
+    expect(htmlContent).toContain('At least 4 weeks');
+    expect(htmlContent).toContain('Clothes and shoes');
+    expect(htmlContent).toContain('We will alternate holidays');
+    expect(htmlContent).toContain('End of section');
+    expect(htmlContent).toContain(
+      'You can use this space to write your agreed answer for the living and visiting section',
+    );
+    expect(htmlContent).toContain(
+      'You can use this space to write your agreed answer for the handovers and holidays section',
+    );
+    expect(htmlContent).toContain('You can use this space to write your agreed answer for the decision making section');
+  });
+
   // TODO: HTML download does not yet redirect to the confirmation page.
   // Once that bug is fixed, add a test to verify the HTML download link
   // is also available on the confirmation page (similar to PDF behaviour).
