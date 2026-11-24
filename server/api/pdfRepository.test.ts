@@ -32,8 +32,11 @@ describe('PdfRepository', () => {
     mockedSend.mockResolvedValue({} as never);
 
     await repository.createPdf({
-      userId: '123',
-      pdfId: '456',
+      planId: 'plan-123',
+      pdfId: 'pdf-456',
+      s3Key: 'plans/plan-123/v1.pdf',
+      version: 1,
+      generatedDate: '2026-11-23T10:00:00Z',
     });
 
     expect(mockedSend).toHaveBeenCalledWith(

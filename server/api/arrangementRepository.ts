@@ -5,8 +5,9 @@ import config from '../config';
 import dynamoClient from './dynamoClient';
 
 export interface Arrangement {
-  userId: string;
   arrangementId: string;
+  userId: string;
+  ttl: number;
 }
 
 export default class ArrangementRepository {

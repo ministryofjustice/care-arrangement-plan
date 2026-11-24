@@ -24,8 +24,9 @@ describe('ArrangementRepository', () => {
     const repository = new ArrangementRepository();
 
     const arrangement: Arrangement = {
-      userId: 'user-123',
       arrangementId: 'arrangement-456',
+      userId: 'user-123',
+      ttl: 1234567890,
     };
 
     await repository.createArrangement(arrangement);

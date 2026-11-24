@@ -19,7 +19,7 @@ describe('PlanRepository', () => {
   it('gets a plan', async () => {
     mockedSend.mockResolvedValue({} as never);
 
-    await repository.getPlan('123', '456');
+    await repository.getPlan('arrangement-123', 'plan-456');
 
     expect(mockedSend).toHaveBeenCalled();
   });
@@ -28,8 +28,23 @@ describe('PlanRepository', () => {
     mockedSend.mockResolvedValue({} as never);
 
     await repository.createPlan({
-      userId: '123',
-      pdfId: '456',
+      arrangementId: 'arrangement-123',
+      planId: 'plan-456',
+      status: 'draft',
+      createdDate: '2026-11-23',
+      updatedDate: '2026-11-23',
+      ttl: 123456789,
+      numberOfChildren: 2,
+      namesOfChildren: ['Child One', 'Child Two'],
+      initialAdultName: 'Adult One',
+      secondaryAdultName: 'Adult Two',
+      livingAndVisiting: {},
+      handoverAndHolidays: {},
+      education: {},
+      childHealth: {},
+      specialDays: {},
+      otherThings: {},
+      decisionMaking: {},
     });
 
     expect(mockedSend).toHaveBeenCalled();

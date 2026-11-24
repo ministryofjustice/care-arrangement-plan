@@ -5,20 +5,35 @@ import config from '../config';
 import dynamoClient from './dynamoClient';
 
 export interface Plan {
-  userId: string;
-  pdfId: string;
+  arrangementId: string;
+  planId: string;
+  status: string;
+  createdDate: string;
+  updatedDate: string;
+  ttl: number;
+  numberOfChildren: number;
+  namesOfChildren: string[];
+  initialAdultName: string;
+  secondaryAdultName: string;
+  livingAndVisiting: object;
+  handoverAndHolidays: object;
+  education: object;
+  childHealth: object;
+  specialDays: object;
+  otherThings: object;
+  decisionMaking: object;
 }
 
 export default class PlanRepository {
   private readonly client = dynamoClient;
 
-  async getPlan(userId: string, pdfId: string) {
+  async getPlan(arrangementId: string, planId: string) {
     return this.client.send(
       new GetCommand({
         TableName: config.dynamo.tableName,
         Key: {
-          userId,
-          pdfId,
+          arrangementId,
+          planId,
         },
       }),
     );
