@@ -1,8 +1,8 @@
 import { Request, Router } from 'express';
 
-//import arrangementRoutes from '../api/arrangementRoutes';
-//import pdfRoutes from '../api/pdfRoutes';
-//import planRoutes from '../api/planRoutes';
+import arrangementRoutes from '../api/arrangementRoutes';
+import pdfRoutes from '../api/pdfRoutes';
+import planRoutes from '../api/planRoutes';
 import config from '../config';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
@@ -95,9 +95,9 @@ const routes = (): Router => {
   downloadRoutes(router);
   accessibilityStatementRoutes(router);
   accountRoutes(router);
-  //planRoutes(router);
-  //pdfRoutes(router);
-  //arrangementRoutes(router);
+  planRoutes(router);
+  pdfRoutes(router);
+  arrangementRoutes(router);
 
   if (!config.production) {
     devSeedRoutes(router);

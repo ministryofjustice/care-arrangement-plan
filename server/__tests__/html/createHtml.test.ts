@@ -21,6 +21,10 @@ jest.mock('../../config', () => ({
     useHttps: false,
     staticResourceCacheDuration: '1h',
     analytics: { ga4Id: undefined as string | undefined },
+    dynamo: {
+      region: 'eu-west-2',
+      tableName: 'test-table',
+    },
     cache: {
       enabled: false,
       host: undefined as string | undefined,
