@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { json, Router } from 'express';
 import request from 'supertest';
 
 import planRoutes from './planRoutes';
@@ -16,9 +16,10 @@ describe('planRoutes', () => {
   const app = express();
 
   beforeEach(() => {
-    app.use(express.json());
+    app.use(json());
 
-    const router = express.Router();
+    const router = Router();
+
     planRoutes(router);
     app.use(router);
 

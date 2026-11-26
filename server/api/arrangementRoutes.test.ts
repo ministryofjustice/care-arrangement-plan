@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { json, Router } from 'express';
 import request from 'supertest';
 
 import arrangementRoutes from './arrangementRoutes';
@@ -16,9 +16,9 @@ describe('arrangementRoutes', () => {
   const app = express();
 
   beforeEach(() => {
-    app.use(express.json());
+    app.use(json());
 
-    const router = express.Router();
+    const router = Router();
     arrangementRoutes(router);
     app.use(router);
 
