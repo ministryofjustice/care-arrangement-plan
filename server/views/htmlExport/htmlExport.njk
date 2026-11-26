@@ -409,6 +409,11 @@
         margin: 0 0 30px 0;
       }
 
+      .cover-page {
+        page-break-after: always;
+        break-after: page;
+      }
+
       .no-print {
         display: none;
       }
@@ -420,6 +425,179 @@
 
       h2 {
         page-break-after: avoid;
+      }
+    }
+
+    /* First page, matched to the returned-form PDF cover */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .cover-masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .cover-page h1 {
+      max-width: 9.8em;
+      margin: 0;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .recipient-document {
+      margin: 0;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: right;
+      white-space: pre-line;
+    }
+
+    .cover-columns {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 72mm;
+      column-gap: 16mm;
+      align-items: start;
+    }
+
+    .cover-page h2 {
+      margin: 0 0 20px;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .cover-inset {
+      margin: 0 0 12px;
+      padding: 0 0 2px 4mm;
+      border-left: 8px solid #c6c6c6;
+      font-weight: 700;
+    }
+
+    .cover-page ul,
+    .cover-page ol {
+      margin: 0 0 8px;
+      padding-left: 1.15em;
+    }
+
+    .cover-page li {
+      margin-bottom: 6px;
+    }
+
+    .support-box {
+      background-color: #e3e3e3;
+      padding: 12px 10px 14px;
+      text-align: center;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .support-box p {
+      margin: 0;
+    }
+
+    .support-box p + p {
+      margin-top: 12px;
+    }
+
+    .shaded-text {
+      background-color: #e3e3e3;
+      padding: 15px 15px 5px;
+      margin: 20px 0;
+    }
+
+    .shaded-text h4,
+    .shaded-text h5 {
+      margin-top: 0;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .shaded-text p:last-child {
+      margin-bottom: 10px;
+    }
+
+    .cover-page a {
+      color: #0b0c0c;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .cover-page a:visited,
+    .cover-page a:hover {
+      color: #0b0c0c;
+    }
+
+    .support-box a,
+    .cover-plan a {
+      font-weight: 700;
+    }
+
+    .cover-plan {
+      margin: 18px 0 16px;
+    }
+
+    .cover-label {
+      margin: 30px 0 15px;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .cover-footer {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: baseline;
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1.5px solid #0b0c0c;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .cover-footer p {
+      margin: 0;
+    }
+
+    .cover-footer__reminder {
+      grid-column: 2;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .cover-footer__page {
+      grid-column: 3;
+      text-align: right;
+    }
+
+    @media (max-width: 720px) {
+      .cover-masthead,
+      .cover-columns {
+        display: block;
+      }
+
+      .cover-page h1,
+      .recipient-document {
+        max-width: none;
+      }
+
+      .recipient-document {
+        margin-bottom: 20px;
+      }
+
+      .support-box {
+        margin-top: 16px;
       }
     }
 
@@ -435,16 +613,7 @@
   </style>
 </head>
 <body>
-  <div class="header">
-    <div class="header-content">
-      <h1>{{ __('pdf.name') }}</h1>
-    </div>
-  </div>
-
   <div class="container">
-    <!-- Main Title -->
-    <h2 style="font-size: 22pt; font-weight: bold; margin-bottom: 5pt;">{{ __('sharePlan.whatWeAreTelling.proposedPlan', {senderName: values.initialAdultName}) }}</h2>
-
     <!-- Preamble Section -->
     <section id="preamble" aria-labelledby="preamble-heading">
       {% include 'htmlExport/partials/whatWeAreTelling.njk' %}

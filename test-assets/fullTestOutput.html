@@ -409,6 +409,11 @@
         margin: 0 0 30px 0;
       }
 
+      .cover-page {
+        page-break-after: always;
+        break-after: page;
+      }
+
       .no-print {
         display: none;
       }
@@ -420,6 +425,179 @@
 
       h2 {
         page-break-after: avoid;
+      }
+    }
+
+    /* First page, matched to the returned-form PDF cover */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .cover-masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .cover-page h1 {
+      max-width: 9.8em;
+      margin: 0;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .recipient-document {
+      margin: 0;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: right;
+      white-space: pre-line;
+    }
+
+    .cover-columns {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 72mm;
+      column-gap: 16mm;
+      align-items: start;
+    }
+
+    .cover-page h2 {
+      margin: 0 0 20px;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .cover-inset {
+      margin: 0 0 12px;
+      padding: 0 0 2px 4mm;
+      border-left: 8px solid #c6c6c6;
+      font-weight: 700;
+    }
+
+    .cover-page ul,
+    .cover-page ol {
+      margin: 0 0 8px;
+      padding-left: 1.15em;
+    }
+
+    .cover-page li {
+      margin-bottom: 6px;
+    }
+
+    .support-box {
+      background-color: #e3e3e3;
+      padding: 12px 10px 14px;
+      text-align: center;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .support-box p {
+      margin: 0;
+    }
+
+    .support-box p + p {
+      margin-top: 12px;
+    }
+
+    .shaded-text {
+      background-color: #e3e3e3;
+      padding: 15px 15px 5px;
+      margin: 20px 0;
+    }
+
+    .shaded-text h4,
+    .shaded-text h5 {
+      margin-top: 0;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .shaded-text p:last-child {
+      margin-bottom: 10px;
+    }
+
+    .cover-page a {
+      color: #0b0c0c;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .cover-page a:visited,
+    .cover-page a:hover {
+      color: #0b0c0c;
+    }
+
+    .support-box a,
+    .cover-plan a {
+      font-weight: 700;
+    }
+
+    .cover-plan {
+      margin: 18px 0 16px;
+    }
+
+    .cover-label {
+      margin: 30px 0 15px;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .cover-footer {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: baseline;
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1.5px solid #0b0c0c;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .cover-footer p {
+      margin: 0;
+    }
+
+    .cover-footer__reminder {
+      grid-column: 2;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .cover-footer__page {
+      grid-column: 3;
+      text-align: right;
+    }
+
+    @media (max-width: 720px) {
+      .cover-masthead,
+      .cover-columns {
+        display: block;
+      }
+
+      .cover-page h1,
+      .recipient-document {
+        max-width: none;
+      }
+
+      .recipient-document {
+        margin-bottom: 20px;
+      }
+
+      .support-box {
+        margin-top: 16px;
       }
     }
 
@@ -435,100 +613,119 @@
   </style>
 </head>
 <body>
-  <div class="header">
-    <div class="header-content">
-      <h1>Proposed child arrangements plan</h1>
-    </div>
-  </div>
-
   <div class="container">
-    <!-- Main Title -->
-    <h2 style="font-size: 22pt; font-weight: bold; margin-bottom: 5pt;">Bob has suggested a child arrangements plan</h2>
-
     <!-- Preamble Section -->
     <section id="preamble" aria-labelledby="preamble-heading">
-      <p>Bob used the Child Arrangements Plan service (<a href="https://propose-child-arrangements-plan.service.gov.uk/">https://propose-child-arrangements-plan.service.gov.uk/</a>) on GOV.UK to suggest a plan for how you both might look after James, Rachel and Jack.</p>
+      
+<div class="cover-page">
+  <div class="cover-masthead">
+    <h1>Proposed child arrangements plan</h1>
+    <p class="recipient-document">Recipient
+document</p>
+  </div>
 
+  <div class="cover-columns">
+    <div>
+      <h2 id="preamble-heading">Before you start</h2>
+      <p class="cover-inset">Do not use this service if you feel pressured or intimidated into using it. If you or your children are at immediate risk of harm, call 999 and ask for the police.</p>
+      <ul>
+        <li>
+          <b>Using this document is voluntary: </b>
+          You do not have to respond if you do not want to.
+        </li>
+        <li>
+          <b>This is not a legal document or court order: </b>
+          Any plan you make is not legally binding or enforceable. You or the other parent can suggest changes at any time.
+        </li>
+        <li>
+          <b>This plan will replace older informal agreements: </b>
+          If you both agree to this plan, it will overwrite any past agreements you made together. It will not overwrite a court order.
+        </li>
+        <li>
+          <b>If there is a court order: </b>
+          Do not use this document if there is an existing court order about you, the other parent, or the children.
+        </li>
+      </ul>
+    </div>
 
-<h3>How to respond to this plan</h3>
-<p>You can read their suggested plan and use it to collaborate to create child arrangements which you both agree on.</p>
+    <aside class="support-box">
+      <p>For support with technical or user issues, you can email <a href="mailto:childarrangements@justice.gov.uk">childarrangements@<br>justice.gov.uk</a></p>
+      <p>We are unable to assist with individual court cases or disputes, and we cannot provide procedural or legal advice.</p>
+    </aside>
+  </div>
 
-<p>This plan is not legally binding and you do not have to do what it says.</p>
+  <p class="cover-plan">
+    
+      You can also use the service to start your own plan, visit <a href="https://propose-child-arrangements-plan.service.gov.uk"> https://propose-child-arrangements-plan.service.gov.uk</a>
+    
+  </p>
 
-<p>If you don&#39;t agree, you can:</p>
-<ul>
-  <li>use this form to suggest changes to Bob&#39;s proposed child arrangements plan</li>
-  <li>start your own proposed child arrangements plan on GOV.UK or find a similar service</li>
-  <li>make a written agreement of your own without using any service or template</li>
-</ul>
+  <h3 class="cover-label">Get more information</h3>
+  <p>You can use GOV.UK to find more information, including:</p>
+  <ul>
+    <li>making child arrangements - <a href="https://www.gov.uk/looking-after-children-divorce">https://www.gov.uk/looking-after-children-divorce</a></li>
+    <li>find ways to make child arrangements - <a href="https://www.gov.uk/find-ways-to-make-child-arrangements">https://www.gov.uk/find-ways-to-make-child-arrangements</a></li>
+    <li>child maintenance service - <a href="https://www.gov.uk/child-maintenance-service">https://www.gov.uk/child-maintenance-service</a></li>
+  </ul>
 
-<h3>Your safety</h3>
-<p>You should only respond to the suggested plan if:</p>
-<ul>
-  <li>you&#39;re confident that you and your ex-partner can make decisions together without putting yourself or the children in danger</li>
-  <li>you do not feel pressured or intimidated into responding</li>
-</ul>
-<h4>If you have any concerns about safety, stop now.</h4>
-<p>If you have any feedback or safety concerns about this service, you can email safety@propose-child-arrangements-plan.service.gov.uk.</p>
-<p>We cannot answer any questions about child arrangement plans that have already been created.</p>
+  <p>You can use this document to agree on child arrangements with your child&#39;s other parent.</p>
 
-<h3>How making a child arrangements plan can help</h3>
-<p>You may find that collaborating with Bob on a child arrangements plan:</p>
-<ul>
-  <li>is cheaper and quicker than going to court (it usually takes around 10 months to get a court order, depending on where you live and whether it&#39;s urgent)</li>
-  <li>leads to a better outcome for your children, which you and your ex-partner are in control of</li>
-</ul>
-<p>Going to court can sometimes mean you are not the ones who make the final decisions about your child arrangements.</p>
+  <h3 class="cover-label">How to respond to this plan</h3>
+  <ol>
+    <li>Read each section of the suggested plan.</li>
+    <li>Mark your choice to show if you agree or disagree.</li>
+    <li>Add your comments if you want to suggest a change.</li>
+    <li>Send the completed document back to Harrison.</li>
+  </ol>
 
-<h3>Tips to help you and your children</h3>
-<p>Your child arrangements plan should:</p>
-<ul>
-  <li>put the child&#39;s welfare first</li>
-  <li>reflect the wishes, feelings and needs of the child</li>
-  <li>consider any harm the child has suffered or any risk of harm</li>
-</ul>
-<p>Check you have every page of this document</p>
+  <h3 class="govuk-heading-s">Bob has suggested a child arrangements plan</h3>
+  <p class="govuk-body">Bob used the Child Arrangements Plan service (<a href="https://propose-child-arrangements-plan.service.gov.uk/">https://propose-child-arrangements-plan.service.gov.uk/</a>) on GOV.UK to suggest a plan for how you both might look after James, Rachel and Jack.</p>
 
-<h3>If there is a court order in place</h3>
-<p>Do not continue if there&#39;s a court order in place relating to you, the other parent, or the children.</p>
-<p>For example, a:</p>
-<ul>
-  <li>child arrangements order</li>
-  <li>specific issue order</li>
-  <li>prohibited steps order</li>
-  <li>protective order such as a non-molestation order, occupation order or a domestic abuse protection order</li>
-  <li>any other order restricting contact between you and the other parent or the children</li>
-</ul>
-<p>To change or enforce an existing child arrangements order, visit <a href="https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order">https://www.gov.uk/looking-after-children-divorce/change-or-enforce-an-order</a>.</p>
+  <h4 class="govuk-heading-s">How making a child arrangements plan can help</h4>
+  <p class="govuk-body">You may find that collaborating with Bob on a child arrangements plan:</p>
+  <ul>
+    <li>is cheaper and quicker than going to court (it usually takes around 10 months to get a court order,
+depending on where you live and whether it&#39;s urgent)</li>
+    <li>leads to a better outcome for your children, of which you and your ex-partner are in control</li>
+  </ul>
 
-<h3>Get more information</h3>
-<p>Use GOV.UK to find more information, for example:</p>
-<ul>
-  <li>making child arrangements - <a href="https://www.gov.uk/looking-after-children-divorce">https://www.gov.uk/looking-after-children-divorce</a></li>
-  <li>getting a legal separation - <a href="https://www.gov.uk/legal-separation">https://www.gov.uk/legal-separation</a></li>
-  <li>getting a divorce - <a href="https://www.gov.uk/get-a-divorce">https://www.gov.uk/get-a-divorce</a></li>
-</ul>
+  <h4 class="govuk-heading-s">Your child arrangements plan should:</h4>
+  <ul>
+    <li>put the child&#39;s welfare first</li>
+    <li>reflect the wishes, feelings and needs of the child</li>
+  </ul>
 
-<h3>If you want legal advice</h3>
-<p>You can find a legal adviser: <a href="https://www.gov.uk/find-legal-advice/find-legal-adviser">https://www.gov.uk/find-legal-advice/find-legal-adviser</a>.</p>
+  <div class="shaded-text">
+    <h4 class="govuk-heading-s">Your safety</h4>
+    <p class="govuk-body">You should only respond to the suggested plan if you&#39;re confident that you and your ex-partner can make decisions together without putting yourself or the children in danger</p>
+    <h5 class="govuk-heading-s">If you have any concerns about safety, stop now.</h5>
+    <p class="govuk-body">If you have any feedback or safety concerns about this service, you can email <a href="mailto:childarrangementssafety@justice.gov.uk">childarrangementssafety@justice.gov.uk</a>.</p>
+  </div>
 
-<h3>Getting help with domestic abuse</h3>
-<p>To find out more about signs and effects of child abuse and neglect, visit <a href="https://www.nspcc.org.uk/what-is-child-abuse">https://www.nspcc.org.uk/what-is-child-abuse</a>.</p>
-<p>If you're unsure whether you're a victim of domestic abuse, visit <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse">https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse</a>.</p>
+  <h4 class="govuk-heading-s">If you decide not to respond to this plan:</h4>
+  <ul>
+    <li>there are no negative consequences</li>
+    <li>it will not affect any court cases or your immigration status</li>
+    <li>your information will not be shared with anyone</li>
+  </ul>
 
-<h3>This plan is not suitable for you if there has been:</h3>
-<ul>
-  <li>any form of domestic abuse or violence, even if the abuse was not directed at the children</li>
-  <li>actual or attempted child abduction</li>
-  <li>child abuse or neglect</li>
-  <li>misuse of drugs, alcohol or other substances</li>
-  <li>any other safety or welfare concerns that place anyone at significant risk of harm</li>
-</ul>
+  <h4 class="govuk-heading-s">Get help finding a child arrangement option</h4>
+  <p class="govuk-body">You can find out about your options for making child arrangements suitable for your circumstances, visit <a href="https://www.gov.uk/find-ways-to-make-child-arrangements">https://www.gov.uk/find-ways-to-make-child-arrangements</a>.</p>
+  <p class="govuk-body">You can find an independent family mediator to help you and the other parent understand your options and work out an agreement, visit <a href="https://www.familymediationcouncil.org.uk/find-local-mediator/">https://www.familymediationcouncil.org.uk/find-local-mediator/</a></p>
 
-<h3>Feedback and support</h3>
-<p>To ask for help using this service, or suggest improvements, you can email <a href="mailto:feedback@propose-child-arrangements-plan.service.gov.uk">feedback@propose-child-arrangements-plan.service.gov.uk</a>.</p>
-<p>We cannot answer any questions about child arrangement plans that have already been created.</p>
+  <h4 class="govuk-heading-s">This plan is not suitable for you if there has been:</h4>
+  <ul>
+    <li>any form of domestic abuse or violence, even if the abuse was not directed at the children</li>
+    <li>actual or attempted child abduction</li>
+    <li>child abuse or neglect</li>
+    <li>misuse of drugs, alcohol or other substances</li>
+    <li>any other safety or welfare concerns that place anyone at significant risk of harm</li>
+  </ul>
 
+  <h4 class="govuk-heading-s">Getting help with domestic abuse</h4>
+  <p class="govuk-body">Domestic abuse or violence is a crime. You can find out how to recognise domestic abuse, visit <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse">https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#recognise-domestic-abuse</a>.</p>
+  <p class="govuk-body">If you have experienced any kind of domestic abuse, you can get a court order to protect you or your children, visit <a href="https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#get-a-court-order-to-protectyou-or-your-child">https://www.gov.uk/guidance/domestic-abuse-how-to-get-help#get-a-court-order-to-protectyou-or-your-child</a>.</p>
+</div>
     </section>
 
     <!-- About The Proposal -->

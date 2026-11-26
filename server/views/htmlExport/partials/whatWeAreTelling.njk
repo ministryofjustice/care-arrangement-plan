@@ -1,81 +1,110 @@
-<p>{{ __('sharePlan.whatWeAreTelling.senderHasUsedThe', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) | customUrlize | safe }}</p>
+{% set startYourOwnPlan = __('sharePlan.beforeYouStart.startYourOwnPlan') %}
+<div class="cover-page">
+  <div class="cover-masthead">
+    <h1>{{ __('sharePlan.name') }}</h1>
+    <p class="recipient-document">{{ __('sharePlan.recipientDocument') }}</p>
+  </div>
 
+  <div class="cover-columns">
+    <div>
+      <h2 id="preamble-heading">{{ __('sharePlan.beforeYouStart.title') }}</h2>
+      <p class="cover-inset">{{ __('sharePlan.beforeYouStart.alert') }}</p>
+      <ul>
+        <li>
+          <b>{{ __('sharePlan.beforeYouStart.options.voluntary.title') }}</b>
+          {{ __('sharePlan.beforeYouStart.options.voluntary.text') }}
+        </li>
+        <li>
+          <b>{{ __('sharePlan.beforeYouStart.options.legalDocument.title') }}</b>
+          {{ __('sharePlan.beforeYouStart.options.legalDocument.text') }}
+        </li>
+        <li>
+          <b>{{ __('sharePlan.beforeYouStart.options.informalAgreements.title') }}</b>
+          {{ __('sharePlan.beforeYouStart.options.informalAgreements.text') }}
+        </li>
+        <li>
+          <b>{{ __('sharePlan.beforeYouStart.options.courtOrder.title') }}</b>
+          {{ __('sharePlan.beforeYouStart.options.courtOrder.text') }}
+        </li>
+      </ul>
+    </div>
 
-<h3>{{ __('sharePlan.whatWeAreTelling.howToRespond') }}</h3>
-<p>{{ __('sharePlan.whatWeAreTelling.pleaseReadThrough') }}</p>
+    <aside class="support-box">
+      <p>{{ __('sharePlan.contact') | customUrlize | replace('">childarrangements@justice.gov.uk</a>', '">childarrangements@<br>justice.gov.uk</a>') | safe }}</p>
+      <p>{{ __('sharePlan.unableToAssist') }}</p>
+    </aside>
+  </div>
 
-<p>{{ __('sharePlan.whatWeAreTelling.notLegallyBinding') }}</p>
+  <p class="cover-plan">
+    {% if '<a' in startYourOwnPlan %}
+      {{ startYourOwnPlan | safe }}
+    {% else %}
+      {{ startYourOwnPlan | customUrlize | safe }}
+    {% endif %}
+  </p>
 
-<p>{{ __('sharePlan.whatWeAreTelling.ifYouDontAgree') }}</p>
-<ul>
-  <li>{{ __('sharePlan.whatWeAreTelling.useThisForm', {senderName: values.initialAdultName}) }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.startYourOwn') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.makeAWrittenAgreement') }}</li>
-</ul>
+  <h3 class="cover-label">{{ __('sharePlan.beforeYouStart.getMoreInfo.title') }}</h3>
+  <p>{{ __('sharePlan.beforeYouStart.getMoreInfo.intro') | safe }}</p>
+  <ul>
+    <li>{{ __('sharePlan.beforeYouStart.getMoreInfo.options.makingChildArrangements') | customUrlize | safe }}</li>
+    <li>{{ __('sharePlan.beforeYouStart.getMoreInfo.options.findWays') | customUrlize | safe }}</li>
+    <li>{{ __('sharePlan.beforeYouStart.getMoreInfo.options.childMaintenanceService') | customUrlize | safe }}</li>
+  </ul>
 
-<h3>{{ __('sharePlan.whatWeAreTelling.yourSafety') }}</h3>
-<p>{{ __('sharePlan.whatWeAreTelling.shouldOnlyRespond') }}</p>
-<ul>
-  <li>{{ __('sharePlan.whatWeAreTelling.confident') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.doNotFeelPressured') }}</li>
-</ul>
-<h4>{{ __('sharePlan.whatWeAreTelling.stopIfAnyConcern') }}</h4>
-<p>{{ __('sharePlan.whatWeAreTelling.feedbackOrSafetyConcerns') }}</p>
-<p>{{ __('sharePlan.whatWeAreTelling.cannotAnswerQuestions') }}</p>
+  <p>{{ __('sharePlan.beforeYouStart.useThisDocument') }}</p>
 
-<h3>{{ __('sharePlan.whatWeAreTelling.benefitsHeading') }}</h3>
-<p>{{ __('sharePlan.whatWeAreTelling.mightFind', {senderName: values.initialAdultName}) }}</p>
-<ul>
-  <li>{{ __('sharePlan.whatWeAreTelling.takesAround') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.bestOutcome') }}</li>
-</ul>
-<p>{{ __('sharePlan.whatWeAreTelling.goingToCourt') }}</p>
+  <h3 class="cover-label">{{ __('sharePlan.beforeYouStart.howToRespond.title') }}</h3>
+  <ol>
+    <li>{{ __('sharePlan.beforeYouStart.howToRespond.options.suggestedPlan') }}</li>
+    <li>{{ __('sharePlan.beforeYouStart.howToRespond.options.markYourChoice') }}</li>
+    <li>{{ __('sharePlan.beforeYouStart.howToRespond.options.addYourComments') }}</li>
+    <li>{{ __('sharePlan.beforeYouStart.howToRespond.options.completedDocument') }}</li>
+  </ol>
 
-<h3>{{ __('sharePlan.whatWeAreTelling.topTips') }}</h3>
-<p>{{ __('sharePlan.whatWeAreTelling.planShould') }}</p>
-<ul>
-  <li>{{ __('sharePlan.whatWeAreTelling.welfare') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.wishes') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.considerAnyHarm') }}</li>
-</ul>
-<p>{{ __('sharePlan.whatWeAreTelling.everyPage') }}</p>
+  <h3 class="govuk-heading-s">{{ __('sharePlan.suggested.title', {senderName: values.initialAdultName}) }}</h3>
+  <p class="govuk-body">{{ __('sharePlan.suggested.intro', {senderName: values.initialAdultName, childrenNames: values.childrenNames}) | customUrlize | safe }}</p>
 
-<h3>{{ __('sharePlan.whatWeAreTelling.ifThereIsCourt') }}</h3>
-<p>{{ __('sharePlan.whatWeAreTelling.doNotContinue') }}</p>
-<p>{{ __('sharePlan.whatWeAreTelling.forExample') }}</p>
-<ul>
-  <li>{{ __('sharePlan.whatWeAreTelling.childArrangementsOrder') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.specificIssueOrder') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.prohibitedStepsOrder') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.protectiveOrder') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.anyOther') }}</li>
-</ul>
-<p>{{ __('sharePlan.whatWeAreTelling.toChange') | customUrlize | safe }}</p>
+  <h4 class="govuk-heading-s">{{ __('sharePlan.suggested.howPlanCanHelp.title') }}</h4>
+  <p class="govuk-body">{{ __('sharePlan.suggested.howPlanCanHelp.intro', {senderName: values.initialAdultName}) }}</p>
+  <ul>
+    <li>{{ __('sharePlan.suggested.howPlanCanHelp.options.cheaperAndQuicker')}}</li>
+    <li>{{ __('sharePlan.suggested.howPlanCanHelp.options.betterOutcome')}}</li>
+  </ul>
 
-<h3>{{ __('sharePlan.whatWeAreTelling.moreInfoHeading') }}</h3>
-<p>{{ __('sharePlan.whatWeAreTelling.moreInfo') }}</p>
-<ul>
-  <li>{{ __('sharePlan.whatWeAreTelling.makingChildArrangements') | customUrlize | safe }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.legalSeparation') | customUrlize | safe }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.divorce') | customUrlize | safe }}</li>
-</ul>
+  <h4 class="govuk-heading-s">{{ __('sharePlan.suggested.yourPlanShould.title') }}</h4>
+  <ul>
+    <li>{{ __('sharePlan.suggested.yourPlanShould.options.welfareFirst')}}</li>
+    <li>{{ __('sharePlan.suggested.yourPlanShould.options.reflectTheWishes')}}</li>
+  </ul>
 
-<h3>{{ __('sharePlan.whatWeAreTelling.legalAdviceHeading') }}</h3>
-<p>{{ __('sharePlan.whatWeAreTelling.findLegalAdviser') | customUrlize | safe }}</p>
+  <div class="shaded-text">
+    <h4 class="govuk-heading-s">{{ __('sharePlan.yourSafety.title') }}</h4>
+    <p class="govuk-body">{{ __('sharePlan.yourSafety.intro') }}</p>
+    <h5 class="govuk-heading-s">{{ __('sharePlan.yourSafety.concerns') }}</h5>
+    <p class="govuk-body">{{ __('sharePlan.yourSafety.feedback') | customUrlize | safe }}</p>
+  </div>
 
-<h3>{{ __('sharePlan.whatWeAreTelling.domesticAbuseHeading') }}</h3>
-<p>{{ __('sharePlan.whatWeAreTelling.signsAndEffects') | customUrlize | safe }}</p>
-<p>{{ __('sharePlan.whatWeAreTelling.unsureVictim') | customUrlize | safe }}</p>
+  <h4 class="govuk-heading-s">{{ __('sharePlan.decideNotToRespond.title') }}</h4>
+  <ul>
+    <li>{{ __('sharePlan.decideNotToRespond.options.noNegativeConsequences')}}</li>
+    <li>{{ __('sharePlan.decideNotToRespond.options.noCourtImpact')}}</li>
+    <li>{{ __('sharePlan.decideNotToRespond.options.noInformationSharing')}}</li>
+  </ul>
 
-<h3>{{ __('sharePlan.whatWeAreTelling.notSuitableHeading') }}</h3>
-<ul>
-  <li>{{ __('sharePlan.whatWeAreTelling.anyForm') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.childAbduction') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.childAbuse') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.drugsOrAlcohol') }}</li>
-  <li>{{ __('sharePlan.whatWeAreTelling.anyOtherSafety') }}</li>
-</ul>
+  <h4 class="govuk-heading-s">{{ __('sharePlan.gettingHelpFindingChildArrangementOptions.title') }}</h4>
+  <p class="govuk-body">{{ __('sharePlan.gettingHelpFindingChildArrangementOptions.intro') | customUrlize | safe }}</p>
+  <p class="govuk-body">{{ __('sharePlan.gettingHelpFindingChildArrangementOptions.independentFamilyMediator') | customUrlize | safe }}</p>
 
-<h3>{{ __('sharePlan.whatWeAreTelling.feedbackHeading') }}</h3>
-<p>{{ __('sharePlan.whatWeAreTelling.toAskForHelp') | customUrlize | safe }}</p>
-<p>{{ __('sharePlan.whatWeAreTelling.weCannot') }}</p>
+  <h4 class="govuk-heading-s">{{ __('sharePlan.gettingHelpFindingChildArrangementOptions.notSuitable.title') }}</h4>
+  <ul>
+    <li>{{ __('sharePlan.gettingHelpFindingChildArrangementOptions.notSuitable.options.domesticAbuse')}}</li>
+    <li>{{ __('sharePlan.gettingHelpFindingChildArrangementOptions.notSuitable.options.childAbduction')}}</li>
+    <li>{{ __('sharePlan.gettingHelpFindingChildArrangementOptions.notSuitable.options.childAbuse')}}</li>
+    <li>{{ __('sharePlan.gettingHelpFindingChildArrangementOptions.notSuitable.options.substanceMisuse')}}</li>
+    <li>{{ __('sharePlan.gettingHelpFindingChildArrangementOptions.notSuitable.options.otherConcerns')}}</li>
+  </ul>
+
+  <h4 class="govuk-heading-s">{{ __('sharePlan.gettingHelpDomesticAbuse.title') }}</h4>
+  <p class="govuk-body">{{ __('sharePlan.gettingHelpDomesticAbuse.intro') | customUrlize | safe }}</p>
+  <p class="govuk-body">{{ __('sharePlan.gettingHelpDomesticAbuse.experiencedAbuse') | customUrlize | safe }}</p>
+</div>

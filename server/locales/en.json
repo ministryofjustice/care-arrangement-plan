@@ -911,7 +911,7 @@
           "text": "Do not use this document if there is an existing court order about you, the other parent, or the children."
         }
       },
-      "startYourOwnPlan": "You can also use the service to start your own plan, visit www.propose-child-arrangements-plan.service.gov.uk",
+      "startYourOwnPlan": "You can also use the service to start your own plan, visit <a href=\"https://propose-child-arrangements-plan.service.gov.uk\"> https://propose-child-arrangements-plan.service.gov.uk</a>",
       "getMoreInfo": {
         "title": "Get more information",
         "intro": "You can use GOV.UK to find more information, including:",
