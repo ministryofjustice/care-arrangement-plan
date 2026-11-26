@@ -43,4 +43,18 @@ describe('PdfRepository', () => {
       expect.any(PutCommand),
     );
   });
+
+  it('updates a pdf', async () => {
+        mockedSend.mockResolvedValueOnce({} as never);
+
+        await repository.updatePdf({
+            planId: 'plan-123',
+            pdfId: 'pdf-456',
+            s3Key: 'plans/plan-123/v1.pdf',
+            version: 1,
+            generatedDate: '2026-11-23T10:00:00Z',
+        });
+
+        expect(mockedSend).toHaveBeenCalledWith(expect.any(PutCommand));
+    });
 });

@@ -5,60 +5,77 @@ import arrangementRoutes from './arrangementRoutes';
 import arrangementService from './arrangementService';
 
 jest.mock('./arrangementService', () => ({
-  __esModule: true,
-  default: {
-    createArrangement: jest.fn(),
-    getArrangement: jest.fn(),
-  },
+    __esModule: true,
+    default: {
+        createArrangement: jest.fn(),
+        getArrangement: jest.fn(),
+        updateArrangement: jest.fn(),
+    },
 }));
 
 describe('arrangementRoutes', () => {
-  const app = express();
+    const app = express();
 
-  beforeEach(() => {
-    app.use(json());
+    beforeEach(() => {
+        app.use(json());
 
-    const router = Router();
-    arrangementRoutes(router);
-    app.use(router);
+        const router = Router();
+        arrangementRoutes(router);
+        app.use(router);
 
-    jest.clearAllMocks();
-  });
+        jest.clearAllMocks();
+    });
 
-  test('POST /api/arrangements returns 201', async () => {
-    const body = {
-      userId: 'user-1',
-      arrangementId: 'arrangement-1',
-    };
+    test('POST /api/arrangements returns 201', async () => {
+        const body = {
+            userId: 'user-1',
+            arrangementId: 'arrangement-1',
+        };
 
-    const response = await request(app)
-      .post('/api/arrangements')
-      .send(body);
+        const response = await request(app)
+            .post('/api/arrangements')
+            .send(body);
 
-    expect(response.status).toBe(201);
-    expect(arrangementService.createArrangement).toHaveBeenCalledWith(body);
-  });
+        expect(response.status).toBe(201);
+        expect(arrangementService.createArrangement).toHaveBeenCalledWith(body);
+    });
 
-  test('GET /api/arrangements/:userId/:arrangementId returns arrangement', async () => {
-    const arrangement = {
-      userId: 'user-1',
-      arrangementId: 'arrangement-1',
-    };
+    test('GET /api/arrangements/:userId/:arrangementId returns arrangement', async () => {
+        const arrangement = {
+            userId: 'user-1',
+            arrangementId: 'arrangement-1',
+        };
 
-    (arrangementService.getArrangement as jest.Mock).mockResolvedValue(
-      arrangement,
-    );
+        (arrangementService.getArrangement as jest.Mock).mockResolvedValue(
+            arrangement,
+        );
 
-    const response = await request(app).get(
-      '/api/arrangements/user-1/arrangement-1',
-    );
+        const response = await request(app).get(
+            '/api/arrangements/user-1/arrangement-1',
+        );
 
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual(arrangement);
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual(arrangement);
 
-    expect(arrangementService.getArrangement).toHaveBeenCalledWith(
-      'user-1',
-      'arrangement-1',
-    );
-  });
+        expect(arrangementService.getArrangement).toHaveBeenCalledWith(
+            'user-1',
+            'arrangement-1',
+        );
+        });
+
+        test('PUT /api/arrangements returns 204', async () => {
+            const body = {
+                userId: 'user-1',
+                arrangementId: 'arrangement-1',
+            };
+
+            (arrangementService.updateArrangement as jest.Mock).mockResolvedValueOnce(undefined);
+
+            const response = await request(app)
+                .put('/api/arrangements')
+                .send(body);
+
+            expect(response.status).toBe(204);
+            expect(arrangementService.updateArrangement).toHaveBeenCalledWith(body);
+        });
 });

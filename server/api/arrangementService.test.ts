@@ -12,4 +12,10 @@ describe('arrangementService', () => {
       expect(arrangementService.createArrangement).toBeDefined();
     });
   });
+
+  describe('updateArrangement', () => {
+        it('should be defined', () => {
+            expect(arrangementService.updateArrangement).toBeDefined();
+        });
+    });
 });

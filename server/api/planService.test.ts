@@ -12,4 +12,10 @@ describe('planService', () => {
       expect(planService.createPlan).toBeDefined();
     });
   });
+
+  describe('updatePlan', () => {
+        it('should be defined', () => {
+            expect(planService.updatePlan).toBeDefined();
+        });
+    });
 });
