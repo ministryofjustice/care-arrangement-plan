@@ -410,7 +410,6 @@
       }
 
       .cover-page {
-        min-height: 270mm;
         page-break-after: always;
         break-after: page;
       }
@@ -434,11 +433,9 @@
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
-      max-width: 190mm;
-      min-height: 297mm;
-      margin: 0 auto 48px;
-      font-size: 15px;
-      line-height: 1.35;
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.5;
     }
 
     .cover-masthead {
@@ -452,30 +449,30 @@
     .cover-page h1 {
       max-width: 9.8em;
       margin: 0;
-      font-size: 37px;
+      font-size: 48px;
       font-weight: 700;
-      line-height: 1.05;
+      line-height: 1.2;
     }
 
     .recipient-document {
       margin: 0;
-      font-size: 27px;
+      font-size: 36px;
       font-weight: 700;
-      line-height: 1.1;
+      line-height: 1.2;
       text-align: right;
       white-space: pre-line;
     }
 
     .cover-columns {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 50mm;
+      grid-template-columns: minmax(0, 1fr) 72mm;
       column-gap: 16mm;
       align-items: start;
     }
 
     .cover-page h2 {
-      margin: 0 0 12px;
-      font-size: 24px;
+      margin: 0 0 20px;
+      font-size: 36px;
       font-weight: 700;
       line-height: 1.2;
     }
@@ -501,8 +498,8 @@
       background-color: #e3e3e3;
       padding: 12px 10px 14px;
       text-align: center;
-      font-size: 13px;
-      line-height: 1.25;
+      font-size: 19px;
+      line-height: 1.5;
     }
 
     .support-box p {
@@ -511,6 +508,24 @@
 
     .support-box p + p {
       margin-top: 12px;
+    }
+
+    .shaded-text {
+      background-color: #e3e3e3;
+      padding: 15px 15px 5px;
+      margin: 20px 0;
+    }
+
+    .shaded-text h4,
+    .shaded-text h5 {
+      margin-top: 0;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .shaded-text p:last-child {
+      margin-bottom: 10px;
     }
 
     .cover-page a {
@@ -534,10 +549,10 @@
     }
 
     .cover-label {
-      margin: 14px 0 0;
-      font-size: 15px;
+      margin: 30px 0 15px;
+      font-size: 24px;
       font-weight: 700;
-      line-height: 1.35;
+      line-height: 1.2;
     }
 
     .cover-footer {
@@ -547,8 +562,8 @@
       margin-top: auto;
       padding-top: 8px;
       border-top: 1.5px solid #0b0c0c;
-      font-size: 13px;
-      line-height: 1.3;
+      font-size: 19px;
+      line-height: 1.5;
     }
 
     .cover-footer p {
@@ -566,16 +581,7 @@
       text-align: right;
     }
 
-    .cover-follow {
-      max-width: 190mm;
-      margin: 0 auto;
-    }
-
     @media (max-width: 720px) {
-      .cover-page {
-        min-height: 0;
-      }
-
       .cover-masthead,
       .cover-columns {
         display: block;

@@ -35,7 +35,13 @@
     </aside>
   </div>
 
-  <p class="cover-plan">{{ __('sharePlan.beforeYouStart.startYourOwnPlan') | customUrlize | safe }}</p>
+  <p class="cover-plan">
+    {% if '<a' in startYourOwnPlan %}
+      {{ startYourOwnPlan | safe }}
+    {% else %}
+      {{ startYourOwnPlan | customUrlize | safe }}
+    {% endif %}
+  </p>
 
   <h3 class="cover-label">{{ __('sharePlan.beforeYouStart.getMoreInfo.title') }}</h3>
   <p>{{ __('sharePlan.beforeYouStart.getMoreInfo.intro') | safe }}</p>
@@ -71,11 +77,12 @@
     <li>{{ __('sharePlan.suggested.yourPlanShould.options.reflectTheWishes')}}</li>
   </ul>
 
-  <h4 class="govuk-heading-s">{{ __('sharePlan.yourSafety.title') }}</h4>
-  <p class="govuk-body">{{ __('sharePlan.yourSafety.intro') }}</p>
-
-  <h5 class="govuk-heading-s">{{ __('sharePlan.yourSafety.concerns') }}</h5>
-  <p class="govuk-body">{{ __('sharePlan.yourSafety.feedback') | customUrlize | safe }}</p>
+  <div class="shaded-text">
+    <h4 class="govuk-heading-s">{{ __('sharePlan.yourSafety.title') }}</h4>
+    <p class="govuk-body">{{ __('sharePlan.yourSafety.intro') }}</p>
+    <h5 class="govuk-heading-s">{{ __('sharePlan.yourSafety.concerns') }}</h5>
+    <p class="govuk-body">{{ __('sharePlan.yourSafety.feedback') | customUrlize | safe }}</p>
+  </div>
 
   <h4 class="govuk-heading-s">{{ __('sharePlan.decideNotToRespond.title') }}</h4>
   <ul>
