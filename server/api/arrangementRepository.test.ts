@@ -33,4 +33,17 @@ describe('ArrangementRepository', () => {
 
     expect(mockedSend).toHaveBeenCalledWith(expect.any(PutCommand));
   });
+
+  it('updates an arrangement', async () => {
+        const repository = new ArrangementRepository();
+        const arrangement: Arrangement = {
+            arrangementId: 'arrangement-456',
+            userId: 'user-123',
+            ttl: 1234567890,
+        };
+
+        await repository.updateArrangement(arrangement);
+
+        expect(mockedSend).toHaveBeenCalledWith(expect.any(PutCommand));
+    });
 });

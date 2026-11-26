@@ -13,7 +13,12 @@ const createPdf = async (pdf: Pdf) => {
   return pdfRepository.createPdf(pdf);
 };
 
+const updatePdf = async (pdf: Pdf) => {
+  return pdfRepository.updatePdf(pdf);
+};
+
 export default {
   getPdf,
   createPdf,
+  updatePdf,
 };

@@ -22,7 +22,16 @@ const createArrangement = async (
   );
 };
 
+const updateArrangement = async (
+  arrangement: Arrangement,
+) => {
+  return arrangementRepository.updateArrangement(
+    arrangement,
+  );
+};
+
 export default {
   getArrangement,
   createArrangement,
+  updateArrangement,
 };

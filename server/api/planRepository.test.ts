@@ -49,4 +49,30 @@ describe('PlanRepository', () => {
 
     expect(mockedSend).toHaveBeenCalled();
   });
+
+  it('updates a plan', async () => {
+        mockedSend.mockResolvedValueOnce({} as never);
+
+        await repository.updatePlan({
+            arrangementId: 'arrangement-123',
+            planId: 'plan-456',
+            status: 'draft',
+            createdDate: '2026-11-23',
+            updatedDate: '2026-11-23',
+            ttl: 123456789,
+            numberOfChildren: 2,
+            namesOfChildren: ['Child One', 'Child Two'],
+            initialAdultName: 'Adult One',
+            secondaryAdultName: 'Adult Two',
+            livingAndVisiting: {},
+            handoverAndHolidays: {},
+            education: {},
+            childHealth: {},
+            specialDays: {},
+            otherThings: {},
+            decisionMaking: {},
+        });
+
+        expect(mockedSend).toHaveBeenCalled();
+    });
 });

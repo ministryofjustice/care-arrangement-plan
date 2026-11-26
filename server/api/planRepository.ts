@@ -47,4 +47,14 @@ export default class PlanRepository {
       }),
     );
   }
+
+  async updatePlan(plan: Plan) {
+    return this.client.send(
+      new PutCommand({
+        TableName: config.dynamo.tableName,
+        Item: plan,
+      }),
+    );
+  }
+
 }

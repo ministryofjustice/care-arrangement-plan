@@ -12,4 +12,10 @@ describe('pdfService', () => {
       expect(pdfService.createPdf).toBeDefined();
     });
   });
+
+  describe('updatePdf', () => {
+        it('should be defined', () => {
+            expect(pdfService.updatePdf).toBeDefined();
+        });
+    });
 });

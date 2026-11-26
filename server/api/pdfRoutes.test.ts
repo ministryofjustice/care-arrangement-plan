@@ -5,60 +5,77 @@ import pdfRoutes from './pdfRoutes';
 import pdfService from './pdfService';
 
 jest.mock('./pdfService', () => ({
-  __esModule: true,
-  default: {
-    createPdf: jest.fn(),
-    getPdf: jest.fn(),
-  },
+    __esModule: true,
+    default: {
+        createPdf: jest.fn(),
+        getPdf: jest.fn(),
+        updatePdf: jest.fn(),
+    },
 }));
 
 describe('pdfRoutes', () => {
-  const app = express();
+    const app = express();
 
-  beforeEach(() => {
-    app.use(json());
+    beforeEach(() => {
+        app.use(json());
 
-    const router = Router();
+        const router = Router();
 
-    pdfRoutes(router);
+        pdfRoutes(router);
 
-    app.use(router);
+        app.use(router);
 
-    jest.clearAllMocks();
-  });
+        jest.clearAllMocks();
+    });
 
-  test('POST /api/pdfs returns 201', async () => {
-    const body = {
-      userId: 'user-1',
-      pdfId: 'pdf-1',
-    };
+    test('POST /api/pdfs returns 201', async () => {
+        const body = {
+            userId: 'user-1',
+            pdfId: 'pdf-1',
+        };
 
-    const response = await request(app)
-      .post('/api/pdfs')
-      .send(body);
+        const response = await request(app)
+            .post('/api/pdfs')
+            .send(body);
 
-    expect(response.status).toBe(201);
-    expect(pdfService.createPdf).toHaveBeenCalledWith(body);
-  });
+        expect(response.status).toBe(201);
+        expect(pdfService.createPdf).toHaveBeenCalledWith(body);
+    });
 
-  test('GET /api/pdfs/:userId/:pdfId returns pdf', async () => {
-    const pdf = {
-      userId: 'user-1',
-      pdfId: 'pdf-1',
-    };
+    test('GET /api/pdfs/:userId/:pdfId returns pdf', async () => {
+        const pdf = {
+            userId: 'user-1',
+            pdfId: 'pdf-1',
+        };
 
-    (pdfService.getPdf as jest.Mock).mockResolvedValue(pdf);
+        (pdfService.getPdf as jest.Mock).mockResolvedValue(pdf);
 
-    const response = await request(app).get(
-      '/api/pdfs/user-1/pdf-1',
-    );
+        const response = await request(app).get(
+            '/api/pdfs/user-1/pdf-1',
+        );
 
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual(pdf);
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual(pdf);
 
-    expect(pdfService.getPdf).toHaveBeenCalledWith(
-      'user-1',
-      'pdf-1',
-    );
-  });
+        expect(pdfService.getPdf).toHaveBeenCalledWith(
+            'user-1',
+            'pdf-1',
+        );
+        });
+
+        test('PUT /api/pdfs returns 204', async () => {
+            const body = {
+                userId: 'user-1',
+                pdfId: 'pdf-1',
+            };
+
+            (pdfService.updatePdf as jest.Mock).mockResolvedValueOnce(undefined);
+
+            const response = await request(app)
+                .put('/api/pdfs')
+                .send(body);
+
+            expect(response.status).toBe(204);
+            expect(pdfService.updatePdf).toHaveBeenCalledWith(body);
+        });
 });

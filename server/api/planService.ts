@@ -13,7 +13,12 @@ const createPlan = async (plan: Plan) => {
   return planRepository.createPlan(plan);
 };
 
+const updatePlan = async (plan: Plan) => {
+  return planRepository.updatePlan(plan);
+};
+
 export default {
   getPlan,
   createPlan,
+  updatePlan,
 };
