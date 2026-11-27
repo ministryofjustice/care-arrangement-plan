@@ -1,5 +1,10 @@
 import { TextRun } from '../@types/pdf';
-import { MAIN_TEXT_SIZE, NO_SPACE, PARAGRAPH_SPACE, SUB_HEADING_SIZE } from '../constants/pdfConstants';
+import {
+  MAIN_TEXT_SIZE,
+  NO_SPACE,
+  PARAGRAPH_SPACE,
+  SUB_HEADING_SIZE
+} from '../constants/pdfConstants';
 
 import SignatureFields from './components/signatureFields';
 import TextComponent from './components/text';
@@ -31,7 +36,7 @@ const addWhatHappensNow = (pdf: Pdf) => {
       text: request.__('sharePlan.endOfForm.sectionTitle'),
       size: SUB_HEADING_SIZE,
       style: FontStyles.NORMAL,
-      bottomPadding: PARAGRAPH_SPACE,
+      bottomPadding: NO_SPACE,
     },
     {
       text: request.__('sharePlan.endOfForm.title'),

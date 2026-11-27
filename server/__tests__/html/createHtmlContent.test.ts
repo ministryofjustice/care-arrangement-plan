@@ -95,7 +95,7 @@ describe('createHtmlContent', () => {
       handoverAndHolidays: {
         getBetweenHouseholds: {
           noDecisionRequired: false,
-          how: 'walk',
+          how: 'bothParents',
         },
         whereHandover: {
           noDecisionRequired: false,
@@ -161,7 +161,13 @@ describe('createHtmlContent', () => {
     expectHtmlToContain(
       html,
       'id="living-visiting"',
+      'livingAndVisiting.whichSchedule.title',
+      'Week on, week off',
       'id="handover-holidays"',
+      '<h1 class="section-heading-title">sharePlan.yourProposedPlan.handoverAndHolidays.sectionTitle</h1>',
+      '<h2 id="handover-holidays-heading" class="section-heading">taskList.handoverAndHolidays.title</h2>',
+      'sharePlan.yourProposedPlan.handoverAndHolidays.householdsTitle',
+      'handoverAndHolidays.getBetweenHouseholds.bothParentsCollect',
       'id="education"',
       'sharePlan.education.sectionTitle',
       'sharePlan.education.schoolInfo.question',
@@ -175,6 +181,8 @@ describe('createHtmlContent', () => {
       'id="decision-making"',
       'id="what-happens-now"',
     );
+    expect(html).not.toContain('livingAndVisiting.willOvernightsHappen.title');
+    expect(html).not.toContain('livingAndVisiting.willDaytimeVisitsHappen.title');
   });
 
   test('handles long strings correctly', () => {
