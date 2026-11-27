@@ -95,6 +95,10 @@ describe('createHtml', () => {
 
     expect(response.status).toBe(200);
     expect(response.headers['content-type']).toMatch(/text\/html/);
+    expect(response.text).toContain('<h1 class="section-heading-title">Section 3</h1>');
+    expect(response.text).toContain('<h2 id="handover-holidays-heading" class="section-heading">Handovers and holidays</h2>');
+    expect(response.text).toContain('How will the children get between households?');
+    expect(response.text).toContain('Bob suggested that this does not need to be decided.');
     expect(response.text).toContain('id="education"');
     expect(response.text).toContain('Section 4');
     expect(response.text).toContain('A grandparent attends parents evening');

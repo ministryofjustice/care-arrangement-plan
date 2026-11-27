@@ -145,6 +145,10 @@ test.describe('HTML Download Functionality', () => {
     expect(htmlContent).toContain('id="child-health"');
     expect(htmlContent).toContain('Section 5');
     expect(htmlContent).toContain('Regular check-ups and an inhaler when needed');
+    expect(htmlContent).toContain('<h1 class="section-heading-title">Section 3</h1>');
+    expect(htmlContent).toContain('<h2 id="handover-holidays-heading" class="section-heading">Handovers and holidays</h2>');
+    expect(htmlContent).toContain('How will the children get between households?');
+    expect(htmlContent).toContain('Parent suggested that Parent collects the children.');
     expect(htmlContent).toContain('At least 4 weeks');
     expect(htmlContent).toContain('Clothes and shoes');
     expect(htmlContent).toContain('We will alternate holidays');
@@ -157,6 +161,55 @@ test.describe('HTML Download Functionality', () => {
     expect(htmlContent).toContain('2 weeks&#039; notice');
     expect(htmlContent).toContain('6 months&#039; time');
     expect(htmlContent).not.toContain('End of section');
+  });
+
+  test('should follow the split living path and include every way the children get between households', async ({ page }) => {
+    await completeMinimalJourney(page);
+
+    await page.getByRole('link', { name: /where will the children spend most of their time/i }).click();
+    await page.getByLabel('They will split time between Parent and Guardian').check();
+    await page.getByRole('button', { name: /continue/i }).click();
+    await expect(page).toHaveURL(/which-schedule/);
+    await page.locator('textarea').fill('Alternating weeks');
+    await page.getByRole('button', { name: /continue/i }).click();
+    await page.waitForURL(/\/make-a-plan/);
+
+    const splitResponse = await page.request.get('/download-html');
+    const splitHtml = await splitResponse.text();
+
+    expect(splitResponse.status()).toBe(200);
+    expect(splitHtml).toContain('<h1 class="section-heading-title">Section 2</h1>');
+    expect(splitHtml).toContain('Living and visiting');
+    expect(splitHtml).toContain('Which schedule best meets the children&#039;s needs?');
+    expect(splitHtml).toContain('An exact split of time between two households does not always suit children&#039;s best interests.');
+    expect(splitHtml).toContain('Alternating weeks');
+    expect(splitHtml).toContain('split their time between');
+    expect(splitHtml).not.toContain('Will the children stay overnight');
+    expect(splitHtml).not.toContain('Will the children do daytime visits');
+
+    await page.getByRole('link', { name: /how will .* get between households/i }).click();
+    await page.getByLabel(/Both parents take turns collecting Test/i).check();
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    const bothParents = await page.request.get('/download-html');
+    const bothParentsHtml = await bothParents.text();
+
+    expect(bothParents.status()).toBe(200);
+    expect(bothParentsHtml).toContain('<h1 class="section-heading-title">Section 3</h1>');
+    expect(bothParentsHtml).toContain('<h2 id="handover-holidays-heading" class="section-heading">Handovers and holidays</h2>');
+    expect(bothParentsHtml).toContain('How will the children get between households?');
+    expect(bothParentsHtml).toContain('Both parents take turns collecting Test');
+
+    await page.goto('/handover-and-holidays/get-between-households');
+    await page.getByLabel(/Someone else collects Test/i).check();
+    await page.getByLabel(/Who will collect Test/i).fill('A grandparent');
+    await page.getByRole('button', { name: /continue/i }).click();
+
+    const someoneElse = await page.request.get('/download-html');
+    const someoneElseHtml = await someoneElse.text();
+
+    expect(someoneElse.status()).toBe(200);
+    expect(someoneElseHtml).toContain('Someone else collects Test: A grandparent');
   });
 
   // TODO: HTML download does not yet redirect to the confirmation page.
