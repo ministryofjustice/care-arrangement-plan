@@ -9,24 +9,35 @@ const planRoutes = (router: Router) => {
     response.sendStatus(201);
   });
 
-  router.get('/api/plans/:arrangementId/:planId', async (request, response) => {
-    const { arrangementId, planId } = request.params;
+  router.get(
+    '/api/plans/arrangement/:arrangementId',
+    async (request, response) => {
+      const { arrangementId } = request.params;
 
-    const plan = await planService.getPlan(
-      arrangementId,
-      planId,
-    );
+      const plans =
+        await planService.getPlansByArrangement(
+          arrangementId,
+        );
 
-    response.status(200).json(plan);
-  });
+      response
+        .status(200)
+        .json(plans.Items ?? plans);
+    },
+  );
 
-  router.get('/api/plans/arrangement/:arrangementId', async (request, response) => {
-    const { arrangementId } = request.params;
+  router.get(
+    '/api/plans/:arrangementId/:planId',
+    async (request, response) => {
+      const { arrangementId, planId } = request.params;
 
-    const plans = await planService.getPlansByArrangement(arrangementId);
+      const plan = await planService.getPlan(
+        arrangementId,
+        planId,
+      );
 
-    response.status(200).json(plans);
-  });
+      response.status(200).json(plan);
+    },
+  );
 
   router.put(
     '/api/plans',

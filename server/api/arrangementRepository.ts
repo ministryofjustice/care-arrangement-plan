@@ -5,6 +5,7 @@ import {
 } from '@aws-sdk/lib-dynamodb';
 
 import config from '../config';
+
 import dynamoClient from './dynamoClient';
 
 export interface Arrangement {

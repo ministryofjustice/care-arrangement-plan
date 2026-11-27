@@ -10,20 +10,6 @@ const pdfRoutes = (router: Router) => {
   });
 
   router.get(
-    '/api/pdfs/:userId/:pdfId',
-    async (request, response) => {
-      const { userId, pdfId } = request.params;
-
-      const pdf = await pdfService.getPdf(
-        userId,
-        pdfId,
-      );
-
-      response.status(200).json(pdf);
-    },
-  );
-
-  router.get(
     '/api/pdfs/plan/:planId',
     async (request, response) => {
       const { planId } = request.params;
@@ -35,6 +21,20 @@ const pdfRoutes = (router: Router) => {
       response
         .status(200)
         .json(pdfs.Items ?? []);
+    },
+  );
+
+  router.get(
+    '/api/pdfs/:userId/:pdfId',
+    async (request, response) => {
+      const { userId, pdfId } = request.params;
+
+      const pdf = await pdfService.getPdf(
+        userId,
+        pdfId,
+      );
+
+      response.status(200).json(pdf);
     },
   );
 
