@@ -15,6 +15,10 @@ const setupAuthentication = () => {
       next();
       return;
     }
+    if (req.path.startsWith('/api/')) {
+      res.status(401).json({ error: 'Unauthorized' });
+      return;
+    }
     if (config.oneLogin.enabled) {
       // The login-start form is the only place that starts GOV.UK One Login,
       // and only after the user chooses to continue an existing plan.

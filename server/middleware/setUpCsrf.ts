@@ -19,7 +19,7 @@ const setUpCsrf = (): Router => {
 
     // Apply CSRF protection but skip for analytics endpoints (they use sendBeacon during page unload)
     router.use((req, res, next) => {
-      if (req.path.startsWith('/api/analytics/')) {
+      if (req.path.startsWith('/api/')) {
         return next();
       }
       return csrfSynchronisedProtection(req, res, next);
