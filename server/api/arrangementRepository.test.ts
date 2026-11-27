@@ -1,4 +1,8 @@
-import { GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import {
+  GetCommand,
+  PutCommand,
+  QueryCommand,
+} from '@aws-sdk/lib-dynamodb';
 
 import ArrangementRepository, { Arrangement } from './arrangementRepository';
 import dynamoClient from './dynamoClient';
@@ -20,6 +24,14 @@ describe('ArrangementRepository', () => {
     expect(mockedSend).toHaveBeenCalledWith(expect.any(GetCommand));
   });
 
+  it('gets arrangements by user id', async () => {
+    const repository = new ArrangementRepository();
+
+    await repository.getArrangementsByUserId('user-123');
+
+    expect(mockedSend).toHaveBeenCalledWith(expect.any(QueryCommand));
+  });
+
   it('creates an arrangement', async () => {
     const repository = new ArrangementRepository();
 
@@ -35,15 +47,15 @@ describe('ArrangementRepository', () => {
   });
 
   it('updates an arrangement', async () => {
-        const repository = new ArrangementRepository();
-        const arrangement: Arrangement = {
-            arrangementId: 'arrangement-456',
-            userId: 'user-123',
-            ttl: 1234567890,
-        };
+    const repository = new ArrangementRepository();
+    const arrangement: Arrangement = {
+      arrangementId: 'arrangement-456',
+      userId: 'user-123',
+      ttl: 1234567890,
+    };
 
-        await repository.updateArrangement(arrangement);
+    await repository.updateArrangement(arrangement);
 
-        expect(mockedSend).toHaveBeenCalledWith(expect.any(PutCommand));
-    });
+    expect(mockedSend).toHaveBeenCalledWith(expect.any(PutCommand));
+  });
 });

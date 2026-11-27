@@ -7,6 +7,12 @@ describe('pdfService', () => {
     });
   });
 
+  describe('getPdfsByPlanId', () => {
+    it('should be defined', () => {
+      expect(pdfService.getPdfsByPlanId).toBeDefined();
+    });
+  });
+
   describe('createPdf', () => {
     it('should be defined', () => {
       expect(pdfService.createPdf).toBeDefined();
@@ -14,8 +20,8 @@ describe('pdfService', () => {
   });
 
   describe('updatePdf', () => {
-        it('should be defined', () => {
-            expect(pdfService.updatePdf).toBeDefined();
-        });
+    it('should be defined', () => {
+      expect(pdfService.updatePdf).toBeDefined();
     });
+  });
 });

@@ -9,6 +9,14 @@ const getPdf = async (
   return pdfRepository.getPdf(userId, pdfId);
 };
 
+const getPdfsByPlanId = async (
+  planId: string,
+) => {
+  return pdfRepository.getPdfsByPlanId(
+    planId,
+  );
+};
+
 const createPdf = async (pdf: Pdf) => {
   return pdfRepository.createPdf(pdf);
 };
@@ -19,6 +27,7 @@ const updatePdf = async (pdf: Pdf) => {
 
 export default {
   getPdf,
+  getPdfsByPlanId,
   createPdf,
   updatePdf,
 };
