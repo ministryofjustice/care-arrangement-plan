@@ -51,10 +51,6 @@ const addDecisionMaking = (request: Request): string => {
 
   let html = '<section id="decision-making" aria-labelledby="decision-making-heading">\n';
   html += answers.join('\n');
-  html += renderTextBox(
-    request.__('sharePlan.yourProposedPlan.endOfSection'),
-    request.__('sharePlan.yourProposedPlan.compromise.decisionMaking'),
-  );
   html += '</section>\n\n';
 
   return html;

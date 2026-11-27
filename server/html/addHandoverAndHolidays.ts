@@ -148,10 +148,6 @@ const addHandoverAndHolidays = (request: Request): string => {
 
   let html = '<section id="handover-holidays" aria-labelledby="handover-holidays-heading">\n';
   html += answers.join('\n');
-  html += renderTextBox(
-    request.__('sharePlan.yourProposedPlan.endOfSection'),
-    request.__('sharePlan.yourProposedPlan.compromise.handoverAndHolidays'),
-  );
   html += '</section>\n\n';
 
   return html;

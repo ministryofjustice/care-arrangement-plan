@@ -1130,7 +1130,6 @@
       "senderSuggested": "Awgrymodd {{{ senderName }}}:\n\"{{{ suggestion }}}\"",
       "senderSuggestedDoNotDecide": "Awgrymodd {{{ senderName }}} nad oes angen penderfynu ar hwn.",
       "doYouAgree": "Ydych chi'n cytuno?",
-      "endOfSection": "Diwedd yr adran",
       "noCourtOrder": "nid oes gorchymyn llys ar waith ar hyn o bryd",
       "forOneChild": "cynllun trefniadau plant arfaethedig yw hwn ar gyfer plentyn 1, {{{ childName }}}",
       "forMultipleChildren": "cynllun trefniadau plant arfaethedig yw hwn ar gyfer plant {{ numberOfChildren }}, {{{ childrenNames }}}",

@@ -1130,7 +1130,6 @@
       "senderSuggested": "{{{ senderName }}} suggested:\n\"{{{ suggestion }}}\"",
       "senderSuggestedDoNotDecide": "{{{ senderName }}} suggested that this does not need to be decided.",
       "doYouAgree": "Do you agree?",
-      "endOfSection": "End of section",
       "noCourtOrder": "there is no court order in place at this time",
       "forOneChild": "this is a proposed child arrangements plan for 1 child, {{{ childName }}}",
       "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{{ childrenNames }}}",

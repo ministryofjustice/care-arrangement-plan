@@ -393,6 +393,17 @@
       box-shadow: inset 0 0 0 2px;
     }
 
+    .section-heading-title {
+      font-size: 48px;
+      font-weight: regular;
+      margin-bottom: 0;
+    }
+
+    .section-heading {
+      font-size: 36px;
+      font-weight: bold;
+    }
+
     @media (max-width: 640px) {
       .signature-fields {
         grid-template-columns: 1fr;
@@ -621,7 +632,8 @@
 
     <!-- About The Proposal -->
     <section id="about-proposal" aria-labelledby="about-proposal-heading">
-      <h2 id="about-proposal-heading">{{ __('sharePlan.yourProposedPlan.aboutThePlan') }}</h2>
+      <p class="section-heading-title">{{ __('sharePlan.yourProposedPlan.sectionTitle') }}</p>
+      <p class="section-heading">{{ __('sharePlan.yourProposedPlan.aboutThePlan') }}</p>
 
       <p>{{ __('sharePlan.yourProposedPlan.senderSaid', {senderName: values.initialAdultName}) }}</p>
       <ul>
@@ -635,6 +647,8 @@
         </li>
         <li>{{ __('sharePlan.yourProposedPlan.agreementBetween', {senderName: values.initialAdultName, otherAdultName: values.secondaryAdultName, childrenNames: values.childrenNames}) }}</li>
       </ul>
+
+      <p>{{ __('sharePlan.yourProposedPlan.doNotStoreNames') }}</p>
 
       <div class="do-you-agree">
         <div class="govuk-form-group">
@@ -660,15 +674,7 @@
         </div>
       </div>
 
-      <div class="text-box">
-        <p>{{ __('sharePlan.yourProposedPlan.doNotStoreNames') }}</p>
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="notes-about-proposal">
-            {{ __('sharePlan.yourProposedPlan.doNotAgreeOnBasics') | customUrlize | safe }}
-          </label>
-          <textarea class="govuk-textarea user-input-area" id="notes-about-proposal" name="notes-about-proposal" rows="5"></textarea>
-        </div>
-      </div>
+      <p>{{ __('sharePlan.yourProposedPlan.doNotAgreeOnBasics') | customUrlize | safe }}</p>
     </section>
 
     <!-- Answers rendered inline -->
