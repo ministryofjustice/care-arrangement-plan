@@ -1,5 +1,6 @@
 import {
   MAIN_TEXT_SIZE,
+  NO_SPACE,
   PARAGRAPH_SPACE,
   QUESTION_TITLE_SIZE,
   SECTION_HEADING_SIZE
@@ -18,29 +19,35 @@ const addOtherThings = (pdf: Pdf) => {
   new BulletListComponent(pdf, {
     initialText: [
       {
-        text: request.__('taskList.otherThings'),
+        text: request.__('sharePlan.otherThings.sectionTitle'),
+        size: SECTION_HEADING_SIZE,
+        style: FontStyles.NORMAL,
+        bottomPadding: NO_SPACE,
+      },
+      {
+        text: request.__('sharePlan.otherThings.title'),
         size: SECTION_HEADING_SIZE,
         style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
-        text: request.__('otherThings.whatOtherThingsMatter.title'),
+        text: request.__('sharePlan.otherThings.whatOtherThingsMatter.title'),
         size: QUESTION_TITLE_SIZE,
         style: FontStyles.BOLD,
         bottomPadding: PARAGRAPH_SPACE,
       },
       {
-        text: request.__('otherThings.whatOtherThingsMatter.thingsToAgree'),
+        text: request.__('sharePlan.otherThings.whatOtherThingsMatter.thingsToAgree'),
         size: MAIN_TEXT_SIZE,
         style: FontStyles.NORMAL,
         bottomPadding: PARAGRAPH_SPACE,
       },
     ],
     bulletText: [
-      request.__('otherThings.whatOtherThingsMatter.religionDietAndRules'),
-      request.__('otherThings.whatOtherThingsMatter.extraCurriculars'),
-      request.__('otherThings.whatOtherThingsMatter.friendsAndFamily'),
-      request.__('otherThings.whatOtherThingsMatter.otherContact'),
+      request.__('sharePlan.otherThings.whatOtherThingsMatter.religionDietAndRules'),
+      request.__('sharePlan.otherThings.whatOtherThingsMatter.extraCurriculars'),
+      request.__('sharePlan.otherThings.whatOtherThingsMatter.friendsAndFamily'),
+      request.__('sharePlan.otherThings.whatOtherThingsMatter.otherContact'),
     ],
   }).addComponentToDocument();
 

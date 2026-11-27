@@ -12,10 +12,10 @@ import Pdf from './pdf';
 const addPlanLastMinuteChanges = (pdf: Pdf, request: Request) => {
   addAnswer(
     pdf,
-    undefined,
-    request.__('taskList.decisionMaking'),
-    request.__('decisionMaking.planLastMinuteChanges.title'),
-    request.__('decisionMaking.planLastMinuteChanges.howChangesCommunicatedAdditionalDescription'),
+    request.__('sharePlan.decisionMaking.sectionTitle'),
+    request.__('sharePlan.decisionMaking.title'),
+    request.__('sharePlan.decisionMaking.planLastMinuteChanges.title'),
+    request.__('sharePlan.decisionMaking.planLastMinuteChanges.intro'),
     planLastMinuteChanges(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLastMinuteChanges'),
   );
@@ -26,8 +26,8 @@ const addPlanLongTermNotice = (pdf: Pdf, request: Request) => {
     pdf,
     undefined,
     undefined,
-    request.__('decisionMaking.planLongTermNotice.title'),
-    request.__('decisionMaking.planLongTermNotice.sometimesYouNeedToPlanAhead'),
+    request.__('sharePlan.decisionMaking.planLongTermNotice.title'),
+    request.__('sharePlan.decisionMaking.planLongTermNotice.intro'),
     planLongTermNotice(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLongTermNotice'),
   );
@@ -38,8 +38,8 @@ const addPlanReview = (pdf: Pdf, request: Request) => {
     pdf,
     undefined,
     undefined,
-    request.__('decisionMaking.planReview.title'),
-    request.__('decisionMaking.planReview.childrensNeedsChange'),
+    request.__('sharePlan.decisionMaking.planReview.title'),
+    request.__('sharePlan.decisionMaking.planReview.intro'),
     planReview(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planReview'),
   );
