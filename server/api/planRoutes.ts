@@ -3,31 +3,50 @@ import { Router } from 'express';
 import planService from './planService';
 
 const planRoutes = (router: Router) => {
-    router.post('/api/plans', async (request, response) => {
-        await planService.createPlan(request.body);
+  router.post('/api/plans', async (request, response) => {
+    await planService.createPlan(request.body);
 
-        response.sendStatus(201);
-    });
+    response.sendStatus(201);
+  });
 
-    router.get('/api/plans/:arrangementId/:planId', async (request, response) => {
-        const { arrangementId, planId } = request.params;
+  router.get(
+    '/api/plans/arrangement/:arrangementId',
+    async (request, response) => {
+      const { arrangementId } = request.params;
 
-        const plan = await planService.getPlan(
-            arrangementId,
-            planId,
+      const plans =
+        await planService.getPlansByArrangement(
+          arrangementId,
         );
 
-        response.status(200).json(plan);
-    });
+      response
+        .status(200)
+        .json(plans.Items ?? plans);
+    },
+  );
 
-    router.put(
-        '/api/plans',
-        async (request, response) => {
-            await planService.updatePlan(request.body);
+  router.get(
+    '/api/plans/:arrangementId/:planId',
+    async (request, response) => {
+      const { arrangementId, planId } = request.params;
 
-            response.sendStatus(204);
-        },
-    );
+      const plan = await planService.getPlan(
+        arrangementId,
+        planId,
+      );
+
+      response.status(200).json(plan);
+    },
+  );
+
+  router.put(
+    '/api/plans',
+    async (request, response) => {
+      await planService.updatePlan(request.body);
+
+      response.sendStatus(204);
+    },
+  );
 };
 
 export default planRoutes;

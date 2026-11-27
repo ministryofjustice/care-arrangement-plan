@@ -1,4 +1,4 @@
-import { GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { GetCommand, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 
 import config from '../config';
 
@@ -39,6 +39,18 @@ export default class PlanRepository {
     );
   }
 
+  async getPlansByArrangement(arrangementId: string) {
+    return this.client.send(
+      new QueryCommand({
+        TableName: config.dynamo.tableName,
+        KeyConditionExpression: 'arrangementId = :arrangementId',
+        ExpressionAttributeValues: {
+          ':arrangementId': arrangementId,
+        },
+      }),
+    );
+  }
+
   async createPlan(plan: Plan) {
     return this.client.send(
       new PutCommand({
@@ -56,5 +68,4 @@ export default class PlanRepository {
       }),
     );
   }
-
 }

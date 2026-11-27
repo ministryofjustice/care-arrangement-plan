@@ -9,6 +9,10 @@ const getPlan = async (
   return planRepository.getPlan(arrangementId, planId);
 };
 
+const getPlansByArrangement = async (arrangementId: string) => {
+  return planRepository.getPlansByArrangement(arrangementId);
+};
+
 const createPlan = async (plan: Plan) => {
   return planRepository.createPlan(plan);
 };
@@ -19,6 +23,7 @@ const updatePlan = async (plan: Plan) => {
 
 export default {
   getPlan,
+  getPlansByArrangement,
   createPlan,
   updatePlan,
 };

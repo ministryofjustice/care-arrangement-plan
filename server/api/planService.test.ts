@@ -7,6 +7,12 @@ describe('planService', () => {
     });
   });
 
+  describe('getPlansByArrangement', () => {
+    it('should be defined', () => {
+      expect(planService.getPlansByArrangement).toBeDefined();
+    });
+  });
+
   describe('createPlan', () => {
     it('should be defined', () => {
       expect(planService.createPlan).toBeDefined();
@@ -14,8 +20,8 @@ describe('planService', () => {
   });
 
   describe('updatePlan', () => {
-        it('should be defined', () => {
-            expect(planService.updatePlan).toBeDefined();
-        });
+    it('should be defined', () => {
+      expect(planService.updatePlan).toBeDefined();
     });
+  });
 });

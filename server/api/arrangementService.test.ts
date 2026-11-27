@@ -7,6 +7,12 @@ describe('arrangementService', () => {
     });
   });
 
+  describe('getArrangementsByUserId', () => {
+    it('should be defined', () => {
+      expect(arrangementService.getArrangementsByUserId).toBeDefined();
+    });
+  });
+
   describe('createArrangement', () => {
     it('should be defined', () => {
       expect(arrangementService.createArrangement).toBeDefined();
@@ -14,8 +20,8 @@ describe('arrangementService', () => {
   });
 
   describe('updateArrangement', () => {
-        it('should be defined', () => {
-            expect(arrangementService.updateArrangement).toBeDefined();
-        });
+    it('should be defined', () => {
+      expect(arrangementService.updateArrangement).toBeDefined();
     });
+  });
 });

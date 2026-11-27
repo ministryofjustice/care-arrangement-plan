@@ -1,3 +1,5 @@
+import { QueryCommand } from '@aws-sdk/lib-dynamodb';
+
 import dynamoClient from './dynamoClient';
 import PlanRepository from './planRepository';
 
@@ -22,6 +24,14 @@ describe('PlanRepository', () => {
     await repository.getPlan('arrangement-123', 'plan-456');
 
     expect(mockedSend).toHaveBeenCalled();
+  });
+
+  it('gets plans by arrangement', async () => {
+    mockedSend.mockResolvedValueOnce({} as never);
+
+    await repository.getPlansByArrangement('arrangement-123');
+
+    expect(mockedSend).toHaveBeenCalledWith(expect.any(QueryCommand));
   });
 
   it('creates a plan', async () => {
@@ -51,28 +61,28 @@ describe('PlanRepository', () => {
   });
 
   it('updates a plan', async () => {
-        mockedSend.mockResolvedValueOnce({} as never);
+    mockedSend.mockResolvedValueOnce({} as never);
 
-        await repository.updatePlan({
-            arrangementId: 'arrangement-123',
-            planId: 'plan-456',
-            status: 'draft',
-            createdDate: '2026-11-23',
-            updatedDate: '2026-11-23',
-            ttl: 123456789,
-            numberOfChildren: 2,
-            namesOfChildren: ['Child One', 'Child Two'],
-            initialAdultName: 'Adult One',
-            secondaryAdultName: 'Adult Two',
-            livingAndVisiting: {},
-            handoverAndHolidays: {},
-            education: {},
-            childHealth: {},
-            specialDays: {},
-            otherThings: {},
-            decisionMaking: {},
-        });
-
-        expect(mockedSend).toHaveBeenCalled();
+    await repository.updatePlan({
+      arrangementId: 'arrangement-123',
+      planId: 'plan-456',
+      status: 'draft',
+      createdDate: '2026-11-23',
+      updatedDate: '2026-11-23',
+      ttl: 123456789,
+      numberOfChildren: 2,
+      namesOfChildren: ['Child One', 'Child Two'],
+      initialAdultName: 'Adult One',
+      secondaryAdultName: 'Adult Two',
+      livingAndVisiting: {},
+      handoverAndHolidays: {},
+      education: {},
+      childHealth: {},
+      specialDays: {},
+      otherThings: {},
+      decisionMaking: {},
     });
+
+    expect(mockedSend).toHaveBeenCalled();
+  });
 });

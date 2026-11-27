@@ -1,47 +1,64 @@
-import { GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import {
+  GetCommand,
+  PutCommand,
+  QueryCommand,
+} from '@aws-sdk/lib-dynamodb';
 
 import config from '../config';
 
 import dynamoClient from './dynamoClient';
 
 export interface Pdf {
-    planId: string;
-    pdfId: string;
-    s3Key: string;
-    version: number;
-    generatedDate: string;
+  planId: string;
+  pdfId: string;
+  s3Key: string;
+  version: number;
+  generatedDate: string;
 }
 
 export default class PdfRepository {
-    private readonly client = dynamoClient;
+  private readonly client = dynamoClient;
 
-    async getPdf(userId: string, pdfId: string) {
-        return this.client.send(
-            new GetCommand({
-                TableName: config.dynamo.tableName,
-                Key: {
-                    userId,
-                    pdfId,
-                },
-            }),
-        );
-    }
+  async getPdf(planId: string, pdfId: string) {
+    return this.client.send(
+      new GetCommand({
+        TableName: config.dynamo.tableName,
+        Key: {
+          planId,
+          pdfId,
+        },
+      }),
+    );
+  }
 
-    async createPdf(pdf: Pdf) {
-        return this.client.send(
-            new PutCommand({
-                TableName: config.dynamo.tableName,
-                Item: pdf,
-            }),
-        );
-    }
+  async getPdfsByPlanId(planId: string) {
+    return this.client.send(
+      new QueryCommand({
+        TableName: config.dynamo.tableName,
+        KeyConditionExpression:
+          'planId = :planId',
+        ExpressionAttributeValues: {
+          ':planId': planId,
+        },
+      }),
+    );
+  }
 
-    async updatePdf(pdf: Pdf) {
-        return this.client.send(
-            new PutCommand({
-                TableName: config.dynamo.tableName,
-                Item: pdf,
-            }),
-        );
-    }
+  async createPdf(pdf: Pdf) {
+    return this.client.send(
+      new PutCommand({
+        TableName: config.dynamo.tableName,
+        Item: pdf,
+      }),
+    );
+  }
+
+  async updatePdf(pdf: Pdf) {
+    return this.client.send(
+      new PutCommand({
+        TableName: config.dynamo.tableName,
+        Item: pdf,
+      }),
+    );
+  }
 }

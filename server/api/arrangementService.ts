@@ -2,7 +2,8 @@ import ArrangementRepository, {
   Arrangement,
 } from './arrangementRepository';
 
-const arrangementRepository = new ArrangementRepository();
+const arrangementRepository =
+  new ArrangementRepository();
 
 const getArrangement = async (
   userId: string,
@@ -30,8 +31,17 @@ const updateArrangement = async (
   );
 };
 
+const getArrangementsByUserId = async (
+  userId: string,
+) => {
+  return arrangementRepository.getArrangementsByUserId(
+    userId,
+  );
+};
+
 export default {
   getArrangement,
   createArrangement,
   updateArrangement,
+  getArrangementsByUserId,
 };
