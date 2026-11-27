@@ -241,6 +241,55 @@ describe('addHandoverAndHolidays', () => {
     expectHtmlToContain(html, '<section id="handover-holidays"', 'Medicine, favorite teddy, homework');
   });
 
+  test('includes how the children get between households for every radio option', () => {
+    Object.assign(sessionMock, {
+      numberOfChildren: 2,
+      namesOfChildren: ['Alice', 'Bob'],
+      initialAdultName: 'John',
+      secondaryAdultName: 'Ben',
+      handoverAndHolidays: {
+        getBetweenHouseholds: {
+          noDecisionRequired: false,
+          how: 'bothParents',
+        },
+        whereHandover: {
+          noDecisionRequired: true,
+        },
+        willChangeDuringSchoolHolidays: {
+          noDecisionRequired: true,
+        },
+        itemsForChangeover: {
+          noDecisionRequired: true,
+        },
+      },
+    });
+
+    const bothParentsHtml = addHandoverAndHolidays(mockRequest as Request);
+
+    expectHtmlToContain(
+      bothParentsHtml,
+      '<h1 class="section-heading-title">sharePlan.yourProposedPlan.handoverAndHolidays.sectionTitle</h1>',
+      '<h2 id="handover-holidays-heading" class="section-heading">taskList.handoverAndHolidays.title</h2>',
+      'sharePlan.yourProposedPlan.handoverAndHolidays.householdsTitle',
+      'handoverAndHolidays.getBetweenHouseholds.bothParentsCollect',
+    );
+
+    sessionMock.handoverAndHolidays.getBetweenHouseholds = {
+      noDecisionRequired: false,
+      how: 'someoneElse',
+      whoWillCollect: 'A grandparent',
+    };
+
+    const someoneElseHtml = addHandoverAndHolidays(mockRequest as Request);
+
+    expectHtmlToContain(
+      someoneElseHtml,
+      'sharePlan.yourProposedPlan.handoverAndHolidays.householdsTitle',
+      'handoverAndHolidays.getBetweenHouseholds.someoneElseCollects',
+      'A grandparent',
+    );
+  });
+
   test('renders travel answers and no end-of-section compromise box', () => {
     Object.assign(sessionMock, {
       numberOfChildren: 1,
@@ -291,7 +340,7 @@ describe('addHandoverAndHolidays', () => {
     expectHtmlToContain(
       html,
       '<h1 class="section-heading-title">sharePlan.yourProposedPlan.handoverAndHolidays.sectionTitle</h1>',
-      '<h2 class="section-heading">taskList.handoverAndHolidays.title</h2>',
+      '<h2 id="handover-holidays-heading" class="section-heading">taskList.handoverAndHolidays.title</h2>',
       'A grandparent’s house',
       'Alternate weeks in the school holidays',
       'Any medication',

@@ -89,21 +89,28 @@ const addWhichDaysDaytimeVisits = (request: Request): string => {
 };
 
 const addLivingAndVisiting = (request: Request): string => {
-  const answers = [
-    addMostlyLive(request),
-    addWhichSchedule(request),
-    addWillOvernightsHappen(request),
-    addWhichDaysOvernight(request),
-    addWillDaytimeVisitsHappen(request),
-    addWhichDaysDaytimeVisits(request),
-  ].filter((item) => item !== '');
+  const where = request.session.livingAndVisiting?.mostlyLive?.where;
+  const answers = [addMostlyLive(request)];
 
-  if (answers.length === 0) {
+  if (where === 'split') {
+    answers.push(addWhichSchedule(request));
+  } else if (where === 'withInitial' || where === 'withSecondary') {
+    answers.push(
+      addWillOvernightsHappen(request),
+      addWhichDaysOvernight(request),
+      addWillDaytimeVisitsHappen(request),
+      addWhichDaysDaytimeVisits(request),
+    );
+  }
+
+  const renderedAnswers = answers.filter((item) => item !== '');
+
+  if (renderedAnswers.length === 0) {
     return '';
   }
 
   let html = '<section id="living-visiting" aria-labelledby="living-visiting-heading">\n';
-  html += answers.join('\n');
+  html += renderedAnswers.join('\n');
   html += '</section>\n\n';
 
   return html;

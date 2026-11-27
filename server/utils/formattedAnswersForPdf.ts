@@ -112,9 +112,18 @@ export const whichDaysDaytimeVisits = (request: Request) => {
 
 export const getBetweenHouseholds = (request: Request) => {
   const { handoverAndHolidays, initialAdultName, secondaryAdultName } = request.session;
+  if (!handoverAndHolidays?.getBetweenHouseholds) return undefined;
   if (handoverAndHolidays.getBetweenHouseholds.noDecisionRequired) {
     return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
+
+  const children = childrenReference(request);
+  const suggested = (suggestion: string) =>
+    request.__('sharePlan.yourProposedPlan.senderSuggested', {
+      senderName: initialAdultName,
+      suggestion,
+    });
+
   switch (handoverAndHolidays.getBetweenHouseholds.how) {
     case 'parent':
       return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
@@ -126,11 +135,15 @@ export const getBetweenHouseholds = (request: Request) => {
         senderName: initialAdultName,
         adult: secondaryAdultName,
       });
+    case 'bothParents':
+      return suggested(request.__('handoverAndHolidays.getBetweenHouseholds.bothParentsCollect', { children }));
+    case 'someoneElse': {
+      const collects = request.__('handoverAndHolidays.getBetweenHouseholds.someoneElseCollects', { children });
+      const whoWillCollect = handoverAndHolidays.getBetweenHouseholds.whoWillCollect;
+      return suggested(whoWillCollect ? `${collects}: ${whoWillCollect}` : collects);
+    }
     case 'anotherArrangement':
-      return request.__('sharePlan.yourProposedPlan.senderSuggested', {
-        senderName: initialAdultName,
-        suggestion: handoverAndHolidays.getBetweenHouseholds.describeArrangement,
-      });
+      return suggested(handoverAndHolidays.getBetweenHouseholds.describeArrangement);
     default:
       return undefined;
   }

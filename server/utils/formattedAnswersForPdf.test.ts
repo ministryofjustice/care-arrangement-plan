@@ -375,6 +375,38 @@ describe('formattedAnswers', () => {
       ],
       [
         {
+          getBetweenHouseholds: { noDecisionRequired: false, how: 'bothParents' as getBetweenHouseholdsField },
+          whereHandover: { noDecisionRequired: true },
+          willChangeDuringSchoolHolidays: { noDecisionRequired: true },
+          itemsForChangeover: { noDecisionRequired: true },
+        },
+        {
+          getBetweenHouseholds: `${session.initialAdultName} suggested:\n"Both parents take turns collecting the children"`,
+          whereHandover: `${session.initialAdultName} suggested that this does not need to be decided.`,
+          willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that this does not need to be decided.`,
+          itemsForChangeover: `${session.initialAdultName} suggested that this does not need to be decided.`,
+        },
+      ],
+      [
+        {
+          getBetweenHouseholds: {
+            noDecisionRequired: false,
+            how: 'someoneElse' as getBetweenHouseholdsField,
+            whoWillCollect: 'Grandmother',
+          },
+          whereHandover: { noDecisionRequired: true },
+          willChangeDuringSchoolHolidays: { noDecisionRequired: true },
+          itemsForChangeover: { noDecisionRequired: true },
+        },
+        {
+          getBetweenHouseholds: `${session.initialAdultName} suggested:\n"Someone else collects the children: Grandmother"`,
+          whereHandover: `${session.initialAdultName} suggested that this does not need to be decided.`,
+          willChangeDuringSchoolHolidays: `${session.initialAdultName} suggested that this does not need to be decided.`,
+          itemsForChangeover: `${session.initialAdultName} suggested that this does not need to be decided.`,
+        },
+      ],
+      [
+        {
           getBetweenHouseholds: { noDecisionRequired: false, how: 'otherParent' as getBetweenHouseholdsField },
           whereHandover: { noDecisionRequired: false, where: ['secondaryHome'] as whereHandoverField[] },
           willChangeDuringSchoolHolidays: { noDecisionRequired: false, willChange: true },
