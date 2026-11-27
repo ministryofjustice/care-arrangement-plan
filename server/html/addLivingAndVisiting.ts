@@ -10,7 +10,7 @@ import {
 } from '../utils/formattedAnswersForPdf';
 import { parentNotMostlyLivedWith } from '../utils/sessionHelpers';
 
-import addAnswer, { renderTextBox } from './addAnswer';
+import addAnswer from './addAnswer';
 
 const addMostlyLive = (request: Request): string => {
   return addAnswer(

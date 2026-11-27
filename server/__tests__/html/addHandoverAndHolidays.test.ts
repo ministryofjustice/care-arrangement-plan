@@ -241,7 +241,7 @@ describe('addHandoverAndHolidays', () => {
     expectHtmlToContain(html, '<section id="handover-holidays"', 'Medicine, favorite teddy, homework');
   });
 
-  test('includes textbox for compromise notes at end of section', () => {
+  test('renders travel answers and no end-of-section compromise box', () => {
     Object.assign(sessionMock, {
       numberOfChildren: 1,
       namesOfChildren: ['Child'],
@@ -250,16 +250,38 @@ describe('addHandoverAndHolidays', () => {
       handoverAndHolidays: {
         getBetweenHouseholds: {
           noDecisionRequired: false,
-          how: 'walk',
+          how: 'parent',
         },
         whereHandover: {
-          noDecisionRequired: true,
+          noDecisionRequired: false,
+          where: ['school', 'other'],
+          other: 'A grandparent’s house',
         },
         willChangeDuringSchoolHolidays: {
-          noDecisionRequired: true,
+          noDecisionRequired: false,
+          willChange: true,
+        },
+        howChangeDuringSchoolHolidays: {
+          noDecisionRequired: false,
+          answer: 'Alternate weeks in the school holidays',
         },
         itemsForChangeover: {
-          noDecisionRequired: true,
+          noDecisionRequired: false,
+          options: ['clothesAndShoes', 'otherItems'],
+          describeArrangement: 'Any medication',
+        },
+        travelAbroad: {
+          noDecisionRequired: false,
+          options: ['fourWeeks'],
+        },
+        travelDocuments: {
+          noDecisionRequired: false,
+          options: ['bothParents'],
+        },
+        travelInformation: {
+          noDecisionRequired: false,
+          options: ['dates', 'contact', 'other'],
+          describeArrangement: 'Flight numbers',
         },
       },
     });
@@ -268,9 +290,20 @@ describe('addHandoverAndHolidays', () => {
 
     expectHtmlToContain(
       html,
-      'sharePlan.yourProposedPlan.endOfSection',
-      'sharePlan.yourProposedPlan.compromise.handoverAndHolidays'
+      '<h1 class="section-heading-title">sharePlan.yourProposedPlan.handoverAndHolidays.sectionTitle</h1>',
+      '<h2 class="section-heading">taskList.handoverAndHolidays.title</h2>',
+      'A grandparent’s house',
+      'Alternate weeks in the school holidays',
+      'Any medication',
+      'handoverAndHolidays.travelAbroad.fourWeeks',
+      'handoverAndHolidays.travelDocuments.bothParents',
+      'handoverAndHolidays.travelInformation.travelInformation',
+      'handoverAndHolidays.travelInformation.emergencyContact',
+      'Flight numbers',
+      'sharePlan.yourProposedPlan.handoverAndHolidays.consentToTravel.title',
     );
+    expect(html).not.toContain('sharePlan.yourProposedPlan.endOfSection');
+    expect(html).not.toContain('sharePlan.yourProposedPlan.compromise.handoverAndHolidays');
   });
 
 });

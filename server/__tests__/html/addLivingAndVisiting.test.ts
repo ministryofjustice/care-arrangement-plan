@@ -157,7 +157,7 @@ describe('addLivingAndVisiting', () => {
     expectHtmlToContain(html, '<section id="living-visiting"');
   });
 
-  test('includes textbox for compromise notes at end of section', () => {
+  test('renders the section title without an end-of-section compromise box', () => {
     Object.assign(sessionMock, {
       numberOfChildren: 1,
       namesOfChildren: ['James'],
@@ -175,9 +175,11 @@ describe('addLivingAndVisiting', () => {
 
     expectHtmlToContain(
       html,
-      'sharePlan.yourProposedPlan.endOfSection',
-      'sharePlan.yourProposedPlan.compromise.livingAndVisiting'
+      '<h1 class="section-heading-title">sharePlan.yourProposedPlan.livingAndVisiting.sectionTitle</h1>',
+      '<h2 class="section-heading">taskList.livingAndVisiting</h2>',
     );
+    expect(html).not.toContain('sharePlan.yourProposedPlan.endOfSection');
+    expect(html).not.toContain('sharePlan.yourProposedPlan.compromise.livingAndVisiting');
   });
 
   test('handles multiple children names correctly', () => {

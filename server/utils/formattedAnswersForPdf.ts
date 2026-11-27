@@ -345,7 +345,7 @@ export const planLastMinuteChanges = (request: Request) => {
       suggestion: decisionMaking.planLastMinuteChanges.anotherArrangementDescription,
     });
   }
-  return request.__('sharePlan.yourProposedPlan.decisionMaking.planLastMinuteChanges.howChangesCommunicated', {
+  return request.__('sharePlan.decisionMaking.planLastMinuteChanges.howChangesCommunicated', {
     senderName: initialAdultName,
     methods: formatPlanChangesOptionsIntoList(request),
   });
@@ -362,7 +362,7 @@ export const planLongTermNotice = (request: Request) => {
       suggestion: decisionMaking.planLongTermNotice.otherAnswer,
     });
   }
-  return request.__('sharePlan.yourProposedPlan.decisionMaking.planLongTermNotice.howChangesCommunicated', {
+  return request.__('sharePlan.decisionMaking.planLongTermNotice.howChangesCommunicated', {
     senderName: initialAdultName,
     numberOfWeeks: decisionMaking.planLongTermNotice.weeks.toString(),
   });
@@ -375,10 +375,10 @@ export const planReview = (request: Request) => {
 
   if (decisionMaking.planReview.months) {
     number = decisionMaking.planReview.months;
-    translationName = 'sharePlan.yourProposedPlan.decisionMaking.planReview.suggestedMonths';
+    translationName = 'sharePlan.decisionMaking.planReview.suggestedMonths';
   } else {
     number = decisionMaking.planReview.years;
-    translationName = 'sharePlan.yourProposedPlan.decisionMaking.planReview.suggestedYears';
+    translationName = 'sharePlan.decisionMaking.planReview.suggestedYears';
   }
 
   const translationSuffix = number === 1 ? 'Singular' : 'Plural';

@@ -29,7 +29,8 @@ const devSeedData: Partial<CAPSession> = {
     },
     whereHandover: {
       noDecisionRequired: false,
-      where: ['school'],
+      where: ['neutral', 'initialHome', 'secondaryHome', 'school', 'other'],
+      other: 'A grandparent’s house',
     },
     willChangeDuringSchoolHolidays: {
       noDecisionRequired: false,
@@ -41,8 +42,33 @@ const devSeedData: Partial<CAPSession> = {
     },
     itemsForChangeover: {
       noDecisionRequired: false,
-      options: ['schoolItems', 'sports', 'otherItems'],
+      options: ['clothesAndShoes', 'schoolItems', 'toiletries', 'sports', 'toys', 'electronicDevices', 'otherItems'],
       describeArrangement: 'Any medication',
+    },
+    travelAbroad: {
+      noDecisionRequired: false,
+      options: ['fourWeeks'],
+    },
+    travelDocuments: {
+      noDecisionRequired: false,
+      options: ['bothParents'],
+    },
+    travelInformation: {
+      noDecisionRequired: false,
+      options: ['dates', 'group', 'address', 'contact', 'passport', 'other'],
+      describeArrangement: 'Flight numbers',
+    },
+  },
+  education: {
+    shareInformation: { noDecisionRequired: false, options: ['bothParents'] },
+    routineDecisions: { noDecisionRequired: false, options: ['parent'] },
+    schoolMeetings: { noDecisionRequired: false, options: ['bothParents'] },
+  },
+  childHealth: {
+    routineDecisions: { noDecisionRequired: false, options: ['bothParents'] },
+    childHealthNeeds: {
+      noDecisionRequired: false,
+      description: 'Regular check-ups and an inhaler when needed',
     },
   },
   specialDays: {

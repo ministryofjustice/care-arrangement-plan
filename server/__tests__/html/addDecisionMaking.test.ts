@@ -48,6 +48,11 @@ describe('addDecisionMaking', () => {
       html,
       '<section id="decision-making"',
       'aria-labelledby="decision-making-heading"',
+      '<h1 class="section-heading-title">sharePlan.decisionMaking.sectionTitle</h1>',
+      '<h2 class="section-heading">sharePlan.decisionMaking.title</h2>',
+      'sharePlan.decisionMaking.planLastMinuteChanges.title',
+      'sharePlan.decisionMaking.planLongTermNotice.title',
+      'sharePlan.decisionMaking.planReview.title',
       '</section>'
     );
   });
@@ -219,7 +224,7 @@ describe('addDecisionMaking', () => {
     expectHtmlToContain(html, '<section id="decision-making"');
   });
 
-  test('includes textbox for compromise notes at end of section', () => {
+  test('does not include an end-of-section compromise box', () => {
     Object.assign(sessionMock, {
       numberOfChildren: 1,
       namesOfChildren: ['Child'],
@@ -241,11 +246,8 @@ describe('addDecisionMaking', () => {
 
     const html = addDecisionMaking(mockRequest as Request);
 
-    expectHtmlToContain(
-      html,
-      'sharePlan.yourProposedPlan.endOfSection',
-      'sharePlan.yourProposedPlan.compromise.decisionMaking'
-    );
+    expect(html).not.toContain('sharePlan.yourProposedPlan.endOfSection');
+    expect(html).not.toContain('sharePlan.yourProposedPlan.compromise.decisionMaking');
   });
 
   test('handles various review periods correctly', () => {

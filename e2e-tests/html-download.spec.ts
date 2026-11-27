@@ -128,7 +128,7 @@ test.describe('HTML Download Functionality', () => {
     expect(htmlContent).toContain('href="https://www.smartsurvey.co.uk/s/EFO5FJ/"');
   });
 
-  test('should include education, health, travel, and section compromise notes in the downloaded HTML', async ({
+  test('should include education, health, travel, special days, other things, and decision making', async ({
     page,
   }) => {
     await completeMinimalJourney(page);
@@ -148,14 +148,15 @@ test.describe('HTML Download Functionality', () => {
     expect(htmlContent).toContain('At least 4 weeks');
     expect(htmlContent).toContain('Clothes and shoes');
     expect(htmlContent).toContain('We will alternate holidays');
-    expect(htmlContent).toContain('End of section');
-    expect(htmlContent).toContain(
-      'You can use this space to write your agreed answer for the living and visiting section',
-    );
-    expect(htmlContent).toContain(
-      'You can use this space to write your agreed answer for the handovers and holidays section',
-    );
-    expect(htmlContent).toContain('You can use this space to write your agreed answer for the decision making section');
+    expect(htmlContent).toContain('<h1 class="section-heading-title">Section 6</h1>');
+    expect(htmlContent).toContain('We will share birthdays and holidays equally');
+    expect(htmlContent).toContain('<h1 class="section-heading-title">Section 7</h1>');
+    expect(htmlContent).toContain('Regular communication about the children');
+    expect(htmlContent).toContain('<h1 class="section-heading-title">Section 8</h1>');
+    expect(htmlContent).toContain('with a phone call');
+    expect(htmlContent).toContain('2 weeks&#039; notice');
+    expect(htmlContent).toContain('6 months&#039; time');
+    expect(htmlContent).not.toContain('End of section');
   });
 
   // TODO: HTML download does not yet redirect to the confirmation page.

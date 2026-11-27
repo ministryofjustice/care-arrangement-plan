@@ -393,6 +393,15 @@
       box-shadow: inset 0 0 0 2px;
     }
 
+    .section-heading-title {
+      font-weight: normal;
+      margin-bottom: 0;
+    }
+
+    .section-heading {
+      margin-top: 0;
+    }
+
     @media (max-width: 640px) {
       .signature-fields {
         grid-template-columns: 1fr;
@@ -730,7 +739,8 @@ depending on where you live and whether it&#39;s urgent)</li>
 
     <!-- About The Proposal -->
     <section id="about-proposal" aria-labelledby="about-proposal-heading">
-      <h2 id="about-proposal-heading">About this child arrangements proposal</h2>
+      <h1 class="section-heading-title">Section 1</h1>
+      <h2 class="section-heading">About this child arrangements proposal</h2>
 
       <p>Bob said:</p>
       <ul>
@@ -742,6 +752,8 @@ depending on where you live and whether it&#39;s urgent)</li>
         </li>
         <li>this agreement is between Bob and Sam, who are the adults who will care for James, Rachel and Jack</li>
       </ul>
+
+      <p>We do not store these names or share any of this information with other government departments.</p>
 
       <div class="do-you-agree">
         <div class="govuk-form-group">
@@ -767,21 +779,14 @@ depending on where you live and whether it&#39;s urgent)</li>
         </div>
       </div>
 
-      <div class="text-box">
-        <p>We do not store these names or share any of this information with other government departments.</p>
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="notes-about-proposal">
-            If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to <a href="https://www.gov.uk/looking-after-children-divorce">https://www.gov.uk/looking-after-children-divorce</a>.
-          </label>
-          <textarea class="govuk-textarea user-input-area" id="notes-about-proposal" name="notes-about-proposal" rows="5"></textarea>
-        </div>
-      </div>
+      <p>If you answered ‘No’, it may be helpful to find a mediator who can help you agree your child arrangements. You can get financial help with this. To find out more, go to <a href="https://www.gov.uk/looking-after-children-divorce">https://www.gov.uk/looking-after-children-divorce</a>.</p>
     </section>
 
     <!-- Answers rendered inline -->
     <section id="living-visiting" aria-labelledby="living-visiting-heading">
 <div class="answer-section">
-  <h2>Living and visiting</h2>
+  <h1 class="section-heading-title">Section 2</h1>
+  <h2 class="section-heading">Living and visiting</h2>
   <h3 class="question">Where will the children spend most of their time?</h3>
   <p class="answer">Bob suggested:
 &quot;livingAndVisitingArrangement&quot;</p>
@@ -817,21 +822,12 @@ depending on where you live and whether it&#39;s urgent)</li>
     </div>
   </div>
 </div>
-<div class="text-box">
-  <h4>End of section</h4>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="textbox-1">
-      You can use this space to write your agreed answer for the living and visiting section
-    </label>
-    <textarea class="govuk-textarea user-input-area" id="textbox-1" name="textbox-1" rows="5"></textarea>
-  </div>
-</div>
 </section>
 
 <section id="handover-holidays" aria-labelledby="handover-holidays-heading">
 <div class="answer-section">
-  <h2 class="govuk-!-font-weight-regular">Section 3</h2>
-  <h2>Handovers and holidays</h2>
+  <h1 class="section-heading-title">Section 3</h1>
+  <h2 class="section-heading">Handovers and holidays</h2>
   <h3 class="question">How will the children get between households?</h3>
   <p class="answer">Bob suggested that this does not need to be decided.</p>
   <div class="do-you-agree">
@@ -984,24 +980,16 @@ Having permission in writing provides a record that consent has been given and c
 A reminder about getting permission before taking the children abroad will be included in your child arrangements plan.
 If you&#039;re concerned your child could be taken abroad, find out what to do if you believe a child could be taken or has been taken abroad without your permission.</p>
 </div>
-<div class="text-box">
-  <h4>End of section</h4>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="textbox-2">
-      You can use this space to write your agreed answer for the handovers and holidays section
-    </label>
-    <textarea class="govuk-textarea user-input-area" id="textbox-2" name="textbox-2" rows="5"></textarea>
-  </div>
-</div>
 </section>
 
-<section id="special-days" aria-labelledby="special-days-heading">
+<section id="education" aria-labelledby="education-heading">
 <div class="answer-section">
-  <h2>Special days</h2>
-  <h3 class="question">What will happen on special days?</h3>
-  <p class="hint">Keep your children&#039;s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother&#039;s Day and Father&#039;s Day, and birthdays.</p>
+  <h1 class="section-heading-title">Section 4</h1>
+  <h2 class="section-heading">Education</h2>
+  <h3 class="question">How should information from the school be shared?</h3>
+  <p class="hint">For example, school emails, reports and emergency communications</p>
   <p class="answer">Bob suggested:
-&quot;whatWillHappenAnswer&quot;</p>
+&quot;Both parents will receive information&quot;</p>
   <div class="do-you-agree">
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset">
@@ -1028,53 +1016,56 @@ If you&#039;re concerned your child could be taken abroad, find out what to do i
   <div class="text-box">
     <div class="govuk-form-group">
       <label class="govuk-label" for="notes-7">
-        If you do not agree, suggest what will happen on special days
+        If you do not agree, suggest how information from the school should be shared
       </label>
       <textarea class="govuk-textarea user-input-area" id="notes-7" name="notes-7" rows="5"></textarea>
     </div>
   </div>
 </div>
-</section>
 
-<section id="other-things" aria-labelledby="other-things-heading">
 <div class="answer-section">
-  <h2>Other things</h2>
-  <h3>What other things matter to your children?</h3>
-  <p>You may want to agree things such as:</p>
-  <ul>
-    <li>religious practices, diet, and standard rules across both households</li>
-    <li>extra-curricular activities, such as swimming lessons</li>
-    <li>access to other friends and family</li>
-    <li>other types of contact, such as video calls</li>
-  </ul>
+  <h3 class="question">How will routine decisions about education be made?</h3>
+  <p class="hint">For example, day-to-day decisions like homework, school trips and uniform.</p>
   <p class="answer">Bob suggested:
-&quot;whatOtherThingsMatterAnswer&quot;</p>
+&quot;You will decide&quot;</p>
   <div class="do-you-agree">
-    <p>Do you agree?</p>
-    <div class="do-you-agree-options">
-      <label>
-        <input type="radio" name="question-8" value="yes">
-        <span>Yes</span>
-      </label>
-      <label>
-        <input type="radio" name="question-8" value="no">
-        <span>No</span>
-      </label>
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-8-yes" name="question-8" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-8-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-8-no" name="question-8" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-8-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
     </div>
   </div>
   <div class="text-box">
-    <p>If you do not agree, suggest what other things matter to your children</p>
-    <textarea class="user-input-area" id="notes-8" aria-label="If you do not agree, suggest what other things matter to your children"></textarea>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-8">
+        If you do not agree, suggest how routine decisions about education should be made
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-8" name="notes-8" rows="5"></textarea>
+    </div>
   </div>
 </div>
-</section>
 
-<section id="decision-making" aria-labelledby="decision-making-heading">
 <div class="answer-section">
-  <h2>Decision making</h2>
-  <h3 class="question">How should last-minute changes be communicated?</h3>
-  <p class="hint">There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.</p>
-  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <h3 class="question">Who will attend school meetings and activities?</h3>
+  <p class="hint">For example, parents&#039; evenings, school meetings, school trips and extracurricular activities.</p>
+  <p class="answer">Bob suggested:
+&quot;A grandparent attends parents evening&quot;</p>
   <div class="do-you-agree">
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset">
@@ -1101,17 +1092,22 @@ If you&#039;re concerned your child could be taken abroad, find out what to do i
   <div class="text-box">
     <div class="govuk-form-group">
       <label class="govuk-label" for="notes-9">
-        If you do not agree, suggest how last minute changes should be communicated
+        If you do not agree, suggest who will attend school meetings and activities
       </label>
       <textarea class="govuk-textarea user-input-area" id="notes-9" name="notes-9" rows="5"></textarea>
     </div>
   </div>
 </div>
+</section>
 
+<section id="child-health" aria-labelledby="child-health-heading">
 <div class="answer-section">
-  <h3 class="question">How much notice should you give to change long-term arrangements?</h3>
-  <p class="hint">Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.</p>
-  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <h1 class="section-heading-title">Section 5</h1>
+  <h2 class="section-heading">Health</h2>
+  <h3 class="question">How will routine decisions about the children&#039;s health be made?</h3>
+  <p class="hint">For example, booking routine check-ups, picking up prescriptions or managing minor illnesses.</p>
+  <p class="answer">Bob suggested:
+&quot;The other parent will decide&quot;</p>
   <div class="do-you-agree">
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset">
@@ -1138,7 +1134,7 @@ If you&#039;re concerned your child could be taken abroad, find out what to do i
   <div class="text-box">
     <div class="govuk-form-group">
       <label class="govuk-label" for="notes-10">
-        If you do not agree, suggest how much notice you should give each other
+        If you do not agree, suggest how routine decisions about the children&#039;s health should be made
       </label>
       <textarea class="govuk-textarea user-input-area" id="notes-10" name="notes-10" rows="5"></textarea>
     </div>
@@ -1146,9 +1142,10 @@ If you&#039;re concerned your child could be taken abroad, find out what to do i
 </div>
 
 <div class="answer-section">
-  <h3 class="question">When would you like to review this plan?</h3>
-  <p class="hint">Children&#039;s needs change as they grow. When should you review this agreement to check it is still what&#039;s best for the children?</p>
-  <p class="answer">Bob suggested that you should review this arrangement in 1 month&#039;s time.</p>
+  <h3 class="question">What health needs should parents be aware of?</h3>
+  <p class="hint">For example, health routines, medical conditions, medications, appointments and specialist support.</p>
+  <p class="answer">Bob suggested:
+&quot;Inhaler every morning&quot;</p>
   <div class="do-you-agree">
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset">
@@ -1175,26 +1172,208 @@ If you&#039;re concerned your child could be taken abroad, find out what to do i
   <div class="text-box">
     <div class="govuk-form-group">
       <label class="govuk-label" for="notes-11">
-        If you do not agree, suggest when you should review this agreement
+        If you do not agree, suggest what health needs parents should be aware of
       </label>
       <textarea class="govuk-textarea user-input-area" id="notes-11" name="notes-11" rows="5"></textarea>
     </div>
   </div>
 </div>
-<div class="text-box">
-  <h4>End of section</h4>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="textbox-3">
-      You can use this space to write your agreed answer for the decision making section
-    </label>
-    <textarea class="govuk-textarea user-input-area" id="textbox-3" name="textbox-3" rows="5"></textarea>
+</section>
+
+<section id="special-days" aria-labelledby="special-days-heading">
+<div class="answer-section">
+  <h1 class="section-heading-title">Section 6</h1>
+  <h2 class="section-heading">Special days</h2>
+  <h3 class="question">What will happen on special days?</h3>
+  <p class="hint">Keep your children&#039;s feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother&#039;s Day and Father&#039;s Day, and birthdays.</p>
+  <p class="answer">Bob suggested:
+&quot;whatWillHappenAnswer&quot;</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-12-yes" name="question-12" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-12-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-12-no" name="question-12" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-12-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-12">
+        If you do not agree, suggest what will happen on special days
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-12" name="notes-12" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="other-things" aria-labelledby="other-things-heading">
+<div class="answer-section">
+  <h1 class="section-heading-title">Section 7</h1>
+  <h2 class="section-heading">Other things</h2>
+  <h3>What other things matter to your children?</h3>
+  <p>You may want to agree things such as:</p>
+  <ul>
+    <li>religious practices, diet, and standard rules across both households</li>
+    <li>extra-curricular activities, such as swimming lessons</li>
+    <li>access to other friends and family</li>
+    <li>other types of contact, such as video calls</li>
+  </ul>
+  <p class="answer">Bob suggested:
+&quot;whatOtherThingsMatterAnswer&quot;</p>
+  <div class="do-you-agree">
+    <p>Do you agree?</p>
+    <div class="do-you-agree-options">
+      <label>
+        <input type="radio" name="question-13" value="yes">
+        <span>Yes</span>
+      </label>
+      <label>
+        <input type="radio" name="question-13" value="no">
+        <span>No</span>
+      </label>
+    </div>
+  </div>
+  <div class="text-box">
+    <p>If you do not agree, suggest what other things matter to your children</p>
+    <textarea class="user-input-area" id="notes-13" aria-label="If you do not agree, suggest what other things matter to your children"></textarea>
+  </div>
+</div>
+</section>
+
+<section id="decision-making" aria-labelledby="decision-making-heading">
+<div class="answer-section">
+  <h1 class="section-heading-title">Section 8</h1>
+  <h2 class="section-heading">Decision making</h2>
+  <h3 class="question">How should last-minute changes be communicated?</h3>
+  <p class="hint">There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.</p>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-14-yes" name="question-14" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-14-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-14-no" name="question-14" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-14-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-14">
+        If you do not agree, suggest how last minute changes should be communicated
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-14" name="notes-14" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">How much notice should you give to change long-term arrangements?</h3>
+  <p class="hint">Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.</p>
+  <p class="answer">Bob suggested that this does not need to be decided.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-15-yes" name="question-15" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-15-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-15-no" name="question-15" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-15-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-15">
+        If you do not agree, suggest how much notice you should give each other
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-15" name="notes-15" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="answer-section">
+  <h3 class="question">When would you like to review this plan?</h3>
+  <p class="hint">Children&#039;s needs change as they grow. When should you review this agreement to check it is still what&#039;s best for the children?</p>
+  <p class="answer">Bob suggested that you should review this arrangement in 1 month&#039;s time.</p>
+  <div class="do-you-agree">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Do you agree?
+        </legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-16-yes" name="question-16" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="question-16-yes">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="question-16-no" name="question-16" type="checkbox" value="no">
+            <label class="govuk-label govuk-checkboxes__label" for="question-16-no">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="text-box">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="notes-16">
+        If you do not agree, suggest when you should review this agreement
+      </label>
+      <textarea class="govuk-textarea user-input-area" id="notes-16" name="notes-16" rows="5"></textarea>
+    </div>
   </div>
 </div>
 </section>
 
 <section id="what-happens-now" aria-labelledby="what-happens-now-heading">
-  <h2 class="section-number">Section 9</h2>
-  <h2 id="what-happens-now-heading">End of form</h2>
+  <h1 class="section-heading-title">Section 9</h1>
+  <h2 id="what-happens-now-heading" class="section-heading">End of form</h2>
   <p><strong>Is there anything else you would like to suggest for the child arrangements plan?</strong></p>
   <div class="text-box">
     <div class="govuk-form-group">

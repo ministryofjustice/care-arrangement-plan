@@ -394,14 +394,12 @@
     }
 
     .section-heading-title {
-      font-size: 48px;
-      font-weight: regular;
+      font-weight: normal;
       margin-bottom: 0;
     }
 
     .section-heading {
-      font-size: 36px;
-      font-weight: bold;
+      margin-top: 0;
     }
 
     @media (max-width: 640px) {
@@ -632,8 +630,8 @@
 
     <!-- About The Proposal -->
     <section id="about-proposal" aria-labelledby="about-proposal-heading">
-      <p class="section-heading-title">{{ __('sharePlan.yourProposedPlan.sectionTitle') }}</p>
-      <p class="section-heading">{{ __('sharePlan.yourProposedPlan.aboutThePlan') }}</p>
+      <h1 class="section-heading-title">{{ __('sharePlan.yourProposedPlan.sectionTitle') }}</h1>
+      <h2 class="section-heading">{{ __('sharePlan.yourProposedPlan.aboutThePlan') }}</h2>
 
       <p>{{ __('sharePlan.yourProposedPlan.senderSaid', {senderName: values.initialAdultName}) }}</p>
       <ul>

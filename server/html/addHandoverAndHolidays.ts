@@ -11,7 +11,7 @@ import {
   willChangeDuringSchoolHolidays,
 } from '../utils/formattedAnswersForPdf';
 
-import addAnswer, { renderTextBox } from './addAnswer';
+import addAnswer from './addAnswer';
 
 const addGetBetweenHouseholds = (request: Request): string => {
   return addAnswer(

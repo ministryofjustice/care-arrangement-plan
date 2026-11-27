@@ -5,7 +5,6 @@ import { yesOrNo } from '../@types/fields';
 import formFields from '../constants/formFields';
 import FORM_STEPS from '../constants/formSteps';
 import paths from '../constants/paths';
-import devSeedData from '../dev/seedData';
 import checkFormProgressFromConfig from '../middleware/checkFormProgressFromConfig';
 import addCompletedStep from '../utils/addCompletedStep';
 
@@ -14,11 +13,10 @@ const safetyCheckRoutes = (router: Router) => {
     paths.CHILDREN_SAFETY_CHECK,
     checkFormProgressFromConfig(FORM_STEPS.CHILDREN_SAFETY_CHECK),
     (request, response) => {
-      Object.assign(request.session, devSeedData, { planStartTime: Date.now() });
-      request.session.completedSteps = Object.values(FORM_STEPS);
-      request.session.pageHistory = [paths.START];
-
-      return response.redirect(paths.DOWNLOAD_HTML);
+      response.render('pages/childrenSafetyCheck', {
+        errors: request.flash('errors'),
+        title: request.__('childrenSafetyCheck.title'),
+      });
     },
   );
 

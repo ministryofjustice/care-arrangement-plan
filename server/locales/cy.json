@@ -1123,6 +1123,48 @@
       "toAskForHelp": "I ofyn am gymorth wrth ddefnyddio'r gwasanaeth hwn, neu i awgrymu gwelliannau, gallwch anfon e-bost at feedback@propose-child-arrangements-plan.service.gov.uk.",
       "weCannot": "Ni allwn ateb unrhyw gwestiynau am gynlluniau trefniadau plant sydd eisoes wedi'u creu."
     },
+    "specialDays": {
+      "sectionTitle": "Section 6",
+      "title": "Dyddiau arbennig",
+      "whatWillHappen": {
+        "title": "Beth fydd yn digwydd ar ddyddiau arbennig?",
+        "content": "Cadwch deimladau eich plant wrth wraidd eich cynlluniau ar gyfer gwyliau a digwyddiadau pwysig. Er enghraifft, dathliadau'r Flwyddyn Newydd, Sul y Mamau a Sul y Tadau, a phen-blwyddi."
+      }
+    },
+    "otherThings": {
+      "sectionTitle": "Section 7",
+      "title": "Pethau eraill",
+      "whatOtherThingsMatter": {
+        "title": "Pa bethau eraill sy'n bwysig i'ch plant?",
+        "thingsToAgree": "Efallai yr hoffech chi gytuno ar bethau fel:",
+        "religionDietAndRules": "arferion crefyddol, diet, a rheolau safonol ar draws y ddau gartref",
+        "extraCurriculars": "gweithgareddau allgyrsiol, fel gwersi nofio",
+        "friendsAndFamily": "mynediad at ffrindiau a theulu eraill",
+        "otherContact": "mathau eraill o gyswllt, fel galwadau fideo"
+      }
+    },
+    "decisionMaking": {
+      "sectionTitle": "Section 8",
+      "title": "Gwneud penderfyniadau",
+      "planLastMinuteChanges": {
+        "title": "Sut dylid cyfathrebu newidiadau munud olaf?",
+        "intro": "Bydd adegau pan fydd angen newid cynlluniau, fel os bydd un rhiant yn sâl yn ddi-rybudd ac yn methu casglu plentyn o'r ysgol.",
+        "howChangesCommunicated": "Awgrymodd {{{ senderName }}} y dylai newidiadau munud olaf gael eu cyfathrebu drwy {{ methods }}."
+      },
+      "planLongTermNotice": {
+        "title": "Faint o rybudd dylech roi i newid trefniadau hirdymor?",
+        "intro": "Weithiau efallai y bydd angen i chi gynllunio ymhell ymlaen llaw. Er enghraifft, os ydych chi eisiau cynllunio gwyliau yn ystod amser nad ydych chi fel arfer yn ei dreulio gyda'r plant.",
+        "howChangesCommunicated": "Awgrymodd {{{ senderName }}} y dylech chi'ch dau roi {{ numberOfWeeks }} o rybudd i'ch gilydd ar gyfer newid trefniadau hirdymor."
+      },
+      "planReview": {
+        "title": "Pryd hoffech chi adolygu'r cynllun hwn?",
+        "intro": "Mae anghenion plant yn newid wrth iddynt dyfu. Pryd dylech chi adolygu'r cytundeb hwn i wirio ei fod yn dal i fod yr hyn sydd orau i'r plant?",
+        "suggestedMonthsSingular": "Awgrymodd {{{ senderName }}} y dylech adolygu'r trefniadau hyn ymhen 1 mis.",
+        "suggestedYearsSingular": "Awgrymodd  {{{ senderName }}} y dylech adolygu'r trefniadau hyn ymhen blwyddyn.",
+        "suggestedMonthsPlural": "Awgrymodd {{{ senderName }}} y dylech adolygu'r trefniadau hyn ymhen {{ number }} mis/fis.",
+        "suggestedYearsPlural": "Awgrymodd {{{ senderName }}} y dylech adolygu'r trefniadau hyn ymhen {{ number }} flynedd/blynedd/mlynedd."
+      }
+    },
     "yourProposedPlan": {
       "sectionTitle": "Section 1",
       "aboutThePlan": "Ynglŷn â'r cynnig trefniadau plant hyn",
@@ -1188,20 +1230,6 @@
         },
         "travelInformation": {
           "title": "What other information should be shared before travelling abroad?"
-        }
-      },
-      "decisionMaking": {
-        "planLastMinuteChanges": {
-          "howChangesCommunicated": "Awgrymodd {{{ senderName }}} y dylai newidiadau munud olaf gael eu cyfathrebu drwy {{ methods }}."
-        },
-        "planLongTermNotice": {
-          "howChangesCommunicated": "Awgrymodd {{{ senderName }}} y dylech chi'ch dau roi {{ numberOfWeeks }} o rybudd i'ch gilydd ar gyfer newid trefniadau hirdymor."
-        },
-        "planReview": {
-          "suggestedMonthsSingular": "Awgrymodd {{{ senderName }}} y dylech adolygu'r trefniadau hyn ymhen 1 mis.",
-          "suggestedYearsSingular": "Awgrymodd  {{{ senderName }}} y dylech adolygu'r trefniadau hyn ymhen blwyddyn.",
-          "suggestedMonthsPlural": "Awgrymodd {{{ senderName }}} y dylech adolygu'r trefniadau hyn ymhen {{ number }} mis/fis.",
-          "suggestedYearsPlural": "Awgrymodd {{{ senderName }}} y dylech adolygu'r trefniadau hyn ymhen {{ number }} flynedd/blynedd/mlynedd."
         }
       },
       "nextSteps": "Y camau nesaf",

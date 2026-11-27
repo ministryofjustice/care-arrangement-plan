@@ -54,11 +54,11 @@ const addAnswer = (
   let html = '<div class="answer-section">\n';
 
   if (sectionTitle) {
-    html += `  <p class="section-heading-title">${escapeHtmlText(sectionTitle)}</hp>\n`;
+    html += `  <h1 class="section-heading-title">${escapeHtmlText(sectionTitle)}</h1>\n`;
   }
 
   if (sectionHeading) {
-    html += `  <p class="section-heading">${escapeHtmlText(sectionHeading)}</p>\n`;
+    html += `  <h2 class="section-heading">${escapeHtmlText(sectionHeading)}</h2>\n`;
   }
 
   html += `  <h3 class="question">${escapeHtmlText(question)}</h3>\n`;

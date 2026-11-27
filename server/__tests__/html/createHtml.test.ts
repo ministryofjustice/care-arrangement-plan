@@ -61,6 +61,19 @@ describe('createHtml', () => {
         willChangeDuringSchoolHolidays: { noDecisionRequired: true },
         itemsForChangeover: { noDecisionRequired: true },
       },
+      childHealth: {
+        routineDecisions: { noDecisionRequired: false, options: ['otherParent'] },
+        childHealthNeeds: { noDecisionRequired: false, description: 'Inhaler every morning' },
+      },
+      education: {
+        shareInformation: { noDecisionRequired: false, options: ['bothParents'] },
+        routineDecisions: { noDecisionRequired: false, options: ['parent'] },
+        schoolMeetings: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent attends parents evening',
+        },
+      },
       specialDays: {
         whatWillHappen: { noDecisionRequired: false, answer: 'whatWillHappenAnswer' },
       },
@@ -78,6 +91,13 @@ describe('createHtml', () => {
 
     expect(response.status).toBe(200);
     expect(response.headers['content-type']).toMatch(/text\/html/);
+    expect(response.text).toContain('id="education"');
+    expect(response.text).toContain('Section 4');
+    expect(response.text).toContain('A grandparent attends parents evening');
+    expect(response.text).toContain('id="child-health"');
+    expect(response.text).toContain('Section 5');
+    expect(response.text).toContain('Inhaler every morning');
+    expect(response.text).not.toContain('</hp>');
 
     const outputPath = path.join(process.cwd(), 'test-assets/fullTestOutput.html');
     fs.writeFileSync(outputPath, response.text);

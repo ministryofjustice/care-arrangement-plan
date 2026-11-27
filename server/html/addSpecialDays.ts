@@ -13,10 +13,10 @@ const addSpecialDays = (request: Request): string => {
 
   let html = '<section id="special-days" aria-labelledby="special-days-heading">\n';
   html += addAnswer(
-    undefined,
-    request.__('taskList.specialDays'),
-    request.__('specialDays.whatWillHappen.title'),
-    request.__('specialDays.whatWillHappen.content'),
+    request.__('sharePlan.specialDays.sectionTitle'),
+    request.__('sharePlan.specialDays.title'),
+    request.__('sharePlan.specialDays.whatWillHappen.title'),
+    request.__('sharePlan.specialDays.whatWillHappen.content'),
     answer,
     request.__('sharePlan.yourProposedPlan.doNotAgree.specialDays.whatWillHappen'),
     request,
