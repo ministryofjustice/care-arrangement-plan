@@ -241,16 +241,16 @@ describe('addHandoverAndHolidays', () => {
     expectHtmlToContain(html, '<section id="handover-holidays"', 'Medicine, favorite teddy, homework');
   });
 
-  test('includes textbox for compromise notes at end of section', () => {
+  test('includes how the children get between households for every radio option', () => {
     Object.assign(sessionMock, {
-      numberOfChildren: 1,
-      namesOfChildren: ['Child'],
-      initialAdultName: 'Adult1',
-      secondaryAdultName: 'Adult2',
+      numberOfChildren: 2,
+      namesOfChildren: ['Alice', 'Bob'],
+      initialAdultName: 'John',
+      secondaryAdultName: 'Ben',
       handoverAndHolidays: {
         getBetweenHouseholds: {
           noDecisionRequired: false,
-          how: 'walk',
+          how: 'bothParents',
         },
         whereHandover: {
           noDecisionRequired: true,
@@ -264,13 +264,95 @@ describe('addHandoverAndHolidays', () => {
       },
     });
 
+    const bothParentsHtml = addHandoverAndHolidays(mockRequest as Request);
+
+    expectHtmlToContain(
+      bothParentsHtml,
+      '<h1 class="section-heading-title">sharePlan.yourProposedPlan.handoverAndHolidays.sectionTitle</h1>',
+      '<h2 id="handover-holidays-heading" class="section-heading">taskList.handoverAndHolidays.title</h2>',
+      'sharePlan.yourProposedPlan.handoverAndHolidays.householdsTitle',
+      'handoverAndHolidays.getBetweenHouseholds.bothParentsCollect',
+    );
+
+    sessionMock.handoverAndHolidays.getBetweenHouseholds = {
+      noDecisionRequired: false,
+      how: 'someoneElse',
+      whoWillCollect: 'A grandparent',
+    };
+
+    const someoneElseHtml = addHandoverAndHolidays(mockRequest as Request);
+
+    expectHtmlToContain(
+      someoneElseHtml,
+      'sharePlan.yourProposedPlan.handoverAndHolidays.householdsTitle',
+      'handoverAndHolidays.getBetweenHouseholds.someoneElseCollects',
+      'A grandparent',
+    );
+  });
+
+  test('renders travel answers and no end-of-section compromise box', () => {
+    Object.assign(sessionMock, {
+      numberOfChildren: 1,
+      namesOfChildren: ['Child'],
+      initialAdultName: 'Adult1',
+      secondaryAdultName: 'Adult2',
+      handoverAndHolidays: {
+        getBetweenHouseholds: {
+          noDecisionRequired: false,
+          how: 'parent',
+        },
+        whereHandover: {
+          noDecisionRequired: false,
+          where: ['school', 'other'],
+          other: 'A grandparent’s house',
+        },
+        willChangeDuringSchoolHolidays: {
+          noDecisionRequired: false,
+          willChange: true,
+        },
+        howChangeDuringSchoolHolidays: {
+          noDecisionRequired: false,
+          answer: 'Alternate weeks in the school holidays',
+        },
+        itemsForChangeover: {
+          noDecisionRequired: false,
+          options: ['clothesAndShoes', 'otherItems'],
+          describeArrangement: 'Any medication',
+        },
+        travelAbroad: {
+          noDecisionRequired: false,
+          options: ['fourWeeks'],
+        },
+        travelDocuments: {
+          noDecisionRequired: false,
+          options: ['bothParents'],
+        },
+        travelInformation: {
+          noDecisionRequired: false,
+          options: ['dates', 'contact', 'other'],
+          describeArrangement: 'Flight numbers',
+        },
+      },
+    });
+
     const html = addHandoverAndHolidays(mockRequest as Request);
 
     expectHtmlToContain(
       html,
-      'sharePlan.yourProposedPlan.endOfSection',
-      'sharePlan.yourProposedPlan.compromise.handoverAndHolidays'
+      '<h1 class="section-heading-title">sharePlan.yourProposedPlan.handoverAndHolidays.sectionTitle</h1>',
+      '<h2 id="handover-holidays-heading" class="section-heading">taskList.handoverAndHolidays.title</h2>',
+      'A grandparent’s house',
+      'Alternate weeks in the school holidays',
+      'Any medication',
+      'handoverAndHolidays.travelAbroad.fourWeeks',
+      'handoverAndHolidays.travelDocuments.bothParents',
+      'handoverAndHolidays.travelInformation.travelInformation',
+      'handoverAndHolidays.travelInformation.emergencyContact',
+      'Flight numbers',
+      'sharePlan.yourProposedPlan.handoverAndHolidays.consentToTravel.title',
     );
+    expect(html).not.toContain('sharePlan.yourProposedPlan.endOfSection');
+    expect(html).not.toContain('sharePlan.yourProposedPlan.compromise.handoverAndHolidays');
   });
 
 });

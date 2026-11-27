@@ -17,14 +17,15 @@ const addOtherThings = (request: Request): string => {
 
   let html = '<section id="other-things" aria-labelledby="other-things-heading">\n';
   html += '<div class="answer-section">\n';
-  html += `  <h2>${escapeHtmlText(request.__('taskList.otherThings'))}</h2>\n`;
-  html += `  <h3>${escapeHtmlText(request.__('otherThings.whatOtherThingsMatter.title'))}</h3>\n`;
-  html += `  <p>${escapeHtmlText(request.__('otherThings.whatOtherThingsMatter.thingsToAgree'))}</p>\n`;
+  html += `  <h1 class="section-heading-title">${escapeHtmlText(request.__('sharePlan.otherThings.sectionTitle'))}</h1>\n`;
+  html += `  <h2 class="section-heading">${escapeHtmlText(request.__('sharePlan.otherThings.title'))}</h2>\n`;
+  html += `  <h3>${escapeHtmlText(request.__('sharePlan.otherThings.whatOtherThingsMatter.title'))}</h3>\n`;
+  html += `  <p>${escapeHtmlText(request.__('sharePlan.otherThings.whatOtherThingsMatter.thingsToAgree'))}</p>\n`;
   html += `  <ul>\n`;
-  html += `    <li>${escapeHtmlText(request.__('otherThings.whatOtherThingsMatter.religionDietAndRules'))}</li>\n`;
-  html += `    <li>${escapeHtmlText(request.__('otherThings.whatOtherThingsMatter.extraCurriculars'))}</li>\n`;
-  html += `    <li>${escapeHtmlText(request.__('otherThings.whatOtherThingsMatter.friendsAndFamily'))}</li>\n`;
-  html += `    <li>${escapeHtmlText(request.__('otherThings.whatOtherThingsMatter.otherContact'))}</li>\n`;
+  html += `    <li>${escapeHtmlText(request.__('sharePlan.otherThings.whatOtherThingsMatter.religionDietAndRules'))}</li>\n`;
+  html += `    <li>${escapeHtmlText(request.__('sharePlan.otherThings.whatOtherThingsMatter.extraCurriculars'))}</li>\n`;
+  html += `    <li>${escapeHtmlText(request.__('sharePlan.otherThings.whatOtherThingsMatter.friendsAndFamily'))}</li>\n`;
+  html += `    <li>${escapeHtmlText(request.__('sharePlan.otherThings.whatOtherThingsMatter.otherContact'))}</li>\n`;
   html += `  </ul>\n`;
   html += `  <p class="answer">${escapeHtmlText(answer)}</p>\n`;
   html += `  <div class="do-you-agree">\n`;

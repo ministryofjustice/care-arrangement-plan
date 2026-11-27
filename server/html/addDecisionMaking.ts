@@ -2,14 +2,14 @@ import { Request } from 'express';
 
 import { planLastMinuteChanges, planLongTermNotice, planReview } from '../utils/formattedAnswersForPdf';
 
-import addAnswer, { renderTextBox } from './addAnswer';
+import addAnswer from './addAnswer';
 
 const addPlanLastMinuteChanges = (request: Request): string => {
   return addAnswer(
-    undefined,
-    request.__('taskList.decisionMaking'),
-    request.__('decisionMaking.planLastMinuteChanges.title'),
-    request.__('decisionMaking.planLastMinuteChanges.howChangesCommunicatedAdditionalDescription'),
+    request.__('sharePlan.decisionMaking.sectionTitle'),
+    request.__('sharePlan.decisionMaking.title'),
+    request.__('sharePlan.decisionMaking.planLastMinuteChanges.title'),
+    request.__('sharePlan.decisionMaking.planLastMinuteChanges.intro'),
     planLastMinuteChanges(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLastMinuteChanges'),
     request,
@@ -20,8 +20,8 @@ const addPlanLongTermNotice = (request: Request): string => {
   return addAnswer(
     undefined,
     undefined,
-    request.__('decisionMaking.planLongTermNotice.title'),
-    request.__('decisionMaking.planLongTermNotice.sometimesYouNeedToPlanAhead'),
+    request.__('sharePlan.decisionMaking.planLongTermNotice.title'),
+    request.__('sharePlan.decisionMaking.planLongTermNotice.intro'),
     planLongTermNotice(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planLongTermNotice'),
     request,
@@ -32,8 +32,8 @@ const addPlanReview = (request: Request): string => {
   return addAnswer(
     undefined,
     undefined,
-    request.__('decisionMaking.planReview.title'),
-    request.__('decisionMaking.planReview.childrensNeedsChange'),
+    request.__('sharePlan.decisionMaking.planReview.title'),
+    request.__('sharePlan.decisionMaking.planReview.intro'),
     planReview(request),
     request.__('sharePlan.yourProposedPlan.doNotAgree.decisionMaking.planReview'),
     request,
@@ -51,10 +51,6 @@ const addDecisionMaking = (request: Request): string => {
 
   let html = '<section id="decision-making" aria-labelledby="decision-making-heading">\n';
   html += answers.join('\n');
-  html += renderTextBox(
-    request.__('sharePlan.yourProposedPlan.endOfSection'),
-    request.__('sharePlan.yourProposedPlan.compromise.decisionMaking'),
-  );
   html += '</section>\n\n';
 
   return html;

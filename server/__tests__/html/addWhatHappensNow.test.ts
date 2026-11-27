@@ -30,7 +30,8 @@ describe('addWhatHappensNow', () => {
 
     expect(html).toContain('<section id="what-happens-now" aria-labelledby="what-happens-now-heading">');
     expect(html).toContain('Section 9');
-    expect(html).toContain('<h2 id="what-happens-now-heading">End of form</h2>');
+    expect(html).toContain('<h1 class="section-heading-title">Section 9</h1>');
+    expect(html).toContain('<h2 id="what-happens-now-heading" class="section-heading">End of form</h2>');
     expect(html).toContain(
       '<strong>Is there anything else you would like to suggest for the child arrangements plan?</strong>',
     );

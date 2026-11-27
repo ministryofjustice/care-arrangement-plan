@@ -71,8 +71,8 @@ const addWhatHappensNow = (request: Request): string => {
   const legallyBinding = request.__(`${whatToDoNext}.legallyBinding`);
 
   let html = '<section id="what-happens-now" aria-labelledby="what-happens-now-heading">\n';
-  html += `  <h2 class="section-number">${text(request.__(`${endOfForm}.sectionTitle`))}</h2>\n`;
-  html += `  <h2 id="what-happens-now-heading">${text(request.__(`${endOfForm}.title`))}</h2>\n`;
+  html += `  <h1 class="section-heading-title">${text(request.__(`${endOfForm}.sectionTitle`))}</h1>\n`;
+  html += `  <h2 id="what-happens-now-heading" class="section-heading">${text(request.__(`${endOfForm}.title`))}</h2>\n`;
   html += `  <p><strong>${text(request.__(`${endOfForm}.subtitle`))}</strong></p>\n`;
   html += `  <div class="text-box">\n`;
   html += `    <div class="govuk-form-group">\n`;

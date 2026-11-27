@@ -43,6 +43,8 @@ describe('addLivingAndVisiting', () => {
       'Custom living arrangement',
       '</section>'
     );
+    expect(html).not.toContain('livingAndVisiting.whichSchedule.title');
+    expect(html).not.toContain('livingAndVisiting.willOvernightsHappen.title');
   });
 
   test('generates HTML for split schedule arrangement', () => {
@@ -59,6 +61,18 @@ describe('addLivingAndVisiting', () => {
           noDecisionRequired: false,
           answer: 'Week on, week off schedule',
         },
+        overnightVisits: {
+          willHappen: true,
+          whichDays: {
+            days: ['friday'],
+          },
+        },
+        daytimeVisits: {
+          willHappen: true,
+          whichDays: {
+            days: ['saturday'],
+          },
+        },
       },
     });
 
@@ -68,8 +82,14 @@ describe('addLivingAndVisiting', () => {
     expectHtmlToContain(
       html,
       '<section id="living-visiting"',
-      'Week on, week off schedule'
+      'livingAndVisiting.whichSchedule.title',
+      'livingAndVisiting.whichSchedule.exactSplitWarning',
+      'Week on, week off schedule',
     );
+    expect(html).not.toContain('livingAndVisiting.willOvernightsHappen.title');
+    expect(html).not.toContain('livingAndVisiting.whichDaysOvernight.title');
+    expect(html).not.toContain('livingAndVisiting.willDaytimeVisitsHappen.title');
+    expect(html).not.toContain('livingAndVisiting.whichDaysDaytimeVisits.title');
   });
 
   test('generates HTML for living with adult with no visits', () => {
@@ -94,7 +114,15 @@ describe('addLivingAndVisiting', () => {
     const html = addLivingAndVisiting(mockRequest as Request);
 
     validateHtmlStructure(html);
-    expectHtmlToContain(html, '<section id="living-visiting"');
+    expectHtmlToContain(
+      html,
+      '<section id="living-visiting"',
+      'livingAndVisiting.willOvernightsHappen.title',
+      'livingAndVisiting.willDaytimeVisitsHappen.title',
+    );
+    expect(html).not.toContain('livingAndVisiting.whichSchedule.title');
+    expect(html).not.toContain('livingAndVisiting.whichDaysOvernight.title');
+    expect(html).not.toContain('livingAndVisiting.whichDaysDaytimeVisits.title');
   });
 
   test('generates HTML for living with adult with overnight visits', () => {
@@ -157,7 +185,7 @@ describe('addLivingAndVisiting', () => {
     expectHtmlToContain(html, '<section id="living-visiting"');
   });
 
-  test('includes textbox for compromise notes at end of section', () => {
+  test('renders the section title without an end-of-section compromise box', () => {
     Object.assign(sessionMock, {
       numberOfChildren: 1,
       namesOfChildren: ['James'],
@@ -175,9 +203,11 @@ describe('addLivingAndVisiting', () => {
 
     expectHtmlToContain(
       html,
-      'sharePlan.yourProposedPlan.endOfSection',
-      'sharePlan.yourProposedPlan.compromise.livingAndVisiting'
+      '<h1 class="section-heading-title">sharePlan.yourProposedPlan.livingAndVisiting.sectionTitle</h1>',
+      '<h2 class="section-heading">taskList.livingAndVisiting</h2>',
     );
+    expect(html).not.toContain('sharePlan.yourProposedPlan.endOfSection');
+    expect(html).not.toContain('sharePlan.yourProposedPlan.compromise.livingAndVisiting');
   });
 
   test('handles multiple children names correctly', () => {

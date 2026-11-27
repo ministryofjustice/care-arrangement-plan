@@ -11,12 +11,12 @@ import {
   willChangeDuringSchoolHolidays,
 } from '../utils/formattedAnswersForPdf';
 
-import addAnswer, { renderTextBox } from './addAnswer';
+import addAnswer, { escapeHtmlText } from './addAnswer';
 
 const addGetBetweenHouseholds = (request: Request): string => {
   return addAnswer(
-    request.__('sharePlan.yourProposedPlan.handoverAndHolidays.sectionTitle'),
-    request.__('taskList.handoverAndHolidays.title'),
+    undefined,
+    undefined,
     request.__('sharePlan.yourProposedPlan.handoverAndHolidays.householdsTitle'),
     undefined,
     getBetweenHouseholds(request),
@@ -147,11 +147,9 @@ const addHandoverAndHolidays = (request: Request): string => {
   }
 
   let html = '<section id="handover-holidays" aria-labelledby="handover-holidays-heading">\n';
+  html += `  <h1 class="section-heading-title">${escapeHtmlText(request.__('sharePlan.yourProposedPlan.handoverAndHolidays.sectionTitle'))}</h1>\n`;
+  html += `  <h2 id="handover-holidays-heading" class="section-heading">${escapeHtmlText(request.__('taskList.handoverAndHolidays.title'))}</h2>\n`;
   html += answers.join('\n');
-  html += renderTextBox(
-    request.__('sharePlan.yourProposedPlan.endOfSection'),
-    request.__('sharePlan.yourProposedPlan.compromise.handoverAndHolidays'),
-  );
   html += '</section>\n\n';
 
   return html;

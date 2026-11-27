@@ -10,11 +10,11 @@ import {
 } from '../utils/formattedAnswersForPdf';
 import { parentNotMostlyLivedWith } from '../utils/sessionHelpers';
 
-import addAnswer, { renderTextBox } from './addAnswer';
+import addAnswer from './addAnswer';
 
 const addMostlyLive = (request: Request): string => {
   return addAnswer(
-    undefined,
+    request.__('sharePlan.yourProposedPlan.livingAndVisiting.sectionTitle'),
     request.__('taskList.livingAndVisiting'),
     request.__('livingAndVisiting.mostlyLive.title'),
     undefined,
@@ -89,25 +89,28 @@ const addWhichDaysDaytimeVisits = (request: Request): string => {
 };
 
 const addLivingAndVisiting = (request: Request): string => {
-  const answers = [
-    addMostlyLive(request),
-    addWhichSchedule(request),
-    addWillOvernightsHappen(request),
-    addWhichDaysOvernight(request),
-    addWillDaytimeVisitsHappen(request),
-    addWhichDaysDaytimeVisits(request),
-  ].filter((item) => item !== '');
+  const where = request.session.livingAndVisiting?.mostlyLive?.where;
+  const answers = [addMostlyLive(request)];
 
-  if (answers.length === 0) {
+  if (where === 'split') {
+    answers.push(addWhichSchedule(request));
+  } else if (where === 'withInitial' || where === 'withSecondary') {
+    answers.push(
+      addWillOvernightsHappen(request),
+      addWhichDaysOvernight(request),
+      addWillDaytimeVisitsHappen(request),
+      addWhichDaysDaytimeVisits(request),
+    );
+  }
+
+  const renderedAnswers = answers.filter((item) => item !== '');
+
+  if (renderedAnswers.length === 0) {
     return '';
   }
 
   let html = '<section id="living-visiting" aria-labelledby="living-visiting-heading">\n';
-  html += answers.join('\n');
-  html += renderTextBox(
-    request.__('sharePlan.yourProposedPlan.endOfSection'),
-    request.__('sharePlan.yourProposedPlan.compromise.livingAndVisiting'),
-  );
+  html += renderedAnswers.join('\n');
   html += '</section>\n\n';
 
   return html;

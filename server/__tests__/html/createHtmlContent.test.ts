@@ -126,6 +126,19 @@ describe('createHtmlContent', () => {
           answer: 'Extracurricular activities',
         },
       },
+      childHealth: {
+        routineDecisions: { noDecisionRequired: false, options: ['otherParent'] },
+        childHealthNeeds: { noDecisionRequired: false, description: 'Inhaler every morning' },
+      },
+      education: {
+        shareInformation: { noDecisionRequired: false, options: ['bothParents'] },
+        routineDecisions: { noDecisionRequired: false, options: ['parent'] },
+        schoolMeetings: {
+          noDecisionRequired: false,
+          options: ['anotherArrangement'],
+          describeArrangement: 'A grandparent attends parents evening',
+        },
+      },
       decisionMaking: {
         planLastMinuteChanges: {
           noDecisionRequired: false,
@@ -149,6 +162,14 @@ describe('createHtmlContent', () => {
       html,
       'id="living-visiting"',
       'id="handover-holidays"',
+      'id="education"',
+      'sharePlan.education.sectionTitle',
+      'sharePlan.education.schoolInfo.question',
+      'A grandparent attends parents evening',
+      'id="child-health"',
+      'sharePlan.childHealth.sectionTitle',
+      'sharePlan.childHealth.healthNeeds.question',
+      'Inhaler every morning',
       'id="special-days"',
       'id="other-things"',
       'id="decision-making"',

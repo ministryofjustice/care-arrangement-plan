@@ -54,11 +54,11 @@ const addAnswer = (
   let html = '<div class="answer-section">\n';
 
   if (sectionTitle) {
-    html += `  <h2 class="govuk-!-font-weight-regular">${escapeHtmlText(sectionTitle)}</h2>\n`;
+    html += `  <h1 class="section-heading-title">${escapeHtmlText(sectionTitle)}</h1>\n`;
   }
 
   if (sectionHeading) {
-    html += `  <h2>${escapeHtmlText(sectionHeading)}</h2>\n`;
+    html += `  <h2 class="section-heading">${escapeHtmlText(sectionHeading)}</h2>\n`;
   }
 
   html += `  <h3 class="question">${escapeHtmlText(question)}</h3>\n`;

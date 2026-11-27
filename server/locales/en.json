@@ -1021,6 +1021,48 @@
         "doNotAgree": "If you do not agree, suggest what health needs parents should be aware of"
       }
     },
+    "specialDays": {
+      "sectionTitle": "Section 6",
+      "title": "Special days",
+      "whatWillHappen": {
+        "title": "What will happen on special days?",
+        "content": "Keep your children's feelings at the centre of your plans for holidays and meaningful events. For example, New Year celebrations, Mother's Day and Father's Day, and birthdays."
+      }
+    },
+    "otherThings": {
+      "sectionTitle": "Section 7",
+      "title": "Other things",
+      "whatOtherThingsMatter": {
+        "title": "What other things matter to your children?",
+        "thingsToAgree": "You may want to agree things such as:",
+        "religionDietAndRules": "religious practices, diet, and standard rules across both households",
+        "extraCurriculars": "extra-curricular activities, such as swimming lessons",
+        "friendsAndFamily": "access to other friends and family",
+        "otherContact": "other types of contact, such as video calls"
+      }
+    },
+    "decisionMaking": {
+      "sectionTitle": "Section 8",
+      "title": "Decision making",
+      "planLastMinuteChanges": {
+        "title": "How should last-minute changes be communicated?",
+        "intro": "There will be times when plans will need to change, such as if one parent is suddenly unwell and cannot collect a child from school.",
+        "howChangesCommunicated": "{{{ senderName }}} suggested that last-minute changes should be communicated {{ methods }}."
+      },
+      "planLongTermNotice": {
+        "title": "How much notice should you give to change long-term arrangements?",
+        "intro": "Sometimes you may need to plan a long way ahead. For example, if you want to plan a holiday during time you do not usually spend with the children.",
+        "howChangesCommunicated": "{{{ senderName }}} suggested that you should both give each other {{ numberOfWeeks }} weeks' notice to change long-term arrangements."
+      },
+      "planReview": {
+        "title": "When would you like to review this plan?",
+        "intro": "Children's needs change as they grow. When should you review this agreement to check it is still what's best for the children?",
+        "suggestedMonthsSingular": "{{{ senderName }}} suggested that you should review this arrangement in 1 month's time.",
+        "suggestedYearsSingular": "{{{ senderName }}} suggested that you should review this arrangement in 1 year's time.",
+        "suggestedMonthsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} months' time.",
+        "suggestedYearsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} years' time."
+      }
+    },
     "endOfForm": {
       "sectionTitle": "Section 9",
       "title": "End of form",
@@ -1130,7 +1172,6 @@
       "senderSuggested": "{{{ senderName }}} suggested:\n\"{{{ suggestion }}}\"",
       "senderSuggestedDoNotDecide": "{{{ senderName }}} suggested that this does not need to be decided.",
       "doYouAgree": "Do you agree?",
-      "endOfSection": "End of section",
       "noCourtOrder": "there is no court order in place at this time",
       "forOneChild": "this is a proposed child arrangements plan for 1 child, {{{ childName }}}",
       "forMultipleChildren": "this is a proposed child arrangements plan for {{ numberOfChildren }} children, {{{ childrenNames }}}",
@@ -1189,20 +1230,6 @@
         },
         "travelInformation": {
           "title": "What other information should be shared before travelling abroad?"
-        }
-      },
-      "decisionMaking": {
-        "planLastMinuteChanges": {
-          "howChangesCommunicated": "{{{ senderName }}} suggested that last-minute changes should be communicated {{ methods }}."
-        },
-        "planLongTermNotice": {
-          "howChangesCommunicated": "{{{ senderName }}} suggested that you should both give each other {{ numberOfWeeks }} weeks' notice to change long-term arrangements."
-        },
-        "planReview": {
-          "suggestedMonthsSingular": "{{{ senderName }}} suggested that you should review this arrangement in 1 month's time.",
-          "suggestedYearsSingular": "{{{ senderName }}} suggested that you should review this arrangement in 1 year's time.",
-          "suggestedMonthsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} months' time.",
-          "suggestedYearsPlural": "{{{ senderName }}} suggested that you should review this arrangement in {{ number }} years' time."
         }
       },
       "nextSteps": "Next steps",

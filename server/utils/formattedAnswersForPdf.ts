@@ -112,9 +112,18 @@ export const whichDaysDaytimeVisits = (request: Request) => {
 
 export const getBetweenHouseholds = (request: Request) => {
   const { handoverAndHolidays, initialAdultName, secondaryAdultName } = request.session;
+  if (!handoverAndHolidays?.getBetweenHouseholds) return undefined;
   if (handoverAndHolidays.getBetweenHouseholds.noDecisionRequired) {
     return request.__('sharePlan.yourProposedPlan.senderSuggestedDoNotDecide', { senderName: initialAdultName });
   }
+
+  const children = childrenReference(request);
+  const suggested = (suggestion: string) =>
+    request.__('sharePlan.yourProposedPlan.senderSuggested', {
+      senderName: initialAdultName,
+      suggestion,
+    });
+
   switch (handoverAndHolidays.getBetweenHouseholds.how) {
     case 'parent':
       return request.__('sharePlan.yourProposedPlan.handoverAndHolidays.suggestedCollects', {
@@ -126,11 +135,15 @@ export const getBetweenHouseholds = (request: Request) => {
         senderName: initialAdultName,
         adult: secondaryAdultName,
       });
+    case 'bothParents':
+      return suggested(request.__('handoverAndHolidays.getBetweenHouseholds.bothParentsCollect', { children }));
+    case 'someoneElse': {
+      const collects = request.__('handoverAndHolidays.getBetweenHouseholds.someoneElseCollects', { children });
+      const whoWillCollect = handoverAndHolidays.getBetweenHouseholds.whoWillCollect;
+      return suggested(whoWillCollect ? `${collects}: ${whoWillCollect}` : collects);
+    }
     case 'anotherArrangement':
-      return request.__('sharePlan.yourProposedPlan.senderSuggested', {
-        senderName: initialAdultName,
-        suggestion: handoverAndHolidays.getBetweenHouseholds.describeArrangement,
-      });
+      return suggested(handoverAndHolidays.getBetweenHouseholds.describeArrangement);
     default:
       return undefined;
   }
@@ -345,7 +358,7 @@ export const planLastMinuteChanges = (request: Request) => {
       suggestion: decisionMaking.planLastMinuteChanges.anotherArrangementDescription,
     });
   }
-  return request.__('sharePlan.yourProposedPlan.decisionMaking.planLastMinuteChanges.howChangesCommunicated', {
+  return request.__('sharePlan.decisionMaking.planLastMinuteChanges.howChangesCommunicated', {
     senderName: initialAdultName,
     methods: formatPlanChangesOptionsIntoList(request),
   });
@@ -362,7 +375,7 @@ export const planLongTermNotice = (request: Request) => {
       suggestion: decisionMaking.planLongTermNotice.otherAnswer,
     });
   }
-  return request.__('sharePlan.yourProposedPlan.decisionMaking.planLongTermNotice.howChangesCommunicated', {
+  return request.__('sharePlan.decisionMaking.planLongTermNotice.howChangesCommunicated', {
     senderName: initialAdultName,
     numberOfWeeks: decisionMaking.planLongTermNotice.weeks.toString(),
   });
@@ -375,10 +388,10 @@ export const planReview = (request: Request) => {
 
   if (decisionMaking.planReview.months) {
     number = decisionMaking.planReview.months;
-    translationName = 'sharePlan.yourProposedPlan.decisionMaking.planReview.suggestedMonths';
+    translationName = 'sharePlan.decisionMaking.planReview.suggestedMonths';
   } else {
     number = decisionMaking.planReview.years;
-    translationName = 'sharePlan.yourProposedPlan.decisionMaking.planReview.suggestedYears';
+    translationName = 'sharePlan.decisionMaking.planReview.suggestedYears';
   }
 
   const translationSuffix = number === 1 ? 'Singular' : 'Plural';
